@@ -105,9 +105,9 @@ function openModal(dateStr) {
         const modalTitle = document.getElementById('modalTitle');
         const expenseList = document.getElementById('modalExpenseList');
 
-        modalTitle.textContent = `Expenses on ${dateStr}`;
-        expenseList.innerHTML = ''; // Clear old content
 
+        expenseList.innerHTML = ''; // Clear old content
+        let sum = 0;
         if (!Array.isArray(expenses) || expenses.length === 0) {
             expenseList.innerHTML = `<p class="text-gray-500">No expenses found for this date.</p>`;
         } else {
@@ -128,9 +128,10 @@ function openModal(dateStr) {
 `;
 
                 expenseList.appendChild(item);
+                sum = sum + parseInt(exp.amount);
             });
         }
-
+        modalTitle.textContent = `Expenses on ${dateStr}: ${sum}`;
         // ✅ Fix: Make it visible by adding flex and removing hidden
         modal.classList.remove('hidden');
         modal.classList.add('flex');
