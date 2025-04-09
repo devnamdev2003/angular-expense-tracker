@@ -1,4 +1,5 @@
 import { CategoryService } from "./localStorage/categoryLocal.js";
+import { BudgetService } from "./localStorage/budgetLocal.js";
 
 
 const toggle = document.getElementById("modeToggle");
@@ -28,8 +29,8 @@ toggle.addEventListener("change", () => {
 });
 
 
-
-function showError(id, message) {
+// Add Category Model
+function showCategoryFormError(id, message) {
     const el = document.getElementById(id);
     el.textContent = message;
     el.classList.remove('hidden');
@@ -48,13 +49,10 @@ function clearFormAndErrors() {
     });
 }
 
-
-
 window.closeCategoryModal = () => {
     document.getElementById('categoryModal').close();
     clearFormAndErrors();
 }
-
 
 window.addCategory = () => {
     const name = document.getElementById('catName').value.trim();
@@ -70,17 +68,17 @@ window.addCategory = () => {
     let hasError = false;
 
     if (nameExists) {
-        showError('nameError', 'This category name already exists.');
+        showCategoryFormError('nameError', 'This category name already exists.');
         hasError = true;
     }
 
     if (iconExists) {
-        showError('iconError', 'This icon is already used.');
+        showCategoryFormError('iconError', 'This icon is already used.');
         hasError = true;
     }
 
     if (colorExists) {
-        showError('colorError', 'This color is already used.');
+        showCategoryFormError('colorError', 'This color is already used.');
         hasError = true;
     }
 
@@ -97,7 +95,7 @@ window.addCategory = () => {
     showToast('Category added successfully!', 'success');
 }
 
-
+// Delete Category Modal 
 window.closeDeleteCategoryModal = () => {
     document.getElementById('deleteCategoryModal').close();
     document.getElementById('deleteCatName').value = '';
@@ -129,7 +127,12 @@ window.deleteCategory = () => {
         return;
     }
 
-    // Check if it's a default category (id between 1–15)
+    if (category.expense_count > 0) {
+        showDeleteError('Deletion blocked: category tied to existing expenses.');
+        document.getElementById('deleteCatName').value = "";
+        return;
+    }
+
     const idAsNumber = parseInt(category.category_id);
     if (!isNaN(idAsNumber) && idAsNumber <= CategoryService.getDefault().length) {
         showDeleteError('Cannot delete default category.');
@@ -148,3 +151,112 @@ window.deleteCategory = () => {
         document.getElementById('deleteCatName').value = "";
     }
 }
+
+// Add Budget Model
+function showBudgetFormError(id, message) {
+    const el = document.getElementById(id);
+    el.textContent = message;
+    el.classList.remove('hidden');
+    setTimeout(() => el.classList.add('hidden'), 3000);
+}
+
+function clearBudgetFormAndErrors() {
+    document.getElementById('budgetFrom').value = '';
+    document.getElementById('budgetTo').value = '';
+    document.getElementById('budgetAmount').value = '';
+
+    ['fromDateError', 'toDateError', 'amountError'].forEach(id => {
+        const el = document.getElementById(id);
+        el.textContent = '';
+        el.classList.add('hidden');
+    });
+}
+
+function isOverlapping(from1, to1, from2, to2) {
+    const start1 = new Date(from1);
+    const end1 = new Date(to1);
+    const start2 = new Date(from2);
+    const end2 = new Date(to2);
+
+    return start1 <= end2 && start2 <= end1;
+}
+
+window.showBudgetModal = () => {
+    const allBudgets = BudgetService.getAll();
+
+    if (allBudgets.length > 0) {
+        const latest = allBudgets[allBudgets.length - 1];
+        document.getElementById('budgetFrom').value = latest.fromDate;
+        document.getElementById('budgetTo').value = latest.toDate;
+        document.getElementById('budgetAmount').value = latest.amount;
+        document.getElementById('budgetModalSubmitButton').innerText = "Update";
+    } else {
+        document.getElementById('budgetFrom').value = '';
+        document.getElementById('budgetTo').value = '';
+        document.getElementById('budgetAmount').value = '';
+        document.getElementById('budgetModalSubmitButton').innerText = "Save";
+
+    }
+
+    document.getElementById('budgetModal').showModal();
+};
+
+window.closeBudgetModal = () => {
+    document.getElementById('budgetModal').close();
+    clearBudgetFormAndErrors();
+}
+
+window.saveBudget = () => {
+    const fromDate = document.getElementById('budgetFrom').value;
+    const toDate = document.getElementById('budgetTo').value;
+    const amount = document.getElementById('budgetAmount').value;
+    const allBudgets = BudgetService.getAll();
+    let hasError = false;
+    // Basic validations
+    if (!fromDate) {
+        showBudgetFormError('fromDateError', 'Please select start date.');
+        hasError = true;
+    }
+
+    if (!toDate) {
+        showBudgetFormError('toDateError', 'Please select end date.');
+        hasError = true;
+    }
+
+    if (!amount || parseFloat(amount) <= 0) {
+        showBudgetFormError('amountError', 'Amount must be greater than 0.');
+        hasError = true;
+    }
+
+    if (hasError) return;
+
+    // Advanced check: fromDate must be before toDate
+    if (new Date(fromDate) > new Date(toDate)) {
+        showBudgetFormError('toDateError', 'End date must be after start date.');
+        return;
+    }
+
+    if (allBudgets.length > 0) {
+        const latest = allBudgets[allBudgets.length - 1];
+        BudgetService.update(latest.id, { amount: parseFloat(amount), fromDate, toDate });
+        closeBudgetModal();
+        showToast('Budget updated successfully!', 'success');
+
+    } else {
+        const overlapping = allBudgets.some(budget =>
+            isOverlapping(fromDate, toDate, budget.fromDate, budget.toDate)
+        );
+
+        if (overlapping) {
+            showBudgetFormError('amountError', 'A budget already exists in this date range!');
+            return;
+        }
+
+        // All good → Save
+        BudgetService.add({ amount: parseFloat(amount), fromDate, toDate });
+        closeBudgetModal();
+        showToast('Budget added successfully!', 'success');
+    }
+}
+
+

@@ -44,6 +44,7 @@ function syncSettingsWithSchema() {
 
     localStorage.setItem('settings', JSON.stringify(syncedSettings));
 }
+
 /* ----------------------------settings------------------------ */
 /* -------------------------------------------------------------- */
 /* ----------------------------expenses------------------------ */
@@ -111,7 +112,40 @@ function syncCustomCategoriesWithSchema() {
 
     localStorage.setItem('custom_categories', JSON.stringify(updatedCategories));
 }
-/* ----------------------------custom_categories------------------------ */
-/* --------------------------------------------------------------------- */
+/* ----------------------------custom_categories----------------------- */
+/* -------------------------------------------------------------------- */
+/* ---------------------------------Budget----------------------------- */
 
-export { syncExpensesWithSchema, syncSettingsWithSchema, syncCustomCategoriesWithSchema };
+if (!localStorage.getItem('budget')) {
+    localStorage.setItem('budget', JSON.stringify([]));
+}
+
+const budgetSchema = {
+    id: "",
+    amount: 0,
+    fromDate: "",
+    toDate: "",
+    dev:"",
+};
+
+
+function syncBudgetWithSchema() {
+    const schemaKeys = Object.keys(budgetSchema);
+    let budget = JSON.parse(localStorage.getItem('budget')) || [];
+
+    const updatedBudget = budget.map(exp => {
+        const synced = {};
+        schemaKeys.forEach(key => {
+            synced[key] = key in exp ? exp[key] : budgetSchema[key];
+        });
+
+        return synced;
+    });
+
+    localStorage.setItem('budget', JSON.stringify(updatedBudget));
+}
+
+/* ---------------------------------Budget----------------------------- */
+/* -------------------------------------------------------------------- */
+
+export { syncExpensesWithSchema, syncSettingsWithSchema, syncCustomCategoriesWithSchema, syncBudgetWithSchema };

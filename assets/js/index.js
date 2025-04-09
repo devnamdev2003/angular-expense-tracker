@@ -2,12 +2,13 @@ import { addFormReset, loadCategory } from './addSection.js';
 import { loadDashboardData } from './homeSection.js';
 import { renderCalendar } from './calenderSection.js';
 import { listSection } from './listSection.js';
-import { syncExpensesWithSchema, syncSettingsWithSchema } from './localStorage/storage.js';
+import { syncExpensesWithSchema, syncSettingsWithSchema, syncBudgetWithSchema } from './localStorage/storage.js';
 
 document.addEventListener("DOMContentLoaded", () => {
   loadDashboardData();
   syncExpensesWithSchema();
   syncSettingsWithSchema();
+  syncBudgetWithSchema();
 });
 
 window.showSection = (id) => {

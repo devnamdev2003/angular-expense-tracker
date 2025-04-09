@@ -7,7 +7,6 @@ function loadDashboardData() {
     try {
         const expenses = ExpenseService.getAll();
         const categories = CategoryService.getAll();
-        console.log(expenses, categories);
         const categoryMap = {};
         categories.forEach((cat) => {
             categoryMap[cat.category_id] = cat.name;
