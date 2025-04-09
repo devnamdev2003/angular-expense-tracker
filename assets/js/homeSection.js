@@ -20,24 +20,49 @@ function loadDashboardData() {
         const fromDate = new Date(latestBudget.fromDate);
         const toDate = new Date(latestBudget.toDate);
 
+        // Filter expenses between budget range
         const expensesInBudgetRange = expenses.filter(exp => {
             const expDate = new Date(exp.date);
             return expDate >= fromDate && expDate <= toDate;
         });
 
         const spent = expensesInBudgetRange.reduce((acc, curr) => acc + parseFloat(curr.amount), 0);
-        const percentage = Math.min(((spent / totalBudget) * 100), 100).toFixed(1);
+        const percentage = Math.min((spent / totalBudget) * 100, 100);
+        const remaining = Math.max(totalBudget - spent, 0);
 
-        budgetBar.style.width = `${percentage}%`;
-        budgetBar.innerText = `${percentage}%`;
-
-        budgetText.innerText = `You have spent ₹${spent.toFixed(2)} out of ₹${totalBudget.toFixed(2)} between ${latestBudget.fromDate} and ${latestBudget.toDate}.`;
-
-        // ✅ Show the section
+        // Show the section
         budgetSection.classList.remove("hidden");
 
+        // Choose color based on percentage
+        let barColor = "bg-green-500";
+        if (percentage > 80) barColor = "bg-red-500";
+        else if (percentage > 50) barColor = "bg-yellow-500";
+        else if (percentage > 30) barColor = "bg-blue-500";
+
+        budgetBar.className = `h-full text-white text-sm font-medium text-center leading-6 rounded-full transition-all duration-500 ease-in-out ${barColor}`;
+
+        // Animate progress bar
+        let currentProgress = 0;
+        const animationSpeed = 15; // Adjust for speed
+        const animateBar = setInterval(() => {
+            if (currentProgress >= percentage) {
+                clearInterval(animateBar);
+                budgetBar.innerText = `${percentage.toFixed(1)}%`;
+                return;
+            }
+            currentProgress += 1;
+            budgetBar.style.width = `${currentProgress}%`;
+            budgetBar.innerText = `${currentProgress.toFixed(0)}%`;
+        }, animationSpeed);
+
+        // Message with emojis
+        if (spent > totalBudget) {
+            budgetText.innerText = `⚠️ You have exceeded your budget! You spent ₹${spent.toFixed(2)} which is ₹${(spent - totalBudget).toFixed(2)} over the limit set between ${latestBudget.fromDate} and ${latestBudget.toDate}. 😰`;
+        } else {
+            budgetText.innerText = `✅ You have spent ₹${spent.toFixed(2)} out of ₹${totalBudget.toFixed(2)} between ${latestBudget.fromDate} and ${latestBudget.toDate}. 💸 Remaining: ₹${remaining.toFixed(2)}`;
+        }
     } else {
-        // ❌ Hide the section
+        // Hide the section if no budget
         budgetSection.classList.add("hidden");
     }
 
