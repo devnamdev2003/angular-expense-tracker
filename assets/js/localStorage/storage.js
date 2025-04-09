@@ -14,7 +14,9 @@ if (!localStorage.getItem('categories')) {
         { category_id: 11, name: 'Family & Friends', icon: '👨‍👩‍👧‍👦', color: '#3498db' },
         { category_id: 12, name: 'Miscellaneous', icon: '📌', color: '#bdc3c7' },
         { category_id: 13, name: 'Gifts', icon: '🎁', color: '#c0392b' },
-        { category_id: 14, name: 'Party', icon: '🥳', color: '#e67e22' }
+        { category_id: 14, name: 'Party', icon: '🥳', color: '#e67e22' },
+        { category_id: 15, name: 'Personal Care', icon: '🧴', color: '#9b59b6' },
+        { category_id: 16, name: 'Home & Hygiene', icon: '🧼', color: '#2ecc71' }
 
     ]));
 }
@@ -33,7 +35,9 @@ else {
         { category_id: 11, name: 'Family & Friends', icon: '👨‍👩‍👧‍👦', color: '#3498db' },
         { category_id: 12, name: 'Miscellaneous', icon: '📌', color: '#bdc3c7' },
         { category_id: 13, name: 'Gifts', icon: '🎁', color: '#c0392b' },
-        { category_id: 14, name: 'Party', icon: '🥳', color: '#e67e22' }
+        { category_id: 14, name: 'Party', icon: '🥳', color: '#e67e22' },
+        { category_id: 15, name: 'Personal Care', icon: '🧴', color: '#9b59b6' },
+        { category_id: 16, name: 'Home & Hygiene', icon: '🧼', color: '#2ecc71' }
 
     ]));
 }
