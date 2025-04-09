@@ -1,25 +1,40 @@
 // localCategoryService.js
 const EXPENSE_STORAGE_KEY = 'expenses';
 const CATEGORY_STORAGE_KEY = 'categories';
+const CUSTOM_CATEGORY_STORAGE_KEY = 'custom_categories';
 
 // Utility to get categories from localStorage
-function getCategoriesFromStorage() {
+function getCutomCategoriesFromStorage() {
+  return JSON.parse(localStorage.getItem(CUSTOM_CATEGORY_STORAGE_KEY)) || [];
+}
+
+// Utility to get categories from localStorage
+function getDefaultCategoriesFromStorage() {
   return JSON.parse(localStorage.getItem(CATEGORY_STORAGE_KEY)) || [];
+}
+
+function getlastCategoryId() {
+  const cat = getCategoriesFromStorage();
+  const size = cat.length;
+  return cat[size - 1].category_id;
+
+}
+// Utility to get all categories (default + custom) from localStorage
+function getCategoriesFromStorage() {
+  const defaultCategories = JSON.parse(localStorage.getItem(CATEGORY_STORAGE_KEY)) || [];
+  const customCategories = JSON.parse(localStorage.getItem(CUSTOM_CATEGORY_STORAGE_KEY)) || [];
+  return [...defaultCategories, ...customCategories];
 }
 
 // Utility to save categories to localStorage
 function saveCategoriesToStorage(categories) {
-  localStorage.setItem(CATEGORY_STORAGE_KEY, JSON.stringify(categories));
-}
-
-// Generate unique ID (simulate DB auto-increment)
-function generateCategoryId() {
-  return '_' + Math.random().toString(36).substr(2, 9);
+  localStorage.setItem(CUSTOM_CATEGORY_STORAGE_KEY, JSON.stringify(categories));
 }
 
 function getExpensesFromStorage() {
   return JSON.parse(localStorage.getItem(EXPENSE_STORAGE_KEY)) || [];
 }
+
 export const CategoryService = {
   // GET all categories with expense count (mocked)
   getAll: () => {
@@ -50,13 +65,12 @@ export const CategoryService = {
 
   // POST new category
   add: ({ name, icon, color }) => {
-    const categories = getCategoriesFromStorage();
+    const categories = getCutomCategoriesFromStorage();
     const newCategory = {
-      category_id: generateCategoryId(),
+      category_id: getlastCategoryId() + 1,
       name,
       icon,
-      color,
-      expense_count: 0
+      color
     };
     categories.push(newCategory);
     saveCategoriesToStorage(categories);
@@ -75,11 +89,15 @@ export const CategoryService = {
 
   // DELETE category
   remove: (id) => {
-    let categories = getCategoriesFromStorage();
+    let categories = getCutomCategoriesFromStorage();
     const exists = categories.some(c => c.category_id === id);
     categories = categories.filter(c => c.category_id !== id);
     saveCategoriesToStorage(categories);
     return exists;
+  },
+
+  getDefault: () => {
+    return getDefaultCategoriesFromStorage();
   }
 };
 

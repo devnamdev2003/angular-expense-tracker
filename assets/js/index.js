@@ -2,19 +2,12 @@ import { addFormReset, loadCategory } from './addSection.js';
 import { loadDashboardData } from './homeSection.js';
 import { renderCalendar } from './calenderSection.js';
 import { listSection } from './listSection.js';
+import { syncExpensesWithSchema, syncSettingsWithSchema } from './localStorage/storage.js';
 
 document.addEventListener("DOMContentLoaded", () => {
-
-  const toggle = document.getElementById("modeToggle");
   loadDashboardData();
-  // Initialize toggle based on theme
-  toggle.checked = document.documentElement.classList.contains("dark");
-
-  // Theme toggle event
-  toggle.addEventListener("change", () => {
-    document.documentElement.classList.toggle("dark");
-  });
-
+  syncExpensesWithSchema();
+  syncSettingsWithSchema();
 });
 
 window.showSection = (id) => {

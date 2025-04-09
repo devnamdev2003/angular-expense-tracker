@@ -1,4 +1,4 @@
-
+/* ----------------------------categories------------------------ */
 localStorage.setItem('categories', JSON.stringify([
     { category_id: 1, name: 'Food & Drinks', icon: '🍔', color: '#f94144' },
     { category_id: 2, name: 'Groceries', icon: '🥦', color: '#f3722c' },
@@ -19,8 +19,99 @@ localStorage.setItem('categories', JSON.stringify([
 
 ]));
 
+/* ---------------------------categories----------------------- */
+/* -------------------------------------------------------------- */
+/* ----------------------------settings------------------------ */
+
+const settingsSchema = {
+    themeMode: "",
+    notifications: true,
+    language: "",
+    currency: "",
+    layout: "",
+};
+
+function syncSettingsWithSchema() {
+    const savedSettings = JSON.parse(localStorage.getItem('settings')) || {};
+    const schemaKeys = Object.keys(settingsSchema);
+
+    const syncedSettings = {};
+
+    // Add new keys & retain valid existing ones
+    schemaKeys.forEach(key => {
+        syncedSettings[key] = key in savedSettings ? savedSettings[key] : settingsSchema[key];
+    });
+
+    localStorage.setItem('settings', JSON.stringify(syncedSettings));
+}
+/* ----------------------------settings------------------------ */
+/* -------------------------------------------------------------- */
+/* ----------------------------expenses------------------------ */
 
 if (!localStorage.getItem('expenses')) {
     localStorage.setItem('expenses', JSON.stringify([]));
 }
 
+const expenseSchema = {
+    amount: "",
+    category_id: "",
+    date: "",
+    expense_id: "",
+    location: "",
+    note: "",
+    payment_mode: "",
+    subcategory: "",
+    time: "",
+};
+
+function syncExpensesWithSchema() {
+    const schemaKeys = Object.keys(expenseSchema);
+    let expenses = JSON.parse(localStorage.getItem('expenses')) || [];
+
+    const updatedExpenses = expenses.map(exp => {
+        const synced = {};
+
+        // Add or update fields to match schema
+        schemaKeys.forEach(key => {
+            synced[key] = key in exp ? exp[key] : expenseSchema[key];
+        });
+
+        return synced;
+    });
+
+    localStorage.setItem('expenses', JSON.stringify(updatedExpenses));
+}
+
+/* ----------------------------categories------------------------ */
+/* -------------------------------------------------------------- */
+/* -------------------------custom_categories-------------------- */
+
+if (!localStorage.getItem('custom_categories')) {
+    localStorage.setItem('custom_categories', JSON.stringify([]));
+}
+
+const customCategorySchema = {
+    category_id: "",
+    name: "",
+    icon: "",
+    color: "",
+};
+
+function syncCustomCategoriesWithSchema() {
+    const schemaKeys = Object.keys(customCategorySchema);
+    let customCategories = JSON.parse(localStorage.getItem('custom_categories')) || [];
+
+    const updatedCategories = customCategories.map(cat => {
+        const synced = {};
+        schemaKeys.forEach(key => {
+            synced[key] = key in cat ? cat[key] : customCategorySchema[key];
+        });
+        return synced;
+    });
+
+    localStorage.setItem('custom_categories', JSON.stringify(updatedCategories));
+}
+/* ----------------------------custom_categories------------------------ */
+/* --------------------------------------------------------------------- */
+
+export { syncExpensesWithSchema, syncSettingsWithSchema, syncCustomCategoriesWithSchema };
