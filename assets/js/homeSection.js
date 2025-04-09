@@ -1,12 +1,49 @@
 import { ExpenseService } from './localStorage/expenseLocal.js';
 import { CategoryService } from './localStorage/categoryLocal.js';
+import { BudgetService } from './localStorage/budgetLocal.js';
 
 let charts = {};
 
 function loadDashboardData() {
+    const expenses = ExpenseService.getAll();
+    const categories = CategoryService.getAll();
+
+    // Budget Section
+    const budgets = BudgetService.getAll();
+    const budgetSection = document.getElementById("budgetSection");
+    const budgetBar = document.getElementById("budgetProgressBar");
+    const budgetText = document.getElementById("budgetStatusText");
+
+    if (budgets.length > 0) {
+        const latestBudget = budgets[budgets.length - 1];
+        const totalBudget = parseFloat(latestBudget.amount);
+        const fromDate = new Date(latestBudget.fromDate);
+        const toDate = new Date(latestBudget.toDate);
+
+        const expensesInBudgetRange = expenses.filter(exp => {
+            const expDate = new Date(exp.date);
+            return expDate >= fromDate && expDate <= toDate;
+        });
+
+        const spent = expensesInBudgetRange.reduce((acc, curr) => acc + parseFloat(curr.amount), 0);
+        const percentage = Math.min(((spent / totalBudget) * 100), 100).toFixed(1);
+
+        budgetBar.style.width = `${percentage}%`;
+        budgetBar.innerText = `${percentage}%`;
+
+        budgetText.innerText = `You have spent ₹${spent.toFixed(2)} out of ₹${totalBudget.toFixed(2)} between ${latestBudget.fromDate} and ${latestBudget.toDate}.`;
+
+        // ✅ Show the section
+        budgetSection.classList.remove("hidden");
+
+    } else {
+        // ❌ Hide the section
+        budgetSection.classList.add("hidden");
+    }
+
+
     try {
-        const expenses = ExpenseService.getAll();
-        const categories = CategoryService.getAll();
+
         const categoryMap = {};
         categories.forEach((cat) => {
             categoryMap[cat.category_id] = cat.name;
