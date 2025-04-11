@@ -125,7 +125,6 @@ const budgetSchema = {
     amount: 0,
     fromDate: "",
     toDate: "",
-    dev:"",
 };
 
 

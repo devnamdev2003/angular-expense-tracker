@@ -258,5 +258,3 @@ window.saveBudget = () => {
         showToast('Budget added successfully!', 'success');
     }
 }
-
-

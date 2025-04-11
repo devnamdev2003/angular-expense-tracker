@@ -72,46 +72,31 @@
     <!-- Sidebar -->
     <aside id="sidebar"
       class="fixed md:static z-40 w-64 bg-surface shadow p-4 transition-all duration-300 ease-in-out hidden md:block h-full">
-      <!-- <h2 class="text-2xl font-bold text-center mb-6">💰 Dashboard</h2> -->
       <ul class="space-y-4">
         <li>
-          <button onclick="showSection('home')" class="w-full text-left hover:text-accent">
-            🏠 Home
-          </button>
+          <button onclick="showSection('home')" class="w-full text-left hover:text-accent">🏠 Home</button>
         </li>
         <li>
-          <button onclick="showSection('add')" class="w-full text-left hover:text-accent">
-            ➕ Add Expense
-          </button>
+          <button onclick="showSection('add')" class="w-full text-left hover:text-accent">➕ Add Expense</button>
         </li>
         <li>
-          <button onclick="showSection('list')" class="w-full text-left hover:text-accent">
-            📋 List Expenses
-          </button>
+          <button onclick="showSection('list')" class="w-full text-left hover:text-accent">📋 List Expenses</button>
         </li>
         <li>
-          <button onclick="showSection('search')" class="w-full text-left hover:text-accent">
-            🔍 Search
-          </button>
+          <button onclick="showSection('search')" class="w-full text-left hover:text-accent">🔍 Search</button>
         </li>
         <li>
-          <button onclick="showSection('calendar')" class="w-full text-left hover:text-accent">
-            📅 Calendar
-          </button>
+          <button onclick="showSection('calendar')" class="w-full text-left hover:text-accent">📅 Calendar</button>
         </li>
         <li>
-          <button onclick="showSection('settings')" class="w-full text-left hover:text-accent">
-            ⚙️ Settings
-          </button>
+          <button onclick="showSection('settings')" class="w-full text-left hover:text-accent">⚙️ Settings</button>
         </li>
       </ul>
     </aside>
 
-    <!-- Mobile Sidebar Toggle -->
+    <!-- Mobile Sidebar Toggle Button -->
     <div id="menuToggle" class="md:hidden fixed top-1 right-4 z-50">
-      <button onclick="toggleSidebar()" class="text-lg text-white px-4 py-2">
-        ☰
-      </button>
+      <button onclick="toggleSidebar()" class="text-lg text-white px-4 py-2">☰</button>
     </div>
     <!-- Main Content -->
     <main class="flex-1 p-6 overflow-y-auto w-full h-full">
@@ -323,24 +308,13 @@
             Search
           </button>
         </form>
-        <div class="overflow-x-auto bg-surface rounded shadow">
-          <table class="min-w-full table-auto">
-            <thead>
-              <tr class="bg-accent text-white uppercase text-xs">
-                <th class="text-left px-4 py-3">Amount</th>
-                <th class="text-left px-4 py-3">Category</th>
-                <th class="text-left px-4 py-3">Subcategory</th>
-                <th class="text-left px-4 py-3">Date</th>
-                <th class="text-left px-4 py-3">Payment Mode</th>
-                <th class="text-left px-4 py-3">Location</th>
-
-              </tr>
-            </thead>
-            <tbody id="searchResultsTableBody" class="text-color-text bg-color-surface dark:bg-color-surface">
-              <!-- Dynamic rows go here -->
-            </tbody>
-          </table>
-        </div>
+        <!-- New List-Based Result Section -->
+        <!-- <ul id="searchResultsList" class="space-y-3">
+         
+        </ul> -->
+        <ul id="searchResultsList" class="grid grid-cols-1 md:grid-cols-2 gap-4 mt-6">
+          <!-- Results go here -->
+        </ul>
 
       </section>
 
@@ -571,9 +545,9 @@
   <footer class="fixed bottom-0 left-0 w-full bg-surface text-center text-sm py-2 z-50 text-muted">
     © 2025 Dev Namdev. All rights reserved.
   </footer>
-  <!-- toast-container -->
-  <div id="toast-container" class="fixed bottom-5 right-5 z-50 space-y-2"></div>
 
+  <!-- toast-container -->
+  <div id="toast-container" class="fixed top-5 left-1/2 transform -translate-x-1/2 z-50 space-y-2 min-w-[20rem]"></div>
 </body>
 
 </html>
