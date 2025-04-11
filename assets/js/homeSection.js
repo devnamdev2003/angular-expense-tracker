@@ -4,6 +4,32 @@ import { BudgetService } from './localStorage/budgetLocal.js';
 
 let charts = {};
 
+function getAvgBudgetInfo(totalBudget, spent, remaining, fromDate, toDate) {
+
+    // Budget Insights Card
+    const avgAllowedEl = document.getElementById("avgAllowedPerDay");
+    const spentPerDayEl = document.getElementById("spentPerDay");
+    const suggestedPerDayEl = document.getElementById("suggestedPerDay");
+
+    // Days calculation
+    const totalDays = Math.ceil((toDate - fromDate) / (1000 * 60 * 60 * 24)) + 1;
+    const today = new Date();
+    const elapsedDays = Math.max(Math.ceil((today - fromDate) / (1000 * 60 * 60 * 24)), 1);
+    const remainingDays = Math.max(totalDays - elapsedDays, 1);
+
+    // Calculations
+    const avgAllowedPerDay = totalBudget / totalDays;
+    const avgSpentPerDay = spent / elapsedDays;
+    const suggestedPerDay = remaining / remainingDays;
+
+    // Show insights card
+    avgAllowedEl.innerText = `₹${avgAllowedPerDay.toFixed(2)}`;
+    spentPerDayEl.innerText = `₹${avgSpentPerDay.toFixed(2)}`;
+    suggestedPerDayEl.innerText = `₹${suggestedPerDay.toFixed(2)}`;
+
+}
+
+
 function loadDashboardData() {
     const expenses = ExpenseService.getAll();
     const categories = CategoryService.getAll();
@@ -61,11 +87,11 @@ function loadDashboardData() {
         } else {
             budgetText.innerText = `✅ You have spent ₹${spent.toFixed(2)} out of ₹${totalBudget.toFixed(2)} between ${latestBudget.fromDate} and ${latestBudget.toDate}. 💸 Remaining: ₹${remaining.toFixed(2)}`;
         }
+        getAvgBudgetInfo(totalBudget, spent, remaining, fromDate, toDate);
     } else {
         // Hide the section if no budget
         budgetSection.classList.add("hidden");
     }
-
 
     try {
 

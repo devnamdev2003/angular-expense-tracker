@@ -28,7 +28,6 @@ toggle.addEventListener("change", () => {
     localStorage.setItem("settings", JSON.stringify(currentSettings));
 });
 
-
 // Add Category Model
 function showCategoryFormError(id, message) {
     const el = document.getElementById(id);
@@ -258,3 +257,32 @@ window.saveBudget = () => {
         showToast('Budget added successfully!', 'success');
     }
 }
+
+// Backup options
+window.handleBackupToggle = () => {
+    const settings = JSON.parse(localStorage.getItem('settings')) || {};
+    if (settings.isBackup) {
+        document.getElementById('backupFrequency').value = settings.backupFrequency;
+        document.getElementById('backupModalSubmitButton').innerText = "Update";
+    } else {
+        document.getElementById('backupFrequency').value = '';
+        document.getElementById('backupModalSubmitButton').innerText = "Save";
+    }
+    document.getElementById('backupModal').showModal();
+};
+
+window.closeBackupModal = () => {
+    document.getElementById('backupModal').close();
+};
+
+window.saveBackupSetting = () => {
+    const frequency = document.getElementById('backupFrequency').value;
+    const settings = JSON.parse(localStorage.getItem('settings')) || {};
+    settings.backupFrequency = frequency;
+    settings.isBackup = true;
+    localStorage.setItem('settings', JSON.stringify(settings));
+    document.getElementById('backupModal').close();
+    showToast(`Backup set to: ${frequency}`, 'success');
+};
+
+

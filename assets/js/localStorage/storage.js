@@ -29,6 +29,8 @@ const settingsSchema = {
     language: "",
     currency: "",
     layout: "",
+    backupFrequency: "", // ✅ New column
+    isBackup: false,
 };
 
 function syncSettingsWithSchema() {
