@@ -237,7 +237,7 @@ window.saveBudget = () => {
 
     if (allBudgets.length > 0) {
         const latest = allBudgets[allBudgets.length - 1];
-        BudgetService.update(latest.id, { amount: parseFloat(amount), fromDate, toDate });
+        BudgetService.update(latest.budget_id, { amount: parseFloat(amount), fromDate, toDate });
         closeBudgetModal();
         showToast('Budget updated successfully!', 'success');
 

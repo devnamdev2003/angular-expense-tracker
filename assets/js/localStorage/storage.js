@@ -24,10 +24,14 @@ localStorage.setItem('categories', JSON.stringify([
 /* ----------------------------settings------------------------ */
 
 const settingsSchema = {
+    setting_id: "",
     themeMode: "",
     notifications: true,
     backupFrequency: "", // ✅ New column
     isBackup: false,
+    lastBackup: "",
+    user_email: "",
+    user_password: "",
 };
 
 function syncSettingsWithSchema() {
@@ -62,6 +66,7 @@ const expenseSchema = {
     payment_mode: "",
     subcategory: "",
     time: "",
+    setting_id: "",
 };
 
 function syncExpensesWithSchema() {
@@ -95,6 +100,7 @@ const customCategorySchema = {
     name: "",
     icon: "",
     color: "",
+    setting_id: "",
 };
 
 function syncCustomCategoriesWithSchema() {
@@ -120,10 +126,11 @@ if (!localStorage.getItem('budget')) {
 }
 
 const budgetSchema = {
-    id: "",
+    budget_id: "",
     amount: 0,
     fromDate: "",
     toDate: "",
+    setting_id: "",
 };
 
 
