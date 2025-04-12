@@ -21,7 +21,7 @@ export const BudgetService = {
 
     // GET by ID
     getById: (id) => {
-        return getBudgetFromStorage().find(b => b.id === id) || null;
+        return getBudgetFromStorage().find(b => b.budget_id === id) || null;
     },
 
     // Search by date range (returns budgets falling in the range)
@@ -37,7 +37,7 @@ export const BudgetService = {
     add: ({ amount, fromDate, toDate }) => {
         const budgets = getBudgetFromStorage();
         const newBudget = {
-            id: generateBudgetId(),
+            budget_id: generateBudgetId(),
             amount,
             fromDate,
             toDate
@@ -50,7 +50,7 @@ export const BudgetService = {
     // UPDATE existing budget
     update: (id, updatedData) => {
         const budgets = getBudgetFromStorage();
-        const index = budgets.findIndex(b => b.id === id);
+        const index = budgets.findIndex(b => b.budget_id === id);
         if (index === -1) return { error: 'Budget not found' };
 
         budgets[index] = { ...budgets[index], ...updatedData };
@@ -61,7 +61,7 @@ export const BudgetService = {
     // DELETE budget
     remove: (id) => {
         let budgets = getBudgetFromStorage();
-        const exists = budgets.some(b => b.id === id);
+        const exists = budgets.some(b => b.budget_id === id);
         if (!exists) return { error: 'Budget not found' };
 
         budgets = budgets.filter(b => b.id !== id);
