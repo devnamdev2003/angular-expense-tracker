@@ -175,7 +175,7 @@
       <!-- ➕ Add Section -->
       <section id="add" class="section hidden">
         <h1 class="text-2xl font-bold mb-6 text-accent">➕ Add Expense</h1>
-        <form id="expenseForm" class="space-y-4 bg-surface p-4 rounded shadow text-[var(--color-text)]">
+        <form id="expenseForm" onsubmit=" event.preventDefault(); addExpenseForm();" class="space-y-4 bg-surface p-4 rounded shadow text-[var(--color-text)]">
           <input type="hidden" name="expense_id" />
 
           <!-- 💰 Amount -->

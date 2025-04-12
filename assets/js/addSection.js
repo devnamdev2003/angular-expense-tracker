@@ -1,72 +1,63 @@
 import { ExpenseService } from './localStorage/expenseLocal.js';
 import { CategoryService } from './localStorage/categoryLocal.js';
 
-document.addEventListener('DOMContentLoaded', () => {
+window.addExpenseForm = () => {
     const form = document.getElementById('expenseForm');
+    // Clear previous errors
+    document.querySelectorAll('.error-message').forEach(el => el.textContent = '');
 
-    form.addEventListener('submit', (e) => {
-        e.preventDefault();
+    const formData = new FormData(form);
+    const data = Object.fromEntries(formData.entries());
 
-        // Clear previous errors
-        document.querySelectorAll('.error-message').forEach(el => el.textContent = '');
-        // document.querySelectorAll('input, select').forEach(el => el.classList.remove('input-error'));
+    // Required fields
+    const requiredFields = ['amount', 'category_id', 'date', 'time', 'payment_mode'];
+    let isValid = true;
 
-        const formData = new FormData(form);
-        const data = Object.fromEntries(formData.entries());
+    requiredFields.forEach(field => {
+        const value = data[field];
+        if (!value || value.trim() === '') {
+            isValid = false;
+            // const input = form.querySelector(`[name="${field}"]`);
+            const errorDiv = document.getElementById(`${field}-error`);
 
-        // Required fields
-        const requiredFields = ['amount', 'category_id', 'date', 'time', 'payment_mode'];
-        let isValid = true;
-
-        requiredFields.forEach(field => {
-            const value = data[field];
-            if (!value || value.trim() === '') {
-                isValid = false;
-                // const input = form.querySelector(`[name="${field}"]`);
-                const errorDiv = document.getElementById(`${field}-error`);
-
-                // if (input) input.classList.add('input-error');
-                if (errorDiv) {
-                    errorDiv.textContent = `This field is required.`;
-                    // Remove error after 3 seconds
-                    setTimeout(() => {
-                        errorDiv.textContent = '';
-                        // if (input) input.classList.remove('input-error');
-                    }, 3000);
-                }
+            // if (input) input.classList.add('input-error');
+            if (errorDiv) {
+                errorDiv.textContent = `This field is required.`;
+                // Remove error after 3 seconds
+                setTimeout(() => {
+                    errorDiv.textContent = '';
+                    // if (input) input.classList.remove('input-error');
+                }, 3000);
             }
-        });
-
-
-        if (!isValid) return;
-        // api use
-        try {
-            const newExpense = ExpenseService.add({
-                amount: data.amount,
-                category_id: data.category_id,
-                subcategory: data.subcategory,
-                date: data.date,
-                time: data.time,
-                note: data.note,
-                payment_mode: data.payment_mode,
-                location: data.location,
-            });
-
-
-            if (!newExpense) {
-                showToast(result.error || 'Failed to add expense', 'error');
-                return;
-            }
-            showToast('Expense added successfully!', 'success');
-            form.reset();
-            addFormReset();
-            loadCategory();
-        } catch (err) {
-            console.error('Submit failed:', err);
-            showToast(result.error || 'Failed to add expense', 'error');
         }
     });
-});
+
+
+    if (!isValid) return;
+    try {
+        const newExpense = ExpenseService.add({
+            amount: data.amount,
+            category_id: data.category_id,
+            subcategory: data.subcategory,
+            date: data.date,
+            time: data.time,
+            note: data.note,
+            payment_mode: data.payment_mode,
+            location: data.location,
+        });
+        if (!newExpense) {
+            showToast(result.error || 'Failed to add expense', 'error');
+            return;
+        }
+        showToast('Expense added successfully!', 'success');
+        form.reset();
+        addFormReset();
+        loadCategory();
+    } catch (err) {
+        console.error('Submit failed:', err);
+        showToast(result.error || 'Failed to add expense', 'error');
+    }
+}
 
 function loadCategory() {
     const dropdownBtn = document.getElementById("custom-category");

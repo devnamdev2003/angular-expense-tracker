@@ -26,9 +26,6 @@ localStorage.setItem('categories', JSON.stringify([
 const settingsSchema = {
     themeMode: "",
     notifications: true,
-    language: "",
-    currency: "",
-    layout: "",
     backupFrequency: "", // ✅ New column
     isBackup: false,
 };

@@ -80,7 +80,6 @@ window.showToast = (message, type = 'success') => {
 
 window.toggleSidebar = () => {
   const sidebar = document.getElementById("sidebar");
-  const menuToggle = document.getElementById("menuToggle");
   const isHidden = sidebar.classList.contains("hidden");
 
   if (isHidden) {
