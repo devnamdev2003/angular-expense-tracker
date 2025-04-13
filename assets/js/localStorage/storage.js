@@ -24,7 +24,7 @@ localStorage.setItem('categories', JSON.stringify([
 /* ----------------------------settings------------------------ */
 
 const settingsSchema = {
-    setting_id: "",
+    settings_id: "",
     themeMode: "",
     notifications: true,
     backupFrequency: "", // ✅ New column
@@ -66,7 +66,7 @@ const expenseSchema = {
     payment_mode: "",
     subcategory: "",
     time: "",
-    setting_id: "",
+    settings_id: "",
 };
 
 function syncExpensesWithSchema() {
@@ -100,7 +100,7 @@ const customCategorySchema = {
     name: "",
     icon: "",
     color: "",
-    setting_id: "",
+    settings_id: "",
 };
 
 function syncCustomCategoriesWithSchema() {
@@ -130,7 +130,7 @@ const budgetSchema = {
     amount: 0,
     fromDate: "",
     toDate: "",
-    setting_id: "",
+    settings_id: "",
 };
 
 

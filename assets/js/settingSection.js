@@ -1,6 +1,6 @@
 import { CategoryService } from "./localStorage/categoryLocal.js";
 import { BudgetService } from "./localStorage/budgetLocal.js";
-
+import { APIURL } from "./global.js";
 
 const toggle = document.getElementById("modeToggle");
 
@@ -286,3 +286,145 @@ window.saveBackupSetting = () => {
 };
 
 
+//  Accout Setup
+function generateSettingId() {
+    return Date.now() + '_' + Math.random().toString(36).substr(2, 9);
+}
+
+
+window.togglePassword = (fieldId, iconElement) => {
+    const input = document.getElementById(fieldId);
+    const isVisible = input.type === 'text';
+    input.type = isVisible ? 'password' : 'text';
+    iconElement.textContent = isVisible ? '👁️' : '🙈';
+};
+
+window.openAccountModal = () => {
+    const settings = JSON.parse(localStorage.getItem('settings')) || {};
+    document.getElementById('accountEmail').value = settings.user_email || '';
+    document.getElementById('accountPassword').value = '';
+    document.getElementById('confirmPassword').value = '';
+    document.getElementById('accountModalSubmitButton').innerText = settings.user_email ? "Update" : "Save";
+
+
+    // Clear errors
+    document.getElementById('emailError').classList.add('hidden');
+    document.getElementById('passwordError').classList.add('hidden');
+    document.getElementById('confirmError').classList.add('hidden');
+
+    document.getElementById('accountModal').showModal();
+};
+
+window.closeAccountModal = () => {
+    document.getElementById('accountModal').close();
+};
+
+window.saveAccountSettings = () => {
+    const email = document.getElementById('accountEmail').value.trim();
+    const password = document.getElementById('accountPassword').value.trim();
+    const confirmPassword = document.getElementById('confirmPassword').value.trim();
+
+    let hasError = false;
+
+    // Email Validation
+    if (!email || !/^\S+@\S+\.\S+$/.test(email)) {
+        document.getElementById('emailError').textContent = 'Please enter a valid email.';
+        document.getElementById('emailError').classList.remove('hidden');
+        hasError = true;
+    } else {
+        document.getElementById('emailError').classList.add('hidden');
+    }
+
+    // Password Validation
+    if (password.length < 8) {
+        document.getElementById('passwordError').textContent = 'Password must be at least 8 characters.';
+        document.getElementById('passwordError').classList.remove('hidden');
+        hasError = true;
+    } else {
+        document.getElementById('passwordError').classList.add('hidden');
+    }
+
+    // Confirm Password Match
+    if (password !== confirmPassword) {
+        document.getElementById('confirmError').textContent = 'Passwords do not match.';
+        document.getElementById('confirmError').classList.remove('hidden');
+        hasError = true;
+    } else {
+        document.getElementById('confirmError').classList.add('hidden');
+    }
+
+    if (hasError) return;
+
+    // 🔐 Save to localStorage
+    const settings = JSON.parse(localStorage.getItem('settings')) || {};
+    settings.user_email = email;
+    settings.user_password = password;
+
+    // Start loader
+    showAccountLoader();
+
+    if (!settings.settings_id) {
+        settings.settings_id = generateSettingId();
+
+        fetch(APIURL + "/register-user", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({
+                settings_id: settings.settings_id,
+                email: settings.user_email,
+                password: settings.user_password
+            })
+        }).then(res => res.json())
+            .then(data => {
+                hideAccountLoader(); // Stop loader
+                if (data.status === "success") {
+                    localStorage.setItem('settings', JSON.stringify(settings));
+                    document.getElementById('accountModal').close();
+                    showToast(data.message, "success");
+                } else {
+                    document.getElementById('confirmError').textContent = data.message;
+                    document.getElementById('confirmError').classList.remove('hidden');
+                }
+            })
+            .catch(err => {
+                hideAccountLoader();
+                console.error("Server save failed", err);
+                showToast("Saved locally. Server sync failed!", "error");
+            });
+
+    } else {
+        fetch(APIURL + "/update-user", {
+            method: "PUT",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({
+                settings_id: settings.settings_id,
+                email: settings.user_email,
+                password: settings.user_password
+            })
+        }).then(res => res.json())
+            .then(data => {
+                hideAccountLoader();
+                if (data.status === "success") {
+                    localStorage.setItem('settings', JSON.stringify(settings));
+                    document.getElementById('accountModal').close();
+                    showToast(data.message, "success");
+                } else {
+                    document.getElementById('confirmError').textContent = data.message;
+                    document.getElementById('confirmError').classList.remove('hidden');
+                }
+            })
+            .catch(err => {
+                hideAccountLoader();
+                console.error("Server save failed", err);
+                showToast("Saved locally. Server sync failed!", "error");
+            });
+    }
+};
+
+window.showAccountLoader = () => {
+    document.getElementById('accountLoader').classList.remove('hidden');
+};
+
+window.hideAccountLoader = () => {
+    document.getElementById('accountLoader').classList.add('hidden');
+};

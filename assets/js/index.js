@@ -3,6 +3,7 @@ import { loadDashboardData } from './homeSection.js';
 import { renderCalendar } from './calenderSection.js';
 import { listSection } from './listSection.js';
 import { syncExpensesWithSchema, syncSettingsWithSchema, syncBudgetWithSchema, syncCustomCategoriesWithSchema } from './localStorage/storage.js';
+import { syncAllDataToServer } from './backupApiCall.js';
 
 document.addEventListener("DOMContentLoaded", () => {
   loadDashboardData();
@@ -10,6 +11,7 @@ document.addEventListener("DOMContentLoaded", () => {
   syncSettingsWithSchema();
   syncCustomCategoriesWithSchema();
   syncBudgetWithSchema();
+  syncAllDataToServer();
 });
 
 window.showSection = (id) => {
@@ -117,3 +119,11 @@ function closeSidebar() {
   document.body.dataset.sidebarOpen = "false";
   document.removeEventListener("click", handleOutsideClick);
 }
+
+window.showGloabalLoader = () => {
+  document.getElementById('globalLoader').classList.remove('hidden');
+};
+
+window.hideGloabalLoader = () => {
+  document.getElementById('globalLoader').classList.add('hidden');
+};
