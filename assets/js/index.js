@@ -11,7 +11,7 @@ document.addEventListener("DOMContentLoaded", () => {
   syncSettingsWithSchema();
   syncCustomCategoriesWithSchema();
   syncBudgetWithSchema();
-  syncAllDataToServer();
+  // syncAllDataToServer();
 });
 
 window.showSection = (id) => {

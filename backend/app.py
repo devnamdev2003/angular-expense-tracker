@@ -32,21 +32,51 @@ def index():
 # 1. **Restore Data API** - Fetch all data based on email and password
 @app.route("/restore-data", methods=["POST"])
 def restore_data():
-    data = request.get_json()
-    email = data.get("email")
-    password = data.get("password")
+    try:
+        data = request.get_json(force=True)
 
-    # Find user based on email
-    settings = Settings.query.filter_by(user_email=email).first()
+        # Step 1: Extract and validate input
+        email = str(data.get("email", "")).strip().lower()
+        password = str(data.get("password", "")).strip()
 
-    if settings and settings.user_password == password:
-        # Fetch all user data based on email
-        categories = Category.query.all()
-        custom_categories = CustomCategory.query.all()
-        expenses = Expense.query.filter_by(category_id=Category.category_id).all()
-        budgets = Budget.query.all()
+        if not email or not password:
+            return (
+                jsonify(
+                    {"status": "fail", "message": "Email and password are required."}
+                ),
+                400,
+            )
 
+        # Step 2: Authenticate user
+        settings = Settings.query.filter_by(user_email=email).first()
+        if not settings or settings.user_password != password:
+            return (
+                jsonify({"status": "fail", "message": "Invalid email or password."}),
+                401,
+            )
+
+        settings_id = settings.settings_id
+
+        # Step 3: Fetch user-specific data
+        categories = Category.query.all()  # global categories
+        custom_categories = (
+            CustomCategory.query.all()
+        )  # all custom ones (filter if needed later)
+        expenses = Expense.query.all()
+        budgets = Budget.query.filter_by(settings_id=settings_id).all()
+
+        # Step 4: Structure the response
         response = {
+            "settings": {
+                "settings_id": settings.settings_id,
+                "themeMode": settings.themeMode,
+                "notifications": settings.notifications,
+                "backupFrequency": settings.backupFrequency,
+                "isBackup": settings.isBackup,
+                "lastBackup": settings.lastBackup,
+                "user_email": settings.user_email,
+                "user_password": settings.user_password,
+            },
             "categories": [
                 {
                     "category_id": c.category_id,
@@ -90,9 +120,29 @@ def restore_data():
             ],
         }
 
-        return jsonify(response), 200
-    else:
-        return jsonify({"error": "Invalid credentials"}), 401
+        return (
+            jsonify(
+                {
+                    "status": "success",
+                    "message": "Data restored successfully.",
+                    "data": response,
+                }
+            ),
+            200,
+        )
+
+    except Exception as e:
+        print("Error in /restore-data:\n", traceback.format_exc())
+        return (
+            jsonify(
+                {
+                    "status": "error",
+                    "message": "An unexpected error occurred while restoring data.",
+                    "details": str(e),
+                }
+            ),
+            500,
+        )
 
 
 # 2. **Set Data API** - Save local storage data to the database
@@ -113,26 +163,35 @@ def set_data():
                 400,
             )
 
-        email = str(data.get("email", "")).strip().lower()
-        password = str(data.get("password", "")).strip()
-        settings_id = str(data.get("settings_id", "")).strip()
+        # Step 1: Validate presence of settings
+        settings_data = data.get("settings")
+        if not settings_data:
+            return (
+                jsonify(
+                    {"status": "fail", "message": "Missing 'settings' in request body."}
+                ),
+                400,
+            )
+
+        settings_id = str(settings_data.get("settings_id", "")).strip()
+        email = str(settings_data.get("user_email", "")).strip().lower()
+        password = str(settings_data.get("user_password", "")).strip()
 
         if not email or not password or not settings_id:
             return (
                 jsonify(
                     {
                         "status": "fail",
-                        "message": "Email, password, and settings_id are required.",
+                        "message": "Email, password, and settings_id are required in 'settings'.",
                     }
                 ),
                 400,
             )
 
-        # Authenticate user using settings_id + email + password
+        # Step 2: Authenticate user
         settings = Settings.query.filter_by(
             settings_id=settings_id, user_email=email
         ).first()
-
         if not settings or not settings.user_password == password:
             return (
                 jsonify(
@@ -144,7 +203,22 @@ def set_data():
                 401,
             )
 
-        # Validate presence of all required data keys
+        # Step 3: Update Settings
+        settings.themeMode = settings_data.get("themeMode", settings.themeMode)
+        settings.notifications = settings_data.get(
+            "notifications", settings.notifications
+        )
+        settings.backupFrequency = settings_data.get(
+            "backupFrequency", settings.backupFrequency
+        )
+        settings.isBackup = settings_data.get("isBackup", settings.isBackup)
+        # settings.lastBackup = settings_data.get("lastBackup", settings.lastBackup)
+
+        # Handle lastBackup safely
+        last_backup = settings_data.get("lastBackup")
+        settings.lastBackup = last_backup if last_backup else None
+
+        # Step 4: Validate data structure
         expected_keys = ["categories", "custom_categories", "expenses", "budgets"]
         missing_keys = [key for key in expected_keys if key not in data]
         if missing_keys:
@@ -162,40 +236,39 @@ def set_data():
             "categories": 0,
             "custom_categories": 0,
             "expenses": 0,
-            "budgets_updated": 0,
+            "budgets_saved": 0,
             "custom_categories_deleted": 0,
+            "settings_updated": True,
         }
 
-        # Categories: Insert new only
+        # Step 5: Insert new Categories
         for cat in data["categories"]:
             if not Category.query.filter_by(category_id=cat["category_id"]).first():
                 db.session.add(Category(**cat))
                 inserted["categories"] += 1
 
-        # Custom Categories: Insert new + delete missing
-        incoming_custom_ids = set()
+        # Step 6: Insert new Custom Categories + delete removed ones
+        incoming_custom_ids = {cat["category_id"] for cat in data["custom_categories"]}
         for cat in data["custom_categories"]:
-            incoming_custom_ids.add(cat["category_id"])
             if not CustomCategory.query.filter_by(
                 category_id=cat["category_id"]
             ).first():
                 db.session.add(CustomCategory(**cat))
                 inserted["custom_categories"] += 1
 
-        # Delete CustomCategories not in localStorage
         existing_custom = CustomCategory.query.all()
         for db_cat in existing_custom:
             if db_cat.category_id not in incoming_custom_ids:
                 db.session.delete(db_cat)
                 inserted["custom_categories_deleted"] += 1
 
-        # Expenses: Insert new only
+        # Step 7: Insert new Expenses
         for exp in data["expenses"]:
             if not Expense.query.filter_by(expense_id=exp["expense_id"]).first():
                 db.session.add(Expense(**exp))
                 inserted["expenses"] += 1
 
-        # Budgets: Update if exists, else insert new
+        # Step 8: Budgets – Update if exists, else insert
         for bud in data["budgets"]:
             existing_budget = Budget.query.filter_by(budget_id=bud["budget_id"]).first()
             if existing_budget:
@@ -212,7 +285,7 @@ def set_data():
                     settings_id=settings_id,
                 )
                 db.session.add(new_budget)
-            inserted["budgets_updated"] += 1
+            inserted["budgets_saved"] += 1
 
         db.session.commit()
 

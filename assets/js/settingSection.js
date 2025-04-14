@@ -1,7 +1,7 @@
 import { CategoryService } from "./localStorage/categoryLocal.js";
 import { BudgetService } from "./localStorage/budgetLocal.js";
 import { APIURL } from "./global.js";
-
+import { handleRestoreData } from "./backupApiCall.js";
 const toggle = document.getElementById("modeToggle");
 
 // Load theme from localStorage
@@ -291,7 +291,6 @@ function generateSettingId() {
     return Date.now() + '_' + Math.random().toString(36).substr(2, 9);
 }
 
-
 window.togglePassword = (fieldId, iconElement) => {
     const input = document.getElementById(fieldId);
     const isVisible = input.type === 'text';
@@ -427,4 +426,51 @@ window.showAccountLoader = () => {
 
 window.hideAccountLoader = () => {
     document.getElementById('accountLoader').classList.add('hidden');
+};
+
+// Restore Data
+window.showRestoreLoader = () => {
+    document.getElementById('restoreLoader').classList.remove('hidden');
+};
+
+window.hideRestoreLoader = () => {
+    document.getElementById('restoreLoader').classList.add('hidden');
+};
+
+window.openRestoreModal = () => {
+    document.getElementById("restoreModal").showModal();
+}
+
+window.closeRestoreModal = () => {
+    document.getElementById("restoreModal").close();
+}
+
+window.validateAndRestore = () => {
+    const emailInput = document.getElementById("restoreEmail");
+    const passwordInput = document.getElementById("restorePassword");
+    const emailError = document.getElementById("restoreEmailError");
+    const passwordError = document.getElementById("restorePasswordError");
+
+    let isValid = true;
+
+    // Reset error visibility
+    emailError.classList.add("hidden");
+    passwordError.classList.add("hidden");
+
+    if (!emailInput.value.trim()) {
+        showCategoryFormError("restoreEmailError","Email is required.")
+        isValid = false;
+    }
+
+    if (!passwordInput.value.trim()) {
+        showCategoryFormError("restorePasswordError","Password is required.")
+        isValid = false;
+    }
+
+    if (!isValid) return;
+
+    const confirmRestore = confirm("Are you sure you want to restore your data? This will overwrite all local data.");
+    if (!confirmRestore) return;
+    showRestoreLoader();
+    handleRestoreData(emailInput.value.trim(), passwordInput.value);
 };

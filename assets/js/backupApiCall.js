@@ -2,7 +2,7 @@ import { APIURL } from "./global.js";
 
 async function syncAllDataToServer() {
     try {
-        const settings = JSON.parse(localStorage.getItem('settings')) || {};
+        const settings = JSON.parse(localStorage.getItem("settings")) || {};
 
         if (!settings.settings_id || !settings.user_email || !settings.user_password) {
             showToast("Incomplete account settings. Please set up your account first.", "error");
@@ -10,32 +10,30 @@ async function syncAllDataToServer() {
         }
 
         // Load all local data
-        const categories = JSON.parse(localStorage.getItem('categories')) || [];
-        const custom_categories = JSON.parse(localStorage.getItem('custom_categories')) || [];
-        const expenses = JSON.parse(localStorage.getItem('expenses')) || [];
-        const budgets = JSON.parse(localStorage.getItem('budget')) || [];
+        const categories = JSON.parse(localStorage.getItem("categories")) || [];
+        const custom_categories = JSON.parse(localStorage.getItem("custom_categories")) || [];
+        const expenses = JSON.parse(localStorage.getItem("expenses")) || [];
+        const budgets = JSON.parse(localStorage.getItem("budget")) || [];
 
-        // Add settings_id to each item in these arrays
+        // Add settings_id to each item
         const addSettingsId = (arr) =>
             arr.map(item => ({ ...item, settings_id: settings.settings_id }));
 
+        // Prepare payload with settings as an object
         const payload = {
-            settings_id: settings.settings_id,
-            email: settings.user_email,
-            password: settings.user_password,
+            settings: settings, // contains settings_id, user_email, user_password, etc.
             categories: categories,
             custom_categories: addSettingsId(custom_categories),
             expenses: addSettingsId(expenses),
-            budgets: addSettingsId(budgets)
+            budgets: addSettingsId(budgets),
         };
 
-        // Optional: show loader
-        showGloabalLoader();
+        showGloabalLoader(); // Optional: show loader
 
         const response = await fetch(APIURL + "/set-data", {
             method: "POST",
             headers: { "Content-Type": "application/json" },
-            body: JSON.stringify(payload)
+            body: JSON.stringify(payload),
         });
 
         const data = await response.json();
@@ -43,7 +41,7 @@ async function syncAllDataToServer() {
         hideGloabalLoader(); // hide loader when done
 
         if (data.status === "success") {
-            showToast("All data synced successfully!", "success");
+            showToast(data.message, "success");
         } else {
             showToast(data.message || "Data sync failed.", "error");
         }
@@ -56,4 +54,44 @@ async function syncAllDataToServer() {
 };
 
 
-export { syncAllDataToServer };
+function handleRestoreData(email, password) {
+    fetch(APIURL + "/restore-data", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email, password })
+    })
+        .then(res => res.json())
+        .then(data => {
+            hideRestoreLoader();
+
+            if (data.status === "success") {
+                const restored = data.data;
+
+                localStorage.clear();
+                localStorage.setItem("settings", JSON.stringify(restored.settings));
+                localStorage.setItem("categories", JSON.stringify(restored.categories));
+                localStorage.setItem("custom_categories", JSON.stringify(restored.custom_categories));
+                localStorage.setItem("expenses", JSON.stringify(restored.expenses));
+                localStorage.setItem("budget", JSON.stringify(restored.budgets));
+
+                closeRestoreModal();
+                hideRestoreLoader();
+                showToast(data.message, "success");
+                location.reload();
+            } else {
+                hideRestoreLoader();
+                const el = document.getElementById("restorePasswordError");
+                el.textContent = data.message || "Failed to restore data.";
+                el.classList.remove('hidden');
+                setTimeout(() => el.classList.add('hidden'), 3000);
+            }
+        })
+        .catch(err => {
+            hideRestoreLoader();
+            console.error("Restore failed:", err);
+            showToast("Something went wrong. Please try again.", "error");
+        });
+}
+
+
+export { syncAllDataToServer, handleRestoreData };
