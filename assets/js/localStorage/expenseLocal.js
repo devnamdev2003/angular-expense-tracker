@@ -1,5 +1,6 @@
 const EXPENSE_STORAGE_KEY = 'expenses';
 const CATEGORY_STORAGE_KEY = 'categories';
+const CUSTOM_CATEGORY_STORAGE_KEY = 'custom_categories';
 
 function getExpensesFromStorage() {
   return JSON.parse(localStorage.getItem(EXPENSE_STORAGE_KEY)) || [];
@@ -10,7 +11,10 @@ function saveExpensesToStorage(expenses) {
 }
 
 function getCategoriesFromStorage() {
-  return JSON.parse(localStorage.getItem(CATEGORY_STORAGE_KEY)) || [];
+  // return JSON.parse(localStorage.getItem(CATEGORY_STORAGE_KEY)) || [];
+  const defaultCategories = JSON.parse(localStorage.getItem(CATEGORY_STORAGE_KEY)) || [];
+  const customCategories = JSON.parse(localStorage.getItem(CUSTOM_CATEGORY_STORAGE_KEY)) || [];
+  return [...defaultCategories, ...customCategories];
 }
 
 function generateExpenseId() {
