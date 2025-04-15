@@ -1,0 +1,16 @@
+<div *ngIf="show" class="fixed inset-0 bg-black bg-opacity-50 z-50 flex justify-center items-center">
+  <div class="p-6 rounded shadow bg-[var(--color-surface)] w-[90%] max-w-md text-[var(--color-text)] relative">
+    <div class="flex justify-between items-center mb-4">
+      <h2 class="text-lg font-semibold text-[var(--color-text)]">{{ title }}</h2>
+      <button (click)="closeModal()" class="text-xl font-bold hover:text-red-500">&times;</button>
+    </div>
+
+    <form class="space-y-4 mt-6" (submit)="submit($event)">
+      <ng-content></ng-content>
+      <div class="flex justify-end gap-2 mt-4">
+        <button type="button" (click)="closeModal()" class="px-4 py-2 bg-gray-300 text-gray-900 rounded">Cancel</button>
+        <button type="submit" class="bg-[var(--color-accent)] text-white px-4 py-2 rounded">{{ submitText }}</button>
+      </div>
+    </form>
+  </div>
+</div>
