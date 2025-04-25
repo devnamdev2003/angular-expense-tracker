@@ -32,7 +32,11 @@
     --input-error: red;
 }
 
-
+/* Disable text selection */
+* {
+    user-select: none;
+  }
+  
 body {
     background-color: var(--color-bg);
     color: var(--color-text);
