@@ -7,11 +7,14 @@ import { StorageService } from './localStorage/storage.service';
 import { UserService } from './localStorage/user.service';
 import { isPlatformBrowser } from '@angular/common';
 import { Inject, PLATFORM_ID } from '@angular/core';
+import { ToastComponent } from './shared/toast/toast.component'
+import { GlobalLoaderComponent } from './shared/global-loader/global-loader.component'
+import { GlobalLoaderService } from './shared/global-loader/global-loader.service';
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [NavbarComponent, SidebarComponent, RouterOutlet, FooterComponent],
+  imports: [NavbarComponent, SidebarComponent, RouterOutlet, FooterComponent, ToastComponent, GlobalLoaderComponent],
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
@@ -19,11 +22,18 @@ import { Inject, PLATFORM_ID } from '@angular/core';
 export class AppComponent {
   constructor(
     public userService: UserService,
+    private loader: GlobalLoaderService,
     @Inject(PLATFORM_ID) private platformId: Object
   ) { }
 
   ngOnInit() {
     if (isPlatformBrowser(this.platformId)) {
+
+      this.loader.show();
+      setTimeout(() => {
+        this.loader.hide();
+      }, 1000);
+
       StorageService.syncCategoriesWithSchema();
       StorageService.syncExpensesWithSchema();
       StorageService.syncUserWithSchema();

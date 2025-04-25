@@ -25,20 +25,21 @@
 </aside>
 
 <!-- Mobile Bottom Nav -->
-<nav class="md:hidden fixed bottom-0 left-0 right-0 bg-[var(--color-surface)] shadow-t p-2 flex justify-around z-50">
+<nav
+  class="md:hidden fixed bottom-0 left-0 right-0 bg-[var(--color-surface)] shadow-t p-[0.7rem] flex justify-around z-50">
 
   <button (click)="navigateAndClose('/list', $event)" class="flex flex-col items-center text-sm hover:text-accent">
-    📋
-    <span>List</span>
+    <img src="assets/img/icon/icons8-list-60.png" alt="list" class="w-[30px] h-[30px]"
+      style="filter: var(--icon-color2); transition: filter 0.3s ease;">
   </button>
 
   <button (click)="navigateAndClose('/add', $event)" class="flex flex-col items-center text-sm hover:text-accent">
-    ➕
-    <span>Add</span>
+    <img src="assets/img/icon/icons8-add-60.png" alt="add" class="w-[30px] h-[30px]"
+      style="filter: var(--icon-color2); transition: filter 0.3s ease;">
   </button>
 
   <button (click)="navigateAndClose('/calendar', $event)" class="flex flex-col items-center text-sm hover:text-accent">
-    📅
-    <span>Calendar</span>
+    <img src="assets/img/icon/icons8-calendar-50.png" alt="calendar" class="w-[30] h-[30px]"
+      style="filter: var(--icon-color2); transition: filter 0.3s ease;">
   </button>
 </nav>

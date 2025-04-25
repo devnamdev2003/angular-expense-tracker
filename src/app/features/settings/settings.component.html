@@ -4,8 +4,7 @@
         <h2 class="text-xl font-semibold text-accent mb-3">🔧 General Settings</h2>
 
         <!-- Toggle Dark Mode -->
-        <div class="bg-[var(--color-surface)] p-4 rounded shadow flex items-center justify-between mb-4">
-            <span class="font-medium text-[var(--color-text)]">🌗 Toggle Dark Mode</span>
+        <app-setting-item label="🌗 Toggle Dark Mode">
             <label class="relative inline-flex items-center cursor-pointer">
                 <input type="checkbox" class="sr-only peer" [(ngModel)]="isDarkMode" (change)="toggleTheme()" />
                 <div
@@ -15,28 +14,22 @@
                     </div>
                 </div>
             </label>
-        </div>
+        </app-setting-item>
     </div>
 
     <!-- 💰 Budget -->
     <div class="mb-6">
         <h2 class="text-xl font-semibold text-accent mb-3">💰 Budget </h2>
 
-        <div class="bg-[var(--color-surface)] p-4 rounded shadow flex items-center justify-between mb-4">
-            <span class="font-medium text-[var(--color-text)]">🎯 Set Budget</span>
+        <app-setting-item label="🎯 Set Budget">
             <button (click)="showBudgetModal()"
                 class="bg-[var(--color-accent)] text-white px-7 py-1 rounded">Set</button>
-        </div>
+        </app-setting-item>
     </div>
 
-    <!-- Budget Modal -->
-    <dialog id="budgetModal"
-        class="p-6 rounded shadow bg-[var(--color-surface)] w-[90%] max-w-md text-[var(--color-text)] relative">
-        <div class="flex justify-between items-center mb-4">
-            <h2 class="text-lg font-semibold">Set Budget</h2>
-            <button (click)="closeBudgetModal()" class="text-xl font-bold hover:text-red-500">&times;</button>
-        </div>
 
+
+    <app-custom-modal modalId="budgetModal" [title]="'Set Budget'" [onClose]="closeBudgetModal.bind(this)">
         <form class="space-y-4 mt-6" (submit)="saveBudget(); $event.preventDefault();">
             <div>
                 <label for="budgetFrom">From Date</label>
@@ -66,6 +59,7 @@
                 {{ budgetService.getAll().length > 0 ? 'Update' : 'Save' }}
             </button>
         </form>
-    </dialog>
+    </app-custom-modal>
+
 </section>
   

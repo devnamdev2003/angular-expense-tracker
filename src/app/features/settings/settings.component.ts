@@ -3,13 +3,22 @@ import { BudgetService } from '../../localStorage/budget.service';
 import { UserService } from '../../localStorage/user.service';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
+import { SettingItemComponent } from '../../component/setting-item/setting-item.component';
+import { CustomModalComponent } from '../../component/custom-modal/custom-modal.component';
+import { ToastService } from '../../shared/toast/toast.service';
 
 @Component({
   selector: 'app-settings',
-  imports: [FormsModule, CommonModule],
+  imports: [
+    FormsModule,
+    CommonModule,
+    SettingItemComponent,
+    CustomModalComponent,
+  ],
   templateUrl: './settings.component.html',
   styleUrls: ['./settings.component.css'],
 })
+
 export class SettingsComponent {
   isDarkMode = false;
   fromDate = '';
@@ -22,11 +31,13 @@ export class SettingsComponent {
   };
 
   constructor(public budgetService: BudgetService,
-    public userService: UserService
+    public userService: UserService,
+    private toast: ToastService,
   ) { }
-  setTheme(): void {
-    
-  }
+
+
+
+
 
   toggleTheme(): void {
     const savedTheme = this.userService.getValue<string>('theme_mode');
@@ -116,6 +127,6 @@ export class SettingsComponent {
     }
 
     this.closeBudgetModal();
-    alert('Budget saved successfully!');
+    this.toast.show('Budget saved successfully!', 'success');
   }
 }

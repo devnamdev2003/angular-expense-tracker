@@ -13,6 +13,8 @@
     --input-border: #ccc;
     --input-placeholder: #888;
     --input-error: red;
+    --icon-color: invert(100%);
+    --icon-color2: invert(0%);
 }
 
 .dark {
@@ -30,13 +32,15 @@
     --input-border: #444;
     --input-placeholder: #aaa;
     --input-error: red;
+    --icon-color: invert(0%);
+    --icon-color2: invert(100%);
 }
 
 /* Disable text selection */
 * {
     user-select: none;
-  }
-  
+}
+
 body {
     background-color: var(--color-bg);
     color: var(--color-text);
