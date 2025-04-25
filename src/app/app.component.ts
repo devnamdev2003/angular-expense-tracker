@@ -38,9 +38,9 @@ export class AppComponent {
     }
   }
 
-  // // Prevent right-click (context menu) globally
-  // @HostListener('document:contextmenu', ['$event'])
-  // onRightClick(event: MouseEvent) {
-  //   event.preventDefault();
-  // }
+  // Prevent right-click (context menu) globally
+  @HostListener('document:contextmenu', ['$event'])
+  onRightClick(event: MouseEvent) {
+    event.preventDefault();
+  }
 }
