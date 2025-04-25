@@ -1,3 +1,4 @@
+<!-- Desktop Sidebar -->
 <aside #sidebarRef id="sidebar"
   class="fixed md:static z-40 w-64 bg-[var(--color-surface)] shadow p-4 transition-all duration-300 ease-in-out hidden md:block h-full">
   <ul class="space-y-4">
@@ -22,3 +23,23 @@
 
   </ul>
 </aside>
+
+<!-- Mobile Bottom Nav -->
+<nav
+  class="md:hidden fixed bottom-0 left-0 right-0 bg-[var(--color-surface)] shadow-t p-2 flex justify-around z-50 border-t border-gray-200">
+
+  <button (click)="navigateAndClose('/list', $event)" class="flex flex-col items-center text-sm hover:text-accent">
+    📋
+    <span>List</span>
+  </button>
+
+  <button (click)="navigateAndClose('/add', $event)" class="flex flex-col items-center text-sm hover:text-accent">
+    ➕
+    <span>Add</span>
+  </button>
+
+  <button (click)="navigateAndClose('/calendar', $event)" class="flex flex-col items-center text-sm hover:text-accent">
+    📅
+    <span>Calendar</span>
+  </button>
+</nav>

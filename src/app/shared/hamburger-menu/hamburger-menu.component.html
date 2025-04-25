@@ -1,0 +1,17 @@
+<div class="md:hidden fixed top-1 right-4 z-50 hamburger-menu-container">
+    <button (click)="toggleMenu()" class="text-lg text-white px-4 py-2">☰</button>
+    <!-- Dropdown Menu -->
+    <div *ngIf="isMenuOpen"
+        class="fixed top-[3rem] right-[0.2rem] bg-[--color-surface] rounded-lg shadow-lg mt-2 w-[10rem]">
+        <ul class="flex flex-col">
+            <li>
+                <a href="#" (click)="navigateAndClose('/search', $event)"
+                    class="block px-4 py-2 hover:bg-[--list-hover]">🔍 Search</a>
+            </li>
+            <li>
+                <a href="#" (click)="navigateAndClose('/settings', $event)"
+                    class="block px-4 py-2 hover:bg-[--list-hover]">⚙️ Settings</a>
+            </li>
+        </ul>
+    </div>
+</div>

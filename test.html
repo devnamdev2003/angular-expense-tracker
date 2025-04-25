@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Expense Wise</title>
+
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+
+    window.showSection = (id) => {
+      // Hide all sections
+      document.querySelectorAll(".section").forEach((section) => {
+        section.classList.add("hidden");
+      });
+
+      // Show selected section
+      document.getElementById(id).classList.remove("hidden");
+      // On mobile, close the sidebar after selection
+      const sidebar = document.getElementById("sidebar");
+      const menuToggle = document.getElementById("menuToggle");
+
+      if (window.innerWidth < 768) {
+        sidebar.classList.add("hidden");
+        menuToggle.classList.remove("hidden");
+      }
+    };
+
+
+    window.toggleSidebar = () => {
+      const sidebar = document.getElementById("sidebar");
+      const isHidden = sidebar.classList.contains("hidden");
+
+      if (isHidden) {
+        sidebar.classList.remove("hidden");
+        document.body.dataset.sidebarOpen = "true";
+
+        // Allow time for sidebar to fully open before listening for outside clicks
+        setTimeout(() => {
+          document.addEventListener("click", handleOutsideClick);
+        }, 10);
+      } else {
+        sidebar.classList.add("hidden");
+        document.body.dataset.sidebarOpen = "false";
+        document.removeEventListener("click", handleOutsideClick);
+      }
+    };
+
+    function handleOutsideClick(event) {
+      const sidebar = document.getElementById("sidebar");
+      const menuToggle = document.getElementById("menuToggle");
+
+      // Only apply on mobile
+      if (window.innerWidth >= 768) return;
+
+      if (!sidebar.contains(event.target) && !menuToggle.contains(event.target)) {
+        closeSidebar();
+      }
+
+    }
+
+    function closeSidebar() {
+      const sidebar = document.getElementById("sidebar");
+      sidebar.classList.add("hidden");
+      document.body.dataset.sidebarOpen = "false";
+      document.removeEventListener("click", handleOutsideClick);
+    }
+
+    window.showGloabalLoader = () => {
+      document.getElementById('globalLoader').classList.remove('hidden');
+    };
+
+    window.hideGloabalLoader = () => {
+      document.getElementById('globalLoader').classList.add('hidden');
+    };
+
+  </script>
+
+  <link rel="stylesheet" href="./assets/css/index.css">
+  <link rel="stylesheet" href="./assets/css/color.css">
+  <link rel="stylesheet" href="./assets/css/addExpense.css">
+  <link rel="stylesheet" href="./assets/css/calenderSection.css">
+</head>
+
+<!-- Keep your existing <head> as it is -->
+
+<body class="transition-colors duration-300">
+
+  <!-- Navbar -->
+  <header class="fixed top-0 left-0 w-full bg-accent text-color z-50 shadow">
+    <div class="flex items-center justify-between px-4 py-3 text-white">
+      <h1 class="text-lg font-semibold">Expense Tracker</h1>
+    </div>
+  </header>
+
+  <!-- Sidebar for Desktop -->
+  <aside id="sidebar" class="hidden md:block fixed md:static z-40 w-64 bg-surface shadow p-4 h-full pt-16">
+    <ul class="space-y-4">
+      <li><button onclick="showSection('home')" class="w-full text-left hover:text-accent">🏠 Home</button></li>
+      <li><button onclick="showSection('add')" class="w-full text-left hover:text-accent">➕ Add Expense</button></li>
+      <li><button onclick="showSection('list')" class="w-full text-left hover:text-accent">📋 List Expenses</button>
+      </li>
+      <li><button onclick="showSection('search')" class="w-full text-left hover:text-accent">🔍 Search</button></li>
+      <li><button onclick="showSection('calendar')" class="w-full text-left hover:text-accent">📅 Calendar</button></li>
+      <li><button onclick="showSection('settings')" class="w-full text-left hover:text-accent">⚙️ Settings</button></li>
+    </ul>
+  </aside>
+
+  <!-- Main Content -->
+  <main class="pt-16 pb-16 px-4 md:ml-64 overflow-y-auto h-screen">
+    <!-- 🏠 Home Section -->
+    <section id="home" class="section">
+      <h1 class="text-2xl font-bold mb-6 text-accent">🏠 Home</h1>
+    </section>
+
+    <!-- ➕ Add Section -->
+    <section id="add" class="section hidden">
+      <h1 class="text-2xl font-bold mb-6 text-accent">➕ Add Expense</h1>
+    </section>
+
+    <!-- 📋 List Section -->
+    <section id="list" class="section hidden">
+      <h1 class="text-2xl font-bold mb-6 text-accent">📋 List of Expenses</h1>
+    </section>
+
+    <!-- 🔍 Search Section -->
+    <section id="search" class="section hidden">
+      <h1 class="text-2xl font-bold mb-6 text-accent">🔍 Search Expenses</h1>
+    </section>
+
+    <!-- 📅 Calendar Section -->
+    <section id="calendar" class="section hidden">
+      <h1 class="text-2xl font-bold mb-6 text-accent">📅 Calendar View</h1>
+    </section>
+
+    <!-- ⚙️ SETTINGS SECTION -->
+    <section id="settings" class="section hidden">
+      <h1 class="text-2xl font-bold mb-6 text-accent">⚙️ Settings</h1>
+    </section>
+  </main>
+
+  <!-- Bottom Navigation for Mobile -->
+  <nav class="fixed bottom-0 left-0 w-full bg-surface text-color shadow z-50 md:hidden">
+    <div class="flex justify-around text-xs py-2">
+      <button onclick="showSection('home')" class="flex flex-col items-center">
+        <span>🏠</span><span>Home</span>
+      </button>
+      <button onclick="showSection('add')" class="flex flex-col items-center">
+        <span>➕</span><span>Add</span>
+      </button>
+      <button onclick="showSection('list')" class="flex flex-col items-center">
+        <span>📋</span><span>List</span>
+      </button>
+      <button onclick="showSection('search')" class="flex flex-col items-center">
+        <span>🔍</span><span>Search</span>
+      </button>
+      <button onclick="showSection('calendar')" class="flex flex-col items-center">
+        <span>📅</span><span>Calendar</span>
+      </button>
+      <button onclick="showSection('settings')" class="flex flex-col items-center">
+        <span>⚙️</span><span>Settings</span>
+      </button>
+    </div>
+  </nav>
+
+  <!-- Optional: Footer visible only on md+ screens -->
+  <footer class="hidden md:block fixed bottom-0 left-0 w-full bg-surface text-center text-sm py-2 z-50 text-muted">
+    © 2025 Dev Namdev. All rights reserved. v1
+  </footer>
+
+</body>
+
+
+</html>
