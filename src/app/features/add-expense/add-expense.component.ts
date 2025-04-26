@@ -7,8 +7,8 @@ import { ToastService } from '../../shared/toast/toast.service';
 
 @Component({
   selector: 'app-add-expense',
-  standalone: true,   // <-- Standalone true
-  imports: [ReactiveFormsModule, CommonModule],  // <-- Import necessary modules here
+  standalone: true,
+  imports: [ReactiveFormsModule, CommonModule],
   templateUrl: './add-expense.component.html',
   styleUrls: ['./add-expense.component.css']
 })
@@ -27,14 +27,14 @@ export class AddExpenseComponent implements OnInit {
     private toastService: ToastService
   ) {
     this.expenseForm = this.fb.group({
-      amount: ['', Validators.required],
+      amount: ['', [Validators.required, Validators.min(0)]],
       category_id: ['', Validators.required],
-      subcategory: [''],
+      subcategory: ['', Validators.maxLength(50)],
       date: ['', Validators.required],
       time: ['', Validators.required],
       payment_mode: ['UPI', Validators.required],
-      location: [''],
-      note: ['']
+      location: ['', Validators.maxLength(50)],
+      note: ['', Validators.maxLength(100)]
     });
   }
 
@@ -79,12 +79,12 @@ export class AddExpenseComponent implements OnInit {
     const data = this.expenseForm.value;
     try {
       this.expenseService.add(data);
-      this.toastService.show('Expense added successfully!', 'success')
+      this.toastService.show('Expense added successfully!', 'success');
       this.expenseForm.reset();
       this.resetFormWithCurrentDateTime();
     } catch (error) {
       console.error('Submit failed:', error);
-      this.toastService.show('Error adding expense.', 'error')
+      this.toastService.show('Error adding expense.', 'error');
     }
   }
 }

@@ -6,7 +6,9 @@
     <main class="flex-1 p-6 overflow-y-auto w-full h-full">
       <ng-container [ngSwitch]="currentSection">
         <app-home *ngSwitchCase="'home'"></app-home>
-        <app-add-expense *ngSwitchCase="'add'"></app-add-expense>
+        <div *ngSwitchCase="'add'" [class.mobile-slide-up]="isMobile">
+          <app-add-expense></app-add-expense>
+        </div>
         <app-list-expenses *ngSwitchCase="'list'"></app-list-expenses>
         <app-search *ngSwitchCase="'search'"></app-search>
         <app-calendar *ngSwitchCase="'calendar'"></app-calendar>

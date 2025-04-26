@@ -32,6 +32,8 @@ import { SectionService } from './service/section/section.service';
 
 export class AppComponent {
   currentSection: string = 'home';
+  isMobile: boolean = false;
+
 
   constructor(
     public userService: UserService,
@@ -47,6 +49,7 @@ export class AppComponent {
 
   ngOnInit() {
     if (isPlatformBrowser(this.platformId)) {
+      this.isMobile = window.innerWidth <= 768;
 
       this.loader.show();
       setTimeout(() => {
@@ -73,15 +76,21 @@ export class AppComponent {
     }
   }
 
+  @HostListener('window:resize', ['$event'])
+  onResize(event: any) {
+    if (isPlatformBrowser(this.platformId)) {
+      this.isMobile = event.target.innerWidth <= 768;
+    }
+  }
+
+  @HostListener('document:contextmenu', ['$event'])
+  onRightClick(event: MouseEvent) {
+    event.preventDefault();
+  }
+
   private generateUserId(): string {
     const timestamp = Date.now().toString(36);
     const random = Math.random().toString(36).substring(2, 10);
     return `${timestamp}-${random}`;
-  }
-
-  // Prevent right-click (context menu) globally
-  @HostListener('document:contextmenu', ['$event'])
-  onRightClick(event: MouseEvent) {
-    event.preventDefault();
   }
 }
