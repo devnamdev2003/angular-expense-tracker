@@ -1,2 +1,102 @@
-<h1 class="text-2xl font-bold mb-6 text-[var(--color-accent)]">➕ Add Expense</h1>
-<p>add-expense works!</p>
+<section id="add" class="section">
+    <!-- <h1 class="text-2xl font-bold mb-6 text-[var(--color-accent)]">➕ Add Expense</h1> -->
+
+    <form [formGroup]="expenseForm" (ngSubmit)="onSubmit()"
+        class="space-y-4 bg-[var(--color-surface)] p-4 rounded shadow text-[var(--color-text)]">
+
+        <!-- Amount -->
+        <div>
+            <label class="block mb-1 font-medium">Amount</label>
+            <input type="number" formControlName="amount" class="w-full p-2 rounded border"
+                style="background-color: var(--input-bg); color: var(--input-text); border-color: var(--input-border);"
+                step="0.01" />
+            <div class="error-message text-red-500"
+                *ngIf="expenseForm.get('amount')?.touched && expenseForm.get('amount')?.invalid">
+                Amount is required
+            </div>
+        </div>
+
+        <!-- Category and Subcategory -->
+        <div class="flex flex-col md:flex-row md:space-x-4">
+            <!-- Category -->
+            <div class="relative w-full md:w-1/2">
+                <label class="block mb-1 font-medium">Category</label>
+                <div class="relative">
+                    <button type="button" (click)="toggleCategoryDropdown()"
+                        class="w-full p-2 rounded border text-left bg-[var(--color-bg)]"
+                        style="background-color: var(--input-bg); color: var(--input-text); border-color: var(--input-border);">
+                        {{ selectedCategoryName }}
+                    </button>
+                    <ul class="absolute z-50 w-full max-h-60 overflow-y-auto bg-[var(--color-bg)] rounded border"
+                        *ngIf="isCategoryDropdownOpen"
+                        style="background-color: var(--input-bg); color: var(--input-text); border-color: var(--input-border);">
+                        <li *ngFor="let cat of categories" (click)="selectCategory(cat)"
+                            class="p-2 cursor-pointer hover:bg-[--list-hover]">
+                            {{ cat.name }} {{ cat.icon }}
+                        </li>
+                    </ul>
+                </div>
+                <div class="error-message text-red-500"
+                    *ngIf="expenseForm.get('category_id')?.touched && expenseForm.get('category_id')?.invalid">
+                    Category is required
+                </div>
+            </div>
+
+
+            <!-- Subcategory -->
+            <div class="w-full md:w-1/2 mt-4 md:mt-0">
+                <label class="block mb-1 font-medium">Subcategory</label>
+                <input type="text" formControlName="subcategory" class="w-full p-2 rounded border"
+                    style="background-color: var(--input-bg); color: var(--input-text); border-color: var(--input-border);" />
+            </div>
+        </div>
+
+        <!-- Date and Time -->
+        <div class="flex flex-col md:flex-row md:space-x-4">
+            <div class="w-full md:w-1/2">
+                <label class="block mb-1 font-medium">Date</label>
+                <input type="date" formControlName="date" class="w-full p-2 rounded border"
+                    style="background-color: var(--input-bg); color: var(--input-text); border-color: var(--input-border);" />
+            </div>
+
+            <div class="w-full md:w-1/2 mt-4 md:mt-0">
+                <label class="block mb-1 font-medium">Time</label>
+                <input type="time" formControlName="time" step="1" class="w-full p-2 rounded border"
+                    style="background-color: var(--input-bg); color: var(--input-text); border-color: var(--input-border);" />
+            </div>
+        </div>
+
+        <!-- Payment Mode and Location -->
+        <div class="flex flex-col md:flex-row md:space-x-4">
+            <div class="w-full md:w-1/2">
+                <label class="block mb-1 font-medium">Payment Mode</label>
+                <select formControlName="payment_mode" class="w-full p-2 rounded border"
+                    style="background-color: var(--input-bg); color: var(--input-text); border-color: var(--input-border);">
+                    <option value="UPI">UPI</option>
+                    <option value="Cash">Cash</option>
+                    <option value="Others">Others</option>
+                </select>
+            </div>
+
+            <div class="w-full md:w-1/2 mt-4 md:mt-0">
+                <label class="block mb-1 font-medium">Location</label>
+                <input type="text" formControlName="location" class="w-full p-2 rounded border"
+                    style="background-color: var(--input-bg); color: var(--input-text); border-color: var(--input-border);" />
+            </div>
+        </div>
+
+        <!-- Note -->
+        <div>
+            <label class="block mb-1 font-medium">Note</label>
+            <textarea formControlName="note" rows="2" class="w-full p-2 rounded border resize-none"
+                style="background-color: var(--input-bg); color: var(--input-text); border-color: var(--input-border);"></textarea>
+        </div>
+
+        <div>
+            <button type="submit" class="bg-[var(--color-accent)] text-white px-4 py-2 rounded w-full">
+                Add Expense
+            </button>
+        </div>
+
+    </form>
+</section>
