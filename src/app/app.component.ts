@@ -1,30 +1,49 @@
 import { Component, HostListener } from '@angular/core';
 import { NavbarComponent } from './shared/navbar/navbar.component';
 import { SidebarComponent } from './shared/sidebar/sidebar.component';
-import { RouterOutlet } from '@angular/router';
 import { FooterComponent } from './shared/footer/footer.component';
 import { StorageService } from './localStorage/storage.service';
 import { UserService } from './localStorage/user.service';
-import { isPlatformBrowser } from '@angular/common';
+import { CommonModule, isPlatformBrowser } from '@angular/common';
 import { Inject, PLATFORM_ID } from '@angular/core';
 import { ToastComponent } from './shared/toast/toast.component'
 import { GlobalLoaderComponent } from './shared/global-loader/global-loader.component'
 import { GlobalLoaderService } from './shared/global-loader/global-loader.service';
+import { AddExpenseComponent } from './features/add-expense/add-expense.component';
+import { SearchComponent } from './features/search/search.component';
+import { SettingsComponent } from './features/settings/settings.component';
+import { ListExpensesComponent } from './features/list-expenses/list-expenses.component';
+import { HomeComponent } from './features/home/home.component';
+import { CalendarComponent } from './features/calendar/calendar.component';
+import { SectionService } from './service/section/section.service';
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [NavbarComponent, SidebarComponent, RouterOutlet, FooterComponent, ToastComponent, GlobalLoaderComponent],
+  imports: [NavbarComponent, SidebarComponent, FooterComponent, ToastComponent, GlobalLoaderComponent, CommonModule, AddExpenseComponent,
+    SearchComponent,
+    SettingsComponent,
+    ListExpensesComponent,
+    HomeComponent,
+    CalendarComponent],
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
 
 export class AppComponent {
+  currentSection: string = 'home';
+
   constructor(
     public userService: UserService,
     private loader: GlobalLoaderService,
+    private sectionService: SectionService,
     @Inject(PLATFORM_ID) private platformId: Object
-  ) { }
+  ) {
+    this.sectionService.currentSection$.subscribe(section => {
+      this.currentSection = section;
+    });
+
+  }
 
   ngOnInit() {
     if (isPlatformBrowser(this.platformId)) {
@@ -32,7 +51,7 @@ export class AppComponent {
       this.loader.show();
       setTimeout(() => {
         this.loader.hide();
-      }, 1000);
+      }, 500);
 
       StorageService.syncCategoriesWithSchema();
       StorageService.syncExpensesWithSchema();
@@ -45,7 +64,19 @@ export class AppComponent {
       } else {
         document.documentElement.classList.remove('dark');
       }
+
+      let userId = this.userService.getValue<string>('id');
+      if (!userId) {
+        userId = this.generateUserId();
+        this.userService.update('id', userId);
+      }
     }
+  }
+
+  private generateUserId(): string {
+    const timestamp = Date.now().toString(36);
+    const random = Math.random().toString(36).substring(2, 10);
+    return `${timestamp}-${random}`;
   }
 
   // Prevent right-click (context menu) globally

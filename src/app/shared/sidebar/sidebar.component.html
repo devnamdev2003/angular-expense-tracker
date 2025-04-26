@@ -3,22 +3,22 @@
   class="fixed md:static z-40 w-64 bg-[var(--color-surface)] shadow p-4 transition-all duration-300 ease-in-out hidden md:block h-full">
   <ul class="space-y-4">
     <li>
-      <a href="#" (click)="navigateAndClose('/home', $event)" class="block hover:text-accent">🏠 Home</a>
+      <a href="#" (click)="navigateAndClose('home', $event)" class="block hover:text-accent">🏠 Home</a>
     </li>
     <li>
-      <a href="#" (click)="navigateAndClose('/add', $event)" class="block hover:text-accent">➕ Add Expense</a>
+      <a href="#" (click)="navigateAndClose('add', $event)" class="block hover:text-accent">➕ Add Expense</a>
     </li>
     <li>
-      <a href="#" (click)="navigateAndClose('/list', $event)" class="block hover:text-accent">📋 List</a>
+      <a href="#" (click)="navigateAndClose('list', $event)" class="block hover:text-accent">📋 List</a>
     </li>
     <li>
-      <a href="#" (click)="navigateAndClose('/search', $event)" class="block hover:text-accent">🔍 Search</a>
+      <a href="#" (click)="navigateAndClose('search', $event)" class="block hover:text-accent">🔍 Search</a>
     </li>
     <li>
-      <a href="#" (click)="navigateAndClose('/calendar', $event)" class="block hover:text-accent">📅 Calendar</a>
+      <a href="#" (click)="navigateAndClose('calendar', $event)" class="block hover:text-accent">📅 Calendar</a>
     </li>
     <li>
-      <a href="#" (click)="navigateAndClose('/settings', $event)" class="block hover:text-accent">⚙️ Settings</a>
+      <a href="#" (click)="navigateAndClose('settings', $event)" class="block hover:text-accent">⚙️ Settings</a>
     </li>
 
   </ul>
@@ -26,20 +26,27 @@
 
 <!-- Mobile Bottom Nav -->
 <nav
-  class="md:hidden fixed bottom-0 left-0 right-0 bg-[var(--color-surface)] shadow-t p-[0.7rem] flex justify-around z-50">
+  class="md:hidden fixed bottom-0 py-[5px] h-[50px] left-0 right-0 bg-[var(--color-surface)] shadow-t flex justify-around z-50">
 
-  <button (click)="navigateAndClose('/list', $event)" class="flex flex-col items-center text-sm hover:text-accent">
-    <img src="assets/img/icon/icons8-list-60.png" alt="list" class="w-[30px] h-[30px]"
-      style="filter: var(--icon-color2); transition: filter 0.3s ease;">
+  <button (click)="navigateAndClose('list', $event)"
+    [ngClass]="{'scale-110  rounded-[50%] bg-[--list-hover]': activePath === 'list'}"
+    class="h-[40px] w-[40px] block px-2 text-sm relative hover:text-accent transition-all duration-300 ease-in-out">
+    <img src="assets/img/icon/icons8-list-60.png" alt="list"
+      class="w-[25px] h-[25px] transition-all duration-300 ease-in-out" style="filter: var(--icon-color2);">
   </button>
 
-  <button (click)="navigateAndClose('/add', $event)" class="flex flex-col items-center text-sm hover:text-accent">
-    <img src="assets/img/icon/icons8-add-60.png" alt="add" class="w-[30px] h-[30px]"
-      style="filter: var(--icon-color2); transition: filter 0.3s ease;">
+  <button (click)="navigateAndClose('add', $event)"
+    [ngClass]="{'scale-110  rounded-[50%] bg-[--list-hover]': activePath === 'add'}"
+    class="h-[40px] w-[40px] block  px-2 text-sm relative hover:text-accent transition-all duration-300 ease-in-out">
+    <img src="assets/img/icon/icons8-add-60.png" alt="add"
+      class="w-[25px] h-[25px] transition-all duration-300 ease-in-out" style="filter: var(--icon-color2);">
   </button>
 
-  <button (click)="navigateAndClose('/calendar', $event)" class="flex flex-col items-center text-sm hover:text-accent">
-    <img src="assets/img/icon/icons8-calendar-50.png" alt="calendar" class="w-[30] h-[30px]"
-      style="filter: var(--icon-color2); transition: filter 0.3s ease;">
+  <button (click)="navigateAndClose('calendar', $event)"
+    [ngClass]="{'scale-110  rounded-[50%] bg-[--list-hover]': activePath === 'calendar'}"
+    class="h-[40px] w-[40px] block  px-2 text-sm relative hover:text-accent transition-all duration-300 ease-in-out">
+    <img src="assets/img/icon/icons8-calendar-50.png" alt="calendar"
+      class="w-[25px] h-[25px] transition-all duration-300 ease-in-out" style="filter: var(--icon-color2);">
   </button>
+
 </nav>

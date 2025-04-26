@@ -16,7 +16,7 @@ export class BudgetService {
     if (!this.isBrowser()) return;
     const all = this.getAll();
     const budget_id = crypto.randomUUID();
-    all.push({ ...data, budget_id, user_id: 'default' });
+    all.push({ ...data, budget_id, user_id: '0' });
     localStorage.setItem('budget', JSON.stringify(all));
   }
 

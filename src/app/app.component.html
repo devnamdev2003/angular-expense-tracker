@@ -1,17 +1,20 @@
 <main class="main">
   <app-global-loader></app-global-loader>
   <app-navbar></app-navbar>
-
   <div class="flex pt-14 pb-9 h-screen overflow-hidden">
     <app-sidebar></app-sidebar>
-
     <main class="flex-1 p-6 overflow-y-auto w-full h-full">
-      <router-outlet></router-outlet>
+      <ng-container [ngSwitch]="currentSection">
+        <app-home *ngSwitchCase="'home'"></app-home>
+        <app-add-expense *ngSwitchCase="'add'"></app-add-expense>
+        <app-list-expenses *ngSwitchCase="'list'"></app-list-expenses>
+        <app-search *ngSwitchCase="'search'"></app-search>
+        <app-calendar *ngSwitchCase="'calendar'"></app-calendar>
+        <app-settings *ngSwitchCase="'settings'"></app-settings>
+        <app-home *ngSwitchDefault></app-home>
+      </ng-container>
     </main>
   </div>
-
   <app-footer></app-footer>
-
   <app-toast></app-toast>
-
 </main>

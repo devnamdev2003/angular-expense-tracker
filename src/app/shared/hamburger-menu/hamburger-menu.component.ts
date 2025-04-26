@@ -1,15 +1,15 @@
 import { Component, HostListener } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { Router } from '@angular/router';
+import { SectionService } from '../../service/section/section.service';
+
 @Component({
   selector: 'app-hamburger-menu',
   imports: [CommonModule],
   templateUrl: './hamburger-menu.component.html',
-  styleUrls: ['./hamburger-menu.component.css'], // Corrected to 'styleUrls'
+  styleUrls: ['./hamburger-menu.component.css'],
 })
 export class HamburgerMenuComponent {
-  constructor(private router: Router
-  ) { }
+  constructor(private sectionService: SectionService) { }
   isMenuOpen = false;
 
   // Toggle the menu when the button is clicked
@@ -26,9 +26,9 @@ export class HamburgerMenuComponent {
     }
   }
 
-  navigateAndClose(path: string, event: Event) {
+  navigateAndClose(section: string, event: Event) {
     event.preventDefault();
-    this.router.navigate([path]);
+    this.sectionService.setSection(section); 
     this.isMenuOpen = !this.isMenuOpen;
   }
 

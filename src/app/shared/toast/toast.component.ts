@@ -9,8 +9,6 @@ import { ToastService } from './toast.service';
   styleUrl: './toast.component.css'
 })
 
-
-
 export class ToastComponent implements AfterViewInit {
   constructor(private toastService: ToastService) { }
 

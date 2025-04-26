@@ -1,12 +1,11 @@
 import { Component } from '@angular/core';
-import { RouterModule } from '@angular/router';
 import { HamburgerMenuComponent } from '../hamburger-menu/hamburger-menu.component';
-import { Router, NavigationEnd } from '@angular/router';
 import { CommonModule } from '@angular/common';
+import { SectionService } from '../../service/section/section.service';
 
 @Component({
   selector: 'app-navbar',
-  imports: [RouterModule, HamburgerMenuComponent, CommonModule],
+  imports: [HamburgerMenuComponent, CommonModule],
   templateUrl: './navbar.component.html',
   styleUrls: ['./navbar.component.css']
 })
@@ -14,18 +13,15 @@ import { CommonModule } from '@angular/common';
 export class NavbarComponent {
   showBackButton = false;
 
-  constructor(private router: Router) {
-    this.router.events.subscribe((event) => {
-      if (event instanceof NavigationEnd) {
-        // Show back button if not on /home
-        this.showBackButton = event.urlAfterRedirects !== '/home';
-      }
+  constructor(private sectionService: SectionService) {
+    this.sectionService.currentSection$.subscribe(section => {
+      this.showBackButton = section !== 'home';
     });
   }
 
-  navigateAndClose(path: string, event: Event) {
+  navigateAndClose(section: string, event: Event) {
     event.preventDefault();
-    this.router.navigate([path]);
+    this.sectionService.setSection(section);
   }
-  
+
 }

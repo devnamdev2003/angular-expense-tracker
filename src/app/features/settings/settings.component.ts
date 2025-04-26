@@ -35,10 +35,6 @@ export class SettingsComponent {
     private toast: ToastService,
   ) { }
 
-
-
-
-
   toggleTheme(): void {
     const savedTheme = this.userService.getValue<string>('theme_mode');
     if (savedTheme === 'dark') {
@@ -50,7 +46,6 @@ export class SettingsComponent {
     document.documentElement.classList.toggle('dark', this.isDarkMode);
     this.userService.update('theme_mode', this.isDarkMode ? 'dark' : 'light');
   }
-
 
   showBudgetModal(): void {
     const allBudgets = this.budgetService.getAll();
