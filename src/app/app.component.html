@@ -3,7 +3,7 @@
   <app-navbar></app-navbar>
   <div class="flex pt-14 pb-9 h-screen overflow-hidden">
     <app-sidebar></app-sidebar>
-    <main class="flex-1 p-6 overflow-y-auto w-full h-full">
+    <main class="flex-1 overflow-y-auto w-full h-full">
       <ng-container [ngSwitch]="currentSection">
         <app-home *ngSwitchCase="'home'"></app-home>
         <div *ngSwitchCase="'add'" [class.mobile-slide-up]="isMobile">
