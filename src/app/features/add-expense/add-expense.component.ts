@@ -36,7 +36,6 @@ export class AddExpenseComponent implements OnInit {
     return this.fb.group({
       amount: ['', [Validators.required, Validators.min(0)]],
       category_id: ['', Validators.required],
-      subcategory: ['', Validators.maxLength(50)],
       date: ['', Validators.required],
       time: ['', Validators.required],
       payment_mode: ['UPI', Validators.required],
@@ -67,7 +66,6 @@ export class AddExpenseComponent implements OnInit {
     this.expenseForm.reset({
       amount: '',
       category_id: '',
-      subcategory: '',
       date: dateStr,
       time: timeStr,
       payment_mode: 'UPI',

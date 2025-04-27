@@ -11,7 +11,6 @@ CREATE TABLE `expenses` (
   `location` varchar(255) DEFAULT NULL,
   `note` longtext,
   `payment_mode` varchar(50) DEFAULT NULL,
-  `subcategory` varchar(100) DEFAULT NULL,
   `time` time(6) DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   `category_id` int DEFAULT NULL,

@@ -172,7 +172,6 @@ export class StorageService {
             location: "",
             note: "",
             payment_mode: "",
-            subcategory: "",
             time: "",
             user_id: "",
         };

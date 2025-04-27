@@ -60,15 +60,11 @@ export class ListExpensesComponent implements OnInit {
           valA = a.category_name;
           valB = b.category_name;
           break;
-        case 2: // Subcategory
-          valA = a.subcategory || '-';
-          valB = b.subcategory || '-';
-          break;
-        case 3: // Date
+        case 2: // Date
           valA = new Date(a.date + 'T' + a.time);
           valB = new Date(b.date + 'T' + b.time);
           break;
-        case 4: // Payment Mode
+        case 3: // Payment Mode
           valA = a.payment_mode;
           valB = b.payment_mode;
           break;
