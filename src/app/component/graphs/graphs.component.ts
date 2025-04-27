@@ -61,13 +61,20 @@ export class GraphsComponent implements OnInit, OnChanges {
       enabled: false
     },
     foreColor: '#ccc',
-    background: 'transparent'
+    background: 'transparent',
+    animations: {
+      enabled: true
+    }
   };
 
   chartXAxis: ApexXAxis = {
     type: 'category',
-    categories: []
+    categories: [],
+    tooltip: {
+      enabled: false
+    }
   };
+
 
   dataLabels: ApexDataLabels = {
     enabled: false
@@ -161,7 +168,10 @@ export class GraphsComponent implements OnInit, OnChanges {
 
     this.chartXAxis = {
       type: 'category',
-      categories: days.map(day => day.toString())
+      categories: days.map(day => day.toString()),
+      tooltip: {
+        enabled: false
+      }
     };
 
     this.chartSeries = [{
@@ -223,7 +233,10 @@ export class GraphsComponent implements OnInit, OnChanges {
 
     this.chartXAxis = {
       type: 'category',
-      categories: times
+      categories: times,
+      tooltip: {
+        enabled: false
+      }
     };
 
     this.chartSeries = [{
