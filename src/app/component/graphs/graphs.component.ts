@@ -60,7 +60,7 @@ export class GraphsComponent implements OnInit, OnChanges {
     zoom: {
       enabled: false
     },
-    foreColor: '#ccc',
+    foreColor: 'var(--color-text)',
     background: 'transparent',
     animations: {
       enabled: true
@@ -162,7 +162,7 @@ export class GraphsComponent implements OnInit, OnChanges {
       text: "Monthly Expenses",
       align: "center",
       style: {
-        color: '#ccc'
+        color: 'var(--color-text)'
       }
     };
 
@@ -227,7 +227,7 @@ export class GraphsComponent implements OnInit, OnChanges {
       text: "Today Expenses",
       align: "center",
       style: {
-        color: '#ccc'
+        color: 'var(--color-text)'
       }
     };
 
