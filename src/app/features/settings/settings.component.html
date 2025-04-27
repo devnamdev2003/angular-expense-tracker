@@ -1,7 +1,7 @@
-<section class="section">
+<section class="section p-4">
     <!-- 🔧 General Settings -->
     <div class="mb-6">
-        <h2 class="text-xl font-semibold text-accent mb-3">🔧 General Settings</h2>
+        <h2 class="text-xl font-semibold text-[var(--color-accent)] mb-3">🔧 General Settings</h2>
 
         <!-- Toggle Dark Mode -->
         <app-setting-item label="🌗 Toggle Dark Mode">
@@ -19,16 +19,15 @@
 
     <!-- 💰 Budget -->
     <div class="mb-6">
-        <h2 class="text-xl font-semibold text-accent mb-3">💰 Budget </h2>
+        <h2 class="text-xl font-semibold text-[var(--color-accent)] mb-3">💰 Budget </h2>
 
         <app-setting-item label="🎯 Set Budget">
             <button (click)="showBudgetModal()"
-                class="bg-[var(--color-accent)] text-white px-7 py-1 rounded">Set</button>
+                class="bg-[var(--color-accent)] text-[var(--color-white)] px-7 py-1 rounded">Set</button>
         </app-setting-item>
     </div>
 
-
-
+    <!-- 💰 Budget Model -->
     <app-custom-modal modalId="budgetModal" [title]="'Set Budget'" [onClose]="closeBudgetModal.bind(this)">
         <form class="space-y-4 mt-6" (submit)="saveBudget(); $event.preventDefault();">
             <div>
@@ -36,7 +35,7 @@
                 <input type="date" id="budgetFrom" [(ngModel)]="fromDate" name="fromDate"
                     class="w-full px-3 py-2 mt-2 border rounded bg-[var(--input-bg)] text-[var(--input-text)]"
                     required />
-                <p *ngIf="errorMessages.fromDate" class="text-red-500 text-sm mt-1">{{ errorMessages.fromDate }}</p>
+                <p *ngIf="errorMessages.fromDate" class="text-[var(--color-error)] text-sm mt-1">{{ errorMessages.fromDate }}</p>
             </div>
 
             <div>
@@ -44,7 +43,7 @@
                 <input type="date" id="budgetTo" [(ngModel)]="toDate" name="toDate"
                     class="w-full px-3 py-2 mt-2 border rounded bg-[var(--input-bg)] text-[var(--input-text)]"
                     required />
-                <p *ngIf="errorMessages.toDate" class="text-red-500 text-sm mt-1">{{ errorMessages.toDate }}</p>
+                <p *ngIf="errorMessages.toDate" class="text-[var(--color-error)] text-sm mt-1">{{ errorMessages.toDate }}</p>
             </div>
 
             <div>
@@ -52,10 +51,10 @@
                 <input type="number" id="budgetAmount" [(ngModel)]="amount" name="amount"
                     class="w-full px-3 py-2 mt-2 border rounded bg-[var(--input-bg)] text-[var(--input-text)]"
                     required />
-                <p *ngIf="errorMessages.amount" class="text-red-500 text-sm mt-1">{{ errorMessages.amount }}</p>
+                <p *ngIf="errorMessages.amount" class="text-[var(--color-error)] text-sm mt-1">{{ errorMessages.amount }}</p>
             </div>
 
-            <button type="submit" class="bg-[var(--color-accent)] text-white px-4 py-2 rounded w-full">
+            <button type="submit" class="bg-[var(--color-accent)] text-[var(--color-white)] px-4 py-2 rounded w-full">
                 {{ budgetService.getAll().length > 0 ? 'Update' : 'Save' }}
             </button>
         </form>

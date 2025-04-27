@@ -3,12 +3,14 @@ import { ExpenseService } from '../../service/localStorage/expense.service';
 import { CategoryService } from '../../service/localStorage/category.service';
 import { CommonModule } from '@angular/common';
 import { ToastService } from '../../service/toast/toast.service';
+
 @Component({
   selector: 'app-list-expenses',
   imports: [CommonModule],
   templateUrl: './list-expenses.component.html',
   styleUrls: ['./list-expenses.component.css']
 })
+
 export class ListExpensesComponent implements OnInit {
   expenses: any[] = [];
   categories: any[] = [];
@@ -52,19 +54,19 @@ export class ListExpensesComponent implements OnInit {
       let valA, valB;
 
       switch (colIndex) {
-        case 0: // Amount
+        case 0:
           valA = a.amount;
           valB = b.amount;
           break;
-        case 1: // Category
+        case 1:
           valA = a.category_name;
           valB = b.category_name;
           break;
-        case 2: // Date
+        case 2:
           valA = new Date(a.date + 'T' + a.time);
           valB = new Date(b.date + 'T' + b.time);
           break;
-        case 3: // Payment Mode
+        case 3:
           valA = a.payment_mode;
           valB = b.payment_mode;
           break;
@@ -88,10 +90,8 @@ export class ListExpensesComponent implements OnInit {
   confirmDelete(id: string) {
     if (confirm("Are you sure you want to delete this expense?")) {
       const result = this.expenseService.delete(id);
-
       this.toastService.show("Expense deleted successfully", 'success');
-      this.listExpenses(); // Refresh the list
-
+      this.listExpenses();
     }
   }
 }

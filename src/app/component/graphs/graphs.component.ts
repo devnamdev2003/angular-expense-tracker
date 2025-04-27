@@ -143,7 +143,7 @@ export class GraphsComponent implements OnInit, OnChanges {
       intersect: false,
       y: {
         formatter: (value: number) => {
-          return `${value} ₹`; // Format the tooltip to display currency
+          return `${value} ₹`;
         }
       },
       x: {

@@ -2,7 +2,7 @@
     class="p-6 rounded shadow bg-[var(--color-surface)] w-[90%] max-w-md text-[var(--color-text)] relative">
     <div class="flex justify-between items-center mb-4">
         <h2 class="text-lg font-semibold">{{ title }}</h2>
-        <button (click)="onClose()" class="text-xl font-bold hover:text-red-500">&times;</button>
+        <button (click)="onClose()" class="text-xl font-bold hover:text-[var(--color-error)]">&times;</button>
     </div>
     <ng-content></ng-content>
 </dialog>

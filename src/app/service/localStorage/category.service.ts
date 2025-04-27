@@ -25,7 +25,7 @@ export class CategoryService {
     if (!this.isBrowser()) return;
     const all = this.getAll();
     const category_id = crypto.randomUUID();
-    const user_id = '0'; // You can replace this with real user logic later
+    const user_id = '0';
 
     all.push({ ...data, category_id, user_id });
     localStorage.setItem(this.storageKey, JSON.stringify(all));

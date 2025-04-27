@@ -1,9 +1,9 @@
 <section id="list" class="section p-4 mb-4">
     <!-- Table Wrapper -->
-    <div class="overflow-x-auto bg-surface rounded shadow">
+    <div class="overflow-x-auto bg-[var(--color-surface)] rounded shadow">
         <table id="expenseTable" class="min-w-full table-auto">
             <thead>
-                <tr class="bg-[var(--color-accent)] text-white">
+                <tr class="bg-[var(--color-accent)] text-[var(--color-white)]">
                     <th class="text-left px-4 py-3 cursor-pointer" (click)="sortTable(0)">
                         Amount
                     </th>
@@ -35,7 +35,7 @@
                     </td>
                     <td class="px-4 py-3 whitespace-nowrap">
                         <button (click)="confirmDelete(expense.expense_id)"
-                            class="text-red-500 hover:underline flex items-center gap-1">
+                            class="text-[var(--color-error)] hover:underline flex items-center gap-1">
                             🗑️ <span>Delete</span>
                         </button>
                     </td>

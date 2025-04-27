@@ -43,7 +43,7 @@ export class ExpenseService {
       .sort((a, b) => {
         const dateA = new Date(`${a.date}T${a.time}`);
         const dateB = new Date(`${b.date}T${b.time}`);
-        return dateB.getTime() - dateA.getTime(); // Descending order
+        return dateB.getTime() - dateA.getTime();
       });
   }
 

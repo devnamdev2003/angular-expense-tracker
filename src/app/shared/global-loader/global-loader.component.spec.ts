@@ -10,7 +10,7 @@ describe('GlobalLoaderComponent', () => {
     await TestBed.configureTestingModule({
       imports: [GlobalLoaderComponent]
     })
-    .compileComponents();
+      .compileComponents();
 
     fixture = TestBed.createComponent(GlobalLoaderComponent);
     component = fixture.componentInstance;

@@ -1,8 +1,9 @@
 <div class="md:hidden fixed top-1 right-4 z-50 hamburger-menu-container">
-    <button (click)="toggleMenu()" class="text-lg text-white py-2">
+    <button (click)="toggleMenu()" class="text-lg text-[var(--color-white)] py-2">
         <img src="assets/img/icon/icons8-menu-vertical-50.png" alt="Menu" class="w-[24px] h-[24px]"
             style="filter: var(--icon-color); transition: filter 0.3s ease;">
     </button>
+
     <!-- Dropdown Menu -->
     <div *ngIf="isMenuOpen"
         class="fixed top-[3rem] right-[0.2rem] bg-[--color-surface] rounded-lg shadow-lg mt-2 w-[10rem]">

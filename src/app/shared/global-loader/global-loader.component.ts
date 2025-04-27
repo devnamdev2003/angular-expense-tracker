@@ -24,7 +24,6 @@ export class GlobalLoaderComponent {
   }
 }
 
-
 // constructor(private loader: LoaderService) {}
 
 // loadSomething() {

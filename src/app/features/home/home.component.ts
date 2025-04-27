@@ -8,13 +8,14 @@ import { GraphsComponent } from '../../component/graphs/graphs.component';
   styleUrl: './home.component.css',
   standalone: true
 })
+
 export class HomeComponent {
   viewType: 'month' | 'day' = 'month';
-  currentDate: Date = new Date();  // ✅ Add this
+  currentDate: Date = new Date();
 
   setViewType(view: 'month' | 'day') {
     this.viewType = view;
-    this.currentDate = new Date(); // Reset date to today/month
+    this.currentDate = new Date();
   }
 
   goPrevious() {
@@ -23,7 +24,7 @@ export class HomeComponent {
     } else if (this.viewType === 'month') {
       this.currentDate.setMonth(this.currentDate.getMonth() - 1);
     }
-    this.currentDate = new Date(this.currentDate); // Force change detection
+    this.currentDate = new Date(this.currentDate);
   }
 
   goNext() {
@@ -32,15 +33,15 @@ export class HomeComponent {
     } else if (this.viewType === 'month') {
       this.currentDate.setMonth(this.currentDate.getMonth() + 1);
     }
-    this.currentDate = new Date(this.currentDate); // Force change detection
+    this.currentDate = new Date(this.currentDate);
   }
 
   getDisplayDate(): string {
     if (this.viewType === 'day') {
-      return this.currentDate.toDateString(); // example: "Sun Apr 27 2025"
+      return this.currentDate.toDateString();
     } else {
-      const monthNames = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", 
-                          "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+      const monthNames = ["Jan", "Feb", "Mar", "Apr", "May", "Jun",
+        "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
       return `${monthNames[this.currentDate.getMonth()]} ${this.currentDate.getFullYear()}`;
     }
   }

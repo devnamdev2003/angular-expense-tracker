@@ -6,8 +6,6 @@ import { GlobalLoaderComponent } from '../../shared/global-loader/global-loader.
 })
 export class GlobalLoaderService {
 
-
-
   private globalLoaderComponent!: GlobalLoaderComponent;
 
   register(component: GlobalLoaderComponent) {

@@ -3,22 +3,26 @@
   class="fixed md:static z-40 w-64 bg-[var(--color-surface)] shadow p-4 transition-all duration-300 ease-in-out hidden md:block h-full">
   <ul class="space-y-4">
     <li>
-      <a href="#" (click)="navigateAndClose('home', $event)" class="block hover:text-accent">🏠 Home</a>
+      <a href="#" (click)="navigateAndClose('home', $event)" class="block hover:text-[var(--color-accent)]">🏠 Home</a>
     </li>
     <li>
-      <a href="#" (click)="navigateAndClose('add', $event)" class="block hover:text-accent">➕ Add Expense</a>
+      <a href="#" (click)="navigateAndClose('add', $event)" class="block hover:text-[var(--color-accent)]">➕ Add
+        Expense</a>
     </li>
     <li>
-      <a href="#" (click)="navigateAndClose('list', $event)" class="block hover:text-accent">📋 List</a>
+      <a href="#" (click)="navigateAndClose('list', $event)" class="block hover:text-[var(--color-accent)]">📋 List</a>
     </li>
     <li>
-      <a href="#" (click)="navigateAndClose('search', $event)" class="block hover:text-accent">🔍 Search</a>
+      <a href="#" (click)="navigateAndClose('search', $event)" class="block hover:text-[var(--color-accent)]">🔍
+        Search</a>
     </li>
     <li>
-      <a href="#" (click)="navigateAndClose('calendar', $event)" class="block hover:text-accent">📅 Calendar</a>
+      <a href="#" (click)="navigateAndClose('calendar', $event)" class="block hover:text-[var(--color-accent)]">📅
+        Calendar</a>
     </li>
     <li>
-      <a href="#" (click)="navigateAndClose('settings', $event)" class="block hover:text-accent">⚙️ Settings</a>
+      <a href="#" (click)="navigateAndClose('settings', $event)" class="block hover:text-[var(--color-accent)]">⚙️
+        Settings</a>
     </li>
 
   </ul>
@@ -30,21 +34,21 @@
 
   <button (click)="navigateAndClose('list', $event)"
     [ngClass]="{'scale-110  rounded-[50%] bg-[--list-hover]': activePath === 'list'}"
-    class="h-[40px] w-[40px] block px-2 text-sm relative hover:text-accent transition-all duration-300 ease-in-out">
+    class="h-[40px] w-[40px] block px-2 text-sm relative transition-all duration-300 ease-in-out">
     <img src="assets/img/icon/icons8-list-60.png" alt="list"
       class="w-[25px] h-[25px] transition-all duration-300 ease-in-out" style="filter: var(--icon-color2);">
   </button>
 
   <button (click)="navigateAndClose('add', $event)"
     [ngClass]="{'scale-110  rounded-[50%] bg-[--list-hover]': activePath === 'add'}"
-    class="h-[40px] w-[40px] block  px-2 text-sm relative hover:text-accent transition-all duration-300 ease-in-out">
+    class="h-[40px] w-[40px] block  px-2 text-sm relative transition-all duration-300 ease-in-out">
     <img src="assets/img/icon/icons8-add-60.png" alt="add"
       class="w-[25px] h-[25px] transition-all duration-300 ease-in-out" style="filter: var(--icon-color2);">
   </button>
 
   <button (click)="navigateAndClose('calendar', $event)"
     [ngClass]="{'scale-110  rounded-[50%] bg-[--list-hover]': activePath === 'calendar'}"
-    class="h-[40px] w-[40px] block  px-2 text-sm relative hover:text-accent transition-all duration-300 ease-in-out">
+    class="h-[40px] w-[40px] block  px-2 text-sm relative transition-all duration-300 ease-in-out">
     <img src="assets/img/icon/icons8-calendar-50.png" alt="calendar"
       class="w-[25px] h-[25px] transition-all duration-300 ease-in-out" style="filter: var(--icon-color2);">
   </button>

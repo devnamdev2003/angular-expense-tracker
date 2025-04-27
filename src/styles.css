@@ -11,10 +11,11 @@
     --input-bg: #ffffff;
     --input-text: #2d2d2d;
     --input-border: #ccc;
-    --input-placeholder: #888;
-    --input-error: red;
     --icon-color: invert(100%);
     --icon-color2: invert(0%);
+
+    --color-error: #ef4444;
+    --color-white: #ffffff;
 }
 
 .dark {
@@ -30,10 +31,11 @@
     --input-bg: #2a2a2a;
     --input-text: #e0e0e0;
     --input-border: #444;
-    --input-placeholder: #aaa;
-    --input-error: red;
     --icon-color: invert(0%);
     --icon-color2: invert(100%);
+
+    --color-error: #f87171;
+    --color-white: #ffffff;
 }
 
 /* Disable text selection */

@@ -6,14 +6,14 @@
 
             <button
                 class="relative z-10 w-1/2 flex-1 text-center text-sm font-medium py-2 rounded-full transition-colors duration-300"
-                [class.text-[var(--color-text)]]="viewType !== 'month'" [class.text-white]="viewType === 'month'"
+                [class.text-[var(--color-text)]]="viewType !== 'month'" [class.text-[var(--color-white)]]="viewType === 'month'"
                 (click)="setViewType('month')">
                 Month
             </button>
 
             <button
                 class="relative z-10 w-1/2 flex-1 text-center text-sm font-medium py-2 rounded-full transition-colors duration-300"
-                [class.text-[var(--color-text)]]="viewType !== 'day'" [class.text-white]="viewType === 'day'"
+                [class.text-[var(--color-text)]]="viewType !== 'day'" [class.text-[var(--color-white)]]="viewType === 'day'"
                 (click)="setViewType('day')">
                 Day
             </button>
@@ -22,7 +22,7 @@
 
     <app-graphs [viewType]="viewType" [currentDate]="currentDate"></app-graphs>
 
-    <!-- New Arrows and Date Display -->
+    <!-- Arrows and Date Display -->
     <div class="flex justify-between items-center w-full max-w-xl px-[3rem]">
         <button (click)="goPrevious()" class="text-md rounded-full">
             <img src="assets/img/icon/icons8-left-arrow-50.png" alt="add"
