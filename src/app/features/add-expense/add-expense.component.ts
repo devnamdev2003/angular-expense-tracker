@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
-import { ExpenseService } from '../../localStorage/expense.service';
-import { CategoryService } from '../../localStorage/category.service';
+import { ExpenseService } from '../../service/localStorage/expense.service';
+import { CategoryService } from '../../service/localStorage/category.service';
 import { CommonModule } from '@angular/common';
-import { ToastService } from '../../shared/toast/toast.service';
+import { ToastService } from '../../service/toast/toast.service';
 
 @Component({
   selector: 'app-add-expense',

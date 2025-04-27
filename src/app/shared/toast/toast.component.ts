@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { AfterViewInit } from '@angular/core';
-import { ToastService } from './toast.service';
+import { ToastService } from '../../service/toast/toast.service';
 
 @Component({
   selector: 'app-toast',
@@ -45,7 +45,7 @@ export class ToastComponent implements AfterViewInit {
 
       setTimeout(() => {
         toast.remove();
-      }, 5000);
+      }, 3000);
     }
   }
 }

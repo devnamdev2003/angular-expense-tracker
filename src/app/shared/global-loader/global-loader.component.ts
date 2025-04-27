@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import {GlobalLoaderService } from './global-loader.service'
+import {GlobalLoaderService } from '../../service/global-loader/global-loader.service'
 import { CommonModule } from '@angular/common';
 
 @Component({

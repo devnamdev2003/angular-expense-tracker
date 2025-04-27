@@ -1,4 +1,3 @@
-DROP TABLE IF EXISTS `categories`;
 CREATE TABLE `categories` (
   `category_id` int NOT NULL AUTO_INCREMENT,
   `color` varchar(20) DEFAULT NULL,

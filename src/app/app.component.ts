@@ -2,13 +2,13 @@ import { Component, HostListener } from '@angular/core';
 import { NavbarComponent } from './shared/navbar/navbar.component';
 import { SidebarComponent } from './shared/sidebar/sidebar.component';
 import { FooterComponent } from './shared/footer/footer.component';
-import { StorageService } from './localStorage/storage.service';
-import { UserService } from './localStorage/user.service';
+import { StorageService } from './service/localStorage/storage.service';
+import { UserService } from './service/localStorage/user.service';
 import { CommonModule, isPlatformBrowser } from '@angular/common';
 import { Inject, PLATFORM_ID } from '@angular/core';
 import { ToastComponent } from './shared/toast/toast.component'
 import { GlobalLoaderComponent } from './shared/global-loader/global-loader.component'
-import { GlobalLoaderService } from './shared/global-loader/global-loader.service';
+import { GlobalLoaderService } from './service/global-loader/global-loader.service';
 import { AddExpenseComponent } from './features/add-expense/add-expense.component';
 import { SearchComponent } from './features/search/search.component';
 import { SettingsComponent } from './features/settings/settings.component';

@@ -1,11 +1,11 @@
 import { Component } from '@angular/core';
-import { BudgetService } from '../../localStorage/budget.service';
-import { UserService } from '../../localStorage/user.service';
+import { BudgetService } from '../../service/localStorage/budget.service';
+import { UserService } from '../../service/localStorage/user.service';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { SettingItemComponent } from '../../component/setting-item/setting-item.component';
 import { CustomModalComponent } from '../../component/custom-modal/custom-modal.component';
-import { ToastService } from '../../shared/toast/toast.service';
+import { ToastService } from '../../service/toast/toast.service';
 
 @Component({
   selector: 'app-settings',

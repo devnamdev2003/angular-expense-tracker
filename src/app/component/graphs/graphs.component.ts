@@ -4,8 +4,8 @@ import {
   ApexAxisChartSeries, ApexChart, ApexXAxis, ApexDataLabels,
   ApexStroke, ApexTitleSubtitle, ApexTheme, ApexTooltip, ApexGrid, ApexYAxis
 } from 'ng-apexcharts';
-import { UserService } from '../../localStorage/user.service';
-import { ExpenseService, Expense } from '../../localStorage/expense.service';
+import { UserService } from '../../service/localStorage/user.service';
+import { ExpenseService, Expense } from '../../service/localStorage/expense.service';
 
 @Component({
   standalone: true,

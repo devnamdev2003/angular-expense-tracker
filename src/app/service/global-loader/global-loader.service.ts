@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { GlobalLoaderComponent } from './global-loader.component';
+import { GlobalLoaderComponent } from '../../shared/global-loader/global-loader.component';
 
 @Injectable({
   providedIn: 'root'
