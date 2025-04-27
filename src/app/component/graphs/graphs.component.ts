@@ -17,6 +17,7 @@ export class GraphsComponent implements OnInit {
 
 
   @Input() viewType: 'month' | 'day' = 'month';
+  @Input() currentDate!: Date;  // ✅ new input
 
   constructor(
     public userService: UserService,
@@ -29,8 +30,13 @@ export class GraphsComponent implements OnInit {
     this.loadData();
   }
 
+  // ngOnChanges(changes: SimpleChanges): void {
+  //   if (changes['viewType']) {
+  //     this.loadData();
+  //   }
+  // }
   ngOnChanges(changes: SimpleChanges): void {
-    if (changes['viewType']) {
+    if (changes['viewType'] || changes['currentDate']) {
       this.loadData();
     }
   }
@@ -98,6 +104,16 @@ export class GraphsComponent implements OnInit {
   // Load data based on the selected view (month or day)
 
 
+  // loadData(): void {
+  //   const expenses: Expense[] = this.expenseService.getAll();
+
+  //   if (this.viewType === 'month') {
+  //     this.loadMonthData(expenses);
+  //   } else {
+  //     this.loadDayData(expenses);
+  //   }
+  // }
+
   loadData(): void {
     const expenses: Expense[] = this.expenseService.getAll();
 
@@ -109,12 +125,21 @@ export class GraphsComponent implements OnInit {
   }
 
 
-  // Load month data (Expenses per day for the selected month)
+
   loadMonthData(expenses: Expense[]): void {
     const dayAmountMap = new Map<number, number>();
+
+    const currentYear = this.currentDate.getFullYear();
+    const currentMonth = this.currentDate.getMonth() + 1; // 1-12
+
     dayAmountMap.set(1, 0);
 
-    expenses.forEach(item => {
+    const currentMonthExpenses = expenses.filter(item => {
+      const [year, month] = item.date.split('-').map(Number);
+      return year === currentYear && month === currentMonth;
+    });
+
+    currentMonthExpenses.forEach(item => {
       const day = parseInt(item.date.split('-')[2]);
       const amount = item.amount;
 
@@ -125,8 +150,8 @@ export class GraphsComponent implements OnInit {
       }
     });
 
-    const days: number[] = Array.from(dayAmountMap.keys()).sort((a, b) => a - b);
-    const amounts: number[] = days.map(day => dayAmountMap.get(day)!);
+    const days = Array.from(dayAmountMap.keys()).sort((a, b) => a - b);
+    const amounts = days.map(day => dayAmountMap.get(day)!);
 
     this.chartXAxis = {
       type: 'category',
@@ -139,33 +164,32 @@ export class GraphsComponent implements OnInit {
     }];
   }
 
-  // Load day data (Expenses per hour for today)
   loadDayData(expenses: Expense[]): void {
     const timeAmountMap = new Map<string, number>();
 
-    // ✅ First, sort the expenses based on time (hours and minutes)
-    expenses.sort((a, b) => {
+    const todayStr = this.currentDate.toISOString().split('T')[0];
+
+    const todaysExpenses = expenses.filter(exp => exp.date === todayStr);
+
+    todaysExpenses.sort((a, b) => {
       const [aHours, aMinutes] = a.time.split(":").map(Number);
       const [bHours, bMinutes] = b.time.split(":").map(Number);
       return aHours !== bHours ? aHours - bHours : aMinutes - bMinutes;
     });
 
     let sum = 0;
-
-    // ✅ Always start from 00:00 with 0
     timeAmountMap.set("00:00", 0);
 
-    expenses.forEach(item => {
+    todaysExpenses.forEach(item => {
       const [hour, minute] = item.time.split(":");
-      const time = `${hour}:${minute}`; // Take only HH:MM
+      const time = `${hour}:${minute}`;
 
-      sum += item.amount; // Cumulative sum
+      sum += item.amount;
       timeAmountMap.set(time, sum);
     });
 
-    // ✅ Now times will be naturally ordered because we sorted before
-    const times: string[] = Array.from(timeAmountMap.keys());
-    const amounts: number[] = times.map(time => timeAmountMap.get(time)!);
+    const times = Array.from(timeAmountMap.keys());
+    const amounts = times.map(time => timeAmountMap.get(time)!);
 
     this.chartXAxis = {
       type: 'category',
@@ -177,4 +201,5 @@ export class GraphsComponent implements OnInit {
       data: amounts
     }];
   }
+
 }

@@ -19,4 +19,13 @@
     </div>
 </div>
 
-<app-graphs [viewType]="viewType"></app-graphs>
+<app-graphs [viewType]="viewType" [currentDate]="currentDate"></app-graphs>
+
+<!-- New Arrows and Date Display -->
+<div class="flex justify-center items-center mt-4 gap-4">
+    <button (click)="goPrevious()" class="text-2xl p-2 bg-gray-200 rounded-full hover:bg-gray-300">←</button>
+
+    <div class="text-lg font-semibold">{{ getDisplayDate() }}</div>
+
+    <button (click)="goNext()" class="text-2xl p-2 bg-gray-200 rounded-full hover:bg-gray-300">→</button>
+</div>

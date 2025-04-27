@@ -12,8 +12,6 @@ import { ToastService } from '../../shared/toast/toast.service';
   templateUrl: './add-expense.component.html',
   styleUrls: ['./add-expense.component.css']
 })
-
-
 export class AddExpenseComponent implements OnInit {
   expenseForm: FormGroup;
   categories: any[] = [];
@@ -26,7 +24,16 @@ export class AddExpenseComponent implements OnInit {
     private categoryService: CategoryService,
     private toastService: ToastService
   ) {
-    this.expenseForm = this.fb.group({
+    this.expenseForm = this.createForm();
+  }
+
+  ngOnInit(): void {
+    this.loadCategories();
+    this.resetFormWithCurrentDateTime();
+  }
+
+  createForm(): FormGroup {
+    return this.fb.group({
       amount: ['', [Validators.required, Validators.min(0)]],
       category_id: ['', Validators.required],
       subcategory: ['', Validators.maxLength(50)],
@@ -36,11 +43,6 @@ export class AddExpenseComponent implements OnInit {
       location: ['', Validators.maxLength(50)],
       note: ['', Validators.maxLength(100)]
     });
-  }
-
-  ngOnInit(): void {
-    this.loadCategories(); // Just load once and keep hidden
-    this.resetFormWithCurrentDateTime();
   }
 
   loadCategories() {
@@ -62,9 +64,15 @@ export class AddExpenseComponent implements OnInit {
     const dateStr = now.toISOString().split('T')[0];
     const timeStr = now.toTimeString().split(' ')[0];
 
-    this.expenseForm.patchValue({
+    this.expenseForm.reset({
+      amount: '',
+      category_id: '',
+      subcategory: '',
       date: dateStr,
-      time: timeStr
+      time: timeStr,
+      payment_mode: 'UPI',
+      location: '',
+      note: ''
     });
 
     this.selectedCategoryName = 'Select Category';
@@ -80,7 +88,6 @@ export class AddExpenseComponent implements OnInit {
     try {
       this.expenseService.add(data);
       this.toastService.show('Expense added successfully!', 'success');
-      this.expenseForm.reset();
       this.resetFormWithCurrentDateTime();
     } catch (error) {
       console.error('Submit failed:', error);
@@ -88,4 +95,3 @@ export class AddExpenseComponent implements OnInit {
     }
   }
 }
-
