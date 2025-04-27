@@ -1,4 +1,52 @@
-<h1 class="text-2xl font-bold mb-6 text-[var(--color-accent)]">
-    📋 List of Expenses
-</h1>
-<p>list-expenses works!</p>
+<section id="list" class="section p-4 mb-4">
+    <!-- Table Wrapper -->
+    <div class="overflow-x-auto bg-surface rounded shadow">
+        <table id="expenseTable" class="min-w-full table-auto">
+            <thead>
+                <tr class="bg-[var(--color-accent)] text-white">
+                    <th class="text-left px-4 py-3 cursor-pointer" (click)="sortTable(0)">
+                        Amount
+                    </th>
+                    <th class="text-left px-4 py-3 cursor-pointer" (click)="sortTable(1)">
+                        Category
+                    </th>
+                    <th class="text-left px-4 py-3 cursor-pointer" (click)="sortTable(2)">
+                        Subcategory
+                    </th>
+                    <th class="text-left px-4 py-3 cursor-pointer" (click)="sortTable(3)">
+                        Date
+                    </th>
+                    <th class="text-left px-4 py-3 cursor-pointer" (click)="sortTable(4)">
+                        Payment Mode
+                    </th>
+                    <th class="text-left px-4 py-3">Actions</th>
+                </tr>
+            </thead>
+            <tbody id="expenseTableBody" class="text-[var(--color-text)] bg-[var(--color-surface)] dark:bg-[var(--color-surface)]">
+                <tr *ngFor="let expense of expenses" class="border-b dark:border-gray-700  hover:bg-[--list-hover] transition">
+                    <td class="px-4 py-3 font-semibold text-[var(--color-text)] whitespace-nowrap">
+                        ₹{{ expense.amount }}
+                    </td>
+                    <td class="px-4 py-3 whitespace-nowrap">
+                        {{ expense.category_name }}
+                    </td>
+                    <td class="px-4 py-3 whitespace-nowrap">
+                        {{ expense.subcategory || '-' }}
+                    </td>
+                    <td class="px-4 py-3 whitespace-nowrap">
+                        {{ getFormattedDate(expense) }}
+                    </td>
+                    <td class="px-4 py-3 whitespace-nowrap">
+                        {{ expense.payment_mode }}
+                    </td>
+                    <td class="px-4 py-3 whitespace-nowrap">
+                        <button (click)="confirmDelete(expense.expense_id)"
+                            class="text-red-500 hover:underline flex items-center gap-1">
+                            🗑️ <span>Delete</span>
+                        </button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</section>

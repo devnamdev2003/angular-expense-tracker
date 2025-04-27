@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { UserService } from './user.service';
+import { CategoryService, Category } from './category.service';
 
 export interface Expense {
   expense_id: string;
@@ -19,7 +20,7 @@ export interface Expense {
 export class ExpenseService {
   private readonly storageKey = 'expenses';
 
-  constructor(private userService: UserService) {}
+  constructor(private userService: UserService, private categoryService: CategoryService) { }
 
   private isBrowser(): boolean {
     return typeof window !== 'undefined' && typeof window.localStorage !== 'undefined';
@@ -27,7 +28,24 @@ export class ExpenseService {
 
   getAll(): Expense[] {
     if (!this.isBrowser()) return [];
-    return JSON.parse(localStorage.getItem(this.storageKey) || '[]');
+    const expenses: Expense[] = JSON.parse(localStorage.getItem(this.storageKey) || '[]');
+    const categories: Category[] = this.categoryService.getAll();
+
+    return expenses
+      .map(e => {
+        const cat = categories.find(c => c.category_id === e.category_id);
+        return {
+          ...e,
+          category_name: cat?.name || '',
+          icon: cat?.icon || '',
+          color: cat?.color || ''
+        };
+      })
+      .sort((a, b) => {
+        const dateA = new Date(`${a.date}T${a.time}`);
+        const dateB = new Date(`${b.date}T${b.time}`);
+        return dateB.getTime() - dateA.getTime(); // Descending order
+      });
   }
 
   add(data: Omit<Expense, 'expense_id' | 'user_id' | 'created_at'>): void {

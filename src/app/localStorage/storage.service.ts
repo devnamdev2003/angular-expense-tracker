@@ -165,6 +165,7 @@ export class StorageService {
     static syncExpensesWithSchema() {
         const expenseSchema: Schema = {
             expense_id: "",
+            category_id: "",
             amount: "",
             created_at: "",
             date: "",

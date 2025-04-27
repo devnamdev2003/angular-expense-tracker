@@ -4,6 +4,7 @@ export interface Category {
   category_id: string;
   name: string;
   icon: string;
+  color: string;
   user_id: string;
 }
 
