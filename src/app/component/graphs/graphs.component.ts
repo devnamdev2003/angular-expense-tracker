@@ -1,11 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input, SimpleChanges, OnChanges } from '@angular/core';
 import { NgApexchartsModule } from 'ng-apexcharts';
-import { ApexAxisChartSeries, ApexChart, ApexXAxis, ApexDataLabels, ApexStroke, ApexTitleSubtitle, ApexTheme, ApexTooltip } from 'ng-apexcharts';
-
+import {
+  ApexAxisChartSeries, ApexChart, ApexXAxis, ApexDataLabels,
+  ApexStroke, ApexTitleSubtitle, ApexTheme, ApexTooltip, ApexGrid, ApexYAxis
+} from 'ng-apexcharts';
 import { UserService } from '../../localStorage/user.service';
-import { ExpenseService } from '../../localStorage/expense.service'; // Import ExpenseService
-import { Expense } from '../../localStorage/expense.service';
-import { Input, OnChanges, SimpleChanges } from '@angular/core';
+import { ExpenseService, Expense } from '../../localStorage/expense.service';
 
 @Component({
   standalone: true,
@@ -14,11 +14,10 @@ import { Input, OnChanges, SimpleChanges } from '@angular/core';
   styleUrls: ['./graphs.component.css'],
   imports: [NgApexchartsModule]
 })
-export class GraphsComponent implements OnInit {
-
+export class GraphsComponent implements OnInit, OnChanges {
 
   @Input() viewType: 'month' | 'day' = 'month';
-  @Input() currentDate!: Date;  // ✅ new input
+  @Input() currentDate!: Date;
 
   constructor(
     public userService: UserService,
@@ -44,11 +43,11 @@ export class GraphsComponent implements OnInit {
     }
   ];
 
-  chartYAxis = {
+  chartYAxis: ApexYAxis = {
     show: true
   };
 
-  grid = {
+  grid: ApexGrid = {
     show: false
   };
 
@@ -70,7 +69,6 @@ export class GraphsComponent implements OnInit {
     categories: []
   };
 
-
   dataLabels: ApexDataLabels = {
     enabled: false
   };
@@ -79,23 +77,26 @@ export class GraphsComponent implements OnInit {
     curve: "smooth"
   };
 
-  title: ApexTitleSubtitle = {
-  };
+  title: ApexTitleSubtitle = {};
 
   theme: ApexTheme = {
-    mode: 'light' // default, will override in ngOnInit
+    mode: 'light'
   };
 
-  // Switch between month and day view
+  tooltip: ApexTooltip = {
+    shared: true,
+    intersect: false,
+    y: {},
+    x: {}
+  };
+
   switchView(viewType: 'month' | 'day'): void {
     this.viewType = viewType;
     this.loadData();
   }
 
-  // Load data based on the selected view (month or day)
   loadData(): void {
     const expenses: Expense[] = this.expenseService.getAll();
-
     if (this.viewType === 'month') {
       this.loadMonthData(expenses);
     } else {
@@ -107,7 +108,7 @@ export class GraphsComponent implements OnInit {
     const dayAmountMap = new Map<number, number>();
 
     const currentYear = this.currentDate.getFullYear();
-    const currentMonth = this.currentDate.getMonth() + 1; // 1-12
+    const currentMonth = this.currentDate.getMonth() + 1;
 
     dayAmountMap.set(1, 0);
 
@@ -130,6 +131,26 @@ export class GraphsComponent implements OnInit {
     const days = Array.from(dayAmountMap.keys()).sort((a, b) => a - b);
     const amounts = days.map(day => dayAmountMap.get(day)!);
 
+    this.tooltip = {
+      shared: true,
+      intersect: false,
+      y: {
+        formatter: (value: number) => {
+          return `${value} ₹`; // Format the tooltip to display currency
+        }
+      },
+      x: {
+        formatter: (value: any) => {
+          const day = days[value - 1];
+          const monthNames = ["Jan", "Feb", "Mar", "Apr", "May", "Jun",
+            "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+          const monthName = monthNames[this.currentDate.getMonth()];
+          const year = this.currentDate.getFullYear();
+          return `${day} ${monthName} ${year}`;
+        }
+      }
+    };
+
     this.title = {
       text: "Monthly Expenses",
       align: "center",
@@ -140,7 +161,7 @@ export class GraphsComponent implements OnInit {
 
     this.chartXAxis = {
       type: 'category',
-      categories: days
+      categories: days.map(day => day.toString())
     };
 
     this.chartSeries = [{
@@ -176,15 +197,21 @@ export class GraphsComponent implements OnInit {
     const times = Array.from(timeAmountMap.keys());
     const amounts = times.map(time => timeAmountMap.get(time)!);
 
-    this.chartXAxis = {
-      type: 'category',
-      categories: times
+    this.tooltip = {
+      shared: true,
+      intersect: false,
+      y: {
+        formatter: (value: number) => {
+          return `${value} ₹`;
+        }
+      },
+      x: {
+        formatter: (value: any) => {
+          const time = times[value - 1];
+          return `Time: ${time}`;
+        }
+      }
     };
-
-    this.chartSeries = [{
-      name: "Expenses",
-      data: amounts
-    }];
 
     this.title = {
       text: "Today Expenses",
@@ -194,6 +221,15 @@ export class GraphsComponent implements OnInit {
       }
     };
 
+    this.chartXAxis = {
+      type: 'category',
+      categories: times
+    };
+
+    this.chartSeries = [{
+      name: "Expenses",
+      data: amounts
+    }];
   }
 
 }
