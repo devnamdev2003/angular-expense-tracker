@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { NgApexchartsModule } from 'ng-apexcharts';
-import { ApexAxisChartSeries, ApexChart, ApexXAxis, ApexDataLabels, ApexStroke, ApexTitleSubtitle, ApexTheme } from 'ng-apexcharts';
+import { ApexAxisChartSeries, ApexChart, ApexXAxis, ApexDataLabels, ApexStroke, ApexTitleSubtitle, ApexTheme, ApexTooltip } from 'ng-apexcharts';
+
 import { UserService } from '../../localStorage/user.service';
 import { ExpenseService } from '../../localStorage/expense.service'; // Import ExpenseService
 import { Expense } from '../../localStorage/expense.service';
@@ -30,11 +31,6 @@ export class GraphsComponent implements OnInit {
     this.loadData();
   }
 
-  // ngOnChanges(changes: SimpleChanges): void {
-  //   if (changes['viewType']) {
-  //     this.loadData();
-  //   }
-  // }
   ngOnChanges(changes: SimpleChanges): void {
     if (changes['viewType'] || changes['currentDate']) {
       this.loadData();
@@ -84,11 +80,6 @@ export class GraphsComponent implements OnInit {
   };
 
   title: ApexTitleSubtitle = {
-    text: "Expenses Trend",
-    align: "left",
-    style: {
-      color: '#ccc'
-    }
   };
 
   theme: ApexTheme = {
@@ -102,18 +93,6 @@ export class GraphsComponent implements OnInit {
   }
 
   // Load data based on the selected view (month or day)
-
-
-  // loadData(): void {
-  //   const expenses: Expense[] = this.expenseService.getAll();
-
-  //   if (this.viewType === 'month') {
-  //     this.loadMonthData(expenses);
-  //   } else {
-  //     this.loadDayData(expenses);
-  //   }
-  // }
-
   loadData(): void {
     const expenses: Expense[] = this.expenseService.getAll();
 
@@ -123,8 +102,6 @@ export class GraphsComponent implements OnInit {
       this.loadDayData(expenses);
     }
   }
-
-
 
   loadMonthData(expenses: Expense[]): void {
     const dayAmountMap = new Map<number, number>();
@@ -152,6 +129,14 @@ export class GraphsComponent implements OnInit {
 
     const days = Array.from(dayAmountMap.keys()).sort((a, b) => a - b);
     const amounts = days.map(day => dayAmountMap.get(day)!);
+
+    this.title = {
+      text: "Monthly Expenses",
+      align: "center",
+      style: {
+        color: '#ccc'
+      }
+    };
 
     this.chartXAxis = {
       type: 'category',
@@ -200,6 +185,15 @@ export class GraphsComponent implements OnInit {
       name: "Expenses",
       data: amounts
     }];
+
+    this.title = {
+      text: "Today Expenses",
+      align: "center",
+      style: {
+        color: '#ccc'
+      }
+    };
+
   }
 
 }

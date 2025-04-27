@@ -1,4 +1,4 @@
-<div class="flex justify-center items-center min-h-[80px]">
+<div class="flex justify-center items-center min-h-[70px]">
     <div class="relative flex w-48 bg-[var(--color-surface)] rounded-full shadow-md">
         <div class="absolute h-full w-1/2 bg-[var(--theme-color)] rounded-full transition-all duration-300"
             [class.translate-x-24]="viewType === 'day'"></div>
@@ -22,10 +22,18 @@
 <app-graphs [viewType]="viewType" [currentDate]="currentDate"></app-graphs>
 
 <!-- New Arrows and Date Display -->
-<div class="flex justify-center items-center mt-4 gap-4">
-    <button (click)="goPrevious()" class="text-2xl p-2 bg-gray-200 rounded-full hover:bg-gray-300">←</button>
+<div class="flex justify-between items-center w-full max-w-xl px-[4rem]">
+    <button (click)="goPrevious()" class="text-2xl p-2 rounded-full">
+        <img src="assets/img/icon/icons8-left-arrow-50.png" alt="add"
+            class="w-[25px] h-[25px] transition-all duration-300 ease-in-out" style="filter: var(--icon-color2);">
+
+    </button>
 
     <div class="text-lg font-semibold">{{ getDisplayDate() }}</div>
 
-    <button (click)="goNext()" class="text-2xl p-2 bg-gray-200 rounded-full hover:bg-gray-300">→</button>
+    <button (click)="goNext()" class="text-2xl p-2  rounded-full ">
+
+        <img src="assets/img/icon/icons8-right-arrow-50.png" alt="add"
+            class="w-[25px] h-[25px] transition-all duration-300 ease-in-out" style="filter: var(--icon-color2);">
+    </button>
 </div>
