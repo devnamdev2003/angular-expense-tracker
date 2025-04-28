@@ -30,6 +30,13 @@ export class ExpenseService {
     return typeof window !== 'undefined' && typeof window.localStorage !== 'undefined';
   }
 
+  getLocalISOString(): string {
+    const now = new Date();
+    const pad = (n: number) => n.toString().padStart(2, '0');
+
+    return `${now.getFullYear()}-${pad(now.getMonth() + 1)}-${pad(now.getDate())}T${pad(now.getHours())}:${pad(now.getMinutes())}:${pad(now.getSeconds())}`;
+  }
+
   getAll(): Expense[] {
     if (!this.isBrowser()) return [];
     const expenses: Expense[] = this.storageService.getAllExpenses();
@@ -57,7 +64,7 @@ export class ExpenseService {
     const all: Expense[] = this.getAll();
     const expense_id = crypto.randomUUID();
     const user_id = this.userService.getValue<string>('id') || '0';
-    const created_at = new Date().toISOString();
+    const created_at = this.getLocalISOString();
 
     all.push({ ...data, expense_id, user_id, created_at });
     localStorage.setItem(StorageService.expenseKey, JSON.stringify(all));

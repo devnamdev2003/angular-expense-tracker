@@ -183,7 +183,7 @@ export class GraphsComponent implements OnInit, OnChanges {
   loadDayData(expenses: Expense[]): void {
     const timeAmountMap = new Map<string, number>();
 
-    const todayStr = this.currentDate.toISOString().split('T')[0];
+    const todayStr = `${this.currentDate.getFullYear()}-${(this.currentDate.getMonth() + 1).toString().padStart(2, '0')}-${this.currentDate.getDate().toString().padStart(2, '0')}`;
 
     const todaysExpenses = expenses.filter(exp => exp.date === todayStr);
 
