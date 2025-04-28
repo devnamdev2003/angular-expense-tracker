@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { BudgetService } from '../../service/localStorage/budget.service';
+import { BudgetService, Budget } from '../../service/localStorage/budget.service';
 import { UserService } from '../../service/localStorage/user.service';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
@@ -48,7 +48,7 @@ export class SettingsComponent {
   }
 
   showBudgetModal(): void {
-    const allBudgets = this.budgetService.getAll();
+    const allBudgets: Budget[] = this.budgetService.getAll();
     if (allBudgets.length > 0) {
       const latest = allBudgets[allBudgets.length - 1];
       this.fromDate = latest.fromDate;
@@ -94,7 +94,7 @@ export class SettingsComponent {
       return;
     }
 
-    const allBudgets = this.budgetService.getAll();
+    const allBudgets: Budget[] = this.budgetService.getAll();
 
     if (allBudgets.length > 0) {
       const latest = allBudgets[allBudgets.length - 1];

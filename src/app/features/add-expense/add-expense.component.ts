@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { ExpenseService } from '../../service/localStorage/expense.service';
-import { CategoryService } from '../../service/localStorage/category.service';
+import { CategoryService, Category } from '../../service/localStorage/category.service';
 import { CommonModule } from '@angular/common';
 import { ToastService } from '../../service/toast/toast.service';
 
@@ -14,7 +14,7 @@ import { ToastService } from '../../service/toast/toast.service';
 })
 export class AddExpenseComponent implements OnInit {
   expenseForm: FormGroup;
-  categories: any[] = [];
+  categories: Category[] = [];
   selectedCategoryName: string = 'Select Category';
   isCategoryDropdownOpen: boolean = false;
 
@@ -45,7 +45,7 @@ export class AddExpenseComponent implements OnInit {
   }
 
   loadCategories() {
-    this.categories = this.categoryService.getAll();
+    this.categories = this.categoryService.getSortedCategoriesByExpenseCount();
   }
 
   toggleCategoryDropdown() {
@@ -87,6 +87,7 @@ export class AddExpenseComponent implements OnInit {
       this.expenseService.add(data);
       this.toastService.show('Expense added successfully!', 'success');
       this.resetFormWithCurrentDateTime();
+      this.loadCategories();
     } catch (error) {
       console.error('Submit failed:', error);
       this.toastService.show('Error adding expense.', 'error');

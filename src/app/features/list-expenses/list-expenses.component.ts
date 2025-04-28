@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { ExpenseService } from '../../service/localStorage/expense.service';
-import { CategoryService } from '../../service/localStorage/category.service';
+import { ExpenseService, Expense } from '../../service/localStorage/expense.service';
+import { CategoryService, Category } from '../../service/localStorage/category.service';
 import { CommonModule } from '@angular/common';
 import { ToastService } from '../../service/toast/toast.service';
 
@@ -12,8 +12,8 @@ import { ToastService } from '../../service/toast/toast.service';
 })
 
 export class ListExpensesComponent implements OnInit {
-  expenses: any[] = [];
-  categories: any[] = [];
+  expenses: Expense[] = [];
+  categories: Category[] = [];
   categoryMap: { [key: string]: string } = {};
   sortDirections: { [key: number]: boolean } = {};
 
@@ -79,9 +79,9 @@ export class ListExpensesComponent implements OnInit {
         return direction * (valA.getTime() - valB.getTime());
       }
 
-      if (!isNaN(valA) && !isNaN(valB)) {
-        return direction * (valA - valB);
-      }
+      if (!isNaN(valA as any) && !isNaN(valB as any)) {
+        return direction * (Number(valA) - Number(valB));
+      }      
 
       return direction * (valA.toString().toLowerCase().localeCompare(valB.toString().toLowerCase(), undefined, { numeric: true }));
     });
@@ -89,7 +89,7 @@ export class ListExpensesComponent implements OnInit {
 
   confirmDelete(id: string) {
     if (confirm("Are you sure you want to delete this expense?")) {
-      const result = this.expenseService.delete(id);
+      this.expenseService.delete(id);
       this.toastService.show("Expense deleted successfully", 'success');
       this.listExpenses();
     }
