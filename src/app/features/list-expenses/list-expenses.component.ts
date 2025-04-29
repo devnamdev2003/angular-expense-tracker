@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, HostListener, OnInit, ViewChild } from '@angular/core';
 import { ExpenseService, Expense } from '../../service/localStorage/expense.service';
 import { CategoryService, Category } from '../../service/localStorage/category.service';
 import { CommonModule } from '@angular/common';
@@ -18,6 +18,7 @@ export class ListExpensesComponent implements OnInit {
   currency: string | null;
   isSortByDropdownOpen: boolean = false;
   selectedFieldName: string = 'Sort By';
+  @ViewChild('dropdownRef') dropdownRef!: ElementRef;
 
   constructor(
     private expenseService: ExpenseService,
@@ -93,5 +94,17 @@ export class ListExpensesComponent implements OnInit {
 
   toggleSortByDropdown() {
     this.isSortByDropdownOpen = !this.isSortByDropdownOpen;
+  }
+
+
+  @HostListener('document:click', ['$event'])
+  onDocumentClick(event: MouseEvent) {
+    if (
+      this.isSortByDropdownOpen &&
+      this.dropdownRef &&
+      !this.dropdownRef.nativeElement.contains(event.target)
+    ) {
+      this.isSortByDropdownOpen = false;
+    }
   }
 }

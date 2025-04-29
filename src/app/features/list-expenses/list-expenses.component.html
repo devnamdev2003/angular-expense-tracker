@@ -1,35 +1,65 @@
 <section id="list" class="section p-4 mb-4">
-    <div class="w-full md:w-1/2 mb-3">
-        <div class="relative">
-            <button type="button" (click)="toggleSortByDropdown()"
-                class="w-full p-2 rounded border text-left bg-[var(--color-bg)]"
-                style="background-color: var(--input-bg); color: var(--input-text); border-color: var(--input-border);">
-                {{ selectedFieldName }}
-            </button>
-            <ul class="absolute z-50 w-full max-h-40 overflow-y-auto bg-[var(--color-bg)] rounded border"
-                *ngIf="isSortByDropdownOpen"
-                style="background-color: var(--input-bg); color: var(--input-text); border-color: var(--input-border);">
-                <li (click)="sortList(0,'Amount ⬇️',1)" class="p-2 cursor-pointer hover:bg-[--list-hover]">
-                    Amount ⬇️
-                </li>
-                <li (click)="sortList(0,'Amount ⬆️',-1)" class="p-2 cursor-pointer hover:bg-[--list-hover]">
-                    Amount ⬆️
-                </li>
-                <li (click)="sortList(1,'Category ⬇️',1)" class="p-2 cursor-pointer hover:bg-[--list-hover]">
-                    Category ⬇️
-                </li>
-                <li (click)="sortList(1,'Category ⬆️',-1)" class="p-2 cursor-pointer hover:bg-[--list-hover]">
-                    Category ⬆️
-                </li>
-                <li (click)="sortList(3,'Date ⬇️',1)" class="p-2 cursor-pointer hover:bg-[--list-hover]">
-                    Date ⬇️
-                </li>
-                <li (click)="sortList(3,'Date ⬆️',-1)" class="p-2 cursor-pointer hover:bg-[--list-hover]">
-                    Date ⬆️
-                </li>
-            </ul>
-        </div>
+    <!-- Sort button (icon style, right-aligned) -->
+    <div class="flex justify-end">
+        <button (click)="toggleSortByDropdown()" class="rounded-full hover:bg-[--list-hover]" aria-label="Sort">
+            <p class="text-sm text-[var(--input-text)]">sort by ^</p>
+        </button>
     </div>
+    <div *ngIf="isSortByDropdownOpen" class="fixed inset-0 z-40 bg-black/40">
+    </div>
+    <!-- Sort bottom sheet modal -->
+
+
+    <div *ngIf="isSortByDropdownOpen" #dropdownRef
+        class="fixed bottom-0 left-0 right-0 z-50 bg-[var(--color-bg)] border-t rounded-t-2xl shadow-xl  max-h-[60vh] overflow-y-auto">
+
+        <h3 class="text-base font-semibold pb-2 border-b-2 border-[var(--color-gray-500)] pt-4 px-4">Sort By</h3>
+        <ul class="text-sm px-4 pb-4">
+            <li (click)="sortList(0,'Amount – Low to High',1)"
+                class="py-1 justify-between cursor-pointer hover:bg-[--list-hover] flex items-center">
+                <p>
+                    Amount – Low to High
+                </p>
+                <p *ngIf="selectedFieldName === 'Amount – Low to High'" class="mr-2 text-green-600">✔</p>
+            </li>
+            <li (click)="sortList(0,'Amount – High to Low',-1)"
+                class="py-1 justify-between cursor-pointer hover:bg-[--list-hover] flex items-center">
+                <p>
+                    Amount – High to Low
+                </p>
+                <p *ngIf="selectedFieldName === 'Amount – High to Low'" class="mr-2 text-green-600">✔</p>
+            </li>
+            <li (click)="sortList(1,'Category – A to Z',1)"
+                class="py-1 justify-between cursor-pointer hover:bg-[--list-hover] flex items-center">
+                <p>
+                    Category – A to Z
+                </p>
+                <p *ngIf="selectedFieldName === 'Category – A to Z'" class="mr-2 text-green-600">✔</p>
+            </li>
+            <li (click)="sortList(1,'Category – Z to A',-1)"
+                class="py-1 justify-between cursor-pointer hover:bg-[--list-hover] flex items-center">
+                <p>
+                    Category – Z to A
+                </p>
+                <p *ngIf="selectedFieldName === 'Category – Z to A'" class="mr-2 text-green-600">✔</p>
+            </li>
+            <li (click)="sortList(2,'Date – Oldest First',1)"
+                class="py-1 justify-between cursor-pointer hover:bg-[--list-hover] flex items-center">
+                <p>
+                    Date – Oldest First
+                </p>
+                <p *ngIf="selectedFieldName === 'Date – Oldest First'" class="mr-2 text-green-600">✔</p>
+            </li>
+            <li (click)="sortList(2,'Date – Newest First',-1)"
+                class="py-1 justify-between cursor-pointer hover:bg-[--list-hover] flex items-center">
+                <p>
+                    Date – Newest First
+                </p>
+                <p *ngIf="selectedFieldName === 'Date – Newest First'" class="mr-2 text-green-600">✔</p>
+            </li>
+        </ul>
+    </div>
+
     <ul class="space-y-3">
         <li *ngFor="let exp of expenses"
             class="bg-[var(--color-surface)] hover:bg-[var(--list-hover)] rounded-lg p-4 shadow-md">
