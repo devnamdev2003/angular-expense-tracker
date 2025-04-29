@@ -3,6 +3,7 @@ import { ExpenseService, Expense } from '../../service/localStorage/expense.serv
 import { CategoryService, Category } from '../../service/localStorage/category.service';
 import { CommonModule } from '@angular/common';
 import { ToastService } from '../../service/toast/toast.service';
+import { UserService } from '../../service/localStorage/user.service';
 
 @Component({
   selector: 'app-list-expenses',
@@ -16,12 +17,15 @@ export class ListExpensesComponent implements OnInit {
   categories: Category[] = [];
   categoryMap: { [key: string]: string } = {};
   sortDirections: { [key: number]: boolean } = {};
-
+  currency: string | null;
   constructor(
     private expenseService: ExpenseService,
     private categoryService: CategoryService,
-    private toastService: ToastService
-  ) { }
+    private toastService: ToastService,
+    private userService: UserService
+  ) {
+    this.currency = this.userService.getValue<string>('currency');
+  }
 
   ngOnInit(): void {
     this.listExpenses();
@@ -81,7 +85,7 @@ export class ListExpensesComponent implements OnInit {
 
       if (!isNaN(valA as any) && !isNaN(valB as any)) {
         return direction * (Number(valA) - Number(valB));
-      }      
+      }
 
       return direction * (valA.toString().toLowerCase().localeCompare(valB.toString().toLowerCase(), undefined, { numeric: true }));
     });

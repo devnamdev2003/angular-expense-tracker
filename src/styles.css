@@ -15,7 +15,10 @@
     --icon-color2: invert(0%);
 
     --color-error: #ef4444;
+    --color-red: #ef4444;
     --color-white: #ffffff;
+    --color-green: #16a34a;
+    --color-gray-500: #6b7280;
 }
 
 .dark {
@@ -35,7 +38,10 @@
     --icon-color2: invert(100%);
 
     --color-error: #f87171;
+    --color-red: #ef4444;
     --color-white: #ffffff;
+    --color-green: #4ade80;
+    --color-gray-500: #6b7280;
 }
 
 /* Disable text selection */

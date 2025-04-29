@@ -1,2 +1,68 @@
-<h1 class="text-2xl font-bold mb-6 text-[var(--color-accent)]">📅 Calendar View</h1>
-<p>calendar works!</p>
+<section id="calendar" class="section p-4">
+
+
+    <div class="flex flex-col justify-between">
+        <div class="flex justify-between m-auto items-center w-[350px] my-4">
+            <button (click)="changeMonth(-1)"
+                class="bg-[var(--color-accent)] text-[var(--color-white)] px-4 py-2 rounded mr-2 transition">&lt;
+            </button>
+            <div class="text-center font-semibold">Total Expenses: <span class="text-[var(--color-green)]">{{currency}} {{
+                    totalExpenses }}</span>
+            </div>
+            <button (click)="changeMonth(1)"
+                class="bg-[var(--color-accent)] text-[var(--color-white)] px-4 py-2 rounded ml-2 transition">
+                &gt;</button>
+        </div>
+        <div>
+            <h2
+                class="border-b border-[var(--color-white)] p-2 bg-[var(--color-accent)] text-[var(--color-white)] text-lg font-semibold text-center">
+                {{ calendarTitle }}
+            </h2>
+
+            <div
+                class="grid grid-cols-7 text-center font-semibold shadow bg-[var(--color-accent)] text-[var(--color-white)] uppercase text-xs">
+                <div class="border-r border-[var(--color-white)] p-2" *ngFor="let day of weekDays">{{ day }}</div>
+            </div>
+
+            <div class="grid grid-cols-7 gap-2 mt-2 text-center text-sm">
+                <ng-container *ngFor="let day of calendarDays">
+                    <div [ngClass]="day.classes" class="p-2 rounded"
+                        (click)="day.isCurrentMonth && openModal(day.date)">
+                        {{ day.label }}
+                    </div>
+                </ng-container>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal -->
+    <div id="dayModal" class="fixed inset-0 bg-black bg-opacity-50 items-center justify-center z-50 flex"
+        *ngIf="showModal">
+
+        <div class="bg-[var(--color-bg)] p-6 rounded-xl w-11/12 md:w-1/2 max-h-[60vh] flex flex-col shadow-xl">
+            <div class="flex justify-between items-center mb-4">
+                <h2 class="text-lg font-bold text-[var(--color-text)]">{{ modalTitle }}</h2>
+                <button (click)="closeModal()" class="text-[var(--color-red)] font-bold text-xl">&times;</button>
+            </div>
+
+            <ul class="space-y-3 overflow-y-auto pr-2 scrollbar-thin scrollbar-thumb-[var(--color-gray-500)] scrollbar-track-[var(--color-gray-500)] "
+                style="max-height: 60vh;">
+                <li *ngIf="modalExpenses.length === 0" class="text-[var(--color-gray-500)]">No expenses found for this
+                    date.</li>
+                <li *ngFor="let exp of modalExpenses"
+                    class="bg-[var(--color-surface)] hover:bg-[var(--list-hover)] rounded-lg p-4 shadow-md">
+                    <div class="flex justify-between items-center mb-2">
+                        <span class="text-lg font-semibold text-[var(--color-green)]">{{currency}} {{ exp.amount }}</span>
+                        <span class="text-sm">{{ exp.category_name || 'Uncategorized' }}</span>
+                    </div>
+                    <div class="text-sm space-y-1">
+                        <div><strong>Time:</strong> {{ exp.time }}</div>
+                        <div *ngIf="exp.note"><strong>Note:</strong> {{ exp.note }}</div>
+                        <div *ngIf="exp.location"><strong>Location:</strong> {{ exp.location }}</div>
+                        <div *ngIf="exp.payment_mode"><strong>Payment Mode:</strong> {{ exp.payment_mode }}</div>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </div>
+</section>

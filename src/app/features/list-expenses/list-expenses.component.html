@@ -22,7 +22,7 @@
             <tbody id="expenseTableBody" class="text-[var(--color-text)] bg-[var(--color-surface)] dark:bg-[var(--color-surface)]">
                 <tr *ngFor="let expense of expenses" class="border-b dark:border-gray-700  hover:bg-[--list-hover] transition">
                     <td class="px-4 py-3 font-semibold text-[var(--color-text)] whitespace-nowrap">
-                        ₹{{ expense.amount }}
+                        {{currency}} {{ expense.amount }}
                     </td>
                     <td class="px-4 py-3 whitespace-nowrap">
                         {{ expense.category_name }}

@@ -12,6 +12,7 @@ export interface User {
   notifications: string,
   user_password: string,
   theme_mode: string,
+  currency: string,
 };
 
 @Injectable({ providedIn: 'root' })

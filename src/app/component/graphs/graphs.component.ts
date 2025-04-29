@@ -143,7 +143,7 @@ export class GraphsComponent implements OnInit, OnChanges {
       intersect: false,
       y: {
         formatter: (value: number) => {
-          return `${value} ₹`;
+          return `${value} ${this.userService.getValue<string>('currency')}`;
         }
       },
       x: {
@@ -212,7 +212,7 @@ export class GraphsComponent implements OnInit, OnChanges {
       intersect: false,
       y: {
         formatter: (value: number) => {
-          return `${value} ₹`;
+          return `${value} ${this.userService.getValue<string>('currency')}`;
         }
       },
       x: {

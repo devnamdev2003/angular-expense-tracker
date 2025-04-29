@@ -65,6 +65,7 @@ export class StorageService {
             notifications: "",
             user_password: "",
             theme_mode: "",
+            currency: "₹"
         };
 
         return StorageService.syncUser(StorageService.userKey, userSchema);
