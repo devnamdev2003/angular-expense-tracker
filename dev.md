@@ -4,7 +4,7 @@ npm install --save apexcharts ng-apexcharts
 
 
 <!-- Next Task -->
-1. calender
+1. calender done✅
 2. update list page
 3. update settings to add a cutom category
 4. add a budget section in sidebar

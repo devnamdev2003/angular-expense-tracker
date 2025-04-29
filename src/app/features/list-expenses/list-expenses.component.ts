@@ -15,9 +15,10 @@ import { UserService } from '../../service/localStorage/user.service';
 export class ListExpensesComponent implements OnInit {
   expenses: Expense[] = [];
   categories: Category[] = [];
-  categoryMap: { [key: string]: string } = {};
-  sortDirections: { [key: number]: boolean } = {};
   currency: string | null;
+  isSortByDropdownOpen: boolean = false;
+  selectedFieldName: string = 'Sort By';
+
   constructor(
     private expenseService: ExpenseService,
     private categoryService: CategoryService,
@@ -35,10 +36,6 @@ export class ListExpensesComponent implements OnInit {
     try {
       this.expenses = this.expenseService.getAll();
       this.categories = this.categoryService.getAll();
-
-      this.categoryMap = Object.fromEntries(
-        this.categories.map(c => [c.category_id, c.name])
-      );
     } catch (err) {
       console.error("Failed to load expenses:", err);
     }
@@ -50,10 +47,7 @@ export class ListExpensesComponent implements OnInit {
     return `${expDate.getFullYear()}-${String(expDate.getMonth() + 1).padStart(2, '0')}-${String(expDate.getDate()).padStart(2, '0')} ${timeParts[0]}:${timeParts[1]}:${timeParts[2]}`;
   }
 
-  sortTable(colIndex: number) {
-    this.sortDirections[colIndex] = !this.sortDirections[colIndex];
-    const direction = this.sortDirections[colIndex] ? 1 : -1;
-
+  sortList(colIndex: number, fieldName: string, direction: number) {
     this.expenses.sort((a, b) => {
       let valA, valB;
 
@@ -70,10 +64,6 @@ export class ListExpensesComponent implements OnInit {
           valA = new Date(a.date + 'T' + a.time);
           valB = new Date(b.date + 'T' + b.time);
           break;
-        case 3:
-          valA = a.payment_mode;
-          valB = b.payment_mode;
-          break;
         default:
           valA = '';
           valB = '';
@@ -89,6 +79,8 @@ export class ListExpensesComponent implements OnInit {
 
       return direction * (valA.toString().toLowerCase().localeCompare(valB.toString().toLowerCase(), undefined, { numeric: true }));
     });
+    this.selectedFieldName = fieldName;
+    this.isSortByDropdownOpen = false;
   }
 
   confirmDelete(id: string) {
@@ -97,5 +89,9 @@ export class ListExpensesComponent implements OnInit {
       this.toastService.show("Expense deleted successfully", 'success');
       this.listExpenses();
     }
+  }
+
+  toggleSortByDropdown() {
+    this.isSortByDropdownOpen = !this.isSortByDropdownOpen;
   }
 }

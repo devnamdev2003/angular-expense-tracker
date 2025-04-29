@@ -1,46 +1,45 @@
 <section id="list" class="section p-4 mb-4">
-    <!-- Table Wrapper -->
-    <div class="overflow-x-auto bg-[var(--color-surface)] rounded shadow">
-        <table id="expenseTable" class="min-w-full table-auto">
-            <thead>
-                <tr class="bg-[var(--color-accent)] text-[var(--color-white)]">
-                    <th class="text-left px-4 py-3 cursor-pointer" (click)="sortTable(0)">
-                        Amount
-                    </th>
-                    <th class="text-left px-4 py-3 cursor-pointer" (click)="sortTable(1)">
-                        Category
-                    </th>
-                    <th class="text-left px-4 py-3 cursor-pointer" (click)="sortTable(3)">
-                        Date
-                    </th>
-                    <th class="text-left px-4 py-3 cursor-pointer" (click)="sortTable(4)">
-                        Payment Mode
-                    </th>
-                    <th class="text-left px-4 py-3">Actions</th>
-                </tr>
-            </thead>
-            <tbody id="expenseTableBody" class="text-[var(--color-text)] bg-[var(--color-surface)] dark:bg-[var(--color-surface)]">
-                <tr *ngFor="let expense of expenses" class="border-b dark:border-gray-700  hover:bg-[--list-hover] transition">
-                    <td class="px-4 py-3 font-semibold text-[var(--color-text)] whitespace-nowrap">
-                        {{currency}} {{ expense.amount }}
-                    </td>
-                    <td class="px-4 py-3 whitespace-nowrap">
-                        {{ expense.category_name }}
-                    </td>
-                    <td class="px-4 py-3 whitespace-nowrap">
-                        {{ getFormattedDate(expense) }}
-                    </td>
-                    <td class="px-4 py-3 whitespace-nowrap">
-                        {{ expense.payment_mode }}
-                    </td>
-                    <td class="px-4 py-3 whitespace-nowrap">
-                        <button (click)="confirmDelete(expense.expense_id)"
-                            class="text-[var(--color-error)] hover:underline flex items-center gap-1">
-                            🗑️ <span>Delete</span>
-                        </button>
-                    </td>
-                </tr>
-            </tbody>
-        </table>
+    <div class="w-full md:w-1/2 mb-3">
+        <div class="relative">
+            <button type="button" (click)="toggleSortByDropdown()"
+                class="w-full p-2 rounded border text-left bg-[var(--color-bg)]"
+                style="background-color: var(--input-bg); color: var(--input-text); border-color: var(--input-border);">
+                {{ selectedFieldName }}
+            </button>
+            <ul class="absolute z-50 w-full max-h-40 overflow-y-auto bg-[var(--color-bg)] rounded border"
+                *ngIf="isSortByDropdownOpen"
+                style="background-color: var(--input-bg); color: var(--input-text); border-color: var(--input-border);">
+                <li (click)="sortList(0,'Amount ⬇️',1)" class="p-2 cursor-pointer hover:bg-[--list-hover]">
+                    Amount ⬇️
+                </li>
+                <li (click)="sortList(0,'Amount ⬆️',-1)" class="p-2 cursor-pointer hover:bg-[--list-hover]">
+                    Amount ⬆️
+                </li>
+                <li (click)="sortList(1,'Category ⬇️',1)" class="p-2 cursor-pointer hover:bg-[--list-hover]">
+                    Category ⬇️
+                </li>
+                <li (click)="sortList(1,'Category ⬆️',-1)" class="p-2 cursor-pointer hover:bg-[--list-hover]">
+                    Category ⬆️
+                </li>
+                <li (click)="sortList(3,'Date ⬇️',1)" class="p-2 cursor-pointer hover:bg-[--list-hover]">
+                    Date ⬇️
+                </li>
+                <li (click)="sortList(3,'Date ⬆️',-1)" class="p-2 cursor-pointer hover:bg-[--list-hover]">
+                    Date ⬆️
+                </li>
+            </ul>
+        </div>
     </div>
+    <ul class="space-y-3">
+        <li *ngFor="let exp of expenses"
+            class="bg-[var(--color-surface)] hover:bg-[var(--list-hover)] rounded-lg p-4 shadow-md">
+            <div class="flex justify-between items-center mb-2">
+                <span class="text-lg font-semibold text-[var(--color-green)]">{{currency}} {{ exp.amount }}</span>
+                <span class="text-sm">{{ exp.category_name || 'Uncategorized' }}</span>
+            </div>
+            <div class="text-sm space-y-1">
+                <div> {{ getFormattedDate(exp) }}</div>
+            </div>
+        </li>
+    </ul>
 </section>
