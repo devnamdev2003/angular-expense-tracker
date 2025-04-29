@@ -1,57 +1,108 @@
 <section id="list" class="section p-4 mb-4">
-    <!-- Sort button (icon style, right-aligned) -->
-    <div class="flex justify-end">
+    <!-- Sort and Filter buttons -->
+    <div class="flex justify-end space-x-2">
         <button (click)="toggleSortByDropdown()" class="rounded-full hover:bg-[--list-hover]" aria-label="Sort">
-            <p class="text-sm text-[var(--input-text)]">sort by ^</p>
+            <p class="text-sm text-[var(--input-text)]">Sort By ^</p>
+        </button>
+
+        <button (click)="toggleFilterDropdown()" class="rounded-full hover:bg-[--list-hover]" aria-label="Filter">
+            <p class="text-sm text-[var(--input-text)]">Filter ⧉</p>
         </button>
     </div>
+
+    <!-- Backdrop -->
+    <div *ngIf="isFilterDropdownOpen" class="fixed inset-0 z-40 bg-black/40"></div>
+
+    <!-- Filter Modal -->
+    <div *ngIf="isFilterDropdownOpen" #filterRef
+        class="fixed bottom-0 left-0 right-0 z-[60] bg-[var(--color-surface)] border-t rounded-t-2xl shadow-xl max-h-[70vh] overflow-y-auto">
+
+        <h3 class="text-base font-semibold pb-2 border-b-2 border-[var(--color-gray-500)] pt-4 px-4">Filter</h3>
+        <form (ngSubmit)="applyFilter()" class="px-4 pb-4 space-y-4">
+            <!-- Date range -->
+            <div class="flex space-x-4">
+              <div class="flex-1">
+                <label class="block text-sm font-semibold mb-1">From Date:</label>
+                <input type="date" [(ngModel)]="filter.fromDate" name="fromDate"
+                  class="text-sm border rounded p-2 w-full bg-[var(--color-surface)]" />
+              </div>
+              
+              <div class="flex-1">
+                <label class="block text-sm font-semibold mb-1">To Date:</label>
+                <input type="date" [(ngModel)]="filter.toDate" name="toDate"
+                  class="text-sm border rounded p-2 w-full bg-[var(--color-surface)]" />
+              </div>
+            </div>
+          
+            <!-- Category checkboxes -->
+            <div>
+              <label class="block text-sm font-semibold mb-1">Categories:</label>
+              <div class="flex flex-wrap gap-2">
+                <label *ngFor="let cat of categories" class="text-sm flex items-center space-x-1">
+                  <input type="checkbox" [checked]="filter.selectedCategoryIds.includes(cat.category_id)"
+                    (change)="onCategoryCheckboxChange($event, cat.category_id)"
+                    class="form-checkbox accent-[var(--color-accent)]" name="category-{{cat.category_id}}" />
+                  <span>{{ cat.name }}</span>
+                </label>
+              </div>
+            </div>
+          
+            <!-- Buttons -->
+            <div class="flex space-x-4">
+              <button type="submit" class="flex-1 bg-[var(--color-accent)] text-white rounded-lg p-2">Apply Filter</button>
+              <button type="button" (click)="clearFilter()" class="flex-1 bg-gray-300 text-black rounded-lg p-2">Clear Filter</button>
+            </div>
+          </form>
+          
+    </div>
+
     <div *ngIf="isSortByDropdownOpen" class="fixed inset-0 z-40 bg-black/40">
     </div>
     <!-- Sort bottom sheet modal -->
 
 
     <div *ngIf="isSortByDropdownOpen" #dropdownRef
-        class="fixed bottom-0 left-0 right-0 z-50 bg-[var(--color-bg)] border-t rounded-t-2xl shadow-xl  max-h-[60vh] overflow-y-auto">
+        class="fixed bottom-0 left-0 right-0 z-[60] bg-[var(--color-surface)] border-t rounded-t-2xl shadow-xl  max-h-[60vh] overflow-y-auto">
 
         <h3 class="text-base font-semibold pb-2 border-b-2 border-[var(--color-gray-500)] pt-4 px-4">Sort By</h3>
         <ul class="text-sm px-4 pb-4">
             <li (click)="sortList(0,'Amount – Low to High',1)"
-                class="py-1 justify-between cursor-pointer hover:bg-[--list-hover] flex items-center">
+                class="py-2 justify-between cursor-pointer hover:bg-[--list-hover] flex items-center">
                 <p>
                     Amount – Low to High
                 </p>
                 <p *ngIf="selectedFieldName === 'Amount – Low to High'" class="mr-2 text-green-600">✔</p>
             </li>
             <li (click)="sortList(0,'Amount – High to Low',-1)"
-                class="py-1 justify-between cursor-pointer hover:bg-[--list-hover] flex items-center">
+                class="py-2 justify-between cursor-pointer hover:bg-[--list-hover] flex items-center">
                 <p>
                     Amount – High to Low
                 </p>
                 <p *ngIf="selectedFieldName === 'Amount – High to Low'" class="mr-2 text-green-600">✔</p>
             </li>
             <li (click)="sortList(1,'Category – A to Z',1)"
-                class="py-1 justify-between cursor-pointer hover:bg-[--list-hover] flex items-center">
+                class="py-2 justify-between cursor-pointer hover:bg-[--list-hover] flex items-center">
                 <p>
                     Category – A to Z
                 </p>
                 <p *ngIf="selectedFieldName === 'Category – A to Z'" class="mr-2 text-green-600">✔</p>
             </li>
             <li (click)="sortList(1,'Category – Z to A',-1)"
-                class="py-1 justify-between cursor-pointer hover:bg-[--list-hover] flex items-center">
+                class="py-2 justify-between cursor-pointer hover:bg-[--list-hover] flex items-center">
                 <p>
                     Category – Z to A
                 </p>
                 <p *ngIf="selectedFieldName === 'Category – Z to A'" class="mr-2 text-green-600">✔</p>
             </li>
             <li (click)="sortList(2,'Date – Oldest First',1)"
-                class="py-1 justify-between cursor-pointer hover:bg-[--list-hover] flex items-center">
+                class="py-2 justify-between cursor-pointer hover:bg-[--list-hover] flex items-center">
                 <p>
                     Date – Oldest First
                 </p>
                 <p *ngIf="selectedFieldName === 'Date – Oldest First'" class="mr-2 text-green-600">✔</p>
             </li>
             <li (click)="sortList(2,'Date – Newest First',-1)"
-                class="py-1 justify-between cursor-pointer hover:bg-[--list-hover] flex items-center">
+                class="py-2 justify-between cursor-pointer hover:bg-[--list-hover] flex items-center">
                 <p>
                     Date – Newest First
                 </p>
@@ -60,7 +111,7 @@
         </ul>
     </div>
 
-    <ul class="space-y-3">
+    <ul class="space-y-3 " *ngIf="expenses.length > 0; else noDataTemplate">
         <li *ngFor="let exp of expenses"
             class="bg-[var(--color-surface)] hover:bg-[var(--list-hover)] rounded-lg p-4 shadow-md">
             <div class="flex justify-between items-center mb-2">
@@ -72,4 +123,11 @@
             </div>
         </li>
     </ul>
+
+    <ng-template #noDataTemplate>
+        <div class="text-center text-gray-500 py-4">
+            No data found
+        </div>
+    </ng-template>
+
 </section>

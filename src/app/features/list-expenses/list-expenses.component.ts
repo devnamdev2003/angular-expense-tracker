@@ -4,12 +4,14 @@ import { CategoryService, Category } from '../../service/localStorage/category.s
 import { CommonModule } from '@angular/common';
 import { ToastService } from '../../service/toast/toast.service';
 import { UserService } from '../../service/localStorage/user.service';
+import { FormsModule } from '@angular/forms';
 
 @Component({
+  standalone: true,
   selector: 'app-list-expenses',
-  imports: [CommonModule],
+  imports: [CommonModule, FormsModule],
   templateUrl: './list-expenses.component.html',
-  styleUrls: ['./list-expenses.component.css']
+  styleUrls: ['./list-expenses.component.css'],
 })
 
 export class ListExpensesComponent implements OnInit {
@@ -18,7 +20,15 @@ export class ListExpensesComponent implements OnInit {
   currency: string | null;
   isSortByDropdownOpen: boolean = false;
   selectedFieldName: string = 'Sort By';
+  isFilterDropdownOpen: boolean = false;
+  filter = {
+    fromDate: '',
+    toDate: '',
+    selectedCategoryIds: [] as string[],
+  };
   @ViewChild('dropdownRef') dropdownRef!: ElementRef;
+  @ViewChild('filterRef') filterRef!: ElementRef;
+
 
   constructor(
     private expenseService: ExpenseService,
@@ -96,15 +106,62 @@ export class ListExpensesComponent implements OnInit {
     this.isSortByDropdownOpen = !this.isSortByDropdownOpen;
   }
 
-
   @HostListener('document:click', ['$event'])
   onDocumentClick(event: MouseEvent) {
+    const target = event.target as HTMLElement;
     if (
       this.isSortByDropdownOpen &&
       this.dropdownRef &&
-      !this.dropdownRef.nativeElement.contains(event.target)
+      !this.dropdownRef.nativeElement.contains(target)
     ) {
       this.isSortByDropdownOpen = false;
+    }
+
+    if (
+      this.isFilterDropdownOpen &&
+      this.filterRef &&
+      !this.filterRef.nativeElement.contains(target)
+    ) {
+      this.isFilterDropdownOpen = false;
+    }
+  }
+
+  toggleFilterDropdown() {
+    this.isFilterDropdownOpen = !this.isFilterDropdownOpen;
+  }
+
+  applyFilter() {
+    let filtered = this.expenseService.getAll();
+
+    if (this.filter.fromDate) {
+      filtered = filtered.filter(e => new Date(e.date) >= new Date(this.filter.fromDate));
+    }
+
+    if (this.filter.toDate) {
+      filtered = filtered.filter(e => new Date(e.date) <= new Date(this.filter.toDate));
+    }
+
+    if (this.filter.selectedCategoryIds.length) {
+      filtered = filtered.filter(e => this.filter.selectedCategoryIds.includes(e.category_id));
+    }
+
+    this.expenses = filtered;
+    this.isFilterDropdownOpen = false;
+  }
+  
+  clearFilter() {
+    this.filter.fromDate = '';
+    this.filter.toDate = '';
+    this.filter.selectedCategoryIds = [];
+    this.listExpenses(); // Reload the expenses after clearing the filter
+  }
+
+  onCategoryCheckboxChange(event: Event, categoryId: string) {
+    const checkbox = event.target as HTMLInputElement;
+    if (checkbox.checked) {
+      this.filter.selectedCategoryIds.push(categoryId);
+    } else {
+      this.filter.selectedCategoryIds = this.filter.selectedCategoryIds.filter(id => id !== categoryId);
     }
   }
 }
