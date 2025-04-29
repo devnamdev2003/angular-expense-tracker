@@ -18,7 +18,6 @@ export interface Expense {
 
   // additional field not a part of table
   category_name: string;
-  expenses_count: number;
 }
 
 @Injectable({ providedIn: 'root' })

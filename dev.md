@@ -1,6 +1,6 @@
 <!-- install command -->
 npm install --save apexcharts ng-apexcharts
-
+npm install lucide-angular
 
 
 <!-- Next Task -->

@@ -1,10 +1,10 @@
-<div class="md:hidden fixed top-1 right-4 z-50 hamburger-menu-container">
+<!-- <div class="md:hidden fixed top-1 right-4 z-50 hamburger-menu-container">
     <button (click)="toggleMenu()" class="text-lg text-[var(--color-white)] py-2">
         <img src="assets/img/icon/icons8-menu-vertical-50.png" alt="Menu" class="w-[24px] h-[24px]"
             style="filter: invert(100%); transition: filter 0.3s ease;">
     </button>
 
-    <!-- Dropdown Menu -->
+    
     <div *ngIf="isMenuOpen"
         class="fixed top-[3rem] right-[0.2rem] bg-[--color-surface] rounded-lg shadow-lg mt-2 w-[10rem]">
         <ul class="flex flex-col">
@@ -18,4 +18,11 @@
             </li>
         </ul>
     </div>
+</div> -->
+
+<div class="md:hidden fixed top-1 right-4 z-50 hamburger-menu-container">
+    <button (click)="navigateAndClose('settings', $event)" class="text-lg text-[var(--color-white)] py-[0.65rem]">
+        <img src="assets/img/icon/icons8-settings-50.png" alt="Menu" class="w-[24px] h-[24px]"
+            style="filter: invert(100%); transition: filter 0.3s ease;">
+    </button>
 </div>

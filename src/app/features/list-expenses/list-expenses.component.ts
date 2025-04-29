@@ -21,6 +21,7 @@ export class ListExpensesComponent implements OnInit {
   isSortByDropdownOpen: boolean = false;
   selectedFieldName: string = 'Sort By';
   isFilterDropdownOpen: boolean = false;
+  selectedExpense: Expense | null = null;
   filter = {
     fromDate: '',
     toDate: '',
@@ -94,13 +95,6 @@ export class ListExpensesComponent implements OnInit {
     this.isSortByDropdownOpen = false;
   }
 
-  confirmDelete(id: string) {
-    if (confirm("Are you sure you want to delete this expense?")) {
-      this.expenseService.delete(id);
-      this.toastService.show("Expense deleted successfully", 'success');
-      this.listExpenses();
-    }
-  }
 
   toggleSortByDropdown() {
     this.isSortByDropdownOpen = !this.isSortByDropdownOpen;
@@ -148,7 +142,7 @@ export class ListExpensesComponent implements OnInit {
     this.expenses = filtered;
     this.isFilterDropdownOpen = false;
   }
-  
+
   clearFilter() {
     this.filter.fromDate = '';
     this.filter.toDate = '';
@@ -164,4 +158,28 @@ export class ListExpensesComponent implements OnInit {
       this.filter.selectedCategoryIds = this.filter.selectedCategoryIds.filter(id => id !== categoryId);
     }
   }
+
+  openExpenseModal(expense: Expense) {
+    this.selectedExpense = expense;
+  }
+
+  closeModal() {
+    this.selectedExpense = null;
+  }
+
+  editExpense(id: string) {
+    // Navigate or show edit form
+    this.toastService.show('Edit feature not implemented yet', 'info');
+  }
+
+  deleteExpense(id: string) {
+    if (confirm("Are you sure you want to delete this expense?")) {
+      this.expenseService.delete(id);
+      this.toastService.show("Expense deleted successfully", 'success');
+      this.closeModal();
+      this.listExpenses();
+    }
+  }
+
+
 }

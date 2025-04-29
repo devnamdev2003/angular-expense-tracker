@@ -1,14 +1,23 @@
 <section id="list" class="section p-4 mb-4">
     <!-- Sort and Filter buttons -->
-    <div class="flex justify-end space-x-2">
-        <button (click)="toggleSortByDropdown()" class="rounded-full hover:bg-[--list-hover]" aria-label="Sort">
-            <p class="text-sm text-[var(--input-text)]">Sort By ^</p>
+    <div class="flex justify-end space-x-2 mb-2">
+        <!-- Sort Button -->
+        <button (click)="toggleSortByDropdown()"
+            class="flex items-center gap-1 px-4 py-2 rounded-full text-sm font-medium bg-[var(--color-surface)] text-[var(--input-text)] hover:bg-[var(--list-hover)] shadow-sm transition">
+            <img src="assets/img/icon/icons8-sort-50.png" alt="list"
+                class="w-[25px] h-[25px] transition-all duration-300 ease-in-out" style="filter: var(--icon-color2);">
+            <span>Sort</span>
         </button>
 
-        <button (click)="toggleFilterDropdown()" class="rounded-full hover:bg-[--list-hover]" aria-label="Filter">
-            <p class="text-sm text-[var(--input-text)]">Filter ⧉</p>
+        <!-- Filter Button -->
+        <button (click)="toggleFilterDropdown()"
+            class="flex items-center gap-1 px-4 py-2 rounded-full text-sm font-medium bg-[var(--color-surface)] text-[var(--input-text)] hover:bg-[var(--list-hover)] shadow-sm transition">
+            <img src="assets/img/icon/icons8-filter-50.png" alt="list"
+                class="w-[25px] h-[25px] transition-all duration-300 ease-in-out" style="filter: var(--icon-color2);">
+            <span>Filter</span>
         </button>
     </div>
+
 
     <!-- Backdrop -->
     <div *ngIf="isFilterDropdownOpen" class="fixed inset-0 z-40 bg-black/40"></div>
@@ -18,91 +27,96 @@
         class="fixed bottom-0 left-0 right-0 z-[60] bg-[var(--color-surface)] border-t rounded-t-2xl shadow-xl max-h-[70vh] overflow-y-auto">
 
         <h3 class="text-base font-semibold pb-2 border-b-2 border-[var(--color-gray-500)] pt-4 px-4">Filter</h3>
-        <form (ngSubmit)="applyFilter()" class="px-4 pb-4 space-y-4">
+        <form (ngSubmit)="applyFilter()" class="px-4 pb-4 pt-2">
             <!-- Date range -->
-            <div class="flex space-x-4">
-              <div class="flex-1">
-                <label class="block text-sm font-semibold mb-1">From Date:</label>
-                <input type="date" [(ngModel)]="filter.fromDate" name="fromDate"
-                  class="text-sm border rounded p-2 w-full bg-[var(--color-surface)]" />
-              </div>
-              
-              <div class="flex-1">
-                <label class="block text-sm font-semibold mb-1">To Date:</label>
-                <input type="date" [(ngModel)]="filter.toDate" name="toDate"
-                  class="text-sm border rounded p-2 w-full bg-[var(--color-surface)]" />
-              </div>
+            <div class="flex space-x-4 pt-2">
+                <div class="flex-1">
+                    <label class="block text-sm font-semibold mb-1">From Date:</label>
+                    <input type="date" [(ngModel)]="filter.fromDate" name="fromDate"
+                        class="text-sm border rounded p-2 w-full bg-[var(--color-surface)]" />
+                </div>
+
+                <div class="flex-1">
+                    <label class="block text-sm font-semibold mb-1">To Date:</label>
+                    <input type="date" [(ngModel)]="filter.toDate" name="toDate"
+                        class="text-sm border rounded p-2 w-full bg-[var(--color-surface)]" />
+                </div>
             </div>
-          
+
             <!-- Category checkboxes -->
-            <div>
-              <label class="block text-sm font-semibold mb-1">Categories:</label>
-              <div class="flex flex-wrap gap-2">
-                <label *ngFor="let cat of categories" class="text-sm flex items-center space-x-1">
-                  <input type="checkbox" [checked]="filter.selectedCategoryIds.includes(cat.category_id)"
-                    (change)="onCategoryCheckboxChange($event, cat.category_id)"
-                    class="form-checkbox accent-[var(--color-accent)]" name="category-{{cat.category_id}}" />
-                  <span>{{ cat.name }}</span>
-                </label>
-              </div>
+            <div class="pt-2">
+                <label class="block text-sm font-semibold mb-1">Categories:</label>
+                <div class="grid grid-cols-2 gap-2 max-h-40 overflow-y-auto pr-1">
+                    <ng-container *ngFor="let cat of categories">
+                        <label class="text-sm flex items-center space-x-1 col-span-2"
+                            [class.col-span-1]="cat.name.length <= 15">
+                            <input type="checkbox" [checked]="filter.selectedCategoryIds.includes(cat.category_id)"
+                                (change)="onCategoryCheckboxChange($event, cat.category_id)"
+                                class="form-checkbox accent-[var(--color-accent)]"
+                                name="category-{{cat.category_id}}" />
+                            <span>{{ cat.name }}</span>
+                        </label>
+                    </ng-container>
+                </div>
             </div>
-          
+
             <!-- Buttons -->
-            <div class="flex space-x-4">
-              <button type="submit" class="flex-1 bg-[var(--color-accent)] text-white rounded-lg p-2">Apply Filter</button>
-              <button type="button" (click)="clearFilter()" class="flex-1 bg-gray-300 text-black rounded-lg p-2">Clear Filter</button>
+            <div class="flex space-x-4 pt-2">
+                <button type="button" (click)="clearFilter()" class="flex-1 bg-gray-300 text-black rounded-lg p-2">Clear
+                    Filter</button>
+                <button type="submit" class="flex-1 bg-[var(--color-accent)] text-white rounded-lg p-2">Apply
+                    Filter</button>
             </div>
-          </form>
-          
+        </form>
+
     </div>
 
     <div *ngIf="isSortByDropdownOpen" class="fixed inset-0 z-40 bg-black/40">
     </div>
+
     <!-- Sort bottom sheet modal -->
-
-
     <div *ngIf="isSortByDropdownOpen" #dropdownRef
         class="fixed bottom-0 left-0 right-0 z-[60] bg-[var(--color-surface)] border-t rounded-t-2xl shadow-xl  max-h-[60vh] overflow-y-auto">
 
         <h3 class="text-base font-semibold pb-2 border-b-2 border-[var(--color-gray-500)] pt-4 px-4">Sort By</h3>
         <ul class="text-sm px-4 pb-4">
             <li (click)="sortList(0,'Amount – Low to High',1)"
-                class="py-2 justify-between cursor-pointer hover:bg-[--list-hover] flex items-center">
+                class="py-2 justify-between cursor-pointer flex items-center">
                 <p>
                     Amount – Low to High
                 </p>
                 <p *ngIf="selectedFieldName === 'Amount – Low to High'" class="mr-2 text-green-600">✔</p>
             </li>
             <li (click)="sortList(0,'Amount – High to Low',-1)"
-                class="py-2 justify-between cursor-pointer hover:bg-[--list-hover] flex items-center">
+                class="py-2 justify-between cursor-pointer flex items-center">
                 <p>
                     Amount – High to Low
                 </p>
                 <p *ngIf="selectedFieldName === 'Amount – High to Low'" class="mr-2 text-green-600">✔</p>
             </li>
             <li (click)="sortList(1,'Category – A to Z',1)"
-                class="py-2 justify-between cursor-pointer hover:bg-[--list-hover] flex items-center">
+                class="py-2 justify-between cursor-pointer flex items-center">
                 <p>
                     Category – A to Z
                 </p>
                 <p *ngIf="selectedFieldName === 'Category – A to Z'" class="mr-2 text-green-600">✔</p>
             </li>
             <li (click)="sortList(1,'Category – Z to A',-1)"
-                class="py-2 justify-between cursor-pointer hover:bg-[--list-hover] flex items-center">
+                class="py-2 justify-between cursor-pointer flex items-center">
                 <p>
                     Category – Z to A
                 </p>
                 <p *ngIf="selectedFieldName === 'Category – Z to A'" class="mr-2 text-green-600">✔</p>
             </li>
             <li (click)="sortList(2,'Date – Oldest First',1)"
-                class="py-2 justify-between cursor-pointer hover:bg-[--list-hover] flex items-center">
+                class="py-2 justify-between cursor-pointer flex items-center">
                 <p>
                     Date – Oldest First
                 </p>
                 <p *ngIf="selectedFieldName === 'Date – Oldest First'" class="mr-2 text-green-600">✔</p>
             </li>
             <li (click)="sortList(2,'Date – Newest First',-1)"
-                class="py-2 justify-between cursor-pointer hover:bg-[--list-hover] flex items-center">
+                class="py-2 justify-between cursor-pointer flex items-center">
                 <p>
                     Date – Newest First
                 </p>
@@ -111,18 +125,45 @@
         </ul>
     </div>
 
-    <ul class="space-y-3 " *ngIf="expenses.length > 0; else noDataTemplate">
-        <li *ngFor="let exp of expenses"
-            class="bg-[var(--color-surface)] hover:bg-[var(--list-hover)] rounded-lg p-4 shadow-md">
+    <!-- Expense List -->
+    <ul class="space-y-3" *ngIf="expenses.length > 0; else noDataTemplate">
+        <li *ngFor="let exp of expenses" (click)="openExpenseModal(exp)"
+            class="hover:bg-[var(--list-hover)] rounded-lg p-4 cursor-pointer transition">
             <div class="flex justify-between items-center mb-2">
-                <span class="text-lg font-semibold text-[var(--color-green)]">{{currency}} {{ exp.amount }}</span>
+                <span class="text-lg font-semibold text-[var(--color-green)]">{{ currency }} {{ exp.amount }}</span>
                 <span class="text-sm">{{ exp.category_name || 'Uncategorized' }}</span>
             </div>
             <div class="text-sm space-y-1">
-                <div> {{ getFormattedDate(exp) }}</div>
+                <div>{{ getFormattedDate(exp) }}</div>
             </div>
         </li>
     </ul>
+
+    <!-- Modal -->
+    <div *ngIf="selectedExpense" class="fixed inset-0 bg-black bg-opacity-40 z-50 flex items-center justify-center">
+        <div class="bg-[var(--color-bg)] p-6 rounded-xl w-11/12 md:w-1/2 max-h-[60vh] flex flex-col shadow-xl">
+            <div class="flex justify-between items-center mb-3">
+                <h2 class="text-lg font-bold text-[var(--color-text)]">Expense Details</h2>
+                <button (click)="closeModal()" class="text-[var(--color-red)] font-bold text-xl">&times;</button>
+            </div>
+            <hr>
+            <div class="space-y-2 text-sm mt-2">
+                <div><strong>Amount:</strong> {{ currency }} {{ selectedExpense.amount }}</div>
+                <div><strong>Category:</strong> {{ selectedExpense.category_name || 'Uncategorized' }}</div>
+                <div><strong>Date:</strong> {{ selectedExpense.date }}</div>
+                <div><strong>Time:</strong> {{ selectedExpense.time }}</div>
+                <div *ngIf="selectedExpense.note"><strong>Note:</strong> {{ selectedExpense.note }}</div>
+                <div><strong>Payment Mode:</strong> {{ selectedExpense.payment_mode }}</div>
+                <div *ngIf="selectedExpense.location"><strong>Location:</strong> {{ selectedExpense.location }}</div>
+            </div>
+            <div class="mt-6 flex space-x-3">
+                <button (click)="closeModal()"
+                    class="flex-1 bg-[var(--color-gray-500)] text-white py-2 px-4 rounded-lg">Close</button>
+                <button (click)="deleteExpense(selectedExpense.expense_id)"
+                    class="flex-1 bg-[var(--color-red)] text-white py-2 px-4 rounded-lg">Delete</button>
+            </div>
+        </div>
+    </div>
 
     <ng-template #noDataTemplate>
         <div class="text-center text-gray-500 py-4">
