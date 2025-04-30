@@ -79,7 +79,6 @@ export class StorageService {
             fromDate: "",
             toDate: "",
             user_id: "",
-            category_id: "",
         };
 
         return StorageService.syncWithSchema(StorageService.budgetKey, budgetSchema);

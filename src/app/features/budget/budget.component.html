@@ -1,30 +1,40 @@
-<section  id="budget" class="p-4 section">
+<section id="budget" class="p-4 section">
 
     <!-- Budget Section -->
     <div *ngIf="showBudgetSection; else noBudgetMessage">
+        <div *ngIf="showBudgetSection" class="bg-surface p-6 rounded-lg shadow-md col-span-1 md:col-span-2">
+            <h2 class="text-xl font-semibold mb-4">💰 Budget Progress</h2>
+            <div class="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-6 overflow-hidden">
+                <div class="h-full text-white text-sm font-medium text-center leading-6 rounded-full transition-all duration-500 ease-in-out"
+                    [ngStyle]="{ width: budgetProgress + '%' }" [ngClass]="budgetColorClass">
+                    {{ budgetProgress.toFixed(1) }}%
+                </div>
+            </div>
+            <p class="mt-4 text-sm text-[var(--color-text)]">
+                {{ budgetMessage }}
+            </p>
+
+            <div class="grid mt-4 grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 text-[var(--color-text)]">
+                <div class="bg-[var(--input-bg)] p-4 rounded shadow flex justify-between items-center">
+                    <p class="text-sm font-medium">Avg Allowed / Day</p>
+                    <p class="text-lg font-bold mt-1 text-blue-500">₹{{ avgAllowedPerDay.toFixed(2) }}</p>
+                </div>
+                <div class="bg-[var(--input-bg)] p-4 rounded shadow flex justify-between items-center">
+                    <p class="text-sm font-medium">Spent / Day</p>
+                    <p class="text-lg font-bold mt-1 text-red-500">₹{{ avgSpentPerDay.toFixed(2) }}</p>
+                </div>
+                <div class="bg-[var(--input-bg)] p-4 rounded shadow flex justify-between items-center">
+                    <p class="text-sm font-medium">Suggested / Day</p>
+                    <p class="text-lg font-bold mt-1 text-green-500">₹{{ suggestedPerDay.toFixed(2) }}</p>
+                </div>
+            </div>
+        </div>
         <div class="flex justify-between items-center mb-4">
-            <h2 class="text-xl font-semibold text-[var(--color-text)]">Budgets</h2>
-            <button (click)="openModal()" class="bg-[var(--color-accent)] text-white px-4 py-2 rounded shadow">
-                + Add Budget
+            <button (click)="openEditModal()" class="bg-[var(--color-accent)] text-white px-4 py-2 rounded shadow">
+                Update Budget
             </button>
         </div>
 
-        <!-- Budget List -->
-        <div class="space-y-4">
-            <div *ngFor="let budget of budgets" class="p-4 rounded-lg hover:bg-[var(--list-hover)] shadow-sm">
-                <div class="flex justify-between text-[var(--color-text)]">
-                    <div>
-                        <p><strong>Amount:</strong> ₹{{ budget.amount }}</p>
-                        <p><strong>Category:</strong> {{ getCategoryName(budget.category_id) }}</p>
-                    </div>
-                    <div>
-                        <p><strong>From:</strong> {{ budget.fromDate }}</p>
-                        <p><strong>To:</strong> {{ budget.toDate }}</p>
-                    </div>
-                </div>
-            </div>
-
-        </div>
     </div>
 
     <!-- No Budget Message -->
@@ -40,7 +50,10 @@
     <div *ngIf="showModal" class="fixed inset-0 bg-black bg-opacity-40 z-50 flex items-center justify-center">
         <div class="bg-[var(--color-bg)] p-6 rounded-xl w-11/12 md:w-1/2 max-h-[70vh] flex flex-col shadow-xl">
             <div class="flex justify-between items-center mb-3">
-                <h2 class="text-lg font-bold text-[var(--color-text)]">Add Budget</h2>
+                <h2 class="text-lg font-bold text-[var(--color-text)]">
+                    {{ isEditMode ? 'Update Budget' : 'Add Budget' }}
+                </h2>
+
                 <button (click)="closeModal()" class="text-[var(--color-red)] font-bold text-xl">&times;</button>
             </div>
             <form [formGroup]="budgetForm" (ngSubmit)="onSubmit()">
@@ -56,40 +69,14 @@
                     *ngIf="budgetForm.get('amount')?.touched && budgetForm.get('amount')?.errors?.['required']">
                     Amount is required
                 </div>
-
-                <div class="w-full mb-2">
-                    <label class="block mb-1 font-medium">Category</label>
-                    <div class="relative">
-                        <button type="button" (click)="toggleCategoryDropdown()"
-                            class="w-full p-2 rounded border text-left bg-[var(--color-bg)]"
-                            style="background-color: var(--input-bg); color: var(--input-text); border-color: var(--input-border);">
-                            {{ selectedCategoryName }}
-                        </button>
-                        <ul class="absolute z-50 w-full max-h-40 overflow-y-auto bg-[var(--color-bg)] rounded border"
-                            *ngIf="isCategoryDropdownOpen"
-                            style="background-color: var(--input-bg); color: var(--input-text); border-color: var(--input-border);">
-                            <li (click)="selectCategory('0',true)" class="p-2 cursor-pointer hover:bg-[--list-hover]">
-                                All Category
-                            </li>
-                            <li *ngFor="let cat of categories" (click)="selectCategory(cat)"
-                                class="p-2 cursor-pointer hover:bg-[--list-hover]">
-                                {{ cat.name }} {{ cat.icon }}
-                            </li>
-                        </ul>
-                    </div>
-                    <div class="error-message text-[var(--color-error)]"
-                        *ngIf="budgetForm.get('category_id')?.touched && budgetForm.get('category_id')?.invalid">
-                        Category is required
-                    </div>
-                </div>
-                <label class="block mb-1 font-medium">From Date</label>
+                <label class="block mt-1 mb-1 font-medium">From Date</label>
                 <input type="date" formControlName="fromDate"
                     class="w-full p-2 rounded border bg-[var(--input-bg)] text-[var(--input-text)] border-[var(--input-border)]">
                 <div *ngIf="budgetForm.get('fromDate')?.touched && budgetForm.get('fromDate')?.invalid"
                     class="text-[var(--color-error)] text-sm mt-1">
                     From Date is required
                 </div>
-                <label class="block mb-1 font-medium">To Date</label>
+                <label class="block mt-1 mb-1 font-medium">To Date</label>
                 <input type="date" formControlName="toDate"
                     class="w-full p-2 rounded border bg-[var(--input-bg)] text-[var(--input-text)] border-[var(--input-border)]">
                 <div *ngIf="budgetForm.get('toDate')?.touched && budgetForm.get('toDate')?.invalid"

@@ -8,7 +8,6 @@ export interface Budget {
   fromDate: string,
   toDate: string,
   user_id: string,
-  category_id: string
 };
 
 @Injectable({ providedIn: 'root' })
