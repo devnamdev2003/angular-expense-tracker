@@ -124,9 +124,11 @@ export class GraphsComponent implements OnInit, OnChanges {
       return year === currentYear && month === currentMonth;
     });
 
+    let totalAmount = 0;
     currentMonthExpenses.forEach(item => {
       const day = parseInt(item.date.split('-')[2]);
       const amount = item.amount;
+      totalAmount += amount;
 
       if (dayAmountMap.has(day)) {
         dayAmountMap.set(day, dayAmountMap.get(day)! + amount);
@@ -159,7 +161,7 @@ export class GraphsComponent implements OnInit, OnChanges {
     };
 
     this.title = {
-      text: "Monthly Expenses",
+      text: "Monthly Expenses: " + totalAmount,
       align: "center",
       style: {
         color: 'var(--color-text)'
@@ -188,20 +190,22 @@ export class GraphsComponent implements OnInit, OnChanges {
     const todaysExpenses = expenses.filter(exp => exp.date === todayStr);
 
     todaysExpenses.sort((a, b) => {
-      const [aHours, aMinutes] = a.time.split(":").map(Number);
-      const [bHours, bMinutes] = b.time.split(":").map(Number);
-      return aHours !== bHours ? aHours - bHours : aMinutes - bMinutes;
+      const [aHours, aMinutes, aSeconds] = a.time.split(":").map(Number);
+      const [bHours, bMinutes, bSeconds] = b.time.split(":").map(Number);
+
+      if (aHours !== bHours) return aHours - bHours;
+      if (aMinutes !== bMinutes) return aMinutes - bMinutes;
+      return aSeconds - bSeconds;
     });
 
-    let sum = 0;
-    timeAmountMap.set("00:00", 0);
 
+    timeAmountMap.set("00:00:00", 0);
+    let totalAmount = 0;
     todaysExpenses.forEach(item => {
-      const [hour, minute] = item.time.split(":");
-      const time = `${hour}:${minute}`;
-
-      sum += item.amount;
-      timeAmountMap.set(time, sum);
+      const [hour, minute, second] = item.time.split(":");
+      const time = `${hour}:${minute}:${second}`;
+      totalAmount += item.amount;
+      timeAmountMap.set(time, item.amount);
     });
 
     const times = Array.from(timeAmountMap.keys());
@@ -224,7 +228,7 @@ export class GraphsComponent implements OnInit, OnChanges {
     };
 
     this.title = {
-      text: "Today Expenses",
+      text: "Today Expenses: " + totalAmount,
       align: "center",
       style: {
         color: 'var(--color-text)'

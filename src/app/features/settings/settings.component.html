@@ -60,5 +60,17 @@
         </form>
     </app-custom-modal>
 
+    <!-- src/app/components/json-expense-input/json-expense-input.component.html -->
+    <div class="p-6 max-w-2xl mx-auto bg-white shadow-md rounded-lg">
+        <h2 class="text-xl font-semibold mb-4">Paste JSON Expenses</h2>
+        <textarea [(ngModel)]="jsonInput" placeholder="Paste your JSON data here..."
+            class="w-full p-4 border rounded-md text-sm font-mono h-60 resize-none focus:outline-none focus:ring-2 focus:ring-blue-500"></textarea>
+        <button (click)="importExpenses()"
+            class="mt-4 bg-blue-600 text-white px-6 py-2 rounded hover:bg-blue-700 transition duration-300">
+            Import Expenses
+        </button>
+    </div>
+
+
 </section>
   

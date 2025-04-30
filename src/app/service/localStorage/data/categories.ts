@@ -1,6 +1,6 @@
 export const Categories = [
     {
-        "category_id": 1,
+        "category_id": "1",
         "name": "Food & Drinks",
         "icon": "🍔",
         "color": "#f94144",
@@ -8,7 +8,7 @@ export const Categories = [
         "user_id": "0"
     },
     {
-        "category_id": 2,
+        "category_id": "2",
         "name": "Groceries",
         "icon": "🥦",
         "color": "#f3722c",
@@ -16,7 +16,7 @@ export const Categories = [
         "user_id": "0"
     },
     {
-        "category_id": 3,
+        "category_id": "3",
         "name": "Shopping",
         "icon": "🛍️",
         "color": "#f9844a",
@@ -24,7 +24,7 @@ export const Categories = [
         "user_id": "0"
     },
     {
-        "category_id": 4,
+        "category_id": "4",
         "name": "Bills & Utilities",
         "icon": "💡",
         "color": "#f9c74f",
@@ -32,7 +32,7 @@ export const Categories = [
         "user_id": "0"
     },
     {
-        "category_id": 5,
+        "category_id": "5",
         "name": "Entertainment",
         "icon": "🎬",
         "color": "#90be6d",
@@ -40,7 +40,7 @@ export const Categories = [
         "user_id": "0"
     },
     {
-        "category_id": 6,
+        "category_id": "6",
         "name": "Health",
         "icon": "💊",
         "color": "#43aa8b",
@@ -48,7 +48,7 @@ export const Categories = [
         "user_id": "0"
     },
     {
-        "category_id": 7,
+        "category_id": "7",
         "name": "Education",
         "icon": "🎓",
         "color": "#577590",
@@ -56,7 +56,7 @@ export const Categories = [
         "user_id": "0"
     },
     {
-        "category_id": 8,
+        "category_id": "8",
         "name": "Subscriptions",
         "icon": "📺",
         "color": "#277da1",
@@ -64,7 +64,7 @@ export const Categories = [
         "user_id": "0"
     },
     {
-        "category_id": 9,
+        "category_id": "9",
         "name": "Travel",
         "icon": "✈️",
         "color": "#8e44ad",
@@ -72,7 +72,7 @@ export const Categories = [
         "user_id": "0"
     },
     {
-        "category_id": 10,
+        "category_id": "10",
         "name": "Rent",
         "icon": "🏠",
         "color": "#34495e",
@@ -80,7 +80,7 @@ export const Categories = [
         "user_id": "0"
     },
     {
-        "category_id": 11,
+        "category_id": "11",
         "name": "Family & Friends",
         "icon": "👨‍👩‍👧‍👦",
         "color": "#3498db",
@@ -88,7 +88,7 @@ export const Categories = [
         "user_id": "0"
     },
     {
-        "category_id": 12,
+        "category_id": "12",
         "name": "Miscellaneous",
         "icon": "📌",
         "color": "#bdc3c7",
@@ -96,7 +96,7 @@ export const Categories = [
         "user_id": "0"
     },
     {
-        "category_id": 13,
+        "category_id": "13",
         "name": "Gifts",
         "icon": "🎁",
         "color": "#c0392b",
@@ -104,7 +104,7 @@ export const Categories = [
         "user_id": "0"
     },
     {
-        "category_id": 14,
+        "category_id": "14",
         "name": "Party",
         "icon": "🥳",
         "color": "#e67e22",
@@ -112,7 +112,7 @@ export const Categories = [
         "user_id": "0"
     },
     {
-        "category_id": 15,
+        "category_id": "15",
         "name": "Personal Care",
         "icon": "🧴",
         "color": "#9b59b6",
@@ -120,7 +120,7 @@ export const Categories = [
         "user_id": "0"
     },
     {
-        "category_id": 16,
+        "category_id": "16",
         "name": "Home & Hygiene",
         "icon": "🧼",
         "color": "#2ecc71",
@@ -128,7 +128,7 @@ export const Categories = [
         "user_id": "0"
     },
     {
-        "category_id": 17,
+        "category_id": "17",
         "name": "others",
         "icon": "🚫",
         "color": "#737373",
@@ -136,7 +136,7 @@ export const Categories = [
         "user_id": "0"
     },
     {
-        "category_id": 18,
+        "category_id": "18",
         "name": "Recharge",
         "icon": "📱",
         "color": "#00ff00",

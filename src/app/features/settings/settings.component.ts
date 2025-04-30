@@ -6,6 +6,7 @@ import { CommonModule } from '@angular/common';
 import { SettingItemComponent } from '../../component/setting-item/setting-item.component';
 import { CustomModalComponent } from '../../component/custom-modal/custom-modal.component';
 import { ToastService } from '../../service/toast/toast.service';
+import { ExpenseService, Expense } from '../../service/localStorage/expense.service';
 
 @Component({
   selector: 'app-settings',
@@ -24,6 +25,7 @@ export class SettingsComponent {
   fromDate = '';
   toDate = '';
   amount: number | null = null;
+  jsonInput = '';
   errorMessages = {
     fromDate: '',
     toDate: '',
@@ -33,6 +35,7 @@ export class SettingsComponent {
   constructor(public budgetService: BudgetService,
     public userService: UserService,
     private toast: ToastService,
+    private expenseService: ExpenseService
   ) { }
 
   toggleTheme(): void {
@@ -123,5 +126,32 @@ export class SettingsComponent {
 
     this.closeBudgetModal();
     this.toast.show('Budget saved successfully!', 'success');
+  }
+
+  importExpenses() {
+    try {
+      const rawData = JSON.parse(this.jsonInput);
+
+      if (!Array.isArray(rawData)) throw new Error('Input must be an array');
+
+      rawData.forEach(item => {
+        const expense: Omit<Expense, 'expense_id' | 'user_id' | 'created_at'> = {
+          amount: +item.amount,
+          category_id: item.category_id,
+          date: item.date,
+          time: item.time,
+          note: [item.note, item.subcategory].filter(Boolean).join(' - ').trim(),
+          payment_mode: item.payment_mode,
+          location: item.location || '',
+          category_name: ''
+        };
+        this.expenseService.add(expense);
+      });
+
+      alert('Expenses imported successfully!');
+      this.jsonInput = ''; // Clear input after success
+    } catch (error) {
+      alert('Invalid JSON format: ' + (error as Error).message);
+    }
   }
 }
