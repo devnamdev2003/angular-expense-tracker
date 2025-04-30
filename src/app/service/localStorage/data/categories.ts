@@ -126,5 +126,21 @@ export const Categories = [
         "color": "#2ecc71",
         "is_active": "true",
         "user_id": "0"
+    },
+    {
+        "category_id": 17,
+        "name": "others",
+        "icon": "🚫",
+        "color": "#737373",
+        "is_active": "true",
+        "user_id": "0"
+    },
+    {
+        "category_id": 18,
+        "name": "Recharge",
+        "icon": "📱",
+        "color": "#00ff00",
+        "is_active": "true",
+        "user_id": "0"
     }
 ]
