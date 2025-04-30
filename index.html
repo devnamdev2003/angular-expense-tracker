@@ -91,6 +91,11 @@
         <li>
           <button onclick="showSection('settings')" class="w-full text-left hover:text-accent">⚙️ Settings</button>
         </li>
+
+        <li>
+          <button onclick="showSection('localStorage')" class="w-full text-left hover:text-accent">⚙️
+            localStorage</button>
+        </li>
       </ul>
     </aside>
 
@@ -576,6 +581,51 @@
 
       </section>
 
+      <section id="localStorage" class="section hidden p-4 bg-white dark:bg-gray-800 text-gray-900 dark:text-white">
+        <h2 class="text-xl font-semibold mb-4">LocalStorage Data</h2>
+        <div id="localStorageContent" class="space-y-2"></div>
+      </section>
+      <script>
+        function renderLocalStorageData() {
+          const section = document.getElementById('localStorage');
+          const container = document.getElementById('localStorageContent');
+
+          container.innerHTML = ''; // Clear previous content
+
+          if (localStorage.length === 0) {
+            container.innerHTML = '<p class="text-sm text-gray-500">No data found in LocalStorage.</p>';
+          } else {
+            for (let i = 0; i < localStorage.length; i++) {
+              const key = localStorage.key(i);
+              let value = localStorage.getItem(key);
+
+              // Try to format JSON if possible
+              try {
+                value = JSON.stringify(JSON.parse(value), null, 2);
+              } catch (e) {
+                // Not JSON
+              }
+
+              const itemEl = document.createElement('div');
+              itemEl.className = 'border p-3 rounded bg-gray-100 dark:bg-gray-700';
+
+              itemEl.innerHTML = `
+        <p>${key}</p>
+        <pre class="whitespace-pre-wrap text-sm mt-1">${value}</pre>
+      `;
+
+              container.appendChild(itemEl);
+            }
+          }
+
+          // Show the section if hidden
+          section.classList.remove('hidden');
+        }
+
+        // Call this function when needed (e.g., on page load or a button click)
+        renderLocalStorageData();
+
+      </script>
     </main>
   </div>
 
