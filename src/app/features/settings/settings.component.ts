@@ -47,81 +47,81 @@ export class SettingsComponent {
     this.userService.update('theme_mode', this.isDarkMode ? 'dark' : 'light');
   }
 
-  showBudgetModal(): void {
-    const allBudgets: Budget[] = this.budgetService.getAll();
-    if (allBudgets.length > 0) {
-      const latest = allBudgets[allBudgets.length - 1];
-      this.fromDate = latest.fromDate;
-      this.toDate = latest.toDate;
-      this.amount = latest.amount;
-    } else {
-      this.fromDate = '';
-      this.toDate = '';
-      this.amount = null;
-    }
+  // showBudgetModal(): void {
+  //   const allBudgets: Budget[] = this.budgetService.getAll();
+  //   if (allBudgets.length > 0) {
+  //     const latest = allBudgets[allBudgets.length - 1];
+  //     this.fromDate = latest.fromDate;
+  //     this.toDate = latest.toDate;
+  //     this.amount = latest.amount;
+  //   } else {
+  //     this.fromDate = '';
+  //     this.toDate = '';
+  //     this.amount = null;
+  //   }
 
-    (document.getElementById('budgetModal') as HTMLDialogElement)?.showModal();
-  }
+  //   (document.getElementById('budgetModal') as HTMLDialogElement)?.showModal();
+  // }
 
-  closeBudgetModal(): void {
-    (document.getElementById('budgetModal') as HTMLDialogElement)?.close();
-    this.errorMessages = { fromDate: '', toDate: '', amount: '' };
-  }
+  // closeBudgetModal(): void {
+  //   (document.getElementById('budgetModal') as HTMLDialogElement)?.close();
+  //   this.errorMessages = { fromDate: '', toDate: '', amount: '' };
+  // }
 
-  saveBudget(): void {
-    this.errorMessages = { fromDate: '', toDate: '', amount: '' };
-    let hasError = false;
+  // saveBudget(): void {
+  //   this.errorMessages = { fromDate: '', toDate: '', amount: '' };
+  //   let hasError = false;
 
-    if (!this.fromDate) {
-      this.errorMessages.fromDate = 'Please select start date.';
-      hasError = true;
-    }
+  //   if (!this.fromDate) {
+  //     this.errorMessages.fromDate = 'Please select start date.';
+  //     hasError = true;
+  //   }
 
-    if (!this.toDate) {
-      this.errorMessages.toDate = 'Please select end date.';
-      hasError = true;
-    }
+  //   if (!this.toDate) {
+  //     this.errorMessages.toDate = 'Please select end date.';
+  //     hasError = true;
+  //   }
 
-    if (!this.amount || this.amount <= 0) {
-      this.errorMessages.amount = 'Amount must be greater than 0.';
-      hasError = true;
-    }
+  //   if (!this.amount || this.amount <= 0) {
+  //     this.errorMessages.amount = 'Amount must be greater than 0.';
+  //     hasError = true;
+  //   }
 
-    if (hasError) return;
+  //   if (hasError) return;
 
-    if (new Date(this.fromDate) > new Date(this.toDate)) {
-      this.errorMessages.toDate = 'End date must be after start date.';
-      return;
-    }
+  //   if (new Date(this.fromDate) > new Date(this.toDate)) {
+  //     this.errorMessages.toDate = 'End date must be after start date.';
+  //     return;
+  //   }
 
-    const allBudgets: Budget[] = this.budgetService.getAll();
+  //   const allBudgets: Budget[] = this.budgetService.getAll();
 
-    if (allBudgets.length > 0) {
-      const latest = allBudgets[allBudgets.length - 1];
-      this.budgetService.update(latest.budget_id, {
-        fromDate: this.fromDate,
-        toDate: this.toDate,
-        amount: this.amount!,
-      });
-    } else {
-      const overlapping = allBudgets.some(b =>
-        new Date(this.fromDate) <= new Date(b.toDate) &&
-        new Date(b.fromDate) <= new Date(this.toDate)
-      );
+  //   if (allBudgets.length > 0) {
+  //     const latest = allBudgets[allBudgets.length - 1];
+  //     this.budgetService.update(latest.budget_id, {
+  //       fromDate: this.fromDate,
+  //       toDate: this.toDate,
+  //       amount: this.amount!,
+  //     });
+  //   } else {
+  //     const overlapping = allBudgets.some(b =>
+  //       new Date(this.fromDate) <= new Date(b.toDate) &&
+  //       new Date(b.fromDate) <= new Date(this.toDate)
+  //     );
 
-      if (overlapping) {
-        this.errorMessages.amount = 'A budget already exists in this date range!';
-        return;
-      }
+  //     if (overlapping) {
+  //       this.errorMessages.amount = 'A budget already exists in this date range!';
+  //       return;
+  //     }
 
-      this.budgetService.add({
-        fromDate: this.fromDate,
-        toDate: this.toDate,
-        amount: this.amount!,
-      });
-    }
+  //     this.budgetService.add({
+  //       fromDate: this.fromDate,
+  //       toDate: this.toDate,
+  //       amount: this.amount!,
+  //     });
+  //   }
 
-    this.closeBudgetModal();
-    this.toast.show('Budget saved successfully!', 'success');
-  }
+  //   this.closeBudgetModal();
+  //   this.toast.show('Budget saved successfully!', 'success');
+  // }
 }

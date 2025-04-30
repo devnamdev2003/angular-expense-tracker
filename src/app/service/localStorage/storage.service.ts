@@ -79,6 +79,7 @@ export class StorageService {
             fromDate: "",
             toDate: "",
             user_id: "",
+            category_id: "",
         };
 
         return StorageService.syncWithSchema(StorageService.budgetKey, budgetSchema);
@@ -127,7 +128,7 @@ export class StorageService {
 
         localStorage.setItem(StorageService.userKey, JSON.stringify(syncedSettings));
     }
-    
+
     getAllCategories() {
         return JSON.parse(localStorage.getItem(StorageService.categoryKey) || '[]');
     }

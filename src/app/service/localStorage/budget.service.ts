@@ -7,7 +7,8 @@ export interface Budget {
   amount: number,
   fromDate: string,
   toDate: string,
-  user_id: string
+  user_id: string,
+  category_id: string
 };
 
 @Injectable({ providedIn: 'root' })

@@ -16,6 +16,8 @@ import { ListExpensesComponent } from './features/list-expenses/list-expenses.co
 import { HomeComponent } from './features/home/home.component';
 import { CalendarComponent } from './features/calendar/calendar.component';
 import { SectionService } from './service/section/section.service';
+import { BudgetComponent } from './features/budget/budget.component';
+import { AnalysisComponent } from './features/analysis/analysis.component';
 
 @Component({
   selector: 'app-root',
@@ -25,6 +27,8 @@ import { SectionService } from './service/section/section.service';
     SettingsComponent,
     ListExpensesComponent,
     HomeComponent,
+    BudgetComponent,
+    AnalysisComponent,
     CalendarComponent],
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
