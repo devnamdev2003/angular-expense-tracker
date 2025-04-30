@@ -2,7 +2,7 @@
 
     <!-- Budget Section -->
     <div *ngIf="showBudgetSection; else noBudgetMessage">
-        <div *ngIf="showBudgetSection" class="bg-surface p-6 rounded-lg shadow-md col-span-1 md:col-span-2">
+        <div *ngIf="showBudgetSection" class="bg-surface rounded-lg shadow-md col-span-1 md:col-span-2">
             <h2 class="text-xl font-semibold mb-4">💰 Budget Progress</h2>
             <div class="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-6 overflow-hidden">
                 <div class="h-full text-white text-sm font-medium text-center leading-6 rounded-full transition-all duration-500 ease-in-out"
@@ -29,12 +29,11 @@
                 </div>
             </div>
         </div>
-        <div class="flex justify-between items-center mb-4">
+        <div class="flex justify-center items-center mb-4 mt-4">
             <button (click)="openEditModal()" class="bg-[var(--color-accent)] text-white px-4 py-2 rounded shadow">
-                Update Budget
+              Update Budget
             </button>
-        </div>
-
+          </div>       
     </div>
 
     <!-- No Budget Message -->

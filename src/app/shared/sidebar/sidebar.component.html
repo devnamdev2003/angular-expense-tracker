@@ -28,10 +28,10 @@
       <a href="#" (click)="navigateAndClose('budget', $event)" class="block hover:text-[var(--color-accent)]">💰
         Budget</a>
     </li>
-    <li>
+    <!-- <li>
       <a href="#" (click)="navigateAndClose('analysis', $event)" class="block hover:text-[var(--color-accent)]"> 📊
         Analysis</a>
-    </li>
+    </li> -->
   </ul>
 </aside>
 
@@ -46,10 +46,10 @@
       class="w-[25px] h-[25px] transition-all duration-300 ease-in-out" style="filter: var(--icon-color2);">
   </button>
 
-  <button (click)="navigateAndClose('analysis', $event)"
-    [ngClass]="{'scale-110  rounded-[50%] bg-[--list-hover]': activePath === 'analysis'}"
+  <button (click)="navigateAndClose('calendar', $event)"
+    [ngClass]="{'scale-110  rounded-[50%] bg-[--list-hover]': activePath === 'calendar'}"
     class="h-[40px] w-[40px] block  px-2 text-sm relative transition-all duration-300 ease-in-out">
-    <img src="assets/img/icon/icons8-analysis-50.png" alt="analysis"
+    <img src="assets/img/icon/icons8-calendar-50.png" alt="calendar"
       class="w-[25px] h-[25px] transition-all duration-300 ease-in-out" style="filter: var(--icon-color2);">
   </button>
 
@@ -67,10 +67,10 @@
       class="w-[25px] h-[25px] transition-all duration-300 ease-in-out" style="filter: var(--icon-color2);">
   </button>
 
-  <button (click)="navigateAndClose('calendar', $event)"
-    [ngClass]="{'scale-110  rounded-[50%] bg-[--list-hover]': activePath === 'calendar'}"
+  <button (click)="navigateAndClose('settings', $event)"
+    [ngClass]="{'scale-110  rounded-[50%] bg-[--list-hover]': activePath === 'settings'}"
     class="h-[40px] w-[40px] block  px-2 text-sm relative transition-all duration-300 ease-in-out">
-    <img src="assets/img/icon/icons8-calendar-50.png" alt="calendar"
+    <img src="assets/img/icon/icons8-settings-50.png" alt="settings"
       class="w-[25px] h-[25px] transition-all duration-300 ease-in-out" style="filter: var(--icon-color2);">
   </button>
 
