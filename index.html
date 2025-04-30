@@ -91,11 +91,6 @@
         <li>
           <button onclick="showSection('settings')" class="w-full text-left hover:text-accent">⚙️ Settings</button>
         </li>
-
-        <li>
-          <button onclick="showSection('localStorage')" class="w-full text-left hover:text-accent">⚙️
-            localStorage</button>
-        </li>
       </ul>
     </aside>
 
@@ -581,42 +576,6 @@
         </dialog>
 
       </section>
-
-      <section id="localStorage" class="section hidden p-4 bg-white dark:bg-gray-800 text-gray-900 dark:text-white">
-        <h2 class="text-xl font-semibold mb-4">LocalStorage Data</h2>
-        <div id="localStorageContent" class="space-y-2"></div>
-      </section>
-
-      <script>
-        function renderLocalStorageData() {
-          const section = document.getElementById('localStorage');
-          const container = document.getElementById('localStorageContent');
-
-          container.innerHTML = ''; // Clear previous content
-
-          const value = localStorage.getItem('expenses');
-
-          if (!value) {
-            container.innerHTML = '<p class="text-sm text-gray-500">No data found for "expenses" in LocalStorage.</p>';
-          } else {
-            const itemEl = document.createElement('div');
-            itemEl.className = 'border p-3 rounded bg-gray-100 dark:bg-gray-700';
-
-            itemEl.innerHTML = `
-              <p class="font-bold mb-1">expenses</p>
-              <textarea readonly class="w-full p-2 rounded bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-600 text-sm text-gray-800 dark:text-white">${value}</textarea>
-            `;
-
-            container.appendChild(itemEl);
-          }
-
-          section.classList.remove('hidden');
-        }
-
-        // Call this function when needed
-        renderLocalStorageData();
-      </script>
-
     </main>
   </div>
 
