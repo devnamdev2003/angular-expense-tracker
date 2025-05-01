@@ -1,6 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Category, CategoryService } from '../../service/localStorage/category.service';
+import { ExpenseService, Expense } from '../../service/localStorage/expense.service';
 import { Budget, BudgetService } from '../../service/localStorage/budget.service';
 import { CommonModule } from '@angular/common';
 import { ToastService } from '../../service/toast/toast.service';
@@ -41,6 +42,7 @@ export class BudgetComponent implements OnInit {
 
   constructor(
     private categoryService: CategoryService,
+    private expenseService: ExpenseService,
     private budgetService: BudgetService,
     private toastService: ToastService,
     private fb: FormBuilder,) {
@@ -49,7 +51,7 @@ export class BudgetComponent implements OnInit {
 
   ngOnInit(): void {
     this.loadCategories();
-    this.loadBudgets(); // Load budgets on init
+    this.loadBudgets();
   }
 
   createForm(): FormGroup {
@@ -97,7 +99,7 @@ export class BudgetComponent implements OnInit {
         this.toastService.show('Budget added successfully!', 'success');
       }
 
-      this.loadBudgets(); // Refresh UI
+      this.loadBudgets();
       this.closeModal();
     } catch (error) {
       console.error('Submit failed:', error);
@@ -149,7 +151,7 @@ export class BudgetComponent implements OnInit {
     const fromDate = new Date(this.latestBudget.fromDate);
     const toDate = new Date(this.latestBudget.toDate);
 
-    const expenses = JSON.parse(localStorage.getItem('expenses') || '[]');
+    const expenses: Expense[] = this.expenseService.getAll();
     const expensesInRange = expenses.filter((exp: any) => {
       const date = new Date(exp.date);
       return date >= fromDate && date <= toDate;

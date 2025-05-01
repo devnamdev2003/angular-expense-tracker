@@ -46,6 +46,7 @@ export class ListExpensesComponent implements OnInit {
   }
 
   listExpenses() {
+    this.totalAmount = 0;
     try {
       this.expenses = this.expenseService.getAll();
       this.categories = this.categoryService.getAll();
@@ -129,6 +130,7 @@ export class ListExpensesComponent implements OnInit {
   }
 
   applyFilter() {
+    this.totalAmount = 0;
     let filtered = this.expenseService.getAll();
 
     if (this.filter.fromDate) {
@@ -144,6 +146,9 @@ export class ListExpensesComponent implements OnInit {
     }
 
     this.expenses = filtered;
+    this.expenses.forEach((val) => {
+      this.totalAmount = this.totalAmount + val.amount;
+    })
     this.isFilterDropdownOpen = false;
   }
 
@@ -151,7 +156,7 @@ export class ListExpensesComponent implements OnInit {
     this.filter.fromDate = '';
     this.filter.toDate = '';
     this.filter.selectedCategoryIds = [];
-    this.listExpenses(); // Reload the expenses after clearing the filter
+    this.listExpenses();
   }
 
   onCategoryCheckboxChange(event: Event, categoryId: string) {
@@ -172,7 +177,6 @@ export class ListExpensesComponent implements OnInit {
   }
 
   editExpense(id: string) {
-    // Navigate or show edit form
     this.toastService.show('Edit feature not implemented yet', 'info');
   }
 

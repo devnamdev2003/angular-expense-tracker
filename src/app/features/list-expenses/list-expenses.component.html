@@ -1,33 +1,34 @@
-<section id="list" class="section p-4 mb-4">
+<section id="list" class="section px-4 mb-4">
     <!-- Sort and Filter buttons -->
-    <div class="flex justify-between space-x-2 mb-2">
-        <!-- Total Amount Styled Like Button -->
-        <div>
-            <p
-                class="flex items-center gap-1 px-4 py-2 rounded-full text-sm font-medium bg-[var(--color-surface)] hover:bg-[var(--list-hover)] text-[var(--input-text)] shadow-sm transition">
-                <img src="assets/img/icon/icons8-expense-48.png" alt="amount"
-                    class="w-[25px] h-[25px] transition-all duration-300 ease-in-out">
-                <span>Total: <span class="text-[var(--color-green)]">{{currency}}{{totalAmount}}</span></span>
-            </p>
-        </div>
+    <div class="sticky top-0 z-50 bg-[var(--color-bg)] py-2 mb-2">
+        <div class="flex justify-between space-x-2">
+            <div>
+                <p
+                    class="flex items-center gap-1 px-3 py-2 rounded-full text-sm font-medium bg-[var(--color-surface)] hover:bg-[var(--list-hover)] text-[var(--input-text)] shadow-sm transition">
+                    <img src="assets/img/icon/icons8-expense-48.png" alt="amount"
+                        class="w-[25px] h-[25px] transition-all duration-300 ease-in-out">
+                    <span class="text-[var(--color-green)]">{{currency}}{{totalAmount}}</span>
+                </p>
+            </div>
 
-        <!-- Sort and Filter Buttons -->
-        <div class="flex gap-2">
-            <button (click)="toggleSortByDropdown()"
-                class="flex items-center gap-1 px-4 py-2 rounded-full text-sm font-medium bg-[var(--color-surface)] text-[var(--input-text)] hover:bg-[var(--list-hover)] shadow-sm transition">
-                <img src="assets/img/icon/icons8-sort-50.png" alt="sort"
-                    class="w-[25px] h-[25px] transition-all duration-300 ease-in-out"
-                    style="filter: var(--icon-color2);">
-                <span>Sort</span>
-            </button>
+            <!-- Sort and Filter Buttons -->
+            <div class="flex gap-2">
+                <button (click)="toggleSortByDropdown()"
+                    class="flex items-center gap-1 px-4 py-2 rounded-full text-sm font-medium bg-[var(--color-surface)] text-[var(--input-text)] hover:bg-[var(--list-hover)] shadow-sm transition">
+                    <img src="assets/img/icon/icons8-sort-50.png" alt="sort"
+                        class="w-[25px] h-[25px] transition-all duration-300 ease-in-out"
+                        style="filter: var(--icon-color2);">
+                    <span>Sort</span>
+                </button>
 
-            <button (click)="toggleFilterDropdown()"
-                class="flex items-center gap-1 px-4 py-2 rounded-full text-sm font-medium bg-[var(--color-surface)] text-[var(--input-text)] hover:bg-[var(--list-hover)] shadow-sm transition">
-                <img src="assets/img/icon/icons8-filter-50.png" alt="filter"
-                    class="w-[25px] h-[25px] transition-all duration-300 ease-in-out"
-                    style="filter: var(--icon-color2);">
-                <span>Filter</span>
-            </button>
+                <button (click)="toggleFilterDropdown()"
+                    class="flex items-center gap-1 px-4 py-2 rounded-full text-sm font-medium bg-[var(--color-surface)] text-[var(--input-text)] hover:bg-[var(--list-hover)] shadow-sm transition">
+                    <img src="assets/img/icon/icons8-filter-50.png" alt="filter"
+                        class="w-[25px] h-[25px] transition-all duration-300 ease-in-out"
+                        style="filter: var(--icon-color2);">
+                    <span>Filter</span>
+                </button>
+            </div>
         </div>
     </div>
 
