@@ -1,10 +1,14 @@
-# 📘 Expense Tracker
+# [📘 Expense Tracker](https://exwise.vercel.app/)
 
 >### Expense Wisely – Where Your Money Stops Playing Hide and Seek!
 
 ## ✅ Overview
 
 The **Expense Tracker Application** helps users manage their personal finances through intuitive UI components, visual analytics, and simple interaction patterns. The application is fully front-end based, leveraging `localStorage` for data persistence.
+
+Experience the power of **Devnoms Chat App** right now:
+
+[![Live Preview](https://img.shields.io/badge/Live-Preview-brightgreen?style=for-the-badge&logo=angular)](https://exwise.vercel.app/)
 
 ---
 
