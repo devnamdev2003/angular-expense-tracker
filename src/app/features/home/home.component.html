@@ -1,0 +1,41 @@
+<div class="px-2">
+    <div class="flex justify-center items-center min-h-[70px]">
+        <div class="relative flex w-48 bg-[var(--color-surface)] rounded-full shadow-md">
+            <div class="absolute h-full w-1/2 bg-[var(--theme-color)] rounded-full transition-all duration-300"
+                [class.translate-x-24]="viewType === 'day'"></div>
+
+            <button
+                class="relative z-10 w-1/2 flex-1 text-center text-sm font-medium py-2 rounded-full transition-colors duration-300"
+                [class.text-[var(--color-text)]]="viewType !== 'month'" [class.text-[var(--color-white)]]="viewType === 'month'"
+                (click)="setViewType('month')">
+                Month
+            </button>
+
+            <button
+                class="relative z-10 w-1/2 flex-1 text-center text-sm font-medium py-2 rounded-full transition-colors duration-300"
+                [class.text-[var(--color-text)]]="viewType !== 'day'" [class.text-[var(--color-white)]]="viewType === 'day'"
+                (click)="setViewType('day')">
+                Day
+            </button>
+        </div>
+    </div>
+
+    <app-graphs [viewType]="viewType" [currentDate]="currentDate"></app-graphs>
+
+    <!-- Arrows and Date Display -->
+    <div class="flex justify-between items-center w-full max-w-xl px-[3rem]">
+        <button (click)="goPrevious()" class="text-md rounded-full">
+            <img src="assets/img/icon/icons8-left-arrow-50.png" alt="add"
+                class="w-[25px] h-[25px] transition-all duration-300 ease-in-out" style="filter: var(--icon-color2);">
+
+        </button>
+
+        <div class="text-md font-semibold">{{ getDisplayDate() }}</div>
+
+        <button (click)="goNext()" class="text-md rounded-full ">
+
+            <img src="assets/img/icon/icons8-right-arrow-50.png" alt="add"
+                class="w-[25px] h-[25px] transition-all duration-300 ease-in-out" style="filter: var(--icon-color2);">
+        </button>
+    </div>
+</div>

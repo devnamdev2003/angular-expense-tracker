@@ -1,0 +1,19 @@
+<section class="section p-4">
+    <!-- 🔧 General Settings -->
+    <div class="mb-6">
+        <h2 class="text-xl font-semibold text-[var(--color-accent)] mb-3">🔧 General Settings</h2>
+
+        <!-- Toggle Dark Mode -->
+        <app-setting-item label="🌗 Toggle Dark Mode">
+            <label class="relative inline-flex items-center cursor-pointer">
+                <input type="checkbox" class="sr-only peer" [(ngModel)]="isDarkMode" (change)="toggleTheme()" />
+                <div
+                    class="w-11 h-6 bg-[var(--color-accent)] rounded-full peer peer-focus:ring-2 peer-checked:bg-[var(--color-accent)] transition-all duration-300">
+                    <div
+                        class="absolute left-1 top-1 bg-[var(--color-surface)] w-4 h-4 rounded-full transition-all duration-300 transform peer-checked:translate-x-5 shadow-md">
+                    </div>
+                </div>
+            </label>
+        </app-setting-item>
+    </div>
+</section>
