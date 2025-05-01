@@ -27,6 +27,7 @@ export class ListExpensesComponent implements OnInit {
     toDate: '',
     selectedCategoryIds: [] as string[],
   };
+  totalAmount: number = 0;
   @ViewChild('dropdownRef') dropdownRef!: ElementRef;
   @ViewChild('filterRef') filterRef!: ElementRef;
 
@@ -48,6 +49,9 @@ export class ListExpensesComponent implements OnInit {
     try {
       this.expenses = this.expenseService.getAll();
       this.categories = this.categoryService.getAll();
+      this.expenses.forEach((val) => {
+        this.totalAmount = this.totalAmount + val.amount;
+      })
     } catch (err) {
       console.error("Failed to load expenses:", err);
     }
@@ -180,6 +184,4 @@ export class ListExpensesComponent implements OnInit {
       this.listExpenses();
     }
   }
-
-
 }
