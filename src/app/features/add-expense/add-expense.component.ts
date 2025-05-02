@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, HostListener, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { ExpenseService } from '../../service/localStorage/expense.service';
 import { CategoryService, Category } from '../../service/localStorage/category.service';
@@ -17,6 +17,7 @@ export class AddExpenseComponent implements OnInit {
   categories: Category[] = [];
   selectedCategoryName: string = 'Select Category';
   isCategoryDropdownOpen: boolean = false;
+  @ViewChild('categorydownRef') categoryRef!: ElementRef;
 
   constructor(
     private fb: FormBuilder,
@@ -92,6 +93,18 @@ export class AddExpenseComponent implements OnInit {
     } catch (error) {
       console.error('Submit failed:', error);
       this.toastService.show('Error adding expense.', 'error');
+    }
+  }
+
+  @HostListener('document:click', ['$event'])
+  onDocumentClick(event: MouseEvent) {
+    const target = event.target as HTMLElement;
+    if (
+      this.isCategoryDropdownOpen &&
+      this.categoryRef &&
+      !this.categoryRef.nativeElement.contains(target)
+    ) {
+      this.isCategoryDropdownOpen = false;
     }
   }
 }

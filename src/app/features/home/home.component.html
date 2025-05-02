@@ -1,4 +1,5 @@
 <div class="px-2">
+    <!-- View Type Toggle -->
     <div class="flex justify-center items-center min-h-[70px]">
         <div class="relative flex w-48 bg-[var(--color-surface)] rounded-full shadow-md">
             <div class="absolute h-full w-1/2 bg-[var(--theme-color)] rounded-full transition-all duration-300"
@@ -6,15 +7,15 @@
 
             <button
                 class="relative z-10 w-1/2 flex-1 text-center text-sm font-medium py-2 rounded-full transition-colors duration-300"
-                [class.text-[var(--color-text)]]="viewType !== 'month'" [class.text-[var(--color-white)]]="viewType === 'month'"
-                (click)="setViewType('month')">
+                [class.text-[var(--color-text)]]="viewType !== 'month'"
+                [class.text-[var(--color-white)]]="viewType === 'month'" (click)="setViewType('month')">
                 Month
             </button>
 
             <button
                 class="relative z-10 w-1/2 flex-1 text-center text-sm font-medium py-2 rounded-full transition-colors duration-300"
-                [class.text-[var(--color-text)]]="viewType !== 'day'" [class.text-[var(--color-white)]]="viewType === 'day'"
-                (click)="setViewType('day')">
+                [class.text-[var(--color-text)]]="viewType !== 'day'"
+                [class.text-[var(--color-white)]]="viewType === 'day'" (click)="setViewType('day')">
                 Day
             </button>
         </div>
@@ -22,7 +23,7 @@
 
     <app-graphs [viewType]="viewType" [currentDate]="currentDate"></app-graphs>
 
-    <!-- Arrows and Date Display -->
+    <!-- Arrows, Date Display, and Input for Jump -->
     <div class="flex justify-between items-center w-full max-w-xl px-[3rem]">
         <button (click)="goPrevious()" class="text-md rounded-full">
             <img src="assets/img/icon/icons8-left-arrow-50.png" alt="add"
@@ -30,7 +31,20 @@
 
         </button>
 
-        <div class="text-md font-semibold">{{ getDisplayDate() }}</div>
+        <!-- Display Date with Input for Direct Jump -->
+        <div>
+            <!-- <div class="text-md font-semibold cursor-pointer">
+                {{ getDisplayDate() }}
+            </div> -->
+            <!-- Input field for date or month, shown when editing is enabled -->
+            <input *ngIf="viewType === 'day'" #dayInput type="date" class="w-[8.7rem] bg-[var(--color-bg)] px-2 py-1 text-sm"
+                [value]="formatDateForInput(currentDate)" (input)="onInputChange($event, dayInput)"
+                (keydown)="blockKey($event)" required minlength="7">
+            <!-- Input for Month View -->
+            <input *ngIf="viewType === 'month'" #monthInput type="month" class="w-[8.7rem] bg-[var(--color-bg)] px-2 py-1 text-sm"
+                [value]="formatMonthForInput(currentDate)" (input)="onMonthChange($event, monthInput)"
+                (keydown)="blockKey($event)" required minlength="10">
+        </div>
 
         <button (click)="goNext()" class="text-md rounded-full ">
 
