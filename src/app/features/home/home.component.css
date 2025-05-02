@@ -1,19 +1,27 @@
-/* Hide calendar icon in Chrome, Safari, Edge */
 input[type="date"]::-webkit-calendar-picker-indicator,
 input[type="month"]::-webkit-calendar-picker-indicator {
   filter: var(--icon-color2);
+  cursor: pointer;
 }
 
-/* Optional: Remove default padding that creates space for icon */
 input[type="date"],
 input[type="month"] {
-  padding-right: 0.5rem; /* adjust if needed */
   border: none;
   outline: none;
 }
 
-
 input[type="date"],
 input[type="month"] {
   cursor: pointer;
+}
+
+.hiddeninput {
+  z-index: 50;
+  background: none;
+  width: 100px;
+  color: transparent;
+}
+
+.hiddeninputdiv {
+  right: -23px;
 }

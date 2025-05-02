@@ -49,58 +49,48 @@ export class HomeComponent {
     }
   }
 
-
-  // Helper: Format Month as yyyy-MM
   onInputChange(event: any, inputRef: HTMLInputElement) {
     const value = event.target.value;
     if (!value || value.trim() === '') {
-      inputRef.value = this.formatDateForInput(this.currentDate); // reset value
+      inputRef.value = this.formatDateForInput(this.currentDate);
       return;
     }
-  
+
     const parsed = new Date(value);
     if (!isNaN(parsed.getTime())) {
       this.currentDate = parsed;
     } else {
-      inputRef.value = this.formatDateForInput(this.currentDate); // fallback
+      inputRef.value = this.formatDateForInput(this.currentDate);
     }
   }
-  
+
   onMonthChange(event: any, inputRef: HTMLInputElement) {
     const value = event.target.value;
     if (!value || value.trim() === '') {
-      inputRef.value = this.formatMonthForInput(this.currentDate); // reset value
+      inputRef.value = this.formatMonthForInput(this.currentDate);
       return;
     }
-  
+
     const [year, month] = value.split('-').map(Number);
     if (!isNaN(year) && !isNaN(month)) {
       this.currentDate = new Date(year, month - 1);
     } else {
-      inputRef.value = this.formatMonthForInput(this.currentDate); // fallback
+      inputRef.value = this.formatMonthForInput(this.currentDate);
     }
   }
-  
-  // helpers
-  formatDateForInput(date: Date): string {
-    return date.toISOString().split('T')[0]; // yyyy-MM-dd
-  }
-  
-  formatMonthForInput(date: Date): string {
-    return `${date.getFullYear()}-${String(date.getMonth() + 1).padStart(2, '0')}`; // yyyy-MM
-  }
-  
 
-  jumpToDate() {
-    this.currentDate = new Date(this.currentDate);
-    // Disable editing after the change
+  formatDateForInput(date: Date): string {
+    return date.toISOString().split('T')[0];
+  }
+
+  formatMonthForInput(date: Date): string {
+    return `${date.getFullYear()}-${String(date.getMonth() + 1).padStart(2, '0')}`;
   }
 
   blockKey(event: KeyboardEvent) {
-    // Allow tab, arrows, etc., block delete/backspace
+
     if (['Backspace', 'Delete'].includes(event.key)) {
       event.preventDefault();
     }
   }
-
 }
