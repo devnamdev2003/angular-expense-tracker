@@ -141,13 +141,34 @@
     <!-- Expense List -->
     <ul class="space-y-3" *ngIf="expenses.length > 0; else noDataTemplate">
         <li *ngFor="let exp of expenses" (click)="openExpenseModal(exp)"
-            class="hover:bg-[var(--list-hover)] rounded-lg p-4 cursor-pointer transition">
-            <div class="flex justify-between items-center mb-2">
-                <span class="text-lg font-semibold text-[var(--color-green)]">{{ currency }} {{ exp.amount }}</span>
-                <span class="text-sm">{{ exp.category_name || 'Uncategorized' }}</span>
+            class="rounded-xl py-2 flex items-center justify-between shadow-sm active:scale-[0.97] transition-transform cursor-pointer hover:bg-[var(--list-hover)]">
+
+            <!-- Left section: Icon + Category + Date -->
+            <div class="flex items-center gap-3">
+                <!-- Gradient Circle Icon -->
+
+                <div class="w-10 h-10 rounded-full flex items-center justify-center text-white text-xl font-bold"
+                    [ngStyle]="{
+                   background: 'linear-gradient(135deg, ' + exp.category_color + ', ' + darkenColor(exp.category_color, 0.2) + ')'
+                 }">
+                    {{ exp.category_icon }}
+                </div>
+
+                <div class="flex flex-col">
+                    <span class="text-sm font-medium">
+                        {{ exp.category_name || 'Uncategorized' }}
+                    </span>
+                    <span class="text-xs text-gray-500 dark:text-gray-400">
+                        {{ getFormattedDate(exp) }}
+                    </span>
+                </div>
             </div>
-            <div class="text-sm space-y-1">
-                <div>{{ getFormattedDate(exp) }}</div>
+
+            <!-- Right section: Amount -->
+            <div class="text-right">
+                <span class="text-[17px] text-[var(--color-green)]">
+                    {{ currency }} {{ exp.amount }}
+                </span>
             </div>
         </li>
     </ul>

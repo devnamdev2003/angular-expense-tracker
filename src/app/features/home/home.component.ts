@@ -2,11 +2,10 @@ import { Component } from '@angular/core';
 import { GraphsComponent } from '../../component/graphs/graphs.component';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
-import { PieChartComponent } from '../../component/pie-chart/pie-chart.component';
 
 @Component({
   selector: 'app-home',
-  imports: [GraphsComponent, FormsModule, CommonModule, PieChartComponent],
+  imports: [GraphsComponent, FormsModule, CommonModule],
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.css'],
   standalone: true

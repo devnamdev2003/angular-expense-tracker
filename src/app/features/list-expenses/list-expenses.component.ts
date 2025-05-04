@@ -22,6 +22,8 @@ export class ListExpensesComponent implements OnInit {
   selectedFieldName: string = 'Sort By';
   isFilterDropdownOpen: boolean = false;
   selectedExpense: Expense | null = null;
+  fieldDirection: number = 0;
+  fieldColIndex: number = 0;
   filter = {
     fromDate: '',
     toDate: '',
@@ -96,6 +98,8 @@ export class ListExpensesComponent implements OnInit {
 
       return direction * (valA.toString().toLowerCase().localeCompare(valB.toString().toLowerCase(), undefined, { numeric: true }));
     });
+    this.fieldColIndex = colIndex;
+    this.fieldDirection = direction;
     this.selectedFieldName = fieldName;
     this.isSortByDropdownOpen = false;
   }
@@ -149,6 +153,9 @@ export class ListExpensesComponent implements OnInit {
     this.expenses.forEach((val) => {
       this.totalAmount = this.totalAmount + val.amount;
     })
+    if (this.selectedFieldName != 'Sort By') {
+      this.sortList(this.fieldColIndex, this.selectedFieldName, this.fieldDirection);
+    }
     this.isFilterDropdownOpen = false;
   }
 
@@ -188,4 +195,17 @@ export class ListExpensesComponent implements OnInit {
       this.listExpenses();
     }
   }
+  darkenColor(hex: string, amount: number): string {
+    const num = parseInt(hex.replace('#', ''), 16);
+    let r = (num >> 16) - amount * 255;
+    let g = ((num >> 8) & 0x00FF) - amount * 255;
+    let b = (num & 0x0000FF) - amount * 255;
+
+    r = Math.max(0, Math.min(255, r));
+    g = Math.max(0, Math.min(255, g));
+    b = Math.max(0, Math.min(255, b));
+
+    return `rgb(${r}, ${g}, ${b})`;
+  }
+
 }
