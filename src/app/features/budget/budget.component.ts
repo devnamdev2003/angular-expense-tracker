@@ -1,10 +1,11 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Category, CategoryService } from '../../service/localStorage/category.service';
 import { ExpenseService, Expense } from '../../service/localStorage/expense.service';
 import { Budget, BudgetService } from '../../service/localStorage/budget.service';
 import { CommonModule } from '@angular/common';
 import { ToastService } from '../../service/toast/toast.service';
+import { UserService } from '../../service/localStorage/user.service';
 
 export type ChartOptions = {
   series: ApexNonAxisChartSeries;
@@ -39,13 +40,17 @@ export class BudgetComponent implements OnInit {
   suggestedPerDay = 0;
   isEditMode = false;
   editingBudgetIndex: number | null = null;
+  currency: string | null;
 
   constructor(
     private categoryService: CategoryService,
     private expenseService: ExpenseService,
     private budgetService: BudgetService,
     private toastService: ToastService,
-    private fb: FormBuilder,) {
+    private fb: FormBuilder,
+    private userService: UserService,
+  ) {
+    this.currency = this.userService.getValue<string>('currency');
     this.budgetForm = this.createForm();
   }
 
@@ -170,9 +175,9 @@ export class BudgetComponent implements OnInit {
 
     // Budget message
     if (spent > totalBudget) {
-      this.budgetMessage = `⚠️ You have exceeded your budget! You spent ₹${spent.toFixed(2)} which is ₹${(spent - totalBudget).toFixed(2)} over the limit set between ${this.latestBudget.fromDate} and ${this.latestBudget.toDate}. 😰`;
+      this.budgetMessage = `⚠️ You have exceeded your budget! You spent ${this.currency}${spent.toFixed(2)} which is ${this.currency}${(spent - totalBudget).toFixed(2)} over the limit set between ${this.latestBudget.fromDate} and ${this.latestBudget.toDate}. 😰`;
     } else {
-      this.budgetMessage = `✅ You have spent ₹${spent.toFixed(2)} out of ₹${totalBudget.toFixed(2)} between ${this.latestBudget.fromDate} and ${this.latestBudget.toDate}. 💸 Remaining: ₹${remaining.toFixed(2)}`;
+      this.budgetMessage = `✅ You have spent ${this.currency}${spent.toFixed(2)} out of ${this.currency}${totalBudget.toFixed(2)} between ${this.latestBudget.fromDate} and ${this.latestBudget.toDate}. 💸 Remaining: ${this.currency}${remaining.toFixed(2)}`;
     }
 
     // Avg insights

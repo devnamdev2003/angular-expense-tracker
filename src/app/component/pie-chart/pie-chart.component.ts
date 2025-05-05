@@ -17,7 +17,7 @@ export class PieChartComponent implements OnInit, OnChanges, AfterViewInit {
   expenses: Expense[] = [];
   charts: { [key: string]: any } = {};
   categoryColors: { [key: string]: string } = {};
-
+  currency: string | null;
 
   @ViewChild('categoryCanvas', { static: false }) canvasRef!: ElementRef<HTMLCanvasElement>;
   @Input() viewType: 'month' | 'day' = 'month';
@@ -27,7 +27,9 @@ export class PieChartComponent implements OnInit, OnChanges, AfterViewInit {
     private categoryService: CategoryService,
     private expenseService: ExpenseService,
     private userService: UserService,
-  ) { }
+  ) {
+    this.currency = this.userService.getValue<string>('currency');
+  }
 
   ngOnInit(): void {
     const userTheme = this.userService.getValue<string>('theme_mode');
@@ -61,9 +63,7 @@ export class PieChartComponent implements OnInit, OnChanges, AfterViewInit {
   }
 
   loadMonthData(): void {
-
     const categoryTotals: { [key: string]: number } = {};
-
     const currentYear = this.currentDate.getFullYear();
     const currentMonth = this.currentDate.getMonth() + 1;
 
@@ -80,15 +80,13 @@ export class PieChartComponent implements OnInit, OnChanges, AfterViewInit {
     this.renderChart("categoryChart", "doughnut", {
       labels: Object.keys(categoryTotals),
       data: Object.values(categoryTotals),
-      label: "Expenses by Category",
+      label: "Amount: " + this.currency,
       backgroundColors: Object.keys(categoryTotals).map(cat => this.categoryColors[cat] || "#ccc")
     });
   }
 
   loadDayData(): void {
-
     const categoryTotals: { [key: string]: number } = {};
-
     const todayStr = `${this.currentDate.getFullYear()}-${(this.currentDate.getMonth() + 1).toString().padStart(2, '0')}-${this.currentDate.getDate().toString().padStart(2, '0')}`;
 
     const todaysExpenses = this.expenses.filter(exp => exp.date === todayStr);
@@ -101,13 +99,12 @@ export class PieChartComponent implements OnInit, OnChanges, AfterViewInit {
     this.renderChart("categoryChart", "doughnut", {
       labels: Object.keys(categoryTotals),
       data: Object.values(categoryTotals),
-      label: "Expenses by Category",
+      label: "Amount: " + this.currency,
       backgroundColors: Object.keys(categoryTotals).map(cat => this.categoryColors[cat] || "#ccc")
     });
   }
 
   renderChart(id: string, type: string, { labels, data, label, backgroundColors, borderColor }: any) {
-
     const ctx = this.canvasRef?.nativeElement.getContext('2d');
     if (!ctx) return;
 
@@ -151,7 +148,7 @@ export class PieChartComponent implements OnInit, OnChanges, AfterViewInit {
               callbacks: {
                 label: function (context: any) {
                   let value = context.parsed.y !== undefined ? context.parsed.y : context.parsed;
-                  return `${context.dataset.label}: ₹${value.toLocaleString("en-IN", {
+                  return `${context.dataset.label}${value.toLocaleString("en-IN", {
                     minimumFractionDigits: 2,
                     maximumFractionDigits: 2
                   })}`;
