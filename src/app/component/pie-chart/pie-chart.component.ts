@@ -1,8 +1,10 @@
 import { Component, Input, OnInit, OnChanges, SimpleChanges, ViewChild, ElementRef, AfterViewInit } from '@angular/core';
 import { CategoryService, Category } from '../../service/localStorage/category.service';
 import { ExpenseService, Expense } from '../../service/localStorage/expense.service';
-declare const Chart: any;
 import { UserService } from '../../service/localStorage/user.service';
+import { Renderer2 } from '@angular/core';
+
+declare const Chart: any;
 
 @Component({
   selector: 'app-pie-chart',
@@ -27,6 +29,7 @@ export class PieChartComponent implements OnInit, OnChanges, AfterViewInit {
     private categoryService: CategoryService,
     private expenseService: ExpenseService,
     private userService: UserService,
+    private renderer: Renderer2
   ) {
     this.currency = this.userService.getValue<string>('currency');
   }
@@ -55,10 +58,15 @@ export class PieChartComponent implements OnInit, OnChanges, AfterViewInit {
   }
 
   loadData(): void {
-    if (this.viewType === 'month') {
-      this.loadMonthData();
+    // Check if Chart.js is available before proceeding
+    if (typeof window !== 'undefined' && (window as any).Chart) {
+      if (this.viewType === 'month') {
+        this.loadMonthData();
+      } else {
+        this.loadDayData();
+      }
     } else {
-      this.loadDayData();
+      console.error("Chart.js is not loaded properly.");
     }
   }
 
@@ -126,7 +134,8 @@ export class PieChartComponent implements OnInit, OnChanges, AfterViewInit {
       datasetConfig.tension = 0.3;
     }
     try {
-      this.charts[id] = new Chart(ctx, {
+      (window as any).Chart = (window as any).Chart || Chart; // Ensure Chart.js is available globally
+      this.charts[id] = new (window as any).Chart(ctx, {
         type: type,
         data: {
           labels: labels,
