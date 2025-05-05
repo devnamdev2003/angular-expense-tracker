@@ -21,11 +21,8 @@
         </div>
     </div>
 
-    <app-graphs [viewType]="viewType" [currentDate]="currentDate"></app-graphs>
-
-    <!-- Arrows, Date Display, and Input for Jump -->
-    <div class="flex justify-between items-center w-full max-w-xl px-[3rem]">
-        <button (click)="goPrevious()" class="text-md rounded-full">
+    <div class="flex justify-between items-center px-2 md:w-[500px] m-auto">
+        <button class="shrink-0" (click)="goPrevious()">
             <img src="assets/img/icon/icons8-left-arrow-50.png" alt="add"
                 class="w-[25px] h-[25px] transition-all duration-300 ease-in-out" style="filter: var(--icon-color2);">
 
@@ -49,14 +46,19 @@
         </div>
 
 
-        <button (click)="goNext()" class="text-md rounded-full ">
-
+        <button class="shrink-0" (click)="goNext()">
             <img src="assets/img/icon/icons8-right-arrow-50.png" alt="add"
                 class="w-[25px] h-[25px] transition-all duration-300 ease-in-out" style="filter: var(--icon-color2);">
         </button>
     </div>
 
-    <!-- category-overview.component.html -->
-    <app-pie-chart></app-pie-chart>
-  
+    <div class="flex flex-col lg:flex-row gap-4 mt-4 mb-4">
+        <div class="w-full lg:w-1/2">
+            <app-graphs [viewType]="viewType" [currentDate]="currentDate"></app-graphs>
+        </div>
+        <div class="w-full lg:w-1/2">
+            <app-pie-chart [viewType]="viewType" [currentDate]="currentDate"></app-pie-chart>
+        </div>
+    </div>
+
 </div>

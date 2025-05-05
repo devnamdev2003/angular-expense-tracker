@@ -51,7 +51,7 @@ export class ListExpensesComponent implements OnInit {
     this.totalAmount = 0;
     try {
       this.expenses = this.expenseService.getAll();
-      this.categories = this.categoryService.getAll();
+      this.categories = this.categoryService.getSortedCategoriesByExpenseCount();
       this.expenses.forEach((val) => {
         this.totalAmount = this.totalAmount + val.amount;
       })
