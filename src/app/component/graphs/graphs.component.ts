@@ -117,7 +117,7 @@ export class GraphsComponent implements OnInit, OnChanges {
     const currentYear = this.currentDate.getFullYear();
     const currentMonth = this.currentDate.getMonth() + 1;
 
-    dayAmountMap.set(1, 0);
+    // dayAmountMap.set(1, 0);
 
     const currentMonthExpenses = expenses.filter(item => {
       const [year, month] = item.date.split('-').map(Number);
@@ -199,7 +199,7 @@ export class GraphsComponent implements OnInit, OnChanges {
     });
 
 
-    timeAmountMap.set("00:00:00", 0);
+    // timeAmountMap.set("00:00:00", 0);
     let totalAmount = 0;
     todaysExpenses.forEach(item => {
       const [hour, minute, second] = item.time.split(":");

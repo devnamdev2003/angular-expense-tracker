@@ -1,4 +1,5 @@
 <div class="px-2">
+    <!-- View Type Toggle -->
     <div class="flex justify-center items-center min-h-[70px]">
         <div class="relative flex w-48 bg-[var(--color-surface)] rounded-full shadow-md">
             <div class="absolute h-full w-1/2 bg-[var(--theme-color)] rounded-full transition-all duration-300"
@@ -6,36 +7,58 @@
 
             <button
                 class="relative z-10 w-1/2 flex-1 text-center text-sm font-medium py-2 rounded-full transition-colors duration-300"
-                [class.text-[var(--color-text)]]="viewType !== 'month'" [class.text-[var(--color-white)]]="viewType === 'month'"
-                (click)="setViewType('month')">
+                [class.text-[var(--color-text)]]="viewType !== 'month'"
+                [class.text-[var(--color-white)]]="viewType === 'month'" (click)="setViewType('month')">
                 Month
             </button>
 
             <button
                 class="relative z-10 w-1/2 flex-1 text-center text-sm font-medium py-2 rounded-full transition-colors duration-300"
-                [class.text-[var(--color-text)]]="viewType !== 'day'" [class.text-[var(--color-white)]]="viewType === 'day'"
-                (click)="setViewType('day')">
+                [class.text-[var(--color-text)]]="viewType !== 'day'"
+                [class.text-[var(--color-white)]]="viewType === 'day'" (click)="setViewType('day')">
                 Day
             </button>
         </div>
     </div>
 
-    <app-graphs [viewType]="viewType" [currentDate]="currentDate"></app-graphs>
-
-    <!-- Arrows and Date Display -->
-    <div class="flex justify-between items-center w-full max-w-xl px-[3rem]">
-        <button (click)="goPrevious()" class="text-md rounded-full">
+    <div class="flex justify-between items-center px-2 md:w-[500px] m-auto">
+        <button class="shrink-0" (click)="goPrevious()">
             <img src="assets/img/icon/icons8-left-arrow-50.png" alt="add"
                 class="w-[25px] h-[25px] transition-all duration-300 ease-in-out" style="filter: var(--icon-color2);">
 
         </button>
 
-        <div class="text-md font-semibold">{{ getDisplayDate() }}</div>
+        <!-- Display Date with Input for Direct Jump -->
+        <div class="flex justify-center relative">
+            <!-- Text that looks like a normal label but opens calendar on click -->
+            <div class="text-md font-semibold cursor-pointer">
+                {{ getDisplayDate() }}
+            </div>
 
-        <button (click)="goNext()" class="text-md rounded-full ">
+            <!-- Hidden Date Input (for 'day' view) -->
+            <div class="hiddeninputdiv absolute">
+                <input #hiddenDayInput type="date" class="hiddeninput" [hidden]="viewType !== 'day'"
+                    [value]="formatDateForInput(currentDate)" (input)="onInputChange($event, hiddenDayInput)" />
 
+                <input #hiddenMonthInput type="month" class="hiddeninput" [hidden]="viewType !== 'month'"
+                    [value]="formatMonthForInput(currentDate)" (input)="onMonthChange($event, hiddenMonthInput)" />
+            </div>
+        </div>
+
+
+        <button class="shrink-0" (click)="goNext()">
             <img src="assets/img/icon/icons8-right-arrow-50.png" alt="add"
                 class="w-[25px] h-[25px] transition-all duration-300 ease-in-out" style="filter: var(--icon-color2);">
         </button>
     </div>
+
+    <div class="flex flex-col lg:flex-row gap-4 mt-4 mb-4">
+        <div class="w-full lg:w-1/2">
+            <app-graphs [viewType]="viewType" [currentDate]="currentDate"></app-graphs>
+        </div>
+        <div class="w-full lg:w-1/2">
+            <app-pie-chart [viewType]="viewType" [currentDate]="currentDate"></app-pie-chart>
+        </div>
+    </div>
+
 </div>

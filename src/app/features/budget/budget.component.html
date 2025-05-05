@@ -17,23 +17,23 @@
             <div class="grid mt-4 grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 text-[var(--color-text)]">
                 <div class="bg-[var(--input-bg)] p-4 rounded shadow flex justify-between items-center">
                     <p class="text-sm font-medium">Avg Allowed / Day</p>
-                    <p class="text-lg font-bold mt-1 text-blue-500">₹{{ avgAllowedPerDay.toFixed(2) }}</p>
+                    <p class="text-lg font-bold mt-1 text-blue-500">{{currency}}{{ avgAllowedPerDay.toFixed(2) }}</p>
                 </div>
                 <div class="bg-[var(--input-bg)] p-4 rounded shadow flex justify-between items-center">
                     <p class="text-sm font-medium">Spent / Day</p>
-                    <p class="text-lg font-bold mt-1 text-red-500">₹{{ avgSpentPerDay.toFixed(2) }}</p>
+                    <p class="text-lg font-bold mt-1 text-red-500">{{currency}}{{ avgSpentPerDay.toFixed(2) }}</p>
                 </div>
                 <div class="bg-[var(--input-bg)] p-4 rounded shadow flex justify-between items-center">
                     <p class="text-sm font-medium">Suggested / Day</p>
-                    <p class="text-lg font-bold mt-1 text-green-500">₹{{ suggestedPerDay.toFixed(2) }}</p>
+                    <p class="text-lg font-bold mt-1 text-green-500">{{currency}}{{ suggestedPerDay.toFixed(2) }}</p>
                 </div>
             </div>
         </div>
         <div class="flex justify-center items-center mb-4 mt-4">
             <button (click)="openEditModal()" class="bg-[var(--color-accent)] text-white px-4 py-2 rounded shadow">
-              Update Budget
+                Update Budget
             </button>
-          </div>       
+        </div>
     </div>
 
     <!-- No Budget Message -->

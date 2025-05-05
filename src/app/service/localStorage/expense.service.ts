@@ -18,6 +18,9 @@ export interface Expense {
 
   // additional field not a part of table
   category_name: string;
+  category_icon: string
+  category_color: string
+
 }
 
 @Injectable({ providedIn: 'root' })
@@ -47,8 +50,8 @@ export class ExpenseService {
         return {
           ...e,
           category_name: cat?.name || '',
-          icon: cat?.icon || '',
-          color: cat?.color || ''
+          category_icon: cat?.icon || '',
+          category_color: cat?.color || ''
         };
       })
       .sort((a, b) => {

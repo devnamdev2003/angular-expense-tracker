@@ -17,19 +17,17 @@ import { SettingItemComponent } from '../../component/setting-item/setting-item.
 
 export class SettingsComponent {
   isDarkMode = false;
-  fromDate = '';
-  toDate = '';
-  amount: number | null = null;
-  errorMessages = {
-    fromDate: '',
-    toDate: '',
-    amount: ''
-  };
 
   constructor(public userService: UserService,) { }
 
+  ngOnInit(): void {
+    const savedTheme = this.userService.getValue<string>('theme_mode') ?? 'light';
+    this.isDarkMode = savedTheme === 'dark';
+    document.documentElement.classList.toggle('dark', this.isDarkMode);
+  }
+
   toggleTheme(): void {
-    const savedTheme = this.userService.getValue<string>('theme_mode');
+    const savedTheme = this.userService.getValue<string>('theme_mode') ?? 'light';
     if (savedTheme === 'dark') {
       this.isDarkMode = false;
     }
