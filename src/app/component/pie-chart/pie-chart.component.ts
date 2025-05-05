@@ -29,13 +29,9 @@ export class PieChartComponent implements OnInit, OnChanges, AfterViewInit {
     private userService: UserService,
   ) { }
 
-  private isViewInitialized = false;
-
   ngOnInit(): void {
     const userTheme = this.userService.getValue<string>('theme_mode');
     this.isDarkMode = userTheme === 'dark';
-
-    // Async data fetching
     this.categories = this.categoryService.getAll();
     this.expenses = this.expenseService.getAll();
     this.categories.forEach((cat) => {
@@ -46,9 +42,7 @@ export class PieChartComponent implements OnInit, OnChanges, AfterViewInit {
     });
   }
 
-
   ngAfterViewInit(): void {
-    this.isViewInitialized = true;
     this.loadData();
   }
 
@@ -57,7 +51,6 @@ export class PieChartComponent implements OnInit, OnChanges, AfterViewInit {
       this.loadData();
     }
   }
-
 
   loadData(): void {
     if (this.viewType === 'month') {
@@ -184,10 +177,5 @@ export class PieChartComponent implements OnInit, OnChanges, AfterViewInit {
     } catch (error) {
       console.error("Error rendering chart:", error);
     }
-
-
   }
 }
-
-
-
