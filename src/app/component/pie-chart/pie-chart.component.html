@@ -1,13 +1,9 @@
-<div id="chart">
-  <apx-chart
-    [series]="chartOptions.series"
-    [chart]="chartOptions.chart"
-    [labels]="chartOptions.labels"
-    [responsive]="chartOptions.responsive"
-    [colors]="chartOptions.colors"
-    [legend]="chartOptions.legend"
-    [stroke]="chartOptions.stroke"
-    [title]="chartOptions.title" 
-    [theme]="chartOptions.theme"
-  ></apx-chart>
+<!-- category-overview.component.html -->
+<div class="bg-surface p-4 rounded shadow flex flex-col">
+  <h2 class="text-lg font-semibold mb-2 text-left">💹 Category Overview</h2>
+  <div class="w-full flex justify-center">
+    <div class="w-full max-w-sm">
+      <canvas id="categoryChart" class="w-full h-auto"></canvas>
+    </div>
+  </div>
 </div>
