@@ -2,7 +2,6 @@ import { Component, Input, OnInit, OnChanges, SimpleChanges, ViewChild, ElementR
 import { CategoryService, Category } from '../../service/localStorage/category.service';
 import { ExpenseService, Expense } from '../../service/localStorage/expense.service';
 import { UserService } from '../../service/localStorage/user.service';
-import { Renderer2 } from '@angular/core';
 
 declare const Chart: any;
 
@@ -29,7 +28,6 @@ export class PieChartComponent implements OnInit, OnChanges, AfterViewInit {
     private categoryService: CategoryService,
     private expenseService: ExpenseService,
     private userService: UserService,
-    private renderer: Renderer2
   ) {
     this.currency = this.userService.getValue<string>('currency');
   }
@@ -58,7 +56,6 @@ export class PieChartComponent implements OnInit, OnChanges, AfterViewInit {
   }
 
   loadData(): void {
-    // Check if Chart.js is available before proceeding
     if (typeof window !== 'undefined' && (window as any).Chart) {
       if (this.viewType === 'month') {
         this.loadMonthData();
@@ -134,7 +131,7 @@ export class PieChartComponent implements OnInit, OnChanges, AfterViewInit {
       datasetConfig.tension = 0.3;
     }
     try {
-      (window as any).Chart = (window as any).Chart || Chart; // Ensure Chart.js is available globally
+      (window as any).Chart = (window as any).Chart || Chart;
       this.charts[id] = new (window as any).Chart(ctx, {
         type: type,
         data: {
