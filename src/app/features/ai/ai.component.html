@@ -1,0 +1,6 @@
+<div class="p-4 max-w-xl mx-auto">
+    <input type="text" [(ngModel)]="userInput" placeholder="Ask something..." class="w-full p-2 border rounded" />
+    <button (click)="send()" class="mt-2 bg-blue-500 text-white px-4 py-2 rounded">Send</button>
+
+    <div *ngIf="responseHtml" class="mt-4 p-4 bg-gray-100 rounded shadow" [innerHTML]="responseHtml"></div>
+</div>

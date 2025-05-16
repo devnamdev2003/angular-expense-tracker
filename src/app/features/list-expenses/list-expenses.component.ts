@@ -55,6 +55,8 @@ export class ListExpensesComponent implements OnInit {
       this.expenses.forEach((val) => {
         this.totalAmount = this.totalAmount + val.amount;
       })
+      this.totalAmount = parseFloat(this.totalAmount.toFixed(2));
+      console.log(this.totalAmount)
     } catch (err) {
       console.error("Failed to load expenses:", err);
     }
@@ -153,6 +155,7 @@ export class ListExpensesComponent implements OnInit {
     this.expenses.forEach((val) => {
       this.totalAmount = this.totalAmount + val.amount;
     })
+    this.totalAmount = parseFloat(this.totalAmount.toFixed(2));
     if (this.selectedFieldName != 'Sort By') {
       this.sortList(this.fieldColIndex, this.selectedFieldName, this.fieldDirection);
     }

@@ -18,6 +18,7 @@ import { CalendarComponent } from './features/calendar/calendar.component';
 import { SectionService } from './service/section/section.service';
 import { BudgetComponent } from './features/budget/budget.component';
 import { AnalysisComponent } from './features/analysis/analysis.component';
+import { AiComponent } from './features/ai/ai.component';
 
 @Component({
   selector: 'app-root',
@@ -29,7 +30,8 @@ import { AnalysisComponent } from './features/analysis/analysis.component';
     HomeComponent,
     BudgetComponent,
     AnalysisComponent,
-    CalendarComponent],
+    CalendarComponent,
+    AiComponent],
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })

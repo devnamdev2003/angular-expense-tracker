@@ -1,10 +1,11 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { SectionService } from '../../service/section/section.service';
+import { HamburgerMenuComponent } from '../hamburger-menu/hamburger-menu.component';
 
 @Component({
   selector: 'app-navbar',
-  imports: [CommonModule],
+  imports: [CommonModule, HamburgerMenuComponent],
   templateUrl: './navbar.component.html',
   styleUrls: ['./navbar.component.css']
 })
