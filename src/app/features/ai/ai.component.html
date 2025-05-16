@@ -1,6 +1,48 @@
-<div class="p-4 max-w-xl mx-auto">
+<section class="p-4 section">
+  <div>
     <input type="text" [(ngModel)]="userInput" placeholder="Ask something..." class="w-full p-2 border rounded" />
-    <button (click)="send()" class="mt-2 bg-blue-500 text-white px-4 py-2 rounded">Send</button>
+    <button (click)="send()" class="mt-2 bg-blue-500 text-white px-4 py-2 rounded">
+      Send
+    </button>
 
     <div *ngIf="responseHtml" class="mt-4 p-4 bg-gray-100 rounded shadow" [innerHTML]="responseHtml"></div>
-</div>
+  </div>
+</section>
+
+
+
+<!-- for chat -->
+
+<!-- <section class="p-4 section">
+  <div class="p-4 max-w-xl mx-auto">
+    <div class="space-y-4 mb-4">
+      <div *ngFor="let msg of messages">
+        <div [ngClass]="{
+          'text-right': msg.role === 'user',
+          'text-left': msg.role === 'model'
+        }">
+          <div [ngClass]="{
+            'bg-blue-100 text-blue-800': msg.role === 'user',
+            'bg-gray-100 text-gray-800': msg.role === 'model'
+          }" class="inline-block px-4 py-2 rounded-lg max-w-full overflow-x-auto">
+            <ng-container *ngIf="msg.role === 'user'; else markdownReply">
+              {{ msg.parts[0].text }}
+            </ng-container>
+            <ng-template #markdownReply>
+              <div [innerHTML]="msg.safeHtml"></div>
+            </ng-template>
+          </div>
+        </div>
+      </div>
+      <div *ngIf="loading" class="text-center text-gray-400">Thinking...</div>
+    </div>
+
+    <div class="flex gap-2">
+      <input type="text" [(ngModel)]="userInput" placeholder="Type your message..." class="w-full p-2 border rounded"
+        (keydown.enter)="send()" />
+      <button (click)="send()" class="bg-blue-500 text-white px-4 py-2 rounded" [disabled]="loading">
+        Send
+      </button>
+    </div>
+  </div>
+</section> -->
