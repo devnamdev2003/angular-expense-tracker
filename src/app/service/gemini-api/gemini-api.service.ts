@@ -15,7 +15,7 @@ export class GeminiApiService {
 
   async getResponse(prompt: string): Promise<string> {
 
-    this.globalLoaderService.show("thinking..");
+    this.globalLoaderService.show("📊 Analyzing your expenses..");
     const expenses = this.getLast15DaysExpenses();
     const updatedPrompt = this.generateExpenseAnalysisPrompt(prompt, expenses);
     const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
@@ -41,7 +41,7 @@ export class GeminiApiService {
     const toDate = new Date();
     const fromDate = new Date();
     fromDate.setDate(toDate.getDate() - 14);
-    
+
     const results = this.expenseService.searchByDateRange(fromDate.toISOString(), toDate.toISOString());
 
     return results.map(exp => ({
@@ -59,16 +59,22 @@ export class GeminiApiService {
     last15DaysExpenses: Pick<Expense, 'amount' | 'note' | 'payment_mode' | 'location' | 'date' | 'category_name'>[]
   ): string {
     const baseInstructions = `
-You are a polite and helpful financial assistant AI. Your job is to help the user analyze their last 15 days of expense data.
+You are a polite and helpful financial assistant AI. Your sole purpose is to help the user analyze their expenses from the last 15 days.
 
-🎯 Your Responsibilities:
-- Use ONLY the provided expense data for any analysis or answers.
-- Politely respond to greetings like "Hi", "Hello", or "How are you?"
-- DO NOT answer any questions unrelated to the expense data.
+🎯 Responsibilities:
+- Use only the provided expense data for any analysis or answers.
+- Politely respond to greetings like “Hi”, “Hello”, or “How are you?” with a short, friendly message.
+- If the user asks a question unrelated to the expense data, you must not answer it.
 
-🚫 If the user asks something completely unrelated (e.g., weather, politics, personal advice), respond with:
-"❌ I'm here only to help with your expense data. Please ask something related to your recent expenses."
-and any other warning message according you.
+🚫 When the user asks something unrelated (e.g., weather, politics, personal advice), respond with:
+- "❌ I'm here only to help with your expense data. Please ask something related to your recent spending."
+- "⚠️ I cannot process questions outside your expense data."
+- "🛑 Let’s keep this focused on your expenses so I can assist you better."
+
+(Include any other appropriate warning messages if the user continues asking unrelated questions.)
+
+Only give the brief answer in a beautify manner. Do not add any extra message at the beginning or end.
+
 ---
 
 Here is the user's last 15 days of expense data:

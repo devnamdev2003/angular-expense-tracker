@@ -1,13 +1,33 @@
-<section class="p-4 section">
-  <div>
-    <input type="text" [(ngModel)]="userInput" placeholder="Ask something..." class="w-full p-2 border rounded" />
-    <button (click)="send()" class="mt-2 bg-blue-500 text-white px-4 py-2 rounded">
-      Send
-    </button>
+<section class="section p-4 mb-4">
+  <div class="transition-all duration-300 max-w-2xl mx-auto">
+    <!-- Centered Heading -->
+    <h2 class="text-xl font-semibold mb-4 text-[var(--theme-color)] text-center">💬 AI Assistant
+    </h2>
+    <!-- Chat-style Input Area -->
+    <div class="flex gap-2 items-center">
+      <!-- Send Button with Icon -->
 
-    <div *ngIf="responseHtml" class="mt-4 p-4 bg-gray-100 rounded shadow" [innerHTML]="responseHtml"></div>
+      <!-- Input Field -->
+      <input type="text" [(ngModel)]="userInput" placeholder="Ask something related to your expenses..."
+        class="flex-1 px-4 py-2 rounded-lg border text-[var(--input-text)] bg-[var(--input-bg)] border-[var(--input-border)] focus:outline-none focus:ring-2 focus:ring-[var(--theme-color)] transition-all duration-200" />
+
+      <button (click)="send()"
+        class="shrink-0 bg-[var(--theme-color)] p-3 rounded-full shadow hover:scale-105 transition-transform duration-200"
+        title="Send">
+        <img src="assets/img/icon/icons8-send-48.png" alt="Send" class="w-5 h-5" style="filter:invert(100%)" />
+      </button>
+
+
+    </div>
+
+    <!-- AI Response Box -->
+    <div *ngIf="responseHtml"
+      class="mt-6 p-3 rounded-xl bg-[var(--color-bg)] border border-[var(--input-border)] shadow-inner animate-fade-in max-h-96 overflow-auto"
+      [innerHTML]="responseHtml"></div>
   </div>
 </section>
+
+
 
 
 

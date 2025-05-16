@@ -23,8 +23,13 @@ export class AiComponent {
   ) { }
 
   async send() {
-    if (!this.userInput.trim()) return;
-    const markdown = await this.geminiApi.getResponse(this.userInput);
+    const trimmedInput = this.userInput.trim();
+    if (trimmedInput.length < 2) {
+      this.userInput = '';
+      return;
+    }
+
+    const markdown = await this.geminiApi.getResponse(trimmedInput);
     const html = await marked.parse(markdown);
     this.responseHtml = this.sanitizer.bypassSecurityTrustHtml(html);
   }
