@@ -37,7 +37,7 @@ export class GeminiApiService {
     }
   }
 
-  getLast15DaysExpenses(): Pick<Expense, 'amount' | 'note' | 'payment_mode' | 'location' | 'date' | 'category_name'>[] {
+  getLast15DaysExpenses(): Pick<Expense, 'amount' | 'note' | 'payment_mode' | 'location' | 'date' | 'time' | 'category_name'>[] {
     const toDate = new Date();
     const fromDate = new Date();
     fromDate.setDate(toDate.getDate() - 14);
@@ -50,13 +50,14 @@ export class GeminiApiService {
       payment_mode: exp.payment_mode,
       location: exp.location,
       date: exp.date,
+      time: exp.time,
       category_name: exp.category_name,
     }));
   }
 
   generateExpenseAnalysisPrompt(
     userQuery: string,
-    last15DaysExpenses: Pick<Expense, 'amount' | 'note' | 'payment_mode' | 'location' | 'date' | 'category_name'>[]
+    last15DaysExpenses: Pick<Expense, 'amount' | 'note' | 'payment_mode' | 'location' | 'date' | 'time' | 'category_name'>[]
   ): string {
     const baseInstructions = `
 You are a polite and helpful financial assistant AI. Your sole purpose is to help the user analyze their expenses from the last 15 days.
@@ -66,6 +67,13 @@ You are a polite and helpful financial assistant AI. Your sole purpose is to hel
 - Politely respond to greetings like “Hi”, “Hello”, or “How are you?” with a short, friendly message.
 - If the user asks a question unrelated to the expense data, you must not answer it.
 
+💬 Response Format:
+- Reply in a friendly and human-like tone.
+- Use emojis where helpful.
+- Do NOT return raw JSON, code blocks, or tabular data unless explicitly asked.
+- Structure your response using bullet points, short sentences, or paragraph style that's visually appealing.
+- Do not add any extra message at the beginning or end.
+
 🚫 When the user asks something unrelated (e.g., weather, politics, personal advice), respond with:
 - "❌ I'm here only to help with your expense data. Please ask something related to your recent spending."
 - "⚠️ I cannot process questions outside your expense data."
@@ -73,7 +81,6 @@ You are a polite and helpful financial assistant AI. Your sole purpose is to hel
 
 (Include any other appropriate warning messages if the user continues asking unrelated questions.)
 
-Only give the brief answer in a beautify manner. Do not add any extra message at the beginning or end.
 At the end of every valid answer, display this info message:
 "ℹ️ This analysis is based only on your last 15 days of expenses." in italic style
 ---
@@ -85,7 +92,6 @@ Here is the user's last 15 days of expense data:
 
     const prompt = `
 ${baseInstructions}
-
 Expense Data:
 ${dataBlock}
 
