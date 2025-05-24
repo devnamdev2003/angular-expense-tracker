@@ -17,5 +17,12 @@
                 </div>
             </label>
         </app-setting-item>
+        <!-- Download Data -->
+        <app-setting-item label="💾 Download Data">
+            <button (click)="confirmAndDownload()"
+                class="p-2 rounded-lg bg-[var(--color-accent)] hover:opacity-90 transition flex items-center justify-center">
+                <img src="assets/img/icon/icons8-download-48.png" alt="Download" class="w-5 h-5" style="filter: invert(100%);"/>
+            </button>
+        </app-setting-item>
     </div>
 </section>
