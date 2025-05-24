@@ -16,7 +16,7 @@ export class GeminiApiService {
   async getResponse(prompt: string): Promise<string> {
 
     this.globalLoaderService.show("📊 Analyzing your expenses..");
-    const expenses = this.getLast15DaysExpenses();
+    const expenses = this.getLast30DaysExpenses();
     const updatedPrompt = this.generateExpenseAnalysisPrompt(prompt, expenses);
     const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
     const body = {
@@ -37,56 +37,49 @@ export class GeminiApiService {
     }
   }
 
-  getLast15DaysExpenses(): Pick<Expense, 'amount' | 'note' | 'payment_mode' | 'location' | 'date' | 'time' | 'category_name'>[] {
+  getLast30DaysExpenses(): Pick<Expense, 'amount' | 'note' | 'location' | 'date' | 'category_name'>[] {
     const toDate = new Date();
     const fromDate = new Date();
-    fromDate.setDate(toDate.getDate() - 14);
+    fromDate.setDate(toDate.getDate() - 29);
 
     const results = this.expenseService.searchByDateRange(fromDate.toISOString(), toDate.toISOString());
 
     return results.map(exp => ({
       amount: exp.amount,
       note: exp.note,
-      payment_mode: exp.payment_mode,
       location: exp.location,
-      date: exp.date,
-      time: exp.time,
+      date: exp.date + "T" + exp.time,
       category_name: exp.category_name,
     }));
   }
 
   generateExpenseAnalysisPrompt(
     userQuery: string,
-    last15DaysExpenses: Pick<Expense, 'amount' | 'note' | 'payment_mode' | 'location' | 'date' | 'time' | 'category_name'>[]
+    last15DaysExpenses: Pick<Expense, 'amount' | 'note' | 'location' | 'date' | 'category_name'>[]
   ): string {
     const baseInstructions = `
-You are a polite and helpful financial assistant AI. Your sole purpose is to help the user **analyze and predict** their expenses from the last 15 days.
+You are a polite and helpful financial assistant AI. Your sole purpose is to help the user **analyze and predict** their expenses from the last 30 days.
 
 🎯 Responsibilities:
 - Use only the provided expense data for any analysis, answers or predictions.
-- Predict the user’s next 10 days of expenses by identifying trends, patterns, or averages from the last 15 days.
+- Predict the user’s expenses by identifying trends, patterns, or averages from the last 30 days.
 - Politely respond to greetings like “Hi”, “Hello”, or “How are you?” with a short, friendly message.
 - If the user asks a question unrelated to the expense data, you must not answer it.
 
 💬 Response Format:
 - Reply in a friendly and human-like tone.
 - Use emojis where helpful.
-- Do NOT return raw JSON, or code blocks unless explicitly asked.
+- Do NOT return raw JSON, or code blocks.
 - Structure your response using bullet points, short sentences, or paragraph style that's visually appealing.
-- Do not add any extra message at the beginning or end.
+- Do not add any extra message at the beginning.
 
 🚫 When the user asks something unrelated (e.g., weather, politics, personal advice), respond with:
 - "❌ I'm here only to help with your expense data. Please ask something related to your recent spending."
 - "⚠️ I cannot process questions outside your expense data."
 - "🛑 Let’s keep this focused on your expenses so I can assist you better."
-
 (Include any other appropriate warning messages if the user continues asking unrelated questions.)
 
-At the end of every valid answer, display this info message:
-"ℹ️ This answer is based only on your last 15 days of expenses." in italic style
----
-
-Here is the user's last 15 days of expense data:
+Here is the user's last 30 days of expense data:
 `;
 
     const dataBlock = JSON.stringify(last15DaysExpenses, null, 2);
