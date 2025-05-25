@@ -60,10 +60,71 @@ export class MusicComponent implements OnDestroy {
     }, 500);
 
     this.audio.onended = () => {
+      this.onSongFinished();
+    };
+  }
+
+  async onSongFinished() {
+    try {
+      const transformedData = this.transformSongData(this.currentSong);
+
+      // Get AI suggestion
+      const nextSong = await this.saavnService.suggestNextSong(transformedData);
+
+      if (!nextSong || typeof nextSong !== 'string' || nextSong.trim() === '') {
+        console.warn('No song suggestion received from AI.');
+        return; // Stop if no suggestion
+      }
+
+      let cleanedSong = nextSong.trim();
+
+      if (cleanedSong.startsWith("```json")) {
+        cleanedSong = cleanedSong.replace(/^```json/, "").replace(/```$/, "").trim();
+      } else if (cleanedSong.startsWith("```")) {
+        cleanedSong = cleanedSong.replace(/^```/, "").replace(/```$/, "").trim();
+      }
+
+      let songDetails: { songName: string; artistsName: string };
+
+      try {
+        songDetails = JSON.parse(cleanedSong);
+      } catch (jsonError) {
+        console.error('Failed to parse AI response as JSON:', jsonError);
+        return; // Stop if JSON parsing fails
+      }
+
+      const { songName, artistsName } = songDetails || {};
+      if (!songName || !artistsName) {
+        console.warn('Incomplete song details received from AI:', songDetails);
+        return; // Stop if required fields are missing
+      }
+
+      console.log('Searching for:', songName + " " + artistsName);
+
+      // Search and play the song
+      this.saavnService.searchSongs(`${songName} ${artistsName}`).subscribe({
+        next: (res) => {
+          const results = res.data?.results || [];
+          if (results.length > 0) {
+            const firstSong = results[0];
+            const url = this.getSongUrl(firstSong);
+            this.playSong(url, firstSong);
+          } else {
+            console.warn('No search results found for suggested song.');
+          }
+        },
+        error: (searchError) => {
+          console.error('Error during song search:', searchError);
+        }
+      });
+    } catch (error) {
+      console.error('Error in onSongFinished:', error);
+    } finally {
+      // Reset progress and cleanup
       this.currentSong = null;
       this.progress.set(0);
       clearInterval(this.interval);
-    };
+    }
   }
 
   formatTime(seconds: number) {
@@ -85,5 +146,25 @@ export class MusicComponent implements OnDestroy {
     }
   }
 
+  transformSongData(data: any) {
+    return {
+      name: data.name,
+      type: data.type,
+      year: data.year,
+      duration: data.duration,
+      label: data.label,
+      playCount: data.playCount,
+      language: data.language,
+      copyright: data.copyright,
+      album: {
+        name: data.album?.name || ''
+      },
+      artists: {
+        all: (data.artists?.primary || []).map((artist: any) => ({
+          name: artist.name
+        }))
+      }
+    };
+  }
 
 }
