@@ -1,20 +1,23 @@
-import { Component, signal } from '@angular/core';
+import { Component, signal, effect, OnDestroy } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { SaavnService } from '../../service/saavan-api/saavan.service';
 
 @Component({
   selector: 'app-music',
-  imports: [FormsModule, CommonModule],
   standalone: true,
+  imports: [CommonModule, FormsModule],
   templateUrl: './music.component.html',
   styleUrl: './music.component.css'
 })
-export class MusicComponent {
-  query = ''; // Normal string for template binding
+export class MusicComponent implements OnDestroy {
+  query = '';
   songs = signal<any[]>([]);
   audio = new Audio();
-  currentPlaying: string | null = null;
+  currentSong: any = null;
+  progress = signal(0);
+  duration = signal(0);
+  interval: any = null;
 
   constructor(private saavnService: SaavnService) { }
 
@@ -31,20 +34,45 @@ export class MusicComponent {
     return song.downloadUrl?.find((d: any) => d.quality === '320kbps')?.url || '';
   }
 
-  playSong(url: string) {
-    if (this.currentPlaying === url) {
-      this.audio.pause();
-      this.currentPlaying = null;
+  playSong(url: string, song: any) {
+    if (!this.audio) {
+      this.audio = new Audio();
+    }
+
+    if (this.currentSong?.url === url) {
+      if (this.audio.paused) {
+        this.audio.play();
+      } else {
+        this.audio.pause();
+      }
     } else {
       this.audio.src = url;
       this.audio.play();
-      this.currentPlaying = url;
+      this.currentSong = { ...song, url };
+      this.duration.set(song.duration);
     }
+
+    clearInterval(this.interval);
+    this.interval = setInterval(() => {
+      if (this.audio) {
+        this.progress.set(this.audio.currentTime);
+      }
+    }, 500);
+
+    this.audio.onended = () => {
+      this.currentSong = null;
+      this.progress.set(0);
+      clearInterval(this.interval);
+    };
   }
 
   formatTime(seconds: number) {
     const min = Math.floor(seconds / 60);
-    const sec = seconds % 60;
+    const sec = Math.floor(seconds % 60);
     return `${min}:${sec.toString().padStart(2, '0')}`;
+  }
+
+  ngOnDestroy() {
+    clearInterval(this.interval);
   }
 }
