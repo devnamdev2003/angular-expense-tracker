@@ -5,11 +5,15 @@ import { finalize } from 'rxjs/operators';
 import { environment } from '../../../environments/environments';
 import { firstValueFrom } from 'rxjs';
 
-
+export interface ChatMessage {
+  role: 'user' | 'model';
+  parts: { text: string }[];
+}
 @Injectable({
   providedIn: 'root'
 })
 export class SaavnService {
+  private history: ChatMessage[] = [];
   private baseUrl = 'https://saavn.dev/api/search/songs';
   private apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${environment.geminiApiKey}`;
 
@@ -26,6 +30,7 @@ export class SaavnService {
   }
 
   async suggestNextSong(currentSong: any) {
+    
     this.globalLoaderService.show("Suggesting next song...");
 
     const formatField = (fieldName: string, value: any) => {
@@ -66,24 +71,29 @@ Provide only the JSON object and no extra text, no backticks, no markdown format
 }
 `;
     console.log(prompt)
+    this.history.push({ role: 'user', parts: [{ text: prompt }] });
     const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
     const body = {
-      contents: [{
-        parts: [{ text: prompt }]
-      }]
+      contents: this.history
     };
 
     try {
       const res: any = await firstValueFrom(this.http.post(this.apiUrl, body, { headers }));
       const parts = res?.candidates?.[0]?.content?.parts;
-      this.globalLoaderService.hide();
-      return parts?.map((p: any) => p.text).join('\n\n') || 'No response';
+      const modelReply = parts?.map((p: any) => p.text).join('\n\n') || 'No response';
+
+      this.history.push({ role: 'model', parts: [{ text: modelReply }] });
+
+      return modelReply;
     } catch (err) {
-      this.globalLoaderService.hide();
-      console.error('Gemini API error:', err);
+      console.error('Error:', err);
       return 'Error fetching response';
     }
 
+  }
+
+  getHistory(): ChatMessage[] {
+    return this.history;
   }
 
 }

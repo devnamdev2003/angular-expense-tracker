@@ -1,13 +1,13 @@
 import { TestBed } from '@angular/core/testing';
 
-import { SaavanService } from './saavan.service'
+import { SaavnService } from './saavan.service'
 
 describe('SaavanService', () => {
-  let service: SaavanService;
+  let service: SaavnService;
 
   beforeEach(() => {
     TestBed.configureTestingModule({});
-    service = TestBed.inject(SaavanService);
+    service = TestBed.inject(SaavnService);
   });
 
   it('should be created', () => {

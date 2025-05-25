@@ -70,6 +70,7 @@ export class MusicComponent implements OnDestroy {
 
       // Get AI suggestion
       const nextSong = await this.saavnService.suggestNextSong(transformedData);
+      console.log("ai response: "+ nextSong)
 
       if (!nextSong || typeof nextSong !== 'string' || nextSong.trim() === '') {
         console.warn('No song suggestion received from AI.');
@@ -94,15 +95,16 @@ export class MusicComponent implements OnDestroy {
       }
 
       const { songName, artistsName } = songDetails || {};
-      if (!songName || !artistsName) {
+      const mainArtist = artistsName ? artistsName.split(",")[0].trim() : "";
+      if (!songName || !mainArtist) {
         console.warn('Incomplete song details received from AI:', songDetails);
         return; // Stop if required fields are missing
       }
 
-      console.log('Searching for:', songName + " " + artistsName);
+      console.log('Searching for:', songName + " " + mainArtist);
 
       // Search and play the song
-      this.saavnService.searchSongs(`${songName} ${artistsName}`).subscribe({
+      this.saavnService.searchSongs(`${songName} ${mainArtist}`).subscribe({
         next: (res) => {
           const results = res.data?.results || [];
           if (results.length > 0) {
