@@ -21,8 +21,8 @@ import { AnalysisComponent } from './features/analysis/analysis.component';
 import { AiComponent } from './features/ai/ai.component';
 import { Router, NavigationEnd } from '@angular/router';
 import { filter } from 'rxjs/operators';
-
 import { MusicComponent } from './features/music/music.component';
+
 @Component({
   selector: 'app-root',
   standalone: true,

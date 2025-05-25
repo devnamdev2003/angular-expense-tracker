@@ -1,1 +1,24 @@
-<p>music works!</p>
+<div class="max-w-xl mx-auto p-4">
+  <h1 class="text-2xl font-semibold mb-4">Search for a Song</h1>
+
+  <div class="flex items-center gap-2 mb-4">
+    <input type="text" [(ngModel)]="query" (keyup.enter)="searchSong()" placeholder="Enter song name"
+      class="flex-1 p-2 border rounded-md bg-[var(--input-bg)] text-[var(--input-text)] border-[var(--input-border)]" />
+    <button (click)="searchSong()" class="bg-[var(--theme-color)] text-white px-4 py-2 rounded-md">Search</button>
+  </div>
+
+  <div *ngFor="let song of songs()" class="flex items-center gap-4 p-2 rounded-md hover:bg-[var(--list-hover)] transition-all">
+    <button (click)="playSong(getSongUrl(song))" class="text-[var(--theme-color)]">
+      ▶️
+    </button>
+
+    <div class="flex-1">
+      <div class="font-semibold">{{ song.name }}</div>
+      <div class="text-sm text-[var(--color-gray-500)]">{{ song.artists.primary[0]?.name || 'Unknown Artist' }}</div>
+    </div>
+
+    <div class="text-sm text-[var(--color-gray-500)]">
+      {{ formatTime(song.duration) }}
+    </div>
+  </div>
+</div>
