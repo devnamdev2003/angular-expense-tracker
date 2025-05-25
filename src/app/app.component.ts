@@ -19,7 +19,10 @@ import { SectionService } from './service/section/section.service';
 import { BudgetComponent } from './features/budget/budget.component';
 import { AnalysisComponent } from './features/analysis/analysis.component';
 import { AiComponent } from './features/ai/ai.component';
+import { Router, NavigationEnd } from '@angular/router';
+import { filter } from 'rxjs/operators';
 
+import { MusicComponent } from './features/music/music.component';
 @Component({
   selector: 'app-root',
   standalone: true,
@@ -31,7 +34,8 @@ import { AiComponent } from './features/ai/ai.component';
     BudgetComponent,
     AnalysisComponent,
     CalendarComponent,
-    AiComponent],
+    AiComponent,
+    MusicComponent],
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
@@ -39,17 +43,27 @@ import { AiComponent } from './features/ai/ai.component';
 export class AppComponent {
   currentSection: string = 'home';
   isMobile: boolean = false;
-
+  isExpenseRoute = false;
+  isMusicRoute = false;
 
   constructor(
     public userService: UserService,
     private loader: GlobalLoaderService,
     private sectionService: SectionService,
+    private router: Router,
     @Inject(PLATFORM_ID) private platformId: Object
   ) {
     this.sectionService.currentSection$.subscribe(section => {
       this.currentSection = section;
     });
+
+    this.router.events
+      .pipe(filter(event => event instanceof NavigationEnd))
+      .subscribe((event: any) => {
+        const url = event.urlAfterRedirects || event.url;
+        this.isExpenseRoute = url === '/';
+        this.isMusicRoute = url.startsWith('/music');
+      });
 
   }
 
