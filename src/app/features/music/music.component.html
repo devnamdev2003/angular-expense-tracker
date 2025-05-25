@@ -7,10 +7,21 @@
     <button (click)="searchSong()" class="bg-[var(--theme-color)] text-white px-4 py-2 rounded-md">Search</button>
   </div>
 
-  <div *ngFor="let song of songs()" class="flex items-center gap-4 p-2 rounded-md hover:bg-[var(--list-hover)] transition-all">
-    <button (click)="playSong(getSongUrl(song), song)" class="text-[var(--theme-color)]">
-      ▶️
-    </button>
+  <div *ngFor="let song of songs()"
+    class="flex items-center gap-4 p-2 rounded-md hover:bg-[var(--list-hover)] transition-all">
+    <div class="relative w-12 h-12 rounded-md overflow-hidden cursor-pointer group"
+      (click)="playSong(getSongUrl(song), song)">
+      <img [src]="song.image?.[2]?.url || 'https://via.placeholder.com/48'" alt="{{ song.name }}"
+        class="w-full h-full object-cover group-hover:brightness-50 transition"
+        [class.filter-brightness-50]="currentSong?.url === getSongUrl(song)" />
+
+      <div
+        class="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity"
+        [class.opacity-100]="currentSong?.url === getSongUrl(song)">
+        <img [src]="'assets/img/music_icon/icons8-play-50.png'" alt="Play" class="w-6 h-6 object-contain"
+          style="filter: invert(100%);" />
+      </div>
+    </div>
 
     <div class="flex-1">
       <div class="font-semibold">{{ song.name }}</div>
@@ -24,23 +35,36 @@
 </div>
 
 <!-- Bottom Audio Bar -->
-<div *ngIf="currentSong" class="fixed bottom-0 left-0 right-0 bg-white shadow-lg border-t p-4 flex items-center gap-4">
-  <img [src]="currentSong.image?.[2]?.url || 'https://via.placeholder.com/50'" alt="Cover" class="w-12 h-12 rounded-md" />
+<div *ngIf="currentSong" class="fixed bottom-0 left-0 right-0 shadow-lg p-4 flex items-center gap-4"
+  [ngStyle]="{'background-color': 'var(--color-surface)', 'color': 'var(--color-text)'}">
+
+  <img [src]="currentSong.image?.[2]?.url || 'https://via.placeholder.com/50'" alt="Cover"
+    class="w-12 h-12 rounded-md" />
 
   <div class="flex-1">
     <div class="font-semibold">{{ currentSong.name }}</div>
-    <div class="text-sm text-gray-500">{{ currentSong.artists.primary[0]?.name || 'Unknown Artist' }}</div>
+    <div class="text-sm" [ngStyle]="{'color': 'var(--color-gray-500)'}">{{ currentSong.artists.primary[0]?.name ||
+      'Unknown Artist' }}</div>
 
-    <!-- Progress Bar -->
-    <div class="h-1 bg-gray-300 rounded mt-2">
-      <div class="h-1 bg-[var(--theme-color)] rounded" [style.width.%]="(progress() / duration()) * 100"></div>
-    </div>
+    <!-- Progress Bar (Range Input) -->
+    <input type="range" min="0" [max]="duration()" [value]="progress()" (input)="onSeek($event)"
+      class="w-full mt-2 h-1 rounded accent-[var(--theme-color)]" [ngStyle]="{
+        'background-color': 'var(--input-border)',
+        'accent-color': 'var(--theme-color)'
+      }" />
   </div>
 
   <div class="flex items-center gap-2">
-    <div class="text-sm text-gray-500">{{ formatTime(progress()) }} / {{ formatTime(duration()) }}</div>
-    <button (click)="playSong(currentSong.url, currentSong)">
-      {{ audio.paused ? '▶️' : '⏸️' }}
+    <div class="text-sm" [ngStyle]="{'color': 'var(--color-gray-500)'}">
+      {{ formatTime(progress()) }} / {{ formatTime(duration()) }}
+    </div>
+
+    <button (click)="playSong(currentSong.url, currentSong)" class="w-7 h-7">
+      <img
+        [src]="audio.paused ? 'assets/img/music_icon/icons8-play-50.png' : 'assets/img/music_icon/icons8-pause-50.png'"
+        alt="{{ audio.paused ? 'Play' : 'Pause' }}"
+        class="w-7 h-7 object-contain transition-transform duration-300 ease-in-out"
+        style="filter: var(--icon-color2);" />
     </button>
   </div>
 </div>

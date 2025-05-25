@@ -75,4 +75,15 @@ export class MusicComponent implements OnDestroy {
   ngOnDestroy() {
     clearInterval(this.interval);
   }
+
+  onSeek(event: Event) {
+    const target = event.target as HTMLInputElement;
+    const seekTime = Number(target.value);
+    if (this.audio) {
+      this.audio.currentTime = seekTime;
+      this.progress.set(seekTime);
+    }
+  }
+
+
 }
