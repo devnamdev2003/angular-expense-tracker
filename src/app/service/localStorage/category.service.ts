@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Expense } from './expense.service';
 import { StorageService } from './storage.service';
+import { UserService } from './user.service';
 
 export interface Category {
   category_id: string;
@@ -21,7 +22,7 @@ export class CategoryService {
     return typeof window !== 'undefined' && typeof window.localStorage !== 'undefined';
   }
 
-  constructor(private storageService: StorageService) { };
+  constructor(private storageService: StorageService, private userService: UserService) { };
 
   getSortedCategoriesByExpenseCount(): Category[] {
     const expenses: Expense[] = this.storageService.getAllExpenses();
@@ -49,7 +50,7 @@ export class CategoryService {
     if (!this.isBrowser()) return;
     const all: Category[] = this.getAll();
     const category_id = crypto.randomUUID();
-    const user_id = '0';
+    const user_id = this.userService.getValue<string>('id') || '0';
 
     all.push({ ...data, category_id, user_id });
     localStorage.setItem(StorageService.categoryKey, JSON.stringify(all));
@@ -61,4 +62,12 @@ export class CategoryService {
     all = all.map(item => item.category_id === category_id ? { ...item, ...newData } : item);
     localStorage.setItem(StorageService.categoryKey, JSON.stringify(all));
   }
+
+  delete(categoryName: string): void {
+    if (!this.isBrowser()) return;
+    const all: Category[] = this.getAll();
+    const updated = all.filter(c => c.name.toLowerCase() !== categoryName.toLowerCase());
+    localStorage.setItem(StorageService.categoryKey, JSON.stringify(updated));
+  }
+
 }
