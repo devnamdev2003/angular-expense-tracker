@@ -33,7 +33,7 @@ export class GeminiApiService {
     } catch (err) {
       this.globalLoaderService.hide();
       console.error('Gemini API error:', err);
-      return 'Error fetching response';
+      return 'Error fetching response' + err;
     }
   }
 
