@@ -142,9 +142,8 @@
         (expenseSelected)="openExpenseModal($event)">
     </app-expense-list>
 
-
     <app-expense-details-modal *ngIf="selectedExpense" [selectedExpense]="selectedExpense" [currency]="currency"
-        (closeModal)="selectedExpense = null" (delete)="deleteExpense($event)" (edit)="editExpense($event)">
+        (closeModal)="closeModal()" (delete)="deleteExpense($event)" (edit)="editExpense($event)" [isEditOpen] = "isEditOpen">
     </app-expense-details-modal>
 
     <ng-template #noDataTemplate>

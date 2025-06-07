@@ -26,6 +26,7 @@ export class ListExpensesComponent implements OnInit {
   selectedExpense: Expense | null = null;
   fieldDirection: number = 0;
   fieldColIndex: number = 0;
+  isEditOpen: boolean = false;
   filter = {
     fromDate: '',
     toDate: '',
@@ -178,11 +179,20 @@ export class ListExpensesComponent implements OnInit {
   }
 
   closeModal() {
+    this.isEditOpen = false;
     this.selectedExpense = null;
   }
 
   editExpense(expense: Expense) {
+    this.isEditOpen = true;
+    this.selectedExpense = expense;
+    const { expense_id, ...newData } = expense;
+    this.expenseService.update(expense_id, newData);
     this.toastService.show('Edit feature not implemented yet', 'info');
+    this.isEditOpen = false;
+    this.listExpenses();
+
+
   }
 
   deleteExpense(id: string) {
