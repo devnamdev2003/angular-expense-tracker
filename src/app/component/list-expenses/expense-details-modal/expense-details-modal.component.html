@@ -6,15 +6,15 @@
             <h2 class="text-lg font-bold text-[var(--color-text)]">
                 {{ isEditOpen ? 'Edit Expense' : 'Expense Details' }}
             </h2>
-            <button (click)="toggleEdit()" class="flex items-center justify-center">
-                <img src="assets/img/icon/icons8-edit-50.png" alt="edit"
-                    class="w-[20px] h-[20px] transition-all duration-300 ease-in-out group-hover:brightness-0 group-hover:invert"
+            <button (click)="toggleEdit()"
+                class="p-2 flex items-center justify-center rounded-full hover:bg-[var(--list-hover)] transition-all duration-200 ease-in-out">
+                <img src="assets/img/icon/icons8-edit-50.png" alt="edit" class="w-[20px] h-[20px] pointer-events-none"
                     style="filter: var(--icon-color2);" />
             </button>
         </div>
 
         <!-- Scrollable Body -->
-        <div class="overflow-y-auto px-6 py-4 space-y-3 text-sm max-h-[45vh]">
+        <div class="overflow-y-auto px-5 py-4 space-y-3 text-sm max-h-[45vh]">
             <!-- View Mode -->
             <ng-container *ngIf="!isEditOpen">
                 <div><strong>Amount:</strong> {{ currency }} {{ selectedExpense.amount }}</div>

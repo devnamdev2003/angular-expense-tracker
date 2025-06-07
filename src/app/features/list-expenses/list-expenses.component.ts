@@ -188,11 +188,9 @@ export class ListExpensesComponent implements OnInit {
     this.selectedExpense = expense;
     const { expense_id, ...newData } = expense;
     this.expenseService.update(expense_id, newData);
-    this.toastService.show('Edit feature not implemented yet', 'info');
+    this.toastService.show('Expense updated successfully', 'success');
     this.isEditOpen = false;
     this.listExpenses();
-
-
   }
 
   deleteExpense(id: string) {
