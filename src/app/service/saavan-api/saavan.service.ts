@@ -70,7 +70,6 @@ Provide only the JSON object and no extra text, no backticks, no markdown format
   "artistsName": "string"
 }
 `;
-    console.log(prompt)
     this.history.push({ role: 'user', parts: [{ text: prompt }] });
     const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
     const body = {

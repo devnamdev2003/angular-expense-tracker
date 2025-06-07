@@ -5,11 +5,13 @@ import { CommonModule } from '@angular/common';
 import { ToastService } from '../../service/toast/toast.service';
 import { UserService } from '../../service/localStorage/user.service';
 import { FormsModule } from '@angular/forms';
+import { ExpenseDetailsModalComponent } from "../../component/list-expenses/expense-details-modal/expense-details-modal.component";
+import { ExpenseListComponent } from "../../component/list-expenses/expense-list/expense-list.component";
 
 @Component({
   standalone: true,
   selector: 'app-list-expenses',
-  imports: [CommonModule, FormsModule],
+  imports: [CommonModule, FormsModule, ExpenseDetailsModalComponent, ExpenseListComponent],
   templateUrl: './list-expenses.component.html',
   styleUrls: ['./list-expenses.component.css'],
 })
@@ -59,12 +61,6 @@ export class ListExpensesComponent implements OnInit {
     } catch (err) {
       console.error("Failed to load expenses:", err);
     }
-  }
-
-  getFormattedDate(expense: any): string {
-    const expDate = new Date(expense.date);
-    const timeParts = expense.time.split(":");
-    return `${expDate.getFullYear()}-${String(expDate.getMonth() + 1).padStart(2, '0')}-${String(expDate.getDate()).padStart(2, '0')} ${timeParts[0]}:${timeParts[1]}:${timeParts[2]}`;
   }
 
   sortList(colIndex: number, fieldName: string, direction: number) {
@@ -185,7 +181,7 @@ export class ListExpensesComponent implements OnInit {
     this.selectedExpense = null;
   }
 
-  editExpense(id: string) {
+  editExpense(expense: Expense) {
     this.toastService.show('Edit feature not implemented yet', 'info');
   }
 
@@ -197,17 +193,4 @@ export class ListExpensesComponent implements OnInit {
       this.listExpenses();
     }
   }
-  darkenColor(hex: string, amount: number): string {
-    const num = parseInt(hex.replace('#', ''), 16);
-    let r = (num >> 16) - amount * 255;
-    let g = ((num >> 8) & 0x00FF) - amount * 255;
-    let b = (num & 0x0000FF) - amount * 255;
-
-    r = Math.max(0, Math.min(255, r));
-    g = Math.max(0, Math.min(255, g));
-    b = Math.max(0, Math.min(255, b));
-
-    return `rgb(${r}, ${g}, ${b})`;
-  }
-
 }

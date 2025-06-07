@@ -1,0 +1,29 @@
+<!-- expense-details-modal.component.html -->
+<div *ngIf="selectedExpense" class="fixed inset-0 bg-black bg-opacity-40 z-50 flex items-center justify-center">
+    <div class="bg-[var(--color-bg)] p-6 rounded-xl w-11/12 md:w-2/5 max-h-[60vh] flex flex-col shadow-xl">
+        <div class="flex justify-between items-center mb-3">
+            <h2 class="text-lg font-bold text-[var(--color-text)]">Expense Details</h2>
+            <button (click)="editDetails()" class="flex items-center justify-center">
+                <img src="assets/img/icon/icons8-edit-50.png" alt="edit"
+                    class="w-[20px] h-[20px] transition-all duration-300 ease-in-out group-hover:brightness-0 group-hover:invert"
+                    style="filter: var(--icon-color2);" />
+            </button>
+        </div>
+        <hr>
+        <div class="space-y-2 text-sm mt-2">
+            <div><strong>Amount:</strong> {{ currency }} {{ selectedExpense.amount }}</div>
+            <div><strong>Category:</strong> {{ selectedExpense.category_name || 'Uncategorized' }}</div>
+            <div><strong>Date:</strong> {{ selectedExpense.date }}</div>
+            <div><strong>Time:</strong> {{ selectedExpense.time }}</div>
+            <div *ngIf="selectedExpense.note"><strong>Note:</strong> {{ selectedExpense.note }}</div>
+            <div><strong>Payment Mode:</strong> {{ selectedExpense.payment_mode }}</div>
+            <div *ngIf="selectedExpense.location"><strong>Location:</strong> {{ selectedExpense.location }}</div>
+        </div>
+        <div class="mt-6 flex space-x-3">
+            <button (click)="close()"
+                class="flex-1 bg-[var(--color-gray-500)] text-white py-2 px-4 rounded-lg">Close</button>
+            <button (click)="onDelete()"
+                class="flex-1 bg-[var(--color-red)] text-white py-2 px-4 rounded-lg">Delete</button>
+        </div>
+    </div>
+</div>

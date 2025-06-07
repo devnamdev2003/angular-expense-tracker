@@ -138,66 +138,14 @@
         </ul>
     </div>
 
-    <!-- Expense List -->
-    <ul class="space-y-3" *ngIf="expenses.length > 0; else noDataTemplate">
-        <li *ngFor="let exp of expenses" (click)="openExpenseModal(exp)"
-            class="rounded-xl py-2 flex items-center justify-between shadow-sm active:scale-[0.97] transition-transform cursor-pointer hover:bg-[var(--list-hover)]">
+    <app-expense-list *ngIf="expenses.length > 0; else noDataTemplate" [expenses]="expenses" [currency]="currency"
+        (expenseSelected)="openExpenseModal($event)">
+    </app-expense-list>
 
-            <!-- Left section: Icon + Category + Date -->
-            <div class="flex items-center gap-3">
-                <!-- Gradient Circle Icon -->
 
-                <div class="w-10 h-10 rounded-full flex items-center justify-center text-white text-xl font-bold"
-                    [ngStyle]="{
-                   background: 'linear-gradient(135deg, ' + exp.category_color + ', ' + darkenColor(exp.category_color, 0.2) + ')'
-                 }">
-                    {{ exp.category_icon }}
-                </div>
-
-                <div class="flex flex-col">
-                    <span class="text-sm font-medium">
-                        {{ exp.category_name || 'Uncategorized' }}
-                    </span>
-                    <span class="text-xs text-gray-500 dark:text-gray-400">
-                        {{ getFormattedDate(exp) }}
-                    </span>
-                </div>
-            </div>
-
-            <!-- Right section: Amount -->
-            <div class="text-right">
-                <span class="text-[17px] text-[var(--color-green)]">
-                    {{ currency }} {{ exp.amount }}
-                </span>
-            </div>
-        </li>
-    </ul>
-
-    <!-- Modal -->
-    <div *ngIf="selectedExpense" class="fixed inset-0 bg-black bg-opacity-40 z-50 flex items-center justify-center">
-        <div class="bg-[var(--color-bg)] p-6 rounded-xl w-11/12 md:w-1/2 max-h-[60vh] flex flex-col shadow-xl">
-            <div class="flex justify-between items-center mb-3">
-                <h2 class="text-lg font-bold text-[var(--color-text)]">Expense Details</h2>
-                <button (click)="closeModal()" class="text-[var(--color-red)] font-bold text-xl">&times;</button>
-            </div>
-            <hr>
-            <div class="space-y-2 text-sm mt-2">
-                <div><strong>Amount:</strong> {{ currency }} {{ selectedExpense.amount }}</div>
-                <div><strong>Category:</strong> {{ selectedExpense.category_name || 'Uncategorized' }}</div>
-                <div><strong>Date:</strong> {{ selectedExpense.date }}</div>
-                <div><strong>Time:</strong> {{ selectedExpense.time }}</div>
-                <div *ngIf="selectedExpense.note"><strong>Note:</strong> {{ selectedExpense.note }}</div>
-                <div><strong>Payment Mode:</strong> {{ selectedExpense.payment_mode }}</div>
-                <div *ngIf="selectedExpense.location"><strong>Location:</strong> {{ selectedExpense.location }}</div>
-            </div>
-            <div class="mt-6 flex space-x-3">
-                <button (click)="closeModal()"
-                    class="flex-1 bg-[var(--color-gray-500)] text-white py-2 px-4 rounded-lg">Close</button>
-                <button (click)="deleteExpense(selectedExpense.expense_id)"
-                    class="flex-1 bg-[var(--color-red)] text-white py-2 px-4 rounded-lg">Delete</button>
-            </div>
-        </div>
-    </div>
+    <app-expense-details-modal *ngIf="selectedExpense" [selectedExpense]="selectedExpense" [currency]="currency"
+        (closeModal)="selectedExpense = null" (delete)="deleteExpense($event)" (edit)="editExpense($event)">
+    </app-expense-details-modal>
 
     <ng-template #noDataTemplate>
         <div class="text-center text-gray-500 py-4">
