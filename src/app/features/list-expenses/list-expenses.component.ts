@@ -32,10 +32,17 @@ export class ListExpensesComponent implements OnInit {
     toDate: '',
     selectedCategoryIds: [] as string[],
   };
-  totalAmount: number = 0;
-  @ViewChild('dropdownRef') dropdownRef!: ElementRef;
-  @ViewChild('filterRef') filterRef!: ElementRef;
 
+  appliedFilter = {
+    fromDate: '',
+    toDate: '',
+    selectedCategoryIds: [] as string[],
+  };
+  isFiltered: boolean = false;
+  isSorted: boolean = false;
+  totalAmount: number = 0;
+  @ViewChild('sortRef') sortRef!: ElementRef;
+  @ViewChild('filterRef') filterRef!: ElementRef;
 
   constructor(
     private expenseService: ExpenseService,
@@ -61,6 +68,14 @@ export class ListExpensesComponent implements OnInit {
       this.totalAmount = parseFloat(this.totalAmount.toFixed(2));
     } catch (err) {
       console.error("Failed to load expenses:", err);
+    }
+    finally {
+      if (this.isSorted) {
+        this.sortList(this.fieldColIndex, this.selectedFieldName, this.fieldDirection);
+      }
+      if (this.isFiltered) {
+        this.applyFilter();
+      }
     }
   }
 
@@ -100,8 +115,8 @@ export class ListExpensesComponent implements OnInit {
     this.fieldDirection = direction;
     this.selectedFieldName = fieldName;
     this.isSortByDropdownOpen = false;
+    this.isSorted = true;
   }
-
 
   toggleSortByDropdown() {
     this.isSortByDropdownOpen = !this.isSortByDropdownOpen;
@@ -112,10 +127,10 @@ export class ListExpensesComponent implements OnInit {
     const target = event.target as HTMLElement;
     if (
       this.isSortByDropdownOpen &&
-      this.dropdownRef &&
-      !this.dropdownRef.nativeElement.contains(target)
+      this.sortRef &&
+      !this.sortRef.nativeElement.contains(target)
     ) {
-      this.isSortByDropdownOpen = false;
+      this.toggleSortByDropdown();
     }
 
     if (
@@ -123,28 +138,35 @@ export class ListExpensesComponent implements OnInit {
       this.filterRef &&
       !this.filterRef.nativeElement.contains(target)
     ) {
-      this.isFilterDropdownOpen = false;
+      this.toggleFilterDropdown();
     }
   }
 
   toggleFilterDropdown() {
+    if (this.isFiltered) {
+      this.filter = structuredClone(this.appliedFilter);
+    }
+    else {
+      this.clearFilter();
+    }
     this.isFilterDropdownOpen = !this.isFilterDropdownOpen;
   }
 
   applyFilter() {
     this.totalAmount = 0;
     let filtered = this.expenseService.getAll();
+    this.appliedFilter = structuredClone(this.filter);
 
-    if (this.filter.fromDate) {
-      filtered = filtered.filter(e => new Date(e.date) >= new Date(this.filter.fromDate));
+    if (this.appliedFilter.fromDate) {
+      filtered = filtered.filter(e => new Date(e.date) >= new Date(this.appliedFilter.fromDate));
     }
 
-    if (this.filter.toDate) {
-      filtered = filtered.filter(e => new Date(e.date) <= new Date(this.filter.toDate));
+    if (this.appliedFilter.toDate) {
+      filtered = filtered.filter(e => new Date(e.date) <= new Date(this.appliedFilter.toDate));
     }
 
-    if (this.filter.selectedCategoryIds.length) {
-      filtered = filtered.filter(e => this.filter.selectedCategoryIds.includes(e.category_id));
+    if (this.appliedFilter.selectedCategoryIds.length) {
+      filtered = filtered.filter(e => this.appliedFilter.selectedCategoryIds.includes(e.category_id));
     }
 
     this.expenses = filtered;
@@ -152,17 +174,11 @@ export class ListExpensesComponent implements OnInit {
       this.totalAmount = this.totalAmount + val.amount;
     })
     this.totalAmount = parseFloat(this.totalAmount.toFixed(2));
-    if (this.selectedFieldName != 'Sort By') {
+    if (this.isSorted) {
       this.sortList(this.fieldColIndex, this.selectedFieldName, this.fieldDirection);
     }
     this.isFilterDropdownOpen = false;
-  }
-
-  clearFilter() {
-    this.filter.fromDate = '';
-    this.filter.toDate = '';
-    this.filter.selectedCategoryIds = [];
-    this.listExpenses();
+    this.isFiltered = true;
   }
 
   onCategoryCheckboxChange(event: Event, categoryId: string) {
@@ -198,7 +214,21 @@ export class ListExpensesComponent implements OnInit {
       this.expenseService.delete(id);
       this.toastService.show("Expense deleted successfully", 'success');
       this.closeModal();
-      this.listExpenses();
     }
+    this.listExpenses();
+  }
+
+  clearFilter() {
+    this.filter.fromDate = '';
+    this.filter.toDate = '';
+    this.filter.selectedCategoryIds = [];
+    this.isFiltered = false;
+    this.listExpenses();
+  }
+
+  clearSort() {
+    this.isSorted = false;
+    this.selectedFieldName = "Sort By";
+    this.listExpenses();
   }
 }
