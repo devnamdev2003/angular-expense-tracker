@@ -5,6 +5,7 @@ import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } 
 import { CommonModule } from '@angular/common';
 import { SettingItemComponent } from '../../component/setting-item/setting-item.component';
 import { CategoryService } from '../../service/localStorage/category.service';
+import { CategoryDropdownComponent } from '../../component/category-dropdown/category-dropdown.component';
 import { AbstractControl, ValidationErrors, ValidatorFn } from '@angular/forms';
 import { ToastService } from '../../service/toast/toast.service';
 
@@ -15,6 +16,7 @@ import { ToastService } from '../../service/toast/toast.service';
     CommonModule,
     SettingItemComponent,
     ReactiveFormsModule,
+    CategoryDropdownComponent,
   ],
   templateUrl: './settings.component.html',
   styleUrls: ['./settings.component.css'],
@@ -27,6 +29,7 @@ export class SettingsComponent {
   deleteCategoryForm!: FormGroup;
   showAddCategoryModal = false;
   showDeleteCategoryModal = false;
+  selectedCategoryName: string = 'Select Category';
 
   constructor(
     public userService: UserService,
@@ -52,9 +55,10 @@ export class SettingsComponent {
     });
 
     const allExpenses = this.expenseService.getAll();
-    const usedCategoryNames = allExpenses.map(exp => exp.category_name);
+    const usedCategoryIds = allExpenses.map(exp => exp.category_id);
+    // const defaultCategoryIds = existingCategories.filter(item => item.user_id == '0').map(cat => cat.category_id);
     this.deleteCategoryForm = this.fb.group({
-      name: ['', [Validators.required, this.categoryInUseValidator(usedCategoryNames)]],
+      category_id: ['', [Validators.required, this.categoryInUseValidator(usedCategoryIds)]],
     });
   }
 
@@ -94,7 +98,6 @@ export class SettingsComponent {
     link.href = url;
     link.download = `expenses-${new Date().toISOString()}.json`;
     link.click();
-
     window.URL.revokeObjectURL(url);
   }
 
@@ -103,7 +106,6 @@ export class SettingsComponent {
       this.addCategoryForm.markAllAsTouched();
       return;
     }
-
     const { name, icon, color } = this.addCategoryForm.value;
     this.categoryService.add({ name, icon, color, is_active: '1', expense_count: 0 });
     this.toastService.show('Category added successfully!', 'success');;
@@ -111,16 +113,20 @@ export class SettingsComponent {
     this.addCategoryForm.reset();
   }
 
+  onCategorySelected(category: any) {
+    this.deleteCategoryForm.patchValue({ category_id: category.category_id });
+    this.selectedCategoryName = category.name;
+  }
+
   deleteCategory(): void {
     if (this.deleteCategoryForm.invalid) {
       this.deleteCategoryForm.markAllAsTouched();
       return;
     }
-    const name = this.deleteCategoryForm.value.name.trim();
-    this.categoryService.delete(name);
-    this.toastService.show(`Category "${name}" deleted (if it existed).`, 'success');
+    const category_id = this.deleteCategoryForm.value;
+    this.categoryService.delete(category_id.category_id);
+    this.toastService.show(`Category deleted succesfully.`, 'success');
     this.closeDeleteCategoryModal();
-    this.deleteCategoryForm.reset();
   }
 
   openCategoryModal(): void {
@@ -138,8 +144,11 @@ export class SettingsComponent {
   }
 
   closeDeleteCategoryModal() {
+    this.selectedCategoryName = "Select Category";
     this.showDeleteCategoryModal = false;
+    this.deleteCategoryForm.reset();
   }
+
   nameExistsValidator(existingNames: string[]): ValidatorFn {
     return (control: AbstractControl): ValidationErrors | null => {
       const value = control.value?.trim().toLowerCase();
@@ -169,10 +178,19 @@ export class SettingsComponent {
 
   categoryInUseValidator(expenseCategories: string[]): ValidatorFn {
     return (control: AbstractControl): ValidationErrors | null => {
-      const value = control.value?.trim().toLowerCase();
+      const value = control.value;
       if (!value) return null;
-      const inUse = expenseCategories.some(cat => cat.toLowerCase() === value);
+      const inUse = expenseCategories.some(cat => cat === value);
       return inUse ? { categoryInUse: true } : null;
+    };
+  }
+
+  defaultCategoryValidator(expenseCategories: string[]): ValidatorFn {
+    return (control: AbstractControl): ValidationErrors | null => {
+      const value = control.value;
+      if (!value) return null;
+      const inUse = expenseCategories.some(cat => cat === value);
+      return inUse ? { defaultCategory: true } : null;
     };
   }
 }

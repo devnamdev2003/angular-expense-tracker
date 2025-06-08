@@ -1,35 +1,30 @@
 import { Component, ElementRef, HostListener, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { ExpenseService } from '../../service/localStorage/expense.service';
-import { CategoryService, Category } from '../../service/localStorage/category.service';
+import { CategoryDropdownComponent } from '../../component/category-dropdown/category-dropdown.component';
 import { CommonModule } from '@angular/common';
 import { ToastService } from '../../service/toast/toast.service';
 
 @Component({
   selector: 'app-add-expense',
   standalone: true,
-  imports: [ReactiveFormsModule, CommonModule],
+  imports: [ReactiveFormsModule, CommonModule, CategoryDropdownComponent],
   templateUrl: './add-expense.component.html',
   styleUrls: ['./add-expense.component.css']
 })
 export class AddExpenseComponent implements OnInit {
   expenseForm: FormGroup;
-  categories: Category[] = [];
   selectedCategoryName: string = 'Select Category';
-  isCategoryDropdownOpen: boolean = false;
-  @ViewChild('categorydownRef') categoryRef!: ElementRef;
 
   constructor(
     private fb: FormBuilder,
     private expenseService: ExpenseService,
-    private categoryService: CategoryService,
     private toastService: ToastService
   ) {
     this.expenseForm = this.createForm();
   }
 
   ngOnInit(): void {
-    this.loadCategories();
     this.resetFormWithCurrentDateTime();
   }
 
@@ -45,18 +40,9 @@ export class AddExpenseComponent implements OnInit {
     });
   }
 
-  loadCategories() {
-    this.categories = this.categoryService.getSortedCategoriesByExpenseCount();
-  }
-
-  toggleCategoryDropdown() {
-    this.isCategoryDropdownOpen = !this.isCategoryDropdownOpen;
-  }
-
-  selectCategory(category: any) {
+  onCategorySelected(category: any) {
     this.expenseForm.patchValue({ category_id: category.category_id });
     this.selectedCategoryName = category.name;
-    this.isCategoryDropdownOpen = false;
   }
 
   resetFormWithCurrentDateTime() {
@@ -89,22 +75,9 @@ export class AddExpenseComponent implements OnInit {
       this.expenseService.add(data);
       this.toastService.show('Expense added successfully!', 'success');
       this.resetFormWithCurrentDateTime();
-      this.loadCategories();
     } catch (error) {
       console.error('Submit failed:', error);
       this.toastService.show('Error adding expense.', 'error');
-    }
-  }
-
-  @HostListener('document:click', ['$event'])
-  onDocumentClick(event: MouseEvent) {
-    const target = event.target as HTMLElement;
-    if (
-      this.isCategoryDropdownOpen &&
-      this.categoryRef &&
-      !this.categoryRef.nativeElement.contains(target)
-    ) {
-      this.isCategoryDropdownOpen = false;
     }
   }
 }

@@ -1,16 +1,14 @@
 import { EventEmitter, Input, Output } from '@angular/core';
-import { Component, ElementRef, HostListener, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
-import { ExpenseService } from '../../../service/localStorage/expense.service';
-import { CategoryService, Category } from '../../../service/localStorage/category.service';
 import { CommonModule } from '@angular/common';
-import { ToastService } from '../../../service/toast/toast.service';
+import { CategoryDropdownComponent } from "../../category-dropdown/category-dropdown.component";
 
 @Component({
   selector: 'app-expense-details-modal',
   templateUrl: './expense-details-modal.component.html',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule],
+  imports: [CommonModule, ReactiveFormsModule, CategoryDropdownComponent],
 })
 export class ExpenseDetailsModalComponent implements OnInit {
   @Input() selectedExpense: any;
@@ -19,27 +17,16 @@ export class ExpenseDetailsModalComponent implements OnInit {
   @Output() closeModal = new EventEmitter<void>();
   @Output() delete = new EventEmitter<string>();
   @Output() edit = new EventEmitter<any>();
-
-  categories: Category[] = [];
   selectedCategoryName: string = 'Select Category';
-  isCategoryDropdownOpen: boolean = false;
   editForm!: FormGroup;
-  @ViewChild('categorydownRef') categoryRef!: ElementRef;
-
 
   constructor(
     private fb: FormBuilder,
-    private expenseService: ExpenseService,
-    private categoryService: CategoryService,
-    private toastService: ToastService
   ) {
     this.initForm();
   }
 
-  ngOnInit() {
-    this.loadCategories();
-  }
-
+  ngOnInit() { }
 
   initForm() {
     this.editForm = this.fb.group({
@@ -53,19 +40,9 @@ export class ExpenseDetailsModalComponent implements OnInit {
     });
   }
 
-
-  loadCategories() {
-    this.categories = this.categoryService.getSortedCategoriesByExpenseCount();
-  }
-
-  toggleCategoryDropdown() {
-    this.isCategoryDropdownOpen = !this.isCategoryDropdownOpen;
-  }
-
-  selectCategory(category: any) {
+  onCategorySelected(category: any) {
     this.editForm.patchValue({ category_id: category.category_id });
-    this.selectedCategoryName = category.name;
-    this.isCategoryDropdownOpen = false;
+    console.log('Selected Category ID:', category);
   }
 
   toggleEdit() {
@@ -75,7 +52,6 @@ export class ExpenseDetailsModalComponent implements OnInit {
       this.initForm();
     }
   }
-
 
   submitEdit() {
     if (this.editForm.valid) {
@@ -88,25 +64,11 @@ export class ExpenseDetailsModalComponent implements OnInit {
     }
   }
 
-
-
   close() {
     this.closeModal.emit();
   }
 
   onDelete() {
     this.delete.emit(this.selectedExpense.expense_id);
-  }
-
-  @HostListener('document:click', ['$event'])
-  onDocumentClick(event: MouseEvent) {
-    const target = event.target as HTMLElement;
-    if (
-      this.isCategoryDropdownOpen &&
-      this.categoryRef &&
-      !this.categoryRef.nativeElement.contains(target)
-    ) {
-      this.isCategoryDropdownOpen = false;
-    }
   }
 }

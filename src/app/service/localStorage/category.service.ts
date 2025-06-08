@@ -63,11 +63,20 @@ export class CategoryService {
     localStorage.setItem(StorageService.categoryKey, JSON.stringify(all));
   }
 
-  delete(categoryName: string): void {
+  delete(category_id: string): void {
     if (!this.isBrowser()) return;
+
+    console.log(category_id)
     const all: Category[] = this.getAll();
-    const updated = all.filter(c => c.name.toLowerCase() !== categoryName.toLowerCase());
+    console.log(all)
+    // Check if the category actually exists
+    const categoryExists = all.some(c => c.category_id === category_id);
+    if (!categoryExists) {
+      console.warn(`Category with ID ${category_id} not found.`);
+      return;
+    }
+
+    const updated = all.filter(c => c.category_id !== category_id);
     localStorage.setItem(StorageService.categoryKey, JSON.stringify(updated));
   }
-
 }

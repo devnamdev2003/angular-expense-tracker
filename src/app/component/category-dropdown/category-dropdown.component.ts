@@ -8,7 +8,7 @@ import {
   ViewChild
 } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { Category } from '../../service/localStorage/category.service';
+import { Category, CategoryService } from '../../service/localStorage/category.service';
 
 @Component({
   selector: 'app-category-dropdown',
@@ -18,31 +18,43 @@ import { Category } from '../../service/localStorage/category.service';
   styleUrls: ['./category-dropdown.component.css']
 })
 export class CategoryDropdownComponent {
-  @Input() categories: Category[] = [];
-  @Input() selectedCategoryName: string = 'Select Category';
+
   @Output() categorySelected = new EventEmitter<Category>();
+  @Input() selectedCategoryName: string = 'Select Category';
+  @Input() dropdownMaxHeightClass: string = 'max-h-40'; 
 
-  isDropdownOpen = false;
-  hoveredCat: Category | null = null;
+  categories: Category[] = [];
+  isCategoryDropdownOpen: boolean = false;
+  @ViewChild('categorydownRef') categoryRef!: ElementRef;
 
+  constructor(private categoryService: CategoryService) { }
 
-  @ViewChild('dropdownRef') dropdownRef!: ElementRef;
+  ngOnInit() {
+    this.loadCategories();
+  }
+  loadCategories() {
+    this.categories = this.categoryService.getSortedCategoriesByExpenseCount();
+  }
 
-  toggleDropdown() {
-    this.isDropdownOpen = !this.isDropdownOpen;
+  toggleCategoryDropdown() {
+    this.isCategoryDropdownOpen = !this.isCategoryDropdownOpen;
   }
 
   selectCategory(category: Category) {
     this.categorySelected.emit(category);
     this.selectedCategoryName = category.name;
-    this.isDropdownOpen = false;
+    this.isCategoryDropdownOpen = false;
   }
 
   @HostListener('document:click', ['$event'])
   onDocumentClick(event: MouseEvent) {
     const target = event.target as HTMLElement;
-    if (this.isDropdownOpen && this.dropdownRef && !this.dropdownRef.nativeElement.contains(target)) {
-      this.isDropdownOpen = false;
+    if (
+      this.isCategoryDropdownOpen &&
+      this.categoryRef &&
+      !this.categoryRef.nativeElement.contains(target)
+    ) {
+      this.isCategoryDropdownOpen = false;
     }
   }
 }

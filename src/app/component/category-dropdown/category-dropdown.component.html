@@ -1,14 +1,15 @@
-<div class="relative w-full" #dropdownRef>
-    <button type="button" (click)="toggleDropdown()" class="w-full p-2 rounded border text-left bg-[var(--color-bg)]"
+<div class="relative">
+    <button type="button" (click)="toggleCategoryDropdown()"
+        class="w-full p-2 rounded border text-left bg-[var(--color-bg)]"
         style="background-color: var(--input-bg); color: var(--input-text); border-color: var(--input-border);">
         {{ selectedCategoryName }}
     </button>
-    <ul *ngIf="isDropdownOpen" class="absolute z-50 w-full max-h-60 overflow-y-auto bg-[var(--color-bg)] rounded border"
+    <ul #categorydownRef class="absolute z-50 w-full overflow-y-auto bg-[var(--color-bg)] rounded border"
+        [ngClass]="dropdownMaxHeightClass" *ngIf="isCategoryDropdownOpen"
         style="background-color: var(--input-bg); color: var(--input-text); border-color: var(--input-border);">
-        <li *ngFor="let cat of categories" (click)="selectCategory(cat)" (mouseenter)="hoveredCat = cat"
-            (mouseleave)="hoveredCat = null" class="p-2 cursor-pointer transition-colors duration-200"
-            [ngStyle]="{ 'background-color': hoveredCat === cat ? cat.color || 'var(--list-hover)' : 'transparent' }">
+        <li *ngFor="let cat of categories" (click)="selectCategory(cat)"
+            class="p-2 cursor-pointer hover:bg-[--list-hover]">
             {{ cat.name }} {{ cat.icon }}
-        </li>
+        </li> 
     </ul>
 </div>
