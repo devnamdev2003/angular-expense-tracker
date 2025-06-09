@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
-import { Category, CategoryService } from '../../service/localStorage/category.service';
 import { ExpenseService, Expense } from '../../service/localStorage/expense.service';
 import { Budget, BudgetService } from '../../service/localStorage/budget.service';
 import { CommonModule } from '@angular/common';
@@ -23,14 +22,9 @@ export type ChartOptions = {
 })
 export class BudgetComponent implements OnInit {
   budgetForm: FormGroup;
-  categories: Category[] = [];
-  selectedCategoryName: string = 'Select Category';
-  isCategoryDropdownOpen: boolean = false;
   budgets: Budget[] = [];
   showModal = false;
   showBudgetSection = false;
-  isAll = false;
-
   latestBudget!: Budget;
   budgetProgress = 0;
   budgetColorClass = 'bg-green-500';
@@ -39,11 +33,9 @@ export class BudgetComponent implements OnInit {
   avgSpentPerDay = 0;
   suggestedPerDay = 0;
   isEditMode = false;
-  editingBudgetIndex: number | null = null;
   currency: string | null;
 
   constructor(
-    private categoryService: CategoryService,
     private expenseService: ExpenseService,
     private budgetService: BudgetService,
     private toastService: ToastService,
@@ -55,7 +47,6 @@ export class BudgetComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.loadCategories();
     this.loadBudgets();
   }
 
@@ -66,12 +57,12 @@ export class BudgetComponent implements OnInit {
       toDate: ['', Validators.required],
     });
   }
+
   openModal(): void {
     this.budgetForm.reset();
     this.isEditMode = false;
     this.showModal = true;
   }
-
 
   openEditModal(): void {
     this.isEditMode = true;
@@ -112,14 +103,6 @@ export class BudgetComponent implements OnInit {
     }
   }
 
-  loadCategories() {
-    this.categories = this.categoryService.getSortedCategoriesByExpenseCount();
-  }
-
-  toggleCategoryDropdown() {
-    this.isCategoryDropdownOpen = !this.isCategoryDropdownOpen;
-  }
-
   loadBudgets() {
     this.budgets = this.budgetService.getAll();
     this.showBudgetSection = this.budgets.length > 0;
@@ -128,27 +111,6 @@ export class BudgetComponent implements OnInit {
       this.latestBudget = this.budgets[this.budgets.length - 1];
       this.calculateBudgetProgress();
     }
-  }
-
-  selectCategory(category: any, isAll = false) {
-    if (isAll) {
-      this.budgetForm.patchValue({ category_id: "0" });
-      this.selectedCategoryName = "All Category";
-      this.isCategoryDropdownOpen = false;
-      this.isAll = true;
-    }
-    else {
-      this.budgetForm.patchValue({ category_id: category.category_id });
-      this.selectedCategoryName = category.name;
-      this.isCategoryDropdownOpen = false;
-      this.isAll = false;
-    }
-  }
-
-  getCategoryName(category_id: string): string {
-    if (category_id === '0') return 'All Category';
-    const cat = this.categories.find(c => c.category_id === category_id);
-    return cat ? cat.name : 'Unknown';
   }
 
   calculateBudgetProgress() {

@@ -1,0 +1,32 @@
+<ul class="space-y-3">
+    <li *ngFor="let exp of expenses" (click)="onSelect(exp)"
+        class="rounded-lg py-2 px-2 flex items-center justify-between shadow-sm active:scale-[0.97] transition-transform cursor-pointer hover:bg-[var(--list-hover)]">
+
+        <!-- Left section: Icon + Category + Date -->
+        <div class="flex items-center gap-3">
+            <!-- Gradient Circle Icon -->
+
+            <div class="w-10 h-10 rounded-full flex items-center justify-center text-white text-xl font-bold" [ngStyle]="{
+                   background: 'linear-gradient(135deg, ' + exp.category_color + ', ' + darkenColor(exp.category_color, 0.2) + ')'
+                 }">
+                {{ exp.category_icon }}
+            </div>
+
+            <div class="flex flex-col">
+                <span class="text-sm font-medium">
+                    {{ exp.category_name || 'Uncategorized' }}
+                </span>
+                <span class="text-xs text-gray-500 dark:text-gray-400">
+                    {{ getFormattedDate(exp) }}
+                </span>
+            </div>
+        </div>
+
+        <!-- Right section: Amount -->
+        <div class="text-right">
+            <span class="text-[17px] text-[var(--color-green)]">
+                {{ currency }} {{ exp.amount }}
+            </span>
+        </div>
+    </li>
+</ul>

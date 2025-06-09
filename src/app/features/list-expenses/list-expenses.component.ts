@@ -5,11 +5,13 @@ import { CommonModule } from '@angular/common';
 import { ToastService } from '../../service/toast/toast.service';
 import { UserService } from '../../service/localStorage/user.service';
 import { FormsModule } from '@angular/forms';
+import { ExpenseDetailsModalComponent } from "../../component/list-expenses/expense-details-modal/expense-details-modal.component";
+import { ExpenseListComponent } from "../../component/list-expenses/expense-list/expense-list.component";
 
 @Component({
   standalone: true,
   selector: 'app-list-expenses',
-  imports: [CommonModule, FormsModule],
+  imports: [CommonModule, FormsModule, ExpenseDetailsModalComponent, ExpenseListComponent],
   templateUrl: './list-expenses.component.html',
   styleUrls: ['./list-expenses.component.css'],
 })
@@ -24,15 +26,23 @@ export class ListExpensesComponent implements OnInit {
   selectedExpense: Expense | null = null;
   fieldDirection: number = 0;
   fieldColIndex: number = 0;
+  isEditOpen: boolean = false;
   filter = {
     fromDate: '',
     toDate: '',
     selectedCategoryIds: [] as string[],
   };
-  totalAmount: number = 0;
-  @ViewChild('dropdownRef') dropdownRef!: ElementRef;
-  @ViewChild('filterRef') filterRef!: ElementRef;
 
+  appliedFilter = {
+    fromDate: '',
+    toDate: '',
+    selectedCategoryIds: [] as string[],
+  };
+  isFiltered: boolean = false;
+  isSorted: boolean = false;
+  totalAmount: number = 0;
+  @ViewChild('sortRef') sortRef!: ElementRef;
+  @ViewChild('filterRef') filterRef!: ElementRef;
 
   constructor(
     private expenseService: ExpenseService,
@@ -55,15 +65,18 @@ export class ListExpensesComponent implements OnInit {
       this.expenses.forEach((val) => {
         this.totalAmount = this.totalAmount + val.amount;
       })
+      this.totalAmount = parseFloat(this.totalAmount.toFixed(2));
     } catch (err) {
       console.error("Failed to load expenses:", err);
     }
-  }
-
-  getFormattedDate(expense: any): string {
-    const expDate = new Date(expense.date);
-    const timeParts = expense.time.split(":");
-    return `${expDate.getFullYear()}-${String(expDate.getMonth() + 1).padStart(2, '0')}-${String(expDate.getDate()).padStart(2, '0')} ${timeParts[0]}:${timeParts[1]}:${timeParts[2]}`;
+    finally {
+      if (this.isSorted) {
+        this.sortList(this.fieldColIndex, this.selectedFieldName, this.fieldDirection);
+      }
+      if (this.isFiltered) {
+        this.applyFilter();
+      }
+    }
   }
 
   sortList(colIndex: number, fieldName: string, direction: number) {
@@ -102,8 +115,8 @@ export class ListExpensesComponent implements OnInit {
     this.fieldDirection = direction;
     this.selectedFieldName = fieldName;
     this.isSortByDropdownOpen = false;
+    this.isSorted = true;
   }
-
 
   toggleSortByDropdown() {
     this.isSortByDropdownOpen = !this.isSortByDropdownOpen;
@@ -114,10 +127,10 @@ export class ListExpensesComponent implements OnInit {
     const target = event.target as HTMLElement;
     if (
       this.isSortByDropdownOpen &&
-      this.dropdownRef &&
-      !this.dropdownRef.nativeElement.contains(target)
+      this.sortRef &&
+      !this.sortRef.nativeElement.contains(target)
     ) {
-      this.isSortByDropdownOpen = false;
+      this.toggleSortByDropdown();
     }
 
     if (
@@ -125,45 +138,47 @@ export class ListExpensesComponent implements OnInit {
       this.filterRef &&
       !this.filterRef.nativeElement.contains(target)
     ) {
-      this.isFilterDropdownOpen = false;
+      this.toggleFilterDropdown();
     }
   }
 
   toggleFilterDropdown() {
+    if (this.isFiltered) {
+      this.filter = structuredClone(this.appliedFilter);
+    }
+    else {
+      this.clearFilter();
+    }
     this.isFilterDropdownOpen = !this.isFilterDropdownOpen;
   }
 
   applyFilter() {
     this.totalAmount = 0;
     let filtered = this.expenseService.getAll();
+    this.appliedFilter = structuredClone(this.filter);
 
-    if (this.filter.fromDate) {
-      filtered = filtered.filter(e => new Date(e.date) >= new Date(this.filter.fromDate));
+    if (this.appliedFilter.fromDate) {
+      filtered = filtered.filter(e => new Date(e.date) >= new Date(this.appliedFilter.fromDate));
     }
 
-    if (this.filter.toDate) {
-      filtered = filtered.filter(e => new Date(e.date) <= new Date(this.filter.toDate));
+    if (this.appliedFilter.toDate) {
+      filtered = filtered.filter(e => new Date(e.date) <= new Date(this.appliedFilter.toDate));
     }
 
-    if (this.filter.selectedCategoryIds.length) {
-      filtered = filtered.filter(e => this.filter.selectedCategoryIds.includes(e.category_id));
+    if (this.appliedFilter.selectedCategoryIds.length) {
+      filtered = filtered.filter(e => this.appliedFilter.selectedCategoryIds.includes(e.category_id));
     }
 
     this.expenses = filtered;
     this.expenses.forEach((val) => {
       this.totalAmount = this.totalAmount + val.amount;
     })
-    if (this.selectedFieldName != 'Sort By') {
+    this.totalAmount = parseFloat(this.totalAmount.toFixed(2));
+    if (this.isSorted) {
       this.sortList(this.fieldColIndex, this.selectedFieldName, this.fieldDirection);
     }
     this.isFilterDropdownOpen = false;
-  }
-
-  clearFilter() {
-    this.filter.fromDate = '';
-    this.filter.toDate = '';
-    this.filter.selectedCategoryIds = [];
-    this.listExpenses();
+    this.isFiltered = true;
   }
 
   onCategoryCheckboxChange(event: Event, categoryId: string) {
@@ -180,11 +195,18 @@ export class ListExpensesComponent implements OnInit {
   }
 
   closeModal() {
+    this.isEditOpen = false;
     this.selectedExpense = null;
   }
 
-  editExpense(id: string) {
-    this.toastService.show('Edit feature not implemented yet', 'info');
+  editExpense(expense: Expense) {
+    this.isEditOpen = true;
+    this.selectedExpense = expense;
+    const { expense_id, ...newData } = expense;
+    this.expenseService.update(expense_id, newData);
+    this.toastService.show('Expense updated successfully', 'success');
+    this.isEditOpen = false;
+    this.listExpenses();
   }
 
   deleteExpense(id: string) {
@@ -192,20 +214,21 @@ export class ListExpensesComponent implements OnInit {
       this.expenseService.delete(id);
       this.toastService.show("Expense deleted successfully", 'success');
       this.closeModal();
-      this.listExpenses();
     }
-  }
-  darkenColor(hex: string, amount: number): string {
-    const num = parseInt(hex.replace('#', ''), 16);
-    let r = (num >> 16) - amount * 255;
-    let g = ((num >> 8) & 0x00FF) - amount * 255;
-    let b = (num & 0x0000FF) - amount * 255;
-
-    r = Math.max(0, Math.min(255, r));
-    g = Math.max(0, Math.min(255, g));
-    b = Math.max(0, Math.min(255, b));
-
-    return `rgb(${r}, ${g}, ${b})`;
+    this.listExpenses();
   }
 
+  clearFilter() {
+    this.filter.fromDate = '';
+    this.filter.toDate = '';
+    this.filter.selectedCategoryIds = [];
+    this.isFiltered = false;
+    this.listExpenses();
+  }
+
+  clearSort() {
+    this.isSorted = false;
+    this.selectedFieldName = "Sort By";
+    this.listExpenses();
+  }
 }

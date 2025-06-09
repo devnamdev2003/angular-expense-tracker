@@ -99,6 +99,9 @@ export class ExpenseService {
 
     return all.filter(item => {
       const itemDate = new Date(item.date);
+      itemDate.setHours(0, 0, 0, 0);
+      from.setHours(0, 0, 0, 0);
+      to.setHours(23, 59, 59, 999);
       return itemDate >= from && itemDate <= to;
     });
   }

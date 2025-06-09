@@ -9,7 +9,13 @@ import { SectionService } from '../../service/section/section.service';
   styleUrls: ['./hamburger-menu.component.css'],
 })
 export class HamburgerMenuComponent {
-  constructor(private sectionService: SectionService) { }
+
+  showAIButton = false;
+  constructor(private sectionService: SectionService) {
+    this.sectionService.currentSection$.subscribe(section => {
+      this.showAIButton = section !== 'ai';
+    });
+  }
   isMenuOpen = false;
 
   // Toggle the menu when the button is clicked
@@ -28,7 +34,7 @@ export class HamburgerMenuComponent {
 
   navigateAndClose(section: string, event: Event) {
     event.preventDefault();
-    this.sectionService.setSection(section); 
+    this.sectionService.setSection(section);
     this.isMenuOpen = !this.isMenuOpen;
   }
 

@@ -1,0 +1,15 @@
+<div class="relative">
+    <button type="button" (click)="toggleCategoryDropdown()"
+        class="w-full p-2 rounded border text-left bg-[var(--color-bg)]"
+        style="background-color: var(--input-bg); color: var(--input-text); border-color: var(--input-border);">
+        {{ selectedCategoryName }}
+    </button>
+    <ul #categorydownRef class="absolute z-50 w-full overflow-y-auto bg-[var(--color-bg)] rounded border"
+        [ngClass]="dropdownMaxHeightClass" *ngIf="isCategoryDropdownOpen"
+        style="background-color: var(--input-bg); color: var(--input-text); border-color: var(--input-border);">
+        <li *ngFor="let cat of categories" (click)="selectCategory(cat)"
+            class="p-2 cursor-pointer hover:bg-[--list-hover]">
+            {{ cat.name }} {{ cat.icon }}
+        </li> 
+    </ul>
+</div>

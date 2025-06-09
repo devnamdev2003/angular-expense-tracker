@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Expense } from './expense.service';
 import { StorageService } from './storage.service';
+import { UserService } from './user.service';
 
 export interface Category {
   category_id: string;
@@ -21,7 +22,7 @@ export class CategoryService {
     return typeof window !== 'undefined' && typeof window.localStorage !== 'undefined';
   }
 
-  constructor(private storageService: StorageService) { };
+  constructor(private storageService: StorageService, private userService: UserService) { };
 
   getSortedCategoriesByExpenseCount(): Category[] {
     const expenses: Expense[] = this.storageService.getAllExpenses();
@@ -49,7 +50,7 @@ export class CategoryService {
     if (!this.isBrowser()) return;
     const all: Category[] = this.getAll();
     const category_id = crypto.randomUUID();
-    const user_id = '0';
+    const user_id = this.userService.getValue<string>('id') || '0';
 
     all.push({ ...data, category_id, user_id });
     localStorage.setItem(StorageService.categoryKey, JSON.stringify(all));
@@ -60,5 +61,22 @@ export class CategoryService {
     let all: Category[] = this.getAll();
     all = all.map(item => item.category_id === category_id ? { ...item, ...newData } : item);
     localStorage.setItem(StorageService.categoryKey, JSON.stringify(all));
+  }
+
+  delete(category_id: string): void {
+    if (!this.isBrowser()) return;
+
+    console.log(category_id)
+    const all: Category[] = this.getAll();
+    console.log(all)
+    // Check if the category actually exists
+    const categoryExists = all.some(c => c.category_id === category_id);
+    if (!categoryExists) {
+      console.warn(`Category with ID ${category_id} not found.`);
+      return;
+    }
+
+    const updated = all.filter(c => c.category_id !== category_id);
+    localStorage.setItem(StorageService.categoryKey, JSON.stringify(updated));
   }
 }

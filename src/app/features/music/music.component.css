@@ -1,0 +1,8 @@
+/* Optional: Style the bottom bar */
+.fixed {
+  z-index: 50;
+}
+
+img {
+  object-fit: cover;
+}

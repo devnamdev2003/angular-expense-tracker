@@ -93,7 +93,9 @@ export class StorageService {
 
         let savedData = JSON.parse(localStorage.getItem(storageKey) || '[]');
         if (storageKey === StorageService.categoryKey) {
-            savedData = Categories;
+            const pastData = JSON.parse(localStorage.getItem(StorageService.categoryKey) || '[]');
+            const filteredPastData = pastData.filter((item: any) => item.user_id !== "0");
+            savedData = [...filteredPastData, ...Categories];
         }
 
         const schemaKeys = Object.keys(defaultSchema);

@@ -11,9 +11,9 @@ export class GlobalLoaderService {
   register(component: GlobalLoaderComponent) {
     this.globalLoaderComponent = component;
   }
-
-  show() {
-    this.globalLoaderComponent?.show();
+  
+  show(text: string = "Loading...") {
+    this.globalLoaderComponent?.show(text);
   }
 
   hide() {
