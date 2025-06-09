@@ -30,6 +30,8 @@ export class SettingsComponent {
   showAddCategoryModal = false;
   showDeleteCategoryModal = false;
   selectedCategoryName: string = 'Select Category';
+  userAgent: string = '';
+  platform: string = '';
 
   constructor(
     public userService: UserService,
@@ -60,6 +62,9 @@ export class SettingsComponent {
     this.deleteCategoryForm = this.fb.group({
       category_id: ['', [Validators.required, this.categoryInUseValidator(usedCategoryIds)]],
     });
+
+    this.userAgent = navigator.userAgent;
+    this.platform = navigator.platform;
   }
 
   toggleTheme(): void {
