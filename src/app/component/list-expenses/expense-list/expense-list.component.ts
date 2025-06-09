@@ -1,29 +1,26 @@
 import { CommonModule } from '@angular/common';
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Component, EventEmitter, Input, Output, OnChanges } from '@angular/core';
 
 @Component({
   selector: 'app-expense-list',
+  standalone: true,
   imports: [CommonModule],
   templateUrl: './expense-list.component.html',
   styleUrl: './expense-list.component.css'
 })
-export class ExpenseListComponent {
+export class ExpenseListComponent implements OnChanges {
   @Input() expenses: any[] = [];
-  @Input() currency: string | null;
+  @Input() currency: string | null = '';
   @Output() expenseSelected = new EventEmitter<any>();
 
-  constructor(
-  ) {
-    this.currency = '';
+  groupedExpenses: { label: string, expenses: any[] }[] = [];
+
+  ngOnChanges() {
+    this.groupExpensesByDate();
   }
 
   onSelect(expense: any) {
     this.expenseSelected.emit(expense);
-  }
-
-  getFormattedDate(exp: any): string {
-    const date = new Date(exp.date);
-    return date.toLocaleDateString();
   }
 
   darkenColor(color: string, percent: number): string {
@@ -39,5 +36,53 @@ export class ExpenseListComponent {
       return color;
     }
   }
-}
 
+  groupExpensesByDate() {
+    const grouped: { [key: string]: any[] } = {};
+
+    for (const expense of this.expenses) {
+      const date = new Date(expense.date);
+      const key = date.toDateString(); // group by exact day
+      if (!grouped[key]) grouped[key] = [];
+      grouped[key].push(expense);
+    }
+
+    const today = new Date();
+    const yesterday = new Date();
+    yesterday.setDate(today.getDate() - 1);
+
+    this.groupedExpenses = Object.entries(grouped)
+      .sort((a, b) => new Date(b[0]).getTime() - new Date(a[0]).getTime()) // most recent first
+      .map(([key, value]) => {
+        const date = new Date(key);
+        let label = this.getDateLabel(date, today, yesterday);
+        return { label, expenses: value };
+      });
+  }
+
+  getDateLabel(date: Date, today: Date, yesterday: Date): string {
+    const isToday = date.toDateString() === today.toDateString();
+    const isYesterday = date.toDateString() === yesterday.toDateString();
+
+    if (isToday) return 'Today';
+    if (isYesterday) return 'Yesterday';
+
+    const day = date.getDate();
+    const month = date.toLocaleString('default', { month: 'long' });
+    const year = date.getFullYear();
+    const suffix = this.getDaySuffix(day);
+
+    return `${day}${suffix} ${month} ${year}`;
+  }
+
+  getDaySuffix(day: number): string {
+    if (day >= 11 && day <= 13) return 'th';
+    switch (day % 10) {
+      case 1: return 'st';
+      case 2: return 'nd';
+      case 3: return 'rd';
+      default: return 'th';
+    }
+  }
+
+}
