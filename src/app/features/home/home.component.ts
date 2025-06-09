@@ -13,7 +13,7 @@ import { PieChartComponent } from '../../component/pie-chart/pie-chart.component
 })
 
 export class HomeComponent {
-  viewType: 'month' | 'day' = 'month';
+  viewType: 'month' | 'day' = 'day';
   currentDate: Date = new Date();
   forceInputReset: boolean = false;
 

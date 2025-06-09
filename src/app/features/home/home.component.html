@@ -3,20 +3,18 @@
     <div class="flex justify-center items-center min-h-[70px]">
         <div class="relative flex w-48 bg-[var(--color-surface)] rounded-full shadow-md">
             <div class="absolute h-full w-1/2 bg-[var(--theme-color)] rounded-full transition-all duration-300"
-                [class.translate-x-24]="viewType === 'day'"></div>
-
-            <button
-                class="relative z-10 w-1/2 flex-1 text-center text-sm font-medium py-2 rounded-full transition-colors duration-300"
-                [class.text-[var(--color-text)]]="viewType !== 'month'"
-                [class.text-[var(--color-white)]]="viewType === 'month'" (click)="setViewType('month')">
-                Month
-            </button>
-
+                [class.translate-x-24]="viewType === 'month'"></div>
             <button
                 class="relative z-10 w-1/2 flex-1 text-center text-sm font-medium py-2 rounded-full transition-colors duration-300"
                 [class.text-[var(--color-text)]]="viewType !== 'day'"
                 [class.text-[var(--color-white)]]="viewType === 'day'" (click)="setViewType('day')">
                 Day
+            </button>
+            <button
+                class="relative z-10 w-1/2 flex-1 text-center text-sm font-medium py-2 rounded-full transition-colors duration-300"
+                [class.text-[var(--color-text)]]="viewType !== 'month'"
+                [class.text-[var(--color-white)]]="viewType === 'month'" (click)="setViewType('month')">
+                Month
             </button>
         </div>
     </div>
