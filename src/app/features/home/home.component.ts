@@ -13,13 +13,18 @@ import { PieChartComponent } from '../../component/pie-chart/pie-chart.component
 })
 
 export class HomeComponent {
-  viewType: 'month' | 'day' = 'day';
+  defaultViewType: 'month' | 'day' = 'month';
+  viewType: 'month' | 'day' = this.defaultViewType;
+  viewTypeDiv: boolean = false;
   currentDate: Date = new Date();
   forceInputReset: boolean = false;
 
   setViewType(view: 'month' | 'day') {
-    this.viewType = view;
-    this.currentDate = new Date();
+    if (this.viewType != view) {
+      this.viewTypeDiv = !this.viewTypeDiv;
+      this.viewType = view;
+      this.currentDate = new Date();
+    }
   }
 
   goPrevious() {
