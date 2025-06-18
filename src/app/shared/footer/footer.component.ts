@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-
+import { AppVersionService } from '../../service/util/app-version/app-version.service';
 @Component({
   selector: 'app-footer',
   imports: [],
@@ -7,5 +7,8 @@ import { Component } from '@angular/core';
   styleUrl: './footer.component.css'
 })
 export class FooterComponent {
-
+  appVersion: string = "";
+  constructor(private appVersionService: AppVersionService) {
+    this.appVersion = this.appVersionService.getVersion();
+  }
 }

@@ -1,6 +1,6 @@
 <section class="p-4 section">
     <!-- 🔧 General Settings -->
-    <div class="mb-6">
+    <div class="mb-2">
         <h2 class="text-xl font-semibold text-[var(--color-accent)] mb-3">
             🔧 General Settings
         </h2>
@@ -28,21 +28,19 @@
     </div>
 
     <!-- 🧩 CATEGORY SETTINGS -->
-    <div class="mb-6">
-        <h2 class="text-xl font-semibold text-accent mb-3">🧩 Categories</h2>
+    <div class="mb-2">
+        <h2 class="text-xl font-semibold text-[var(--color-accent)] mb-3">🧩 Categories</h2>
 
         <!-- Category Manager -->
-        <div class="bg-surface p-4 rounded shadow flex items-center justify-between mb-4">
-            <span class="font-medium text-[var(--color-text)]">➕ Add Category</span>
+        <app-setting-item label="💾 Download Data">
             <button (click)="openCategoryModal()"
                 class="bg-[var(--color-accent)] text-white px-6 py-1 rounded">Add</button>
-        </div>
+        </app-setting-item>
 
         <!-- Delete Category -->
-        <div class="bg-surface p-4 rounded shadow flex items-center justify-between mb-4">
-            <span class="font-medium text-[var(--color-text)]">🗑️ Delete Category</span>
+        <app-setting-item label="💾 Download Data">
             <button (click)="openDeleteCategoryModal()" class="bg-red-500 text-white px-4 py-1 rounded">Delete</button>
-        </div>
+        </app-setting-item>
     </div>
 
     <div *ngIf="showAddCategoryModal"
@@ -145,11 +143,5 @@
             </form>
         </div>
     </div>
-
-    <!-- <p>
-        {{ userAgent }}
-    </p>
-    <p> {{ platform }}
-    </p> -->
 
 </section>
