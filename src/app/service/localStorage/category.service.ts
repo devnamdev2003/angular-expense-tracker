@@ -53,14 +53,14 @@ export class CategoryService {
     const user_id = this.userService.getValue<string>('id') || '0';
 
     all.push({ ...data, category_id, user_id });
-    localStorage.setItem(StorageService.categoryKey, JSON.stringify(all));
+    localStorage.setItem(this.storageService.getCategoryKey(), JSON.stringify(all));
   }
 
   update(category_id: string, newData: Partial<Category>): void {
     if (!this.isBrowser()) return;
     let all: Category[] = this.getAll();
     all = all.map(item => item.category_id === category_id ? { ...item, ...newData } : item);
-    localStorage.setItem(StorageService.categoryKey, JSON.stringify(all));
+    localStorage.setItem(this.storageService.getCategoryKey(), JSON.stringify(all));
   }
 
   delete(category_id: string): void {
@@ -77,6 +77,6 @@ export class CategoryService {
     }
 
     const updated = all.filter(c => c.category_id !== category_id);
-    localStorage.setItem(StorageService.categoryKey, JSON.stringify(updated));
+    localStorage.setItem(this.storageService.getCategoryKey(), JSON.stringify(updated));
   }
 }

@@ -1,19 +1,17 @@
 import { Injectable } from '@angular/core';
-import { UserService } from './user.service';
 import { StorageService } from './storage.service';
 
 export interface Budget {
   budget_id: string,
   amount: number,
   fromDate: string,
-  toDate: string,
-  user_id: string,
+  toDate: string
 };
 
 @Injectable({ providedIn: 'root' })
 export class BudgetService {
 
-  constructor(private userService: UserService,
+  constructor(
     private storageService: StorageService
   ) { }
 
@@ -26,13 +24,12 @@ export class BudgetService {
     return this.storageService.getAllBudgets();
   }
 
-  add(data: Omit<Budget, 'budget_id' | 'user_id'>): void {
+  add(data: Omit<Budget, 'budget_id'>): void {
     if (!this.isBrowser()) return;
     const all: Budget[] = this.getAll();
     const budget_id = crypto.randomUUID();
-    const user_id = this.userService.getValue<string>('id') || '0';
-    all.push({ ...data, budget_id, user_id });
-    localStorage.setItem(StorageService.budgetKey, JSON.stringify(all));
+    all.push({ ...data, budget_id });
+    localStorage.setItem(this.storageService.getBudgetKey(), JSON.stringify(all));
   }
 
   update(budget_id: string, newData: Partial<Budget>): void {
@@ -41,6 +38,6 @@ export class BudgetService {
     all = all.map(item =>
       item.budget_id === budget_id ? { ...item, ...newData } : item
     );
-    localStorage.setItem(StorageService.budgetKey, JSON.stringify(all));
+    localStorage.setItem(this.storageService.getBudgetKey(), JSON.stringify(all));
   }
 }

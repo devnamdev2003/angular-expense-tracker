@@ -50,6 +50,7 @@ export class AppComponent {
     public userService: UserService,
     private loader: GlobalLoaderService,
     private sectionService: SectionService,
+    private storageService: StorageService,
     private router: Router,
     @Inject(PLATFORM_ID) private platformId: Object
   ) {
@@ -76,10 +77,10 @@ export class AppComponent {
         this.loader.hide();
       }, 500);
 
-      StorageService.syncCategoriesWithSchema();
-      StorageService.syncExpensesWithSchema();
-      StorageService.syncUserWithSchema();
-      StorageService.syncBudgetWithSchema();
+      this.storageService.syncCategoriesWithSchema();
+      this.storageService.syncExpensesWithSchema();
+      this.storageService.syncUserWithSchema();
+      this.storageService.syncBudgetWithSchema();
 
       const savedTheme = this.userService.getValue<string>('theme_mode');
       if (savedTheme === 'dark') {

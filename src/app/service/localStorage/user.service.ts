@@ -13,6 +13,7 @@ export interface User {
   user_password: string,
   theme_mode: string,
   currency: string,
+  app_version: string
 };
 
 @Injectable({ providedIn: 'root' })
@@ -33,7 +34,7 @@ export class UserService {
     if (!this.isBrowser()) return;
     const currentSettings = this.get();
     currentSettings[key] = value;
-    localStorage.setItem(StorageService.userKey, JSON.stringify(currentSettings));
+    localStorage.setItem(this.storageService.getUserKey(), JSON.stringify(currentSettings));
   }
 
   getValue<T = any>(key: string): T | null {

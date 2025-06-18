@@ -1,5 +1,4 @@
 import { Injectable } from '@angular/core';
-import { UserService } from './user.service';
 import { Category } from './category.service';
 import { StorageService } from './storage.service';
 
@@ -13,8 +12,6 @@ export interface Expense {
   note?: string;
   payment_mode: string;
   location?: string;
-  user_id: string;
-  created_at: string;
 
   // additional field not a part of table
   category_name: string;
@@ -26,7 +23,7 @@ export interface Expense {
 @Injectable({ providedIn: 'root' })
 export class ExpenseService {
 
-  constructor(private userService: UserService, private storageService: StorageService) { }
+  constructor(private storageService: StorageService) { }
 
   private isBrowser(): boolean {
     return typeof window !== 'undefined' && typeof window.localStorage !== 'undefined';
@@ -61,22 +58,19 @@ export class ExpenseService {
       });
   }
 
-  add(data: Omit<Expense, 'expense_id' | 'user_id' | 'created_at'>): void {
+  add(data: Omit<Expense, 'expense_id'>): void {
     if (!this.isBrowser()) return;
     const all: Expense[] = this.getAll();
     const expense_id = crypto.randomUUID();
-    const user_id = this.userService.getValue<string>('id') || '0';
-    const created_at = this.getLocalISOString();
-
-    all.push({ ...data, expense_id, user_id, created_at });
-    localStorage.setItem(StorageService.expenseKey, JSON.stringify(all));
+    all.push({ ...data, expense_id });
+    localStorage.setItem(this.storageService.getExpenseKey(), JSON.stringify(all));
   }
 
   update(expense_id: string, newData: Partial<Expense>): void {
     if (!this.isBrowser()) return;
     let all: Expense[] = this.getAll();
     all = all.map(item => item.expense_id === expense_id ? { ...item, ...newData } : item);
-    localStorage.setItem(StorageService.expenseKey, JSON.stringify(all));
+    localStorage.setItem(this.storageService.getExpenseKey(), JSON.stringify(all));
   }
 
   getByExpenseId(expense_id: string): Expense | null {
@@ -88,7 +82,7 @@ export class ExpenseService {
     if (!this.isBrowser()) return;
     let all: Expense[] = this.getAll();
     all = all.filter(item => item.expense_id !== expense_id);
-    localStorage.setItem(StorageService.expenseKey, JSON.stringify(all));
+    localStorage.setItem(this.storageService.getExpenseKey(), JSON.stringify(all));
   }
 
   searchByDateRange(fromDate: string, toDate: string): Expense[] {
