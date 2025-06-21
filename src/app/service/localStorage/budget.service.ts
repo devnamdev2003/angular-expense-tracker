@@ -40,4 +40,11 @@ export class BudgetService {
     );
     localStorage.setItem(this.storageService.getBudgetKey(), JSON.stringify(all));
   }
+
+  delete(budget_id: string): void {
+    if (!this.isBrowser()) return;
+    let all: Budget[] = this.getAll();
+    all = all.filter(item => item.budget_id !== budget_id);
+    localStorage.setItem(this.storageService.getBudgetKey(), JSON.stringify(all));
+  }
 }

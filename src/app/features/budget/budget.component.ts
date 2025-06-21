@@ -160,4 +160,13 @@ export class BudgetComponent implements OnInit {
     this.avgSpentPerDay = spent / elapsedDays;
     this.suggestedPerDay = remaining / remainingDays;
   }
+
+  deleteBudget() {
+    if (confirm("Are you sure you want to delete this budget?")) {
+      this.budgetService.delete(this.latestBudget.budget_id);
+      this.toastService.show("Budget deleted successfully", 'success');
+      this.closeModal();
+    }
+    this.loadBudgets();
+  }
 }
