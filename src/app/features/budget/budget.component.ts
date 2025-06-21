@@ -34,6 +34,7 @@ export class BudgetComponent implements OnInit {
   suggestedPerDay = 0;
   isEditMode = false;
   currency: string | null;
+  isDarkMode: boolean = false;
 
   constructor(
     private expenseService: ExpenseService,
@@ -44,6 +45,13 @@ export class BudgetComponent implements OnInit {
   ) {
     this.currency = this.userService.getValue<string>('currency');
     this.budgetForm = this.createForm();
+    const savedTheme = this.userService.getValue<string>('theme_mode') ?? 'light';
+    if (savedTheme === 'dark') {
+      this.isDarkMode = true;
+    }
+    else {
+      this.isDarkMode = false;
+    }
   }
 
   ngOnInit(): void {

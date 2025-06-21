@@ -1,8 +1,8 @@
-<section id="budget" class="p-4 section">
+<section id="budget">
 
     <!-- Budget Section -->
-    <div *ngIf="showBudgetSection; else noBudgetMessage">
-        <div *ngIf="showBudgetSection" class="bg-surface rounded-lg shadow-md col-span-1 md:col-span-2">
+    <div *ngIf="showBudgetSection; else noBudgetMessage" class="p-4">
+        <div *ngIf="showBudgetSection" class="bg-[--color-surface] rounded-lg shadow-md col-span-1 md:col-span-2">
             <h2 class="text-xl font-semibold mb-4">💰 Budget Progress</h2>
             <div class="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-6 overflow-hidden">
                 <div class="h-full text-white text-sm font-medium text-center leading-6 rounded-full transition-all duration-500 ease-in-out"
@@ -38,16 +38,28 @@
 
     <!-- No Budget Message -->
     <ng-template #noBudgetMessage>
-        <div class="text-center">
-            <p class="text-lg text-[var(--color-gray-500)]">🚫 No budget exists!</p>
-            <button (click)="openModal()" class="mt-4 bg-[var(--color-accent)] text-white px-4 py-2 rounded shadow">Add
-                Budget</button>
+        <div class="text-center flex flex-col items-center justify-center space-y-4 px-4 py-6">
+            <!-- Mobile View -->
+            <div class="w-full max-w-[360px] h-[440px] overflow-hidden rounded-lg block md:hidden">
+                <img [src]="isDarkMode ? 'assets/budget/budgetD.png' : 'assets/budget/budgetL.png'" alt="budget mobile"
+                    class="w-full h-full object-cover object-top">
+            </div>
+
+            <!-- Desktop View -->
+            <div class="w-[360px] h-[440px] overflow-hidden rounded-lg hidden md:block">
+                <img [src]="isDarkMode ? 'assets/budget/budgetD.png' : 'assets/budget/budgetL.png'" alt="budget desktop"
+                    class="w-full h-full object-cover object-top">
+            </div>
+            <button (click)="openModal()"
+                class="mt-2 bg-[var(--color-accent)] text-white px-5 py-2.5 rounded-full shadow">
+                Add Budget
+            </button>
         </div>
     </ng-template>
 
     <!-- Modal -->
-    <div *ngIf="showModal" class="fixed inset-0 bg-black bg-opacity-40 z-50 flex items-center justify-center">
-        <div class="bg-[var(--color-bg)] p-6 rounded-xl w-11/12 md:w-1/2 max-h-[70vh] flex flex-col shadow-xl">
+    <div *ngIf="showModal" class="p-4 fixed inset-0 bg-black bg-opacity-40 z-50 flex items-center justify-center">
+        <div class="bg-[var(--color-surface)] p-6 rounded-xl w-11/12 md:w-1/2 max-h-[70vh] flex flex-col shadow-xl">
             <div class="flex justify-between items-center mb-3">
                 <h2 class="text-lg font-bold text-[var(--color-text)]">
                     {{ isEditMode ? 'Update Budget' : 'Add Budget' }}

@@ -1,7 +1,7 @@
 :root {
     --theme-color: #8f91ea;
-    --color-bg: #f5f6fa;
-    --color-surface: #ffffff;
+    --color-bg: #ffffff;
+    --color-surface: #f5f6fa;
     --color-text: #000000;
     --color-text2: #ffffff;
     --color-accent: var(--theme-color);
@@ -23,7 +23,7 @@
 
 .dark {
     --theme-color: #8f91ea;
-    --color-bg: #121212;
+    --color-bg: #000000;
     --color-surface: #1e1e1e;
     --color-text: #ffffff;
     --color-text2: #000000;
