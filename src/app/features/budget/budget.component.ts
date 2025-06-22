@@ -35,6 +35,9 @@ export class BudgetComponent implements OnInit {
   isEditMode = false;
   currency: string | null;
   isDarkMode: boolean = false;
+  animatedBudgetProgress = 0;
+  displayedPercentage = 0;
+
 
   constructor(
     private expenseService: ExpenseService,
@@ -136,8 +139,16 @@ export class BudgetComponent implements OnInit {
     const percentage = Math.min((spent / totalBudget) * 100, 100);
     const remaining = Math.max(totalBudget - spent, 0);
     this.budgetProgress = percentage;
+    this.animatedBudgetProgress = 0;
+    this.displayedPercentage = 0;
 
-    // Color class
+    setTimeout(() => {
+      this.animatedBudgetProgress = this.budgetProgress;
+    }, 100);
+
+    this.animatePercentage();
+
+    // Color class logic
     if (percentage > 80) this.budgetColorClass = 'bg-red-500';
     else if (percentage > 50) this.budgetColorClass = 'bg-yellow-500';
     else if (percentage > 30) this.budgetColorClass = 'bg-blue-500';
@@ -150,7 +161,7 @@ export class BudgetComponent implements OnInit {
       this.budgetMessage = `✅ You have spent ${this.currency}${spent.toFixed(2)} out of ${this.currency}${totalBudget.toFixed(2)} between ${this.latestBudget.fromDate} and ${this.latestBudget.toDate}. 💸 Remaining: ${this.currency}${remaining.toFixed(2)}`;
     }
 
-    // Avg insights
+    // Average insights
     const totalDays = Math.ceil((toDate.getTime() - fromDate.getTime()) / (1000 * 60 * 60 * 24)) + 1;
     const today = new Date();
     const elapsedDays = Math.max(Math.ceil((today.getTime() - fromDate.getTime()) / (1000 * 60 * 60 * 24)), 1);
@@ -159,6 +170,23 @@ export class BudgetComponent implements OnInit {
     this.avgAllowedPerDay = totalBudget / totalDays;
     this.avgSpentPerDay = spent / elapsedDays;
     this.suggestedPerDay = remaining / remainingDays;
+  }
+
+  animatePercentage() {
+    const duration = 800;
+    const steps = 40;
+    const increment = this.budgetProgress / steps;
+    let currentStep = 0;
+
+    const interval = setInterval(() => {
+      currentStep++;
+      this.displayedPercentage = +(increment * currentStep).toFixed(1);
+
+      if (currentStep >= steps) {
+        this.displayedPercentage = +this.budgetProgress.toFixed(1);
+        clearInterval(interval);
+      }
+    }, duration / steps);
   }
 
   deleteBudget() {

@@ -5,11 +5,16 @@
         <div *ngIf="showBudgetSection" class=" col-span-1 md:col-span-2">
             <h2 class="text-xl font-semibold mb-4">💰 Budget Progress</h2>
             <div class="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-6 overflow-hidden">
-                <div class="h-full text-white text-sm font-medium text-center leading-6 rounded-full transition-all duration-500 ease-in-out"
-                    [ngStyle]="{ width: budgetProgress + '%' }" [ngClass]="budgetColorClass">
-                    {{ budgetProgress.toFixed(1) }}%
+                <div class="h-full rounded-full transition-all duration-700 ease-in-out flex items-center justify-center"
+                    [ngStyle]="{ width: animatedBudgetProgress + '%' }" [ngClass]="budgetColorClass">
+
+                    <span class="text-white text-sm font-semibold">
+                        {{ displayedPercentage.toFixed(1) }}%
+                    </span>
+
                 </div>
             </div>
+
             <p class="mt-4 text-sm text-[var(--color-text)]">
                 {{ budgetMessage }}
             </p>
