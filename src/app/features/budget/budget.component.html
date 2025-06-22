@@ -2,7 +2,7 @@
 
     <!-- Budget Section -->
     <div *ngIf="showBudgetSection; else noBudgetMessage" class="p-4">
-        <div *ngIf="showBudgetSection" class="bg-[--color-surface] rounded-lg shadow-md col-span-1 md:col-span-2">
+        <div *ngIf="showBudgetSection" class=" col-span-1 md:col-span-2">
             <h2 class="text-xl font-semibold mb-4">💰 Budget Progress</h2>
             <div class="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-6 overflow-hidden">
                 <div class="h-full text-white text-sm font-medium text-center leading-6 rounded-full transition-all duration-500 ease-in-out"
@@ -32,10 +32,11 @@
         <div class="w-full flex justify-start">
             <div class="w-full max-w-[600px] py-4 flex space-x-3">
                 <button (click)="openEditModal()"
-                    class="flex-1 bg-[var(--color-accent)] text-white py-2 px-4 rounded-lg">
+                    class="flex-1 bg-[var(--color-accent)] hover:opacity-90 text-white py-2 px-4 rounded-lg shadow-md transition">
                     Update
                 </button>
-                <button (click)="deleteBudget()" class="flex-1 bg-[var(--color-red)] text-white py-2 px-4 rounded-lg">
+                <button (click)="deleteBudget()"
+                    class="flex-1 bg-[var(--color-red)] hover:opacity-90 text-white py-2 px-4 rounded-lg shadow-md transition">
                     Delete
                 </button>
             </div>
@@ -58,8 +59,8 @@
                     class="w-full h-full object-cover object-top">
             </div>
             <button (click)="openModal()"
-                class="mt-2 bg-[var(--color-accent)] text-white px-5 py-2.5 rounded-full shadow">
-                Add Budget
+                class="mt-2 bg-[var(--color-accent)] hover:opacity-90 text-white px-5 py-2 rounded-full shadow-md transition">
+                ➕ Add Budget
             </button>
         </div>
     </ng-template>
@@ -103,9 +104,9 @@
                 </div>
                 <div class="py-4 flex space-x-3">
                     <button type="button" (click)="closeModal()"
-                        class="flex-1  bg-[var(--color-gray-500)] text-white py-2 px-4 rounded-lg">Cancel</button>
+                        class="flex-1  bg-[var(--color-gray-500)] hover:opacity-90 text-white py-2 px-4 rounded-lg shadow-md transition">Cancel</button>
                     <button type="submit"
-                        class="flex-1 bg-[var(--color-accent)] text-white py-2 px-4 rounded-lg">Save</button>
+                        class="flex-1 bg-[var(--color-accent)] hover:opacity-90 text-white py-2 px-4 rounded-lg shadow-md transition">Save</button>
                 </div>
             </form>
         </div>
