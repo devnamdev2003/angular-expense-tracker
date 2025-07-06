@@ -28,7 +28,7 @@ export class BudgetService {
     if (!this.isBrowser()) return;
     const all: Budget[] = this.getAll();
     const budget_id = crypto.randomUUID();
-    all.push({ ...data, budget_id });
+    all.push({ ...data, budget_id, amount: Math.round(data.amount * 100) / 100 });
     localStorage.setItem(this.storageService.getBudgetKey(), JSON.stringify(all));
   }
 
@@ -37,6 +37,10 @@ export class BudgetService {
     let all: Budget[] = this.getAll();
     all = all.map(item =>
       item.budget_id === budget_id ? { ...item, ...newData } : item
+    );
+    all = all.map(item => (
+      { ...item, amount: Math.round(item.amount * 100) / 100 }
+    )
     );
     localStorage.setItem(this.storageService.getBudgetKey(), JSON.stringify(all));
   }

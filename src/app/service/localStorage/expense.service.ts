@@ -40,8 +40,11 @@ export class ExpenseService {
     if (!this.isBrowser()) return [];
     const expenses: Expense[] = this.storageService.getAllExpenses();
     const categories: Category[] = this.storageService.getAllCategories();
-
-    return expenses
+    const formattedExpense = expenses.map(item => ({
+      ...item,
+      amount: Math.round(item.amount * 100) / 100,
+    }));
+    return formattedExpense
       .map(e => {
         const cat = categories.find(c => c.category_id === e.category_id);
         return {
@@ -62,7 +65,7 @@ export class ExpenseService {
     if (!this.isBrowser()) return;
     const all: Expense[] = this.getAll();
     const expense_id = crypto.randomUUID();
-    all.push({ ...data, expense_id });
+    all.push({ ...data, expense_id, amount: Math.round(data.amount * 100) / 100 });
     localStorage.setItem(this.storageService.getExpenseKey(), JSON.stringify(all));
   }
 
@@ -70,6 +73,7 @@ export class ExpenseService {
     if (!this.isBrowser()) return;
     let all: Expense[] = this.getAll();
     all = all.map(item => item.expense_id === expense_id ? { ...item, ...newData } : item);
+    all = all.map(item => ({ ...item, amount: Math.round(item.amount * 100) / 100 }));
     localStorage.setItem(this.storageService.getExpenseKey(), JSON.stringify(all));
   }
 
