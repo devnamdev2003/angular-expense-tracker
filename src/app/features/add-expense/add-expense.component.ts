@@ -15,6 +15,13 @@ import { ToastService } from '../../service/toast/toast.service';
 export class AddExpenseComponent implements OnInit {
   expenseForm: FormGroup;
   selectedCategoryName: string = 'Select Category';
+  locationSuggestions: any[] = [];
+  filteredLocationSuggestions: string[] = [];
+  showLocationSuggestions = false;
+
+  noteSuggestions: any[] = [];
+  filteredNoteSuggestions: string[] = [];
+  showNoteSuggestions = false;
 
   constructor(
     private fb: FormBuilder,
@@ -26,6 +33,8 @@ export class AddExpenseComponent implements OnInit {
 
   ngOnInit(): void {
     this.resetFormWithCurrentDateTime();
+    this.loadSuggestionsFromLocalStorage();
+    this.onInputChanges();
   }
 
   createForm(): FormGroup {
@@ -75,9 +84,72 @@ export class AddExpenseComponent implements OnInit {
       this.expenseService.add(data);
       this.toastService.show('Expense added successfully!', 'success');
       this.resetFormWithCurrentDateTime();
+      this.loadSuggestionsFromLocalStorage();
     } catch (error) {
       console.error('Submit failed:', error);
       this.toastService.show('Error adding expense.', 'error');
     }
+  }
+
+  loadSuggestionsFromLocalStorage() {
+    const allExpenses = this.expenseService.getAll() || [];
+
+    this.locationSuggestions = [
+      ...new Set(
+        allExpenses
+          .map(item => item.location?.trim())
+          .filter(loc => loc)
+      )
+    ];
+
+    this.noteSuggestions = [
+      ...new Set(
+        allExpenses
+          .map(item => item.note?.trim())
+          .filter(note => note)
+      )
+    ];
+  }
+
+  onInputChanges() {
+    this.expenseForm.get('location')?.valueChanges.subscribe(val => {
+      const input = val?.toLowerCase().trim() || '';
+
+      if (!input) {
+        this.showLocationSuggestions = false;
+        this.filteredLocationSuggestions = [];
+        return;
+      }
+
+      this.filteredLocationSuggestions = this.locationSuggestions.filter(loc =>
+        loc.toLowerCase().includes(input)
+      );
+      this.showLocationSuggestions = this.filteredLocationSuggestions.length > 0;
+    });
+
+    this.expenseForm.get('note')?.valueChanges.subscribe(val => {
+      const input = val?.toLowerCase().trim() || '';
+
+      if (!input) {
+        this.showNoteSuggestions = false;
+        this.filteredNoteSuggestions = [];
+        return;
+      }
+
+      this.filteredNoteSuggestions = this.noteSuggestions.filter(note =>
+        note.toLowerCase().includes(input)
+      );
+      this.showNoteSuggestions = this.filteredNoteSuggestions.length > 0;
+    });
+
+  }
+  selectLocationSuggestion(suggestion: string) {
+    this.expenseForm.patchValue({ location: suggestion });
+    this.showLocationSuggestions = false;
+  }
+
+  selectNoteSuggestion(suggestion: string) {
+    this.expenseForm.patchValue({ note: suggestion });
+    this.showNoteSuggestions = false;
   }
 }

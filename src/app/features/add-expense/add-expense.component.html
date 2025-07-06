@@ -69,10 +69,21 @@
                 </select>
             </div>
 
-            <div class="w-full md:w-1/2 mt-4 md:mt-0">
+            <div class="relative w-full md:w-1/2 mt-4 md:mt-0">
                 <label class="block mb-1 font-medium">Location</label>
                 <input type="text" formControlName="location" maxlength="51" class="w-full p-2 rounded border"
                     style="background-color: var(--input-bg); color: var(--input-text); border-color: var(--input-border);" />
+
+                <!-- Location Suggestions -->
+                <ul *ngIf="showLocationSuggestions && filteredLocationSuggestions.length"
+                    class="absolute  max-h-40  z-50 w-full overflow-y-auto bg-[var(--color-bg)] rounded border"
+                    style="background-color: var(--input-bg); color: var(--input-text); border-color: var(--input-border);">
+                    <li *ngFor="let loc of filteredLocationSuggestions" (click)="selectLocationSuggestion(loc)"
+                        class="p-2 cursor-pointer hover:bg-[--list-hover]">
+                        {{ loc }}
+                    </li>
+                </ul>
+
                 <div class="error-message text-[var(--color-error)]"
                     *ngIf="expenseForm.get('location')?.touched && expenseForm.get('location')?.errors?.['maxlength']">
                     Location cannot be more than 50 characters
@@ -85,6 +96,17 @@
             <label class="block mb-1 font-medium">Note</label>
             <textarea formControlName="note" maxlength="101" rows="2" class="w-full p-2 rounded border resize-none"
                 style="background-color: var(--input-bg); color: var(--input-text); border-color: var(--input-border);"></textarea>
+
+            <!-- Note Suggestions -->
+            <ul *ngIf="showNoteSuggestions && filteredNoteSuggestions.length"
+                class="max-h-40  z-50 w-full overflow-y-auto bg-[var(--color-bg)] rounded border"
+                style="background-color: var(--input-bg); color: var(--input-text); border-color: var(--input-border);">
+                <li *ngFor="let note of filteredNoteSuggestions" (click)="selectNoteSuggestion(note)"
+                    class="p-2 cursor-pointer hover:bg-[--list-hover]">
+                    {{ note }}
+                </li>
+            </ul>
+
             <div class="error-message text-[var(--color-error)]"
                 *ngIf="expenseForm.get('note')?.touched && expenseForm.get('note')?.errors?.['maxlength']">
                 Note cannot be more than 100 characters
