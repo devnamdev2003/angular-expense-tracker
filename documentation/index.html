@@ -1,0 +1,360 @@
+<!doctype html>
+<html class="no-js" lang="">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <title>expense-wise documentation</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <link rel="icon" type="image/x-icon" href="./images/favicon.ico">
+	   <link rel="stylesheet" href="./styles/style.css">
+        <link rel="stylesheet" href="./styles/dark.css">
+    </head>
+    <body>
+          <script>
+               // Blocking script to avoid flickering dark mode
+               // Dark mode toggle button
+               var useDark = window.matchMedia('(prefers-color-scheme: dark)');
+               var darkModeState = useDark.matches;
+               var $darkModeToggleSwitchers = document.querySelectorAll('.dark-mode-switch input');
+               var $darkModeToggles = document.querySelectorAll('.dark-mode-switch');
+               var darkModeStateLocal = localStorage.getItem('compodoc_darkmode-state');
+
+               function checkToggle(check) {
+                    for (var i = 0; i < $darkModeToggleSwitchers.length; i++) {
+                         $darkModeToggleSwitchers[i].checked = check;
+                    }
+               }
+
+               function toggleDarkMode(state) {
+                    if (window.localStorage) {
+                         localStorage.setItem('compodoc_darkmode-state', state);
+                    }
+
+                    checkToggle(state);
+
+                    const hasClass = document.body.classList.contains('dark');
+
+                    if (state) {
+                         for (var i = 0; i < $darkModeToggles.length; i++) {
+                              $darkModeToggles[i].classList.add('dark');
+                         }
+                         if (!hasClass) {
+                              document.body.classList.add('dark');
+                         }
+                    } else {
+                         for (var i = 0; i < $darkModeToggles.length; i++) {
+                              $darkModeToggles[i].classList.remove('dark');
+                         }
+                         if (hasClass) {
+                              document.body.classList.remove('dark');
+                         }
+                    }
+               }
+
+               useDark.addEventListener('change', function (evt) {
+                    toggleDarkMode(evt.matches);
+               });
+               if (darkModeStateLocal) {
+                    darkModeState = darkModeStateLocal === 'true';
+               }
+               toggleDarkMode(darkModeState);
+          </script>
+
+        <div class="navbar navbar-default navbar-fixed-top d-md-none p-0">
+               <div class="d-flex">
+                    <a href="./" class="navbar-brand">expense-wise documentation</a>
+                    <button type="button" class="btn btn-default btn-menu ion-ios-menu" id="btn-menu"></button>
+               </div>
+        </div>
+
+        <div class="xs-menu menu" id="mobile-menu">
+                <div id="book-search-input" role="search"><input type="text" placeholder="Type to search"></div>            <compodoc-menu></compodoc-menu>
+        </div>
+
+        <div class="container-fluid main">
+           <div class="row main">
+               <div class="d-none d-md-block menu">
+                   <compodoc-menu mode="normal"></compodoc-menu>
+               </div>
+               <!-- START CONTENT -->
+               <div class="content getting-started">
+                   <div class="content-data">
+
+<h1><a href="https://exwise.vercel.app/">📘 Expense Tracker</a></h1>
+<blockquote>
+<h3>Expense Wisely – Where Your Money Stops Playing Hide and Seek!</h3>
+</blockquote>
+<h2>✅ Overview</h2>
+<p>The <strong>Expense Tracker Application</strong> helps users manage their personal finances through intuitive UI components, visual analytics, and simple interaction patterns. The application is fully front-end based, leveraging <code>localStorage</code> for data persistence.</p>
+<p>Experience the power of <strong>Devnoms Chat App</strong> right now:</p>
+<p><a href="https://exwise.vercel.app/"><img src="https://img.shields.io/badge/Live-Preview-brightgreen?style=for-the-badge&logo=angular" alt="Live Preview" class="img-responsive"></a></p>
+<hr>
+<p><img src="./assets/images/share_o.png" alt="App" class="img-responsive"> </p>
+<h2>💡 Features</h2>
+<ul>
+<li>Add and categorize expenses with rich metadata.</li>
+<li>Real-time visual analysis using charts (daily, weekly, monthly).</li>
+<li>Budget management with progress tracking.</li>
+<li>Calendar view for date-wise expense breakdown.</li>
+<li>Sorting, filtering, and searching of expenses.</li>
+<li>Light/Dark theme toggle and full settings configuration.</li>
+<li>Supports both predefined and custom categories.</li>
+<li>Backup settings for future cloud sync capability.</li>
+</ul>
+<hr>
+<h2>🧭 Page-wise Functionality</h2>
+<h3>1. <strong>Home Page</strong></h3>
+<p>Displays all key metrics and analytics:</p>
+<ul>
+<li><strong>Budget Progress</strong>: Visual bar with % used, allowed/spent/suggested per day.</li>
+<li><strong>Charts</strong>:<ul>
+<li>Daily Spending (bar/line)</li>
+<li>Last 7 Days</li>
+<li>Monthly Overview</li>
+<li>Category Overview (doughnut/pie)</li>
+</ul>
+</li>
+</ul>
+<h3>2. <strong>Add Expense Page</strong></h3>
+<p>Form to record new expenses:</p>
+<ul>
+<li>Fields:<ul>
+<li>Amount</li>
+<li>Category &amp; Subcategory</li>
+<li>Date and Time</li>
+<li>Note (optional)</li>
+<li>Payment Mode (UPI or Cash)</li>
+</ul>
+</li>
+</ul>
+<h3>3. <strong>Expense List Page</strong></h3>
+<p>Tabular view of all expenses with:</p>
+<ul>
+<li>Sortable columns (by amount, category, date, etc.)</li>
+<li>Pagination or scrolling support for large data sets</li>
+</ul>
+<h3>4. <strong>Search Page</strong></h3>
+<ul>
+<li>Filter expenses by <strong>From Date</strong> and <strong>To Date</strong></li>
+<li>List all matching results in a detailed view</li>
+</ul>
+<h3>5. <strong>Calendar Page</strong></h3>
+<ul>
+<li>Visual calendar UI</li>
+<li>Clicking on a date opens a modal displaying all expenses on that specific day</li>
+</ul>
+<h3>6. <strong>Settings Page</strong></h3>
+<ul>
+<li>Switch between <strong>Dark Mode</strong> and <strong>Light Mode</strong></li>
+<li>Set budgets (monthly or custom range)</li>
+<li>Add/Delete categories</li>
+<li>Backup settings</li>
+</ul>
+<hr>
+<h2>📂 Data Management (localStorage)</h2>
+<p>All data is stored in the browser&#39;s <code>localStorage</code>. Each major data type (expenses, categories, settings, etc.) is maintained in its respective storage key.</p>
+<hr>
+<h2>📊 Database Schemas</h2>
+<h3>🧾 Expense Schema</h3>
+<b>Example :</b><div><pre class="line-numbers"><code class="language-js">{
+  amount: &quot;&quot;,
+  category_id: &quot;&quot;,
+  date: &quot;&quot;,
+  expense_id: &quot;&quot;,
+  location: &quot;&quot;,
+  note: &quot;&quot;,
+  payment_mode: &quot;&quot;, // e.g., &quot;UPI&quot; or &quot;Cash&quot;
+  subcategory: &quot;&quot;,
+  time: &quot;&quot;
+}</code></pre></div><h3>📁 Category Schema</h3>
+<b>Example :</b><div><pre class="line-numbers"><code class="language-js">{
+  category_id: 1,
+  name: &quot;Food &amp; Drinks&quot;,
+  icon: &quot;🍔&quot;,
+  color: &quot;#f94144&quot;
+}</code></pre></div><h3>🧰 Custom Category Schema</h3>
+<b>Example :</b><div><pre class="line-numbers"><code class="language-js">{
+  category_id: &quot;&quot;,
+  name: &quot;&quot;,
+  icon: &quot;&quot;,
+  color: &quot;&quot;
+}</code></pre></div><h3>⚙️ Settings Schema</h3>
+<b>Example :</b><div><pre class="line-numbers"><code class="language-js">{
+  themeMode: &quot;&quot;,
+  notifications: true,
+  backupFrequency: &quot;&quot;,
+  isBackup: false
+}</code></pre></div><h3>📅 Budget Schema</h3>
+<b>Example :</b><div><pre class="line-numbers"><code class="language-js">{
+  id: &quot;&quot;,
+  amount: 0,
+  fromDate: &quot;&quot;,
+  toDate: &quot;&quot;
+}</code></pre></div><hr>
+<h2>📈 Charts and Visualization</h2>
+<p>The app uses <code>Chart.js</code> to display visual statistics:</p>
+<ul>
+<li><strong>Daily Chart</strong> – Spending today</li>
+<li><strong>Last 7 Days</strong> – Weekly analysis</li>
+<li><strong>Monthly Chart</strong> – Month-wise data</li>
+<li><strong>Category Chart</strong> – Expense distribution by category</li>
+<li>Each chart dynamically updates based on data changes</li>
+</ul>
+<hr>
+<h2>⚙️ Settings and Personalization</h2>
+<p>Users can customize their experience with:</p>
+<ul>
+<li>Theme toggle (light/dark)</li>
+<li>Add/remove categories</li>
+<li>Set budgets with date range</li>
+<li>Configure backup frequency (for future enhancements)</li>
+</ul>
+<hr>
+<h2>🔄 Backup &amp; Sync</h2>
+<ul>
+<li>A backup system is designed using the <code>isBackup</code> flag and <code>backupFrequency</code></li>
+<li>Future integration planned with cloud/local file system</li>
+</ul>
+<hr>
+<h2>📌 Usage Guide</h2>
+<h3>Adding an Expense</h3>
+<ol>
+<li>Go to &quot;Add Expense&quot; tab</li>
+<li>Fill in details (amount, category, date/time, etc.)</li>
+<li>Click <strong>Submit</strong> – the data is stored in localStorage and reflected across the app</li>
+</ol>
+<h3>Viewing Reports</h3>
+<ul>
+<li>Navigate to Home to view detailed spending analytics</li>
+</ul>
+<h3>Managing Budget</h3>
+<ul>
+<li>Head to <strong>Settings &gt; Set Budget</strong></li>
+<li>Set monthly or custom range with allowed budget</li>
+</ul>
+<h3>Viewing Daily Expenses</h3>
+<ul>
+<li>Go to <strong>Calendar Page</strong></li>
+<li>Click any date to view expenses via modal</li>
+</ul>
+<h3>Backup</h3>
+<ul>
+<li>Enable <code>Backup</code> in <strong>Settings</strong></li>
+<li>Configure backup frequency (daily/weekly/monthly)</li>
+</ul>
+<hr>
+<h2>🖼️ Screenshots</h2>
+<p>Below are visual previews of the Expense Tracker application to provide better insight into its user interface and functionality.</p>
+<h3>📊 Home Page – Dashboard Overview</h3>
+<p>Displays budget progress and various charts for spending analytics.
+<img src="./assets/images/screenshots/home.png" alt="Home Dashboard" class="img-responsive"></p>
+<h3>➕ Add Expense Page</h3>
+<p>Simple and clean form to add new expenses with all required fields.
+<img src="./assets/images/screenshots/add.png" alt="Add Expense" class="img-responsive"></p>
+<h3>📃 Expense List</h3>
+<p>Tabular view of all recorded expenses with sorting capabilities.
+<img src="./assets/images/screenshots/list.png" alt="Expense List" class="img-responsive"></p>
+<h3>🔍 Search by Date Range</h3>
+<p>Filter and display expenses between selected dates.
+<img src="./assets/images/screenshots/search.png" alt="Search Expenses" class="img-responsive"></p>
+<h3>📅 Calendar View</h3>
+<p>Visual calendar UI to access expenses on a specific day.
+<img src="./assets/images/screenshots/calendar.gif" alt="Calendar View" class="img-responsive"></p>
+<h3>⚙️ Settings Panel</h3>
+<p>Includes theme toggle, budget setup, category management, and backup options.
+<img src="./assets/images/screenshots/setting.png" alt="Settings Page" class="img-responsive"></p>
+<hr>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                   </div><div class="search-results">
+    <div class="has-results">
+        <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+        <ul class="search-results-list"></ul>
+    </div>
+    <div class="no-results">
+        <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+    </div>
+</div>
+</div>
+               <!-- END CONTENT -->
+           </div>
+       </div>
+
+          <label class="dark-mode-switch">
+               <input type="checkbox">
+               <span class="slider">
+                    <svg class="slider-icon" viewBox="0 0 24 24" fill="none" height="20" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" width="20" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"></path>
+                    </svg>
+               </span>
+          </label>
+
+       <script>
+            var COMPODOC_CURRENT_PAGE_DEPTH = 0;
+            var COMPODOC_CURRENT_PAGE_CONTEXT = 'getting-started';
+            var COMPODOC_CURRENT_PAGE_URL = 'index.html';
+            var MAX_SEARCH_RESULTS = 15;
+       </script>
+
+       <script>
+               $darkModeToggleSwitchers = document.querySelectorAll('.dark-mode-switch input');
+               checkToggle(darkModeState);
+               if ($darkModeToggleSwitchers.length > 0) {
+                    for (var i = 0; i < $darkModeToggleSwitchers.length; i++) {
+                         $darkModeToggleSwitchers[i].addEventListener('change', function (event) {
+                              darkModeState = !darkModeState;
+                              toggleDarkMode(darkModeState);
+                         });
+                    }
+               }
+          </script>
+
+       <script src="./js/libs/custom-elements.min.js"></script>
+       <script src="./js/libs/lit-html.js"></script>
+
+       <script src="./js/menu-wc.js" defer></script>
+       <script nomodule src="./js/menu-wc_es5.js" defer></script>
+
+       <script src="./js/libs/bootstrap-native.js"></script>
+
+       <script src="./js/libs/es6-shim.min.js"></script>
+       <script src="./js/libs/EventDispatcher.js"></script>
+       <script src="./js/libs/promise.min.js"></script>
+
+       <script src="./js/compodoc.js"></script>
+
+       <script src="./js/tabs.js"></script>
+       <script src="./js/menu.js"></script>
+       <script src="./js/libs/clipboard.min.js"></script>
+       <script src="./js/libs/prism.js"></script>
+       <script src="./js/sourceCode.js"></script>
+          <script src="./js/search/search.js"></script>
+          <script src="./js/search/lunr.min.js"></script>
+          <script src="./js/search/search-lunr.js"></script>
+          <script src="./js/search/search_index.js"></script>
+       <script src="./js/lazy-load-graphs.js"></script>
+
+
+    </body>
+</html>

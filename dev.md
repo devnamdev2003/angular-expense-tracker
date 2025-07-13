@@ -2,6 +2,7 @@
 npm install --save apexcharts ng-apexcharts
 npm install lucide-angular
 npm install marked
+npm install -g @compodoc/compodoc
 
 
 <!-- Next Task -->
@@ -11,3 +12,14 @@ npm install marked
 4. add a budget section in sidebar
 5. add analysis section in sidebar
 6. add category wise list in home page
+
+commands
+
+# Generate documentation
+compodoc -p tsconfig.json -s
+
+# Or watch for changes
+compodoc -p tsconfig.json -w
+
+## Serve Documentation
+compodoc -s

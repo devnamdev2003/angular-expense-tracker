@@ -2,220 +2,114 @@
 
 >### Expense Wisely – Where Your Money Stops Playing Hide and Seek!
 
-## ✅ Overview
+## 📌 Overview
 
-The **Expense Tracker Application** helps users manage their personal finances through intuitive UI components, visual analytics, and simple interaction patterns. The application is fully front-end based, leveraging `localStorage` for data persistence.
+**Expense Tracker** is a mobile-first financial management application designed to help users easily track their daily and monthly expenses. The application emphasizes a user-friendly UI/UX tailored specifically for smartphones, allowing seamless personal finance management on the go.
 
-Experience the power of **Devnoms Chat App** right now:
-
-[![Live Preview](https://img.shields.io/badge/Live-Preview-brightgreen?style=for-the-badge&logo=angular)](https://exwise.vercel.app/)
+This application leverages **Angular** as the frontend framework and **Tailwind CSS** for responsive and modern UI styling. All user data is stored in **LocalStorage**, making the app lightweight and independent of backend dependencies.
 
 ---
 
-![App](./assets/images/share_o.png) 
+## 🧰 Tech Stack
 
-## 💡 Features
-
-- Add and categorize expenses with rich metadata.
-- Real-time visual analysis using charts (daily, weekly, monthly).
-- Budget management with progress tracking.
-- Calendar view for date-wise expense breakdown.
-- Sorting, filtering, and searching of expenses.
-- Light/Dark theme toggle and full settings configuration.
-- Supports both predefined and custom categories.
-- Backup settings for future cloud sync capability.
+| Technology   | Purpose                    |
+| ------------ | -------------------------- |
+| Angular      | Frontend application logic |
+| Tailwind CSS | Styling and responsive UI  |
+| LocalStorage | Persistent data storage    |
 
 ---
 
-## 🧭 Page-wise Functionality
+## 📱 Features & Functionality
 
-### 1. **Home Page**
-Displays all key metrics and analytics:
-- **Budget Progress**: Visual bar with % used, allowed/spent/suggested per day.
-- **Charts**:
-  - Daily Spending (bar/line)
-  - Last 7 Days
-  - Monthly Overview
-  - Category Overview (doughnut/pie)
+### 1. **Dashboard View**
 
-### 2. **Add Expense Page**
-Form to record new expenses:
-- Fields:
-  - Amount
-  - Category & Subcategory
-  - Date and Time
-  - Note (optional)
-  - Payment Mode (UPI or Cash)
+* Upon launch, users are greeted with two interactive graphs:
 
-### 3. **Expense List Page**
-Tabular view of all expenses with:
-- Sortable columns (by amount, category, date, etc.)
-- Pagination or scrolling support for large data sets
-
-### 4. **Search Page**
-- Filter expenses by **From Date** and **To Date**
-- List all matching results in a detailed view
-
-### 5. **Calendar Page**
-- Visual calendar UI
-- Clicking on a date opens a modal displaying all expenses on that specific day
-
-### 6. **Settings Page**
-- Switch between **Dark Mode** and **Light Mode**
-- Set budgets (monthly or custom range)
-- Add/Delete categories
-- Backup settings
+  * **Expense Graph (Toggle: Monthly / Daily)**: Displays a line graph representing user expenses over time. Users can switch between **Monthly** and **Daily** views.
+  * **Category-wise Pie Chart**: Visualizes how the expenses are distributed across different categories (e.g., Food, Travel, Shopping).
 
 ---
 
-## 📂 Data Management (localStorage)
+### 2. **Add Expense View**
 
-All data is stored in the browser's `localStorage`. Each major data type (expenses, categories, settings, etc.) is maintained in its respective storage key.
+Allows users to add new expense entries through a form. Input fields include:
 
----
+* 💰 **Amount**
+* 📅 **Date & Time**
+* 🏷️ **Category** (chosen from a dropdown list)
+* 📍 **Location**
+* 📝 **Note**
 
-## 📊 Database Schemas
-
-### 🧾 Expense Schema
-
-```js
-{
-  amount: "",
-  category_id: "",
-  date: "",
-  expense_id: "",
-  location: "",
-  note: "",
-  payment_mode: "", // e.g., "UPI" or "Cash"
-  subcategory: "",
-  time: ""
-}
-```
-
-### 📁 Category Schema
-
-```js
-{
-  category_id: 1,
-  name: "Food & Drinks",
-  icon: "🍔",
-  color: "#f94144"
-}
-```
-
-### 🧰 Custom Category Schema
-
-```js
-{
-  category_id: "",
-  name: "",
-  icon: "",
-  color: ""
-}
-```
-
-### ⚙️ Settings Schema
-
-```js
-{
-  themeMode: "",
-  notifications: true,
-  backupFrequency: "",
-  isBackup: false
-}
-```
-
-### 📅 Budget Schema
-
-```js
-{
-  id: "",
-  amount: 0,
-  fromDate: "",
-  toDate: ""
-}
-```
+All expenses are stored in the device's **LocalStorage** and reflected immediately in graphs and listings.
 
 ---
 
-## 📈 Charts and Visualization
+### 3. **Calendar View**
 
-The app uses `Chart.js` to display visual statistics:
-- **Daily Chart** – Spending today
-- **Last 7 Days** – Weekly analysis
-- **Monthly Chart** – Month-wise data
-- **Category Chart** – Expense distribution by category
-- Each chart dynamically updates based on data changes
+* Users can view a **monthly calendar** to explore expenses on specific dates.
+* Tap any date to open a **popup modal** displaying all expenses for that day.
+* Navigate across **months and years** to view past or future expenses.
 
 ---
 
-## ⚙️ Settings and Personalization
+### 4. **List View**
 
-Users can customize their experience with:
-- Theme toggle (light/dark)
-- Add/remove categories
-- Set budgets with date range
-- Configure backup frequency (for future enhancements)
+* Displays all user expenses in a scrollable, searchable, and sortable list.
+* Users can:
 
----
-
-## 🔄 Backup & Sync
-
-- A backup system is designed using the `isBackup` flag and `backupFrequency`
-- Future integration planned with cloud/local file system
+  * 🧾 **Sort** expenses by date, amount, or category.
+  * 🔍 **Filter** by category, date, or keyword.
+  * 🖱️ Tap any entry to open a **modal** with complete details and options to **edit** or **delete** the expense.
 
 ---
 
-## 📌 Usage Guide
+### 5. **Budget View**
 
-### Adding an Expense
-1. Go to "Add Expense" tab
-2. Fill in details (amount, category, date/time, etc.)
-3. Click **Submit** – the data is stored in localStorage and reflected across the app
+* Users can define a **budget range** by selecting start and end dates.
+* After setting a budget:
 
-### Viewing Reports
-- Navigate to Home to view detailed spending analytics
-
-### Managing Budget
-- Head to **Settings > Set Budget**
-- Set monthly or custom range with allowed budget
-
-### Viewing Daily Expenses
-- Go to **Calendar Page**
-- Click any date to view expenses via modal
-
-### Backup
-- Enable `Backup` in **Settings**
-- Configure backup frequency (daily/weekly/monthly)
+  * A **progress bar** shows how much of the budget has been spent.
+  * Options to **edit** or **delete** the budget are available for flexibility and control.
 
 ---
 
-## 🖼️ Screenshots
+### 6. **Settings View**
 
-Below are visual previews of the Expense Tracker application to provide better insight into its user interface and functionality.
+Provides customization and utility options for better personalization:
 
-### 📊 Home Page – Dashboard Overview
-Displays budget progress and various charts for spending analytics.
-![Home Dashboard](./assets/images/screenshots/home.png)
-
-### ➕ Add Expense Page
-Simple and clean form to add new expenses with all required fields.
-![Add Expense](./assets/images/screenshots/add.png)
-
-### 📃 Expense List
-Tabular view of all recorded expenses with sorting capabilities.
-![Expense List](./assets/images/screenshots/list.png)
-
-### 🔍 Search by Date Range
-Filter and display expenses between selected dates.
-![Search Expenses](./assets/images/screenshots/search.png)
-
-### 📅 Calendar View
-Visual calendar UI to access expenses on a specific day.
-![Calendar View](./assets/images/screenshots/calendar.gif)
-
-### ⚙️ Settings Panel
-Includes theme toggle, budget setup, category management, and backup options.
-![Settings Page](./assets/images/screenshots/setting.png)
+* 🎨 **Theme Mode Toggle** (Dark / Light)
+* ⬇️ **Download Data** (export expenses data)
+* ➕ **Add Category** (custom categories for better organization)
+* ❌ **Delete Category** (remove unused or incorrect categories)
 
 ---
+
+## 📱 Mobile-First Design
+
+* The application is specifically designed for **mobile devices**.
+* Features responsive components, intuitive touch controls, and visually appealing UI optimized for small screens.
+* Not intended for laptop or desktop usage.
+
+---
+
+## 🗃️ Data Storage
+
+All user data is stored using the **browser’s LocalStorage API**, ensuring:
+
+* No need for backend/server.
+* Fast read/write operations.
+* Data remains available between app sessions.
+
+---
+
+## 📈 User Flow Summary
+
+1. **Launch App** → View Expense Graphs (Toggle between Month/Day).
+2. **Add Expenses** via the **+** tab.
+3. Navigate to:
+
+   * **Calendar** to view per-date expenses.
+   * **List** for detailed log and search/filter options.
+   * **Budget** to monitor spending.
+   * **Settings** for customization.

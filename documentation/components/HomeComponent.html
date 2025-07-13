@@ -1,0 +1,1303 @@
+<!doctype html>
+<html class="no-js" lang="">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <title>expense-wise documentation</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <link rel="icon" type="image/x-icon" href="../images/favicon.ico">
+	   <link rel="stylesheet" href="../styles/style.css">
+        <link rel="stylesheet" href="../styles/dark.css">
+    </head>
+    <body>
+          <script>
+               // Blocking script to avoid flickering dark mode
+               // Dark mode toggle button
+               var useDark = window.matchMedia('(prefers-color-scheme: dark)');
+               var darkModeState = useDark.matches;
+               var $darkModeToggleSwitchers = document.querySelectorAll('.dark-mode-switch input');
+               var $darkModeToggles = document.querySelectorAll('.dark-mode-switch');
+               var darkModeStateLocal = localStorage.getItem('compodoc_darkmode-state');
+
+               function checkToggle(check) {
+                    for (var i = 0; i < $darkModeToggleSwitchers.length; i++) {
+                         $darkModeToggleSwitchers[i].checked = check;
+                    }
+               }
+
+               function toggleDarkMode(state) {
+                    if (window.localStorage) {
+                         localStorage.setItem('compodoc_darkmode-state', state);
+                    }
+
+                    checkToggle(state);
+
+                    const hasClass = document.body.classList.contains('dark');
+
+                    if (state) {
+                         for (var i = 0; i < $darkModeToggles.length; i++) {
+                              $darkModeToggles[i].classList.add('dark');
+                         }
+                         if (!hasClass) {
+                              document.body.classList.add('dark');
+                         }
+                    } else {
+                         for (var i = 0; i < $darkModeToggles.length; i++) {
+                              $darkModeToggles[i].classList.remove('dark');
+                         }
+                         if (hasClass) {
+                              document.body.classList.remove('dark');
+                         }
+                    }
+               }
+
+               useDark.addEventListener('change', function (evt) {
+                    toggleDarkMode(evt.matches);
+               });
+               if (darkModeStateLocal) {
+                    darkModeState = darkModeStateLocal === 'true';
+               }
+               toggleDarkMode(darkModeState);
+          </script>
+
+        <div class="navbar navbar-default navbar-fixed-top d-md-none p-0">
+               <div class="d-flex">
+                    <a href="../" class="navbar-brand">expense-wise documentation</a>
+                    <button type="button" class="btn btn-default btn-menu ion-ios-menu" id="btn-menu"></button>
+               </div>
+        </div>
+
+        <div class="xs-menu menu" id="mobile-menu">
+                <div id="book-search-input" role="search"><input type="text" placeholder="Type to search"></div>            <compodoc-menu></compodoc-menu>
+        </div>
+
+        <div class="container-fluid main">
+           <div class="row main">
+               <div class="d-none d-md-block menu">
+                   <compodoc-menu mode="normal"></compodoc-menu>
+               </div>
+               <!-- START CONTENT -->
+               <div class="content component">
+                   <div class="content-data">
+
+
+
+
+<ol class="breadcrumb">
+  <li class="breadcrumb-item">Components</li>
+  <li class="breadcrumb-item"
+  >
+  HomeComponent</li>
+</ol>
+
+<ul class="nav nav-tabs" role="tablist">
+        <li class="nav-item">
+            <a href="#info" class="nav-link active"
+                role="tab" id="info-tab" data-bs-toggle="tab" data-link="info">Info</a>
+        </li>
+        <li class="nav-item">
+            <a href="#source" class="nav-link"
+                role="tab" id="source-tab" data-bs-toggle="tab" data-link="source">Source</a>
+        </li>
+        <li class="nav-item">
+            <a href="#templateData" class="nav-link"
+                role="tab" id="templateData-tab" data-bs-toggle="tab" data-link="template">Template</a>
+        </li>
+        <li class="nav-item">
+            <a href="#styleData" class="nav-link"
+                role="tab" id="styleData-tab" data-bs-toggle="tab" data-link="style">Styles</a>
+        </li>
+        <li class="nav-item">
+            <a href="#tree" class="nav-link"
+                role="tab" id="tree-tab" data-bs-toggle="tab" data-link="dom-tree">DOM Tree</a>
+        </li>
+</ul>
+
+<div class="tab-content">
+    <div class="tab-pane fade active in" id="info"><p class="comment">
+    <h3>File</h3>
+</p>
+<p class="comment">
+    <code>src/app/features/home/home.component.ts</code>
+</p>
+
+
+
+
+
+
+<section data-compodoc="block-metadata">
+    <h3>Metadata</h3>
+    <table class="table table-sm table-hover metadata">
+        <tbody>
+
+
+
+
+
+
+
+
+
+
+
+
+            <tr>
+                <td class="col-md-3">selector</td>
+                <td class="col-md-9"><code>app-home</code></td>
+            </tr>
+
+            <tr>
+                <td class="col-md-3">standalone</td>
+                <td class="col-md-9"><code>true</code></td>
+            </tr>
+
+            <tr>
+                <td class="col-md-3">imports</td>
+                <td class="col-md-9">
+                                <code><a href="../components/GraphsComponent.html" target="_self" >GraphsComponent</a></code>
+                            <code>FormsModule</code>
+                            <code>CommonModule</code>
+                                <code><a href="../components/PieChartComponent.html" target="_self" >PieChartComponent</a></code>
+                </td>
+            </tr>
+
+            <tr>
+                <td class="col-md-3">styleUrls</td>
+                <td class="col-md-9"><code>./home.component.css</code></td>
+            </tr>
+
+
+
+            <tr>
+                <td class="col-md-3">templateUrl</td>
+                <td class="col-md-9"><code>./home.component.html</code></td>
+            </tr>
+
+
+
+
+
+
+
+
+        </tbody>
+    </table>
+</section>
+
+    <section data-compodoc="block-index">
+    <h3 id="index">Index</h3>
+    <table class="table table-sm table-bordered index-table">
+        <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Properties</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                <a href="#currentDate" >currentDate</a>
+                            </li>
+                            <li>
+                                <a href="#defaultViewType" >defaultViewType</a>
+                            </li>
+                            <li>
+                                <a href="#forceInputReset" >forceInputReset</a>
+                            </li>
+                            <li>
+                                <a href="#viewType" >viewType</a>
+                            </li>
+                            <li>
+                                <a href="#viewTypeDiv" >viewTypeDiv</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Methods</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                <a href="#blockKey" >blockKey</a>
+                            </li>
+                            <li>
+                                <a href="#formatDateForInput" >formatDateForInput</a>
+                            </li>
+                            <li>
+                                <a href="#formatMonthForInput" >formatMonthForInput</a>
+                            </li>
+                            <li>
+                                <a href="#getDisplayDate" >getDisplayDate</a>
+                            </li>
+                            <li>
+                                <a href="#goNext" >goNext</a>
+                            </li>
+                            <li>
+                                <a href="#goPrevious" >goPrevious</a>
+                            </li>
+                            <li>
+                                <a href="#onInputChange" >onInputChange</a>
+                            </li>
+                            <li>
+                                <a href="#onMonthChange" >onMonthChange</a>
+                            </li>
+                            <li>
+                                <a href="#setViewType" >setViewType</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+
+
+
+
+
+        </tbody>
+    </table>
+</section>
+
+
+
+
+
+
+    <section data-compodoc="block-methods">
+    
+    <h3 id="methods">
+        Methods
+    </h3>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="blockKey"></a>
+                    <span class="name">
+                        <span ><b>blockKey</b></span>
+                        <a href="#blockKey"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>blockKey(event: KeyboardEvent)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="96"
+                                    class="link-to-prism">src/app/features/home/home.component.ts:96</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>event</td>
+                                            <td>
+                                                        <code>KeyboardEvent</code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="formatDateForInput"></a>
+                    <span class="name">
+                        <span ><b>formatDateForInput</b></span>
+                        <a href="#formatDateForInput"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>formatDateForInput(date: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date" target="_blank">Date</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="88"
+                                    class="link-to-prism">src/app/features/home/home.component.ts:88</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>date</td>
+                                            <td>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date" target="_blank" >Date</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="formatMonthForInput"></a>
+                    <span class="name">
+                        <span ><b>formatMonthForInput</b></span>
+                        <a href="#formatMonthForInput"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>formatMonthForInput(date: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date" target="_blank">Date</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="92"
+                                    class="link-to-prism">src/app/features/home/home.component.ts:92</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>date</td>
+                                            <td>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date" target="_blank" >Date</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="getDisplayDate"></a>
+                    <span class="name">
+                        <span ><b>getDisplayDate</b></span>
+                        <a href="#getDisplayDate"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>getDisplayDate()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="48"
+                                    class="link-to-prism">src/app/features/home/home.component.ts:48</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="goNext"></a>
+                    <span class="name">
+                        <span ><b>goNext</b></span>
+                        <a href="#goNext"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>goNext()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="39"
+                                    class="link-to-prism">src/app/features/home/home.component.ts:39</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="goPrevious"></a>
+                    <span class="name">
+                        <span ><b>goPrevious</b></span>
+                        <a href="#goPrevious"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>goPrevious()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="30"
+                                    class="link-to-prism">src/app/features/home/home.component.ts:30</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="onInputChange"></a>
+                    <span class="name">
+                        <span ><b>onInputChange</b></span>
+                        <a href="#onInputChange"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>onInputChange(event: <a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank">any</a>, inputRef: HTMLInputElement)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="58"
+                                    class="link-to-prism">src/app/features/home/home.component.ts:58</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>event</td>
+                                            <td>
+                                                            <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                        <tr>
+                                                <td>inputRef</td>
+                                            <td>
+                                                        <code>HTMLInputElement</code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="onMonthChange"></a>
+                    <span class="name">
+                        <span ><b>onMonthChange</b></span>
+                        <a href="#onMonthChange"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>onMonthChange(event: <a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank">any</a>, inputRef: HTMLInputElement)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="73"
+                                    class="link-to-prism">src/app/features/home/home.component.ts:73</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>event</td>
+                                            <td>
+                                                            <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                        <tr>
+                                                <td>inputRef</td>
+                                            <td>
+                                                        <code>HTMLInputElement</code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="setViewType"></a>
+                    <span class="name">
+                        <span ><b>setViewType</b></span>
+                        <a href="#setViewType"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>setViewType(view: "month" | "day")</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="22"
+                                    class="link-to-prism">src/app/features/home/home.component.ts:22</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>view</td>
+                                            <td>
+                                                        <code>&quot;month&quot; | &quot;day&quot;</code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</section>
+    <section data-compodoc="block-properties">
+    
+    <h3 id="inputs">
+        Properties
+    </h3>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="currentDate"></a>
+                    <span class="name">
+                        <span ><b>currentDate</b></span>
+                        <a href="#currentDate"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date" target="_blank" >Date</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>new Date()</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="19" class="link-to-prism">src/app/features/home/home.component.ts:19</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="defaultViewType"></a>
+                    <span class="name">
+                        <span ><b>defaultViewType</b></span>
+                        <a href="#defaultViewType"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>&quot;month&quot; | &quot;day&quot;</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>&#x27;month&#x27;</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="16" class="link-to-prism">src/app/features/home/home.component.ts:16</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="forceInputReset"></a>
+                    <span class="name">
+                        <span ><b>forceInputReset</b></span>
+                        <a href="#forceInputReset"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>false</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="20" class="link-to-prism">src/app/features/home/home.component.ts:20</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="viewType"></a>
+                    <span class="name">
+                        <span ><b>viewType</b></span>
+                        <a href="#viewType"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>&quot;month&quot; | &quot;day&quot;</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>this.defaultViewType</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="17" class="link-to-prism">src/app/features/home/home.component.ts:17</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="viewTypeDiv"></a>
+                    <span class="name">
+                        <span ><b>viewTypeDiv</b></span>
+                        <a href="#viewTypeDiv"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>false</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="18" class="link-to-prism">src/app/features/home/home.component.ts:18</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+</section>
+
+</div>
+
+
+    <div class="tab-pane fade  tab-source-code" id="source">
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Component } from &#x27;@angular/core&#x27;;
+import { GraphsComponent } from &#x27;../../component/graphs/graphs.component&#x27;;
+import { FormsModule } from &#x27;@angular/forms&#x27;;
+import { CommonModule } from &#x27;@angular/common&#x27;;
+import { PieChartComponent } from &#x27;../../component/pie-chart/pie-chart.component&#x27;;
+
+@Component({
+  selector: &#x27;app-home&#x27;,
+  imports: [GraphsComponent, FormsModule, CommonModule, PieChartComponent],
+  templateUrl: &#x27;./home.component.html&#x27;,
+  styleUrls: [&#x27;./home.component.css&#x27;],
+  standalone: true
+})
+
+export class HomeComponent {
+  defaultViewType: &#x27;month&#x27; | &#x27;day&#x27; &#x3D; &#x27;month&#x27;;
+  viewType: &#x27;month&#x27; | &#x27;day&#x27; &#x3D; this.defaultViewType;
+  viewTypeDiv: boolean &#x3D; false;
+  currentDate: Date &#x3D; new Date();
+  forceInputReset: boolean &#x3D; false;
+
+  setViewType(view: &#x27;month&#x27; | &#x27;day&#x27;) {
+    if (this.viewType !&#x3D; view) {
+      this.viewTypeDiv &#x3D; !this.viewTypeDiv;
+      this.viewType &#x3D; view;
+      this.currentDate &#x3D; new Date();
+    }
+  }
+
+  goPrevious() {
+    if (this.viewType &#x3D;&#x3D;&#x3D; &#x27;day&#x27;) {
+      this.currentDate.setDate(this.currentDate.getDate() - 1);
+    } else if (this.viewType &#x3D;&#x3D;&#x3D; &#x27;month&#x27;) {
+      this.currentDate.setMonth(this.currentDate.getMonth() - 1);
+    }
+    this.currentDate &#x3D; new Date(this.currentDate);
+  }
+
+  goNext() {
+    if (this.viewType &#x3D;&#x3D;&#x3D; &#x27;day&#x27;) {
+      this.currentDate.setDate(this.currentDate.getDate() + 1);
+    } else if (this.viewType &#x3D;&#x3D;&#x3D; &#x27;month&#x27;) {
+      this.currentDate.setMonth(this.currentDate.getMonth() + 1);
+    }
+    this.currentDate &#x3D; new Date(this.currentDate);
+  }
+
+  getDisplayDate(): string {
+    if (this.viewType &#x3D;&#x3D;&#x3D; &#x27;day&#x27;) {
+      return this.currentDate.toDateString();
+    } else {
+      const monthNames &#x3D; [&quot;Jan&quot;, &quot;Feb&quot;, &quot;Mar&quot;, &quot;Apr&quot;, &quot;May&quot;, &quot;Jun&quot;,
+        &quot;Jul&quot;, &quot;Aug&quot;, &quot;Sep&quot;, &quot;Oct&quot;, &quot;Nov&quot;, &quot;Dec&quot;];
+      return &#x60;${monthNames[this.currentDate.getMonth()]} ${this.currentDate.getFullYear()}&#x60;;
+    }
+  }
+
+  onInputChange(event: any, inputRef: HTMLInputElement) {
+    const value &#x3D; event.target.value;
+    if (!value || value.trim() &#x3D;&#x3D;&#x3D; &#x27;&#x27;) {
+      inputRef.value &#x3D; this.formatDateForInput(this.currentDate);
+      return;
+    }
+
+    const parsed &#x3D; new Date(value);
+    if (!isNaN(parsed.getTime())) {
+      this.currentDate &#x3D; parsed;
+    } else {
+      inputRef.value &#x3D; this.formatDateForInput(this.currentDate);
+    }
+  }
+
+  onMonthChange(event: any, inputRef: HTMLInputElement) {
+    const value &#x3D; event.target.value;
+    if (!value || value.trim() &#x3D;&#x3D;&#x3D; &#x27;&#x27;) {
+      inputRef.value &#x3D; this.formatMonthForInput(this.currentDate);
+      return;
+    }
+
+    const [year, month] &#x3D; value.split(&#x27;-&#x27;).map(Number);
+    if (!isNaN(year) &amp;&amp; !isNaN(month)) {
+      this.currentDate &#x3D; new Date(year, month - 1);
+    } else {
+      inputRef.value &#x3D; this.formatMonthForInput(this.currentDate);
+    }
+  }
+
+  formatDateForInput(date: Date): string {
+    return date.toISOString().split(&#x27;T&#x27;)[0];
+  }
+
+  formatMonthForInput(date: Date): string {
+    return &#x60;${date.getFullYear()}-${String(date.getMonth() + 1).padStart(2, &#x27;0&#x27;)}&#x60;;
+  }
+
+  blockKey(event: KeyboardEvent) {
+
+    if ([&#x27;Backspace&#x27;, &#x27;Delete&#x27;].includes(event.key)) {
+      event.preventDefault();
+    }
+  }
+}</code></pre>
+    </div>
+
+    <div class="tab-pane fade " id="templateData">
+        <pre class="line-numbers"><code class="language-html">&lt;div class&#x3D;&quot;px-2&quot;&gt;
+    &lt;!-- View Type Toggle --&gt;
+    &lt;div class&#x3D;&quot;flex justify-center items-center min-h-[70px]&quot;&gt;
+        &lt;div class&#x3D;&quot;relative flex w-48 bg-[var(--color-surface)] rounded-full shadow-md&quot;&gt;
+            &lt;div class&#x3D;&quot;absolute h-full w-1/2 bg-[var(--theme-color)] rounded-full transition-all duration-300&quot;
+                [class.translate-x-24]&#x3D;&quot;viewTypeDiv&quot;&gt;&lt;/div&gt;
+            &lt;button
+                class&#x3D;&quot;relative z-10 w-1/2 flex-1 text-center text-sm font-medium py-2 rounded-full transition-colors duration-300&quot;
+                [class.text-[var(--color-text)]]&#x3D;&quot;viewType !&#x3D;&#x3D; defaultViewType&quot;
+                [class.text-[var(--color-white)]]&#x3D;&quot;viewType &#x3D;&#x3D;&#x3D; defaultViewType&quot; (click)&#x3D;&quot;setViewType(defaultViewType)&quot;&gt;
+                {{ defaultViewType | titlecase }}
+            &lt;/button&gt;
+            &lt;button
+                class&#x3D;&quot;relative z-10 w-1/2 flex-1 text-center text-sm font-medium py-2 rounded-full transition-colors duration-300&quot;
+                [class.text-[var(--color-text)]]&#x3D;&quot;viewType !&#x3D;&#x3D; (defaultViewType &#x3D;&#x3D; &#x27;month&#x27;?&#x27;day&#x27;:&#x27;month&#x27;)&quot;
+                [class.text-[var(--color-white)]]&#x3D;&quot;viewType &#x3D;&#x3D;&#x3D; (defaultViewType &#x3D;&#x3D; &#x27;month&#x27;?&#x27;day&#x27;:&#x27;month&#x27;)&quot;
+                (click)&#x3D;&quot;setViewType(defaultViewType &#x3D;&#x3D; &#x27;month&#x27;?&#x27;day&#x27;:&#x27;month&#x27;)&quot;&gt;
+                {{ (defaultViewType &#x3D;&#x3D; &#x27;month&#x27; ? &#x27;day&#x27; : &#x27;month&#x27;) | titlecase }}
+            &lt;/button&gt;
+        &lt;/div&gt;
+    &lt;/div&gt;
+
+    &lt;div class&#x3D;&quot;flex justify-between items-center px-2 md:w-[500px] m-auto&quot;&gt;
+        &lt;button class&#x3D;&quot;shrink-0&quot; (click)&#x3D;&quot;goPrevious()&quot;&gt;
+            &lt;img src&#x3D;&quot;assets/img/icon/icons8-left-arrow-50.png&quot; alt&#x3D;&quot;add&quot;
+                class&#x3D;&quot;w-[25px] h-[25px] transition-all duration-300 ease-in-out&quot; style&#x3D;&quot;filter: var(--icon-color2);&quot;&gt;
+
+        &lt;/button&gt;
+
+        &lt;!-- Display Date with Input for Direct Jump --&gt;
+        &lt;div class&#x3D;&quot;flex justify-center relative&quot;&gt;
+            &lt;!-- Text that looks like a normal label but opens calendar on click --&gt;
+            &lt;div class&#x3D;&quot;text-md font-semibold cursor-pointer&quot;&gt;
+                {{ getDisplayDate() }}
+            &lt;/div&gt;
+
+            &lt;!-- Hidden Date Input (for &#x27;day&#x27; view) --&gt;
+            &lt;div class&#x3D;&quot;hiddeninputdiv absolute&quot;&gt;
+                &lt;input #hiddenDayInput type&#x3D;&quot;date&quot; class&#x3D;&quot;hiddeninput&quot; [hidden]&#x3D;&quot;viewType !&#x3D;&#x3D; &#x27;day&#x27;&quot;
+                    [value]&#x3D;&quot;formatDateForInput(currentDate)&quot; (input)&#x3D;&quot;onInputChange($event, hiddenDayInput)&quot; /&gt;
+
+                &lt;input #hiddenMonthInput type&#x3D;&quot;month&quot; class&#x3D;&quot;hiddeninput&quot; [hidden]&#x3D;&quot;viewType !&#x3D;&#x3D; &#x27;month&#x27;&quot;
+                    [value]&#x3D;&quot;formatMonthForInput(currentDate)&quot; (input)&#x3D;&quot;onMonthChange($event, hiddenMonthInput)&quot; /&gt;
+            &lt;/div&gt;
+        &lt;/div&gt;
+
+
+        &lt;button class&#x3D;&quot;shrink-0&quot; (click)&#x3D;&quot;goNext()&quot;&gt;
+            &lt;img src&#x3D;&quot;assets/img/icon/icons8-right-arrow-50.png&quot; alt&#x3D;&quot;add&quot;
+                class&#x3D;&quot;w-[25px] h-[25px] transition-all duration-300 ease-in-out&quot; style&#x3D;&quot;filter: var(--icon-color2);&quot;&gt;
+        &lt;/button&gt;
+    &lt;/div&gt;
+
+    &lt;div class&#x3D;&quot;flex flex-col lg:flex-row gap-4 mt-4 mb-4&quot;&gt;
+        &lt;div class&#x3D;&quot;w-full lg:w-1/2&quot;&gt;
+            &lt;app-graphs [viewType]&#x3D;&quot;viewType&quot; [currentDate]&#x3D;&quot;currentDate&quot;&gt;&lt;/app-graphs&gt;
+        &lt;/div&gt;
+        &lt;div class&#x3D;&quot;w-full lg:w-1/2&quot;&gt;
+            &lt;app-pie-chart [viewType]&#x3D;&quot;viewType&quot; [currentDate]&#x3D;&quot;currentDate&quot;&gt;&lt;/app-pie-chart&gt;
+        &lt;/div&gt;
+    &lt;/div&gt;
+
+&lt;/div&gt;</code></pre>
+    </div>
+
+    <div class="tab-pane fade " id="styleData">
+                <p class="comment">
+                    <code>./home.component.css</code>
+                </p>
+                <pre class="line-numbers"><code class="language-scss">input[type&#x3D;&quot;date&quot;]::-webkit-calendar-picker-indicator,
+input[type&#x3D;&quot;month&quot;]::-webkit-calendar-picker-indicator {
+  filter: var(--icon-color2);
+  cursor: pointer;
+}
+
+input[type&#x3D;&quot;date&quot;],
+input[type&#x3D;&quot;month&quot;] {
+  border: none;
+  outline: none;
+}
+
+input[type&#x3D;&quot;date&quot;],
+input[type&#x3D;&quot;month&quot;] {
+  cursor: pointer;
+}
+
+.hiddeninput {
+  z-index: 50;
+  background: none;
+  width: 100px;
+  color: transparent;
+}
+
+.hiddeninputdiv {
+  right: -23px;
+}</code></pre>
+    </div>
+
+    <div class="tab-pane fade " id="tree">
+        <div id="tree-container"></div>
+        <div class="tree-legend">
+            <div class="title">
+                <b>Legend</b>
+            </div>
+            <div>
+                <div class="color htmlelement"></div><span>Html element</span>
+            </div>
+            <div>
+                <div class="color component"></div><span>Component</span>
+            </div>
+            <div>
+                <div class="color directive"></div><span>Html element with directive</span>
+            </div>
+        </div>
+    </div>
+
+    
+</div>
+
+<script src="../js/libs/vis.min.js"></script>
+<script src="../js/libs/htmlparser.js"></script>
+<script src="../js/libs/deep-iterator.js"></script>
+<script>
+        var COMPONENT_TEMPLATE = '<div><div class="px-2">    <!-- View Type Toggle -->    <div class="flex justify-center items-center min-h-[70px]">        <div class="relative flex w-48 bg-[var(--color-surface)] rounded-full shadow-md">            <div class="absolute h-full w-1/2 bg-[var(--theme-color)] rounded-full transition-all duration-300"                [class.translate-x-24]="viewTypeDiv"></div>            <button                class="relative z-10 w-1/2 flex-1 text-center text-sm font-medium py-2 rounded-full transition-colors duration-300"                [class.text-[var(--color-text)]]="viewType !== defaultViewType"                [class.text-[var(--color-white)]]="viewType === defaultViewType" (click)="setViewType(defaultViewType)">                {{ defaultViewType | titlecase }}            </button>            <button                class="relative z-10 w-1/2 flex-1 text-center text-sm font-medium py-2 rounded-full transition-colors duration-300"                [class.text-[var(--color-text)]]="viewType !== (defaultViewType == \'month\'?\'day\':\'month\')"                [class.text-[var(--color-white)]]="viewType === (defaultViewType == \'month\'?\'day\':\'month\')"                (click)="setViewType(defaultViewType == \'month\'?\'day\':\'month\')">                {{ (defaultViewType == \'month\' ? \'day\' : \'month\') | titlecase }}            </button>        </div>    </div>    <div class="flex justify-between items-center px-2 md:w-[500px] m-auto">        <button class="shrink-0" (click)="goPrevious()">            <img src="assets/img/icon/icons8-left-arrow-50.png" alt="add"                class="w-[25px] h-[25px] transition-all duration-300 ease-in-out" style="filter: var(--icon-color2);">        </button>        <!-- Display Date with Input for Direct Jump -->        <div class="flex justify-center relative">            <!-- Text that looks like a normal label but opens calendar on click -->            <div class="text-md font-semibold cursor-pointer">                {{ getDisplayDate() }}            </div>            <!-- Hidden Date Input (for \'day\' view) -->            <div class="hiddeninputdiv absolute">                <input #hiddenDayInput type="date" class="hiddeninput" [hidden]="viewType !== \'day\'"                    [value]="formatDateForInput(currentDate)" (input)="onInputChange($event, hiddenDayInput)" />                <input #hiddenMonthInput type="month" class="hiddeninput" [hidden]="viewType !== \'month\'"                    [value]="formatMonthForInput(currentDate)" (input)="onMonthChange($event, hiddenMonthInput)" />            </div>        </div>        <button class="shrink-0" (click)="goNext()">            <img src="assets/img/icon/icons8-right-arrow-50.png" alt="add"                class="w-[25px] h-[25px] transition-all duration-300 ease-in-out" style="filter: var(--icon-color2);">        </button>    </div>    <div class="flex flex-col lg:flex-row gap-4 mt-4 mb-4">        <div class="w-full lg:w-1/2">            <app-graphs [viewType]="viewType" [currentDate]="currentDate"></app-graphs>        </div>        <div class="w-full lg:w-1/2">            <app-pie-chart [viewType]="viewType" [currentDate]="currentDate"></app-pie-chart>        </div>    </div></div></div>'
+    var COMPONENTS = [{'name': 'AddExpenseComponent', 'selector': 'app-add-expense'},{'name': 'AiComponent', 'selector': 'app-ai'},{'name': 'AnalysisComponent', 'selector': 'app-analysis'},{'name': 'AppComponent', 'selector': 'app-root'},{'name': 'BudgetComponent', 'selector': 'app-budget'},{'name': 'CalendarComponent', 'selector': 'app-calendar'},{'name': 'CategoryDropdownComponent', 'selector': 'app-category-dropdown'},{'name': 'CustomModalComponent', 'selector': 'app-custom-modal'},{'name': 'ExpenseDetailsModalComponent', 'selector': 'app-expense-details-modal'},{'name': 'ExpenseListComponent', 'selector': 'app-expense-list'},{'name': 'FooterComponent', 'selector': 'app-footer'},{'name': 'GlobalLoaderComponent', 'selector': 'app-global-loader'},{'name': 'GraphsComponent', 'selector': 'app-graphs'},{'name': 'HamburgerMenuComponent', 'selector': 'app-hamburger-menu'},{'name': 'HomeComponent', 'selector': 'app-home'},{'name': 'InfoIconComponent', 'selector': 'app-info-icon'},{'name': 'ListExpensesComponent', 'selector': 'app-list-expenses'},{'name': 'MusicComponent', 'selector': 'app-music'},{'name': 'NavbarComponent', 'selector': 'app-navbar'},{'name': 'PieChartComponent', 'selector': 'app-pie-chart'},{'name': 'SearchComponent', 'selector': 'app-search'},{'name': 'SettingItemComponent', 'selector': 'app-setting-item'},{'name': 'SettingsComponent', 'selector': 'app-settings'},{'name': 'SidebarComponent', 'selector': 'app-sidebar'},{'name': 'ToastComponent', 'selector': 'app-toast'}];
+    var DIRECTIVES = [];
+    var ACTUAL_COMPONENT = {'name': 'HomeComponent'};
+</script>
+<script src="../js/tree.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                   </div><div class="search-results">
+    <div class="has-results">
+        <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+        <ul class="search-results-list"></ul>
+    </div>
+    <div class="no-results">
+        <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+    </div>
+</div>
+</div>
+               <!-- END CONTENT -->
+           </div>
+       </div>
+
+          <label class="dark-mode-switch">
+               <input type="checkbox">
+               <span class="slider">
+                    <svg class="slider-icon" viewBox="0 0 24 24" fill="none" height="20" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" width="20" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"></path>
+                    </svg>
+               </span>
+          </label>
+
+       <script>
+            var COMPODOC_CURRENT_PAGE_DEPTH = 1;
+            var COMPODOC_CURRENT_PAGE_CONTEXT = 'component';
+            var COMPODOC_CURRENT_PAGE_URL = 'HomeComponent.html';
+            var MAX_SEARCH_RESULTS = 15;
+       </script>
+
+       <script>
+               $darkModeToggleSwitchers = document.querySelectorAll('.dark-mode-switch input');
+               checkToggle(darkModeState);
+               if ($darkModeToggleSwitchers.length > 0) {
+                    for (var i = 0; i < $darkModeToggleSwitchers.length; i++) {
+                         $darkModeToggleSwitchers[i].addEventListener('change', function (event) {
+                              darkModeState = !darkModeState;
+                              toggleDarkMode(darkModeState);
+                         });
+                    }
+               }
+          </script>
+
+       <script src="../js/libs/custom-elements.min.js"></script>
+       <script src="../js/libs/lit-html.js"></script>
+
+       <script src="../js/menu-wc.js" defer></script>
+       <script nomodule src="../js/menu-wc_es5.js" defer></script>
+
+       <script src="../js/libs/bootstrap-native.js"></script>
+
+       <script src="../js/libs/es6-shim.min.js"></script>
+       <script src="../js/libs/EventDispatcher.js"></script>
+       <script src="../js/libs/promise.min.js"></script>
+
+       <script src="../js/compodoc.js"></script>
+
+       <script src="../js/tabs.js"></script>
+       <script src="../js/menu.js"></script>
+       <script src="../js/libs/clipboard.min.js"></script>
+       <script src="../js/libs/prism.js"></script>
+       <script src="../js/sourceCode.js"></script>
+          <script src="../js/search/search.js"></script>
+          <script src="../js/search/lunr.min.js"></script>
+          <script src="../js/search/search-lunr.js"></script>
+          <script src="../js/search/search_index.js"></script>
+       <script src="../js/lazy-load-graphs.js"></script>
+
+
+    </body>
+</html>

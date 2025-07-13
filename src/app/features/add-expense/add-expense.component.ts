@@ -5,6 +5,13 @@ import { CategoryDropdownComponent } from '../../component/category-dropdown/cat
 import { CommonModule } from '@angular/common';
 import { ToastService } from '../../service/toast/toast.service';
 
+/**
+  * @component
+  * @description
+  * Component for adding new expenses.
+  * It includes a reactive form and suggestions for location and notes.
+  * @see README.md
+*/
 @Component({
   selector: 'app-add-expense',
   standalone: true,
@@ -13,16 +20,36 @@ import { ToastService } from '../../service/toast/toast.service';
   styleUrls: ['./add-expense.component.css']
 })
 export class AddExpenseComponent implements OnInit {
+  /** The reactive form used to input expense data */
   expenseForm: FormGroup;
+
+  /** Currently selected category name for display */
   selectedCategoryName: string = 'Select Category';
+
+  /** Stored location suggestions based on previous expenses */
   locationSuggestions: any[] = [];
+
+  /** Filtered location suggestions based on user input */
   filteredLocationSuggestions: string[] = [];
+
+  /** Controls visibility of location suggestions dropdown */
   showLocationSuggestions = false;
 
+  /** Stored note suggestions based on previous expenses */
   noteSuggestions: any[] = [];
+
+  /** Filtered note suggestions based on user input */
   filteredNoteSuggestions: string[] = [];
+
+  /** Controls visibility of note suggestions dropdown */
   showNoteSuggestions = false;
 
+  /**
+   * Constructor to inject dependencies
+   * @param fb FormBuilder instance
+   * @param expenseService LocalStorage-based expense service
+   * @param toastService Toast notification service
+   */
   constructor(
     private fb: FormBuilder,
     private expenseService: ExpenseService,
@@ -31,12 +58,17 @@ export class AddExpenseComponent implements OnInit {
     this.expenseForm = this.createForm();
   }
 
+  /** Lifecycle hook that initializes the component */
   ngOnInit(): void {
     this.resetFormWithCurrentDateTime();
     this.loadSuggestionsFromLocalStorage();
     this.onInputChanges();
   }
 
+  /**
+   * Creates and configures the reactive form
+   * @returns Configured FormGroup
+   */
   createForm(): FormGroup {
     return this.fb.group({
       amount: ['', [Validators.required, Validators.min(0)]],
@@ -49,12 +81,17 @@ export class AddExpenseComponent implements OnInit {
     });
   }
 
-  onCategorySelected(category: any) {
+  /**
+   * Handles category selection from dropdown
+   * @param category The selected category
+   */
+  onCategorySelected(category: any): void {
     this.expenseForm.patchValue({ category_id: category.category_id });
     this.selectedCategoryName = category.name;
   }
 
-  resetFormWithCurrentDateTime() {
+  /** Resets the form with the current date and time */
+  resetFormWithCurrentDateTime(): void {
     const now = new Date();
 
     const dateStr = `${now.getFullYear()}-${(now.getMonth() + 1).toString().padStart(2, '0')}-${now.getDate().toString().padStart(2, '0')}`;
@@ -73,6 +110,7 @@ export class AddExpenseComponent implements OnInit {
     this.selectedCategoryName = 'Select Category';
   }
 
+  /** Submits the form and adds the expense */
   onSubmit() {
     if (this.expenseForm.invalid) {
       this.expenseForm.markAllAsTouched();
@@ -91,7 +129,8 @@ export class AddExpenseComponent implements OnInit {
     }
   }
 
-  loadSuggestionsFromLocalStorage() {
+  /** Loads past note and location suggestions from localStorage */
+  loadSuggestionsFromLocalStorage(): void {
     const allExpenses = this.expenseService.getAll() || [];
 
     this.locationSuggestions = [
@@ -111,7 +150,8 @@ export class AddExpenseComponent implements OnInit {
     ];
   }
 
-  onInputChanges() {
+  /** Subscribes to input changes and filters suggestions */
+  onInputChanges(): void {
     this.expenseForm.get('location')?.valueChanges.subscribe(val => {
       const input = val?.toLowerCase().trim() || '';
 
@@ -120,7 +160,6 @@ export class AddExpenseComponent implements OnInit {
         this.filteredLocationSuggestions = [];
         return;
       }
-
       this.filteredLocationSuggestions = this.locationSuggestions.filter(loc =>
         loc.toLowerCase().includes(input)
       );
@@ -143,12 +182,21 @@ export class AddExpenseComponent implements OnInit {
     });
 
   }
-  selectLocationSuggestion(suggestion: string) {
+
+  /**
+   * Selects a location suggestion and fills it in the input
+   * @param suggestion The selected location
+   */
+  selectLocationSuggestion(suggestion: string): void {
     this.expenseForm.patchValue({ location: suggestion });
     this.showLocationSuggestions = false;
   }
 
-  selectNoteSuggestion(suggestion: string) {
+  /**
+   * Selects a note suggestion and fills it in the input
+   * @param suggestion The selected note
+   */
+  selectNoteSuggestion(suggestion: string): void {
     this.expenseForm.patchValue({ note: suggestion });
     this.showNoteSuggestions = false;
   }
