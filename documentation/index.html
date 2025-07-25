@@ -131,6 +131,7 @@
 <li>💰 <strong>Amount</strong></li>
 <li>📅 <strong>Date &amp; Time</strong></li>
 <li>🏷️ <strong>Category</strong> (chosen from a dropdown list)</li>
+<li>💳 <strong>Payment Mode</strong></li>
 <li>📍 <strong>Location</strong></li>
 <li>📝 <strong>Note</strong></li>
 </ul>
@@ -145,12 +146,12 @@
 <hr>
 <h3>4. <strong>List View</strong></h3>
 <ul>
-<li><p>Displays all user expenses in a scrollable, searchable, and sortable list.</p>
+<li><p>Displays all user expenses in a scrollable, and sortable list.</p>
 </li>
 <li><p>Users can:</p>
 <ul>
 <li>🧾 <strong>Sort</strong> expenses by date, amount, or category.</li>
-<li>🔍 <strong>Filter</strong> by category, date, or keyword.</li>
+<li>🔍 <strong>Filter</strong> by category, date, and payment mode.</li>
 <li>🖱️ Tap any entry to open a <strong>modal</strong> with complete details and options to <strong>edit</strong> or <strong>delete</strong> the expense.</li>
 </ul>
 </li>
@@ -158,12 +159,21 @@
 <hr>
 <h3>5. <strong>Budget View</strong></h3>
 <ul>
-<li><p>Users can define a <strong>budget range</strong> by selecting start and end dates.</p>
+<li><p>Users can define a <strong>budget range</strong> by selecting a <strong>start</strong> and <strong>end date</strong>.</p>
 </li>
-<li><p>After setting a budget:</p>
+<li><p>Once a budget is set:</p>
 <ul>
-<li>A <strong>progress bar</strong> shows how much of the budget has been spent.</li>
-<li>Options to <strong>edit</strong> or <strong>delete</strong> the budget are available for flexibility and control.</li>
+<li><p>A <strong>progress bar</strong> visually represents how much of the budget has been spent.</p>
+</li>
+<li><p>Informative summary boxes display:</p>
+<ul>
+<li><strong>Avg Allowed/Day</strong></li>
+<li><strong>Spent/Day</strong></li>
+<li><strong>Suggested/Day</strong> (based on remaining budget and days)</li>
+</ul>
+</li>
+<li><p>Users have the ability to <strong>edit</strong> or <strong>delete</strong> the budget for better flexibility and control.</p>
+</li>
 </ul>
 </li>
 </ul>
@@ -173,6 +183,7 @@
 <ul>
 <li>🎨 <strong>Theme Mode Toggle</strong> (Dark / Light)</li>
 <li>⬇️ <strong>Download Data</strong> (export expenses data)</li>
+<li>📤 <strong>Import Data</strong> (upload expense data)</li>
 <li>➕ <strong>Add Category</strong> (custom categories for better organization)</li>
 <li>❌ <strong>Delete Category</strong> (remove unused or incorrect categories)</li>
 </ul>
@@ -187,9 +198,9 @@
 <h2>🗃️ Data Storage</h2>
 <p>All user data is stored using the <strong>browser’s LocalStorage API</strong>, ensuring:</p>
 <ul>
-<li>No need for backend/server.</li>
-<li>Fast read/write operations.</li>
-<li>Data remains available between app sessions.</li>
+<li>✅ No need for a backend or server</li>
+<li>⚡ Fast read/write operations</li>
+<li>🔒 Data stays on the user&#39;s device for privacy and control</li>
 </ul>
 <hr>
 <h2>📈 User Flow Summary</h2>
