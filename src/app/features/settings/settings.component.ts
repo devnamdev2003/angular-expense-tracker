@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ElementRef, ViewChild } from '@angular/core';
 import { UserService } from '../../service/localStorage/user.service';
 import { ExpenseService } from '../../service/localStorage/expense.service';
 import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
@@ -94,6 +94,8 @@ export class SettingsComponent {
       note: expense.note,
       payment_mode: expense.payment_mode,
       category_name: expense.category_name,
+      category_id: expense.category_id,
+      expense_id: expense.expense_id,
     }));
 
     const jsonData = JSON.stringify(filteredData, null, 2);
@@ -198,4 +200,90 @@ export class SettingsComponent {
       return inUse ? { defaultCategory: true } : null;
     };
   }
+
+  @ViewChild('fileInput') fileInput!: ElementRef<HTMLInputElement>;
+
+  triggerFileInput(): void {
+    this.fileInput.nativeElement.click();
+  }
+
+  handleFileUpload(event: Event): void {
+    const input = event.target as HTMLInputElement;
+    const file = input.files?.[0];
+
+    // ✅ Check if file is selected
+    if (!file) {
+      this.toastService.show('No file selected.', 'warning');
+      return;
+    }
+
+    // ✅ Validate file type (accept only .json)
+    if (file.type !== 'application/json' && !file.name.endsWith('.json')) {
+      this.toastService.show('Only JSON files are allowed.', 'error');
+      input.value = '';
+      return;
+    }
+
+    // ✅ (Optional) Validate file size (e.g., max 1MB)
+    const maxSizeInBytes = 1 * 1024 * 1024; // 1MB
+    if (file.size > maxSizeInBytes) {
+      this.toastService.show('File size exceeds 1MB limit.', 'error');
+      input.value = '';
+      return;
+    }
+
+    const reader = new FileReader();
+
+    reader.onload = () => {
+      try {
+        const content = reader.result as string;
+
+        // ✅ Validate JSON parse
+        const json = JSON.parse(content);
+        if (!Array.isArray(json)) throw new Error('JSON must be an array of expense objects.');
+
+        // ✅ Validate each item
+        const validData = json.filter(item =>
+          typeof item.amount === 'number' &&
+          typeof item.date === 'string' &&
+          typeof item.time === 'string' &&
+          typeof item.category_id === 'string' &&
+          typeof item.payment_mode === 'string' &&
+          typeof item.note === 'string' &&
+          typeof item.location === 'string'
+        );
+
+        if (validData.length === 0) {
+          this.toastService.show('No valid expenses found in the file.', 'warning');
+          return;
+        }
+
+        // ✅ Confirm with user
+        const confirmed = confirm(`Found ${validData.length} valid expenses. Do you want to import them?`);
+        if (!confirmed) return;
+
+        // ✅ Import data
+        for (const expense of validData) {
+          this.expenseService.add(expense);
+        }
+
+        this.toastService.show('Data imported successfully!', 'success');
+      } catch (e) {
+        console.error('Error parsing file:', e);
+        this.toastService.show('Invalid JSON structure.', 'error');
+      } finally {
+        // ✅ Reset input so same file can be uploaded again
+        input.value = '';
+      }
+    };
+
+    reader.onerror = () => {
+      console.error('File reading error:', reader.error);
+      this.toastService.show('Failed to read the file.', 'error');
+      input.value = '';
+    };
+
+    reader.readAsText(file);
+  }
+
 }

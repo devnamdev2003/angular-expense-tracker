@@ -56,6 +56,31 @@
                 </div>
             </div>
 
+            <!-- payment mode -->
+            <div class="pt-2">
+                <label class="block text-sm font-semibold mb-1">Payment Mode:</label>
+                <div class="flex gap-8 max-h-40 pr-1">
+                     <label class="flex items-center gap-1 text-sm">
+                        <input type="checkbox" [checked]="filter.paymentMode.includes('Cash')"
+                            (change)="onPaymentModeCheckboxChange($event, 'Cash')"
+                            class="form-checkbox accent-[var(--color-accent)]" name="Cash" />
+                        <span>Cash</span>
+                    </label>
+                     <label class="flex items-center gap-1 text-sm">
+                        <input type="checkbox" [checked]="filter.paymentMode.includes('UPI')"
+                            (change)="onPaymentModeCheckboxChange($event, 'UPI')"
+                            class="form-checkbox accent-[var(--color-accent)]" name="UPI" />
+                        <span>UPI</span>
+                    </label>
+                     <label class="flex items-center gap-1 text-sm">
+                        <input type="checkbox" [checked]="filter.paymentMode.includes('Others')"
+                            (change)="onPaymentModeCheckboxChange($event, 'Others')"
+                            class="form-checkbox accent-[var(--color-accent)]" name="Others" />
+                        <span>Others</span>
+                    </label>
+                </div>
+            </div>
+
             <!-- Category checkboxes -->
             <div class="pt-2">
                 <label class="block text-sm font-semibold mb-1">Categories:</label>
@@ -143,7 +168,8 @@
     </app-expense-list>
 
     <app-expense-details-modal *ngIf="selectedExpense" [selectedExpense]="selectedExpense" [currency]="currency"
-        (closeModal)="closeModal()" (delete)="deleteExpense($event)" (edit)="editExpense($event)" [isEditOpen] = "isEditOpen">
+        (closeModal)="closeModal()" (delete)="deleteExpense($event)" (edit)="editExpense($event)"
+        [isEditOpen]="isEditOpen">
     </app-expense-details-modal>
 
     <ng-template #noDataTemplate>

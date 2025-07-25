@@ -1,0 +1,212 @@
+[
+  {
+    "amount": 250,
+    "category_id": "2",
+    "date": "2025-07-19",
+    "time": "10:22:14",
+    "payment_mode": "UPI",
+    "location": "Delhi",
+    "note": "Weekly groceries",
+    "expense_id": "e74b5cd4-60f4-42a0-9b1e-f1fc946e9bd1"
+  },
+  {
+    "amount": 899,
+    "category_id": "3",
+    "date": "2025-07-18",
+    "time": "16:47:58",
+    "payment_mode": "Card",
+    "location": "Mumbai",
+    "note": "Jeans purchase",
+    "expense_id": "5b9a6b3f-27a6-4a2d-bc58-4a83783b3e59"
+  },
+  {
+    "amount": 120,
+    "category_id": "5",
+    "date": "2025-07-20",
+    "time": "20:31:02",
+    "payment_mode": "Cash",
+    "location": "India",
+    "note": "Movie night",
+    "expense_id": "2a92a13e-c2a1-4e1b-8b4c-98868285b2a2"
+  },
+  {
+    "amount": 1450,
+    "category_id": "4",
+    "date": "2025-07-15",
+    "time": "11:00:00",
+    "payment_mode": "Netbanking",
+    "location": "Pune",
+    "note": "Electricity bill",
+    "expense_id": "e7b3d334-91d6-4313-9bcb-b99442df7c30"
+  },
+  {
+    "amount": 600,
+    "category_id": "6",
+    "date": "2025-07-16",
+    "time": "09:45:27",
+    "payment_mode": "UPI",
+    "location": "Bangalore",
+    "note": "Medicines",
+    "expense_id": "59e002f4-d7a6-46c5-9e31-12f28d46c50e"
+  },
+  {
+    "amount": 100,
+    "category_id": "1",
+    "date": "2025-07-20",
+    "time": "12:54:04",
+    "payment_mode": "Cash",
+    "location": "India",
+    "note": "Chips",
+    "expense_id": "931ae73e-295e-4667-89af-81c3d0454223"
+  },
+  {
+    "amount": 299,
+    "category_id": "8",
+    "date": "2025-07-14",
+    "time": "13:15:33",
+    "payment_mode": "Card",
+    "location": "Hyderabad",
+    "note": "Spotify subscription",
+    "expense_id": "02408c31-e85f-4c7b-bf76-4b6045ec8b5a"
+  },
+  {
+    "amount": 6500,
+    "category_id": "10",
+    "date": "2025-07-01",
+    "time": "08:00:00",
+    "payment_mode": "Netbanking",
+    "location": "Chennai",
+    "note": "Monthly rent",
+    "expense_id": "ea17df76-c61c-4b13-846a-41db3e41edff"
+  },
+  {
+    "amount": 70,
+    "category_id": "1",
+    "date": "2025-07-19",
+    "time": "19:30:00",
+    "payment_mode": "Cash",
+    "location": "India",
+    "note": "Tea and snacks",
+    "expense_id": "b8c8e73c-c987-496c-9c21-e48ea4d0ee2f"
+  },
+  {
+    "amount": 220,
+    "category_id": "15",
+    "date": "2025-07-17",
+    "time": "15:05:12",
+    "payment_mode": "Card",
+    "location": "Noida",
+    "note": "Haircut",
+    "expense_id": "9fd0f10a-7d0a-4ec5-b9ae-60e46c7a5bd4"
+  },
+  {
+    "amount": 180,
+    "category_id": "11",
+    "date": "2025-07-13",
+    "time": "17:55:22",
+    "payment_mode": "Cash",
+    "location": "Jaipur",
+    "note": "Lunch with cousin",
+    "expense_id": "c9cce19f-bf56-4630-985f-b1a9ad23dd5a"
+  },
+  {
+    "amount": 95,
+    "category_id": "18",
+    "date": "2025-07-20",
+    "time": "10:10:10",
+    "payment_mode": "UPI",
+    "location": "India",
+    "note": "Mobile recharge",
+    "expense_id": "5f407748-9987-4e42-8049-bb83ecb6be69"
+  },
+  {
+    "amount": 325,
+    "category_id": "14",
+    "date": "2025-07-12",
+    "time": "21:00:00",
+    "payment_mode": "Card",
+    "location": "Delhi",
+    "note": "Birthday party supplies",
+    "expense_id": "7986f144-cc91-4c15-822e-99b99ee743d2"
+  },
+  {
+    "amount": 129,
+    "category_id": "7",
+    "date": "2025-07-10",
+    "time": "08:25:30",
+    "payment_mode": "Cash",
+    "location": "Lucknow",
+    "note": "Online course",
+    "expense_id": "1783b29e-2fc3-4d68-b301-8e3d2ea369ef"
+  },
+  {
+    "amount": 400,
+    "category_id": "16",
+    "date": "2025-07-11",
+    "time": "13:00:00",
+    "payment_mode": "UPI",
+    "location": "Nagpur",
+    "note": "Cleaning supplies",
+    "expense_id": "d4b7cd6b-30d5-4a00-bc9f-08b9f0d2290c"
+  },
+  {
+    "amount": 1500,
+    "category_id": "13",
+    "date": "2025-07-06",
+    "time": "14:14:14",
+    "payment_mode": "Card",
+    "location": "India",
+    "note": "Anniversary gift",
+    "expense_id": "d8859c3f-8aa7-4198-b725-3dfacfc62591"
+  },
+  {
+    "amount": 80,
+    "category_id": "9",
+    "date": "2025-07-08",
+    "time": "18:22:45",
+    "payment_mode": "Cash",
+    "location": "Manali",
+    "note": "Bus ticket",
+    "expense_id": "a6f93493-98c3-4045-89fc-f8d6ff97f061"
+  },
+  {
+    "amount": 199,
+    "category_id": "12",
+    "date": "2025-07-18",
+    "time": "09:10:00",
+    "payment_mode": "Card",
+    "location": "Kolkata",
+    "note": "Misc expense",
+    "expense_id": "74f0509a-f9d3-4c10-970f-22cf159a1612"
+  },
+  {
+    "amount": 550,
+    "category_id": "17",
+    "date": "2025-07-09",
+    "time": "12:00:00",
+    "payment_mode": "UPI",
+    "location": "India",
+    "note": "Uncategorized spending",
+    "expense_id": "4b61b9cf-7a0f-4292-9de4-92906d68bb4b"
+  },
+  {
+    "amount": 105,
+    "category_id": "1",
+    "date": "2025-07-20",
+    "time": "13:30:20",
+    "payment_mode": "Cash",
+    "location": "India",
+    "note": "Cold drink and chips",
+    "expense_id": "1fefdb3e-69ec-4213-a0ff-84cd938aa1fc"
+  },
+  {
+    "amount": 89,
+    "category_id": "2",
+    "date": "2025-07-19",
+    "time": "11:11:11",
+    "payment_mode": "UPI",
+    "location": "India",
+    "note": "Vegetables",
+    "expense_id": "9fd6e3a1-2bcf-47b6-bf6d-d2e637383502"
+  }
+]

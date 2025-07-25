@@ -25,24 +25,34 @@
                     style="filter: invert(100%);" />
             </button>
         </app-setting-item>
+
+        <!-- import Data -->
+        <app-setting-item label="📂 Import Data">
+            <button (click)="triggerFileInput()"
+                class="p-2 rounded-lg bg-[var(--color-accent)] hover:opacity-90 transition flex items-center justify-center">
+                <img src="assets/img/icon/icons8-upload-48.png" alt="Upload" class="w-5 h-5"
+                    style="filter: invert(100%);" />
+            </button>
+            <input type="file" accept=".json" #fileInput hidden (change)="handleFileUpload($event)" />
+        </app-setting-item>
     </div>
 
-<!-- 🧩 CATEGORY SETTINGS -->
-<div class="mb-2">
-    <h2 class="text-xl font-semibold text-[var(--color-accent)] mb-3">🧩 Categories</h2>
+    <!-- 🧩 CATEGORY SETTINGS -->
+    <div class="mb-2">
+        <h2 class="text-xl font-semibold text-[var(--color-accent)] mb-3">🧩 Categories</h2>
 
-    <!-- Category Manager -->
-    <app-setting-item label="➕ Add Category">
-        <button (click)="openCategoryModal()"
-            class="bg-[var(--color-accent)] text-white px-6 py-1 rounded">Add</button>
-    </app-setting-item>
+        <!-- Category Manager -->
+        <app-setting-item label="➕ Add Category">
+            <button (click)="openCategoryModal()"
+                class="bg-[var(--color-accent)] text-white px-6 py-1 rounded">Add</button>
+        </app-setting-item>
 
-    <!-- Delete Category -->
-    <app-setting-item label="🗑️ Delete Category">
+        <!-- Delete Category -->
+        <app-setting-item label="🗑️ Delete Category">
         <button (click)="openDeleteCategoryModal()" 
             class="bg-red-500 text-white px-4 py-1 rounded">Delete</button>
-    </app-setting-item>
-</div>
+        </app-setting-item>
+    </div>
     <div *ngIf="showAddCategoryModal"
         class="fixed inset-0 bg-black bg-opacity-40 z-50 flex items-center justify-center">
 

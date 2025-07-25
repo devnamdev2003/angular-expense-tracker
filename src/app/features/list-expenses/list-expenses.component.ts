@@ -31,12 +31,14 @@ export class ListExpensesComponent implements OnInit {
     fromDate: '',
     toDate: '',
     selectedCategoryIds: [] as string[],
+    paymentMode: [] as string[],
   };
 
   appliedFilter = {
     fromDate: '',
     toDate: '',
     selectedCategoryIds: [] as string[],
+    paymentMode: [] as string[],
   };
   isFiltered: boolean = false;
   isSorted: boolean = false;
@@ -168,6 +170,10 @@ export class ListExpensesComponent implements OnInit {
     if (this.appliedFilter.selectedCategoryIds.length) {
       filtered = filtered.filter(e => this.appliedFilter.selectedCategoryIds.includes(e.category_id));
     }
+    
+    if (this.appliedFilter.paymentMode.length) {
+      filtered = filtered.filter(e => this.appliedFilter.paymentMode.includes(e.payment_mode));
+    }
 
     this.expenses = filtered;
     this.expenses.forEach((val) => {
@@ -222,6 +228,7 @@ export class ListExpensesComponent implements OnInit {
     this.filter.fromDate = '';
     this.filter.toDate = '';
     this.filter.selectedCategoryIds = [];
+    this.filter.paymentMode = [];
     this.isFiltered = false;
     this.listExpenses();
   }
@@ -230,5 +237,14 @@ export class ListExpensesComponent implements OnInit {
     this.isSorted = false;
     this.selectedFieldName = "Sort By";
     this.listExpenses();
+  }
+
+  onPaymentModeCheckboxChange(event: Event, categoryId: string) {
+    const checkbox = event.target as HTMLInputElement;
+    if (checkbox.checked) {
+      this.filter.paymentMode.push(categoryId);
+    } else {
+      this.filter.paymentMode = this.filter.paymentMode.filter(id => id !== categoryId);
+    }
   }
 }
