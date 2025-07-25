@@ -38,6 +38,7 @@ Allows users to add new expense entries through a form. Input fields include:
 * 💰 **Amount**
 * 📅 **Date & Time**
 * 🏷️ **Category** (chosen from a dropdown list)
+* 💳 **Payment Mode**
 * 📍 **Location**
 * 📝 **Note**
 
@@ -55,22 +56,27 @@ All expenses are stored in the device's **LocalStorage** and reflected immediate
 
 ### 4. **List View**
 
-* Displays all user expenses in a scrollable, searchable, and sortable list.
+* Displays all user expenses in a scrollable, and sortable list.
 * Users can:
 
   * 🧾 **Sort** expenses by date, amount, or category.
-  * 🔍 **Filter** by category, date, or keyword.
+  * 🔍 **Filter** by category, date, and payment mode.
   * 🖱️ Tap any entry to open a **modal** with complete details and options to **edit** or **delete** the expense.
 
 ---
 
 ### 5. **Budget View**
 
-* Users can define a **budget range** by selecting start and end dates.
-* After setting a budget:
+* Users can define a **budget range** by selecting a **start** and **end date**.
+* Once a budget is set:
 
-  * A **progress bar** shows how much of the budget has been spent.
-  * Options to **edit** or **delete** the budget are available for flexibility and control.
+  * A **progress bar** visually represents how much of the budget has been spent.
+  * Informative summary boxes display:
+
+    * **Avg Allowed/Day**
+    * **Spent/Day**
+    * **Suggested/Day** (based on remaining budget and days)
+  * Users have the ability to **edit** or **delete** the budget for better flexibility and control.
 
 ---
 
@@ -80,6 +86,7 @@ Provides customization and utility options for better personalization:
 
 * 🎨 **Theme Mode Toggle** (Dark / Light)
 * ⬇️ **Download Data** (export expenses data)
+* 📤 **Import Data** (upload expense data)
 * ➕ **Add Category** (custom categories for better organization)
 * ❌ **Delete Category** (remove unused or incorrect categories)
 
@@ -97,9 +104,9 @@ Provides customization and utility options for better personalization:
 
 All user data is stored using the **browser’s LocalStorage API**, ensuring:
 
-* No need for backend/server.
-* Fast read/write operations.
-* Data remains available between app sessions.
+* ✅ No need for a backend or server
+* ⚡ Fast read/write operations
+* 🔒 Data stays on the user's device for privacy and control
 
 ---
 
