@@ -4,11 +4,18 @@ import { ExpenseService } from '../../service/localStorage/expense.service';
 import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { SettingItemComponent } from '../../component/setting-item/setting-item.component';
-import { CategoryService } from '../../service/localStorage/category.service';
+import { Category, CategoryService } from '../../service/localStorage/category.service';
 import { CategoryDropdownComponent } from '../../component/category-dropdown/category-dropdown.component';
 import { AbstractControl, ValidationErrors, ValidatorFn } from '@angular/forms';
 import { ToastService } from '../../service/toast/toast.service';
 
+/**
+ * @component
+ * @description
+ * Settings component for managing user preferences and categories.
+ * 
+ * Allows toggling dark mode, adding/deleting categories, and downloading data.
+ */
 @Component({
   selector: 'app-settings',
   imports: [
@@ -23,16 +30,37 @@ import { ToastService } from '../../service/toast/toast.service';
 })
 
 export class SettingsComponent {
+  /** Flag to toggle dark mode */
   isDarkMode = false;
 
+  /** Form for adding a new category */
   addCategoryForm!: FormGroup;
-  deleteCategoryForm!: FormGroup;
-  showAddCategoryModal = false;
-  showDeleteCategoryModal = false;
-  selectedCategoryName: string = 'Select Category';
-  userAgent: string = '';
-  platform: string = '';
 
+  /** Form for deleting a category */
+  deleteCategoryForm!: FormGroup;
+
+  /** Modal visibility states */
+  showAddCategoryModal = false;
+
+  /** Modal visibility states */
+  showDeleteCategoryModal = false;
+
+  /** Name of the currently selected category (display only) */
+  selectedCategoryName: string = 'Select Category';
+
+  /** Flag to show delete category option based on user categories */
+  showDeleteCategoryOption: boolean = false;
+
+  /**
+    * Constructor to inject dependencies
+    * @param userService User service for managing user preferences
+    * @param expenseService Expense service for managing expenses
+    * @param categoryService Category service for managing categories
+    * @param fb FormBuilder instance for creating reactive forms
+    * @param toastService Toast service for showing notifications
+    * @constructor
+    * @memberof SettingsComponent
+   */
   constructor(
     public userService: UserService,
     private expenseService: ExpenseService,
@@ -41,19 +69,21 @@ export class SettingsComponent {
     private toastService: ToastService,
   ) { }
 
+  /** 
+   * Initializes component state and loads existing categories
+   * 
+   * Lifecycle hook that initializes the component.
+   */
   ngOnInit(): void {
     const savedTheme = this.userService.getValue<string>('theme_mode') ?? 'light';
     this.isDarkMode = savedTheme === 'dark';
     document.documentElement.classList.toggle('dark', this.isDarkMode);
-    const existingCategories = this.categoryService.getAll();
-    const names = existingCategories.map(cat => cat.name);
-    const icons = existingCategories.map(cat => cat.icon);
-    const colors = existingCategories.map(cat => cat.color);
+    const existingCategories: Category[] = this.categoryService.getAll();
 
     this.addCategoryForm = this.fb.group({
-      name: ['', [Validators.required, this.nameExistsValidator(names)]],
-      icon: ['', [Validators.required, this.iconExistsValidator(icons)]],
-      color: ['#000000', [Validators.required, this.colorExistsValidator(colors)]],
+      name: ['', [Validators.required, this.nameExistsValidator()]],
+      icon: ['', [Validators.required, this.iconExistsValidator()]],
+      color: ['#000000', [Validators.required, this.colorExistsValidator()]],
     });
 
     const allExpenses = this.expenseService.getAll();
@@ -62,11 +92,15 @@ export class SettingsComponent {
     this.deleteCategoryForm = this.fb.group({
       category_id: ['', [Validators.required, this.categoryInUseValidator(usedCategoryIds)]],
     });
-
-    this.userAgent = navigator.userAgent;
-    this.platform = navigator.platform;
+    
+    // Check if user has any custom categories
+    let userId = this.userService.getValue<string>('id') || '0';
+    this.showDeleteCategoryOption = existingCategories.some(cat => cat.user_id === userId);
   }
 
+  /**
+   * Toggle between light and dark themes.
+   */
   toggleTheme(): void {
     const savedTheme = this.userService.getValue<string>('theme_mode') ?? 'light';
     if (savedTheme === 'dark') {
@@ -79,6 +113,9 @@ export class SettingsComponent {
     this.userService.update('theme_mode', this.isDarkMode ? 'dark' : 'light');
   }
 
+  /**
+   * Confirm and download all expenses as a JSON file.
+   */
   confirmAndDownload(): void {
     const confirmed = confirm('Are you sure you want to download your data as a JSON file?');
     if (!confirmed) return;
@@ -108,6 +145,9 @@ export class SettingsComponent {
     window.URL.revokeObjectURL(url);
   }
 
+  /**
+   * Add a new category using the form data.
+   */
   addCategory(): void {
     if (this.addCategoryForm.invalid) {
       this.addCategoryForm.markAllAsTouched();
@@ -118,13 +158,21 @@ export class SettingsComponent {
     this.toastService.show('Category added successfully!', 'success');;
     this.closeCategoryModal();
     this.addCategoryForm.reset();
+    this.showDeleteCategoryOption = true;
   }
 
+  /**
+   * Handles category selection from the dropdown.
+   * @param category The selected category
+   */
   onCategorySelected(category: any) {
     this.deleteCategoryForm.patchValue({ category_id: category.category_id });
     this.selectedCategoryName = category.name;
   }
 
+  /**
+   * Deletes the selected category after confirmation.
+   */
   deleteCategory(): void {
     if (this.deleteCategoryForm.invalid) {
       this.deleteCategoryForm.markAllAsTouched();
@@ -134,30 +182,44 @@ export class SettingsComponent {
     this.categoryService.delete(category_id.category_id);
     this.toastService.show(`Category deleted succesfully.`, 'success');
     this.closeDeleteCategoryModal();
+    const existingCategories: Category[] = this.categoryService.getAll();
+    let userId = this.userService.getValue<string>('id') || '0';
+    this.showDeleteCategoryOption = existingCategories.some(cat => cat.user_id === userId);
   }
 
+  /**
+   * Opens the modal to add a new category.
+   */
   openCategoryModal(): void {
     this.addCategoryForm.reset();
     this.showAddCategoryModal = true;
   }
 
+  /**
+   * Opens the modal to delete a category.
+   */
   openDeleteCategoryModal(): void {
     this.deleteCategoryForm.reset();
     this.showDeleteCategoryModal = true;
   }
 
-  closeCategoryModal() {
+  /** Closes the add category modal */
+  closeCategoryModal(): void {
     this.showAddCategoryModal = false;
   }
 
-  closeDeleteCategoryModal() {
+  /** Closes the delete category modal */
+  closeDeleteCategoryModal(): void {
     this.selectedCategoryName = "Select Category";
     this.showDeleteCategoryModal = false;
     this.deleteCategoryForm.reset();
   }
 
-  nameExistsValidator(existingNames: string[]): ValidatorFn {
+  /** Validates if the category name already exists */
+  nameExistsValidator(): ValidatorFn {
     return (control: AbstractControl): ValidationErrors | null => {
+      const existingCategories: Category[] = this.categoryService.getAll();
+      const existingNames = existingCategories.map(cat => cat.name);
       const value = control.value?.trim().toLowerCase();
       if (!value) return null;
       const exists = existingNames.some(name => name.toLowerCase() === value);
@@ -165,8 +227,11 @@ export class SettingsComponent {
     };
   }
 
-  iconExistsValidator(existingIcons: string[]): ValidatorFn {
+  /** Validates if the category icon already exists */
+  iconExistsValidator(): ValidatorFn {
     return (control: AbstractControl): ValidationErrors | null => {
+      const existingCategories: Category[] = this.categoryService.getAll();
+      const existingIcons = existingCategories.map(cat => cat.icon);
       const value = control.value;
       if (!value) return null;
       const exists = existingIcons.includes(value);
@@ -174,8 +239,11 @@ export class SettingsComponent {
     };
   }
 
-  colorExistsValidator(existingColors: string[]): ValidatorFn {
+  /** Validates if the category color already exists */
+  colorExistsValidator(): ValidatorFn {
     return (control: AbstractControl): ValidationErrors | null => {
+      const existingCategories: Category[] = this.categoryService.getAll();
+      const existingColors = existingCategories.map(cat => cat.color);
       const value = control.value;
       if (!value) return null;
       const exists = existingColors.includes(value);
@@ -183,6 +251,7 @@ export class SettingsComponent {
     };
   }
 
+  /** Validates if the category is in use by any expense */
   categoryInUseValidator(expenseCategories: string[]): ValidatorFn {
     return (control: AbstractControl): ValidationErrors | null => {
       const value = control.value;
@@ -192,6 +261,7 @@ export class SettingsComponent {
     };
   }
 
+  /** Validates if the category is a default category */
   defaultCategoryValidator(expenseCategories: string[]): ValidatorFn {
     return (control: AbstractControl): ValidationErrors | null => {
       const value = control.value;
@@ -201,12 +271,15 @@ export class SettingsComponent {
     };
   }
 
+  /** Reference to the file input element for importing expenses */
   @ViewChild('fileInput') fileInput!: ElementRef<HTMLInputElement>;
 
+  /** Opens the file input dialog to select a JSON file for import */
   triggerFileInput(): void {
     this.fileInput.nativeElement.click();
   }
 
+  /** Handles the file upload and processes the JSON data */
   handleFileUpload(event: Event): void {
     const input = event.target as HTMLInputElement;
     const file = input.files?.[0];

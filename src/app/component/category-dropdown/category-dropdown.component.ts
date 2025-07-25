@@ -9,6 +9,7 @@ import {
 } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Category, CategoryService } from '../../service/localStorage/category.service';
+import { UserService } from '../../service/localStorage/user.service';
 
 /**
  * Dropdown component for selecting an expense category.
@@ -37,6 +38,14 @@ export class CategoryDropdownComponent {
    */
   @Input() dropdownMaxHeightClass: string = 'max-h-40';
 
+  /**
+   * Optional categoryType to filter categories
+   * - 'default': only default categories
+   * - 'custom': only custom categories
+   * - 'all': all categories (default)
+   */
+  @Input() categoryType: 'default' | 'custom' | 'all' = 'all';
+
   /** List of categories to display */
   categories: Category[] = [];
 
@@ -46,7 +55,7 @@ export class CategoryDropdownComponent {
   /** Reference to the dropdown DOM element */
   @ViewChild('categorydownRef') categoryRef!: ElementRef;
 
-  constructor(private categoryService: CategoryService) {}
+  constructor(private categoryService: CategoryService, private userService: UserService) { }
 
   /** Initializes and loads categories */
   ngOnInit(): void {
@@ -56,6 +65,20 @@ export class CategoryDropdownComponent {
   /** Loads sorted categories from service */
   loadCategories(): void {
     this.categories = this.categoryService.getSortedCategoriesByExpenseCount();
+    if (this.categoryType !== 'all') {
+      if (this.categoryType === 'custom') {
+        let userId = this.userService.getValue<string>('id') || '0';
+        this.categories = this.categories.filter(category =>
+          category.user_id === userId
+        );
+        console.log('Custom categories:', this.categories);
+      }
+      else {
+        this.categories = this.categories.filter(category =>
+          category.user_id === '0'
+        );
+      }
+    }
   }
 
   /** Toggles category dropdown visibility */

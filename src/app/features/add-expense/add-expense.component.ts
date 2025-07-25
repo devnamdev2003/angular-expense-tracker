@@ -9,8 +9,8 @@ import { ToastService } from '../../service/toast/toast.service';
   * @component
   * @description
   * Component for adding new expenses.
+  * 
   * It includes a reactive form and suggestions for location and notes.
-  * @see README.md
 */
 @Component({
   selector: 'app-add-expense',

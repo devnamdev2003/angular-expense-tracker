@@ -15,7 +15,17 @@ npm install -g @compodoc/compodoc
 
 commands
 
+# First install Globally Than use compodoc 
+
+npm install -g @compodoc/compodoc
+
 # Generate documentation
+compodoc -p tsconfig.json
+
+# Generate documentation and serve
+compodoc -p tsconfig.json -s
+
+# Serve compodoc
 compodoc -p tsconfig.json -s
 
 # Or watch for changes

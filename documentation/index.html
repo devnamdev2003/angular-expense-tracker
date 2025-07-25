@@ -86,186 +86,129 @@
 <blockquote>
 <h3>Expense Wisely – Where Your Money Stops Playing Hide and Seek!</h3>
 </blockquote>
-<h2>✅ Overview</h2>
-<p>The <strong>Expense Tracker Application</strong> helps users manage their personal finances through intuitive UI components, visual analytics, and simple interaction patterns. The application is fully front-end based, leveraging <code>localStorage</code> for data persistence.</p>
-<p>Experience the power of <strong>Devnoms Chat App</strong> right now:</p>
-<p><a href="https://exwise.vercel.app/"><img src="https://img.shields.io/badge/Live-Preview-brightgreen?style=for-the-badge&logo=angular" alt="Live Preview" class="img-responsive"></a></p>
+<h2>📌 Overview</h2>
+<p><strong>Expense Tracker</strong> is a mobile-first financial management application designed to help users easily track their daily and monthly expenses. The application emphasizes a user-friendly UI/UX tailored specifically for smartphones, allowing seamless personal finance management on the go.</p>
+<p>This application leverages <strong>Angular</strong> as the frontend framework and <strong>Tailwind CSS</strong> for responsive and modern UI styling. All user data is stored in <strong>LocalStorage</strong>, making the app lightweight and independent of backend dependencies.</p>
 <hr>
-<p><img src="./assets/images/share_o.png" alt="App" class="img-responsive"> </p>
-<h2>💡 Features</h2>
-<ul>
-<li>Add and categorize expenses with rich metadata.</li>
-<li>Real-time visual analysis using charts (daily, weekly, monthly).</li>
-<li>Budget management with progress tracking.</li>
-<li>Calendar view for date-wise expense breakdown.</li>
-<li>Sorting, filtering, and searching of expenses.</li>
-<li>Light/Dark theme toggle and full settings configuration.</li>
-<li>Supports both predefined and custom categories.</li>
-<li>Backup settings for future cloud sync capability.</li>
-</ul>
+<h2>🧰 Tech Stack</h2>
+<table class="table table-bordered compodoc-table">
+<thead>
+<tr>
+<th>Technology</th>
+<th>Purpose</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Angular</td>
+<td>Frontend application logic</td>
+</tr>
+<tr>
+<td>Tailwind CSS</td>
+<td>Styling and responsive UI</td>
+</tr>
+<tr>
+<td>LocalStorage</td>
+<td>Persistent data storage</td>
+</tr>
+</tbody>
+</table>
 <hr>
-<h2>🧭 Page-wise Functionality</h2>
-<h3>1. <strong>Home Page</strong></h3>
-<p>Displays all key metrics and analytics:</p>
+<h2>📱 Features &amp; Functionality</h2>
+<h3>1. <strong>Dashboard View</strong></h3>
 <ul>
-<li><strong>Budget Progress</strong>: Visual bar with % used, allowed/spent/suggested per day.</li>
-<li><strong>Charts</strong>:<ul>
-<li>Daily Spending (bar/line)</li>
-<li>Last 7 Days</li>
-<li>Monthly Overview</li>
-<li>Category Overview (doughnut/pie)</li>
+<li><p>Upon launch, users are greeted with two interactive graphs:</p>
+<ul>
+<li><strong>Expense Graph (Toggle: Monthly / Daily)</strong>: Displays a line graph representing user expenses over time. Users can switch between <strong>Monthly</strong> and <strong>Daily</strong> views.</li>
+<li><strong>Category-wise Pie Chart</strong>: Visualizes how the expenses are distributed across different categories (e.g., Food, Travel, Shopping).</li>
 </ul>
 </li>
 </ul>
-<h3>2. <strong>Add Expense Page</strong></h3>
-<p>Form to record new expenses:</p>
+<hr>
+<h3>2. <strong>Add Expense View</strong></h3>
+<p>Allows users to add new expense entries through a form. Input fields include:</p>
 <ul>
-<li>Fields:<ul>
-<li>Amount</li>
-<li>Category &amp; Subcategory</li>
-<li>Date and Time</li>
-<li>Note (optional)</li>
-<li>Payment Mode (UPI or Cash)</li>
+<li>💰 <strong>Amount</strong></li>
+<li>📅 <strong>Date &amp; Time</strong></li>
+<li>🏷️ <strong>Category</strong> (chosen from a dropdown list)</li>
+<li>📍 <strong>Location</strong></li>
+<li>📝 <strong>Note</strong></li>
+</ul>
+<p>All expenses are stored in the device&#39;s <strong>LocalStorage</strong> and reflected immediately in graphs and listings.</p>
+<hr>
+<h3>3. <strong>Calendar View</strong></h3>
+<ul>
+<li>Users can view a <strong>monthly calendar</strong> to explore expenses on specific dates.</li>
+<li>Tap any date to open a <strong>popup modal</strong> displaying all expenses for that day.</li>
+<li>Navigate across <strong>months and years</strong> to view past or future expenses.</li>
+</ul>
+<hr>
+<h3>4. <strong>List View</strong></h3>
+<ul>
+<li><p>Displays all user expenses in a scrollable, searchable, and sortable list.</p>
+</li>
+<li><p>Users can:</p>
+<ul>
+<li>🧾 <strong>Sort</strong> expenses by date, amount, or category.</li>
+<li>🔍 <strong>Filter</strong> by category, date, or keyword.</li>
+<li>🖱️ Tap any entry to open a <strong>modal</strong> with complete details and options to <strong>edit</strong> or <strong>delete</strong> the expense.</li>
 </ul>
 </li>
 </ul>
-<h3>3. <strong>Expense List Page</strong></h3>
-<p>Tabular view of all expenses with:</p>
+<hr>
+<h3>5. <strong>Budget View</strong></h3>
 <ul>
-<li>Sortable columns (by amount, category, date, etc.)</li>
-<li>Pagination or scrolling support for large data sets</li>
+<li><p>Users can define a <strong>budget range</strong> by selecting start and end dates.</p>
+</li>
+<li><p>After setting a budget:</p>
+<ul>
+<li>A <strong>progress bar</strong> shows how much of the budget has been spent.</li>
+<li>Options to <strong>edit</strong> or <strong>delete</strong> the budget are available for flexibility and control.</li>
 </ul>
-<h3>4. <strong>Search Page</strong></h3>
-<ul>
-<li>Filter expenses by <strong>From Date</strong> and <strong>To Date</strong></li>
-<li>List all matching results in a detailed view</li>
-</ul>
-<h3>5. <strong>Calendar Page</strong></h3>
-<ul>
-<li>Visual calendar UI</li>
-<li>Clicking on a date opens a modal displaying all expenses on that specific day</li>
-</ul>
-<h3>6. <strong>Settings Page</strong></h3>
-<ul>
-<li>Switch between <strong>Dark Mode</strong> and <strong>Light Mode</strong></li>
-<li>Set budgets (monthly or custom range)</li>
-<li>Add/Delete categories</li>
-<li>Backup settings</li>
+</li>
 </ul>
 <hr>
-<h2>📂 Data Management (localStorage)</h2>
-<p>All data is stored in the browser&#39;s <code>localStorage</code>. Each major data type (expenses, categories, settings, etc.) is maintained in its respective storage key.</p>
-<hr>
-<h2>📊 Database Schemas</h2>
-<h3>🧾 Expense Schema</h3>
-<b>Example :</b><div><pre class="line-numbers"><code class="language-js">{
-  amount: &quot;&quot;,
-  category_id: &quot;&quot;,
-  date: &quot;&quot;,
-  expense_id: &quot;&quot;,
-  location: &quot;&quot;,
-  note: &quot;&quot;,
-  payment_mode: &quot;&quot;, // e.g., &quot;UPI&quot; or &quot;Cash&quot;
-  subcategory: &quot;&quot;,
-  time: &quot;&quot;
-}</code></pre></div><h3>📁 Category Schema</h3>
-<b>Example :</b><div><pre class="line-numbers"><code class="language-js">{
-  category_id: 1,
-  name: &quot;Food &amp; Drinks&quot;,
-  icon: &quot;🍔&quot;,
-  color: &quot;#f94144&quot;
-}</code></pre></div><h3>🧰 Custom Category Schema</h3>
-<b>Example :</b><div><pre class="line-numbers"><code class="language-js">{
-  category_id: &quot;&quot;,
-  name: &quot;&quot;,
-  icon: &quot;&quot;,
-  color: &quot;&quot;
-}</code></pre></div><h3>⚙️ Settings Schema</h3>
-<b>Example :</b><div><pre class="line-numbers"><code class="language-js">{
-  themeMode: &quot;&quot;,
-  notifications: true,
-  backupFrequency: &quot;&quot;,
-  isBackup: false
-}</code></pre></div><h3>📅 Budget Schema</h3>
-<b>Example :</b><div><pre class="line-numbers"><code class="language-js">{
-  id: &quot;&quot;,
-  amount: 0,
-  fromDate: &quot;&quot;,
-  toDate: &quot;&quot;
-}</code></pre></div><hr>
-<h2>📈 Charts and Visualization</h2>
-<p>The app uses <code>Chart.js</code> to display visual statistics:</p>
+<h3>6. <strong>Settings View</strong></h3>
+<p>Provides customization and utility options for better personalization:</p>
 <ul>
-<li><strong>Daily Chart</strong> – Spending today</li>
-<li><strong>Last 7 Days</strong> – Weekly analysis</li>
-<li><strong>Monthly Chart</strong> – Month-wise data</li>
-<li><strong>Category Chart</strong> – Expense distribution by category</li>
-<li>Each chart dynamically updates based on data changes</li>
+<li>🎨 <strong>Theme Mode Toggle</strong> (Dark / Light)</li>
+<li>⬇️ <strong>Download Data</strong> (export expenses data)</li>
+<li>➕ <strong>Add Category</strong> (custom categories for better organization)</li>
+<li>❌ <strong>Delete Category</strong> (remove unused or incorrect categories)</li>
 </ul>
 <hr>
-<h2>⚙️ Settings and Personalization</h2>
-<p>Users can customize their experience with:</p>
+<h2>📱 Mobile-First Design</h2>
 <ul>
-<li>Theme toggle (light/dark)</li>
-<li>Add/remove categories</li>
-<li>Set budgets with date range</li>
-<li>Configure backup frequency (for future enhancements)</li>
+<li>The application is specifically designed for <strong>mobile devices</strong>.</li>
+<li>Features responsive components, intuitive touch controls, and visually appealing UI optimized for small screens.</li>
+<li>Not intended for laptop or desktop usage.</li>
 </ul>
 <hr>
-<h2>🔄 Backup &amp; Sync</h2>
+<h2>🗃️ Data Storage</h2>
+<p>All user data is stored using the <strong>browser’s LocalStorage API</strong>, ensuring:</p>
 <ul>
-<li>A backup system is designed using the <code>isBackup</code> flag and <code>backupFrequency</code></li>
-<li>Future integration planned with cloud/local file system</li>
+<li>No need for backend/server.</li>
+<li>Fast read/write operations.</li>
+<li>Data remains available between app sessions.</li>
 </ul>
 <hr>
-<h2>📌 Usage Guide</h2>
-<h3>Adding an Expense</h3>
+<h2>📈 User Flow Summary</h2>
 <ol>
-<li>Go to &quot;Add Expense&quot; tab</li>
-<li>Fill in details (amount, category, date/time, etc.)</li>
-<li>Click <strong>Submit</strong> – the data is stored in localStorage and reflected across the app</li>
+<li><p><strong>Launch App</strong> → View Expense Graphs (Toggle between Month/Day).</p>
+</li>
+<li><p><strong>Add Expenses</strong> via the <strong>+</strong> tab.</p>
+</li>
+<li><p>Navigate to:</p>
+<ul>
+<li><strong>Calendar</strong> to view per-date expenses.</li>
+<li><strong>List</strong> for detailed log and search/filter options.</li>
+<li><strong>Budget</strong> to monitor spending.</li>
+<li><strong>Settings</strong> for customization.</li>
+</ul>
+</li>
 </ol>
-<h3>Viewing Reports</h3>
-<ul>
-<li>Navigate to Home to view detailed spending analytics</li>
-</ul>
-<h3>Managing Budget</h3>
-<ul>
-<li>Head to <strong>Settings &gt; Set Budget</strong></li>
-<li>Set monthly or custom range with allowed budget</li>
-</ul>
-<h3>Viewing Daily Expenses</h3>
-<ul>
-<li>Go to <strong>Calendar Page</strong></li>
-<li>Click any date to view expenses via modal</li>
-</ul>
-<h3>Backup</h3>
-<ul>
-<li>Enable <code>Backup</code> in <strong>Settings</strong></li>
-<li>Configure backup frequency (daily/weekly/monthly)</li>
-</ul>
-<hr>
-<h2>🖼️ Screenshots</h2>
-<p>Below are visual previews of the Expense Tracker application to provide better insight into its user interface and functionality.</p>
-<h3>📊 Home Page – Dashboard Overview</h3>
-<p>Displays budget progress and various charts for spending analytics.
-<img src="./assets/images/screenshots/home.png" alt="Home Dashboard" class="img-responsive"></p>
-<h3>➕ Add Expense Page</h3>
-<p>Simple and clean form to add new expenses with all required fields.
-<img src="./assets/images/screenshots/add.png" alt="Add Expense" class="img-responsive"></p>
-<h3>📃 Expense List</h3>
-<p>Tabular view of all recorded expenses with sorting capabilities.
-<img src="./assets/images/screenshots/list.png" alt="Expense List" class="img-responsive"></p>
-<h3>🔍 Search by Date Range</h3>
-<p>Filter and display expenses between selected dates.
-<img src="./assets/images/screenshots/search.png" alt="Search Expenses" class="img-responsive"></p>
-<h3>📅 Calendar View</h3>
-<p>Visual calendar UI to access expenses on a specific day.
-<img src="./assets/images/screenshots/calendar.gif" alt="Calendar View" class="img-responsive"></p>
-<h3>⚙️ Settings Panel</h3>
-<p>Includes theme toggle, budget setup, category management, and backup options.
-<img src="./assets/images/screenshots/setting.png" alt="Settings Page" class="img-responsive"></p>
-<hr>
+<h2>📄 Code Documentation</h2>
+<p>For developers and contributors, detailed code-level documentation is available here:<br>👉 <a href="https://devnamdev2003.github.io/ExpenseWise/documentation/">Documentation</a></p>
 
 
 
