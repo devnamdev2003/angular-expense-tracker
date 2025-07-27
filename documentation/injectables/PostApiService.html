@@ -119,6 +119,14 @@
         </p>
 
 
+            <p class="comment">
+                <h3>Description</h3>
+            </p>
+            <p class="comment">
+                <p>Service to handle background POST requests to sync user data (expenses, budget, categories, etc.)
+with the backend API. Intended to run silently once every 24 hours.</p>
+
+            </p>
 
 
 
@@ -164,12 +172,14 @@
                 </tr>
                         <tr>
                             <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="10" class="link-to-prism">src/app/service/backend-api/post/post-api.service.ts:10</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="15" class="link-to-prism">src/app/service/backend-api/post/post-api.service.ts:15</a></div>
                             </td>
                         </tr>
 
                 <tr>
                     <td class="col-md-4">
+                            <div class="io-description"><p>Creates an instance of PostApiService.</p>
+</div>
                             <div>
                                     <b>Parameters :</b>
                                     <table class="params">
@@ -178,6 +188,7 @@
                                                 <td>Name</td>
                                                     <td>Type</td>
                                                 <td>Optional</td>
+                                                    <td>Description</td>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -192,6 +203,10 @@
                                                             No
                                                     </td>
                                                     
+                                                        <td>
+                                                                <p>Angular HttpClient to perform HTTP requests</p>
+
+                                                        </td>
                                                 </tr>
                                                 <tr>
                                                         <td>configService</td>
@@ -204,6 +219,10 @@
                                                             No
                                                     </td>
                                                     
+                                                        <td>
+                                                                <p>Provides API base URL based on environment</p>
+
+                                                        </td>
                                                 </tr>
                                                 <tr>
                                                         <td>storageService</td>
@@ -216,6 +235,10 @@
                                                             No
                                                     </td>
                                                     
+                                                        <td>
+                                                                <p>Accesses user data from LocalStorage</p>
+
+                                                        </td>
                                                 </tr>
                                                 <tr>
                                                         <td>userService</td>
@@ -228,6 +251,10 @@
                                                             No
                                                     </td>
                                                     
+                                                        <td>
+                                                                <p>Manages user-specific values like <code>id</code> and <code>last_backup</code></p>
+
+                                                        </td>
                                                 </tr>
                                         </tbody>
                                     </table>
@@ -263,19 +290,27 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="37"
-                                    class="link-to-prism">src/app/service/backend-api/post/post-api.service.ts:37</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="66"
+                                    class="link-to-prism">src/app/service/backend-api/post/post-api.service.ts:66</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
+                        <div class="io-description"><p>Gathers all relevant user data from LocalStorage to be sent to the backend.</p>
+<p>or <code>undefined</code> if user_id is not available.</p>
+</div>
 
                         <div class="io-description">
-                            <b>Returns : </b>    <code>{ user_id: any; expenses: any; budget: any; category: any; user_data: any; }</code>
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
 
                         </div>
+                            <div class="io-description">
+                                <p>An object containing user_id, expenses, budget, category, and user_data
+or <code>undefined</code> if user_id is not available.</p>
+
+                            </div>
                 </td>
             </tr>
         </tbody>
@@ -300,14 +335,17 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="14"
-                                    class="link-to-prism">src/app/service/backend-api/post/post-api.service.ts:14</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="35"
+                                    class="link-to-prism">src/app/service/backend-api/post/post-api.service.ts:35</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
+                        <div class="io-description"><p>Posts user data to the server in the background if more than 24 hours have passed
+since the last successful backup. Uses <code>/api/post/</code> endpoint.</p>
+</div>
 
                         <div class="io-description">
                             <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
@@ -329,22 +367,45 @@ import { take } from &#x27;rxjs/operators&#x27;;
 import { ConfigService } from &#x27;../../util/config/config.service&#x27;;
 import { StorageService } from &#x27;../../localStorage/storage.service&#x27;;
 import { UserService } from &#x27;../../localStorage/user.service&#x27;;
+
+/**
+ * Service to handle background POST requests to sync user data (expenses, budget, categories, etc.)
+ * with the backend API. Intended to run silently once every 24 hours.
+ */
 @Injectable({
   providedIn: &#x27;root&#x27;
 })
 export class PostApiService {
-  constructor(private http: HttpClient, private configService: ConfigService, private storageService: StorageService, private userService: UserService) { }
 
-  // Method to post user data silently
-  postUserData() {
+  /**
+   * Creates an instance of PostApiService.
+   * @param http Angular HttpClient to perform HTTP requests
+   * @param configService Provides API base URL based on environment
+   * @param storageService Accesses user data from LocalStorage
+   * @param userService Manages user-specific values like &#x60;id&#x60; and &#x60;last_backup&#x60;
+   */
+  constructor(
+    private http: HttpClient,
+    private configService: ConfigService,
+    private storageService: StorageService,
+    private userService: UserService
+  ) { }
+
+  /**
+   * Posts user data to the server in the background if more than 24 hours have passed
+   * since the last successful backup. Uses &#x60;/api/post/&#x60; endpoint.
+   */
+  postUserData(): void {
     const lastBackupStr &#x3D; this.userService.getValue&lt;string&gt;(&#x27;last_backup&#x27;);
     const now &#x3D; new Date();
     const lastBackup &#x3D; lastBackupStr ? new Date(lastBackupStr) : null;
     const shouldBackup &#x3D; !lastBackup || (now.getTime() - lastBackup.getTime()) &gt; 24 * 60 * 60 * 1000;
+
     if (shouldBackup) {
       console.log(&#x27;Posting user data in the background...&#x27;);
       const url &#x3D; this.configService.getapiUrl() + &#x27;/api/post/&#x27;;
       const userData &#x3D; this.getUserDataFromLocalStorage();
+
       this.http.post(url, userData).pipe(take(1)).subscribe({
         next: () &#x3D;&gt; {
           console.log(&#x27;User data posted successfully. Updating last_backup...&#x27;);
@@ -359,16 +420,24 @@ export class PostApiService {
     }
   }
 
-  getUserDataFromLocalStorage() {
-    const userId &#x3D; this.userService.getValue&lt;string&gt;(&#x27;id&#x27;)
+  /**
+   * Gathers all relevant user data from LocalStorage to be sent to the backend.
+   *
+   * @returns An object containing user_id, expenses, budget, category, and user_data
+   * or &#x60;undefined&#x60; if user_id is not available.
+   */
+  getUserDataFromLocalStorage(): any {
+    const userId &#x3D; this.userService.getValue&lt;string&gt;(&#x27;id&#x27;);
     if (!userId) {
       console.warn(&#x27;User ID is missing, skipping backup.&#x27;);
       return;
     }
+
     const userData &#x3D; this.storageService.getUser();
     const expenses &#x3D; this.storageService.getAllExpenses();
     const budget &#x3D; this.storageService.getAllBudgets();
     const categories &#x3D; this.storageService.getAllCategories();
+
     return {
       user_id: userId,
       expenses: expenses || [],
@@ -377,7 +446,8 @@ export class PostApiService {
       user_data: userData || {}
     };
   }
-}</code></pre>
+}
+</code></pre>
     </div>
 
 </div>
