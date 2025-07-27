@@ -4,7 +4,7 @@ import { Injectable } from '@angular/core';
   providedIn: 'root'
 })
 export class AppVersionService {
-  private readonly version: string = "25.7.25";
+  private readonly version: string = "25.7.27";
 
   constructor() { }
 

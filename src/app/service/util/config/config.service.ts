@@ -14,7 +14,7 @@ export class ConfigService {
    * Possible values: 'local' | 'live'.
    * Change this value to switch API endpoints.
    */
-  private readonly developmentEnviroment: string = "local";
+  private readonly developmentEnviroment: string = "live";
   // private readonly developmentEnviroment: string = "live";
 
   /**
