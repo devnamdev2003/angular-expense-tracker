@@ -26,7 +26,7 @@ compodoc -p tsconfig.json
 compodoc -p tsconfig.json -s
 
 # Serve compodoc
-compodoc -p tsconfig.json -s
+compodoc -s
 
 # Or watch for changes
 compodoc -p tsconfig.json -w

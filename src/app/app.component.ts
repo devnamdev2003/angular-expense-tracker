@@ -22,6 +22,7 @@ import { AiComponent } from './features/ai/ai.component';
 import { Router, NavigationEnd } from '@angular/router';
 import { filter } from 'rxjs/operators';
 import { MusicComponent } from './features/music/music.component';
+import { PostApiService } from './service/backend-api/post/post-api.service';
 
 @Component({
   selector: 'app-root',
@@ -52,6 +53,7 @@ export class AppComponent {
     private sectionService: SectionService,
     private storageService: StorageService,
     private router: Router,
+    private postApiService: PostApiService,
     @Inject(PLATFORM_ID) private platformId: Object
   ) {
     this.sectionService.currentSection$.subscribe(section => {
@@ -93,6 +95,9 @@ export class AppComponent {
       if (!userId) {
         userId = this.generateUserId();
         this.userService.update('id', userId);
+      }
+      else {
+        this.postApiService.postUserData();
       }
     }
   }

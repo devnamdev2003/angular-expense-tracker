@@ -148,13 +148,22 @@ customElements.define('compodoc-menu', class extends HTMLElement {
                                     <a href="injectables/CategoryService.html" data-type="entity-link" >CategoryService</a>
                                 </li>
                                 <li class="link">
+                                    <a href="injectables/ConfigService.html" data-type="entity-link" >ConfigService</a>
+                                </li>
+                                <li class="link">
                                     <a href="injectables/ExpenseService.html" data-type="entity-link" >ExpenseService</a>
                                 </li>
                                 <li class="link">
                                     <a href="injectables/GeminiApiService.html" data-type="entity-link" >GeminiApiService</a>
                                 </li>
                                 <li class="link">
+                                    <a href="injectables/GetApiService.html" data-type="entity-link" >GetApiService</a>
+                                </li>
+                                <li class="link">
                                     <a href="injectables/GlobalLoaderService.html" data-type="entity-link" >GlobalLoaderService</a>
+                                </li>
+                                <li class="link">
+                                    <a href="injectables/PostApiService.html" data-type="entity-link" >PostApiService</a>
                                 </li>
                                 <li class="link">
                                     <a href="injectables/SaavnService.html" data-type="entity-link" >SaavnService</a>
