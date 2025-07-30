@@ -228,7 +228,7 @@ export class GraphsComponent implements OnInit, OnChanges {
     };
 
     this.title = {
-      text: "Today Expenses: " + totalAmount,
+      text: "Total Expenses: " + totalAmount,
       align: "center",
       style: {
         color: 'var(--color-text)'
