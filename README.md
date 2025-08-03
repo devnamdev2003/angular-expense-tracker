@@ -26,7 +26,7 @@ This application leverages **Angular** as the frontend framework and **Tailwind 
 
 * Upon launch, users are greeted with two interactive graphs:
 
-  * **Expense Graph (Toggle: Monthly / Daily)**: Displays a line graph representing user expenses over time. Users can switch between **Monthly** and **Daily** views.
+  * **Expense Graph (Toggle: Monthly / Daily / Yearly)**: Displays a line graph representing user expenses over time. Users can switch between **Monthly**, **Daily** and **Yearly** views.
   * **Category-wise Pie Chart**: Visualizes how the expenses are distributed across different categories (e.g., Food, Travel, Shopping).
 
 ---
@@ -113,7 +113,7 @@ All user data is stored using the **browser’s LocalStorage API**, ensuring:
 ## 📈 User Flow Summary
 
 1. **Launch App** → View Expense Graphs (Toggle between Month/Day).
-2. **Add Expenses** via the **+** tab.
+2. **Add Expenses** via the ➕ tab.
 3. Navigate to:
 
    * **Calendar** to view per-date expenses.
