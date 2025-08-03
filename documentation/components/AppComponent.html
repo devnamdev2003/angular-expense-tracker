@@ -124,6 +124,15 @@
 </p>
 
 
+    <p class="comment">
+        <h3>Description</h3>
+    </p>
+    <p class="comment">
+        <p>Root component of the application.
+Manages global state, mobile view detection, section tracking,
+theme application, schema syncing, and PWA update activation.</p>
+
+    </p>
 
 
 
@@ -289,17 +298,20 @@
             <tbody>
                 <tr>
                     <td class="col-md-4">
-<code>constructor(userService: <a href="../injectables/UserService.html" target="_self">UserService</a>, loader: <a href="../injectables/GlobalLoaderService.html" target="_self">GlobalLoaderService</a>, sectionService: <a href="../injectables/SectionService.html" target="_self">SectionService</a>, storageService: <a href="../injectables/StorageService.html" target="_self">StorageService</a>, router: Router, postApiService: <a href="../injectables/PostApiService.html" target="_self">PostApiService</a>, platformId: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object" target="_blank">Object</a>)</code>
+<code>constructor(userService: <a href="../injectables/UserService.html" target="_self">UserService</a>, loader: <a href="../injectables/GlobalLoaderService.html" target="_self">GlobalLoaderService</a>, sectionService: <a href="../injectables/SectionService.html" target="_self">SectionService</a>, storageService: <a href="../injectables/StorageService.html" target="_self">StorageService</a>, router: Router, postApiService: <a href="../injectables/PostApiService.html" target="_self">PostApiService</a>, swUpdate: SwUpdate, platformId: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object" target="_blank">Object</a>)</code>
                     </td>
                 </tr>
                         <tr>
                             <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="48" class="link-to-prism">src/app/app.component.ts:48</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="67" class="link-to-prism">src/app/app.component.ts:67</a></div>
                             </td>
                         </tr>
 
                 <tr>
                     <td class="col-md-4">
+                            <div class="io-description"><p>Constructor for AppComponent.
+Initializes route tracking, section updates, PWA update listener, and services.</p>
+</div>
                             <div>
                                     <b>Parameters :</b>
                                     <table class="params">
@@ -308,6 +320,7 @@
                                                 <td>Name</td>
                                                     <td>Type</td>
                                                 <td>Optional</td>
+                                                    <td>Description</td>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -322,6 +335,10 @@
                                                             No
                                                     </td>
                                                     
+                                                        <td>
+                                                                <p>Service for managing user preferences</p>
+
+                                                        </td>
                                                 </tr>
                                                 <tr>
                                                         <td>loader</td>
@@ -334,6 +351,10 @@
                                                             No
                                                     </td>
                                                     
+                                                        <td>
+                                                                <p>Global loader overlay service</p>
+
+                                                        </td>
                                                 </tr>
                                                 <tr>
                                                         <td>sectionService</td>
@@ -346,6 +367,10 @@
                                                             No
                                                     </td>
                                                     
+                                                        <td>
+                                                                <p>Service to track current section changes</p>
+
+                                                        </td>
                                                 </tr>
                                                 <tr>
                                                         <td>storageService</td>
@@ -358,6 +383,10 @@
                                                             No
                                                     </td>
                                                     
+                                                        <td>
+                                                                <p>Local storage schema sync service</p>
+
+                                                        </td>
                                                 </tr>
                                                 <tr>
                                                         <td>router</td>
@@ -370,6 +399,10 @@
                                                             No
                                                     </td>
                                                     
+                                                        <td>
+                                                                <p>Angular Router to track route changes</p>
+
+                                                        </td>
                                                 </tr>
                                                 <tr>
                                                         <td>postApiService</td>
@@ -382,6 +415,26 @@
                                                             No
                                                     </td>
                                                     
+                                                        <td>
+                                                                <p>Backend API post service</p>
+
+                                                        </td>
+                                                </tr>
+                                                <tr>
+                                                        <td>swUpdate</td>
+                                                  
+                                                        <td>
+                                                                    <code>SwUpdate</code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                        <td>
+                                                                <p>Service Worker update manager</p>
+
+                                                        </td>
                                                 </tr>
                                                 <tr>
                                                         <td>platformId</td>
@@ -394,6 +447,10 @@
                                                             No
                                                     </td>
                                                     
+                                                        <td>
+                                                                <p>Angular platform ID to check if running in browser</p>
+
+                                                        </td>
                                                 </tr>
                                         </tbody>
                                     </table>
@@ -433,12 +490,47 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="113"
-                                    class="link-to-prism">src/app/app.component.ts:113</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="170"
+                                    class="link-to-prism">src/app/app.component.ts:170</a></div>
                         </td>
                     </tr>
 
 
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-description"><p>Disables the context menu on right-click for the whole app.</p>
+</div>
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                            <td>Optional</td>
+                                                <td>Description</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>event</td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                            <td>
+                                                    <p>Mouse event object</p>
+
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                </td>
+            </tr>
         </tbody>
     </table>
     <table class="table table-sm table-bordered">
@@ -466,12 +558,47 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="106"
-                                    class="link-to-prism">src/app/app.component.ts:106</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="159"
+                                    class="link-to-prism">src/app/app.component.ts:159</a></div>
                         </td>
                     </tr>
 
 
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-description"><p>Event listener for window resize to update mobile view detection.</p>
+</div>
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                            <td>Optional</td>
+                                                <td>Description</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>event</td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                            <td>
+                                                    <p>Resize event object</p>
+
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                </td>
+            </tr>
         </tbody>
     </table>
 </section>
@@ -502,19 +629,25 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="117"
-                                    class="link-to-prism">src/app/app.component.ts:117</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="178"
+                                    class="link-to-prism">src/app/app.component.ts:178</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
+                        <div class="io-description"><p>Generates a unique user ID by combining timestamp and random string.</p>
+</div>
 
                         <div class="io-description">
                             <b>Returns : </b>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
 
                         </div>
+                            <div class="io-description">
+                                <p>Generated user ID string</p>
+
+                            </div>
                 </td>
             </tr>
         </tbody>
@@ -539,14 +672,17 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="73"
-                                    class="link-to-prism">src/app/app.component.ts:73</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="120"
+                                    class="link-to-prism">src/app/app.component.ts:120</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
+                        <div class="io-description"><p>Angular lifecycle hook called after component initialization.
+Applies theme, syncs schema, sets user ID, and shows loader.</p>
+</div>
 
                         <div class="io-description">
                             <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
@@ -585,14 +721,16 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="106"
-                                    class="link-to-prism">src/app/app.component.ts:106</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="159"
+                                    class="link-to-prism">src/app/app.component.ts:159</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
+                        <div class="io-description"><p>Event listener for window resize to update mobile view detection.</p>
+</div>
 
                             <div class="io-description">
                                 <b>Parameters :</b>
@@ -603,6 +741,7 @@
                                             <td>Name</td>
                                                 <td>Type</td>
                                             <td>Optional</td>
+                                                <td>Description</td>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -617,6 +756,10 @@
                                             </td>
 
 
+                                            <td>
+                                                    <p>Resize event object</p>
+
+                                            </td>
                                         </tr>
                                     </tbody>
                                 </table>
@@ -661,14 +804,16 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="113"
-                                    class="link-to-prism">src/app/app.component.ts:113</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="170"
+                                    class="link-to-prism">src/app/app.component.ts:170</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
+                        <div class="io-description"><p>Disables the context menu on right-click for the whole app.</p>
+</div>
 
                             <div class="io-description">
                                 <b>Parameters :</b>
@@ -679,6 +824,7 @@
                                             <td>Name</td>
                                                 <td>Type</td>
                                             <td>Optional</td>
+                                                <td>Description</td>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -693,6 +839,10 @@
                                             </td>
 
 
+                                            <td>
+                                                    <p>Mouse event object</p>
+
+                                            </td>
                                         </tr>
                                     </tbody>
                                 </table>
@@ -738,10 +888,16 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="45" class="link-to-prism">src/app/app.component.ts:45</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="52" class="link-to-prism">src/app/app.component.ts:52</a></div>
                         </td>
                     </tr>
 
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Currently active section of the app (e.g., &#39;home&#39;, &#39;settings&#39;).</p>
+</div>
+                </td>
+            </tr>
 
         </tbody>
     </table>
@@ -763,10 +919,16 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="47" class="link-to-prism">src/app/app.component.ts:47</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="62" class="link-to-prism">src/app/app.component.ts:62</a></div>
                         </td>
                     </tr>
 
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Boolean indicating whether the current route is the root/expenses page.</p>
+</div>
+                </td>
+            </tr>
 
         </tbody>
     </table>
@@ -794,10 +956,16 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="46" class="link-to-prism">src/app/app.component.ts:46</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="57" class="link-to-prism">src/app/app.component.ts:57</a></div>
                         </td>
                     </tr>
 
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Boolean indicating whether the app is being viewed on a mobile device.</p>
+</div>
+                </td>
+            </tr>
 
         </tbody>
     </table>
@@ -819,10 +987,16 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="48" class="link-to-prism">src/app/app.component.ts:48</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="67" class="link-to-prism">src/app/app.component.ts:67</a></div>
                         </td>
                     </tr>
 
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Boolean indicating whether the current route is the music page.</p>
+</div>
+                </td>
+            </tr>
 
         </tbody>
     </table>
@@ -846,10 +1020,15 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="51" class="link-to-prism">src/app/app.component.ts:51</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="83" class="link-to-prism">src/app/app.component.ts:83</a></div>
                         </td>
                     </tr>
 
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description">Service for managing user preferences</div>
+                </td>
+            </tr>
 
         </tbody>
     </table>
@@ -859,55 +1038,87 @@
 
 
     <div class="tab-pane fade  tab-source-code" id="source">
-        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Component, HostListener } from &#x27;@angular/core&#x27;;
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Component, HostListener, Inject } from &#x27;@angular/core&#x27;;
+import { CommonModule, isPlatformBrowser } from &#x27;@angular/common&#x27;;
+import { PLATFORM_ID } from &#x27;@angular/core&#x27;;
+import { Router, NavigationEnd } from &#x27;@angular/router&#x27;;
+import { SwUpdate } from &#x27;@angular/service-worker&#x27;;
+import { filter } from &#x27;rxjs/operators&#x27;;
+
 import { NavbarComponent } from &#x27;./shared/navbar/navbar.component&#x27;;
 import { SidebarComponent } from &#x27;./shared/sidebar/sidebar.component&#x27;;
 import { FooterComponent } from &#x27;./shared/footer/footer.component&#x27;;
-import { StorageService } from &#x27;./service/localStorage/storage.service&#x27;;
-import { UserService } from &#x27;./service/localStorage/user.service&#x27;;
-import { CommonModule, isPlatformBrowser } from &#x27;@angular/common&#x27;;
-import { Inject, PLATFORM_ID } from &#x27;@angular/core&#x27;;
-import { ToastComponent } from &#x27;./shared/toast/toast.component&#x27;
-import { GlobalLoaderComponent } from &#x27;./shared/global-loader/global-loader.component&#x27;
-import { GlobalLoaderService } from &#x27;./service/global-loader/global-loader.service&#x27;;
+import { ToastComponent } from &#x27;./shared/toast/toast.component&#x27;;
+import { GlobalLoaderComponent } from &#x27;./shared/global-loader/global-loader.component&#x27;;
 import { AddExpenseComponent } from &#x27;./features/add-expense/add-expense.component&#x27;;
 import { SearchComponent } from &#x27;./features/search/search.component&#x27;;
 import { SettingsComponent } from &#x27;./features/settings/settings.component&#x27;;
 import { ListExpensesComponent } from &#x27;./features/list-expenses/list-expenses.component&#x27;;
 import { HomeComponent } from &#x27;./features/home/home.component&#x27;;
 import { CalendarComponent } from &#x27;./features/calendar/calendar.component&#x27;;
-import { SectionService } from &#x27;./service/section/section.service&#x27;;
 import { BudgetComponent } from &#x27;./features/budget/budget.component&#x27;;
 import { AnalysisComponent } from &#x27;./features/analysis/analysis.component&#x27;;
 import { AiComponent } from &#x27;./features/ai/ai.component&#x27;;
-import { Router, NavigationEnd } from &#x27;@angular/router&#x27;;
-import { filter } from &#x27;rxjs/operators&#x27;;
 import { MusicComponent } from &#x27;./features/music/music.component&#x27;;
+
+import { StorageService } from &#x27;./service/localStorage/storage.service&#x27;;
+import { UserService } from &#x27;./service/localStorage/user.service&#x27;;
+import { GlobalLoaderService } from &#x27;./service/global-loader/global-loader.service&#x27;;
+import { SectionService } from &#x27;./service/section/section.service&#x27;;
 import { PostApiService } from &#x27;./service/backend-api/post/post-api.service&#x27;;
 
+/**
+ * Root component of the application.
+ * Manages global state, mobile view detection, section tracking,
+ * theme application, schema syncing, and PWA update activation.
+ */
 @Component({
   selector: &#x27;app-root&#x27;,
   standalone: true,
-  imports: [NavbarComponent, SidebarComponent, FooterComponent, ToastComponent, GlobalLoaderComponent, CommonModule, AddExpenseComponent,
-    SearchComponent,
-    SettingsComponent,
-    ListExpensesComponent,
-    HomeComponent,
-    BudgetComponent,
-    AnalysisComponent,
-    CalendarComponent,
-    AiComponent,
-    MusicComponent],
+  imports: [
+    NavbarComponent, SidebarComponent, FooterComponent, ToastComponent,
+    GlobalLoaderComponent, CommonModule, AddExpenseComponent, SearchComponent,
+    SettingsComponent, ListExpensesComponent, HomeComponent, BudgetComponent,
+    AnalysisComponent, CalendarComponent, AiComponent, MusicComponent
+  ],
   templateUrl: &#x27;./app.component.html&#x27;,
   styleUrls: [&#x27;./app.component.css&#x27;]
 })
-
 export class AppComponent {
+
+  /**
+   * Currently active section of the app (e.g., &#x27;home&#x27;, &#x27;settings&#x27;).
+   */
   currentSection: string &#x3D; &#x27;home&#x27;;
+
+  /**
+   * Boolean indicating whether the app is being viewed on a mobile device.
+   */
   isMobile: boolean &#x3D; false;
+
+  /**
+   * Boolean indicating whether the current route is the root/expenses page.
+   */
   isExpenseRoute &#x3D; false;
+
+  /**
+   * Boolean indicating whether the current route is the music page.
+   */
   isMusicRoute &#x3D; false;
 
+  /**
+   * Constructor for AppComponent.
+   * Initializes route tracking, section updates, PWA update listener, and services.
+   * 
+   * @param userService Service for managing user preferences
+   * @param loader Global loader overlay service
+   * @param sectionService Service to track current section changes
+   * @param storageService Local storage schema sync service
+   * @param router Angular Router to track route changes
+   * @param postApiService Backend API post service
+   * @param swUpdate Service Worker update manager
+   * @param platformId Angular platform ID to check if running in browser
+   */
   constructor(
     public userService: UserService,
     private loader: GlobalLoaderService,
@@ -915,12 +1126,24 @@ export class AppComponent {
     private storageService: StorageService,
     private router: Router,
     private postApiService: PostApiService,
+    private swUpdate: SwUpdate,
     @Inject(PLATFORM_ID) private platformId: Object
   ) {
+    // Handle PWA version updates
+    if (this.swUpdate.isEnabled) {
+      this.swUpdate.versionUpdates.subscribe(() &#x3D;&gt; {
+        this.swUpdate.activateUpdate().then(() &#x3D;&gt; {
+          document.location.reload();
+        });
+      });
+    }
+
+    // Track current section name
     this.sectionService.currentSection$.subscribe(section &#x3D;&gt; {
       this.currentSection &#x3D; section;
     });
 
+    // Track route changes to detect page-specific routes
     this.router.events
       .pipe(filter(event &#x3D;&gt; event instanceof NavigationEnd))
       .subscribe((event: any) &#x3D;&gt; {
@@ -928,9 +1151,12 @@ export class AppComponent {
         this.isExpenseRoute &#x3D; url &#x3D;&#x3D;&#x3D; &#x27;/&#x27;;
         this.isMusicRoute &#x3D; url.startsWith(&#x27;/music&#x27;);
       });
-
   }
 
+  /**
+   * Angular lifecycle hook called after component initialization.
+   * Applies theme, syncs schema, sets user ID, and shows loader.
+   */
   ngOnInit() {
     if (isPlatformBrowser(this.platformId)) {
       this.isMobile &#x3D; window.innerWidth &lt;&#x3D; 768;
@@ -940,11 +1166,13 @@ export class AppComponent {
         this.loader.hide();
       }, 500);
 
+      // Sync schema for stored data
       this.storageService.syncCategoriesWithSchema();
       this.storageService.syncExpensesWithSchema();
       this.storageService.syncUserWithSchema();
       this.storageService.syncBudgetWithSchema();
 
+      // Apply saved theme mode
       const savedTheme &#x3D; this.userService.getValue&lt;string&gt;(&#x27;theme_mode&#x27;);
       if (savedTheme &#x3D;&#x3D;&#x3D; &#x27;dark&#x27;) {
         document.documentElement.classList.add(&#x27;dark&#x27;);
@@ -952,17 +1180,21 @@ export class AppComponent {
         document.documentElement.classList.remove(&#x27;dark&#x27;);
       }
 
+      // Ensure user ID exists
       let userId &#x3D; this.userService.getValue&lt;string&gt;(&#x27;id&#x27;);
       if (!userId) {
         userId &#x3D; this.generateUserId();
         this.userService.update(&#x27;id&#x27;, userId);
-      }
-      else {
+      } else {
         this.postApiService.postUserData();
       }
     }
   }
 
+  /**
+   * Event listener for window resize to update mobile view detection.
+   * @param event Resize event object
+   */
   @HostListener(&#x27;window:resize&#x27;, [&#x27;$event&#x27;])
   onResize(event: any) {
     if (isPlatformBrowser(this.platformId)) {
@@ -970,11 +1202,19 @@ export class AppComponent {
     }
   }
 
+  /**
+   * Disables the context menu on right-click for the whole app.
+   * @param event Mouse event object
+   */
   @HostListener(&#x27;document:contextmenu&#x27;, [&#x27;$event&#x27;])
   onRightClick(event: MouseEvent) {
     event.preventDefault();
   }
 
+  /**
+   * Generates a unique user ID by combining timestamp and random string.
+   * @returns Generated user ID string
+   */
   private generateUserId(): string {
     const timestamp &#x3D; Date.now().toString(36);
     const random &#x3D; Math.random().toString(36).substring(2, 10);

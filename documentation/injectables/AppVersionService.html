@@ -119,6 +119,14 @@
         </p>
 
 
+            <p class="comment">
+                <h3>Description</h3>
+            </p>
+            <p class="comment">
+                <p>Service to provide the current application version.</p>
+<p>This version is typically injected from the environment configuration.</p>
+
+            </p>
 
 
 
@@ -177,10 +185,16 @@
                 </tr>
                         <tr>
                             <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="7" class="link-to-prism">src/app/service/util/app-version/app-version.service.ts:7</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="17" class="link-to-prism">src/app/service/util/app-version/app-version.service.ts:17</a></div>
                             </td>
                         </tr>
 
+                <tr>
+                    <td class="col-md-4">
+                            <div class="io-description"><p>Constructor for AppVersionService.</p>
+</div>
+                    </td>
+                </tr>
             </tbody>
         </table>
 </section>
@@ -210,19 +224,25 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="11"
-                                    class="link-to-prism">src/app/service/util/app-version/app-version.service.ts:11</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="29"
+                                    class="link-to-prism">src/app/service/util/app-version/app-version.service.ts:29</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
+                        <div class="io-description"><p>Returns the current application version.</p>
+</div>
 
                         <div class="io-description">
                             <b>Returns : </b>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
 
                         </div>
+                            <div class="io-description">
+                                <p>A string representing the app version</p>
+
+                            </div>
                 </td>
             </tr>
         </tbody>
@@ -254,15 +274,21 @@
                 </tr>
                 <tr>
                     <td class="col-md-4">
-                        <i>Default value : </i><code>&quot;25.7.25&quot;</code>
+                        <i>Default value : </i><code>environment.applicationVersion</code>
                     </td>
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="7" class="link-to-prism">src/app/service/util/app-version/app-version.service.ts:7</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="17" class="link-to-prism">src/app/service/util/app-version/app-version.service.ts:17</a></div>
                         </td>
                     </tr>
 
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Stores the application version from the environment file.</p>
+</div>
+                </td>
+            </tr>
 
         </tbody>
     </table>
@@ -273,19 +299,38 @@
 
     <div class="tab-pane fade  tab-source-code" id="source">
         <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Injectable } from &#x27;@angular/core&#x27;;
+import { environment } from &#x27;../../../../environments/environments&#x27;;
 
+/**
+ * Service to provide the current application version.
+ * 
+ * This version is typically injected from the environment configuration.
+ */
 @Injectable({
   providedIn: &#x27;root&#x27;
 })
 export class AppVersionService {
-  private readonly version: string &#x3D; &quot;25.7.25&quot;;
 
+  /**
+   * Stores the application version from the environment file.
+   */
+  private readonly version: string &#x3D; environment.applicationVersion;
+
+  /**
+   * Constructor for AppVersionService.
+   */
   constructor() { }
 
+  /**
+   * Returns the current application version.
+   * 
+   * @returns A string representing the app version
+   */
   getVersion(): string {
     return this.version;
   }
-}</code></pre>
+}
+</code></pre>
     </div>
 
 </div>

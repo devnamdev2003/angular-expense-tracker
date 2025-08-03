@@ -185,7 +185,7 @@ such as API base URLs based on the current environment (local or live).</p>
                 </tr>
                         <tr>
                             <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="17" class="link-to-prism">src/app/service/util/config/config.service.ts:17</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="18" class="link-to-prism">src/app/service/util/config/config.service.ts:18</a></div>
                             </td>
                         </tr>
 
@@ -224,8 +224,8 @@ such as API base URLs based on the current environment (local or live).</p>
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="30"
-                                    class="link-to-prism">src/app/service/util/config/config.service.ts:30</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="29"
+                                    class="link-to-prism">src/app/service/util/config/config.service.ts:29</a></div>
                         </td>
                     </tr>
 
@@ -274,12 +274,12 @@ such as API base URLs based on the current environment (local or live).</p>
                 </tr>
                 <tr>
                     <td class="col-md-4">
-                        <i>Default value : </i><code>&quot;live&quot;</code>
+                        <i>Default value : </i><code>environment.developmentEnviroment</code>
                     </td>
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="17" class="link-to-prism">src/app/service/util/config/config.service.ts:17</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="18" class="link-to-prism">src/app/service/util/config/config.service.ts:18</a></div>
                         </td>
                     </tr>
 
@@ -301,6 +301,7 @@ Change this value to switch API endpoints.</p>
 
     <div class="tab-pane fade  tab-source-code" id="source">
         <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Injectable } from &#x27;@angular/core&#x27;;
+import { environment } from &#x27;../../../../environments/environments&#x27;;
 
 /**
  * Service responsible for providing configuration values across the application,
@@ -316,9 +317,7 @@ export class ConfigService {
    * Possible values: &#x27;local&#x27; | &#x27;live&#x27;.
    * Change this value to switch API endpoints.
    */
-  private readonly developmentEnviroment: string &#x3D; &quot;live&quot;;
-  // private readonly developmentEnviroment: string &#x3D; &quot;live&quot;;
-
+  private readonly developmentEnviroment: string &#x3D; environment.developmentEnviroment;
   /**
    * Creates an instance of ConfigService.
    */

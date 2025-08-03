@@ -25,21 +25,26 @@ import { UserService } from '../../service/localStorage/user.service';
 export class CategoryDropdownComponent {
   /**
    * Emits the selected category to parent
+   * @type {EventEmitter<Category>}
    */
   @Output() categorySelected = new EventEmitter<Category>();
 
   /**
    * Name of the currently selected category (display only)
+   * @type {string}
    */
   @Input() selectedCategoryName: string = 'Select Category';
 
   /**
    * Optional max-height Tailwind class for scrollable dropdown
+   * @type {string}
+   * Default is 'max-h-40' (10rem)
    */
   @Input() dropdownMaxHeightClass: string = 'max-h-40';
 
   /**
    * Optional categoryType to filter categories
+   * @type {'default' | 'custom' | 'all'}
    * - 'default': only default categories
    * - 'custom': only custom categories
    * - 'all': all categories (default)
@@ -55,9 +60,16 @@ export class CategoryDropdownComponent {
   /** Reference to the dropdown DOM element */
   @ViewChild('categorydownRef') categoryRef!: ElementRef;
 
+  /**
+   * Constructor to inject services
+   * @param categoryService Service to manage categories
+   * @param userService Service to manage user data
+   */
   constructor(private categoryService: CategoryService, private userService: UserService) { }
 
-  /** Initializes and loads categories */
+  /** 
+   * Initializes and loads categories
+   */
   ngOnInit(): void {
     this.loadCategories();
   }

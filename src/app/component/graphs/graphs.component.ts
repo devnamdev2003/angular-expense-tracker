@@ -7,6 +7,9 @@ import {
 import { UserService } from '../../service/localStorage/user.service';
 import { ExpenseService, Expense } from '../../service/localStorage/expense.service';
 
+/**
+ * GraphsComponent displays area charts for expenses based on selected time range (month/day/year).
+ */
 @Component({
   standalone: true,
   selector: 'app-graphs',
@@ -16,26 +19,21 @@ import { ExpenseService, Expense } from '../../service/localStorage/expense.serv
 })
 export class GraphsComponent implements OnInit, OnChanges {
 
-  @Input() viewType: 'month' | 'day' = 'month';
+  /**
+   * Determines whether to show monthly or daily or yearly view.
+   * @type {'month' | 'day' | 'year'}
+   */
+  @Input() viewType: 'month' | 'day' | 'year' = 'month';
+
+  /**
+   * The current selected date used for filtering expense data.
+   * @type {Date}
+   */
   @Input() currentDate!: Date;
 
-  constructor(
-    public userService: UserService,
-    private expenseService: ExpenseService
-  ) { }
-
-  ngOnInit(): void {
-    const userTheme = this.userService.getValue<string>('theme_mode');
-    this.theme.mode = userTheme === 'dark' ? 'dark' : 'light';
-    this.loadData();
-  }
-
-  ngOnChanges(changes: SimpleChanges): void {
-    if (changes['viewType'] || changes['currentDate']) {
-      this.loadData();
-    }
-  }
-
+  /**
+   * Chart series data used by ApexCharts.
+   */
   chartSeries: ApexAxisChartSeries = [
     {
       name: "Expenses",
@@ -43,14 +41,23 @@ export class GraphsComponent implements OnInit, OnChanges {
     }
   ];
 
+  /**
+   * Y-axis configuration for the chart.
+   */
   chartYAxis: ApexYAxis = {
     show: true
   };
 
+  /**
+   * Grid styling for the chart.
+   */
   grid: ApexGrid = {
     show: false
   };
 
+  /**
+   * Main chart configuration such as type, zoom, toolbar.
+   */
   chartDetails: ApexChart = {
     type: "area",
     height: 350,
@@ -67,6 +74,9 @@ export class GraphsComponent implements OnInit, OnChanges {
     }
   };
 
+  /**
+   * X-axis configuration including categories and tooltip.
+   */
   chartXAxis: ApexXAxis = {
     type: 'category',
     categories: [],
@@ -75,21 +85,35 @@ export class GraphsComponent implements OnInit, OnChanges {
     }
   };
 
-
+  /**
+   * Data label configuration for the chart.
+   */
   dataLabels: ApexDataLabels = {
     enabled: false
   };
 
+  /**
+   * Stroke configuration for line smoothing.
+   */
   stroke: ApexStroke = {
     curve: "smooth"
   };
 
+  /**
+   * Title of the chart including total expense.
+   */
   title: ApexTitleSubtitle = {};
 
+  /**
+   * Theme configuration for light or dark mode.
+   */
   theme: ApexTheme = {
     mode: 'light'
   };
 
+  /**
+   * Tooltip configuration for the chart.
+   */
   tooltip: ApexTooltip = {
     shared: true,
     intersect: false,
@@ -97,27 +121,67 @@ export class GraphsComponent implements OnInit, OnChanges {
     x: {}
   };
 
-  switchView(viewType: 'month' | 'day'): void {
+  /**
+   * Constructs GraphsComponent with injected services.
+   * @param userService Service for accessing user settings like theme and currency
+   * @param expenseService Service for retrieving stored expenses
+   */
+  constructor(
+    public userService: UserService,
+    private expenseService: ExpenseService
+  ) { }
+
+  /**
+   * Lifecycle hook called after component initialization.
+   */
+  ngOnInit(): void {
+    const userTheme = this.userService.getValue<string>('theme_mode');
+    this.theme.mode = userTheme === 'dark' ? 'dark' : 'light';
+    this.loadData();
+  }
+
+  /**
+   * Lifecycle hook called when @Input values change.
+   * @param changes Object containing changed input properties
+   */
+  ngOnChanges(changes: SimpleChanges): void {
+    if (changes['viewType'] || changes['currentDate']) {
+      this.loadData();
+    }
+  }
+
+  /**
+   * Switches between 'month', 'year' and 'day' view and reloads chart data.
+   * @param viewType View type to switch to
+   */
+  switchView(viewType: 'month' | 'day' | 'year'): void {
     this.viewType = viewType;
     this.loadData();
   }
 
+  /**
+   * Loads chart data based on the current view type.
+   */
   loadData(): void {
     const expenses: Expense[] = this.expenseService.getAll();
     if (this.viewType === 'month') {
       this.loadMonthData(expenses);
-    } else {
+    } else if (this.viewType === 'day') {
       this.loadDayData(expenses);
+    }
+    else {
+      this.loadYearData(expenses);
     }
   }
 
+  /**
+   * Loads and processes expense data grouped by day for the current month.
+   * @param expenses List of all expenses
+   */
   loadMonthData(expenses: Expense[]): void {
     const dayAmountMap = new Map<number, number>();
-
     const currentYear = this.currentDate.getFullYear();
     const currentMonth = this.currentDate.getMonth() + 1;
-
-    // dayAmountMap.set(1, 0);
 
     const currentMonthExpenses = expenses.filter(item => {
       const [year, month] = item.date.split('-').map(Number);
@@ -161,7 +225,7 @@ export class GraphsComponent implements OnInit, OnChanges {
     };
 
     this.title = {
-      text: "Monthly Expenses: " + totalAmount,
+      text: "Total: " + totalAmount,
       align: "center",
       style: {
         color: 'var(--color-text)'
@@ -182,9 +246,12 @@ export class GraphsComponent implements OnInit, OnChanges {
     }];
   }
 
+  /**
+   * Loads and processes expense data grouped by time for the current day.
+   * @param expenses List of all expenses
+   */
   loadDayData(expenses: Expense[]): void {
     const timeAmountMap = new Map<string, number>();
-
     const todayStr = `${this.currentDate.getFullYear()}-${(this.currentDate.getMonth() + 1).toString().padStart(2, '0')}-${this.currentDate.getDate().toString().padStart(2, '0')}`;
 
     const todaysExpenses = expenses.filter(exp => exp.date === todayStr);
@@ -249,4 +316,62 @@ export class GraphsComponent implements OnInit, OnChanges {
     }];
   }
 
+  /**
+   * Loads and processes expense data grouped by month for the current year.
+   * @param expenses List of all expenses
+   */
+  loadYearData(expenses: Expense[]): void {
+    const monthNames = ["Jan", "Feb", "Mar", "Apr", "May", "Jun",
+      "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+    const monthAmountMap = new Map<string, number>();
+    const currentYear = this.currentDate.getFullYear();
+
+    const currentYearExpenses = expenses.filter(item => {
+      const [year] = item.date.split('-').map(Number);
+      return year === currentYear;
+    });
+
+    let totalAmount = 0;
+    currentYearExpenses.forEach(item => {
+      const month = parseInt(item.date.split('-')[1]);
+      totalAmount += item.amount;
+      const monthName = monthNames[month - 1];
+      monthAmountMap.set(monthName, (monthAmountMap.get(monthName) || 0) + item.amount);
+    });
+
+    const months = Array.from(monthAmountMap.keys()).reverse();
+    const amounts = months.map(month => monthAmountMap.get(month)!);
+
+    this.tooltip = {
+      shared: true,
+      intersect: false,
+      y: {
+        formatter: (value: number) => `${value} ${this.userService.getValue<string>('currency')}`
+      },
+      x: {
+        formatter: (_value: any) => {
+          const fullNames = ["January", "February", "March", "April", "May", "June",
+            "July", "August", "September", "October", "November", "December"];
+          return `Month: ${fullNames[_value - 1]}`;
+        }
+      }
+    };
+
+    this.title = {
+      text: "Total: " + totalAmount,
+      align: "center",
+      style: { color: 'var(--color-text)' }
+    };
+
+    this.chartXAxis = {
+      type: 'category',
+      categories: months,
+      tooltip: { enabled: false }
+    };
+
+    this.chartSeries = [{
+      name: "Expenses",
+      data: amounts
+    }];
+  }
 }

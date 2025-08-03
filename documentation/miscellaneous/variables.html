@@ -597,12 +597,40 @@
                 <tr>
                     <td class="col-md-4">
                         <i>Default value : </i><code>{
-    production: false,
-    geminiApiKey: &#x27;AIzaSyAZT2MYoLB9gRwRa6NRan8NdFSVmmwzz04&#x27;,
+  /**
+   * Flag to indicate if the app is running in production mode.
+   * Set to true in the production environment.
+   */
+  production: false,
+
+  /**
+   * API key for accessing the Gemini AI API.
+   * Replace or secure this key before deploying to production.
+   */
+  geminiApiKey: &#x27;AIzaSyAZT2MYoLB9gRwRa6NRan8NdFSVmmwzz04&#x27;,
+
+  /**
+   * Current environment type.
+   * Possible values: &#x27;local&#x27;, &#x27;live&#x27;
+   */
+  developmentEnviroment: &#x27;local&#x27;, // Change to &#x27;live&#x27; for production
+
+  /**
+   * Application version.
+   * This should be updated with each release to track application versions.
+   */
+  applicationVersion: &#x27;25.8.03&#x27;, // Current application version
 }</code>
                     </td>
                 </tr>
 
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Application environment configuration for development mode.
+Use this file during development. It will be replaced by <code>environment.prod.ts</code> during build.</p>
+</div>
+                </td>
+            </tr>
 
         </tbody>
     </table>

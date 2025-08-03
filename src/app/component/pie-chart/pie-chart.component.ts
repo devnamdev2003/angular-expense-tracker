@@ -21,7 +21,7 @@ export class PieChartComponent implements OnInit, OnChanges, AfterViewInit {
   currency: string | null;
 
   @ViewChild('categoryCanvas', { static: false }) canvasRef!: ElementRef<HTMLCanvasElement>;
-  @Input() viewType: 'month' | 'day' = 'month';
+  @Input() viewType: 'month' | 'day' | 'year' = 'month';
   @Input() currentDate!: Date;
 
   constructor(
@@ -59,7 +59,9 @@ export class PieChartComponent implements OnInit, OnChanges, AfterViewInit {
     if (typeof window !== 'undefined' && (window as any).Chart) {
       if (this.viewType === 'month') {
         this.loadMonthData();
-      } else {
+      } else if (this.viewType === 'year') {
+        this.loadYearData();
+      } else if (this.viewType === 'day') {
         this.loadDayData();
       }
     } else {
@@ -108,6 +110,29 @@ export class PieChartComponent implements OnInit, OnChanges, AfterViewInit {
       backgroundColors: Object.keys(categoryTotals).map(cat => this.categoryColors[cat] || "#ccc")
     });
   }
+
+  loadYearData(): void {
+    const categoryTotals: { [key: string]: number } = {};
+    const currentYear = this.currentDate.getFullYear();
+
+    const currentYearExpenses = this.expenses.filter(item => {
+      const [year] = item.date.split('-').map(Number);
+      return year === currentYear;
+    });
+
+    currentYearExpenses.forEach(item => {
+      const catName = this.categoryMap[item.category_id] || "Other";
+      categoryTotals[catName] = (categoryTotals[catName] || 0) + item.amount;
+    });
+
+    this.renderChart("categoryChart", "doughnut", {
+      labels: Object.keys(categoryTotals),
+      data: Object.values(categoryTotals),
+      label: "Amount: " + this.currency,
+      backgroundColors: Object.keys(categoryTotals).map(cat => this.categoryColors[cat] || "#ccc")
+    });
+  }
+
 
   renderChart(id: string, type: string, { labels, data, label, backgroundColors, borderColor }: any) {
     const ctx = this.canvasRef?.nativeElement.getContext('2d');

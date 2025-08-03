@@ -2,20 +2,33 @@
     <!-- View Type Toggle -->
     <div class="flex justify-center items-center min-h-[70px]">
         <div class="relative flex w-48 bg-[var(--color-surface)] rounded-full shadow-md">
-            <div class="absolute h-full w-1/2 bg-[var(--theme-color)] rounded-full transition-all duration-300"
-                [class.translate-x-24]="viewTypeDiv"></div>
+            <div class="absolute h-full w-1/3 bg-[var(--theme-color)] rounded-full transition-all duration-300"
+                [ngClass]="{
+                    'translate-x-[4rem]': viewTypeDayDiv,
+                    'translate-x-[8rem]': viewTypeYearDiv
+                }">
+            </div>
+
             <button
                 class="relative z-10 w-1/2 flex-1 text-center text-sm font-medium py-2 rounded-full transition-colors duration-300"
-                [class.text-[var(--color-text)]]="viewType !== defaultViewType"
-                [class.text-[var(--color-white)]]="viewType === defaultViewType" (click)="setViewType(defaultViewType)">
-                {{ defaultViewType | titlecase }}
+                [class.text-[var(--color-text)]]="viewType !== 'month'"
+                [class.text-[var(--color-white)]]="viewType === 'month'" (click)="setViewType('month')">
+                {{ "month" | titlecase }}
             </button>
             <button
                 class="relative z-10 w-1/2 flex-1 text-center text-sm font-medium py-2 rounded-full transition-colors duration-300"
-                [class.text-[var(--color-text)]]="viewType !== (defaultViewType == 'month'?'day':'month')"
-                [class.text-[var(--color-white)]]="viewType === (defaultViewType == 'month'?'day':'month')"
-                (click)="setViewType(defaultViewType == 'month'?'day':'month')">
-                {{ (defaultViewType == 'month' ? 'day' : 'month') | titlecase }}
+                [class.text-[var(--color-text)]]="viewType !== 'day'"
+                [class.text-[var(--color-white)]]="viewType === 'day'"
+                (click)="setViewType('day')">
+                {{ "day" | titlecase }}
+            </button>
+
+            <button
+                class="relative z-10 w-1/2 flex-1 text-center text-sm font-medium py-2 rounded-full transition-colors duration-300"
+                [class.text-[var(--color-text)]]="viewType !== 'year'"
+                [class.text-[var(--color-white)]]="viewType === 'year'"
+                (click)="setViewType('year')">
+                {{ "year" | titlecase }}
             </button>
         </div>
     </div>
@@ -41,6 +54,7 @@
 
                 <input #hiddenMonthInput type="month" class="hiddeninput" [hidden]="viewType !== 'month'"
                     [value]="formatMonthForInput(currentDate)" (input)="onMonthChange($event, hiddenMonthInput)" />
+
             </div>
         </div>
 

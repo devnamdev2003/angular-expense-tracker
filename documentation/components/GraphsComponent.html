@@ -124,6 +124,13 @@
 </p>
 
 
+    <p class="comment">
+        <h3>Description</h3>
+    </p>
+    <p class="comment">
+        <p>GraphsComponent displays area charts for expenses based on selected time range (month/day/year).</p>
+
+    </p>
 
 
     <p class="comment">
@@ -259,6 +266,9 @@
                                 <a href="#loadMonthData" >loadMonthData</a>
                             </li>
                             <li>
+                                <a href="#loadYearData" >loadYearData</a>
+                            </li>
+                            <li>
                                 <a href="#ngOnChanges" >ngOnChanges</a>
                             </li>
                             <li>
@@ -307,12 +317,14 @@
                 </tr>
                         <tr>
                             <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="20" class="link-to-prism">src/app/component/graphs/graphs.component.ts:20</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="122" class="link-to-prism">src/app/component/graphs/graphs.component.ts:122</a></div>
                             </td>
                         </tr>
 
                 <tr>
                     <td class="col-md-4">
+                            <div class="io-description"><p>Constructs GraphsComponent with injected services.</p>
+</div>
                             <div>
                                     <b>Parameters :</b>
                                     <table class="params">
@@ -321,6 +333,7 @@
                                                 <td>Name</td>
                                                     <td>Type</td>
                                                 <td>Optional</td>
+                                                    <td>Description</td>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -335,6 +348,10 @@
                                                             No
                                                     </td>
                                                     
+                                                        <td>
+                                                                <p>Service for accessing user settings like theme and currency</p>
+
+                                                        </td>
                                                 </tr>
                                                 <tr>
                                                         <td>expenseService</td>
@@ -347,6 +364,10 @@
                                                             No
                                                     </td>
                                                     
+                                                        <td>
+                                                                <p>Service for retrieving stored expenses</p>
+
+                                                        </td>
                                                 </tr>
                                         </tbody>
                                     </table>
@@ -375,9 +396,15 @@
                 </tr>
                         <tr>
                             <td class="col-md-2" colspan="2">
-                                    <div class="io-line">Defined in <a href="" data-line="20" class="link-to-prism">src/app/component/graphs/graphs.component.ts:20</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="32" class="link-to-prism">src/app/component/graphs/graphs.component.ts:32</a></div>
                             </td>
                         </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <div class="io-description"><p>The current selected date used for filtering expense data.</p>
+</div>
+                    </td>
+                </tr>
             </tbody>
         </table>
         <table class="table table-sm table-bordered">
@@ -390,7 +417,7 @@
                 </tr>
                 <tr>
                     <td class="col-md-4">
-                        <i>Type : </i>    <code>&quot;month&quot; | &quot;day&quot;</code>
+                        <i>Type : </i>    <code>&quot;month&quot; | &quot;day&quot; | &quot;year&quot;</code>
 
                     </td>
                 </tr>
@@ -401,9 +428,15 @@
                 </tr>
                         <tr>
                             <td class="col-md-2" colspan="2">
-                                    <div class="io-line">Defined in <a href="" data-line="19" class="link-to-prism">src/app/component/graphs/graphs.component.ts:19</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="26" class="link-to-prism">src/app/component/graphs/graphs.component.ts:26</a></div>
                             </td>
                         </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <div class="io-description"><p>Determines whether to show monthly or daily or yearly view.</p>
+</div>
+                    </td>
+                </tr>
             </tbody>
         </table>
 </section>
@@ -435,14 +468,16 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="105"
-                                    class="link-to-prism">src/app/component/graphs/graphs.component.ts:105</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="165"
+                                    class="link-to-prism">src/app/component/graphs/graphs.component.ts:165</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
+                        <div class="io-description"><p>Loads chart data based on the current view type.</p>
+</div>
 
                         <div class="io-description">
                             <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
@@ -472,14 +507,16 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="185"
-                                    class="link-to-prism">src/app/component/graphs/graphs.component.ts:185</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="253"
+                                    class="link-to-prism">src/app/component/graphs/graphs.component.ts:253</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
+                        <div class="io-description"><p>Loads and processes expense data grouped by time for the current day.</p>
+</div>
 
                             <div class="io-description">
                                 <b>Parameters :</b>
@@ -490,6 +527,7 @@
                                             <td>Name</td>
                                                 <td>Type</td>
                                             <td>Optional</td>
+                                                <td>Description</td>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -504,6 +542,10 @@
                                             </td>
 
 
+                                            <td>
+                                                    <p>List of all expenses</p>
+
+                                            </td>
                                         </tr>
                                     </tbody>
                                 </table>
@@ -539,14 +581,16 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="114"
-                                    class="link-to-prism">src/app/component/graphs/graphs.component.ts:114</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="181"
+                                    class="link-to-prism">src/app/component/graphs/graphs.component.ts:181</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
+                        <div class="io-description"><p>Loads and processes expense data grouped by day for the current month.</p>
+</div>
 
                             <div class="io-description">
                                 <b>Parameters :</b>
@@ -557,6 +601,7 @@
                                             <td>Name</td>
                                                 <td>Type</td>
                                             <td>Optional</td>
+                                                <td>Description</td>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -571,6 +616,84 @@
                                             </td>
 
 
+                                            <td>
+                                                    <p>List of all expenses</p>
+
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="loadYearData"></a>
+                    <span class="name">
+                        <span ><b>loadYearData</b></span>
+                        <a href="#loadYearData"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>loadYearData(expenses: <a href="../interfaces/Expense.html" target="_self">Expense[]</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="323"
+                                    class="link-to-prism">src/app/component/graphs/graphs.component.ts:323</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-description"><p>Loads and processes expense data grouped by month for the current year.</p>
+</div>
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                                <td>Description</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>expenses</td>
+                                            <td>
+                                                            <code><a href="../interfaces/Expense.html" target="_self" >Expense[]</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                            <td>
+                                                    <p>List of all expenses</p>
+
+                                            </td>
                                         </tr>
                                     </tbody>
                                 </table>
@@ -606,14 +729,16 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="33"
-                                    class="link-to-prism">src/app/component/graphs/graphs.component.ts:33</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="147"
+                                    class="link-to-prism">src/app/component/graphs/graphs.component.ts:147</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
+                        <div class="io-description"><p>Lifecycle hook called when @Input values change.</p>
+</div>
 
                             <div class="io-description">
                                 <b>Parameters :</b>
@@ -624,6 +749,7 @@
                                             <td>Name</td>
                                                 <td>Type</td>
                                             <td>Optional</td>
+                                                <td>Description</td>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -638,6 +764,10 @@
                                             </td>
 
 
+                                            <td>
+                                                    <p>Object containing changed input properties</p>
+
+                                            </td>
                                         </tr>
                                     </tbody>
                                 </table>
@@ -673,14 +803,16 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="27"
-                                    class="link-to-prism">src/app/component/graphs/graphs.component.ts:27</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="137"
+                                    class="link-to-prism">src/app/component/graphs/graphs.component.ts:137</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
+                        <div class="io-description"><p>Lifecycle hook called after component initialization.</p>
+</div>
 
                         <div class="io-description">
                             <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
@@ -703,21 +835,23 @@
             </tr>
             <tr>
                 <td class="col-md-4">
-<code>switchView(viewType: "month" | "day")</code>
+<code>switchView(viewType: "month" | "day" | "year")</code>
                 </td>
             </tr>
 
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="100"
-                                    class="link-to-prism">src/app/component/graphs/graphs.component.ts:100</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="157"
+                                    class="link-to-prism">src/app/component/graphs/graphs.component.ts:157</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
+                        <div class="io-description"><p>Switches between &#39;month&#39;, &#39;year&#39; and &#39;day&#39; view and reloads chart data.</p>
+</div>
 
                             <div class="io-description">
                                 <b>Parameters :</b>
@@ -728,13 +862,14 @@
                                             <td>Name</td>
                                                 <td>Type</td>
                                             <td>Optional</td>
+                                                <td>Description</td>
                                         </tr>
                                     </thead>
                                     <tbody>
                                         <tr>
                                                 <td>viewType</td>
                                             <td>
-                                                        <code>&quot;month&quot; | &quot;day&quot;</code>
+                                                        <code>&quot;month&quot; | &quot;day&quot; | &quot;year&quot;</code>
                                             </td>
 
                                             <td>
@@ -742,6 +877,10 @@
                                             </td>
 
 
+                                            <td>
+                                                    <p>View type to switch to</p>
+
+                                            </td>
                                         </tr>
                                     </tbody>
                                 </table>
@@ -801,10 +940,16 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="54" class="link-to-prism">src/app/component/graphs/graphs.component.ts:54</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="61" class="link-to-prism">src/app/component/graphs/graphs.component.ts:61</a></div>
                         </td>
                     </tr>
 
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Main chart configuration such as type, zoom, toolbar.</p>
+</div>
+                </td>
+            </tr>
 
         </tbody>
     </table>
@@ -837,10 +982,16 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="39" class="link-to-prism">src/app/component/graphs/graphs.component.ts:39</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="37" class="link-to-prism">src/app/component/graphs/graphs.component.ts:37</a></div>
                         </td>
                     </tr>
 
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Chart series data used by ApexCharts.</p>
+</div>
+                </td>
+            </tr>
 
         </tbody>
     </table>
@@ -874,10 +1025,16 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="70" class="link-to-prism">src/app/component/graphs/graphs.component.ts:70</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="80" class="link-to-prism">src/app/component/graphs/graphs.component.ts:80</a></div>
                         </td>
                     </tr>
 
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>X-axis configuration including categories and tooltip.</p>
+</div>
+                </td>
+            </tr>
 
         </tbody>
     </table>
@@ -907,10 +1064,16 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="46" class="link-to-prism">src/app/component/graphs/graphs.component.ts:46</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="47" class="link-to-prism">src/app/component/graphs/graphs.component.ts:47</a></div>
                         </td>
                     </tr>
 
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Y-axis configuration for the chart.</p>
+</div>
+                </td>
+            </tr>
 
         </tbody>
     </table>
@@ -940,10 +1103,16 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="79" class="link-to-prism">src/app/component/graphs/graphs.component.ts:79</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="91" class="link-to-prism">src/app/component/graphs/graphs.component.ts:91</a></div>
                         </td>
                     </tr>
 
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Data label configuration for the chart.</p>
+</div>
+                </td>
+            </tr>
 
         </tbody>
     </table>
@@ -973,10 +1142,16 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="50" class="link-to-prism">src/app/component/graphs/graphs.component.ts:50</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="54" class="link-to-prism">src/app/component/graphs/graphs.component.ts:54</a></div>
                         </td>
                     </tr>
 
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Grid styling for the chart.</p>
+</div>
+                </td>
+            </tr>
 
         </tbody>
     </table>
@@ -1006,10 +1181,16 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="83" class="link-to-prism">src/app/component/graphs/graphs.component.ts:83</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="98" class="link-to-prism">src/app/component/graphs/graphs.component.ts:98</a></div>
                         </td>
                     </tr>
 
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Stroke configuration for line smoothing.</p>
+</div>
+                </td>
+            </tr>
 
         </tbody>
     </table>
@@ -1039,10 +1220,16 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="89" class="link-to-prism">src/app/component/graphs/graphs.component.ts:89</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="110" class="link-to-prism">src/app/component/graphs/graphs.component.ts:110</a></div>
                         </td>
                     </tr>
 
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Theme configuration for light or dark mode.</p>
+</div>
+                </td>
+            </tr>
 
         </tbody>
     </table>
@@ -1070,10 +1257,16 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="87" class="link-to-prism">src/app/component/graphs/graphs.component.ts:87</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="105" class="link-to-prism">src/app/component/graphs/graphs.component.ts:105</a></div>
                         </td>
                     </tr>
 
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Title of the chart including total expense.</p>
+</div>
+                </td>
+            </tr>
 
         </tbody>
     </table>
@@ -1106,10 +1299,16 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="93" class="link-to-prism">src/app/component/graphs/graphs.component.ts:93</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="117" class="link-to-prism">src/app/component/graphs/graphs.component.ts:117</a></div>
                         </td>
                     </tr>
 
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Tooltip configuration for the chart.</p>
+</div>
+                </td>
+            </tr>
 
         </tbody>
     </table>
@@ -1133,10 +1332,15 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="23" class="link-to-prism">src/app/component/graphs/graphs.component.ts:23</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="130" class="link-to-prism">src/app/component/graphs/graphs.component.ts:130</a></div>
                         </td>
                     </tr>
 
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description">Service for accessing user settings like theme and currency</div>
+                </td>
+            </tr>
 
         </tbody>
     </table>
@@ -1155,6 +1359,9 @@ import {
 import { UserService } from &#x27;../../service/localStorage/user.service&#x27;;
 import { ExpenseService, Expense } from &#x27;../../service/localStorage/expense.service&#x27;;
 
+/**
+ * GraphsComponent displays area charts for expenses based on selected time range (month/day/year).
+ */
 @Component({
   standalone: true,
   selector: &#x27;app-graphs&#x27;,
@@ -1164,26 +1371,21 @@ import { ExpenseService, Expense } from &#x27;../../service/localStorage/expense
 })
 export class GraphsComponent implements OnInit, OnChanges {
 
-  @Input() viewType: &#x27;month&#x27; | &#x27;day&#x27; &#x3D; &#x27;month&#x27;;
+  /**
+   * Determines whether to show monthly or daily or yearly view.
+   * @type {&#x27;month&#x27; | &#x27;day&#x27; | &#x27;year&#x27;}
+   */
+  @Input() viewType: &#x27;month&#x27; | &#x27;day&#x27; | &#x27;year&#x27; &#x3D; &#x27;month&#x27;;
+
+  /**
+   * The current selected date used for filtering expense data.
+   * @type {Date}
+   */
   @Input() currentDate!: Date;
 
-  constructor(
-    public userService: UserService,
-    private expenseService: ExpenseService
-  ) { }
-
-  ngOnInit(): void {
-    const userTheme &#x3D; this.userService.getValue&lt;string&gt;(&#x27;theme_mode&#x27;);
-    this.theme.mode &#x3D; userTheme &#x3D;&#x3D;&#x3D; &#x27;dark&#x27; ? &#x27;dark&#x27; : &#x27;light&#x27;;
-    this.loadData();
-  }
-
-  ngOnChanges(changes: SimpleChanges): void {
-    if (changes[&#x27;viewType&#x27;] || changes[&#x27;currentDate&#x27;]) {
-      this.loadData();
-    }
-  }
-
+  /**
+   * Chart series data used by ApexCharts.
+   */
   chartSeries: ApexAxisChartSeries &#x3D; [
     {
       name: &quot;Expenses&quot;,
@@ -1191,14 +1393,23 @@ export class GraphsComponent implements OnInit, OnChanges {
     }
   ];
 
+  /**
+   * Y-axis configuration for the chart.
+   */
   chartYAxis: ApexYAxis &#x3D; {
     show: true
   };
 
+  /**
+   * Grid styling for the chart.
+   */
   grid: ApexGrid &#x3D; {
     show: false
   };
 
+  /**
+   * Main chart configuration such as type, zoom, toolbar.
+   */
   chartDetails: ApexChart &#x3D; {
     type: &quot;area&quot;,
     height: 350,
@@ -1215,6 +1426,9 @@ export class GraphsComponent implements OnInit, OnChanges {
     }
   };
 
+  /**
+   * X-axis configuration including categories and tooltip.
+   */
   chartXAxis: ApexXAxis &#x3D; {
     type: &#x27;category&#x27;,
     categories: [],
@@ -1223,21 +1437,35 @@ export class GraphsComponent implements OnInit, OnChanges {
     }
   };
 
-
+  /**
+   * Data label configuration for the chart.
+   */
   dataLabels: ApexDataLabels &#x3D; {
     enabled: false
   };
 
+  /**
+   * Stroke configuration for line smoothing.
+   */
   stroke: ApexStroke &#x3D; {
     curve: &quot;smooth&quot;
   };
 
+  /**
+   * Title of the chart including total expense.
+   */
   title: ApexTitleSubtitle &#x3D; {};
 
+  /**
+   * Theme configuration for light or dark mode.
+   */
   theme: ApexTheme &#x3D; {
     mode: &#x27;light&#x27;
   };
 
+  /**
+   * Tooltip configuration for the chart.
+   */
   tooltip: ApexTooltip &#x3D; {
     shared: true,
     intersect: false,
@@ -1245,27 +1473,67 @@ export class GraphsComponent implements OnInit, OnChanges {
     x: {}
   };
 
-  switchView(viewType: &#x27;month&#x27; | &#x27;day&#x27;): void {
+  /**
+   * Constructs GraphsComponent with injected services.
+   * @param userService Service for accessing user settings like theme and currency
+   * @param expenseService Service for retrieving stored expenses
+   */
+  constructor(
+    public userService: UserService,
+    private expenseService: ExpenseService
+  ) { }
+
+  /**
+   * Lifecycle hook called after component initialization.
+   */
+  ngOnInit(): void {
+    const userTheme &#x3D; this.userService.getValue&lt;string&gt;(&#x27;theme_mode&#x27;);
+    this.theme.mode &#x3D; userTheme &#x3D;&#x3D;&#x3D; &#x27;dark&#x27; ? &#x27;dark&#x27; : &#x27;light&#x27;;
+    this.loadData();
+  }
+
+  /**
+   * Lifecycle hook called when @Input values change.
+   * @param changes Object containing changed input properties
+   */
+  ngOnChanges(changes: SimpleChanges): void {
+    if (changes[&#x27;viewType&#x27;] || changes[&#x27;currentDate&#x27;]) {
+      this.loadData();
+    }
+  }
+
+  /**
+   * Switches between &#x27;month&#x27;, &#x27;year&#x27; and &#x27;day&#x27; view and reloads chart data.
+   * @param viewType View type to switch to
+   */
+  switchView(viewType: &#x27;month&#x27; | &#x27;day&#x27; | &#x27;year&#x27;): void {
     this.viewType &#x3D; viewType;
     this.loadData();
   }
 
+  /**
+   * Loads chart data based on the current view type.
+   */
   loadData(): void {
     const expenses: Expense[] &#x3D; this.expenseService.getAll();
     if (this.viewType &#x3D;&#x3D;&#x3D; &#x27;month&#x27;) {
       this.loadMonthData(expenses);
-    } else {
+    } else if (this.viewType &#x3D;&#x3D;&#x3D; &#x27;day&#x27;) {
       this.loadDayData(expenses);
+    }
+    else {
+      this.loadYearData(expenses);
     }
   }
 
+  /**
+   * Loads and processes expense data grouped by day for the current month.
+   * @param expenses List of all expenses
+   */
   loadMonthData(expenses: Expense[]): void {
     const dayAmountMap &#x3D; new Map&lt;number, number&gt;();
-
     const currentYear &#x3D; this.currentDate.getFullYear();
     const currentMonth &#x3D; this.currentDate.getMonth() + 1;
-
-    // dayAmountMap.set(1, 0);
 
     const currentMonthExpenses &#x3D; expenses.filter(item &#x3D;&gt; {
       const [year, month] &#x3D; item.date.split(&#x27;-&#x27;).map(Number);
@@ -1309,7 +1577,7 @@ export class GraphsComponent implements OnInit, OnChanges {
     };
 
     this.title &#x3D; {
-      text: &quot;Monthly Expenses: &quot; + totalAmount,
+      text: &quot;Total: &quot; + totalAmount,
       align: &quot;center&quot;,
       style: {
         color: &#x27;var(--color-text)&#x27;
@@ -1330,9 +1598,12 @@ export class GraphsComponent implements OnInit, OnChanges {
     }];
   }
 
+  /**
+   * Loads and processes expense data grouped by time for the current day.
+   * @param expenses List of all expenses
+   */
   loadDayData(expenses: Expense[]): void {
     const timeAmountMap &#x3D; new Map&lt;string, number&gt;();
-
     const todayStr &#x3D; &#x60;${this.currentDate.getFullYear()}-${(this.currentDate.getMonth() + 1).toString().padStart(2, &#x27;0&#x27;)}-${this.currentDate.getDate().toString().padStart(2, &#x27;0&#x27;)}&#x60;;
 
     const todaysExpenses &#x3D; expenses.filter(exp &#x3D;&gt; exp.date &#x3D;&#x3D;&#x3D; todayStr);
@@ -1376,7 +1647,7 @@ export class GraphsComponent implements OnInit, OnChanges {
     };
 
     this.title &#x3D; {
-      text: &quot;Today Expenses: &quot; + totalAmount,
+      text: &quot;Total Expenses: &quot; + totalAmount,
       align: &quot;center&quot;,
       style: {
         color: &#x27;var(--color-text)&#x27;
@@ -1397,6 +1668,64 @@ export class GraphsComponent implements OnInit, OnChanges {
     }];
   }
 
+  /**
+   * Loads and processes expense data grouped by month for the current year.
+   * @param expenses List of all expenses
+   */
+  loadYearData(expenses: Expense[]): void {
+    const monthNames &#x3D; [&quot;Jan&quot;, &quot;Feb&quot;, &quot;Mar&quot;, &quot;Apr&quot;, &quot;May&quot;, &quot;Jun&quot;,
+      &quot;Jul&quot;, &quot;Aug&quot;, &quot;Sep&quot;, &quot;Oct&quot;, &quot;Nov&quot;, &quot;Dec&quot;];
+    const monthAmountMap &#x3D; new Map&lt;string, number&gt;();
+    const currentYear &#x3D; this.currentDate.getFullYear();
+
+    const currentYearExpenses &#x3D; expenses.filter(item &#x3D;&gt; {
+      const [year] &#x3D; item.date.split(&#x27;-&#x27;).map(Number);
+      return year &#x3D;&#x3D;&#x3D; currentYear;
+    });
+
+    let totalAmount &#x3D; 0;
+    currentYearExpenses.forEach(item &#x3D;&gt; {
+      const month &#x3D; parseInt(item.date.split(&#x27;-&#x27;)[1]);
+      totalAmount +&#x3D; item.amount;
+      const monthName &#x3D; monthNames[month - 1];
+      monthAmountMap.set(monthName, (monthAmountMap.get(monthName) || 0) + item.amount);
+    });
+
+    const months &#x3D; Array.from(monthAmountMap.keys()).reverse();
+    const amounts &#x3D; months.map(month &#x3D;&gt; monthAmountMap.get(month)!);
+
+    this.tooltip &#x3D; {
+      shared: true,
+      intersect: false,
+      y: {
+        formatter: (value: number) &#x3D;&gt; &#x60;${value} ${this.userService.getValue&lt;string&gt;(&#x27;currency&#x27;)}&#x60;
+      },
+      x: {
+        formatter: (_value: any) &#x3D;&gt; {
+          const fullNames &#x3D; [&quot;January&quot;, &quot;February&quot;, &quot;March&quot;, &quot;April&quot;, &quot;May&quot;, &quot;June&quot;,
+            &quot;July&quot;, &quot;August&quot;, &quot;September&quot;, &quot;October&quot;, &quot;November&quot;, &quot;December&quot;];
+          return &#x60;Month: ${fullNames[_value - 1]}&#x60;;
+        }
+      }
+    };
+
+    this.title &#x3D; {
+      text: &quot;Total: &quot; + totalAmount,
+      align: &quot;center&quot;,
+      style: { color: &#x27;var(--color-text)&#x27; }
+    };
+
+    this.chartXAxis &#x3D; {
+      type: &#x27;category&#x27;,
+      categories: months,
+      tooltip: { enabled: false }
+    };
+
+    this.chartSeries &#x3D; [{
+      name: &quot;Expenses&quot;,
+      data: amounts
+    }];
+  }
 }
 </code></pre>
     </div>
