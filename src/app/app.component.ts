@@ -2,7 +2,6 @@ import { Component, HostListener, Inject } from '@angular/core';
 import { CommonModule, isPlatformBrowser } from '@angular/common';
 import { PLATFORM_ID } from '@angular/core';
 import { Router, NavigationEnd } from '@angular/router';
-import { SwUpdate } from '@angular/service-worker';
 import { filter } from 'rxjs/operators';
 
 import { NavbarComponent } from './shared/navbar/navbar.component';
@@ -86,17 +85,8 @@ export class AppComponent {
     private storageService: StorageService,
     private router: Router,
     private postApiService: PostApiService,
-    private swUpdate: SwUpdate,
     @Inject(PLATFORM_ID) private platformId: Object
   ) {
-    // Handle PWA version updates
-    if (this.swUpdate.isEnabled) {
-      this.swUpdate.versionUpdates.subscribe(() => {
-        this.swUpdate.activateUpdate().then(() => {
-          document.location.reload();
-        });
-      });
-    }
 
     // Track current section name
     this.sectionService.currentSection$.subscribe(section => {

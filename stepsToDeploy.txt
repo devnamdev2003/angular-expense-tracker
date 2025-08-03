@@ -5,3 +5,4 @@
 5. Stop the running application
 6. Modify environments.ts by changing the developmentEnvironment variable from 'local' to 'live' for production
 7. Proceed with the deployment process to push the updated application
+8. After deploment again modify environments.ts by changing the developmentEnvironment variable from 'live' to 'local' for production
