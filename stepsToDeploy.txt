@@ -6,5 +6,5 @@
 6. Modify environments.ts by changing the developmentEnvironment variable from 'local' to 'live' for production
 7. Update the README.md file with your changes
 8. Proceed with the deployment process to push the updated application
-9. After deployment, modify environments.ts by changing the developmentEnvironment variable from 'live' back to 'local'
-10. Merge the angular-dev branch into the main branch
+9. Merge the angular-dev branch into the main branch
+10. Than, modify environments.ts by changing the developmentEnvironment variable from 'live' back to 'local'

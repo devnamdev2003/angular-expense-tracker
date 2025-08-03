@@ -19,7 +19,7 @@ export const environment = {
    * Current environment type.
    * Possible values: 'local', 'live'
    */
-  developmentEnviroment: 'live', // Change to 'live' for production
+  developmentEnvironment: 'live', // Change to 'live' for production or 'local' for local development
 
   /**
    * Application version.
