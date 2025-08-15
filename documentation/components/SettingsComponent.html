@@ -296,6 +296,9 @@
                             <li>
                                 <a href="#triggerFileInput" >triggerFileInput</a>
                             </li>
+                            <li>
+                                <a href="#updateApp" >updateApp</a>
+                            </li>
                         </ul>
                     </td>
                 </tr>
@@ -1226,6 +1229,46 @@
             </tr>
         </tbody>
     </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="updateApp"></a>
+                    <span class="name">
+                        <span ><b>updateApp</b></span>
+                        <a href="#updateApp"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>updateApp()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="368"
+                                    class="link-to-prism">src/app/features/settings/settings.component.ts:368</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-description"><p>Updates the application by clearing caches and reloading the page.
+This is useful for applying updates or changes to the app.</p>
+</div>
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
 </section>
     <section data-compodoc="block-properties">
     
@@ -1637,7 +1680,7 @@ export class SettingsComponent {
     this.deleteCategoryForm &#x3D; this.fb.group({
       category_id: [&#x27;&#x27;, [Validators.required, this.categoryInUseValidator(usedCategoryIds)]],
     });
-    
+
     // Check if user has any custom categories
     let userId &#x3D; this.userService.getValue&lt;string&gt;(&#x27;id&#x27;) || &#x27;0&#x27;;
     this.showDeleteCategoryOption &#x3D; existingCategories.some(cat &#x3D;&gt; cat.user_id &#x3D;&#x3D;&#x3D; userId);
@@ -1906,6 +1949,21 @@ export class SettingsComponent {
     reader.readAsText(file);
   }
 
+  /**
+   * Updates the application by clearing caches and reloading the page.
+   * This is useful for applying updates or changes to the app.
+   */
+  updateApp() {
+    if (&#x27;caches&#x27; in window) {
+      caches.keys().then((names: string[]) &#x3D;&gt; {
+        names.forEach(name &#x3D;&gt; caches.delete(name));
+      }).finally(() &#x3D;&gt; {
+        (window as Window).location.reload(); // ✅ cast fixes TS error
+      });
+    } else {
+      (window as Window).location.reload();
+    }
+  }
 }</code></pre>
     </div>
 
@@ -1967,6 +2025,14 @@ export class SettingsComponent {
             &lt;/app-setting-item&gt;
         &lt;/div&gt;
     &lt;/div&gt;
+
+    &lt;app-setting-item label&#x3D;&quot;🔄 Update App&quot;&gt;
+        &lt;button (click)&#x3D;&quot;updateApp()&quot;
+            class&#x3D;&quot;p-2 rounded-lg bg-[var(--color-accent)] hover:opacity-90 transition flex items-center justify-center&quot;&gt;
+            &lt;img src&#x3D;&quot;assets/img/icon/icons8-refresh-64.png&quot; alt&#x3D;&quot;Update&quot; class&#x3D;&quot;w-5 h-5&quot;
+                style&#x3D;&quot;filter: invert(100%);&quot; /&gt;
+        &lt;/button&gt;
+    &lt;/app-setting-item&gt;
     &lt;div *ngIf&#x3D;&quot;showAddCategoryModal&quot;
         class&#x3D;&quot;fixed inset-0 bg-black bg-opacity-40 z-50 flex items-center justify-center&quot;&gt;
 
@@ -2068,8 +2134,7 @@ export class SettingsComponent {
         &lt;/div&gt;
     &lt;/div&gt;
 
-&lt;/section&gt;
-</code></pre>
+&lt;/section&gt;</code></pre>
     </div>
 
     <div class="tab-pane fade " id="styleData">
@@ -2104,7 +2169,7 @@ export class SettingsComponent {
 <script src="../js/libs/htmlparser.js"></script>
 <script src="../js/libs/deep-iterator.js"></script>
 <script>
-        var COMPONENT_TEMPLATE = '<div><section class="p-4 section">    <!-- 🔧 General Settings -->    <div class="mb-2">        <h2 class="text-xl font-semibold text-[var(--color-accent)] mb-3">            🔧 General Settings        </h2>        <!-- Toggle Dark Mode -->        <app-setting-item label="🌗 Toggle Dark Mode">            <label class="relative inline-flex items-center cursor-pointer">                <input id="darkModeToggle" type="checkbox" class="sr-only peer" [(ngModel)]="isDarkMode"                    (change)="toggleTheme()" />                <div class="w-11 h-6 bg-[var(--color-accent)] rounded-full relative transition-all duration-300">                    <div [ngClass]="isDarkMode ? \'left-[0.25rem]\' : \'left-[1.5rem]\'"                        class="absolute top-1 w-4 h-4 rounded-full bg-[var(--color-surface)] transition-all duration-300 ease-in-out">                    </div>                </div>            </label>        </app-setting-item>        <!-- Download Data -->        <app-setting-item label="💾 Download Data">            <button (click)="confirmAndDownload()"                class="p-2 rounded-lg bg-[var(--color-accent)] hover:opacity-90 transition flex items-center justify-center">                <img src="assets/img/icon/icons8-download-48.png" alt="Download" class="w-5 h-5"                    style="filter: invert(100%);" />            </button>        </app-setting-item>        <!-- import Data -->        <app-setting-item label="📂 Import Data">            <button (click)="triggerFileInput()"                class="p-2 rounded-lg bg-[var(--color-accent)] hover:opacity-90 transition flex items-center justify-center">                <img src="assets/img/icon/icons8-upload-48.png" alt="Upload" class="w-5 h-5"                    style="filter: invert(100%);" />            </button>            <input type="file" accept=".json" #fileInput hidden (change)="handleFileUpload($event)" />        </app-setting-item>    </div>    <!-- 🧩 CATEGORY SETTINGS -->    <div class="mb-2">        <h2 class="text-xl font-semibold text-[var(--color-accent)] mb-3">🧩 Categories</h2>        <!-- Category Manager -->        <app-setting-item label="➕ Add Category">            <button (click)="openCategoryModal()"                class="bg-[var(--color-accent)] text-white px-6 py-1 rounded">Add</button>        </app-setting-item>        <!-- Delete Category -->        <div *ngIf="showDeleteCategoryOption">            <app-setting-item label="🗑️ Delete Category">                <button (click)="openDeleteCategoryModal()"                    class="bg-red-500 text-white px-4 py-1 rounded">Delete</button>            </app-setting-item>        </div>    </div>    <div *ngIf="showAddCategoryModal"        class="fixed inset-0 bg-black bg-opacity-40 z-50 flex items-center justify-center">        <div class="bg-[var(--color-bg)] p-6 rounded-xl w-11/12 md:w-1/2 max-h-[70vh] flex flex-col shadow-xl">            <div class="flex justify-between items-center mb-3">                <h2 class="text-lg font-bold text-[var(--color-text)]">                    Add Category                </h2>                <button (click)="closeCategoryModal()"                    class="text-[var(--color-red)] font-bold text-xl">&times;</button>            </div>            <form [formGroup]="addCategoryForm" (ngSubmit)="addCategory()">                <label class="block mb-1 font-medium">Name</label>                <input formControlName="name" type="text" autocomplete="off" placeholder="Category Name"                    class="w-full p-2 rounded border"                    style="background-color: var(--input-bg); color: var(--input-text); border-color: var(--input-border);"                    step="0.01" />                <div class="error-message text-[var(--color-error)]"                    *ngIf="addCategoryForm.get(\'name\')?.touched && addCategoryForm.get(\'name\')?.errors?.[\'required\']">                    Category name is required                </div>                <div class="error-message text-[var(--color-error)]"                    *ngIf="addCategoryForm.get(\'name\')?.touched && addCategoryForm.get(\'name\')?.hasError(\'nameExists\')">                    Category name already exists                </div>                <label class="block mb-1 font-medium">Icon</label>                <input formControlName="icon" type="text" placeholder="Icon (e.g., 🍕)"                    class="w-full p-2 rounded border"                    style="background-color: var(--input-bg); color: var(--input-text); border-color: var(--input-border);"                    step="0.01" />                <div class="error-message text-[var(--color-error)]"                    *ngIf="addCategoryForm.get(\'icon\')?.touched && addCategoryForm.get(\'icon\')?.errors?.[\'required\']">                    Icon is required                </div>                <div class="error-message text-[var(--color-error)]"                    *ngIf="addCategoryForm.get(\'icon\')?.touched && addCategoryForm.get(\'icon\')?.hasError(\'iconExists\')">                    Icon is already used                </div>                <label class="block mb-1 font-medium">Colour</label>                <input formControlName="color" type="color" class="w-full h-10 rounded border"                    style="background-color: var(--input-bg); color: var(--input-text); border-color: var(--input-border);"                    step="0.01" />                <div class="error-message text-[var(--color-error)]"                    *ngIf="addCategoryForm.get(\'color\')?.touched && addCategoryForm.get(\'color\')?.errors?.[\'required\']">                    Color is required                </div>                <div class="error-message text-[var(--color-error)]"                    *ngIf="addCategoryForm.get(\'color\')?.touched && addCategoryForm.get(\'color\')?.hasError(\'colorExists\')">                    Color is already used                </div>                <div class="flex justify-end mt-2">                    <button type="button" (click)="closeCategoryModal()"                        class="mr-2 px-4 py-2 bg-[var(--color-gray-500)] text-white rounded">Cancel</button>                    <button type="submit" class="px-4 py-2 bg-[var(--color-accent)] text-white rounded">Save</button>                </div>            </form>        </div>    </div>    <div *ngIf="showDeleteCategoryModal"        class="fixed inset-0 bg-black bg-opacity-40 z-50 flex items-center justify-center">        <div class="bg-[var(--color-bg)] p-6 rounded-xl w-11/12 md:w-1/2 max-h-[70vh] flex flex-col shadow-xl">            <div class="flex justify-between items-center mb-3">                <h2 class="text-lg font-bold text-[var(--color-text)]">                    Delete Category                </h2>                <button (click)="closeDeleteCategoryModal()"                    class="text-[var(--color-red)] font-bold text-xl">&times;</button>            </div>            <form [formGroup]="deleteCategoryForm" (ngSubmit)="deleteCategory()">                <label class="block mb-1 font-medium">Category</label>                <app-category-dropdown [dropdownMaxHeightClass]="\'max-h-60\'" [categoryType]="\'custom\'"                    [selectedCategoryName]="selectedCategoryName"                    (categorySelected)="onCategorySelected($event)"></app-category-dropdown>                <div class="error-message text-[var(--color-error)]"                    *ngIf="deleteCategoryForm.get(\'category_id\')?.touched && deleteCategoryForm.get(\'category_id\')?.errors?.[\'required\']">                    Category is required                </div>                <div class="error-message text-[var(--color-error)]"                    *ngIf="deleteCategoryForm.get(\'category_id\')?.touched && deleteCategoryForm.get(\'category_id\')?.hasError(\'categoryInUse\')">                    This category is associated with expenses and cannot be deleted                </div>                <!-- <div class="error-message text-[var(--color-error)]"                    *ngIf="deleteCategoryForm.get(\'category_id\')?.touched && deleteCategoryForm.get(\'category_id\')?.hasError(\'defaultCategory\')">                    You can\'t delete default category.                </div> -->                <div class="flex justify-end mt-2">                    <button type="button" (click)="closeDeleteCategoryModal()"                        class="mr-2 px-4 py-2 bg-[var(--color-gray-500)] text-white rounded">Cancel</button>                    <button type="submit" class="px-4 py-2 bg-red-500 text-white rounded">Delete</button>                </div>            </form>        </div>    </div></section></div>'
+        var COMPONENT_TEMPLATE = '<div><section class="p-4 section">    <!-- 🔧 General Settings -->    <div class="mb-2">        <h2 class="text-xl font-semibold text-[var(--color-accent)] mb-3">            🔧 General Settings        </h2>        <!-- Toggle Dark Mode -->        <app-setting-item label="🌗 Toggle Dark Mode">            <label class="relative inline-flex items-center cursor-pointer">                <input id="darkModeToggle" type="checkbox" class="sr-only peer" [(ngModel)]="isDarkMode"                    (change)="toggleTheme()" />                <div class="w-11 h-6 bg-[var(--color-accent)] rounded-full relative transition-all duration-300">                    <div [ngClass]="isDarkMode ? \'left-[0.25rem]\' : \'left-[1.5rem]\'"                        class="absolute top-1 w-4 h-4 rounded-full bg-[var(--color-surface)] transition-all duration-300 ease-in-out">                    </div>                </div>            </label>        </app-setting-item>        <!-- Download Data -->        <app-setting-item label="💾 Download Data">            <button (click)="confirmAndDownload()"                class="p-2 rounded-lg bg-[var(--color-accent)] hover:opacity-90 transition flex items-center justify-center">                <img src="assets/img/icon/icons8-download-48.png" alt="Download" class="w-5 h-5"                    style="filter: invert(100%);" />            </button>        </app-setting-item>        <!-- import Data -->        <app-setting-item label="📂 Import Data">            <button (click)="triggerFileInput()"                class="p-2 rounded-lg bg-[var(--color-accent)] hover:opacity-90 transition flex items-center justify-center">                <img src="assets/img/icon/icons8-upload-48.png" alt="Upload" class="w-5 h-5"                    style="filter: invert(100%);" />            </button>            <input type="file" accept=".json" #fileInput hidden (change)="handleFileUpload($event)" />        </app-setting-item>    </div>    <!-- 🧩 CATEGORY SETTINGS -->    <div class="mb-2">        <h2 class="text-xl font-semibold text-[var(--color-accent)] mb-3">🧩 Categories</h2>        <!-- Category Manager -->        <app-setting-item label="➕ Add Category">            <button (click)="openCategoryModal()"                class="bg-[var(--color-accent)] text-white px-6 py-1 rounded">Add</button>        </app-setting-item>        <!-- Delete Category -->        <div *ngIf="showDeleteCategoryOption">            <app-setting-item label="🗑️ Delete Category">                <button (click)="openDeleteCategoryModal()"                    class="bg-red-500 text-white px-4 py-1 rounded">Delete</button>            </app-setting-item>        </div>    </div>    <app-setting-item label="🔄 Update App">        <button (click)="updateApp()"            class="p-2 rounded-lg bg-[var(--color-accent)] hover:opacity-90 transition flex items-center justify-center">            <img src="assets/img/icon/icons8-refresh-64.png" alt="Update" class="w-5 h-5"                style="filter: invert(100%);" />        </button>    </app-setting-item>    <div *ngIf="showAddCategoryModal"        class="fixed inset-0 bg-black bg-opacity-40 z-50 flex items-center justify-center">        <div class="bg-[var(--color-bg)] p-6 rounded-xl w-11/12 md:w-1/2 max-h-[70vh] flex flex-col shadow-xl">            <div class="flex justify-between items-center mb-3">                <h2 class="text-lg font-bold text-[var(--color-text)]">                    Add Category                </h2>                <button (click)="closeCategoryModal()"                    class="text-[var(--color-red)] font-bold text-xl">&times;</button>            </div>            <form [formGroup]="addCategoryForm" (ngSubmit)="addCategory()">                <label class="block mb-1 font-medium">Name</label>                <input formControlName="name" type="text" autocomplete="off" placeholder="Category Name"                    class="w-full p-2 rounded border"                    style="background-color: var(--input-bg); color: var(--input-text); border-color: var(--input-border);"                    step="0.01" />                <div class="error-message text-[var(--color-error)]"                    *ngIf="addCategoryForm.get(\'name\')?.touched && addCategoryForm.get(\'name\')?.errors?.[\'required\']">                    Category name is required                </div>                <div class="error-message text-[var(--color-error)]"                    *ngIf="addCategoryForm.get(\'name\')?.touched && addCategoryForm.get(\'name\')?.hasError(\'nameExists\')">                    Category name already exists                </div>                <label class="block mb-1 font-medium">Icon</label>                <input formControlName="icon" type="text" placeholder="Icon (e.g., 🍕)"                    class="w-full p-2 rounded border"                    style="background-color: var(--input-bg); color: var(--input-text); border-color: var(--input-border);"                    step="0.01" />                <div class="error-message text-[var(--color-error)]"                    *ngIf="addCategoryForm.get(\'icon\')?.touched && addCategoryForm.get(\'icon\')?.errors?.[\'required\']">                    Icon is required                </div>                <div class="error-message text-[var(--color-error)]"                    *ngIf="addCategoryForm.get(\'icon\')?.touched && addCategoryForm.get(\'icon\')?.hasError(\'iconExists\')">                    Icon is already used                </div>                <label class="block mb-1 font-medium">Colour</label>                <input formControlName="color" type="color" class="w-full h-10 rounded border"                    style="background-color: var(--input-bg); color: var(--input-text); border-color: var(--input-border);"                    step="0.01" />                <div class="error-message text-[var(--color-error)]"                    *ngIf="addCategoryForm.get(\'color\')?.touched && addCategoryForm.get(\'color\')?.errors?.[\'required\']">                    Color is required                </div>                <div class="error-message text-[var(--color-error)]"                    *ngIf="addCategoryForm.get(\'color\')?.touched && addCategoryForm.get(\'color\')?.hasError(\'colorExists\')">                    Color is already used                </div>                <div class="flex justify-end mt-2">                    <button type="button" (click)="closeCategoryModal()"                        class="mr-2 px-4 py-2 bg-[var(--color-gray-500)] text-white rounded">Cancel</button>                    <button type="submit" class="px-4 py-2 bg-[var(--color-accent)] text-white rounded">Save</button>                </div>            </form>        </div>    </div>    <div *ngIf="showDeleteCategoryModal"        class="fixed inset-0 bg-black bg-opacity-40 z-50 flex items-center justify-center">        <div class="bg-[var(--color-bg)] p-6 rounded-xl w-11/12 md:w-1/2 max-h-[70vh] flex flex-col shadow-xl">            <div class="flex justify-between items-center mb-3">                <h2 class="text-lg font-bold text-[var(--color-text)]">                    Delete Category                </h2>                <button (click)="closeDeleteCategoryModal()"                    class="text-[var(--color-red)] font-bold text-xl">&times;</button>            </div>            <form [formGroup]="deleteCategoryForm" (ngSubmit)="deleteCategory()">                <label class="block mb-1 font-medium">Category</label>                <app-category-dropdown [dropdownMaxHeightClass]="\'max-h-60\'" [categoryType]="\'custom\'"                    [selectedCategoryName]="selectedCategoryName"                    (categorySelected)="onCategorySelected($event)"></app-category-dropdown>                <div class="error-message text-[var(--color-error)]"                    *ngIf="deleteCategoryForm.get(\'category_id\')?.touched && deleteCategoryForm.get(\'category_id\')?.errors?.[\'required\']">                    Category is required                </div>                <div class="error-message text-[var(--color-error)]"                    *ngIf="deleteCategoryForm.get(\'category_id\')?.touched && deleteCategoryForm.get(\'category_id\')?.hasError(\'categoryInUse\')">                    This category is associated with expenses and cannot be deleted                </div>                <!-- <div class="error-message text-[var(--color-error)]"                    *ngIf="deleteCategoryForm.get(\'category_id\')?.touched && deleteCategoryForm.get(\'category_id\')?.hasError(\'defaultCategory\')">                    You can\'t delete default category.                </div> -->                <div class="flex justify-end mt-2">                    <button type="button" (click)="closeDeleteCategoryModal()"                        class="mr-2 px-4 py-2 bg-[var(--color-gray-500)] text-white rounded">Cancel</button>                    <button type="submit" class="px-4 py-2 bg-red-500 text-white rounded">Delete</button>                </div>            </form>        </div>    </div></section></div>'
     var COMPONENTS = [{'name': 'AddExpenseComponent', 'selector': 'app-add-expense'},{'name': 'AiComponent', 'selector': 'app-ai'},{'name': 'AnalysisComponent', 'selector': 'app-analysis'},{'name': 'AppComponent', 'selector': 'app-root'},{'name': 'BudgetComponent', 'selector': 'app-budget'},{'name': 'CalendarComponent', 'selector': 'app-calendar'},{'name': 'CategoryDropdownComponent', 'selector': 'app-category-dropdown'},{'name': 'CustomModalComponent', 'selector': 'app-custom-modal'},{'name': 'ExpenseDetailsModalComponent', 'selector': 'app-expense-details-modal'},{'name': 'ExpenseListComponent', 'selector': 'app-expense-list'},{'name': 'FooterComponent', 'selector': 'app-footer'},{'name': 'GlobalLoaderComponent', 'selector': 'app-global-loader'},{'name': 'GraphsComponent', 'selector': 'app-graphs'},{'name': 'HamburgerMenuComponent', 'selector': 'app-hamburger-menu'},{'name': 'HomeComponent', 'selector': 'app-home'},{'name': 'InfoIconComponent', 'selector': 'app-info-icon'},{'name': 'ListExpensesComponent', 'selector': 'app-list-expenses'},{'name': 'MusicComponent', 'selector': 'app-music'},{'name': 'NavbarComponent', 'selector': 'app-navbar'},{'name': 'PieChartComponent', 'selector': 'app-pie-chart'},{'name': 'SearchComponent', 'selector': 'app-search'},{'name': 'SettingItemComponent', 'selector': 'app-setting-item'},{'name': 'SettingsComponent', 'selector': 'app-settings'},{'name': 'SidebarComponent', 'selector': 'app-sidebar'},{'name': 'ToastComponent', 'selector': 'app-toast'}];
     var DIRECTIVES = [];
     var ACTUAL_COMPONENT = {'name': 'SettingsComponent'};

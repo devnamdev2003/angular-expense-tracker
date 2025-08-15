@@ -41,6 +41,7 @@ Allows users to add new expense entries through a form. Input fields include:
 * 💳 **Payment Mode**
 * 📍 **Location**
 * 📝 **Note**
+* **Extra Sprnding**
 
 All expenses are stored in the device's **LocalStorage** and reflected immediately in graphs and listings.
 
@@ -60,7 +61,7 @@ All expenses are stored in the device's **LocalStorage** and reflected immediate
 * Users can:
 
   * 🧾 **Sort** expenses by date, amount, or category.
-  * 🔍 **Filter** by category, date, and payment mode.
+  * 🔍 **Filter** by category, date, extra spending, and payment mode.
   * 🖱️ Tap any entry to open a **modal** with complete details and options to **edit** or **delete** the expense.
 
 ---
@@ -89,6 +90,7 @@ Provides customization and utility options for better personalization:
 * 📤 **Import Data** (upload expense data)
 * ➕ **Add Category** (custom categories for better organization)
 * ❌ **Delete Category** (remove unused or incorrect categories)
+* 🔄 **Update App**
 
 ---
 

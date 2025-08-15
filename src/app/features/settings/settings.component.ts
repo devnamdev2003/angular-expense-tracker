@@ -92,7 +92,7 @@ export class SettingsComponent {
     this.deleteCategoryForm = this.fb.group({
       category_id: ['', [Validators.required, this.categoryInUseValidator(usedCategoryIds)]],
     });
-    
+
     // Check if user has any custom categories
     let userId = this.userService.getValue<string>('id') || '0';
     this.showDeleteCategoryOption = existingCategories.some(cat => cat.user_id === userId);
@@ -361,4 +361,19 @@ export class SettingsComponent {
     reader.readAsText(file);
   }
 
+  /**
+   * Updates the application by clearing caches and reloading the page.
+   * This is useful for applying updates or changes to the app.
+   */
+  updateApp() {
+    if ('caches' in window) {
+      caches.keys().then((names: string[]) => {
+        names.forEach(name => caches.delete(name));
+      }).finally(() => {
+        (window as Window).location.reload(); // ✅ cast fixes TS error
+      });
+    } else {
+      (window as Window).location.reload();
+    }
+  }
 }

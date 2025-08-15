@@ -55,6 +55,14 @@
             </app-setting-item>
         </div>
     </div>
+
+    <app-setting-item label="🔄 Update App">
+        <button (click)="updateApp()"
+            class="p-2 rounded-lg bg-[var(--color-accent)] hover:opacity-90 transition flex items-center justify-center">
+            <img src="assets/img/icon/icons8-refresh-64.png" alt="Update" class="w-5 h-5"
+                style="filter: invert(100%);" />
+        </button>
+    </app-setting-item>
     <div *ngIf="showAddCategoryModal"
         class="fixed inset-0 bg-black bg-opacity-40 z-50 flex items-center justify-center">
 
