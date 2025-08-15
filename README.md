@@ -41,7 +41,7 @@ Allows users to add new expense entries through a form. Input fields include:
 * 💳 **Payment Mode**
 * 📍 **Location**
 * 📝 **Note**
-* **Extra Sprnding**
+* 💡 **Extra Spending**
 
 All expenses are stored in the device's **LocalStorage** and reflected immediately in graphs and listings.
 
@@ -90,7 +90,8 @@ Provides customization and utility options for better personalization:
 * 📤 **Import Data** (upload expense data)
 * ➕ **Add Category** (custom categories for better organization)
 * ❌ **Delete Category** (remove unused or incorrect categories)
-* 🔄 **Update App**
+* 🔄 **Update App** (Update the application to the latest release)
+
 
 ---
 
@@ -127,3 +128,21 @@ All user data is stored using the **browser’s LocalStorage API**, ensuring:
 
 For developers and contributors, detailed code-level documentation is available here:  
 👉 [Documentation](https://devnamdev2003.github.io/ExpenseWise/documentation/)
+
+
+## 🖼️ Screenshots
+
+<div style="
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 16px;
+    justify-items: center;
+    padding: 16px;
+">
+    <img src="./public/assets/appScreenshot/home.jpg" alt="home" style="width: 100%; max-width: 200px; border-radius: 8px;">
+    <img src="./public/assets/appScreenshot/add.jpg" alt="add" style="width: 100%; max-width: 200px; border-radius: 8px;">
+    <img src="./public/assets/appScreenshot/calendar.jpg" alt="calendar" style="width: 100%; max-width: 200px; border-radius: 8px;">
+    <img src="./public/assets/appScreenshot/settings.jpg" alt="settings" style="width: 100%; max-width: 200px; border-radius: 8px;">
+    <img src="./public/assets/appScreenshot/budget.jpg" alt="budget" style="width: 100%; max-width: 200px; border-radius: 8px;">
+    <img src="./public/assets/appScreenshot/home.jpg" alt="home" style="width: 100%; max-width: 200px; border-radius: 8px;">
+</div>
