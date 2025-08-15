@@ -36,7 +36,8 @@ export class ExpenseDetailsModalComponent implements OnInit {
       time: [this.selectedExpense?.time || '', Validators.required],
       note: [this.selectedExpense?.note || ''],
       payment_mode: [this.selectedExpense?.payment_mode || '', Validators.required],
-      location: [this.selectedExpense?.location || '']
+      location: [this.selectedExpense?.location || ''],
+      isExtraSpending: [this.selectedExpense?.isExtraSpending || false]
     });
   }
 

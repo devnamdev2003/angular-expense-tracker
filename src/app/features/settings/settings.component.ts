@@ -133,6 +133,7 @@ export class SettingsComponent {
       category_name: expense.category_name,
       category_id: expense.category_id,
       expense_id: expense.expense_id,
+      isExtraSpending: expense.isExtraSpending
     }));
 
     const jsonData = JSON.stringify(filteredData, null, 2);
@@ -323,7 +324,8 @@ export class SettingsComponent {
           typeof item.category_id === 'string' &&
           typeof item.payment_mode === 'string' &&
           typeof item.note === 'string' &&
-          typeof item.location === 'string'
+          typeof item.location === 'string' &&
+          typeof item.isExtraSpending === 'boolean'
         );
 
         if (validData.length === 0) {

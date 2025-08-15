@@ -32,6 +32,7 @@ export class ListExpensesComponent implements OnInit {
     toDate: '',
     selectedCategoryIds: [] as string[],
     paymentMode: [] as string[],
+    isExtraSpending: true
   };
 
   appliedFilter = {
@@ -39,6 +40,7 @@ export class ListExpensesComponent implements OnInit {
     toDate: '',
     selectedCategoryIds: [] as string[],
     paymentMode: [] as string[],
+    isExtraSpending: true
   };
   isFiltered: boolean = false;
   isSorted: boolean = false;
@@ -175,6 +177,10 @@ export class ListExpensesComponent implements OnInit {
       filtered = filtered.filter(e => this.appliedFilter.paymentMode.includes(e.payment_mode));
     }
 
+    if (this.appliedFilter.isExtraSpending) {
+      filtered = filtered.filter(e => e.isExtraSpending);
+    }
+
     this.expenses = filtered;
     this.expenses.forEach((val) => {
       this.totalAmount = this.totalAmount + val.amount;
@@ -229,6 +235,7 @@ export class ListExpensesComponent implements OnInit {
     this.filter.toDate = '';
     this.filter.selectedCategoryIds = [];
     this.filter.paymentMode = [];
+    this.filter.isExtraSpending = false;
     this.isFiltered = false;
     this.listExpenses();
   }

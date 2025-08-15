@@ -202,7 +202,8 @@ export class StorageService {
             location: &quot;&quot;,
             note: &quot;&quot;,
             payment_mode: &quot;&quot;,
-            time: &quot;&quot;
+            time: &quot;&quot;,
+            isExtraSpending: false
         };
 
         return this.syncWithSchema(this.expenseKey, expenseSchema);

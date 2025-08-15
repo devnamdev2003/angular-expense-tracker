@@ -263,15 +263,15 @@
             </tr>
             <tr>
                 <td class="col-md-4">
-<code>generateExpenseAnalysisPrompt(userQuery: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>, last15DaysExpenses: <a href="../interfaces/Expense.html" target="_self">Pick&lt;Expense, &quot;amount&quot; | &quot;note&quot; | &quot;location&quot; | &quot;date&quot; | &quot;category_name&quot; | &quot;payment_mode&quot;&gt;[]</a>)</code>
+<code>generateExpenseAnalysisPrompt(userQuery: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>, last15DaysExpenses: <a href="../interfaces/Expense.html" target="_self">Pick&lt;Expense, &quot;amount&quot; | &quot;note&quot; | &quot;location&quot; | &quot;date&quot; | &quot;category_name&quot; | &quot;payment_mode&quot; | &quot;isExtraSpending&quot;&gt;[]</a>)</code>
                 </td>
             </tr>
 
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="57"
-                                    class="link-to-prism">src/app/service/gemini-api/gemini-api.service.ts:57</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="58"
+                                    class="link-to-prism">src/app/service/gemini-api/gemini-api.service.ts:58</a></div>
                         </td>
                     </tr>
 
@@ -306,7 +306,7 @@
                                         <tr>
                                                 <td>last15DaysExpenses</td>
                                             <td>
-                                                            <code><a href="../interfaces/Expense.html" target="_self" >Pick&lt;Expense, &quot;amount&quot; | &quot;note&quot; | &quot;location&quot; | &quot;date&quot; | &quot;category_name&quot; | &quot;payment_mode&quot;&gt;[]</a></code>
+                                                            <code><a href="../interfaces/Expense.html" target="_self" >Pick&lt;Expense, &quot;amount&quot; | &quot;note&quot; | &quot;location&quot; | &quot;date&quot; | &quot;category_name&quot; | &quot;payment_mode&quot; | &quot;isExtraSpending&quot;&gt;[]</a></code>
                                             </td>
 
                                             <td>
@@ -512,7 +512,7 @@ export class GeminiApiService {
     }
   }
 
-  getLast30DaysExpenses(): Pick&lt;Expense, &#x27;amount&#x27; | &#x27;note&#x27; | &#x27;location&#x27; | &#x27;date&#x27; | &#x27;category_name&#x27; | &#x27;payment_mode&#x27;&gt;[] {
+  getLast30DaysExpenses(): Pick&lt;Expense, &#x27;amount&#x27; | &#x27;note&#x27; | &#x27;location&#x27; | &#x27;date&#x27; | &#x27;category_name&#x27; | &#x27;payment_mode&#x27; | &#x27;isExtraSpending&#x27;&gt;[] {
     const toDate &#x3D; new Date();
     const fromDate &#x3D; new Date();
     fromDate.setDate(toDate.getDate() - 29);
@@ -525,13 +525,14 @@ export class GeminiApiService {
       location: exp.location,
       date: exp.date + &quot;T&quot; + exp.time,
       category_name: exp.category_name,
-      payment_mode: exp.payment_mode
+      payment_mode: exp.payment_mode,
+      isExtraSpending: exp.isExtraSpending
     }));
   }
 
   generateExpenseAnalysisPrompt(
     userQuery: string,
-    last15DaysExpenses: Pick&lt;Expense, &#x27;amount&#x27; | &#x27;note&#x27; | &#x27;location&#x27; | &#x27;date&#x27; | &#x27;category_name&#x27; | &#x27;payment_mode&#x27;&gt;[]
+    last15DaysExpenses: Pick&lt;Expense, &#x27;amount&#x27; | &#x27;note&#x27; | &#x27;location&#x27; | &#x27;date&#x27; | &#x27;category_name&#x27; | &#x27;payment_mode&#x27; | &#x27;isExtraSpending&#x27;&gt;[]
   ): string {
     const baseInstructions &#x3D; &#x60;
 You are a polite and helpful financial assistant AI. Your sole purpose is to help the user **analyze and predict** their expenses from the last 30 days.

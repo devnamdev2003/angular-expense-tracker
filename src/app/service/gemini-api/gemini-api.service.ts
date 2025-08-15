@@ -37,7 +37,7 @@ export class GeminiApiService {
     }
   }
 
-  getLast30DaysExpenses(): Pick<Expense, 'amount' | 'note' | 'location' | 'date' | 'category_name' | 'payment_mode'>[] {
+  getLast30DaysExpenses(): Pick<Expense, 'amount' | 'note' | 'location' | 'date' | 'category_name' | 'payment_mode' | 'isExtraSpending'>[] {
     const toDate = new Date();
     const fromDate = new Date();
     fromDate.setDate(toDate.getDate() - 29);
@@ -50,13 +50,14 @@ export class GeminiApiService {
       location: exp.location,
       date: exp.date + "T" + exp.time,
       category_name: exp.category_name,
-      payment_mode: exp.payment_mode
+      payment_mode: exp.payment_mode,
+      isExtraSpending: exp.isExtraSpending
     }));
   }
 
   generateExpenseAnalysisPrompt(
     userQuery: string,
-    last15DaysExpenses: Pick<Expense, 'amount' | 'note' | 'location' | 'date' | 'category_name' | 'payment_mode'>[]
+    last15DaysExpenses: Pick<Expense, 'amount' | 'note' | 'location' | 'date' | 'category_name' | 'payment_mode' | 'isExtraSpending'>[]
   ): string {
     const baseInstructions = `
 You are a polite and helpful financial assistant AI. Your sole purpose is to help the user **analyze and predict** their expenses from the last 30 days.

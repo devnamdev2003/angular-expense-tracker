@@ -77,7 +77,8 @@ export class AddExpenseComponent implements OnInit {
       time: ['', Validators.required],
       payment_mode: ['UPI', Validators.required],
       location: ['', Validators.maxLength(50)],
-      note: ['', Validators.maxLength(100)]
+      note: ['', Validators.maxLength(100)],
+      isExtraSpending: [false, Validators.required]
     });
   }
 
@@ -104,7 +105,8 @@ export class AddExpenseComponent implements OnInit {
       time: timeStr,
       payment_mode: 'UPI',
       location: '',
-      note: ''
+      note: '',
+      isExtraSpending: false
     });
 
     this.selectedCategoryName = 'Select Category';

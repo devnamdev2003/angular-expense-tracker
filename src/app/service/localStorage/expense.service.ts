@@ -12,11 +12,11 @@ export interface Expense {
   note?: string;
   payment_mode: string;
   location?: string;
-
+  isExtraSpending?: boolean;
   // additional field not a part of table
   category_name: string;
-  category_icon: string
-  category_color: string
+  category_icon: string;
+  category_color: string;
 
 }
 
