@@ -15,7 +15,7 @@ export class ConfigService {
    * Possible values: 'local' | 'live'.
    * Change this value to switch API endpoints.
    */
-  private readonly developmentEnviroment: string = environment.developmentEnviroment;
+  private readonly developmentEnvironment: string = environment.developmentEnvironment;
   /**
    * Creates an instance of ConfigService.
    */
@@ -27,10 +27,10 @@ export class ConfigService {
    * @returns {string} The API base URL for the current environment.
    */
   getapiUrl(): string {
-    if (this.developmentEnviroment === "local") {
+    if (this.developmentEnvironment === "local") {
       return "http://localhost:8000";
     }
-    else if (this.developmentEnviroment === "live") {
+    else if (this.developmentEnvironment === "live") {
       return "https://exwiseapi.onrender.com";
     }
     else {

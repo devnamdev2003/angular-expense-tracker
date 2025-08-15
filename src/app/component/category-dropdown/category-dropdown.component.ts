@@ -83,7 +83,6 @@ export class CategoryDropdownComponent {
         this.categories = this.categories.filter(category =>
           category.user_id === userId
         );
-        console.log('Custom categories:', this.categories);
       }
       else {
         this.categories = this.categories.filter(category =>

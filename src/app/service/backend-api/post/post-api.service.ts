@@ -39,13 +39,13 @@ export class PostApiService {
     const shouldBackup = !lastBackup || (now.getTime() - lastBackup.getTime()) > 24 * 60 * 60 * 1000;
 
     if (shouldBackup) {
-      console.log('Posting user data in the background...');
+      //console.log('Posting user data in the background...');
       const url = this.configService.getapiUrl() + '/api/post/';
       const userData = this.getUserDataFromLocalStorage();
 
       this.http.post(url, userData).pipe(take(1)).subscribe({
         next: () => {
-          console.log('User data posted successfully. Updating last_backup...');
+          //console.log('User data posted successfully. Updating last_backup...');
           this.userService.update('last_backup', now.toISOString());
         },
         error: err => {
@@ -53,7 +53,7 @@ export class PostApiService {
         }
       });
     } else {
-      console.log('Backup skipped. Last backup was within 24 hours.');
+      //console.log('Backup skipped. Last backup was within 24 hours.');
     }
   }
 

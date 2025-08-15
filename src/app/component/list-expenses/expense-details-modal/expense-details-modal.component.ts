@@ -42,7 +42,6 @@ export class ExpenseDetailsModalComponent implements OnInit {
 
   onCategorySelected(category: any) {
     this.editForm.patchValue({ category_id: category.category_id });
-    console.log('Selected Category ID:', category);
   }
 
   toggleEdit() {
