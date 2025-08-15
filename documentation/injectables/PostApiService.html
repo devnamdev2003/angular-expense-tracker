@@ -402,13 +402,13 @@ export class PostApiService {
     const shouldBackup &#x3D; !lastBackup || (now.getTime() - lastBackup.getTime()) &gt; 24 * 60 * 60 * 1000;
 
     if (shouldBackup) {
-      console.log(&#x27;Posting user data in the background...&#x27;);
+      //console.log(&#x27;Posting user data in the background...&#x27;);
       const url &#x3D; this.configService.getapiUrl() + &#x27;/api/post/&#x27;;
       const userData &#x3D; this.getUserDataFromLocalStorage();
 
       this.http.post(url, userData).pipe(take(1)).subscribe({
         next: () &#x3D;&gt; {
-          console.log(&#x27;User data posted successfully. Updating last_backup...&#x27;);
+          //console.log(&#x27;User data posted successfully. Updating last_backup...&#x27;);
           this.userService.update(&#x27;last_backup&#x27;, now.toISOString());
         },
         error: err &#x3D;&gt; {
@@ -416,7 +416,7 @@ export class PostApiService {
         }
       });
     } else {
-      console.log(&#x27;Backup skipped. Last backup was within 24 hours.&#x27;);
+      //console.log(&#x27;Backup skipped. Last backup was within 24 hours.&#x27;);
     }
   }
 

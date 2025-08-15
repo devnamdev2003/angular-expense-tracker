@@ -631,10 +631,7 @@ export class CategoryService {
 
   delete(category_id: string): void {
     if (!this.isBrowser()) return;
-
-    console.log(category_id)
     const all: Category[] &#x3D; this.getAll();
-    console.log(all)
     // Check if the category actually exists
     const categoryExists &#x3D; all.some(c &#x3D;&gt; c.category_id &#x3D;&#x3D;&#x3D; category_id);
     if (!categoryExists) {

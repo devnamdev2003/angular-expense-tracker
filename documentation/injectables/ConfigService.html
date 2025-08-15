@@ -145,7 +145,7 @@ such as API base URLs based on the current environment (local or live).</p>
                             <li>
                                     <span class="modifier">Private</span>
                                     <span class="modifier">Readonly</span>
-                                <a href="#developmentEnviroment" >developmentEnviroment</a>
+                                <a href="#developmentEnvironment" >developmentEnvironment</a>
                             </li>
                         </ul>
                     </td>
@@ -257,12 +257,12 @@ such as API base URLs based on the current environment (local or live).</p>
         <tbody>
             <tr>
                 <td class="col-md-4">
-                    <a name="developmentEnviroment"></a>
+                    <a name="developmentEnvironment"></a>
                     <span class="name">
                             <span class="modifier">Private</span>
                             <span class="modifier">Readonly</span>
-                        <span ><b>developmentEnviroment</b></span>
-                        <a href="#developmentEnviroment"><span class="icon ion-ios-link"></span></a>
+                        <span ><b>developmentEnvironment</b></span>
+                        <a href="#developmentEnvironment"><span class="icon ion-ios-link"></span></a>
                     </span>
                 </td>
             </tr>
@@ -274,7 +274,7 @@ such as API base URLs based on the current environment (local or live).</p>
                 </tr>
                 <tr>
                     <td class="col-md-4">
-                        <i>Default value : </i><code>environment.developmentEnviroment</code>
+                        <i>Default value : </i><code>environment.developmentEnvironment</code>
                     </td>
                 </tr>
                     <tr>
@@ -317,7 +317,7 @@ export class ConfigService {
    * Possible values: &#x27;local&#x27; | &#x27;live&#x27;.
    * Change this value to switch API endpoints.
    */
-  private readonly developmentEnviroment: string &#x3D; environment.developmentEnviroment;
+  private readonly developmentEnvironment: string &#x3D; environment.developmentEnvironment;
   /**
    * Creates an instance of ConfigService.
    */
@@ -329,10 +329,10 @@ export class ConfigService {
    * @returns {string} The API base URL for the current environment.
    */
   getapiUrl(): string {
-    if (this.developmentEnviroment &#x3D;&#x3D;&#x3D; &quot;local&quot;) {
+    if (this.developmentEnvironment &#x3D;&#x3D;&#x3D; &quot;local&quot;) {
       return &quot;http://localhost:8000&quot;;
     }
-    else if (this.developmentEnviroment &#x3D;&#x3D;&#x3D; &quot;live&quot;) {
+    else if (this.developmentEnvironment &#x3D;&#x3D;&#x3D; &quot;live&quot;) {
       return &quot;https://exwiseapi.onrender.com&quot;;
     }
     else {
