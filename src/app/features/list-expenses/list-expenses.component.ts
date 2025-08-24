@@ -7,11 +7,12 @@ import { UserService } from '../../service/localStorage/user.service';
 import { FormsModule } from '@angular/forms';
 import { ExpenseDetailsModalComponent } from "../../component/list-expenses/expense-details-modal/expense-details-modal.component";
 import { ExpenseListComponent } from "../../component/list-expenses/expense-list/expense-list.component";
+import { SearchButtonComponent } from '../../component/search-button/search-button.component';
 
 @Component({
   standalone: true,
   selector: 'app-list-expenses',
-  imports: [CommonModule, FormsModule, ExpenseDetailsModalComponent, ExpenseListComponent],
+  imports: [CommonModule, FormsModule, ExpenseDetailsModalComponent, ExpenseListComponent, SearchButtonComponent],
   templateUrl: './list-expenses.component.html',
   styleUrls: ['./list-expenses.component.css'],
 })
@@ -158,7 +159,7 @@ export class ListExpensesComponent implements OnInit {
 
   applyFilter() {
     this.totalAmount = 0;
-    let filtered = this.expenseService.getAll();
+    let filtered = this.expenses;
     this.appliedFilter = structuredClone(this.filter);
 
     if (this.appliedFilter.fromDate) {
@@ -172,7 +173,7 @@ export class ListExpensesComponent implements OnInit {
     if (this.appliedFilter.selectedCategoryIds.length) {
       filtered = filtered.filter(e => this.appliedFilter.selectedCategoryIds.includes(e.category_id));
     }
-    
+
     if (this.appliedFilter.paymentMode.length) {
       filtered = filtered.filter(e => this.appliedFilter.paymentMode.includes(e.payment_mode));
     }
@@ -253,5 +254,30 @@ export class ListExpensesComponent implements OnInit {
     } else {
       this.filter.paymentMode = this.filter.paymentMode.filter(id => id !== categoryId);
     }
+  }
+
+  onSearch(query: string) {
+    this.totalAmount = 0;
+    console.log('Parent received search query:', query);
+    this.expenses = this.expenseService.getAll();
+    this.expenses = this.expenses.filter(ex => {
+      return ((ex.location && ex.location.toLowerCase().includes(query.toLowerCase())) || (ex.note && ex.note.toLowerCase().includes(query.toLowerCase())));
+    });
+    this.expenses.forEach((val) => {
+      this.totalAmount = this.totalAmount + val.amount;
+    })
+    this.totalAmount = parseFloat(this.totalAmount.toFixed(2));
+    this.clearFiltersAndSorting();
+  }
+
+  clearFiltersAndSorting() {
+    this.filter.fromDate = '';
+    this.filter.toDate = '';
+    this.filter.selectedCategoryIds = [];
+    this.filter.paymentMode = [];
+    this.filter.isExtraSpending = false;
+    this.isFiltered = false;
+    this.isSorted = false;
+    this.selectedFieldName = "Sort By";
   }
 }

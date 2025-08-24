@@ -1,0 +1,20 @@
+<div class="fixed bottom-16 right-5 z-50 flex items-center">
+  <!-- Animated container -->
+  <div
+    class="flex items-center bg-[var(--color-surface)] shadow-lg rounded-full overflow-hidden transition-all duration-300 ease-in-out"
+    [ngClass]="isOpen ? 'w-[90vw] md:w-[400px] pl-3 pr-1 h-14' : 'w-14 h-14 justify-center'">
+    <!-- Search input -->
+    <input *ngIf="isOpen" #searchInput [(ngModel)]="query" (keyup.enter)="onSearch()" type="text" maxlength="100"
+      placeholder="Search..." class="flex-1 outline-none text-sm px-2 text-[var(--input-text)] bg-transparent focus:ring-[var(--theme-color)]
+    transition-all duration-200" />
+    <!-- Search button -->
+    <button (click)="toggleSearch()"
+      class="flex items-center justify-center w-12 h-12 bg-[var(--theme-color)] text-white rounded-full transition">
+      <!-- Search icon (when closed) -->
+      <img *ngIf="!isOpen" src="assets/img/icon/icons8-search-50.png" alt="Search" class="w-5 h-5 invert" />
+
+      <!-- Close icon (when open) -->
+      <img *ngIf="isOpen" src="assets/img/icon/icons8-cross-50.png" alt="Close" class="w-6 h-6 invert" />
+    </button>
+  </div>
+</div>

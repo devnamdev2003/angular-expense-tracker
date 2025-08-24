@@ -44,6 +44,9 @@ export class AddExpenseComponent implements OnInit {
   /** Controls visibility of note suggestions dropdown */
   showNoteSuggestions = false;
 
+  /** Reference to the amount input element */
+  @ViewChild('amountInput') amountInput!: ElementRef<HTMLInputElement>;
+
   /**
    * Constructor to inject dependencies
    * @param fb FormBuilder instance
@@ -60,6 +63,9 @@ export class AddExpenseComponent implements OnInit {
 
   /** Lifecycle hook that initializes the component */
   ngOnInit(): void {
+    setTimeout(() => {
+      this.amountInput?.nativeElement.focus();
+    }, 50);
     this.resetFormWithCurrentDateTime();
     this.loadSuggestionsFromLocalStorage();
     this.onInputChanges();

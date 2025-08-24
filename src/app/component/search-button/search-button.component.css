@@ -1,0 +1,5 @@
+/* Optional: smoother animation for width transition */
+:host {
+  display: block;
+}
+

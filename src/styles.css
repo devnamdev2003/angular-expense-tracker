@@ -1,7 +1,7 @@
 :root {
     --theme-color: #8f91ea;
     --color-bg: #ffffff;
-    --color-surface: #f5f6fa;
+    --color-surface: #f5f6fb;
     --color-text: #000000;
     --color-text2: #ffffff;
     --color-accent: var(--theme-color);
