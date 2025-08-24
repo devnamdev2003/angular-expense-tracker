@@ -25,6 +25,7 @@ import { UserService } from './service/localStorage/user.service';
 import { GlobalLoaderService } from './service/global-loader/global-loader.service';
 import { SectionService } from './service/section/section.service';
 import { PostApiService } from './service/backend-api/post/post-api.service';
+import { ToastService } from './service/toast/toast.service';
 
 /**
  * Root component of the application.
@@ -77,6 +78,7 @@ export class AppComponent {
    * @param postApiService Backend API post service
    * @param swUpdate Service Worker update manager
    * @param platformId Angular platform ID to check if running in browser
+   * @param toastService Service for displaying toast notifications
    */
   constructor(
     public userService: UserService,
@@ -85,6 +87,7 @@ export class AppComponent {
     private storageService: StorageService,
     private router: Router,
     private postApiService: PostApiService,
+    private toastService: ToastService,
     @Inject(PLATFORM_ID) private platformId: Object
   ) {
 
@@ -138,6 +141,13 @@ export class AppComponent {
       } else {
         this.postApiService.postUserData();
       }
+
+      // Show update toast if app is not updated
+      if (!this.isAppUpdated()) {
+        setTimeout(() => {
+          this.toastService.show('🚀 Update available! Please update from ⚙️ Settings.', 'info', 5000);
+        }, 500);
+      }
     }
   }
 
@@ -169,5 +179,13 @@ export class AppComponent {
     const timestamp = Date.now().toString(36);
     const random = Math.random().toString(36).substring(2, 10);
     return `${timestamp}-${random}`;
+  }
+
+  /**
+   * Checks if the application is updated.
+   * @returns True if the app is updated, false otherwise.
+   */
+  isAppUpdated(): boolean {
+    return this.userService.getValue<boolean>('is_app_updated') ?? false;
   }
 }

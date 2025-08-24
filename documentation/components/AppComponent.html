@@ -253,6 +253,9 @@ theme application, schema syncing, and PWA update activation.</p>
                                 <a href="#generateUserId" >generateUserId</a>
                             </li>
                             <li>
+                                <a href="#isAppUpdated" >isAppUpdated</a>
+                            </li>
+                            <li>
                                 <a href="#ngOnInit" >ngOnInit</a>
                             </li>
                             <li>
@@ -298,12 +301,12 @@ theme application, schema syncing, and PWA update activation.</p>
             <tbody>
                 <tr>
                     <td class="col-md-4">
-<code>constructor(userService: <a href="../injectables/UserService.html" target="_self">UserService</a>, loader: <a href="../injectables/GlobalLoaderService.html" target="_self">GlobalLoaderService</a>, sectionService: <a href="../injectables/SectionService.html" target="_self">SectionService</a>, storageService: <a href="../injectables/StorageService.html" target="_self">StorageService</a>, router: Router, postApiService: <a href="../injectables/PostApiService.html" target="_self">PostApiService</a>, platformId: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object" target="_blank">Object</a>)</code>
+<code>constructor(userService: <a href="../injectables/UserService.html" target="_self">UserService</a>, loader: <a href="../injectables/GlobalLoaderService.html" target="_self">GlobalLoaderService</a>, sectionService: <a href="../injectables/SectionService.html" target="_self">SectionService</a>, storageService: <a href="../injectables/StorageService.html" target="_self">StorageService</a>, router: Router, postApiService: <a href="../injectables/PostApiService.html" target="_self">PostApiService</a>, toastService: <a href="../injectables/ToastService.html" target="_self">ToastService</a>, platformId: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object" target="_blank">Object</a>)</code>
                     </td>
                 </tr>
                         <tr>
                             <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="66" class="link-to-prism">src/app/app.component.ts:66</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="67" class="link-to-prism">src/app/app.component.ts:67</a></div>
                             </td>
                         </tr>
 
@@ -421,6 +424,22 @@ Initializes route tracking, section updates, PWA update listener, and services.<
                                                         </td>
                                                 </tr>
                                                 <tr>
+                                                        <td>toastService</td>
+                                                  
+                                                        <td>
+                                                                        <code><a href="../injectables/ToastService.html" target="_self" >ToastService</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                        <td>
+                                                                <p>Service for displaying toast notifications</p>
+
+                                                        </td>
+                                                </tr>
+                                                <tr>
                                                         <td>platformId</td>
                                                   
                                                         <td>
@@ -474,8 +493,8 @@ Initializes route tracking, section updates, PWA update listener, and services.<
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="160"
-                                    class="link-to-prism">src/app/app.component.ts:160</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="170"
+                                    class="link-to-prism">src/app/app.component.ts:170</a></div>
                         </td>
                     </tr>
 
@@ -542,8 +561,8 @@ Initializes route tracking, section updates, PWA update listener, and services.<
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="149"
-                                    class="link-to-prism">src/app/app.component.ts:149</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="159"
+                                    class="link-to-prism">src/app/app.component.ts:159</a></div>
                         </td>
                     </tr>
 
@@ -613,8 +632,8 @@ Initializes route tracking, section updates, PWA update listener, and services.<
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="168"
-                                    class="link-to-prism">src/app/app.component.ts:168</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="178"
+                                    class="link-to-prism">src/app/app.component.ts:178</a></div>
                         </td>
                     </tr>
 
@@ -630,6 +649,49 @@ Initializes route tracking, section updates, PWA update listener, and services.<
                         </div>
                             <div class="io-description">
                                 <p>Generated user ID string</p>
+
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="isAppUpdated"></a>
+                    <span class="name">
+                        <span ><b>isAppUpdated</b></span>
+                        <a href="#isAppUpdated"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>isAppUpdated()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="188"
+                                    class="link-to-prism">src/app/app.component.ts:188</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-description"><p>Checks if the application is updated.</p>
+</div>
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                <p>True if the app is updated, false otherwise.</p>
 
                             </div>
                 </td>
@@ -656,8 +718,8 @@ Initializes route tracking, section updates, PWA update listener, and services.<
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="110"
-                                    class="link-to-prism">src/app/app.component.ts:110</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="113"
+                                    class="link-to-prism">src/app/app.component.ts:113</a></div>
                         </td>
                     </tr>
 
@@ -705,8 +767,8 @@ Applies theme, syncs schema, sets user ID, and shows loader.</p>
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="149"
-                                    class="link-to-prism">src/app/app.component.ts:149</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="159"
+                                    class="link-to-prism">src/app/app.component.ts:159</a></div>
                         </td>
                     </tr>
 
@@ -788,8 +850,8 @@ Applies theme, syncs schema, sets user ID, and shows loader.</p>
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="160"
-                                    class="link-to-prism">src/app/app.component.ts:160</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="170"
+                                    class="link-to-prism">src/app/app.component.ts:170</a></div>
                         </td>
                     </tr>
 
@@ -872,7 +934,7 @@ Applies theme, syncs schema, sets user ID, and shows loader.</p>
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="51" class="link-to-prism">src/app/app.component.ts:51</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="52" class="link-to-prism">src/app/app.component.ts:52</a></div>
                         </td>
                     </tr>
 
@@ -903,7 +965,7 @@ Applies theme, syncs schema, sets user ID, and shows loader.</p>
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="61" class="link-to-prism">src/app/app.component.ts:61</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="62" class="link-to-prism">src/app/app.component.ts:62</a></div>
                         </td>
                     </tr>
 
@@ -940,7 +1002,7 @@ Applies theme, syncs schema, sets user ID, and shows loader.</p>
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="56" class="link-to-prism">src/app/app.component.ts:56</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="57" class="link-to-prism">src/app/app.component.ts:57</a></div>
                         </td>
                     </tr>
 
@@ -971,7 +1033,7 @@ Applies theme, syncs schema, sets user ID, and shows loader.</p>
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="66" class="link-to-prism">src/app/app.component.ts:66</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="67" class="link-to-prism">src/app/app.component.ts:67</a></div>
                         </td>
                     </tr>
 
@@ -1004,7 +1066,7 @@ Applies theme, syncs schema, sets user ID, and shows loader.</p>
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="82" class="link-to-prism">src/app/app.component.ts:82</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="84" class="link-to-prism">src/app/app.component.ts:84</a></div>
                         </td>
                     </tr>
 
@@ -1049,6 +1111,7 @@ import { UserService } from &#x27;./service/localStorage/user.service&#x27;;
 import { GlobalLoaderService } from &#x27;./service/global-loader/global-loader.service&#x27;;
 import { SectionService } from &#x27;./service/section/section.service&#x27;;
 import { PostApiService } from &#x27;./service/backend-api/post/post-api.service&#x27;;
+import { ToastService } from &#x27;./service/toast/toast.service&#x27;;
 
 /**
  * Root component of the application.
@@ -1101,6 +1164,7 @@ export class AppComponent {
    * @param postApiService Backend API post service
    * @param swUpdate Service Worker update manager
    * @param platformId Angular platform ID to check if running in browser
+   * @param toastService Service for displaying toast notifications
    */
   constructor(
     public userService: UserService,
@@ -1109,6 +1173,7 @@ export class AppComponent {
     private storageService: StorageService,
     private router: Router,
     private postApiService: PostApiService,
+    private toastService: ToastService,
     @Inject(PLATFORM_ID) private platformId: Object
   ) {
 
@@ -1162,6 +1227,13 @@ export class AppComponent {
       } else {
         this.postApiService.postUserData();
       }
+
+      // Show update toast if app is not updated
+      if (!this.isAppUpdated()) {
+        setTimeout(() &#x3D;&gt; {
+          this.toastService.show(&#x27;🚀 Update available! Please update from ⚙️ Settings.&#x27;, &#x27;info&#x27;, 5000);
+        }, 500);
+      }
     }
   }
 
@@ -1193,6 +1265,14 @@ export class AppComponent {
     const timestamp &#x3D; Date.now().toString(36);
     const random &#x3D; Math.random().toString(36).substring(2, 10);
     return &#x60;${timestamp}-${random}&#x60;;
+  }
+
+  /**
+   * Checks if the application is updated.
+   * @returns True if the app is updated, false otherwise.
+   */
+  isAppUpdated(): boolean {
+    return this.userService.getValue&lt;boolean&gt;(&#x27;is_app_updated&#x27;) ?? false;
   }
 }
 </code></pre>

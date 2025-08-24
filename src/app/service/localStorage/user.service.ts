@@ -13,7 +13,8 @@ export interface User {
   user_password: string,
   theme_mode: string,
   currency: string,
-  app_version: string
+  app_version: string,
+  is_app_updated: boolean
 };
 
 @Injectable({ providedIn: 'root' })

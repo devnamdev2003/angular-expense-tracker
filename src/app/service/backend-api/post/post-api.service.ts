@@ -4,7 +4,7 @@ import { take } from 'rxjs/operators';
 import { ConfigService } from '../../util/config/config.service';
 import { StorageService } from '../../localStorage/storage.service';
 import { UserService } from '../../localStorage/user.service';
-
+import { ToastService } from '../../toast/toast.service';
 /**
  * Service to handle background POST requests to sync user data (expenses, budget, categories, etc.)
  * with the backend API. Intended to run silently once every 24 hours.
@@ -20,12 +20,14 @@ export class PostApiService {
    * @param configService Provides API base URL based on environment
    * @param storageService Accesses user data from LocalStorage
    * @param userService Manages user-specific values like `id` and `last_backup`
+   * @param toastService Displays notifications to the user
    */
   constructor(
     private http: HttpClient,
     private configService: ConfigService,
     private storageService: StorageService,
-    private userService: UserService
+    private userService: UserService,
+    private toastService: ToastService
   ) { }
 
   /**
@@ -39,13 +41,21 @@ export class PostApiService {
     const shouldBackup = !lastBackup || (now.getTime() - lastBackup.getTime()) > 24 * 60 * 60 * 1000;
 
     if (shouldBackup) {
-      //console.log('Posting user data in the background...');
+      // console.log('Posting user data in the background...');
       const url = this.configService.getapiUrl() + '/api/post/';
       const userData = this.getUserDataFromLocalStorage();
 
       this.http.post(url, userData).pipe(take(1)).subscribe({
-        next: () => {
-          //console.log('User data posted successfully. Updating last_backup...');
+        next: (res: any) => {
+          console.log('User data posted successfully. Response:', res);
+          const api_response_app_version = res.app_version;
+          const app_current_version = this.userService.getValue<string>('app_version');
+          if (api_response_app_version != app_current_version) {
+            this.userService.update('is_app_updated', false);
+            setTimeout(() => {
+              this.toastService.show('🚀 Update available! Please update from ⚙️ Settings.', 'info', 5000);
+            }, 500);
+          }
           this.userService.update('last_backup', now.toISOString());
         },
         error: err => {

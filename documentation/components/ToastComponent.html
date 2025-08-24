@@ -120,6 +120,16 @@
 </p>
 
 
+    <p class="comment">
+        <h3>Description</h3>
+    </p>
+    <p class="comment">
+        <p>ToastComponent</p>
+<p>A reusable component responsible for rendering toast notifications.
+It integrates with <code>ToastService</code> to display messages dynamically
+and handles auto-dismiss after a configurable duration.</p>
+
+    </p>
 
 
     <p class="comment">
@@ -218,12 +228,15 @@
                 </tr>
                         <tr>
                             <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="12" class="link-to-prism">src/app/shared/toast/toast.component.ts:12</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="17" class="link-to-prism">src/app/shared/toast/toast.component.ts:17</a></div>
                             </td>
                         </tr>
 
                 <tr>
                     <td class="col-md-4">
+                            <div class="io-description"><p>Creates an instance of ToastComponent.
+so that it can be accessed globally.</p>
+</div>
                             <div>
                                     <b>Parameters :</b>
                                     <table class="params">
@@ -232,6 +245,7 @@
                                                 <td>Name</td>
                                                     <td>Type</td>
                                                 <td>Optional</td>
+                                                    <td>Description</td>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -246,6 +260,11 @@
                                                             No
                                                     </td>
                                                     
+                                                        <td>
+                                                                <p>Service used to register this component instance
+so that it can be accessed globally.</p>
+
+                                                        </td>
                                                 </tr>
                                         </tbody>
                                     </table>
@@ -285,14 +304,17 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="15"
-                                    class="link-to-prism">src/app/shared/toast/toast.component.ts:15</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="30"
+                                    class="link-to-prism">src/app/shared/toast/toast.component.ts:30</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
+                        <div class="io-description"><p>Lifecycle hook that runs after component&#39;s view has been fully initialized.
+Registers this component with the <code>ToastService</code> so it can be controlled externally.</p>
+</div>
 
                         <div class="io-description">
                             <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
@@ -315,21 +337,23 @@
             </tr>
             <tr>
                 <td class="col-md-4">
-<code>showToast(message: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>, type: "success" | "error" | "info" | "warning")</code>
+<code>showToast(message: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>, type: "success" | "error" | "info" | "warning", duration: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank">number</a>)</code>
                 </td>
             </tr>
 
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="18"
-                                    class="link-to-prism">src/app/shared/toast/toast.component.ts:18</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="41"
+                                    class="link-to-prism">src/app/shared/toast/toast.component.ts:41</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
+                        <div class="io-description"><p>Displays a toast notification with a message, style, and duration.</p>
+</div>
 
                             <div class="io-description">
                                 <b>Parameters :</b>
@@ -341,6 +365,7 @@
                                                 <td>Type</td>
                                             <td>Optional</td>
                                                 <td>Default value</td>
+                                                <td>Description</td>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -357,6 +382,10 @@
                                             <td>
                                             </td>
 
+                                            <td>
+                                                    <p>The text content of the toast</p>
+
+                                            </td>
                                         </tr>
                                         <tr>
                                                 <td>type</td>
@@ -372,6 +401,29 @@
                                                     <code>&#x27;success&#x27;</code>
                                             </td>
 
+                                            <td>
+                                                    <p>The type of toast (<code>success</code> | <code>error</code> | <code>info</code> | <code>warning</code>), defaults to <code>&#39;success&#39;</code></p>
+
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                                <td>duration</td>
+                                            <td>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+                                            <td>
+                                                    <code>3000</code>
+                                            </td>
+
+                                            <td>
+                                                    <p>Duration in milliseconds before the toast disappears, defaults to <code>3000</code></p>
+
+                                            </td>
                                         </tr>
                                     </tbody>
                                 </table>
@@ -393,29 +445,58 @@
 
 
     <div class="tab-pane fade  tab-source-code" id="source">
-        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Component } from &#x27;@angular/core&#x27;;
-import { AfterViewInit } from &#x27;@angular/core&#x27;;
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Component, AfterViewInit } from &#x27;@angular/core&#x27;;
 import { ToastService } from &#x27;../../service/toast/toast.service&#x27;;
 
+/**
+ * ToastComponent
+ *
+ * A reusable component responsible for rendering toast notifications.
+ * It integrates with &#x60;ToastService&#x60; to display messages dynamically
+ * and handles auto-dismiss after a configurable duration.
+ */
 @Component({
   selector: &#x27;app-toast&#x27;,
   imports: [],
   templateUrl: &#x27;./toast.component.html&#x27;,
   styleUrl: &#x27;./toast.component.css&#x27;
 })
-
 export class ToastComponent implements AfterViewInit {
+
+  /**
+   * Creates an instance of ToastComponent.
+   * @param toastService Service used to register this component instance
+   * so that it can be accessed globally.
+   */
   constructor(private toastService: ToastService) { }
 
+  /**
+   * Lifecycle hook that runs after component&#x27;s view has been fully initialized.
+   * Registers this component with the &#x60;ToastService&#x60; so it can be controlled externally.
+   */
   ngAfterViewInit(): void {
     this.toastService.register(this);
   }
-  showToast(message: string, type: &#x27;success&#x27; | &#x27;error&#x27; | &#x27;info&#x27; | &#x27;warning&#x27; &#x3D; &#x27;success&#x27;) {
+
+  /**
+   * Displays a toast notification with a message, style, and duration.
+   *
+   * @param message The text content of the toast
+   * @param type The type of toast (&#x60;success&#x60; | &#x60;error&#x60; | &#x60;info&#x60; | &#x60;warning&#x60;), defaults to &#x60;&#x27;success&#x27;&#x60;
+   * @param duration Duration in milliseconds before the toast disappears, defaults to &#x60;3000&#x60;
+   */
+  showToast(
+    message: string,
+    type: &#x27;success&#x27; | &#x27;error&#x27; | &#x27;info&#x27; | &#x27;warning&#x27; &#x3D; &#x27;success&#x27;,
+    duration: number &#x3D; 3000
+  ): void {
     const toastContainer &#x3D; document.getElementById(&#x27;toast-container&#x27;);
 
     if (toastContainer) {
+      // Clear any existing toasts
       toastContainer.innerHTML &#x3D; &#x27;&#x27;;
 
+      // Define style classes for each toast type
       const typeClasses: any &#x3D; {
         success: &#x27;bg-green-500&#x27;,
         error: &#x27;bg-red-500&#x27;,
@@ -423,6 +504,7 @@ export class ToastComponent implements AfterViewInit {
         warning: &#x27;bg-yellow-500 text-black&#x27;,
       };
 
+      // Create toast element
       const toast &#x3D; document.createElement(&#x27;div&#x27;);
       toast.className &#x3D; &#x60;
         flex items-center justify-between max-w-xs w-full p-4 rounded shadow-lg
@@ -431,6 +513,7 @@ export class ToastComponent implements AfterViewInit {
         animate-fade-in
       &#x60;;
 
+      // Add message and dismiss button
       toast.innerHTML &#x3D; &#x60;
         &lt;span&gt;${message}&lt;/span&gt;
         &lt;button class&#x3D;&quot;ml-4 font-bold focus:outline-none&quot; onclick&#x3D;&quot;this.parentElement.remove()&quot;&gt;&amp;times;&lt;/button&gt;
@@ -438,9 +521,10 @@ export class ToastComponent implements AfterViewInit {
 
       toastContainer.appendChild(toast);
 
+      // Auto-remove toast after the given duration
       setTimeout(() &#x3D;&gt; {
         toast.remove();
-      }, 3000);
+      }, duration);
     }
   }
 }

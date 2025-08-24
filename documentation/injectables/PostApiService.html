@@ -167,7 +167,7 @@ with the backend API. Intended to run silently once every 24 hours.</p>
             <tbody>
                 <tr>
                     <td class="col-md-4">
-<code>constructor(http: HttpClient, configService: <a href="../injectables/ConfigService.html" target="_self">ConfigService</a>, storageService: <a href="../injectables/StorageService.html" target="_self">StorageService</a>, userService: <a href="../injectables/UserService.html" target="_self">UserService</a>)</code>
+<code>constructor(http: HttpClient, configService: <a href="../injectables/ConfigService.html" target="_self">ConfigService</a>, storageService: <a href="../injectables/StorageService.html" target="_self">StorageService</a>, userService: <a href="../injectables/UserService.html" target="_self">UserService</a>, toastService: <a href="../injectables/ToastService.html" target="_self">ToastService</a>)</code>
                     </td>
                 </tr>
                         <tr>
@@ -256,6 +256,22 @@ with the backend API. Intended to run silently once every 24 hours.</p>
 
                                                         </td>
                                                 </tr>
+                                                <tr>
+                                                        <td>toastService</td>
+                                                  
+                                                        <td>
+                                                                        <code><a href="../injectables/ToastService.html" target="_self" >ToastService</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                        <td>
+                                                                <p>Displays notifications to the user</p>
+
+                                                        </td>
+                                                </tr>
                                         </tbody>
                                     </table>
                             </div>
@@ -290,8 +306,8 @@ with the backend API. Intended to run silently once every 24 hours.</p>
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="66"
-                                    class="link-to-prism">src/app/service/backend-api/post/post-api.service.ts:66</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="76"
+                                    class="link-to-prism">src/app/service/backend-api/post/post-api.service.ts:76</a></div>
                         </td>
                     </tr>
 
@@ -335,8 +351,8 @@ or <code>undefined</code> if user_id is not available.</p>
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="35"
-                                    class="link-to-prism">src/app/service/backend-api/post/post-api.service.ts:35</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="37"
+                                    class="link-to-prism">src/app/service/backend-api/post/post-api.service.ts:37</a></div>
                         </td>
                     </tr>
 
@@ -367,7 +383,7 @@ import { take } from &#x27;rxjs/operators&#x27;;
 import { ConfigService } from &#x27;../../util/config/config.service&#x27;;
 import { StorageService } from &#x27;../../localStorage/storage.service&#x27;;
 import { UserService } from &#x27;../../localStorage/user.service&#x27;;
-
+import { ToastService } from &#x27;../../toast/toast.service&#x27;;
 /**
  * Service to handle background POST requests to sync user data (expenses, budget, categories, etc.)
  * with the backend API. Intended to run silently once every 24 hours.
@@ -383,12 +399,14 @@ export class PostApiService {
    * @param configService Provides API base URL based on environment
    * @param storageService Accesses user data from LocalStorage
    * @param userService Manages user-specific values like &#x60;id&#x60; and &#x60;last_backup&#x60;
+   * @param toastService Displays notifications to the user
    */
   constructor(
     private http: HttpClient,
     private configService: ConfigService,
     private storageService: StorageService,
-    private userService: UserService
+    private userService: UserService,
+    private toastService: ToastService
   ) { }
 
   /**
@@ -402,13 +420,21 @@ export class PostApiService {
     const shouldBackup &#x3D; !lastBackup || (now.getTime() - lastBackup.getTime()) &gt; 24 * 60 * 60 * 1000;
 
     if (shouldBackup) {
-      //console.log(&#x27;Posting user data in the background...&#x27;);
+      // console.log(&#x27;Posting user data in the background...&#x27;);
       const url &#x3D; this.configService.getapiUrl() + &#x27;/api/post/&#x27;;
       const userData &#x3D; this.getUserDataFromLocalStorage();
 
       this.http.post(url, userData).pipe(take(1)).subscribe({
-        next: () &#x3D;&gt; {
-          //console.log(&#x27;User data posted successfully. Updating last_backup...&#x27;);
+        next: (res: any) &#x3D;&gt; {
+          console.log(&#x27;User data posted successfully. Response:&#x27;, res);
+          const api_response_app_version &#x3D; res.app_version;
+          const app_current_version &#x3D; this.userService.getValue&lt;string&gt;(&#x27;app_version&#x27;);
+          if (api_response_app_version !&#x3D; app_current_version) {
+            this.userService.update(&#x27;is_app_updated&#x27;, false);
+            setTimeout(() &#x3D;&gt; {
+              this.toastService.show(&#x27;🚀 Update available! Please update from ⚙️ Settings.&#x27;, &#x27;info&#x27;, 5000);
+            }, 500);
+          }
           this.userService.update(&#x27;last_backup&#x27;, now.toISOString());
         },
         error: err &#x3D;&gt; {

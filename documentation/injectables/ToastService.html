@@ -119,6 +119,16 @@
         </p>
 
 
+            <p class="comment">
+                <h3>Description</h3>
+            </p>
+            <p class="comment">
+                <p>ToastService</p>
+<p>A service for displaying toast notifications in the application.
+It requires registering a <code>ToastComponent</code> instance so it can delegate
+showing messages to the UI component.</p>
+
+            </p>
 
 
 
@@ -194,14 +204,17 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="10"
-                                    class="link-to-prism">src/app/service/toast/toast.service.ts:10</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="27"
+                                    class="link-to-prism">src/app/service/toast/toast.service.ts:27</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
+                        <div class="io-description"><p>Registers the toast component instance.
+Must be called once, typically from the root component.</p>
+</div>
 
                             <div class="io-description">
                                 <b>Parameters :</b>
@@ -212,6 +225,7 @@
                                             <td>Name</td>
                                                 <td>Type</td>
                                             <td>Optional</td>
+                                                <td>Description</td>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -226,6 +240,10 @@
                                             </td>
 
 
+                                            <td>
+                                                    <p>Instance of <code>ToastComponent</code> used to render notifications</p>
+
+                                            </td>
                                         </tr>
                                     </tbody>
                                 </table>
@@ -254,21 +272,23 @@
             </tr>
             <tr>
                 <td class="col-md-4">
-<code>show(message: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>, type: "success" | "error" | "info" | "warning")</code>
+<code>show(message: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>, type: "success" | "error" | "info" | "warning", duration: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank">number</a>)</code>
                 </td>
             </tr>
 
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="14"
-                                    class="link-to-prism">src/app/service/toast/toast.service.ts:14</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="39"
+                                    class="link-to-prism">src/app/service/toast/toast.service.ts:39</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
+                        <div class="io-description"><p>Displays a toast message.</p>
+<b>Example :</b><div><pre class="line-numbers"><code class="language-none">        Defaults to `&#39;success&#39;`</code></pre></div></div>
 
                             <div class="io-description">
                                 <b>Parameters :</b>
@@ -280,6 +300,7 @@
                                                 <td>Type</td>
                                             <td>Optional</td>
                                                 <td>Default value</td>
+                                                <td>Description</td>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -296,6 +317,10 @@
                                             <td>
                                             </td>
 
+                                            <td>
+                                                    <p>The message text to display</p>
+
+                                            </td>
                                         </tr>
                                         <tr>
                                                 <td>type</td>
@@ -311,6 +336,29 @@
                                                     <code>&#x27;success&#x27;</code>
                                             </td>
 
+                                            <td>
+                                                    <p>The type of toast (<code>success</code> | <code>error</code> | <code>info</code> | <code>warning</code>)<br>Defaults to <code>&#39;success&#39;</code></p>
+
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                                <td>duration</td>
+                                            <td>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+                                            <td>
+                                                    <code>3000</code>
+                                            </td>
+
+                                            <td>
+                                                    <p>Duration in milliseconds before auto-hide (default: <code>3000</code>)</p>
+
+                                            </td>
                                         </tr>
                                     </tbody>
                                 </table>
@@ -352,10 +400,17 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="8" class="link-to-prism">src/app/service/toast/toast.service.ts:8</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="19" class="link-to-prism">src/app/service/toast/toast.service.ts:19</a></div>
                         </td>
                     </tr>
 
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Reference to the toast component instance.
+This is registered once during app initialization.</p>
+</div>
+                </td>
+            </tr>
 
         </tbody>
     </table>
@@ -368,18 +423,47 @@
         <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Injectable } from &#x27;@angular/core&#x27;;
 import { ToastComponent } from &#x27;../../shared/toast/toast.component&#x27;;
 
+/**
+ * ToastService
+ *
+ * A service for displaying toast notifications in the application.
+ * It requires registering a &#x60;ToastComponent&#x60; instance so it can delegate
+ * showing messages to the UI component.
+ */
 @Injectable({
   providedIn: &#x27;root&#x27;,
 })
 export class ToastService {
+  /**
+   * Reference to the toast component instance.
+   * This is registered once during app initialization.
+   */
   private toastComponent!: ToastComponent;
 
-  register(toast: ToastComponent) {
+  /**
+   * Registers the toast component instance.
+   * Must be called once, typically from the root component.
+   *
+   * @param toast Instance of &#x60;ToastComponent&#x60; used to render notifications
+   */
+  register(toast: ToastComponent): void {
     this.toastComponent &#x3D; toast;
   }
 
-  show(message: string, type: &#x27;success&#x27; | &#x27;error&#x27; | &#x27;info&#x27; | &#x27;warning&#x27; &#x3D; &#x27;success&#x27;) {
-    this.toastComponent?.showToast(message, type);
+  /**
+   * Displays a toast message.
+   *
+   * @param message The message text to display
+   * @param type The type of toast (&#x60;success&#x60; | &#x60;error&#x60; | &#x60;info&#x60; | &#x60;warning&#x60;)  
+   *             Defaults to &#x60;&#x27;success&#x27;&#x60;
+   * @param duration Duration in milliseconds before auto-hide (default: &#x60;3000&#x60;)
+   */
+  show(
+    message: string,
+    type: &#x27;success&#x27; | &#x27;error&#x27; | &#x27;info&#x27; | &#x27;warning&#x27; &#x3D; &#x27;success&#x27;,
+    duration: number &#x3D; 3000
+  ): void {
+    this.toastComponent?.showToast(message, type, duration);
   }
 }
 </code></pre>

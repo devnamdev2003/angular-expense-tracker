@@ -370,9 +370,11 @@ export class SettingsComponent {
       caches.keys().then((names: string[]) => {
         names.forEach(name => caches.delete(name));
       }).finally(() => {
-        (window as Window).location.reload(); // ✅ cast fixes TS error
+        this.userService.update('is_app_updated', true);
+        (window as Window).location.reload();
       });
     } else {
+      this.userService.update('is_app_updated', true);
       (window as Window).location.reload();
     }
   }

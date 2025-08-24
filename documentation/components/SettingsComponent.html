@@ -1958,9 +1958,11 @@ export class SettingsComponent {
       caches.keys().then((names: string[]) &#x3D;&gt; {
         names.forEach(name &#x3D;&gt; caches.delete(name));
       }).finally(() &#x3D;&gt; {
-        (window as Window).location.reload(); // ✅ cast fixes TS error
+        this.userService.update(&#x27;is_app_updated&#x27;, true);
+        (window as Window).location.reload();
       });
     } else {
+      this.userService.update(&#x27;is_app_updated&#x27;, true);
       (window as Window).location.reload();
     }
   }

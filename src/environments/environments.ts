@@ -25,5 +25,5 @@ export const environment = {
    * Application version.
    * This should be updated with each release to track application versions.
    */
-  applicationVersion: '25.8.24', // Current application version
+  applicationVersion: '25.8.25', // Current application version
 };
