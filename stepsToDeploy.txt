@@ -8,3 +8,4 @@
 8. Proceed with the deployment process to push the updated application
 9. Merge the angular-dev branch into the main branch
 10. Than, modify environments.ts by changing the developmentEnvironment variable from 'live' back to 'local'
+11. update the app version in backend side.
