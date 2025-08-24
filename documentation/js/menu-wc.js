@@ -114,6 +114,9 @@ customElements.define('compodoc-menu', class extends HTMLElement {
                                 <a href="components/PieChartComponent.html" data-type="entity-link" >PieChartComponent</a>
                             </li>
                             <li class="link">
+                                <a href="components/SearchButtonComponent.html" data-type="entity-link" >SearchButtonComponent</a>
+                            </li>
+                            <li class="link">
                                 <a href="components/SearchComponent.html" data-type="entity-link" >SearchComponent</a>
                             </li>
                             <li class="link">

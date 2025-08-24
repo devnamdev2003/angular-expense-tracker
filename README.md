@@ -60,8 +60,9 @@ All expenses are stored in the device's **LocalStorage** and reflected immediate
 * Displays all user expenses in a scrollable, and sortable list.
 * Users can:
 
+  * 🔍 **Search** expenses quickly by typing keywords (category, note, or payment mode).  
   * 🧾 **Sort** expenses by date, amount, or category.
-  * 🔍 **Filter** by category, date, extra spending, and payment mode.
+  * 🎯 **Filter** by category, date, extra spending, and payment mode.
   * 🖱️ Tap any entry to open a **modal** with complete details and options to **edit** or **delete** the expense.
 
 ---
@@ -92,7 +93,6 @@ Provides customization and utility options for better personalization:
 * ❌ **Delete Category** (remove unused or incorrect categories)
 * 🔄 **Update App** (Update the application to the latest release)
 
-
 ---
 
 ## 📱 Mobile-First Design
@@ -120,7 +120,7 @@ All user data is stored using the **browser’s LocalStorage API**, ensuring:
 3. Navigate to:
 
    * **Calendar** to view per-date expenses.
-   * **List** for detailed log and search/filter options.
+   * **List** for detailed log with **search, filter, and sort** options.
    * **Budget** to monitor spending.
    * **Settings** for customization.
 
