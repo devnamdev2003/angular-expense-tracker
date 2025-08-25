@@ -129,7 +129,7 @@ All user data is stored using the **browser’s LocalStorage API**, ensuring:
 ## 📄 Code Documentation
 
 For developers and contributors, detailed code-level documentation is available here:  
-👉 [Documentation](https://devnamdev2003.github.io/ExpenseWise/documentation/)
+👉 [Documentation](https://devnamdev2003.github.io/Angular-ExpenseWise/documentation/)
 
 ---
 
@@ -142,10 +142,10 @@ For developers and contributors, detailed code-level documentation is available 
     justify-items: center;
     padding: 16px;
 ">
-    <img src="https://devnamdev2003.github.io/ExpenseWise/public/assets/appScreenshot/home.jpg" alt="home" style="width: 200px; border-radius: 8px;">
-    <img src="https://devnamdev2003.github.io/ExpenseWise/public/assets/appScreenshot/add.jpg" alt="add" style="width: 200px; border-radius: 8px;">
-    <img src="https://devnamdev2003.github.io/ExpenseWise/public/assets/appScreenshot/calendar.jpg" alt="calendar" style="width: 200px; border-radius: 8px;">
-    <img src="https://devnamdev2003.github.io/ExpenseWise/public/assets/appScreenshot/settings.jpg" alt="settings" style="width: 200px; border-radius: 8px;">
-    <img src="https://devnamdev2003.github.io/ExpenseWise/public/assets/appScreenshot/budget.jpg" alt="budget" style="width: 200px; border-radius: 8px;">
-    <img src="https://devnamdev2003.github.io/ExpenseWise/public/assets/appScreenshot/list.jpg" alt="list" style="width: 200px; border-radius: 8px;">
+    <img src="https://devnamdev2003.github.io/Angular-ExpenseWise/public/assets/appScreenshot/home.jpg" alt="home" style="width: 200px; border-radius: 8px;">
+    <img src="https://devnamdev2003.github.io/Angular-ExpenseWise/public/assets/appScreenshot/add.jpg" alt="add" style="width: 200px; border-radius: 8px;">
+    <img src="https://devnamdev2003.github.io/Angular-ExpenseWise/public/assets/appScreenshot/calendar.jpg" alt="calendar" style="width: 200px; border-radius: 8px;">
+    <img src="https://devnamdev2003.github.io/Angular-ExpenseWise/public/assets/appScreenshot/settings.jpg" alt="settings" style="width: 200px; border-radius: 8px;">
+    <img src="https://devnamdev2003.github.io/Angular-ExpenseWise/public/assets/appScreenshot/budget.jpg" alt="budget" style="width: 200px; border-radius: 8px;">
+    <img src="https://devnamdev2003.github.io/Angular-ExpenseWise/public/assets/appScreenshot/list.jpg" alt="list" style="width: 200px; border-radius: 8px;">
 </div>
