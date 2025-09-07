@@ -63,6 +63,7 @@ ${formatField('Name', currentSong.name)}${formatField('Type', currentSong.type)}
 - Suggest the next song that is the most accurate match in mood, vibe, and style to provide a smooth and positive user experience.
 - Use only the current song’s metadata to infer the best next song.
 - Do not include any additional text, explanation, or formatting in your response.
+- Do not repeat the already suggested song.
 
 Provide only the JSON object and no extra text, no backticks, no markdown formatting:
 {

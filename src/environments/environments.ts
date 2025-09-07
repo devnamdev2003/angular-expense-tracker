@@ -13,13 +13,13 @@ export const environment = {
    * API key for accessing the Gemini AI API.
    * Replace or secure this key before deploying to production.
    */
-  geminiApiKey: 'AIzaSyAZT2MYoLB9gRwRa6NRan8NdFSVmmwzz04',
+  geminiApiKey: 'AIzaSyBkBmHCsVna6d8bPYjQQhbpdymn7_Nvm2w',
 
   /**
    * Current environment type.
    * Possible values: 'local', 'live'
    */
-  developmentEnvironment: 'live', // Change to 'live' for production or 'local' for local development
+  developmentEnvironment: 'local', // Change to 'live' for production or 'local' for local development
 
   /**
    * Application version.

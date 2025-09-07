@@ -11,7 +11,7 @@ import { SearchButtonComponent } from '../../component/search-button/search-butt
 
 /**
  * ListExpensesComponent
- *
+ * 
  * Displays a list of expenses with support for:
  * - Sorting
  * - Filtering (date range, categories, payment mode, extra spending)
@@ -19,6 +19,7 @@ import { SearchButtonComponent } from '../../component/search-button/search-butt
  * - Editing and deleting expenses
  * - Viewing expense details in a modal
  */
+
 @Component({
   standalone: true,
   selector: 'app-list-expenses',
@@ -33,20 +34,17 @@ export class ListExpensesComponent implements OnInit {
   /** All categories, sorted by expense count. */
   categories: Category[] = [];
 
+  /** Currently selected expense (for modal view/edit). */
+  selectedExpense: Expense | null = null;
+
   /** User's preferred currency (retrieved from UserService). */
   currency: string | null;
-
-  /** Controls visibility of sort dropdown. */
-  isSortByDropdownOpen: boolean = false;
 
   /** Currently selected sort option label. */
   selectedFieldName: string = 'Sort By';
 
-  /** Controls visibility of filter dropdown. */
-  isFilterDropdownOpen: boolean = false;
-
-  /** Currently selected expense (for modal view/edit). */
-  selectedExpense: Expense | null = null;
+  /** Search query for filtering expenses. */
+  searchQuery: string = '';
 
   /** Sort direction (1 = asc, -1 = desc). */
   fieldDirection: number = 0;
@@ -54,8 +52,8 @@ export class ListExpensesComponent implements OnInit {
   /** Index of column used for sorting. */
   fieldColIndex: number = 0;
 
-  /** Whether the expense edit modal is open. */
-  isEditOpen: boolean = false;
+  /** Total amount of currently visible expenses. */
+  totalAmount: number = 0;
 
   /** Filter state before being applied. */
   filter = {
@@ -63,7 +61,7 @@ export class ListExpensesComponent implements OnInit {
     toDate: '',
     selectedCategoryIds: [] as string[],
     paymentMode: [] as string[],
-    isExtraSpending: true
+    isExtraSpending: false
   };
 
   /** Currently applied filters (saved state). */
@@ -72,17 +70,20 @@ export class ListExpensesComponent implements OnInit {
     toDate: '',
     selectedCategoryIds: [] as string[],
     paymentMode: [] as string[],
-    isExtraSpending: true
+    isExtraSpending: false
   };
-
-  /** Whether filter is active. */
-  isFiltered: boolean = false;
 
   /** Whether sorting is active. */
   isSorted: boolean = false;
 
-  /** Total amount of currently visible expenses. */
-  totalAmount: number = 0;
+  /** Whether the expense edit modal is open. */
+  isEditOpen: boolean = false;
+
+  /** Controls visibility of sort dropdown. */
+  isSortByDropdownOpen: boolean = false;
+
+  /** Controls visibility of filter dropdown. */
+  isFilterDropdownOpen: boolean = false;
 
   /** Reference to sort dropdown element. */
   @ViewChild('sortRef') sortRef!: ElementRef;
@@ -129,14 +130,6 @@ export class ListExpensesComponent implements OnInit {
     } catch (err) {
       console.error("Failed to load expenses:", err);
     }
-    finally {
-      if (this.isSorted) {
-        this.sortList(this.fieldColIndex, this.selectedFieldName, this.fieldDirection);
-      }
-      if (this.isFiltered) {
-        this.applyFilter();
-      }
-    }
   }
 
   /**
@@ -179,37 +172,12 @@ export class ListExpensesComponent implements OnInit {
   }
 
   /**
-   * Handles document click to close dropdowns when clicking outside.
-   * @param event Mouse click event
-   */
-  @HostListener('document:click', ['$event'])
-  onDocumentClick(event: MouseEvent): void {
-    const target = event.target as HTMLElement;
-    if (this.isSortByDropdownOpen && this.sortRef && !this.sortRef.nativeElement.contains(target)) {
-      this.toggleSortByDropdown();
-    }
-
-    if (this.isFilterDropdownOpen && this.filterRef && !this.filterRef.nativeElement.contains(target)) {
-      this.toggleFilterDropdown();
-    }
-  }
-
-  /** Toggles the filter dropdown and resets filter state accordingly. */
-  toggleFilterDropdown(): void {
-    if (this.isFiltered) {
-      this.filter = structuredClone(this.appliedFilter);
-    } else {
-      this.clearFilter();
-    }
-    this.isFilterDropdownOpen = !this.isFilterDropdownOpen;
-  }
-
-  /**
    * Applies the current filter to the expense list.
    */
   applyFilter(): void {
     this.totalAmount = 0;
-    let filtered = this.expenses;
+    this.searchData(this.searchQuery);
+    let filtered: Expense[] = this.expenses;
     this.appliedFilter = structuredClone(this.filter);
 
     if (this.appliedFilter.fromDate) {
@@ -241,7 +209,26 @@ export class ListExpensesComponent implements OnInit {
       this.sortList(this.fieldColIndex, this.selectedFieldName, this.fieldDirection);
     }
     this.isFilterDropdownOpen = false;
-    this.isFiltered = true;
+  }
+
+  /** Toggles the filter dropdown and resets filter state accordingly. */
+  toggleFilterDropdown(): void {
+    this.filter = structuredClone(this.appliedFilter);
+    this.isFilterDropdownOpen = !this.isFilterDropdownOpen;
+  }
+
+  /**
+    * Handles payment mode checkbox changes inside filter modal.
+    * @param event Checkbox change event
+    * @param categoryId Payment mode value
+    */
+  onPaymentModeCheckboxChange(event: Event, categoryId: string): void {
+    const checkbox = event.target as HTMLInputElement;
+    if (checkbox.checked) {
+      this.filter.paymentMode.push(categoryId);
+    } else {
+      this.filter.paymentMode = this.filter.paymentMode.filter(id => id !== categoryId);
+    }
   }
 
   /**
@@ -256,6 +243,28 @@ export class ListExpensesComponent implements OnInit {
     } else {
       this.filter.selectedCategoryIds = this.filter.selectedCategoryIds.filter(id => id !== categoryId);
     }
+  }
+
+  /** Clears all filters and reloads expenses. */
+  clearFilter(): void {
+    this.filter = {
+      fromDate: '',
+      toDate: '',
+      selectedCategoryIds: [],
+      paymentMode: [],
+      isExtraSpending: false
+    };
+  }
+
+  /** Clears the applied filter. */
+  clearAppliedFilter(): void {
+    this.appliedFilter = {
+      fromDate: '',
+      toDate: '',
+      selectedCategoryIds: [],
+      paymentMode: [],
+      isExtraSpending: false
+    };
   }
 
   /**
@@ -283,7 +292,6 @@ export class ListExpensesComponent implements OnInit {
     this.expenseService.update(expense_id, newData);
     this.toastService.show('Expense updated successfully', 'success');
     this.isEditOpen = false;
-    this.listExpenses();
   }
 
   /**
@@ -296,39 +304,18 @@ export class ListExpensesComponent implements OnInit {
       this.toastService.show("Expense deleted successfully", 'success');
       this.closeModal();
     }
-    this.listExpenses();
-  }
-
-  /** Clears all filters and reloads expenses. */
-  clearFilter(): void {
-    this.filter.fromDate = '';
-    this.filter.toDate = '';
-    this.filter.selectedCategoryIds = [];
-    this.filter.paymentMode = [];
-    this.filter.isExtraSpending = false;
-    this.isFiltered = false;
-    this.listExpenses();
-  }
-
-  /** Clears sorting and reloads expenses. */
-  clearSort(): void {
-    this.isSorted = false;
-    this.selectedFieldName = "Sort By";
-    this.listExpenses();
   }
 
   /**
-   * Handles payment mode checkbox changes inside filter modal.
-   * @param event Checkbox change event
-   * @param categoryId Payment mode value
+   * Searches expenses by location or note.
+   * @param query Search query string
    */
-  onPaymentModeCheckboxChange(event: Event, categoryId: string): void {
-    const checkbox = event.target as HTMLInputElement;
-    if (checkbox.checked) {
-      this.filter.paymentMode.push(categoryId);
-    } else {
-      this.filter.paymentMode = this.filter.paymentMode.filter(id => id !== categoryId);
-    }
+  searchData(query: string): void {
+    this.expenses = this.expenseService.getAll();
+    this.expenses = this.expenses.filter(ex => {
+      return ((ex.location && ex.location.toLowerCase().includes(query.toLowerCase())) ||
+        (ex.note && ex.note.toLowerCase().includes(query.toLowerCase())));
+    });
   }
 
   /**
@@ -337,12 +324,8 @@ export class ListExpensesComponent implements OnInit {
    */
   onSearch(query: string): void {
     this.totalAmount = 0;
-    console.log('Parent received search query:', query);
-    this.expenses = this.expenseService.getAll();
-    this.expenses = this.expenses.filter(ex => {
-      return ((ex.location && ex.location.toLowerCase().includes(query.toLowerCase())) || 
-              (ex.note && ex.note.toLowerCase().includes(query.toLowerCase())));
-    });
+    this.searchQuery = query;
+    this.searchData(this.searchQuery);
     this.expenses.forEach((val) => {
       this.totalAmount = this.totalAmount + val.amount;
     })
@@ -352,13 +335,25 @@ export class ListExpensesComponent implements OnInit {
 
   /** Resets both filters and sorting without reloading expenses. */
   clearFiltersAndSorting(): void {
-    this.filter.fromDate = '';
-    this.filter.toDate = '';
-    this.filter.selectedCategoryIds = [];
-    this.filter.paymentMode = [];
-    this.filter.isExtraSpending = false;
-    this.isFiltered = false;
+    this.clearFilter();
+    this.clearAppliedFilter();
     this.isSorted = false;
     this.selectedFieldName = "Sort By";
+  }
+
+  /**
+   * Handles document click to close dropdowns when clicking outside.
+   * @param event Mouse click event
+   */
+  @HostListener('document:click', ['$event'])
+  onDocumentClick(event: MouseEvent): void {
+    const target = event.target as HTMLElement;
+    if (this.isSortByDropdownOpen && this.sortRef && !this.sortRef.nativeElement.contains(target)) {
+      this.toggleSortByDropdown();
+    }
+
+    if (this.isFilterDropdownOpen && this.filterRef && !this.filterRef.nativeElement.contains(target)) {
+      this.toggleFilterDropdown();
+    }
   }
 }
