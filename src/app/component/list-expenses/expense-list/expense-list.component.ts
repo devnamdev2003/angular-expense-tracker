@@ -1,6 +1,13 @@
 import { CommonModule } from '@angular/common';
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 
+/**
+ * ExpenseListComponent
+ *
+ * Displays a list of expenses with formatted dates and emits
+ * events when an expense is selected. Also provides a utility
+ * to darken colors for styling purposes.
+ */
 @Component({
   selector: 'app-expense-list',
   standalone: true,
@@ -8,22 +15,48 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
   templateUrl: './expense-list.component.html',
   styleUrl: './expense-list.component.css'
 })
-
 export class ExpenseListComponent {
+  /**
+   * The list of expense objects to display.
+   * Each expense should contain at least a `date` field.
+   */
   @Input() expenses: any[] = [];
+
+  /**
+   * The currency symbol or code to display with expense amounts.
+   */
   @Input() currency: string | null;
+
+  /**
+   * Event emitted when an expense is selected.
+   */
   @Output() expenseSelected = new EventEmitter<any>();
 
-  constructor(
-  ) {
+  /**
+   * Creates an instance of ExpenseListComponent.
+   * Initializes the currency to an empty string.
+   */
+  constructor() {
     this.currency = '';
-
   }
 
-  onSelect(expense: any) {
+  /**
+   * Handles the selection of an expense.
+   * Emits the selected expense via the `expenseSelected` output.
+   *
+   * @param expense The expense object that was selected.
+   */
+  onSelect(expense: any): void {
     this.expenseSelected.emit(expense);
   }
 
+  /**
+   * Formats the date of an expense into a human-readable string.
+   * Example: `Mon 1st Mar 2025`
+   *
+   * @param exp The expense object containing a `date` field.
+   * @returns A formatted date string with day, suffix, month, and year.
+   */
   getFormattedDate(exp: any): string {
     const date = new Date(exp.date);
 
@@ -51,7 +84,14 @@ export class ExpenseListComponent {
     return `${dayName} ${day}${suffix(day)} ${month} ${year}`;
   }
 
-
+  /**
+   * Darkens a given HEX color by a percentage.
+   * Converts the color to RGB and decreases brightness.
+   *
+   * @param color The HEX color string (e.g., `#FF0000`).
+   * @param percent The percentage (0–1) to darken the color.
+   * @returns The darkened color as an RGB string, or the original color on error.
+   */
   darkenColor(color: string, percent: number): string {
     try {
       const num = parseInt(color.replace('#', ''), 16);

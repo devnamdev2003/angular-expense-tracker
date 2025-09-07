@@ -11,15 +11,16 @@ import { SearchButtonComponent } from '../../component/search-button/search-butt
 
 /**
  * ListExpensesComponent
- * 
- * Displays a list of expenses with support for:
- * - Sorting
- * - Filtering (date range, categories, payment mode, extra spending)
- * - Searching
+ *
+ * Provides a full-featured expense list view with support for:
+ * - Sorting by amount, category, or date
+ * - Filtering by date range, category, payment mode, or extra spending
+ * - Free-text searching (location and note fields)
  * - Editing and deleting expenses
  * - Viewing expense details in a modal
+ *
+ * Integrates with services for persistence, categories, user preferences, and toasts.
  */
-
 @Component({
   standalone: true,
   selector: 'app-list-expenses',
@@ -28,67 +29,67 @@ import { SearchButtonComponent } from '../../component/search-button/search-butt
   styleUrls: ['./list-expenses.component.css'],
 })
 export class ListExpensesComponent implements OnInit {
-  /** All expenses currently loaded (filtered/sorted if applicable). */
+  /** All expenses currently displayed (after filtering/sorting). */
   expenses: Expense[] = [];
 
-  /** All categories, sorted by expense count. */
+  /** List of categories sorted by expense count. */
   categories: Category[] = [];
 
-  /** Currently selected expense (for modal view/edit). */
+  /** Currently selected expense (for modal). */
   selectedExpense: Expense | null = null;
 
-  /** User's preferred currency (retrieved from UserService). */
+  /** User's preferred currency (from UserService). */
   currency: string | null;
 
-  /** Currently selected sort option label. */
+  /** Selected sort field label (shown in UI). */
   selectedFieldName: string = 'Sort By';
 
-  /** Search query for filtering expenses. */
+  /** Current search query string. */
   searchQuery: string = '';
 
-  /** Sort direction (1 = asc, -1 = desc). */
+  /** Sort direction: 1 = ascending, -1 = descending. */
   fieldDirection: number = 0;
 
-  /** Index of column used for sorting. */
+  /** Index of column currently sorted. */
   fieldColIndex: number = 0;
 
-  /** Total amount of currently visible expenses. */
+  /** Total of visible expenses. */
   totalAmount: number = 0;
 
-  /** Filter state before being applied. */
+  /** Pending filter values (before apply). */
   filter = {
     fromDate: '',
     toDate: '',
     selectedCategoryIds: [] as string[],
     paymentMode: [] as string[],
-    isExtraSpending: false
+    isExtraSpending: false,
   };
 
-  /** Currently applied filters (saved state). */
+  /** Active filter values (after apply). */
   appliedFilter = {
     fromDate: '',
     toDate: '',
     selectedCategoryIds: [] as string[],
     paymentMode: [] as string[],
-    isExtraSpending: false
+    isExtraSpending: false,
   };
 
-  /** Whether sorting is active. */
+  /** Whether list is sorted. */
   isSorted: boolean = false;
 
-  /** Whether the expense edit modal is open. */
+  /** Whether edit modal is open. */
   isEditOpen: boolean = false;
 
-  /** Controls visibility of sort dropdown. */
+  /** Controls sort dropdown visibility. */
   isSortByDropdownOpen: boolean = false;
 
-  /** Controls visibility of filter dropdown. */
+  /** Controls filter dropdown visibility. */
   isFilterDropdownOpen: boolean = false;
 
-  /** Reference to sort dropdown element. */
+  /** Ref to sort dropdown element. */
   @ViewChild('sortRef') sortRef!: ElementRef;
 
-  /** Reference to filter dropdown element. */
+  /** Ref to filter dropdown element. */
   @ViewChild('filterRef') filterRef!: ElementRef;
 
   /**
@@ -107,16 +108,14 @@ export class ListExpensesComponent implements OnInit {
     this.currency = this.userService.getValue<string>('currency');
   }
 
-  /**
-   * Lifecycle hook: initializes the component by fetching expenses.
-   */
+  /** Angular lifecycle hook: initializes expense list. */
   ngOnInit(): void {
     this.listExpenses();
   }
 
   /**
-   * Loads expenses from storage, calculates totals,
-   * and reapplies sorting/filtering if enabled.
+   * Fetches all expenses, categories, and calculates total.
+   * Reapplies filters and sorting if active.
    */
   listExpenses(): void {
     this.totalAmount = 0;
@@ -134,13 +133,13 @@ export class ListExpensesComponent implements OnInit {
 
   /**
    * Sorts the expense list.
-   * @param colIndex Index of the column to sort by
-   * @param fieldName Label of the field being sorted
-   * @param direction 1 for ascending, -1 for descending
+   * @param colIndex Column index (0 = amount, 1 = category, 2 = date)
+   * @param fieldName Label of field
+   * @param direction 1 = asc, -1 = desc
    */
   sortList(colIndex: number, fieldName: string, direction: number): void {
     this.expenses.sort((a, b) => {
-      let valA, valB;
+      let valA: any, valB: any;
 
       switch (colIndex) {
         case 0: valA = a.amount; valB = b.amount; break;
@@ -153,12 +152,14 @@ export class ListExpensesComponent implements OnInit {
         return direction * (valA.getTime() - valB.getTime());
       }
 
-      if (!isNaN(valA as any) && !isNaN(valB as any)) {
+      if (!isNaN(valA) && !isNaN(valB)) {
         return direction * (Number(valA) - Number(valB));
       }
 
-      return direction * (valA.toString().toLowerCase().localeCompare(valB.toString().toLowerCase(), undefined, { numeric: true }));
+      return direction * valA.toString().toLowerCase()
+        .localeCompare(valB.toString().toLowerCase(), undefined, { numeric: true });
     });
+
     this.fieldColIndex = colIndex;
     this.fieldDirection = direction;
     this.selectedFieldName = fieldName;
@@ -166,13 +167,13 @@ export class ListExpensesComponent implements OnInit {
     this.isSorted = true;
   }
 
-  /** Toggles the sort dropdown. */
+  /** Toggles sort dropdown visibility. */
   toggleSortByDropdown(): void {
     this.isSortByDropdownOpen = !this.isSortByDropdownOpen;
   }
 
   /**
-   * Applies the current filter to the expense list.
+   * Applies filters (date, category, payment, extra spending).
    */
   applyFilter(): void {
     this.totalAmount = 0;
@@ -205,13 +206,15 @@ export class ListExpensesComponent implements OnInit {
       this.totalAmount = this.totalAmount + val.amount;
     })
     this.totalAmount = parseFloat(this.totalAmount.toFixed(2));
+
     if (this.isSorted) {
       this.sortList(this.fieldColIndex, this.selectedFieldName, this.fieldDirection);
     }
+
     this.isFilterDropdownOpen = false;
   }
 
-  /** Toggles the filter dropdown and resets filter state accordingly. */
+  /** Toggles filter dropdown, resetting pending filter state. */
   toggleFilterDropdown(): void {
     this.filter = structuredClone(this.appliedFilter);
     this.isFilterDropdownOpen = !this.isFilterDropdownOpen;
@@ -221,7 +224,7 @@ export class ListExpensesComponent implements OnInit {
     * Handles payment mode checkbox changes inside filter modal.
     * @param event Checkbox change event
     * @param categoryId Payment mode value
-    */
+   */
   onPaymentModeCheckboxChange(event: Event, categoryId: string): void {
     const checkbox = event.target as HTMLInputElement;
     if (checkbox.checked) {
@@ -245,7 +248,7 @@ export class ListExpensesComponent implements OnInit {
     }
   }
 
-  /** Clears all filters and reloads expenses. */
+  /** Resets pending filters. */
   clearFilter(): void {
     this.filter = {
       fromDate: '',
@@ -256,7 +259,7 @@ export class ListExpensesComponent implements OnInit {
     };
   }
 
-  /** Clears the applied filter. */
+  /** Resets applied filters. */
   clearAppliedFilter(): void {
     this.appliedFilter = {
       fromDate: '',
@@ -319,7 +322,7 @@ export class ListExpensesComponent implements OnInit {
   }
 
   /**
-   * Searches expenses by location or note.
+   * Performs search, updates total, clears filters/sorting.
    * @param query Search query string
    */
   onSearch(query: string): void {
@@ -333,7 +336,7 @@ export class ListExpensesComponent implements OnInit {
     this.clearFiltersAndSorting();
   }
 
-  /** Resets both filters and sorting without reloading expenses. */
+  /** Resets both filters and sorting state. */
   clearFiltersAndSorting(): void {
     this.clearFilter();
     this.clearAppliedFilter();
@@ -351,7 +354,6 @@ export class ListExpensesComponent implements OnInit {
     if (this.isSortByDropdownOpen && this.sortRef && !this.sortRef.nativeElement.contains(target)) {
       this.toggleSortByDropdown();
     }
-
     if (this.isFilterDropdownOpen && this.filterRef && !this.filterRef.nativeElement.contains(target)) {
       this.toggleFilterDropdown();
     }

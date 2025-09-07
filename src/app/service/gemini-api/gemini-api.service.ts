@@ -5,16 +5,44 @@ import { firstValueFrom } from 'rxjs';
 import { GlobalLoaderService } from '../global-loader/global-loader.service';
 import { ExpenseService, Expense } from '../localStorage/expense.service';
 
+/**
+ * GeminiApiService
+ *
+ * This service is responsible for communicating with the
+ * Google Gemini API to analyze the user's expense data.
+ * It fetches the last 30 days of expenses, generates prompts,
+ * and retrieves AI-generated insights for the user.
+ */
 @Injectable({
   providedIn: 'root'
 })
 export class GeminiApiService {
+  /**
+   * API URL for the Gemini model including the environment API key.
+   */
   private apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${environment.geminiApiKey}`;
 
-  constructor(private http: HttpClient, private globalLoaderService: GlobalLoaderService, private expenseService: ExpenseService) { }
+  /**
+   * Creates an instance of GeminiApiService.
+   *
+   * @param http Angular HttpClient for API requests.
+   * @param globalLoaderService Service to show/hide global loading indicators.
+   * @param expenseService Service to fetch expense data from local storage.
+   */
+  constructor(
+    private http: HttpClient,
+    private globalLoaderService: GlobalLoaderService,
+    private expenseService: ExpenseService
+  ) {}
 
+  /**
+   * Sends a prompt to the Gemini API and returns the generated response.
+   * Enhances the prompt with the user's last 30 days of expenses.
+   *
+   * @param prompt The user’s query or message.
+   * @returns A string response from Gemini with analysis or insights.
+   */
   async getResponse(prompt: string): Promise<string> {
-
     this.globalLoaderService.show("📊 Analyzing your expenses..");
     const expenses = this.getLast30DaysExpenses();
     const updatedPrompt = this.generateExpenseAnalysisPrompt(prompt, expenses);
@@ -37,7 +65,16 @@ export class GeminiApiService {
     }
   }
 
-  getLast30DaysExpenses(): Pick<Expense, 'amount' | 'note' | 'location' | 'date' | 'category_name' | 'payment_mode' | 'isExtraSpending'>[] {
+  /**
+   * Fetches the user's expenses from the last 30 days.
+   *
+   * @returns An array of expense objects with selected fields:
+   * amount, note, location, date, category_name, payment_mode, isExtraSpending.
+   */
+  getLast30DaysExpenses(): Pick<
+    Expense,
+    'amount' | 'note' | 'location' | 'date' | 'category_name' | 'payment_mode' | 'isExtraSpending'
+  >[] {
     const toDate = new Date();
     const fromDate = new Date();
     fromDate.setDate(toDate.getDate() - 29);
@@ -55,9 +92,20 @@ export class GeminiApiService {
     }));
   }
 
+  /**
+   * Generates a structured AI prompt for expense analysis.
+   * Includes instructions for the model and the last 30 days of expenses.
+   *
+   * @param userQuery The user’s input or question.
+   * @param last15DaysExpenses Array of expense objects from the last 30 days.
+   * @returns A formatted string prompt ready for Gemini API.
+   */
   generateExpenseAnalysisPrompt(
     userQuery: string,
-    last15DaysExpenses: Pick<Expense, 'amount' | 'note' | 'location' | 'date' | 'category_name' | 'payment_mode' | 'isExtraSpending'>[]
+    last15DaysExpenses: Pick<
+      Expense,
+      'amount' | 'note' | 'location' | 'date' | 'category_name' | 'payment_mode' | 'isExtraSpending'
+    >[]
   ): string {
     const baseInstructions = `
 You are a polite and helpful financial assistant AI. Your sole purpose is to help the user **analyze and predict** their expenses from the last 30 days.

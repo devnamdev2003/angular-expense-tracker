@@ -5,20 +5,61 @@ import { finalize } from 'rxjs/operators';
 import { environment } from '../../../environments/environments';
 import { firstValueFrom } from 'rxjs';
 
+/**
+ * ChatMessage interface
+ *
+ * Represents a single message exchanged between the user and the model.
+ */
 export interface ChatMessage {
+  /** Role of the message sender (user or model). */
   role: 'user' | 'model';
+  /** The text content of the message. */
   parts: { text: string }[];
 }
+
+/**
+ * SaavnService
+ *
+ * Service for integrating with Saavn API (song search) and
+ * Google Gemini API (next song recommendation).
+ * It manages search, AI-based suggestions, and conversation history.
+ */
 @Injectable({
   providedIn: 'root'
 })
 export class SaavnService {
+  /**
+   * Conversation history between user and AI model.
+   */
   private history: ChatMessage[] = [];
+
+  /**
+   * Base URL for Saavn song search API.
+   */
   private baseUrl = 'https://saavn.dev/api/search/songs';
+
+  /**
+   * Gemini API URL with authentication key from environment.
+   */
   private apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${environment.geminiApiKey}`;
 
-  constructor(private http: HttpClient, private globalLoaderService: GlobalLoaderService) { }
+  /**
+   * Creates an instance of SaavnService.
+   *
+   * @param http Angular HttpClient for API calls.
+   * @param globalLoaderService Global loader service to show/hide loading UI.
+   */
+  constructor(
+    private http: HttpClient,
+    private globalLoaderService: GlobalLoaderService
+  ) {}
 
+  /**
+   * Searches for songs using the Saavn API.
+   *
+   * @param query The search term provided by the user.
+   * @returns An observable containing the list of matching songs.
+   */
   searchSongs(query: string) {
     this.globalLoaderService.show("Searching songs...");
 
@@ -29,10 +70,23 @@ export class SaavnService {
     );
   }
 
-  async suggestNextSong(currentSong: any) {
-    
+  /**
+   * Suggests the next song based on the current song metadata.
+   * Uses Gemini API to infer mood and style, and returns the most suitable next track.
+   *
+   * @param currentSong The currently playing song object with metadata (name, album, artists, etc.).
+   * @returns A JSON string with the suggested song name and artist.
+   */
+  async suggestNextSong(currentSong: any): Promise<string> {
     this.globalLoaderService.show("Suggesting next song...");
 
+    /**
+     * Helper function to format metadata fields safely.
+     *
+     * @param fieldName The name of the metadata field.
+     * @param value The field value to format.
+     * @returns Formatted string or empty string if invalid.
+     */
     const formatField = (fieldName: string, value: any) => {
       if (value === null || value === undefined || value === '') {
         return '';
@@ -43,15 +97,15 @@ export class SaavnService {
       return `${fieldName}: ${value}\n`;
     };
 
-    // Safely extract album name
+    // Extract album name safely
     const albumName = currentSong.album?.name || '';
 
-    // Safely extract artists names as comma separated string
+    // Extract artists as a comma-separated string
     const artistsName = (currentSong.artists?.all && currentSong.artists.all.length > 0)
       ? currentSong.artists.all.map((artist: any) => artist.name).join(', ')
       : '';
 
-    // Build prompt string by concatenating only valid fields
+    // Prompt for Gemini API
     const prompt = `
 You are a smart music recommendation assistant. Your job is to analyze the mood and style of the current song the user is listening to and suggest the most accurate next song that fits or enhances the user's mood and listening experience.
 
@@ -71,11 +125,10 @@ Provide only the JSON object and no extra text, no backticks, no markdown format
   "artistsName": "string"
 }
 `;
+
     this.history.push({ role: 'user', parts: [{ text: prompt }] });
     const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
-    const body = {
-      contents: this.history
-    };
+    const body = { contents: this.history };
 
     try {
       const res: any = await firstValueFrom(this.http.post(this.apiUrl, body, { headers }));
@@ -83,17 +136,19 @@ Provide only the JSON object and no extra text, no backticks, no markdown format
       const modelReply = parts?.map((p: any) => p.text).join('\n\n') || 'No response';
 
       this.history.push({ role: 'model', parts: [{ text: modelReply }] });
-
       return modelReply;
     } catch (err) {
       console.error('Error:', err);
       return 'Error fetching response';
     }
-
   }
 
+  /**
+   * Returns the full conversation history between user and model.
+   *
+   * @returns An array of ChatMessage objects.
+   */
   getHistory(): ChatMessage[] {
     return this.history;
   }
-
 }

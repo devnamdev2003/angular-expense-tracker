@@ -129,14 +129,15 @@
     </p>
     <p class="comment">
         <p>ListExpensesComponent</p>
-<p>Displays a list of expenses with support for:</p>
+<p>Provides a full-featured expense list view with support for:</p>
 <ul>
-<li>Sorting</li>
-<li>Filtering (date range, categories, payment mode, extra spending)</li>
-<li>Searching</li>
+<li>Sorting by amount, category, or date</li>
+<li>Filtering by date range, category, payment mode, or extra spending</li>
+<li>Free-text searching (location and note fields)</li>
 <li>Editing and deleting expenses</li>
 <li>Viewing expense details in a modal</li>
 </ul>
+<p>Integrates with services for persistence, categories, user preferences, and toasts.</p>
 
     </p>
 
@@ -253,13 +254,13 @@
                                 <a href="#isFilterDropdownOpen" >isFilterDropdownOpen</a>
                             </li>
                             <li>
-                                <a href="#isFiltered" >isFiltered</a>
-                            </li>
-                            <li>
                                 <a href="#isSortByDropdownOpen" >isSortByDropdownOpen</a>
                             </li>
                             <li>
                                 <a href="#isSorted" >isSorted</a>
+                            </li>
+                            <li>
+                                <a href="#searchQuery" >searchQuery</a>
                             </li>
                             <li>
                                 <a href="#selectedExpense" >selectedExpense</a>
@@ -290,13 +291,13 @@
                                 <a href="#applyFilter" >applyFilter</a>
                             </li>
                             <li>
+                                <a href="#clearAppliedFilter" >clearAppliedFilter</a>
+                            </li>
+                            <li>
                                 <a href="#clearFilter" >clearFilter</a>
                             </li>
                             <li>
                                 <a href="#clearFiltersAndSorting" >clearFiltersAndSorting</a>
-                            </li>
-                            <li>
-                                <a href="#clearSort" >clearSort</a>
                             </li>
                             <li>
                                 <a href="#closeModal" >closeModal</a>
@@ -328,6 +329,9 @@
                             </li>
                             <li>
                                 <a href="#openExpenseModal" >openExpenseModal</a>
+                            </li>
+                            <li>
+                                <a href="#searchData" >searchData</a>
                             </li>
                             <li>
                                 <a href="#sortList" >sortList</a>
@@ -375,7 +379,7 @@
                 </tr>
                         <tr>
                             <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="91" class="link-to-prism">src/app/features/list-expenses/list-expenses.component.ts:91</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="93" class="link-to-prism">src/app/features/list-expenses/list-expenses.component.ts:93</a></div>
                             </td>
                         </tr>
 
@@ -497,8 +501,8 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="186"
-                                    class="link-to-prism">src/app/features/list-expenses/list-expenses.component.ts:186</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="352"
+                                    class="link-to-prism">src/app/features/list-expenses/list-expenses.component.ts:352</a></div>
                         </td>
                     </tr>
 
@@ -566,15 +570,54 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="210"
-                                    class="link-to-prism">src/app/features/list-expenses/list-expenses.component.ts:210</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="178"
+                                    class="link-to-prism">src/app/features/list-expenses/list-expenses.component.ts:178</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
-                        <div class="io-description"><p>Applies the current filter to the expense list.</p>
+                        <div class="io-description"><p>Applies filters (date, category, payment, extra spending).</p>
+</div>
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="clearAppliedFilter"></a>
+                    <span class="name">
+                        <span ><b>clearAppliedFilter</b></span>
+                        <a href="#clearAppliedFilter"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>clearAppliedFilter()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="263"
+                                    class="link-to-prism">src/app/features/list-expenses/list-expenses.component.ts:263</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-description"><p>Resets applied filters.</p>
 </div>
 
                         <div class="io-description">
@@ -605,15 +648,15 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="303"
-                                    class="link-to-prism">src/app/features/list-expenses/list-expenses.component.ts:303</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="252"
+                                    class="link-to-prism">src/app/features/list-expenses/list-expenses.component.ts:252</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
-                        <div class="io-description"><p>Clears all filters and reloads expenses.</p>
+                        <div class="io-description"><p>Resets pending filters.</p>
 </div>
 
                         <div class="io-description">
@@ -644,54 +687,15 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="354"
-                                    class="link-to-prism">src/app/features/list-expenses/list-expenses.component.ts:354</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="340"
+                                    class="link-to-prism">src/app/features/list-expenses/list-expenses.component.ts:340</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
-                        <div class="io-description"><p>Resets both filters and sorting without reloading expenses.</p>
-</div>
-
-                        <div class="io-description">
-                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
-
-                        </div>
-                </td>
-            </tr>
-        </tbody>
-    </table>
-    <table class="table table-sm table-bordered">
-        <tbody>
-            <tr>
-                <td class="col-md-4">
-                    <a name="clearSort"></a>
-                    <span class="name">
-                        <span ><b>clearSort</b></span>
-                        <a href="#clearSort"><span class="icon ion-ios-link"></span></a>
-                    </span>
-                </td>
-            </tr>
-            <tr>
-                <td class="col-md-4">
-<code>clearSort()</code>
-                </td>
-            </tr>
-
-
-                    <tr>
-                        <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="314"
-                                    class="link-to-prism">src/app/features/list-expenses/list-expenses.component.ts:314</a></div>
-                        </td>
-                    </tr>
-
-
-            <tr>
-                <td class="col-md-4">
-                        <div class="io-description"><p>Clears sorting and reloads expenses.</p>
+                        <div class="io-description"><p>Resets both filters and sorting state.</p>
 </div>
 
                         <div class="io-description">
@@ -722,8 +726,8 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="270"
-                                    class="link-to-prism">src/app/features/list-expenses/list-expenses.component.ts:270</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="282"
+                                    class="link-to-prism">src/app/features/list-expenses/list-expenses.component.ts:282</a></div>
                         </td>
                     </tr>
 
@@ -761,8 +765,8 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="293"
-                                    class="link-to-prism">src/app/features/list-expenses/list-expenses.component.ts:293</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="304"
+                                    class="link-to-prism">src/app/features/list-expenses/list-expenses.component.ts:304</a></div>
                         </td>
                     </tr>
 
@@ -835,8 +839,8 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="279"
-                                    class="link-to-prism">src/app/features/list-expenses/list-expenses.component.ts:279</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="291"
+                                    class="link-to-prism">src/app/features/list-expenses/list-expenses.component.ts:291</a></div>
                         </td>
                     </tr>
 
@@ -917,8 +921,8 @@
 
             <tr>
                 <td class="col-md-4">
-                        <div class="io-description"><p>Loads expenses from storage, calculates totals,
-and reapplies sorting/filtering if enabled.</p>
+                        <div class="io-description"><p>Fetches all expenses, categories, and calculates total.
+Reapplies filters and sorting if active.</p>
 </div>
 
                         <div class="io-description">
@@ -957,7 +961,7 @@ and reapplies sorting/filtering if enabled.</p>
 
             <tr>
                 <td class="col-md-4">
-                        <div class="io-description"><p>Lifecycle hook: initializes the component by fetching expenses.</p>
+                        <div class="io-description"><p>Angular lifecycle hook: initializes expense list.</p>
 </div>
 
                         <div class="io-description">
@@ -988,8 +992,8 @@ and reapplies sorting/filtering if enabled.</p>
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="252"
-                                    class="link-to-prism">src/app/features/list-expenses/list-expenses.component.ts:252</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="242"
+                                    class="link-to-prism">src/app/features/list-expenses/list-expenses.component.ts:242</a></div>
                         </td>
                     </tr>
 
@@ -1087,8 +1091,8 @@ and reapplies sorting/filtering if enabled.</p>
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="186"
-                                    class="link-to-prism">src/app/features/list-expenses/list-expenses.component.ts:186</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="352"
+                                    class="link-to-prism">src/app/features/list-expenses/list-expenses.component.ts:352</a></div>
                         </td>
                     </tr>
 
@@ -1161,8 +1165,8 @@ and reapplies sorting/filtering if enabled.</p>
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="325"
-                                    class="link-to-prism">src/app/features/list-expenses/list-expenses.component.ts:325</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="228"
+                                    class="link-to-prism">src/app/features/list-expenses/list-expenses.component.ts:228</a></div>
                         </td>
                     </tr>
 
@@ -1251,15 +1255,15 @@ and reapplies sorting/filtering if enabled.</p>
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="338"
-                                    class="link-to-prism">src/app/features/list-expenses/list-expenses.component.ts:338</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="328"
+                                    class="link-to-prism">src/app/features/list-expenses/list-expenses.component.ts:328</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
-                        <div class="io-description"><p>Searches expenses by location or note.</p>
+                        <div class="io-description"><p>Performs search, updates total, clears filters/sorting.</p>
 </div>
 
                             <div class="io-description">
@@ -1325,8 +1329,8 @@ and reapplies sorting/filtering if enabled.</p>
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="265"
-                                    class="link-to-prism">src/app/features/list-expenses/list-expenses.component.ts:265</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="277"
+                                    class="link-to-prism">src/app/features/list-expenses/list-expenses.component.ts:277</a></div>
                         </td>
                     </tr>
 
@@ -1383,6 +1387,80 @@ and reapplies sorting/filtering if enabled.</p>
         <tbody>
             <tr>
                 <td class="col-md-4">
+                    <a name="searchData"></a>
+                    <span class="name">
+                        <span ><b>searchData</b></span>
+                        <a href="#searchData"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>searchData(query: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="316"
+                                    class="link-to-prism">src/app/features/list-expenses/list-expenses.component.ts:316</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-description"><p>Searches expenses by location or note.</p>
+</div>
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                                <td>Description</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>query</td>
+                                            <td>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                            <td>
+                                                    <p>Search query string</p>
+
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
                     <a name="sortList"></a>
                     <span class="name">
                         <span ><b>sortList</b></span>
@@ -1399,8 +1477,8 @@ and reapplies sorting/filtering if enabled.</p>
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="148"
-                                    class="link-to-prism">src/app/features/list-expenses/list-expenses.component.ts:148</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="140"
+                                    class="link-to-prism">src/app/features/list-expenses/list-expenses.component.ts:140</a></div>
                         </td>
                     </tr>
 
@@ -1435,7 +1513,7 @@ and reapplies sorting/filtering if enabled.</p>
 
 
                                             <td>
-                                                    <p>Index of the column to sort by</p>
+                                                    <p>Column index (0 = amount, 1 = category, 2 = date)</p>
 
                                             </td>
                                         </tr>
@@ -1451,7 +1529,7 @@ and reapplies sorting/filtering if enabled.</p>
 
 
                                             <td>
-                                                    <p>Label of the field being sorted</p>
+                                                    <p>Label of field</p>
 
                                             </td>
                                         </tr>
@@ -1467,7 +1545,7 @@ and reapplies sorting/filtering if enabled.</p>
 
 
                                             <td>
-                                                    <p>1 for ascending, -1 for descending</p>
+                                                    <p>1 = asc, -1 = desc</p>
 
                                             </td>
                                         </tr>
@@ -1505,15 +1583,15 @@ and reapplies sorting/filtering if enabled.</p>
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="198"
-                                    class="link-to-prism">src/app/features/list-expenses/list-expenses.component.ts:198</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="218"
+                                    class="link-to-prism">src/app/features/list-expenses/list-expenses.component.ts:218</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
-                        <div class="io-description"><p>Toggles the filter dropdown and resets filter state accordingly.</p>
+                        <div class="io-description"><p>Toggles filter dropdown, resetting pending filter state.</p>
 </div>
 
                         <div class="io-description">
@@ -1544,15 +1622,15 @@ and reapplies sorting/filtering if enabled.</p>
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="177"
-                                    class="link-to-prism">src/app/features/list-expenses/list-expenses.component.ts:177</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="171"
+                                    class="link-to-prism">src/app/features/list-expenses/list-expenses.component.ts:171</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
-                        <div class="io-description"><p>Toggles the sort dropdown.</p>
+                        <div class="io-description"><p>Toggles sort dropdown visibility.</p>
 </div>
 
                         <div class="io-description">
@@ -1593,19 +1671,19 @@ and reapplies sorting/filtering if enabled.</p>
     toDate: &#x27;&#x27;,
     selectedCategoryIds: [] as string[],
     paymentMode: [] as string[],
-    isExtraSpending: true
+    isExtraSpending: false,
   }</code>
                     </td>
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="70" class="link-to-prism">src/app/features/list-expenses/list-expenses.component.ts:70</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="69" class="link-to-prism">src/app/features/list-expenses/list-expenses.component.ts:69</a></div>
                         </td>
                     </tr>
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-description"><p>Currently applied filters (saved state).</p>
+                    <div class="io-description"><p>Active filter values (after apply).</p>
 </div>
                 </td>
             </tr>
@@ -1636,13 +1714,13 @@ and reapplies sorting/filtering if enabled.</p>
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="34" class="link-to-prism">src/app/features/list-expenses/list-expenses.component.ts:34</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="36" class="link-to-prism">src/app/features/list-expenses/list-expenses.component.ts:36</a></div>
                         </td>
                     </tr>
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-description"><p>All categories, sorted by expense count.</p>
+                    <div class="io-description"><p>List of categories sorted by expense count.</p>
 </div>
                 </td>
             </tr>
@@ -1668,13 +1746,13 @@ and reapplies sorting/filtering if enabled.</p>
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="37" class="link-to-prism">src/app/features/list-expenses/list-expenses.component.ts:37</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="42" class="link-to-prism">src/app/features/list-expenses/list-expenses.component.ts:42</a></div>
                         </td>
                     </tr>
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-description"><p>User&#39;s preferred currency (retrieved from UserService).</p>
+                    <div class="io-description"><p>User&#39;s preferred currency (from UserService).</p>
 </div>
                 </td>
             </tr>
@@ -1705,13 +1783,13 @@ and reapplies sorting/filtering if enabled.</p>
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="31" class="link-to-prism">src/app/features/list-expenses/list-expenses.component.ts:31</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="33" class="link-to-prism">src/app/features/list-expenses/list-expenses.component.ts:33</a></div>
                         </td>
                     </tr>
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-description"><p>All expenses currently loaded (filtered/sorted if applicable).</p>
+                    <div class="io-description"><p>All expenses currently displayed (after filtering/sorting).</p>
 </div>
                 </td>
             </tr>
@@ -1742,13 +1820,13 @@ and reapplies sorting/filtering if enabled.</p>
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="55" class="link-to-prism">src/app/features/list-expenses/list-expenses.component.ts:55</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="54" class="link-to-prism">src/app/features/list-expenses/list-expenses.component.ts:54</a></div>
                         </td>
                     </tr>
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-description"><p>Index of column used for sorting.</p>
+                    <div class="io-description"><p>Index of column currently sorted.</p>
 </div>
                 </td>
             </tr>
@@ -1779,13 +1857,13 @@ and reapplies sorting/filtering if enabled.</p>
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="52" class="link-to-prism">src/app/features/list-expenses/list-expenses.component.ts:52</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="51" class="link-to-prism">src/app/features/list-expenses/list-expenses.component.ts:51</a></div>
                         </td>
                     </tr>
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-description"><p>Sort direction (1 = asc, -1 = desc).</p>
+                    <div class="io-description"><p>Sort direction: 1 = ascending, -1 = descending.</p>
 </div>
                 </td>
             </tr>
@@ -1816,19 +1894,19 @@ and reapplies sorting/filtering if enabled.</p>
     toDate: &#x27;&#x27;,
     selectedCategoryIds: [] as string[],
     paymentMode: [] as string[],
-    isExtraSpending: true
+    isExtraSpending: false,
   }</code>
                     </td>
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="61" class="link-to-prism">src/app/features/list-expenses/list-expenses.component.ts:61</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="60" class="link-to-prism">src/app/features/list-expenses/list-expenses.component.ts:60</a></div>
                         </td>
                     </tr>
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-description"><p>Filter state before being applied.</p>
+                    <div class="io-description"><p>Pending filter values (before apply).</p>
 </div>
                 </td>
             </tr>
@@ -1864,13 +1942,13 @@ and reapplies sorting/filtering if enabled.</p>
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="91" class="link-to-prism">src/app/features/list-expenses/list-expenses.component.ts:91</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="93" class="link-to-prism">src/app/features/list-expenses/list-expenses.component.ts:93</a></div>
                         </td>
                     </tr>
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-description"><p>Reference to filter dropdown element.</p>
+                    <div class="io-description"><p>Ref to filter dropdown element.</p>
 </div>
                 </td>
             </tr>
@@ -1901,13 +1979,13 @@ and reapplies sorting/filtering if enabled.</p>
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="58" class="link-to-prism">src/app/features/list-expenses/list-expenses.component.ts:58</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="81" class="link-to-prism">src/app/features/list-expenses/list-expenses.component.ts:81</a></div>
                         </td>
                     </tr>
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-description"><p>Whether the expense edit modal is open.</p>
+                    <div class="io-description"><p>Whether edit modal is open.</p>
 </div>
                 </td>
             </tr>
@@ -1938,50 +2016,13 @@ and reapplies sorting/filtering if enabled.</p>
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="46" class="link-to-prism">src/app/features/list-expenses/list-expenses.component.ts:46</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="87" class="link-to-prism">src/app/features/list-expenses/list-expenses.component.ts:87</a></div>
                         </td>
                     </tr>
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-description"><p>Controls visibility of filter dropdown.</p>
-</div>
-                </td>
-            </tr>
-
-        </tbody>
-    </table>
-    <table class="table table-sm table-bordered">
-        <tbody>
-            <tr>
-                <td class="col-md-4">
-                    <a name="isFiltered"></a>
-                    <span class="name">
-                        <span ><b>isFiltered</b></span>
-                        <a href="#isFiltered"><span class="icon ion-ios-link"></span></a>
-                    </span>
-                </td>
-            </tr>
-                <tr>
-                    <td class="col-md-4">
-                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
-
-                    </td>
-                </tr>
-                <tr>
-                    <td class="col-md-4">
-                        <i>Default value : </i><code>false</code>
-                    </td>
-                </tr>
-                    <tr>
-                        <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="79" class="link-to-prism">src/app/features/list-expenses/list-expenses.component.ts:79</a></div>
-                        </td>
-                    </tr>
-
-            <tr>
-                <td class="col-md-4">
-                    <div class="io-description"><p>Whether filter is active.</p>
+                    <div class="io-description"><p>Controls filter dropdown visibility.</p>
 </div>
                 </td>
             </tr>
@@ -2012,13 +2053,13 @@ and reapplies sorting/filtering if enabled.</p>
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="40" class="link-to-prism">src/app/features/list-expenses/list-expenses.component.ts:40</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="84" class="link-to-prism">src/app/features/list-expenses/list-expenses.component.ts:84</a></div>
                         </td>
                     </tr>
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-description"><p>Controls visibility of sort dropdown.</p>
+                    <div class="io-description"><p>Controls sort dropdown visibility.</p>
 </div>
                 </td>
             </tr>
@@ -2049,13 +2090,50 @@ and reapplies sorting/filtering if enabled.</p>
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="82" class="link-to-prism">src/app/features/list-expenses/list-expenses.component.ts:82</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="78" class="link-to-prism">src/app/features/list-expenses/list-expenses.component.ts:78</a></div>
                         </td>
                     </tr>
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-description"><p>Whether sorting is active.</p>
+                    <div class="io-description"><p>Whether list is sorted.</p>
+</div>
+                </td>
+            </tr>
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="searchQuery"></a>
+                    <span class="name">
+                        <span ><b>searchQuery</b></span>
+                        <a href="#searchQuery"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>&#x27;&#x27;</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="48" class="link-to-prism">src/app/features/list-expenses/list-expenses.component.ts:48</a></div>
+                        </td>
+                    </tr>
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Current search query string.</p>
 </div>
                 </td>
             </tr>
@@ -2086,13 +2164,13 @@ and reapplies sorting/filtering if enabled.</p>
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="49" class="link-to-prism">src/app/features/list-expenses/list-expenses.component.ts:49</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="39" class="link-to-prism">src/app/features/list-expenses/list-expenses.component.ts:39</a></div>
                         </td>
                     </tr>
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-description"><p>Currently selected expense (for modal view/edit).</p>
+                    <div class="io-description"><p>Currently selected expense (for modal).</p>
 </div>
                 </td>
             </tr>
@@ -2123,13 +2201,13 @@ and reapplies sorting/filtering if enabled.</p>
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="43" class="link-to-prism">src/app/features/list-expenses/list-expenses.component.ts:43</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="45" class="link-to-prism">src/app/features/list-expenses/list-expenses.component.ts:45</a></div>
                         </td>
                     </tr>
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-description"><p>Currently selected sort option label.</p>
+                    <div class="io-description"><p>Selected sort field label (shown in UI).</p>
 </div>
                 </td>
             </tr>
@@ -2165,13 +2243,13 @@ and reapplies sorting/filtering if enabled.</p>
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="88" class="link-to-prism">src/app/features/list-expenses/list-expenses.component.ts:88</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="90" class="link-to-prism">src/app/features/list-expenses/list-expenses.component.ts:90</a></div>
                         </td>
                     </tr>
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-description"><p>Reference to sort dropdown element.</p>
+                    <div class="io-description"><p>Ref to sort dropdown element.</p>
 </div>
                 </td>
             </tr>
@@ -2202,13 +2280,13 @@ and reapplies sorting/filtering if enabled.</p>
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="85" class="link-to-prism">src/app/features/list-expenses/list-expenses.component.ts:85</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="57" class="link-to-prism">src/app/features/list-expenses/list-expenses.component.ts:57</a></div>
                         </td>
                     </tr>
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-description"><p>Total amount of currently visible expenses.</p>
+                    <div class="io-description"><p>Total of visible expenses.</p>
 </div>
                 </td>
             </tr>
@@ -2235,12 +2313,14 @@ import { SearchButtonComponent } from &#x27;../../component/search-button/search
 /**
  * ListExpensesComponent
  *
- * Displays a list of expenses with support for:
- * - Sorting
- * - Filtering (date range, categories, payment mode, extra spending)
- * - Searching
+ * Provides a full-featured expense list view with support for:
+ * - Sorting by amount, category, or date
+ * - Filtering by date range, category, payment mode, or extra spending
+ * - Free-text searching (location and note fields)
  * - Editing and deleting expenses
  * - Viewing expense details in a modal
+ *
+ * Integrates with services for persistence, categories, user preferences, and toasts.
  */
 @Component({
   standalone: true,
@@ -2250,67 +2330,67 @@ import { SearchButtonComponent } from &#x27;../../component/search-button/search
   styleUrls: [&#x27;./list-expenses.component.css&#x27;],
 })
 export class ListExpensesComponent implements OnInit {
-  /** All expenses currently loaded (filtered/sorted if applicable). */
+  /** All expenses currently displayed (after filtering/sorting). */
   expenses: Expense[] &#x3D; [];
 
-  /** All categories, sorted by expense count. */
+  /** List of categories sorted by expense count. */
   categories: Category[] &#x3D; [];
 
-  /** User&#x27;s preferred currency (retrieved from UserService). */
-  currency: string | null;
-
-  /** Controls visibility of sort dropdown. */
-  isSortByDropdownOpen: boolean &#x3D; false;
-
-  /** Currently selected sort option label. */
-  selectedFieldName: string &#x3D; &#x27;Sort By&#x27;;
-
-  /** Controls visibility of filter dropdown. */
-  isFilterDropdownOpen: boolean &#x3D; false;
-
-  /** Currently selected expense (for modal view/edit). */
+  /** Currently selected expense (for modal). */
   selectedExpense: Expense | null &#x3D; null;
 
-  /** Sort direction (1 &#x3D; asc, -1 &#x3D; desc). */
+  /** User&#x27;s preferred currency (from UserService). */
+  currency: string | null;
+
+  /** Selected sort field label (shown in UI). */
+  selectedFieldName: string &#x3D; &#x27;Sort By&#x27;;
+
+  /** Current search query string. */
+  searchQuery: string &#x3D; &#x27;&#x27;;
+
+  /** Sort direction: 1 &#x3D; ascending, -1 &#x3D; descending. */
   fieldDirection: number &#x3D; 0;
 
-  /** Index of column used for sorting. */
+  /** Index of column currently sorted. */
   fieldColIndex: number &#x3D; 0;
 
-  /** Whether the expense edit modal is open. */
-  isEditOpen: boolean &#x3D; false;
+  /** Total of visible expenses. */
+  totalAmount: number &#x3D; 0;
 
-  /** Filter state before being applied. */
+  /** Pending filter values (before apply). */
   filter &#x3D; {
     fromDate: &#x27;&#x27;,
     toDate: &#x27;&#x27;,
     selectedCategoryIds: [] as string[],
     paymentMode: [] as string[],
-    isExtraSpending: true
+    isExtraSpending: false,
   };
 
-  /** Currently applied filters (saved state). */
+  /** Active filter values (after apply). */
   appliedFilter &#x3D; {
     fromDate: &#x27;&#x27;,
     toDate: &#x27;&#x27;,
     selectedCategoryIds: [] as string[],
     paymentMode: [] as string[],
-    isExtraSpending: true
+    isExtraSpending: false,
   };
 
-  /** Whether filter is active. */
-  isFiltered: boolean &#x3D; false;
-
-  /** Whether sorting is active. */
+  /** Whether list is sorted. */
   isSorted: boolean &#x3D; false;
 
-  /** Total amount of currently visible expenses. */
-  totalAmount: number &#x3D; 0;
+  /** Whether edit modal is open. */
+  isEditOpen: boolean &#x3D; false;
 
-  /** Reference to sort dropdown element. */
+  /** Controls sort dropdown visibility. */
+  isSortByDropdownOpen: boolean &#x3D; false;
+
+  /** Controls filter dropdown visibility. */
+  isFilterDropdownOpen: boolean &#x3D; false;
+
+  /** Ref to sort dropdown element. */
   @ViewChild(&#x27;sortRef&#x27;) sortRef!: ElementRef;
 
-  /** Reference to filter dropdown element. */
+  /** Ref to filter dropdown element. */
   @ViewChild(&#x27;filterRef&#x27;) filterRef!: ElementRef;
 
   /**
@@ -2329,16 +2409,14 @@ export class ListExpensesComponent implements OnInit {
     this.currency &#x3D; this.userService.getValue&lt;string&gt;(&#x27;currency&#x27;);
   }
 
-  /**
-   * Lifecycle hook: initializes the component by fetching expenses.
-   */
+  /** Angular lifecycle hook: initializes expense list. */
   ngOnInit(): void {
     this.listExpenses();
   }
 
   /**
-   * Loads expenses from storage, calculates totals,
-   * and reapplies sorting/filtering if enabled.
+   * Fetches all expenses, categories, and calculates total.
+   * Reapplies filters and sorting if active.
    */
   listExpenses(): void {
     this.totalAmount &#x3D; 0;
@@ -2352,25 +2430,17 @@ export class ListExpensesComponent implements OnInit {
     } catch (err) {
       console.error(&quot;Failed to load expenses:&quot;, err);
     }
-    finally {
-      if (this.isSorted) {
-        this.sortList(this.fieldColIndex, this.selectedFieldName, this.fieldDirection);
-      }
-      if (this.isFiltered) {
-        this.applyFilter();
-      }
-    }
   }
 
   /**
    * Sorts the expense list.
-   * @param colIndex Index of the column to sort by
-   * @param fieldName Label of the field being sorted
-   * @param direction 1 for ascending, -1 for descending
+   * @param colIndex Column index (0 &#x3D; amount, 1 &#x3D; category, 2 &#x3D; date)
+   * @param fieldName Label of field
+   * @param direction 1 &#x3D; asc, -1 &#x3D; desc
    */
   sortList(colIndex: number, fieldName: string, direction: number): void {
     this.expenses.sort((a, b) &#x3D;&gt; {
-      let valA, valB;
+      let valA: any, valB: any;
 
       switch (colIndex) {
         case 0: valA &#x3D; a.amount; valB &#x3D; b.amount; break;
@@ -2383,12 +2453,14 @@ export class ListExpensesComponent implements OnInit {
         return direction * (valA.getTime() - valB.getTime());
       }
 
-      if (!isNaN(valA as any) &amp;&amp; !isNaN(valB as any)) {
+      if (!isNaN(valA) &amp;&amp; !isNaN(valB)) {
         return direction * (Number(valA) - Number(valB));
       }
 
-      return direction * (valA.toString().toLowerCase().localeCompare(valB.toString().toLowerCase(), undefined, { numeric: true }));
+      return direction * valA.toString().toLowerCase()
+        .localeCompare(valB.toString().toLowerCase(), undefined, { numeric: true });
     });
+
     this.fieldColIndex &#x3D; colIndex;
     this.fieldDirection &#x3D; direction;
     this.selectedFieldName &#x3D; fieldName;
@@ -2396,43 +2468,18 @@ export class ListExpensesComponent implements OnInit {
     this.isSorted &#x3D; true;
   }
 
-  /** Toggles the sort dropdown. */
+  /** Toggles sort dropdown visibility. */
   toggleSortByDropdown(): void {
     this.isSortByDropdownOpen &#x3D; !this.isSortByDropdownOpen;
   }
 
   /**
-   * Handles document click to close dropdowns when clicking outside.
-   * @param event Mouse click event
-   */
-  @HostListener(&#x27;document:click&#x27;, [&#x27;$event&#x27;])
-  onDocumentClick(event: MouseEvent): void {
-    const target &#x3D; event.target as HTMLElement;
-    if (this.isSortByDropdownOpen &amp;&amp; this.sortRef &amp;&amp; !this.sortRef.nativeElement.contains(target)) {
-      this.toggleSortByDropdown();
-    }
-
-    if (this.isFilterDropdownOpen &amp;&amp; this.filterRef &amp;&amp; !this.filterRef.nativeElement.contains(target)) {
-      this.toggleFilterDropdown();
-    }
-  }
-
-  /** Toggles the filter dropdown and resets filter state accordingly. */
-  toggleFilterDropdown(): void {
-    if (this.isFiltered) {
-      this.filter &#x3D; structuredClone(this.appliedFilter);
-    } else {
-      this.clearFilter();
-    }
-    this.isFilterDropdownOpen &#x3D; !this.isFilterDropdownOpen;
-  }
-
-  /**
-   * Applies the current filter to the expense list.
+   * Applies filters (date, category, payment, extra spending).
    */
   applyFilter(): void {
     this.totalAmount &#x3D; 0;
-    let filtered &#x3D; this.expenses;
+    this.searchData(this.searchQuery);
+    let filtered: Expense[] &#x3D; this.expenses;
     this.appliedFilter &#x3D; structuredClone(this.filter);
 
     if (this.appliedFilter.fromDate) {
@@ -2460,11 +2507,32 @@ export class ListExpensesComponent implements OnInit {
       this.totalAmount &#x3D; this.totalAmount + val.amount;
     })
     this.totalAmount &#x3D; parseFloat(this.totalAmount.toFixed(2));
+
     if (this.isSorted) {
       this.sortList(this.fieldColIndex, this.selectedFieldName, this.fieldDirection);
     }
+
     this.isFilterDropdownOpen &#x3D; false;
-    this.isFiltered &#x3D; true;
+  }
+
+  /** Toggles filter dropdown, resetting pending filter state. */
+  toggleFilterDropdown(): void {
+    this.filter &#x3D; structuredClone(this.appliedFilter);
+    this.isFilterDropdownOpen &#x3D; !this.isFilterDropdownOpen;
+  }
+
+  /**
+    * Handles payment mode checkbox changes inside filter modal.
+    * @param event Checkbox change event
+    * @param categoryId Payment mode value
+   */
+  onPaymentModeCheckboxChange(event: Event, categoryId: string): void {
+    const checkbox &#x3D; event.target as HTMLInputElement;
+    if (checkbox.checked) {
+      this.filter.paymentMode.push(categoryId);
+    } else {
+      this.filter.paymentMode &#x3D; this.filter.paymentMode.filter(id &#x3D;&gt; id !&#x3D;&#x3D; categoryId);
+    }
   }
 
   /**
@@ -2479,6 +2547,28 @@ export class ListExpensesComponent implements OnInit {
     } else {
       this.filter.selectedCategoryIds &#x3D; this.filter.selectedCategoryIds.filter(id &#x3D;&gt; id !&#x3D;&#x3D; categoryId);
     }
+  }
+
+  /** Resets pending filters. */
+  clearFilter(): void {
+    this.filter &#x3D; {
+      fromDate: &#x27;&#x27;,
+      toDate: &#x27;&#x27;,
+      selectedCategoryIds: [],
+      paymentMode: [],
+      isExtraSpending: false
+    };
+  }
+
+  /** Resets applied filters. */
+  clearAppliedFilter(): void {
+    this.appliedFilter &#x3D; {
+      fromDate: &#x27;&#x27;,
+      toDate: &#x27;&#x27;,
+      selectedCategoryIds: [],
+      paymentMode: [],
+      isExtraSpending: false
+    };
   }
 
   /**
@@ -2506,7 +2596,6 @@ export class ListExpensesComponent implements OnInit {
     this.expenseService.update(expense_id, newData);
     this.toastService.show(&#x27;Expense updated successfully&#x27;, &#x27;success&#x27;);
     this.isEditOpen &#x3D; false;
-    this.listExpenses();
   }
 
   /**
@@ -2519,53 +2608,28 @@ export class ListExpensesComponent implements OnInit {
       this.toastService.show(&quot;Expense deleted successfully&quot;, &#x27;success&#x27;);
       this.closeModal();
     }
-    this.listExpenses();
-  }
-
-  /** Clears all filters and reloads expenses. */
-  clearFilter(): void {
-    this.filter.fromDate &#x3D; &#x27;&#x27;;
-    this.filter.toDate &#x3D; &#x27;&#x27;;
-    this.filter.selectedCategoryIds &#x3D; [];
-    this.filter.paymentMode &#x3D; [];
-    this.filter.isExtraSpending &#x3D; false;
-    this.isFiltered &#x3D; false;
-    this.listExpenses();
-  }
-
-  /** Clears sorting and reloads expenses. */
-  clearSort(): void {
-    this.isSorted &#x3D; false;
-    this.selectedFieldName &#x3D; &quot;Sort By&quot;;
-    this.listExpenses();
-  }
-
-  /**
-   * Handles payment mode checkbox changes inside filter modal.
-   * @param event Checkbox change event
-   * @param categoryId Payment mode value
-   */
-  onPaymentModeCheckboxChange(event: Event, categoryId: string): void {
-    const checkbox &#x3D; event.target as HTMLInputElement;
-    if (checkbox.checked) {
-      this.filter.paymentMode.push(categoryId);
-    } else {
-      this.filter.paymentMode &#x3D; this.filter.paymentMode.filter(id &#x3D;&gt; id !&#x3D;&#x3D; categoryId);
-    }
   }
 
   /**
    * Searches expenses by location or note.
    * @param query Search query string
    */
-  onSearch(query: string): void {
-    this.totalAmount &#x3D; 0;
-    console.log(&#x27;Parent received search query:&#x27;, query);
+  searchData(query: string): void {
     this.expenses &#x3D; this.expenseService.getAll();
     this.expenses &#x3D; this.expenses.filter(ex &#x3D;&gt; {
-      return ((ex.location &amp;&amp; ex.location.toLowerCase().includes(query.toLowerCase())) || 
-              (ex.note &amp;&amp; ex.note.toLowerCase().includes(query.toLowerCase())));
+      return ((ex.location &amp;&amp; ex.location.toLowerCase().includes(query.toLowerCase())) ||
+        (ex.note &amp;&amp; ex.note.toLowerCase().includes(query.toLowerCase())));
     });
+  }
+
+  /**
+   * Performs search, updates total, clears filters/sorting.
+   * @param query Search query string
+   */
+  onSearch(query: string): void {
+    this.totalAmount &#x3D; 0;
+    this.searchQuery &#x3D; query;
+    this.searchData(this.searchQuery);
     this.expenses.forEach((val) &#x3D;&gt; {
       this.totalAmount &#x3D; this.totalAmount + val.amount;
     })
@@ -2573,19 +2637,29 @@ export class ListExpensesComponent implements OnInit {
     this.clearFiltersAndSorting();
   }
 
-  /** Resets both filters and sorting without reloading expenses. */
+  /** Resets both filters and sorting state. */
   clearFiltersAndSorting(): void {
-    this.filter.fromDate &#x3D; &#x27;&#x27;;
-    this.filter.toDate &#x3D; &#x27;&#x27;;
-    this.filter.selectedCategoryIds &#x3D; [];
-    this.filter.paymentMode &#x3D; [];
-    this.filter.isExtraSpending &#x3D; false;
-    this.isFiltered &#x3D; false;
+    this.clearFilter();
+    this.clearAppliedFilter();
     this.isSorted &#x3D; false;
     this.selectedFieldName &#x3D; &quot;Sort By&quot;;
   }
-}
-</code></pre>
+
+  /**
+   * Handles document click to close dropdowns when clicking outside.
+   * @param event Mouse click event
+   */
+  @HostListener(&#x27;document:click&#x27;, [&#x27;$event&#x27;])
+  onDocumentClick(event: MouseEvent): void {
+    const target &#x3D; event.target as HTMLElement;
+    if (this.isSortByDropdownOpen &amp;&amp; this.sortRef &amp;&amp; !this.sortRef.nativeElement.contains(target)) {
+      this.toggleSortByDropdown();
+    }
+    if (this.isFilterDropdownOpen &amp;&amp; this.filterRef &amp;&amp; !this.filterRef.nativeElement.contains(target)) {
+      this.toggleFilterDropdown();
+    }
+  }
+}</code></pre>
     </div>
 
     <div class="tab-pane fade " id="templateData">

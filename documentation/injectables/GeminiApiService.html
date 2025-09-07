@@ -119,6 +119,17 @@
         </p>
 
 
+            <p class="comment">
+                <h3>Description</h3>
+            </p>
+            <p class="comment">
+                <p>GeminiApiService</p>
+<p>This service is responsible for communicating with the
+Google Gemini API to analyze the user&#39;s expense data.
+It fetches the last 30 days of expenses, generates prompts,
+and retrieves AI-generated insights for the user.</p>
+
+            </p>
 
 
 
@@ -183,12 +194,14 @@
                 </tr>
                         <tr>
                             <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="12" class="link-to-prism">src/app/service/gemini-api/gemini-api.service.ts:12</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="23" class="link-to-prism">src/app/service/gemini-api/gemini-api.service.ts:23</a></div>
                             </td>
                         </tr>
 
                 <tr>
                     <td class="col-md-4">
+                            <div class="io-description"><p>Creates an instance of GeminiApiService.</p>
+</div>
                             <div>
                                     <b>Parameters :</b>
                                     <table class="params">
@@ -197,6 +210,7 @@
                                                 <td>Name</td>
                                                     <td>Type</td>
                                                 <td>Optional</td>
+                                                    <td>Description</td>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -211,6 +225,10 @@
                                                             No
                                                     </td>
                                                     
+                                                        <td>
+                                                                <p>Angular HttpClient for API requests.</p>
+
+                                                        </td>
                                                 </tr>
                                                 <tr>
                                                         <td>globalLoaderService</td>
@@ -223,6 +241,10 @@
                                                             No
                                                     </td>
                                                     
+                                                        <td>
+                                                                <p>Service to show/hide global loading indicators.</p>
+
+                                                        </td>
                                                 </tr>
                                                 <tr>
                                                         <td>expenseService</td>
@@ -235,6 +257,10 @@
                                                             No
                                                     </td>
                                                     
+                                                        <td>
+                                                                <p>Service to fetch expense data from local storage.</p>
+
+                                                        </td>
                                                 </tr>
                                         </tbody>
                                     </table>
@@ -270,14 +296,17 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="58"
-                                    class="link-to-prism">src/app/service/gemini-api/gemini-api.service.ts:58</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="103"
+                                    class="link-to-prism">src/app/service/gemini-api/gemini-api.service.ts:103</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
+                        <div class="io-description"><p>Generates a structured AI prompt for expense analysis.
+Includes instructions for the model and the last 30 days of expenses.</p>
+</div>
 
                             <div class="io-description">
                                 <b>Parameters :</b>
@@ -288,6 +317,7 @@
                                             <td>Name</td>
                                                 <td>Type</td>
                                             <td>Optional</td>
+                                                <td>Description</td>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -302,6 +332,10 @@
                                             </td>
 
 
+                                            <td>
+                                                    <p>The user’s input or question.</p>
+
+                                            </td>
                                         </tr>
                                         <tr>
                                                 <td>last15DaysExpenses</td>
@@ -314,6 +348,10 @@
                                             </td>
 
 
+                                            <td>
+                                                    <p>Array of expense objects from the last 30 days.</p>
+
+                                            </td>
                                         </tr>
                                     </tbody>
                                 </table>
@@ -323,7 +361,8 @@
 
                         </div>
                             <div class="io-description">
-                                
+                                <p>A formatted string prompt ready for Gemini API.</p>
+
                             </div>
                 </td>
             </tr>
@@ -349,19 +388,27 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="40"
-                                    class="link-to-prism">src/app/service/gemini-api/gemini-api.service.ts:40</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="74"
+                                    class="link-to-prism">src/app/service/gemini-api/gemini-api.service.ts:74</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
+                        <div class="io-description"><p>Fetches the user&#39;s expenses from the last 30 days.</p>
+<p>amount, note, location, date, category_name, payment_mode, isExtraSpending.</p>
+</div>
 
                         <div class="io-description">
                             <b>Returns : </b>    <code>Pick[]</code>
 
                         </div>
+                            <div class="io-description">
+                                <p>An array of expense objects with selected fields:
+amount, note, location, date, category_name, payment_mode, isExtraSpending.</p>
+
+                            </div>
                 </td>
             </tr>
         </tbody>
@@ -388,14 +435,17 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="16"
-                                    class="link-to-prism">src/app/service/gemini-api/gemini-api.service.ts:16</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="45"
+                                    class="link-to-prism">src/app/service/gemini-api/gemini-api.service.ts:45</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
+                        <div class="io-description"><p>Sends a prompt to the Gemini API and returns the generated response.
+Enhances the prompt with the user&#39;s last 30 days of expenses.</p>
+</div>
 
                             <div class="io-description">
                                 <b>Parameters :</b>
@@ -406,6 +456,7 @@
                                             <td>Name</td>
                                                 <td>Type</td>
                                             <td>Optional</td>
+                                                <td>Description</td>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -420,6 +471,10 @@
                                             </td>
 
 
+                                            <td>
+                                                    <p>The user’s query or message.</p>
+
+                                            </td>
                                         </tr>
                                     </tbody>
                                 </table>
@@ -429,7 +484,8 @@
 
                         </div>
                             <div class="io-description">
-                                
+                                <p>A string response from Gemini with analysis or insights.</p>
+
                             </div>
                 </td>
             </tr>
@@ -460,10 +516,16 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="12" class="link-to-prism">src/app/service/gemini-api/gemini-api.service.ts:12</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="23" class="link-to-prism">src/app/service/gemini-api/gemini-api.service.ts:23</a></div>
                         </td>
                     </tr>
 
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>API URL for the Gemini model including the environment API key.</p>
+</div>
+                </td>
+            </tr>
 
         </tbody>
     </table>
@@ -480,16 +542,44 @@ import { firstValueFrom } from &#x27;rxjs&#x27;;
 import { GlobalLoaderService } from &#x27;../global-loader/global-loader.service&#x27;;
 import { ExpenseService, Expense } from &#x27;../localStorage/expense.service&#x27;;
 
+/**
+ * GeminiApiService
+ *
+ * This service is responsible for communicating with the
+ * Google Gemini API to analyze the user&#x27;s expense data.
+ * It fetches the last 30 days of expenses, generates prompts,
+ * and retrieves AI-generated insights for the user.
+ */
 @Injectable({
   providedIn: &#x27;root&#x27;
 })
 export class GeminiApiService {
+  /**
+   * API URL for the Gemini model including the environment API key.
+   */
   private apiUrl &#x3D; &#x60;https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key&#x3D;${environment.geminiApiKey}&#x60;;
 
-  constructor(private http: HttpClient, private globalLoaderService: GlobalLoaderService, private expenseService: ExpenseService) { }
+  /**
+   * Creates an instance of GeminiApiService.
+   *
+   * @param http Angular HttpClient for API requests.
+   * @param globalLoaderService Service to show/hide global loading indicators.
+   * @param expenseService Service to fetch expense data from local storage.
+   */
+  constructor(
+    private http: HttpClient,
+    private globalLoaderService: GlobalLoaderService,
+    private expenseService: ExpenseService
+  ) {}
 
+  /**
+   * Sends a prompt to the Gemini API and returns the generated response.
+   * Enhances the prompt with the user&#x27;s last 30 days of expenses.
+   *
+   * @param prompt The user’s query or message.
+   * @returns A string response from Gemini with analysis or insights.
+   */
   async getResponse(prompt: string): Promise&lt;string&gt; {
-
     this.globalLoaderService.show(&quot;📊 Analyzing your expenses..&quot;);
     const expenses &#x3D; this.getLast30DaysExpenses();
     const updatedPrompt &#x3D; this.generateExpenseAnalysisPrompt(prompt, expenses);
@@ -512,7 +602,16 @@ export class GeminiApiService {
     }
   }
 
-  getLast30DaysExpenses(): Pick&lt;Expense, &#x27;amount&#x27; | &#x27;note&#x27; | &#x27;location&#x27; | &#x27;date&#x27; | &#x27;category_name&#x27; | &#x27;payment_mode&#x27; | &#x27;isExtraSpending&#x27;&gt;[] {
+  /**
+   * Fetches the user&#x27;s expenses from the last 30 days.
+   *
+   * @returns An array of expense objects with selected fields:
+   * amount, note, location, date, category_name, payment_mode, isExtraSpending.
+   */
+  getLast30DaysExpenses(): Pick&lt;
+    Expense,
+    &#x27;amount&#x27; | &#x27;note&#x27; | &#x27;location&#x27; | &#x27;date&#x27; | &#x27;category_name&#x27; | &#x27;payment_mode&#x27; | &#x27;isExtraSpending&#x27;
+  &gt;[] {
     const toDate &#x3D; new Date();
     const fromDate &#x3D; new Date();
     fromDate.setDate(toDate.getDate() - 29);
@@ -530,9 +629,20 @@ export class GeminiApiService {
     }));
   }
 
+  /**
+   * Generates a structured AI prompt for expense analysis.
+   * Includes instructions for the model and the last 30 days of expenses.
+   *
+   * @param userQuery The user’s input or question.
+   * @param last15DaysExpenses Array of expense objects from the last 30 days.
+   * @returns A formatted string prompt ready for Gemini API.
+   */
   generateExpenseAnalysisPrompt(
     userQuery: string,
-    last15DaysExpenses: Pick&lt;Expense, &#x27;amount&#x27; | &#x27;note&#x27; | &#x27;location&#x27; | &#x27;date&#x27; | &#x27;category_name&#x27; | &#x27;payment_mode&#x27; | &#x27;isExtraSpending&#x27;&gt;[]
+    last15DaysExpenses: Pick&lt;
+      Expense,
+      &#x27;amount&#x27; | &#x27;note&#x27; | &#x27;location&#x27; | &#x27;date&#x27; | &#x27;category_name&#x27; | &#x27;payment_mode&#x27; | &#x27;isExtraSpending&#x27;
+    &gt;[]
   ): string {
     const baseInstructions &#x3D; &#x60;
 You are a polite and helpful financial assistant AI. Your sole purpose is to help the user **analyze and predict** their expenses from the last 30 days.
@@ -550,7 +660,7 @@ You are a polite and helpful financial assistant AI. Your sole purpose is to hel
 - Structure your response using bullet points, short sentences, or paragraph style that&#x27;s visually appealing.
 - Do not add any extra message at the beginning.
 
-🚫 When the user asks something unrelated (e.g., weather, politics, personal advice), respond with:
+🚫 When the user asks something unrelated (e.g., weather, politics), respond with:
 - &quot;❌ I&#x27;m here only to help with your expense data. Please ask something related to your recent spending.&quot;
 - &quot;⚠️ I cannot process questions outside your expense data.&quot;
 - &quot;🛑 Let’s keep this focused on your expenses so I can assist you better.&quot;

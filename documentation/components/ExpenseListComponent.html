@@ -120,6 +120,16 @@
 </p>
 
 
+    <p class="comment">
+        <h3>Description</h3>
+    </p>
+    <p class="comment">
+        <p>ExpenseListComponent</p>
+<p>Displays a list of expenses with formatted dates and emits
+events when an expense is selected. Also provides a utility
+to darken colors for styling purposes.</p>
+
+    </p>
 
 
 
@@ -256,10 +266,17 @@
                 </tr>
                         <tr>
                             <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="15" class="link-to-prism">src/app/component/list-expenses/expense-list/expense-list.component.ts:15</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="33" class="link-to-prism">src/app/component/list-expenses/expense-list/expense-list.component.ts:33</a></div>
                             </td>
                         </tr>
 
+                <tr>
+                    <td class="col-md-4">
+                            <div class="io-description"><p>Creates an instance of ExpenseListComponent.
+Initializes the currency to an empty string.</p>
+</div>
+                    </td>
+                </tr>
             </tbody>
         </table>
 </section>
@@ -282,9 +299,15 @@
                 </tr>
                         <tr>
                             <td class="col-md-2" colspan="2">
-                                    <div class="io-line">Defined in <a href="" data-line="14" class="link-to-prism">src/app/component/list-expenses/expense-list/expense-list.component.ts:14</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="28" class="link-to-prism">src/app/component/list-expenses/expense-list/expense-list.component.ts:28</a></div>
                             </td>
                         </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <div class="io-description"><p>The currency symbol or code to display with expense amounts.</p>
+</div>
+                    </td>
+                </tr>
             </tbody>
         </table>
         <table class="table table-sm table-bordered">
@@ -308,9 +331,16 @@
                 </tr>
                         <tr>
                             <td class="col-md-2" colspan="2">
-                                    <div class="io-line">Defined in <a href="" data-line="13" class="link-to-prism">src/app/component/list-expenses/expense-list/expense-list.component.ts:13</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="23" class="link-to-prism">src/app/component/list-expenses/expense-list/expense-list.component.ts:23</a></div>
                             </td>
                         </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <div class="io-description"><p>The list of expense objects to display.
+Each expense should contain at least a <code>date</code> field.</p>
+</div>
+                    </td>
+                </tr>
             </tbody>
         </table>
 </section>
@@ -332,9 +362,15 @@
                 </tr>
                         <tr>
                             <td class="col-md-2" colspan="2">
-                                    <div class="io-line">Defined in <a href="" data-line="15" class="link-to-prism">src/app/component/list-expenses/expense-list/expense-list.component.ts:15</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="33" class="link-to-prism">src/app/component/list-expenses/expense-list/expense-list.component.ts:33</a></div>
                             </td>
                         </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <div class="io-description"><p>Event emitted when an expense is selected.</p>
+</div>
+                    </td>
+                </tr>
             </tbody>
         </table>
 </section>
@@ -365,14 +401,17 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="32"
-                                    class="link-to-prism">src/app/component/list-expenses/expense-list/expense-list.component.ts:32</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="95"
+                                    class="link-to-prism">src/app/component/list-expenses/expense-list/expense-list.component.ts:95</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
+                        <div class="io-description"><p>Darkens a given HEX color by a percentage.
+Converts the color to RGB and decreases brightness.</p>
+</div>
 
                             <div class="io-description">
                                 <b>Parameters :</b>
@@ -383,6 +422,7 @@
                                             <td>Name</td>
                                                 <td>Type</td>
                                             <td>Optional</td>
+                                                <td>Description</td>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -397,6 +437,10 @@
                                             </td>
 
 
+                                            <td>
+                                                    <p>The HEX color string (e.g., <code>#FF0000</code>).</p>
+
+                                            </td>
                                         </tr>
                                         <tr>
                                                 <td>percent</td>
@@ -409,6 +453,10 @@
                                             </td>
 
 
+                                            <td>
+                                                    <p>The percentage (0–1) to darken the color.</p>
+
+                                            </td>
                                         </tr>
                                     </tbody>
                                 </table>
@@ -418,7 +466,8 @@
 
                         </div>
                             <div class="io-description">
-                                
+                                <p>The darkened color as an RGB string, or the original color on error.</p>
+
                             </div>
                 </td>
             </tr>
@@ -444,14 +493,17 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="27"
-                                    class="link-to-prism">src/app/component/list-expenses/expense-list/expense-list.component.ts:27</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="60"
+                                    class="link-to-prism">src/app/component/list-expenses/expense-list/expense-list.component.ts:60</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
+                        <div class="io-description"><p>Formats the date of an expense into a human-readable string.
+Example: <code>Mon 1st Mar 2025</code></p>
+</div>
 
                             <div class="io-description">
                                 <b>Parameters :</b>
@@ -462,6 +514,7 @@
                                             <td>Name</td>
                                                 <td>Type</td>
                                             <td>Optional</td>
+                                                <td>Description</td>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -476,6 +529,10 @@
                                             </td>
 
 
+                                            <td>
+                                                    <p>The expense object containing a <code>date</code> field.</p>
+
+                                            </td>
                                         </tr>
                                     </tbody>
                                 </table>
@@ -485,7 +542,8 @@
 
                         </div>
                             <div class="io-description">
-                                
+                                <p>A formatted date string with day, suffix, month, and year.</p>
+
                             </div>
                 </td>
             </tr>
@@ -511,14 +569,17 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="23"
-                                    class="link-to-prism">src/app/component/list-expenses/expense-list/expense-list.component.ts:23</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="49"
+                                    class="link-to-prism">src/app/component/list-expenses/expense-list/expense-list.component.ts:49</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
+                        <div class="io-description"><p>Handles the selection of an expense.
+Emits the selected expense via the <code>expenseSelected</code> output.</p>
+</div>
 
                             <div class="io-description">
                                 <b>Parameters :</b>
@@ -529,6 +590,7 @@
                                             <td>Name</td>
                                                 <td>Type</td>
                                             <td>Optional</td>
+                                                <td>Description</td>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -543,6 +605,10 @@
                                             </td>
 
 
+                                            <td>
+                                                    <p>The expense object that was selected.</p>
+
+                                            </td>
                                         </tr>
                                     </tbody>
                                 </table>
@@ -567,6 +633,13 @@
         <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { CommonModule } from &#x27;@angular/common&#x27;;
 import { Component, EventEmitter, Input, Output } from &#x27;@angular/core&#x27;;
 
+/**
+ * ExpenseListComponent
+ *
+ * Displays a list of expenses with formatted dates and emits
+ * events when an expense is selected. Also provides a utility
+ * to darken colors for styling purposes.
+ */
 @Component({
   selector: &#x27;app-expense-list&#x27;,
   standalone: true,
@@ -574,27 +647,83 @@ import { Component, EventEmitter, Input, Output } from &#x27;@angular/core&#x27;
   templateUrl: &#x27;./expense-list.component.html&#x27;,
   styleUrl: &#x27;./expense-list.component.css&#x27;
 })
-
 export class ExpenseListComponent {
+  /**
+   * The list of expense objects to display.
+   * Each expense should contain at least a &#x60;date&#x60; field.
+   */
   @Input() expenses: any[] &#x3D; [];
+
+  /**
+   * The currency symbol or code to display with expense amounts.
+   */
   @Input() currency: string | null;
+
+  /**
+   * Event emitted when an expense is selected.
+   */
   @Output() expenseSelected &#x3D; new EventEmitter&lt;any&gt;();
 
-  constructor(
-  ) {
+  /**
+   * Creates an instance of ExpenseListComponent.
+   * Initializes the currency to an empty string.
+   */
+  constructor() {
     this.currency &#x3D; &#x27;&#x27;;
-
   }
 
-  onSelect(expense: any) {
+  /**
+   * Handles the selection of an expense.
+   * Emits the selected expense via the &#x60;expenseSelected&#x60; output.
+   *
+   * @param expense The expense object that was selected.
+   */
+  onSelect(expense: any): void {
     this.expenseSelected.emit(expense);
   }
 
+  /**
+   * Formats the date of an expense into a human-readable string.
+   * Example: &#x60;Mon 1st Mar 2025&#x60;
+   *
+   * @param exp The expense object containing a &#x60;date&#x60; field.
+   * @returns A formatted date string with day, suffix, month, and year.
+   */
   getFormattedDate(exp: any): string {
     const date &#x3D; new Date(exp.date);
-    return date.toLocaleDateString();
+
+    const days &#x3D; [&quot;Sun&quot;, &quot;Mon&quot;, &quot;Tue&quot;, &quot;Wed&quot;, &quot;Thu&quot;, &quot;Fri&quot;, &quot;Sat&quot;];
+    const months &#x3D; [
+      &quot;Jan&quot;, &quot;Feb&quot;, &quot;Mar&quot;, &quot;Apr&quot;, &quot;May&quot;, &quot;Jun&quot;,
+      &quot;Jul&quot;, &quot;Aug&quot;, &quot;Sep&quot;, &quot;Oct&quot;, &quot;Nov&quot;, &quot;Dec&quot;
+    ];
+
+    const dayName &#x3D; days[date.getDay()];
+    const day &#x3D; date.getDate();
+    const month &#x3D; months[date.getMonth()];
+    const year &#x3D; date.getFullYear();
+
+    const suffix &#x3D; (d: number): string &#x3D;&gt; {
+      if (d &gt; 3 &amp;&amp; d &lt; 21) return &quot;th&quot;;
+      switch (d % 10) {
+        case 1: return &quot;st&quot;;
+        case 2: return &quot;nd&quot;;
+        case 3: return &quot;rd&quot;;
+        default: return &quot;th&quot;;
+      }
+    };
+
+    return &#x60;${dayName} ${day}${suffix(day)} ${month} ${year}&#x60;;
   }
 
+  /**
+   * Darkens a given HEX color by a percentage.
+   * Converts the color to RGB and decreases brightness.
+   *
+   * @param color The HEX color string (e.g., &#x60;#FF0000&#x60;).
+   * @param percent The percentage (0–1) to darken the color.
+   * @returns The darkened color as an RGB string, or the original color on error.
+   */
   darkenColor(color: string, percent: number): string {
     try {
       const num &#x3D; parseInt(color.replace(&#x27;#&#x27;, &#x27;&#x27;), 16);
@@ -608,7 +737,8 @@ export class ExpenseListComponent {
       return color;
     }
   }
-}</code></pre>
+}
+</code></pre>
     </div>
 
     <div class="tab-pane fade " id="templateData">

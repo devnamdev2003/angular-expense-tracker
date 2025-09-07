@@ -41,7 +41,7 @@
 <!-- Bottom Audio Bar -->
 <div *ngIf="currentSong"
   class="max-w-xl mx-auto  fixed bottom-0 left-0 right-0 shadow-lg py-4 px-2 flex items-center gap-4 z-20"
-  [ngStyle]="{'background-color': 'var(--color-surface)', 'color': 'var(--color-text)'}">
+  [ngStyle]="{'background-color': 'var(--color-surface)', 'color': 'var(--color-text)', 'z-index': '99'}">
 
   <!-- Song Image -->
   <img [src]="currentSong.image?.[2]?.url || 'https://via.placeholder.com/50'" alt="Cover"
