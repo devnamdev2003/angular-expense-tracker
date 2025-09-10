@@ -3,10 +3,7 @@ npm install --save apexcharts ng-apexcharts
 npm install lucide-angular
 npm install marked
 npm install -g @compodoc/compodoc
-npm install jspdf jspdf-autotable xlsx file-saver
-npm install --save-dev @types/file-saver
-
-
+npm install jspdf jspdf-autotable xlsx
 
 
 <!-- Next Task -->
