@@ -3,11 +3,13 @@ import { UserService } from '../../service/localStorage/user.service';
 import { ExpenseService } from '../../service/localStorage/expense.service';
 import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { CommonModule } from '@angular/common';
-import { SettingItemComponent } from '../../component/setting-item/setting-item.component';
+import { SettingItemComponent } from '../../component/settings-components/setting-item/setting-item.component';
 import { Category, CategoryService } from '../../service/localStorage/category.service';
 import { CategoryDropdownComponent } from '../../component/category-dropdown/category-dropdown.component';
 import { AbstractControl, ValidationErrors, ValidatorFn } from '@angular/forms';
 import { ToastService } from '../../service/toast/toast.service';
+import { FormModelComponent } from '../../component/form-model/form-model.component';
+import { DownloadComponentComponent } from '../../component/settings-components/download-component/download-component.component';
 
 /**
  * @component
@@ -24,6 +26,8 @@ import { ToastService } from '../../service/toast/toast.service';
     SettingItemComponent,
     ReactiveFormsModule,
     CategoryDropdownComponent,
+    FormModelComponent,
+    DownloadComponentComponent,
   ],
   templateUrl: './settings.component.html',
   styleUrls: ['./settings.component.css'],
@@ -111,39 +115,6 @@ export class SettingsComponent {
     }
     document.documentElement.classList.toggle('dark', this.isDarkMode);
     this.userService.update('theme_mode', this.isDarkMode ? 'dark' : 'light');
-  }
-
-  /**
-   * Confirm and download all expenses as a JSON file.
-   */
-  confirmAndDownload(): void {
-    const confirmed = confirm('Are you sure you want to download your data as a JSON file?');
-    if (!confirmed) return;
-
-    const data = this.expenseService.getAll();
-
-    // Filter out unwanted fields
-    const filteredData = data.map(expense => ({
-      amount: expense.amount,
-      date: expense.date,
-      time: expense.time,
-      location: expense.location,
-      note: expense.note,
-      payment_mode: expense.payment_mode,
-      category_name: expense.category_name,
-      category_id: expense.category_id,
-      expense_id: expense.expense_id,
-      isExtraSpending: expense.isExtraSpending
-    }));
-
-    const jsonData = JSON.stringify(filteredData, null, 2);
-    const blob = new Blob([jsonData], { type: 'application/json' });
-    const url = window.URL.createObjectURL(blob);
-    const link = document.createElement('a');
-    link.href = url;
-    link.download = `expenses-${new Date().toISOString()}.json`;
-    link.click();
-    window.URL.revokeObjectURL(url);
   }
 
   /**
