@@ -1,20 +1,12 @@
 <!-- install command -->
 npm install --save apexcharts ng-apexcharts
-npm install lucide-angular
 npm install marked
 npm install -g @compodoc/compodoc
 npm install jspdf jspdf-autotable xlsx
 
 
-<!-- Next Task -->
-1. calender done✅
-2. update list page done✅
-3. update settings to add a cutom category
-4. add a budget section in sidebar
-5. add analysis section in sidebar
-6. add category wise list in home page
 
-commands
+commands:
 
 # First install Globally Than use compodoc 
 
@@ -34,3 +26,10 @@ compodoc -p tsconfig.json -w
 
 ## Serve Documentation
 compodoc -s
+
+
+
+# Build for production
+ng build --configuration production
+# or
+ng build --prod
