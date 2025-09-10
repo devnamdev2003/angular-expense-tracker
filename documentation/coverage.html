@@ -61,6 +61,20 @@
                }
                toggleDarkMode(darkModeState);
           </script>
+          <script>
+              // --- Iframe navigation tracking for Template Playground ---
+              function sendCurrentUrlToParent() {
+                  if (window.parent && window.parent !== window) {
+                      window.parent.postMessage({
+                          type: 'compodoc-iframe-navigate',
+                          url: window.location.pathname + window.location.hash
+                      }, '*');
+                  }
+              }
+              window.addEventListener('hashchange', sendCurrentUrlToParent, false);
+              window.addEventListener('popstate', sendCurrentUrlToParent, false);
+              window.addEventListener('DOMContentLoaded', sendCurrentUrlToParent, false);
+          </script>
 
         <div class="navbar navbar-default navbar-fixed-top d-md-none p-0">
                <div class="d-flex">
@@ -81,6 +95,10 @@
                <!-- START CONTENT -->
                <div class="content coverage">
                    <div class="content-data">
+
+
+
+
 
 
 
@@ -121,7 +139,7 @@
         <tr class="very-good">
             <td>
                 <!-- miscellaneous -->
-                <a href="./components/AppComponent.html">src/app/app.component.ts</a>
+                        <a href="./components/AppComponent.html">src/app/app.component.ts</a>
             </td>
             <td>component</td>
             <td>AppComponent</td>
@@ -178,10 +196,22 @@
                 <span class="coverage-count">(0/1)</span>
             </td>
         </tr>
+        <tr class="low">
+            <td>
+                <!-- miscellaneous -->
+                        <a href="./miscellaneous/variables.html#routes">src/app/app.routes.ts</a>
+            </td>
+            <td>variable</td>
+            <td>routes</td>
+            <td align="right" data-sort="0">
+                <span class="coverage-percent">0 %</span>
+                <span class="coverage-count">(0/1)</span>
+            </td>
+        </tr>
         <tr class="very-good">
             <td>
                 <!-- miscellaneous -->
-                <a href="./components/CategoryDropdownComponent.html">src/app/component/category-dropdown/category-dropdown.component.ts</a>
+                        <a href="./components/CategoryDropdownComponent.html">src/app/component/category-dropdown/category-dropdown.component.ts</a>
             </td>
             <td>component</td>
             <td>CategoryDropdownComponent</td>
@@ -193,7 +223,7 @@
         <tr class="low">
             <td>
                 <!-- miscellaneous -->
-                <a href="./components/CustomModalComponent.html">src/app/component/custom-modal/custom-modal.component.ts</a>
+                        <a href="./components/CustomModalComponent.html">src/app/component/custom-modal/custom-modal.component.ts</a>
             </td>
             <td>component</td>
             <td>CustomModalComponent</td>
@@ -205,7 +235,7 @@
         <tr class="very-good">
             <td>
                 <!-- miscellaneous -->
-                <a href="./components/FormModelComponent.html">src/app/component/form-model/form-model.component.ts</a>
+                        <a href="./components/FormModelComponent.html">src/app/component/form-model/form-model.component.ts</a>
             </td>
             <td>component</td>
             <td>FormModelComponent</td>
@@ -217,7 +247,7 @@
         <tr class="very-good">
             <td>
                 <!-- miscellaneous -->
-                <a href="./components/GraphsComponent.html">src/app/component/graphs/graphs.component.ts</a>
+                        <a href="./components/GraphsComponent.html">src/app/component/graphs/graphs.component.ts</a>
             </td>
             <td>component</td>
             <td>GraphsComponent</td>
@@ -229,7 +259,7 @@
         <tr class="low">
             <td>
                 <!-- miscellaneous -->
-                <a href="./components/InfoIconComponent.html">src/app/component/info-icon/info-icon.component.ts</a>
+                        <a href="./components/InfoIconComponent.html">src/app/component/info-icon/info-icon.component.ts</a>
             </td>
             <td>component</td>
             <td>InfoIconComponent</td>
@@ -241,7 +271,7 @@
         <tr class="low">
             <td>
                 <!-- miscellaneous -->
-                <a href="./components/ExpenseDetailsModalComponent.html">src/app/component/list-expenses/expense-details-modal/expense-details-modal.component.ts</a>
+                        <a href="./components/ExpenseDetailsModalComponent.html">src/app/component/list-expenses/expense-details-modal/expense-details-modal.component.ts</a>
             </td>
             <td>component</td>
             <td>ExpenseDetailsModalComponent</td>
@@ -253,7 +283,7 @@
         <tr class="very-good">
             <td>
                 <!-- miscellaneous -->
-                <a href="./components/ExpenseListComponent.html">src/app/component/list-expenses/expense-list/expense-list.component.ts</a>
+                        <a href="./components/ExpenseListComponent.html">src/app/component/list-expenses/expense-list/expense-list.component.ts</a>
             </td>
             <td>component</td>
             <td>ExpenseListComponent</td>
@@ -265,7 +295,7 @@
         <tr class="low">
             <td>
                 <!-- miscellaneous -->
-                <a href="./components/PieChartComponent.html">src/app/component/pie-chart/pie-chart.component.ts</a>
+                        <a href="./components/PieChartComponent.html">src/app/component/pie-chart/pie-chart.component.ts</a>
             </td>
             <td>component</td>
             <td>PieChartComponent</td>
@@ -289,7 +319,7 @@
         <tr class="very-good">
             <td>
                 <!-- miscellaneous -->
-                <a href="./components/SearchButtonComponent.html">src/app/component/search-button/search-button.component.ts</a>
+                        <a href="./components/SearchButtonComponent.html">src/app/component/search-button/search-button.component.ts</a>
             </td>
             <td>component</td>
             <td>SearchButtonComponent</td>
@@ -301,7 +331,7 @@
         <tr class="very-good">
             <td>
                 <!-- miscellaneous -->
-                <a href="./components/DownloadComponentComponent.html">src/app/component/settings-components/download-component/download-component.component.ts</a>
+                        <a href="./components/DownloadComponentComponent.html">src/app/component/settings-components/download-component/download-component.component.ts</a>
             </td>
             <td>component</td>
             <td>DownloadComponentComponent</td>
@@ -313,7 +343,7 @@
         <tr class="very-good">
             <td>
                 <!-- miscellaneous -->
-                <a href="./components/SettingItemComponent.html">src/app/component/settings-components/setting-item/setting-item.component.ts</a>
+                        <a href="./components/SettingItemComponent.html">src/app/component/settings-components/setting-item/setting-item.component.ts</a>
             </td>
             <td>component</td>
             <td>SettingItemComponent</td>
@@ -325,7 +355,7 @@
         <tr class="very-good">
             <td>
                 <!-- miscellaneous -->
-                <a href="./components/AddExpenseComponent.html">src/app/features/add-expense/add-expense.component.ts</a>
+                        <a href="./components/AddExpenseComponent.html">src/app/features/add-expense/add-expense.component.ts</a>
             </td>
             <td>component</td>
             <td>AddExpenseComponent</td>
@@ -337,7 +367,7 @@
         <tr class="low">
             <td>
                 <!-- miscellaneous -->
-                <a href="./components/AiComponent.html">src/app/features/ai/ai.component.ts</a>
+                        <a href="./components/AiComponent.html">src/app/features/ai/ai.component.ts</a>
             </td>
             <td>component</td>
             <td>AiComponent</td>
@@ -349,7 +379,7 @@
         <tr class="low">
             <td>
                 <!-- miscellaneous -->
-                <a href="./components/AnalysisComponent.html">src/app/features/analysis/analysis.component.ts</a>
+                        <a href="./components/AnalysisComponent.html">src/app/features/analysis/analysis.component.ts</a>
             </td>
             <td>component</td>
             <td>AnalysisComponent</td>
@@ -361,7 +391,7 @@
         <tr class="low">
             <td>
                 <!-- miscellaneous -->
-                <a href="./components/BudgetComponent.html">src/app/features/budget/budget.component.ts</a>
+                        <a href="./components/BudgetComponent.html">src/app/features/budget/budget.component.ts</a>
             </td>
             <td>component</td>
             <td>BudgetComponent</td>
@@ -385,7 +415,7 @@
         <tr class="low">
             <td>
                 <!-- miscellaneous -->
-                <a href="./components/CalendarComponent.html">src/app/features/calendar/calendar.component.ts</a>
+                        <a href="./components/CalendarComponent.html">src/app/features/calendar/calendar.component.ts</a>
             </td>
             <td>component</td>
             <td>CalendarComponent</td>
@@ -397,7 +427,7 @@
         <tr class="very-good">
             <td>
                 <!-- miscellaneous -->
-                <a href="./components/HomeComponent.html">src/app/features/home/home.component.ts</a>
+                        <a href="./components/HomeComponent.html">src/app/features/home/home.component.ts</a>
             </td>
             <td>component</td>
             <td>HomeComponent</td>
@@ -409,7 +439,7 @@
         <tr class="very-good">
             <td>
                 <!-- miscellaneous -->
-                <a href="./components/ListExpensesComponent.html">src/app/features/list-expenses/list-expenses.component.ts</a>
+                        <a href="./components/ListExpensesComponent.html">src/app/features/list-expenses/list-expenses.component.ts</a>
             </td>
             <td>component</td>
             <td>ListExpensesComponent</td>
@@ -421,7 +451,7 @@
         <tr class="low">
             <td>
                 <!-- miscellaneous -->
-                <a href="./components/MusicComponent.html">src/app/features/music/music.component.ts</a>
+                        <a href="./components/MusicComponent.html">src/app/features/music/music.component.ts</a>
             </td>
             <td>component</td>
             <td>MusicComponent</td>
@@ -433,7 +463,7 @@
         <tr class="low">
             <td>
                 <!-- miscellaneous -->
-                <a href="./components/SearchComponent.html">src/app/features/search/search.component.ts</a>
+                        <a href="./components/SearchComponent.html">src/app/features/search/search.component.ts</a>
             </td>
             <td>component</td>
             <td>SearchComponent</td>
@@ -445,7 +475,7 @@
         <tr class="very-good">
             <td>
                 <!-- miscellaneous -->
-                <a href="./components/SettingsComponent.html">src/app/features/settings/settings.component.ts</a>
+                        <a href="./components/SettingsComponent.html">src/app/features/settings/settings.component.ts</a>
             </td>
             <td>component</td>
             <td>SettingsComponent</td>
@@ -457,7 +487,7 @@
         <tr class="low">
             <td>
                 <!-- miscellaneous -->
-                <a href="./injectables/GetApiService.html">src/app/service/backend-api/get/get-api.service.ts</a>
+                        <a href="./injectables/GetApiService.html">src/app/service/backend-api/get/get-api.service.ts</a>
             </td>
             <td>injectable</td>
             <td>GetApiService</td>
@@ -469,7 +499,7 @@
         <tr class="very-good">
             <td>
                 <!-- miscellaneous -->
-                <a href="./injectables/PostApiService.html">src/app/service/backend-api/post/post-api.service.ts</a>
+                        <a href="./injectables/PostApiService.html">src/app/service/backend-api/post/post-api.service.ts</a>
             </td>
             <td>injectable</td>
             <td>PostApiService</td>
@@ -481,7 +511,7 @@
         <tr class="very-good">
             <td>
                 <!-- miscellaneous -->
-                <a href="./injectables/GeminiApiService.html">src/app/service/gemini-api/gemini-api.service.ts</a>
+                        <a href="./injectables/GeminiApiService.html">src/app/service/gemini-api/gemini-api.service.ts</a>
             </td>
             <td>injectable</td>
             <td>GeminiApiService</td>
@@ -493,7 +523,7 @@
         <tr class="low">
             <td>
                 <!-- miscellaneous -->
-                <a href="./injectables/GlobalLoaderService.html">src/app/service/global-loader/global-loader.service.ts</a>
+                        <a href="./injectables/GlobalLoaderService.html">src/app/service/global-loader/global-loader.service.ts</a>
             </td>
             <td>injectable</td>
             <td>GlobalLoaderService</td>
@@ -505,7 +535,7 @@
         <tr class="low">
             <td>
                 <!-- miscellaneous -->
-                <a href="./injectables/BudgetService.html">src/app/service/localStorage/budget.service.ts</a>
+                        <a href="./injectables/BudgetService.html">src/app/service/localStorage/budget.service.ts</a>
             </td>
             <td>injectable</td>
             <td>BudgetService</td>
@@ -517,7 +547,7 @@
         <tr class="low">
             <td>
                 <!-- miscellaneous -->
-                <a href="./interfaces/Budget.html">src/app/service/localStorage/budget.service.ts</a>
+                        <a href="./interfaces/Budget.html">src/app/service/localStorage/budget.service.ts</a>
             </td>
             <td>interface</td>
             <td>Budget</td>
@@ -529,7 +559,7 @@
         <tr class="low">
             <td>
                 <!-- miscellaneous -->
-                <a href="./injectables/CategoryService.html">src/app/service/localStorage/category.service.ts</a>
+                        <a href="./injectables/CategoryService.html">src/app/service/localStorage/category.service.ts</a>
             </td>
             <td>injectable</td>
             <td>CategoryService</td>
@@ -541,7 +571,7 @@
         <tr class="low">
             <td>
                 <!-- miscellaneous -->
-                <a href="./interfaces/Category.html">src/app/service/localStorage/category.service.ts</a>
+                        <a href="./interfaces/Category.html">src/app/service/localStorage/category.service.ts</a>
             </td>
             <td>interface</td>
             <td>Category</td>
@@ -565,7 +595,7 @@
         <tr class="low">
             <td>
                 <!-- miscellaneous -->
-                <a href="./injectables/ExpenseService.html">src/app/service/localStorage/expense.service.ts</a>
+                        <a href="./injectables/ExpenseService.html">src/app/service/localStorage/expense.service.ts</a>
             </td>
             <td>injectable</td>
             <td>ExpenseService</td>
@@ -577,7 +607,7 @@
         <tr class="low">
             <td>
                 <!-- miscellaneous -->
-                <a href="./interfaces/Expense.html">src/app/service/localStorage/expense.service.ts</a>
+                        <a href="./interfaces/Expense.html">src/app/service/localStorage/expense.service.ts</a>
             </td>
             <td>interface</td>
             <td>Expense</td>
@@ -589,7 +619,7 @@
         <tr class="low">
             <td>
                 <!-- miscellaneous -->
-                <a href="./injectables/StorageService.html">src/app/service/localStorage/storage.service.ts</a>
+                        <a href="./injectables/StorageService.html">src/app/service/localStorage/storage.service.ts</a>
             </td>
             <td>injectable</td>
             <td>StorageService</td>
@@ -601,7 +631,7 @@
         <tr class="low">
             <td>
                 <!-- miscellaneous -->
-                <a href="./interfaces/Schema.html">src/app/service/localStorage/storage.service.ts</a>
+                        <a href="./interfaces/Schema.html">src/app/service/localStorage/storage.service.ts</a>
             </td>
             <td>interface</td>
             <td>Schema</td>
@@ -613,7 +643,7 @@
         <tr class="low">
             <td>
                 <!-- miscellaneous -->
-                <a href="./injectables/UserService.html">src/app/service/localStorage/user.service.ts</a>
+                        <a href="./injectables/UserService.html">src/app/service/localStorage/user.service.ts</a>
             </td>
             <td>injectable</td>
             <td>UserService</td>
@@ -625,7 +655,7 @@
         <tr class="low">
             <td>
                 <!-- miscellaneous -->
-                <a href="./interfaces/User.html">src/app/service/localStorage/user.service.ts</a>
+                        <a href="./interfaces/User.html">src/app/service/localStorage/user.service.ts</a>
             </td>
             <td>interface</td>
             <td>User</td>
@@ -637,7 +667,7 @@
         <tr class="very-good">
             <td>
                 <!-- miscellaneous -->
-                <a href="./injectables/SaavnService.html">src/app/service/saavan-api/saavan.service.ts</a>
+                        <a href="./injectables/SaavnService.html">src/app/service/saavan-api/saavan.service.ts</a>
             </td>
             <td>injectable</td>
             <td>SaavnService</td>
@@ -649,7 +679,7 @@
         <tr class="very-good">
             <td>
                 <!-- miscellaneous -->
-                <a href="./interfaces/ChatMessage.html">src/app/service/saavan-api/saavan.service.ts</a>
+                        <a href="./interfaces/ChatMessage.html">src/app/service/saavan-api/saavan.service.ts</a>
             </td>
             <td>interface</td>
             <td>ChatMessage</td>
@@ -661,7 +691,7 @@
         <tr class="low">
             <td>
                 <!-- miscellaneous -->
-                <a href="./injectables/SectionService.html">src/app/service/section/section.service.ts</a>
+                        <a href="./injectables/SectionService.html">src/app/service/section/section.service.ts</a>
             </td>
             <td>injectable</td>
             <td>SectionService</td>
@@ -673,7 +703,7 @@
         <tr class="very-good">
             <td>
                 <!-- miscellaneous -->
-                <a href="./injectables/ToastService.html">src/app/service/toast/toast.service.ts</a>
+                        <a href="./injectables/ToastService.html">src/app/service/toast/toast.service.ts</a>
             </td>
             <td>injectable</td>
             <td>ToastService</td>
@@ -685,7 +715,7 @@
         <tr class="very-good">
             <td>
                 <!-- miscellaneous -->
-                <a href="./injectables/AppVersionService.html">src/app/service/util/app-version/app-version.service.ts</a>
+                        <a href="./injectables/AppVersionService.html">src/app/service/util/app-version/app-version.service.ts</a>
             </td>
             <td>injectable</td>
             <td>AppVersionService</td>
@@ -697,7 +727,7 @@
         <tr class="very-good">
             <td>
                 <!-- miscellaneous -->
-                <a href="./injectables/ConfigService.html">src/app/service/util/config/config.service.ts</a>
+                        <a href="./injectables/ConfigService.html">src/app/service/util/config/config.service.ts</a>
             </td>
             <td>injectable</td>
             <td>ConfigService</td>
@@ -709,7 +739,7 @@
         <tr class="low">
             <td>
                 <!-- miscellaneous -->
-                <a href="./injectables/UtilsService.html">src/app/service/util/utils.service.ts</a>
+                        <a href="./injectables/UtilsService.html">src/app/service/util/utils.service.ts</a>
             </td>
             <td>injectable</td>
             <td>UtilsService</td>
@@ -721,7 +751,7 @@
         <tr class="low">
             <td>
                 <!-- miscellaneous -->
-                <a href="./components/FooterComponent.html">src/app/shared/footer/footer.component.ts</a>
+                        <a href="./components/FooterComponent.html">src/app/shared/footer/footer.component.ts</a>
             </td>
             <td>component</td>
             <td>FooterComponent</td>
@@ -733,7 +763,7 @@
         <tr class="low">
             <td>
                 <!-- miscellaneous -->
-                <a href="./components/GlobalLoaderComponent.html">src/app/shared/global-loader/global-loader.component.ts</a>
+                        <a href="./components/GlobalLoaderComponent.html">src/app/shared/global-loader/global-loader.component.ts</a>
             </td>
             <td>component</td>
             <td>GlobalLoaderComponent</td>
@@ -745,7 +775,7 @@
         <tr class="low">
             <td>
                 <!-- miscellaneous -->
-                <a href="./components/HamburgerMenuComponent.html">src/app/shared/hamburger-menu/hamburger-menu.component.ts</a>
+                        <a href="./components/HamburgerMenuComponent.html">src/app/shared/hamburger-menu/hamburger-menu.component.ts</a>
             </td>
             <td>component</td>
             <td>HamburgerMenuComponent</td>
@@ -757,7 +787,7 @@
         <tr class="low">
             <td>
                 <!-- miscellaneous -->
-                <a href="./components/NavbarComponent.html">src/app/shared/navbar/navbar.component.ts</a>
+                        <a href="./components/NavbarComponent.html">src/app/shared/navbar/navbar.component.ts</a>
             </td>
             <td>component</td>
             <td>NavbarComponent</td>
@@ -769,7 +799,7 @@
         <tr class="low">
             <td>
                 <!-- miscellaneous -->
-                <a href="./components/SidebarComponent.html">src/app/shared/sidebar/sidebar.component.ts</a>
+                        <a href="./components/SidebarComponent.html">src/app/shared/sidebar/sidebar.component.ts</a>
             </td>
             <td>component</td>
             <td>SidebarComponent</td>
@@ -781,7 +811,7 @@
         <tr class="very-good">
             <td>
                 <!-- miscellaneous -->
-                <a href="./components/ToastComponent.html">src/app/shared/toast/toast.component.ts</a>
+                        <a href="./components/ToastComponent.html">src/app/shared/toast/toast.component.ts</a>
             </td>
             <td>component</td>
             <td>ToastComponent</td>
