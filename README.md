@@ -87,7 +87,7 @@ All expenses are stored in the device's **LocalStorage** and reflected immediate
 Provides customization and utility options for better personalization:
 
 * 🎨 **Theme Mode Toggle** (Dark / Light)
-* ⬇️ **Download Data** (export expenses data)
+* ⬇️ **Download Data** (export expenses data in pdf, json, excel formats)
 * 📤 **Import Data** (upload expense data)
 * ➕ **Add Category** (custom categories for better organization)
 * ❌ **Delete Category** (remove unused or incorrect categories)

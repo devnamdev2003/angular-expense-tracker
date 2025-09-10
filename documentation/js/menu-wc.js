@@ -78,6 +78,9 @@ customElements.define('compodoc-menu', class extends HTMLElement {
                                 <a href="components/CustomModalComponent.html" data-type="entity-link" >CustomModalComponent</a>
                             </li>
                             <li class="link">
+                                <a href="components/DownloadComponentComponent.html" data-type="entity-link" >DownloadComponentComponent</a>
+                            </li>
+                            <li class="link">
                                 <a href="components/ExpenseDetailsModalComponent.html" data-type="entity-link" >ExpenseDetailsModalComponent</a>
                             </li>
                             <li class="link">
@@ -85,6 +88,9 @@ customElements.define('compodoc-menu', class extends HTMLElement {
                             </li>
                             <li class="link">
                                 <a href="components/FooterComponent.html" data-type="entity-link" >FooterComponent</a>
+                            </li>
+                            <li class="link">
+                                <a href="components/FormModelComponent.html" data-type="entity-link" >FormModelComponent</a>
                             </li>
                             <li class="link">
                                 <a href="components/GlobalLoaderComponent.html" data-type="entity-link" >GlobalLoaderComponent</a>

@@ -89,7 +89,7 @@
   <li class="breadcrumb-item">Components</li>
   <li class="breadcrumb-item"
   >
-  InfoIconComponent</li>
+  FormModelComponent</li>
 </ol>
 
 <ul class="nav nav-tabs" role="tablist">
@@ -116,10 +116,19 @@
     <h3>File</h3>
 </p>
 <p class="comment">
-    <code>src/app/component/info-icon/info-icon.component.ts</code>
+    <code>src/app/component/form-model/form-model.component.ts</code>
 </p>
 
 
+    <p class="comment">
+        <h3>Description</h3>
+    </p>
+    <p class="comment">
+        <p>A reusable modal component for forms.</p>
+<p>This component displays a modal with a customizable label
+and provides an output event to notify when the modal is closed.</p>
+
+    </p>
 
 
 
@@ -142,7 +151,7 @@
 
             <tr>
                 <td class="col-md-3">selector</td>
-                <td class="col-md-9"><code>app-info-icon</code></td>
+                <td class="col-md-9"><code>app-form-model</code></td>
             </tr>
 
 
@@ -152,14 +161,14 @@
 
             <tr>
                 <td class="col-md-3">templateUrl</td>
-                <td class="col-md-9"><code>./info-icon.component.html</code></td>
+                <td class="col-md-9"><code>./form-model.component.html</code></td>
             </tr>
 
 
 
             <tr>
                 <td class="col-md-3">styleUrl</td>
-                <td class="col-md-9"><code>./info-icon.component.css</code></td>
+                <td class="col-md-9"><code>./form-model.component.css</code></td>
             </tr>
 
 
@@ -175,6 +184,20 @@
     <table class="table table-sm table-bordered index-table">
         <tbody>
 
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Methods</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                <a href="#closeModel" >closeModel</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
 
                 <tr>
                     <td class="col-md-4">
@@ -185,12 +208,26 @@
                     <td class="col-md-4">
                         <ul class="index-list">
                             <li>
-                                <a href="#message" >message</a>
+                                <a href="#label" >label</a>
                             </li>
                         </ul>
                     </td>
                 </tr>
 
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Outputs</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                <a href="#close" >close</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
 
 
 
@@ -205,8 +242,8 @@
             <tbody>
                 <tr>
                     <td class="col-md-4">
-                        <a name="message"></a>
-                        <b>message</b>
+                        <a name="label"></a>
+                        <b>label</b>
                     </td>
                 </tr>
                 <tr>
@@ -215,53 +252,162 @@
 
                     </td>
                 </tr>
+                        <tr>
+                            <td class="col-md-2" colspan="2">
+                                    <div class="io-line">Defined in <a href="" data-line="22" class="link-to-prism">src/app/component/form-model/form-model.component.ts:22</a></div>
+                            </td>
+                        </tr>
                 <tr>
                     <td class="col-md-4">
-                        <i>Default value : </i><code>&#x27;Info tooltip&#x27;</code>
+                        <div class="io-description"><p>The label text displayed in the form modal.</p>
+<p>This property should be provided by the parent component.</p>
+</div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+</section>
+    <section data-compodoc="block-outputs">
+    <h3 id="outputs">Outputs</h3>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="close"></a>
+                        <b>close</b>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>EventEmitter</code>
+
                     </td>
                 </tr>
                         <tr>
                             <td class="col-md-2" colspan="2">
-                                    <div class="io-line">Defined in <a href="" data-line="10" class="link-to-prism">src/app/component/info-icon/info-icon.component.ts:10</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="30" class="link-to-prism">src/app/component/form-model/form-model.component.ts:30</a></div>
                             </td>
                         </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <div class="io-description"><p>Event emitted when the modal is closed.</p>
+<p>The parent component can listen to this event
+to perform actions such as hiding the modal.</p>
+</div>
+                    </td>
+                </tr>
             </tbody>
         </table>
 </section>
 
 
+    <section data-compodoc="block-methods">
+    
+    <h3 id="methods">
+        Methods
+    </h3>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="closeModel"></a>
+                    <span class="name">
+                        <span ><b>closeModel</b></span>
+                        <a href="#closeModel"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>closeModel()</code>
+                </td>
+            </tr>
 
 
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="38"
+                                    class="link-to-prism">src/app/component/form-model/form-model.component.ts:38</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-description"><p>Closes the modal and emits the <code>close</code> event.</p>
+<p>This method is typically called when the user
+clicks a close button or dismisses the modal.</p>
+</div>
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</section>
 
 </div>
 
 
     <div class="tab-pane fade  tab-source-code" id="source">
-        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Component, Input } from &#x27;@angular/core&#x27;;
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Component, EventEmitter, Input, Output } from &#x27;@angular/core&#x27;;
 
+/**
+ * A reusable modal component for forms.
+ * 
+ * This component displays a modal with a customizable label
+ * and provides an output event to notify when the modal is closed.
+ */
 @Component({
-  selector: &#x27;app-info-icon&#x27;,
+  selector: &#x27;app-form-model&#x27;,
   imports: [],
-  templateUrl: &#x27;./info-icon.component.html&#x27;,
-  styleUrl: &#x27;./info-icon.component.css&#x27;
+  templateUrl: &#x27;./form-model.component.html&#x27;,
+  styleUrl: &#x27;./form-model.component.css&#x27;
 })
-export class InfoIconComponent {
-  @Input() message: string &#x3D; &#x27;Info tooltip&#x27;;
+export class FormModelComponent {
+
+  /**
+   * The label text displayed in the form modal.
+   * 
+   * This property should be provided by the parent component.
+   */
+  @Input() label!: string;
+
+  /**
+   * Event emitted when the modal is closed.
+   * 
+   * The parent component can listen to this event
+   * to perform actions such as hiding the modal.
+   */
+  @Output() close &#x3D; new EventEmitter&lt;void&gt;();
+
+  /**
+   * Closes the modal and emits the &#x60;close&#x60; event.
+   * 
+   * This method is typically called when the user
+   * clicks a close button or dismisses the modal.
+   */
+  closeModel(): void {
+    this.close.emit();
+  }
+
 }
 </code></pre>
     </div>
 
     <div class="tab-pane fade " id="templateData">
-        <pre class="line-numbers"><code class="language-html">&lt;div class&#x3D;&quot;relative group inline-block&quot;&gt;
-    &lt;img src&#x3D;&quot;assets/img/icon/icons8-i-48.png&quot; alt&#x3D;&quot;Info&quot; class&#x3D;&quot;w-5 h-5 cursor-pointer&quot; /&gt;
-    &lt;div class&#x3D;&quot;absolute bottom-full left-1/2 transform -translate-x-1/2 mb-2 w-max max-w-xs 
-               bg-gray-800 text-white text-xs rounded px-2 py-1 
-               opacity-0 group-hover:opacity-100 
-               pointer-events-none
-               transition-opacity duration-200
-               dark:bg-gray-200 dark:text-gray-900
-              &quot;&gt;
-        {{ message }}
+        <pre class="line-numbers"><code class="language-html">&lt;div class&#x3D;&quot;fixed inset-0 bg-black bg-opacity-40 z-50 flex items-center justify-center&quot;&gt;
+    &lt;div class&#x3D;&quot;bg-[var(--color-bg)] p-6 rounded-xl w-11/12 md:w-1/2 max-h-[70vh] flex flex-col shadow-xl&quot;&gt;
+        &lt;div class&#x3D;&quot;flex justify-between items-center mb-3&quot;&gt;
+            &lt;h2 class&#x3D;&quot;text-lg font-bold text-[var(--color-text)]&quot;&gt;
+                {{ label }}
+            &lt;/h2&gt;
+            &lt;button (click)&#x3D;&quot;closeModel()&quot; class&#x3D;&quot;text-[var(--color-red)] font-bold text-xl&quot;&gt;&amp;times;&lt;/button&gt;
+        &lt;/div&gt;
+        &lt;ng-content&gt;&lt;/ng-content&gt;
     &lt;/div&gt;
 &lt;/div&gt;</code></pre>
     </div>
@@ -292,10 +438,10 @@ export class InfoIconComponent {
 <script src="../js/libs/htmlparser.js"></script>
 <script src="../js/libs/deep-iterator.js"></script>
 <script>
-        var COMPONENT_TEMPLATE = '<div><div class="relative group inline-block">    <img src="assets/img/icon/icons8-i-48.png" alt="Info" class="w-5 h-5 cursor-pointer" />    <div class="absolute bottom-full left-1/2 transform -translate-x-1/2 mb-2 w-max max-w-xs                bg-gray-800 text-white text-xs rounded px-2 py-1                opacity-0 group-hover:opacity-100                pointer-events-none               transition-opacity duration-200               dark:bg-gray-200 dark:text-gray-900              ">        {{ message }}    </div></div></div>'
+        var COMPONENT_TEMPLATE = '<div><div class="fixed inset-0 bg-black bg-opacity-40 z-50 flex items-center justify-center">    <div class="bg-[var(--color-bg)] p-6 rounded-xl w-11/12 md:w-1/2 max-h-[70vh] flex flex-col shadow-xl">        <div class="flex justify-between items-center mb-3">            <h2 class="text-lg font-bold text-[var(--color-text)]">                {{ label }}            </h2>            <button (click)="closeModel()" class="text-[var(--color-red)] font-bold text-xl">&times;</button>        </div>        <ng-content></ng-content>    </div></div></div>'
     var COMPONENTS = [{'name': 'AddExpenseComponent', 'selector': 'app-add-expense'},{'name': 'AiComponent', 'selector': 'app-ai'},{'name': 'AnalysisComponent', 'selector': 'app-analysis'},{'name': 'AppComponent', 'selector': 'app-root'},{'name': 'BudgetComponent', 'selector': 'app-budget'},{'name': 'CalendarComponent', 'selector': 'app-calendar'},{'name': 'CategoryDropdownComponent', 'selector': 'app-category-dropdown'},{'name': 'CustomModalComponent', 'selector': 'app-custom-modal'},{'name': 'DownloadComponentComponent', 'selector': 'app-download-component'},{'name': 'ExpenseDetailsModalComponent', 'selector': 'app-expense-details-modal'},{'name': 'ExpenseListComponent', 'selector': 'app-expense-list'},{'name': 'FooterComponent', 'selector': 'app-footer'},{'name': 'FormModelComponent', 'selector': 'app-form-model'},{'name': 'GlobalLoaderComponent', 'selector': 'app-global-loader'},{'name': 'GraphsComponent', 'selector': 'app-graphs'},{'name': 'HamburgerMenuComponent', 'selector': 'app-hamburger-menu'},{'name': 'HomeComponent', 'selector': 'app-home'},{'name': 'InfoIconComponent', 'selector': 'app-info-icon'},{'name': 'ListExpensesComponent', 'selector': 'app-list-expenses'},{'name': 'MusicComponent', 'selector': 'app-music'},{'name': 'NavbarComponent', 'selector': 'app-navbar'},{'name': 'PieChartComponent', 'selector': 'app-pie-chart'},{'name': 'SearchButtonComponent', 'selector': 'app-search-button'},{'name': 'SearchComponent', 'selector': 'app-search'},{'name': 'SettingItemComponent', 'selector': 'app-setting-item'},{'name': 'SettingsComponent', 'selector': 'app-settings'},{'name': 'SidebarComponent', 'selector': 'app-sidebar'},{'name': 'ToastComponent', 'selector': 'app-toast'}];
     var DIRECTIVES = [];
-    var ACTUAL_COMPONENT = {'name': 'InfoIconComponent'};
+    var ACTUAL_COMPONENT = {'name': 'FormModelComponent'};
 </script>
 <script src="../js/tree.js"></script>
 
@@ -341,7 +487,7 @@ export class InfoIconComponent {
        <script>
             var COMPODOC_CURRENT_PAGE_DEPTH = 1;
             var COMPODOC_CURRENT_PAGE_CONTEXT = 'component';
-            var COMPODOC_CURRENT_PAGE_URL = 'InfoIconComponent.html';
+            var COMPODOC_CURRENT_PAGE_URL = 'FormModelComponent.html';
             var MAX_SEARCH_RESULTS = 15;
        </script>
 

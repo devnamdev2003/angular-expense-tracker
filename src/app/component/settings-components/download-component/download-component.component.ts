@@ -8,6 +8,14 @@ import jsPDF from 'jspdf';
 import autoTable from 'jspdf-autotable';
 import * as XLSX from 'xlsx';
 
+/**
+ * Component responsible for exporting user expenses
+ * into JSON, PDF, or Excel formats within a given date range.
+ *
+ * This component provides a modal dialog with a form
+ * to select a date range and file type, validates the input,
+ * and triggers the download of filtered expense data.
+ */
 @Component({
   selector: 'app-download-component',
   imports: [
@@ -20,6 +28,30 @@ import * as XLSX from 'xlsx';
   styleUrl: './download-component.component.css'
 })
 export class DownloadComponentComponent {
+
+  /**
+   * Reactive form instance for selecting date range and file type.
+   */
+  downloadDataForm!: FormGroup;
+
+  /**
+   * Controls the visibility of the download data modal.
+   */
+  showDownloadDataModal = false;
+
+  /**
+   * Current date in `yyyy-MM-dd` format,
+   * used for validation to prevent future dates.
+   */
+  today: string;
+
+  /**
+   * Creates an instance of `DownloadComponentComponent`.
+   *
+   * @param expenseService Service used to fetch and filter expenses.
+   * @param fb Angular `FormBuilder` to build the reactive form.
+   * @param toastService Service used to show toast notifications.
+   */
   constructor(
     private expenseService: ExpenseService,
     private fb: FormBuilder,
@@ -28,10 +60,10 @@ export class DownloadComponentComponent {
     this.today = new Date().toISOString().split('T')[0];
   }
 
-  downloadDataForm!: FormGroup;
-  showDownloadDataModal = false;
-  today: string;
-
+  /**
+   * Lifecycle hook that initializes the form
+   * with default controls and validators.
+   */
   ngOnInit(): void {
     this.downloadDataForm = this.fb.group({
       fromDate: ['', [Validators.required]],
@@ -40,7 +72,12 @@ export class DownloadComponentComponent {
     });
   }
 
-  downloadData() {
+  /**
+   * Validates the form before triggering data download.
+   *
+   * Marks all controls as touched if the form is invalid.
+   */
+  downloadData(): void {
     if (this.downloadDataForm.invalid) {
       this.downloadDataForm.markAllAsTouched();
       return;
@@ -48,6 +85,10 @@ export class DownloadComponentComponent {
     this.confirmAndDownload();
   }
 
+  /**
+   * Validates date range and triggers the appropriate
+   * export function (JSON, PDF, Excel) based on user selection.
+   */
   confirmAndDownload(): void {
     const { fromDate, toDate, fileType } = this.downloadDataForm.value;
 
@@ -63,7 +104,7 @@ export class DownloadComponentComponent {
       return;
     }
 
-    // Filter fields
+    // Filter fields for export
     const filteredData = data.map(expense => ({
       amount: expense.amount,
       date: expense.date,
@@ -90,7 +131,7 @@ export class DownloadComponentComponent {
         this.toastService.show('PDF downloaded successfully!', 'success', 3000);
         return;
       } else if (fileType === 'EXCEL') {
-        this.exportToExcel(filteredData, fromDate, toDate);
+        this.exportToExcel(filteredData);
         this.closeDownloadDataModal();
         this.toastService.show('Excel downloaded successfully!', 'success', 3000);
         return;
@@ -101,6 +142,13 @@ export class DownloadComponentComponent {
     }
   }
 
+  /**
+   * Creates a file blob and triggers the browser to download it.
+   *
+   * @param content File content to download.
+   * @param mimeType MIME type of the file.
+   * @param extension File extension (json, pdf, xlsx).
+   */
   private triggerDownload(content: string, mimeType: string, extension: string): void {
     const blob = new Blob([content], { type: mimeType });
     const url = window.URL.createObjectURL(blob);
@@ -109,15 +157,17 @@ export class DownloadComponentComponent {
     const timestamp = new Date().toISOString().replace(/[:.]/g, '-');
     link.download = `expenses-${timestamp}.${extension}`;
 
-    // append -> safer across browsers
     document.body.appendChild(link);
     link.click();
     document.body.removeChild(link);
 
-    // ensure revoke
     window.URL.revokeObjectURL(url);
   }
 
+  /**
+   * Opens the modal and resets the download form
+   * to its initial state.
+   */
   openDownloadDataModal(): void {
     this.downloadDataForm.reset({
       fromDate: '',
@@ -129,11 +179,20 @@ export class DownloadComponentComponent {
     this.showDownloadDataModal = true;
   }
 
+  /**
+   * Closes the download modal.
+   */
   closeDownloadDataModal(): void {
     this.showDownloadDataModal = false;
   }
 
-  // PDF export
+  /**
+   * Exports expense data to a formatted PDF file.
+   *
+   * @param data Filtered expense records.
+   * @param fromDate Start date of the report.
+   * @param toDate End date of the report.
+   */
   private exportToPDF(data: any[], fromDate: string, toDate: string): void {
     const doc = new jsPDF('p', 'pt', 'a4');
     const pageWidth = doc.internal.pageSize.getWidth();
@@ -196,8 +255,12 @@ export class DownloadComponentComponent {
     doc.save(`expenses-${timestamp}.pdf`);
   }
 
-  // Excel export (no file-saver)
-  private exportToExcel(data: any[], fromDate: string, toDate: string): void {
+  /**
+   * Exports expense data to an Excel file.
+   *
+   * @param data Filtered expense records.
+   */
+  private exportToExcel(data: any[]): void {
     const excelData = data.map((exp, i) => ({
       'Index': i + 1,
       Category: exp.category_name,
@@ -211,8 +274,6 @@ export class DownloadComponentComponent {
     }));
 
     const workbook = XLSX.utils.book_new();
-
-    // ---- Build AoA (Array of Arrays)----
     const aoa: any[][] = [];
 
     if (excelData.length > 0) {
@@ -220,7 +281,7 @@ export class DownloadComponentComponent {
       aoa.push(headerRow);
 
       for (const row of excelData) {
-        aoa.push(Object.values(row)); // ✅ avoids TS index errors
+        aoa.push(Object.values(row));
       }
     }
 

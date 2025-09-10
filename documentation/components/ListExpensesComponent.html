@@ -501,8 +501,8 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="352"
-                                    class="link-to-prism">src/app/features/list-expenses/list-expenses.component.ts:352</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="354"
+                                    class="link-to-prism">src/app/features/list-expenses/list-expenses.component.ts:354</a></div>
                         </td>
                     </tr>
 
@@ -687,8 +687,8 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="340"
-                                    class="link-to-prism">src/app/features/list-expenses/list-expenses.component.ts:340</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="342"
+                                    class="link-to-prism">src/app/features/list-expenses/list-expenses.component.ts:342</a></div>
                         </td>
                     </tr>
 
@@ -765,8 +765,8 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="304"
-                                    class="link-to-prism">src/app/features/list-expenses/list-expenses.component.ts:304</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="305"
+                                    class="link-to-prism">src/app/features/list-expenses/list-expenses.component.ts:305</a></div>
                         </td>
                     </tr>
 
@@ -1091,8 +1091,8 @@ Reapplies filters and sorting if active.</p>
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="352"
-                                    class="link-to-prism">src/app/features/list-expenses/list-expenses.component.ts:352</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="354"
+                                    class="link-to-prism">src/app/features/list-expenses/list-expenses.component.ts:354</a></div>
                         </td>
                     </tr>
 
@@ -1255,8 +1255,8 @@ Reapplies filters and sorting if active.</p>
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="328"
-                                    class="link-to-prism">src/app/features/list-expenses/list-expenses.component.ts:328</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="330"
+                                    class="link-to-prism">src/app/features/list-expenses/list-expenses.component.ts:330</a></div>
                         </td>
                     </tr>
 
@@ -1403,8 +1403,8 @@ Reapplies filters and sorting if active.</p>
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="316"
-                                    class="link-to-prism">src/app/features/list-expenses/list-expenses.component.ts:316</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="318"
+                                    class="link-to-prism">src/app/features/list-expenses/list-expenses.component.ts:318</a></div>
                         </td>
                     </tr>
 
@@ -2596,6 +2596,7 @@ export class ListExpensesComponent implements OnInit {
     this.expenseService.update(expense_id, newData);
     this.toastService.show(&#x27;Expense updated successfully&#x27;, &#x27;success&#x27;);
     this.isEditOpen &#x3D; false;
+    this.searchData(this.searchQuery);
   }
 
   /**
@@ -2607,6 +2608,7 @@ export class ListExpensesComponent implements OnInit {
       this.expenseService.delete(id);
       this.toastService.show(&quot;Expense deleted successfully&quot;, &#x27;success&#x27;);
       this.closeModal();
+      this.searchData(this.searchQuery);
     }
   }
 
@@ -2897,7 +2899,7 @@ export class ListExpensesComponent implements OnInit {
 <script src="../js/libs/deep-iterator.js"></script>
 <script>
         var COMPONENT_TEMPLATE = '<div><section id="list" class="section md:px-2 mb-4">    <!-- Sort and Filter buttons -->    <div class="sticky top-0 z-30 bg-[var(--color-bg)] py-2 px-1">        <div class="flex justify-between space-x-2">            <div>                <p                    class="flex items-center gap-1 px-3 py-2 rounded-full text-sm font-medium bg-[var(--color-surface)] hover:bg-[var(--list-hover)] text-[var(--input-text)] shadow-sm transition">                    <img src="assets/img/icon/icons8-expense-48.png" alt="amount"                        class="w-[25px] h-[25px] transition-all duration-300 ease-in-out">                    <span class="text-[var(--color-green)]">{{currency}}{{totalAmount}}</span>                </p>            </div>            <!-- Sort and Filter Buttons -->            <div class="flex gap-2">                <button (click)="toggleSortByDropdown()"                    class="flex items-center gap-1 px-4 py-2 rounded-full text-sm font-medium bg-[var(--color-surface)] text-[var(--input-text)] hover:bg-[var(--list-hover)] shadow-sm transition">                    <img src="assets/img/icon/icons8-sort-50.png" alt="sort"                        class="w-[25px] h-[25px] transition-all duration-300 ease-in-out"                        style="filter: var(--icon-color2);">                    <span>Sort</span>                </button>                <button (click)="toggleFilterDropdown()"                    class="flex items-center gap-1 px-4 py-2 rounded-full text-sm font-medium bg-[var(--color-surface)] text-[var(--input-text)] hover:bg-[var(--list-hover)] shadow-sm transition">                    <img src="assets/img/icon/icons8-filter-50.png" alt="filter"                        class="w-[25px] h-[25px] transition-all duration-300 ease-in-out"                        style="filter: var(--icon-color2);">                    <span>Filter</span>                </button>            </div>        </div>    </div>    <!-- Backdrop -->    <div *ngIf="isFilterDropdownOpen" class="fixed inset-0 z-40 bg-black/40"></div>    <!-- Filter Modal -->    <div *ngIf="isFilterDropdownOpen" #filterRef        class="fixed bottom-0 left-0 right-0 z-[60] bg-[var(--color-surface)] border-t rounded-t-2xl shadow-xl max-h-[70vh] overflow-y-auto">        <h3 class="text-base font-semibold pb-2 border-b-2 border-[var(--color-gray-500)] pt-4 px-4">Filter</h3>        <form (ngSubmit)="applyFilter()" class="px-4 pb-4 pt-2">            <!-- Date range -->            <div class="flex space-x-4 pt-2">                <div class="flex-1">                    <label class="block text-sm font-semibold mb-1">From Date:</label>                    <input type="date" [(ngModel)]="filter.fromDate" name="fromDate"                        class="text-sm border rounded p-2 w-full bg-[var(--color-surface)]" />                </div>                <div class="flex-1">                    <label class="block text-sm font-semibold mb-1">To Date:</label>                    <input type="date" [(ngModel)]="filter.toDate" name="toDate"                        class="text-sm border rounded p-2 w-full bg-[var(--color-surface)]" />                </div>            </div>            <!-- payment mode -->            <div class="pt-2">                <label class="block text-sm font-semibold mb-1">Payment Mode:</label>                <div class="flex gap-8 max-h-40 pr-1">                    <label class="flex items-center gap-1 text-sm">                        <input type="checkbox" [checked]="filter.paymentMode.includes(\'Cash\')"                            (change)="onPaymentModeCheckboxChange($event, \'Cash\')"                            class="form-checkbox accent-[var(--color-accent)]" name="Cash" />                        <span>Cash</span>                    </label>                    <label class="flex items-center gap-1 text-sm">                        <input type="checkbox" [checked]="filter.paymentMode.includes(\'UPI\')"                            (change)="onPaymentModeCheckboxChange($event, \'UPI\')"                            class="form-checkbox accent-[var(--color-accent)]" name="UPI" />                        <span>UPI</span>                    </label>                    <label class="flex items-center gap-1 text-sm">                        <input type="checkbox" [checked]="filter.paymentMode.includes(\'Others\')"                            (change)="onPaymentModeCheckboxChange($event, \'Others\')"                            class="form-checkbox accent-[var(--color-accent)]" name="Others" />                        <span>Others</span>                    </label>                </div>            </div>            <!-- Extra Spending Toggle -->            <div class="pt-2">                <div class="w-full md:w-1/2 flex items-center justify-start space-x-4">                    <label for="isExtraSpending" class="block text-sm font-semibold mb-1">Extra Spending</label>                    <label class="relative inline-flex items-center cursor-pointer">                        <input type="checkbox" id="isExtraSpending" [checked]="filter.isExtraSpending"                            (change)="filter.isExtraSpending = !filter.isExtraSpending" class="sr-only peer">                        <div                            class="w-8 h-5 bg-gray-600 rounded-full peer peer-checked:bg-[var(--color-accent)] transition-all">                        </div>                        <span                            class="absolute left-1 top-1 w-3 h-3 bg-white rounded-full transition-all peer-checked:translate-x-3"></span>                    </label>                </div>            </div>            <!-- Category checkboxes -->            <div class="pt-2">                <label class="block text-sm font-semibold mb-1">Categories:</label>                <div class="grid grid-cols-2 gap-2 max-h-40 overflow-y-auto pr-1">                    <ng-container *ngFor="let cat of categories">                        <label class="text-sm flex items-center space-x-1 col-span-2"                            [class.col-span-1]="cat.name.length <= 15">                            <input type="checkbox" [checked]="filter.selectedCategoryIds.includes(cat.category_id)"                                (change)="onCategoryCheckboxChange($event, cat.category_id)"                                class="form-checkbox accent-[var(--color-accent)]"                                name="category-{{cat.category_id}}" />                            <span>{{ cat.name }}</span>                        </label>                    </ng-container>                </div>            </div>            <!-- Buttons -->            <div class="flex space-x-4 pt-2">                <button type="button" (click)="clearFilter()" class="flex-1 bg-gray-300 text-black rounded-lg p-2">Clear                    Filter</button>                <button type="submit" class="flex-1 bg-[var(--color-accent)] text-white rounded-lg p-2">Apply                    Filter</button>            </div>        </form>    </div>    <div *ngIf="isSortByDropdownOpen" class="fixed inset-0 z-40 bg-black/40">    </div>    <!-- Sort bottom sheet modal -->    <div *ngIf="isSortByDropdownOpen" #sortRef        class="fixed bottom-0 left-0 right-0 z-[60] bg-[var(--color-surface)] border-t rounded-t-2xl shadow-xl  max-h-[60vh] overflow-y-auto">        <h3 class="text-base font-semibold pb-2 border-b-2 border-[var(--color-gray-500)] pt-4 px-4">Sort By</h3>        <ul class="text-sm px-4 pb-4">            <li (click)="sortList(0,\'Amount – Low to High\',1)"                class="py-2 justify-between cursor-pointer flex items-center">                <p>                    Amount – Low to High                </p>                <p *ngIf="selectedFieldName === \'Amount – Low to High\'" class="mr-2 text-green-600">✔</p>            </li>            <li (click)="sortList(0,\'Amount – High to Low\',-1)"                class="py-2 justify-between cursor-pointer flex items-center">                <p>                    Amount – High to Low                </p>                <p *ngIf="selectedFieldName === \'Amount – High to Low\'" class="mr-2 text-green-600">✔</p>            </li>            <li (click)="sortList(1,\'Category – A to Z\',1)"                class="py-2 justify-between cursor-pointer flex items-center">                <p>                    Category – A to Z                </p>                <p *ngIf="selectedFieldName === \'Category – A to Z\'" class="mr-2 text-green-600">✔</p>            </li>            <li (click)="sortList(1,\'Category – Z to A\',-1)"                class="py-2 justify-between cursor-pointer flex items-center">                <p>                    Category – Z to A                </p>                <p *ngIf="selectedFieldName === \'Category – Z to A\'" class="mr-2 text-green-600">✔</p>            </li>            <li (click)="sortList(2,\'Date – Oldest First\',1)"                class="py-2 justify-between cursor-pointer flex items-center">                <p>                    Date – Oldest First                </p>                <p *ngIf="selectedFieldName === \'Date – Oldest First\'" class="mr-2 text-green-600">✔</p>            </li>            <li (click)="sortList(2,\'Date – Newest First\',-1)"                class="py-2 justify-between cursor-pointer flex items-center">                <p>                    Date – Newest First                </p>                <p *ngIf="selectedFieldName === \'Date – Newest First\'" class="mr-2 text-green-600">✔</p>            </li>        </ul>    </div>    <app-expense-list *ngIf="expenses.length > 0; else noDataTemplate" [expenses]="expenses" [currency]="currency"        (expenseSelected)="openExpenseModal($event)">    </app-expense-list>    <app-expense-details-modal *ngIf="selectedExpense" [selectedExpense]="selectedExpense" [currency]="currency"        (closeModal)="closeModal()" (delete)="deleteExpense($event)" (edit)="editExpense($event)"        [isEditOpen]="isEditOpen">    </app-expense-details-modal>    <ng-template #noDataTemplate>        <div class="text-center text-gray-500 py-4">            No data found        </div>    </ng-template>    <app-search-button (search)="onSearch($event)"></app-search-button></section></div>'
-    var COMPONENTS = [{'name': 'AddExpenseComponent', 'selector': 'app-add-expense'},{'name': 'AiComponent', 'selector': 'app-ai'},{'name': 'AnalysisComponent', 'selector': 'app-analysis'},{'name': 'AppComponent', 'selector': 'app-root'},{'name': 'BudgetComponent', 'selector': 'app-budget'},{'name': 'CalendarComponent', 'selector': 'app-calendar'},{'name': 'CategoryDropdownComponent', 'selector': 'app-category-dropdown'},{'name': 'CustomModalComponent', 'selector': 'app-custom-modal'},{'name': 'ExpenseDetailsModalComponent', 'selector': 'app-expense-details-modal'},{'name': 'ExpenseListComponent', 'selector': 'app-expense-list'},{'name': 'FooterComponent', 'selector': 'app-footer'},{'name': 'GlobalLoaderComponent', 'selector': 'app-global-loader'},{'name': 'GraphsComponent', 'selector': 'app-graphs'},{'name': 'HamburgerMenuComponent', 'selector': 'app-hamburger-menu'},{'name': 'HomeComponent', 'selector': 'app-home'},{'name': 'InfoIconComponent', 'selector': 'app-info-icon'},{'name': 'ListExpensesComponent', 'selector': 'app-list-expenses'},{'name': 'MusicComponent', 'selector': 'app-music'},{'name': 'NavbarComponent', 'selector': 'app-navbar'},{'name': 'PieChartComponent', 'selector': 'app-pie-chart'},{'name': 'SearchButtonComponent', 'selector': 'app-search-button'},{'name': 'SearchComponent', 'selector': 'app-search'},{'name': 'SettingItemComponent', 'selector': 'app-setting-item'},{'name': 'SettingsComponent', 'selector': 'app-settings'},{'name': 'SidebarComponent', 'selector': 'app-sidebar'},{'name': 'ToastComponent', 'selector': 'app-toast'}];
+    var COMPONENTS = [{'name': 'AddExpenseComponent', 'selector': 'app-add-expense'},{'name': 'AiComponent', 'selector': 'app-ai'},{'name': 'AnalysisComponent', 'selector': 'app-analysis'},{'name': 'AppComponent', 'selector': 'app-root'},{'name': 'BudgetComponent', 'selector': 'app-budget'},{'name': 'CalendarComponent', 'selector': 'app-calendar'},{'name': 'CategoryDropdownComponent', 'selector': 'app-category-dropdown'},{'name': 'CustomModalComponent', 'selector': 'app-custom-modal'},{'name': 'DownloadComponentComponent', 'selector': 'app-download-component'},{'name': 'ExpenseDetailsModalComponent', 'selector': 'app-expense-details-modal'},{'name': 'ExpenseListComponent', 'selector': 'app-expense-list'},{'name': 'FooterComponent', 'selector': 'app-footer'},{'name': 'FormModelComponent', 'selector': 'app-form-model'},{'name': 'GlobalLoaderComponent', 'selector': 'app-global-loader'},{'name': 'GraphsComponent', 'selector': 'app-graphs'},{'name': 'HamburgerMenuComponent', 'selector': 'app-hamburger-menu'},{'name': 'HomeComponent', 'selector': 'app-home'},{'name': 'InfoIconComponent', 'selector': 'app-info-icon'},{'name': 'ListExpensesComponent', 'selector': 'app-list-expenses'},{'name': 'MusicComponent', 'selector': 'app-music'},{'name': 'NavbarComponent', 'selector': 'app-navbar'},{'name': 'PieChartComponent', 'selector': 'app-pie-chart'},{'name': 'SearchButtonComponent', 'selector': 'app-search-button'},{'name': 'SearchComponent', 'selector': 'app-search'},{'name': 'SettingItemComponent', 'selector': 'app-setting-item'},{'name': 'SettingsComponent', 'selector': 'app-settings'},{'name': 'SidebarComponent', 'selector': 'app-sidebar'},{'name': 'ToastComponent', 'selector': 'app-toast'}];
     var DIRECTIVES = [];
     var ACTUAL_COMPONENT = {'name': 'ListExpensesComponent'};
 </script>
