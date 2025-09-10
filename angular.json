@@ -53,19 +53,13 @@
               "outputHashing": "all",
               "serviceWorker": "ngsw-config.json",
               "optimization": true,
-              "buildOptimizer": true,
               "sourceMap": false,
-              "extractLicenses": true,
-              "namedChunks": false,
-              "vendorChunk": false
+              "extractLicenses": true
             },
             "development": {
               "optimization": false,
               "extractLicenses": false,
-              "sourceMap": true,
-              "namedChunks": true,
-              "vendorChunk": true,
-              "buildOptimizer": false
+              "sourceMap": true
             }
           },
           "defaultConfiguration": "production"
