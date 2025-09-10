@@ -7,8 +7,6 @@ import { FormModelComponent } from '../../form-model/form-model.component';
 import jsPDF from 'jspdf';
 import autoTable from 'jspdf-autotable';
 import * as XLSX from 'xlsx';
-import { saveAs } from 'file-saver';
-
 
 @Component({
   selector: 'app-download-component',
@@ -22,7 +20,6 @@ import { saveAs } from 'file-saver';
   styleUrl: './download-component.component.css'
 })
 export class DownloadComponentComponent {
-
   constructor(
     private expenseService: ExpenseService,
     private fb: FormBuilder,
@@ -32,9 +29,7 @@ export class DownloadComponentComponent {
   }
 
   downloadDataForm!: FormGroup;
-
   showDownloadDataModal = false;
-
   today: string;
 
   ngOnInit(): void {
@@ -53,13 +48,9 @@ export class DownloadComponentComponent {
     this.confirmAndDownload();
   }
 
-  /**
-   * Confirm and download all expenses as a JSON file.
-   */
   confirmAndDownload(): void {
     const { fromDate, toDate, fileType } = this.downloadDataForm.value;
 
-    // Guard: Ensure toDate >= fromDate
     if (new Date(toDate) < new Date(fromDate)) {
       this.toastService.show('Invalid date range: To Date must be after From Date', 'error', 3000);
       return;
@@ -91,17 +82,15 @@ export class DownloadComponentComponent {
         const jsonData = JSON.stringify(filteredData, null, 2);
         this.triggerDownload(jsonData, 'application/json', 'json');
         this.closeDownloadDataModal();
-        this.toastService.show('Data downloaded successfully!', 'success', 3000);
+        this.toastService.show('JSON downloaded successfully!', 'success', 3000);
         return;
-      }
-      else if (fileType === 'PDF') {
-        this.exportToPDF(filteredData);
+      } else if (fileType === 'PDF') {
+        this.exportToPDF(filteredData, fromDate, toDate);
         this.closeDownloadDataModal();
         this.toastService.show('PDF downloaded successfully!', 'success', 3000);
         return;
-      }
-      else if (fileType === 'EXCEL') {
-        this.exportToExcel(filteredData);
+      } else if (fileType === 'EXCEL') {
+        this.exportToExcel(filteredData, fromDate, toDate);
         this.closeDownloadDataModal();
         this.toastService.show('Excel downloaded successfully!', 'success', 3000);
         return;
@@ -120,7 +109,12 @@ export class DownloadComponentComponent {
     const timestamp = new Date().toISOString().replace(/[:.]/g, '-');
     link.download = `expenses-${timestamp}.${extension}`;
 
+    // append -> safer across browsers
+    document.body.appendChild(link);
     link.click();
+    document.body.removeChild(link);
+
+    // ensure revoke
     window.URL.revokeObjectURL(url);
   }
 
@@ -135,19 +129,27 @@ export class DownloadComponentComponent {
     this.showDownloadDataModal = true;
   }
 
-
   closeDownloadDataModal(): void {
     this.showDownloadDataModal = false;
   }
 
+  // PDF export
+  private exportToPDF(data: any[], fromDate: string, toDate: string): void {
+    const doc = new jsPDF('p', 'pt', 'a4');
+    const pageWidth = doc.internal.pageSize.getWidth();
 
-  private exportToPDF(data: any[]): void {
-    const doc = new jsPDF();
+    // Title + metadata
+    const title = 'Expenses Report';
+    const sub = `From: ${fromDate}  —  To: ${toDate}`;
+    doc.setFontSize(14);
+    doc.text(title, pageWidth / 2, 40, { align: 'center' });
+    doc.setFontSize(10);
+    doc.text(sub, pageWidth / 2, 58, { align: 'center' });
 
-    // Table headers
-    const headers = ['Index', 'Amount', 'Date', 'Time', 'Location', 'Note', 'Payment Mode', 'Category', 'Extra Spending'];
+    // Table headers (order matches rows below)
+    const headers = ['Index', 'Category', 'Amount', 'Date', 'Time', 'Location', 'Note', 'Payment Mode', 'Extra Spending'];
 
-    // Table rows with index
+    // Rows
     const rows = data.map((exp, i) => [
       i + 1,
       exp.category_name,
@@ -161,18 +163,41 @@ export class DownloadComponentComponent {
     ]);
 
     autoTable(doc, {
+      startY: 70,
       head: [headers],
       body: rows,
-      styles: { fontSize: 8 },
-      headStyles: { fillColor: [52, 152, 219] }, // nice blue
+      styles: { fontSize: 9, overflow: 'linebreak' },
+      headStyles: {
+        fillColor: [143, 145, 234],
+        halign: 'center',
+        valign: 'middle',
+        fontStyle: 'bold',
+        textColor: 255
+      },
+      margin: { left: 30, right: 30 },
+      bodyStyles: {
+        halign: 'center'
+      },
+      columnStyles: {
+        0: { cellWidth: 33 },                      // Index
+        1: { cellWidth: 58, halign: 'left' },      // Category
+        2: { cellWidth: 46 },                      // Amount
+        3: { cellWidth: 55 },                      // Date
+        4: { cellWidth: 50 },                      // Time
+        5: { cellWidth: 85, halign: 'left' },      // Location
+        6: { cellWidth: 110, halign: 'left' },     // Note (wraps)
+        7: { cellWidth: 48 },                      // Payment Mode
+        8: { cellWidth: 50 }                       // Extra Spending
+      }
     });
+
+    // file name
     const timestamp = new Date().toISOString().replace(/[:.]/g, '-');
     doc.save(`expenses-${timestamp}.pdf`);
   }
 
-
-  private exportToExcel(data: any[]): void {
-    // Add index column
+  // Excel export (no file-saver)
+  private exportToExcel(data: any[], fromDate: string, toDate: string): void {
     const excelData = data.map((exp, i) => ({
       'Index': i + 1,
       Category: exp.category_name,
@@ -185,14 +210,26 @@ export class DownloadComponentComponent {
       'Extra Spending': exp.isExtraSpending ? 'Yes' : 'No'
     }));
 
-    const worksheet = XLSX.utils.json_to_sheet(excelData);
     const workbook = XLSX.utils.book_new();
+
+    // ---- Build AoA (Array of Arrays)----
+    const aoa: any[][] = [];
+
+    if (excelData.length > 0) {
+      const headerRow = Object.keys(excelData[0]);
+      aoa.push(headerRow);
+
+      for (const row of excelData) {
+        aoa.push(Object.values(row)); // ✅ avoids TS index errors
+      }
+    }
+
+    const worksheet = XLSX.utils.aoa_to_sheet(aoa);
     XLSX.utils.book_append_sheet(workbook, worksheet, 'Expenses');
 
-    const excelBuffer: any = XLSX.write(workbook, { bookType: 'xlsx', type: 'array' });
-    const blob = new Blob([excelBuffer], { type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet' });
     const timestamp = new Date().toISOString().replace(/[:.]/g, '-');
-    saveAs(blob, `expenses-${timestamp}.xlsx`);
+    const filename = `expenses-${timestamp}.xlsx`;
+    XLSX.writeFile(workbook, filename);
   }
 
 }

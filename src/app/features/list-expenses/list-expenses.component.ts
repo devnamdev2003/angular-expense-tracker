@@ -295,6 +295,7 @@ export class ListExpensesComponent implements OnInit {
     this.expenseService.update(expense_id, newData);
     this.toastService.show('Expense updated successfully', 'success');
     this.isEditOpen = false;
+    this.searchData(this.searchQuery);
   }
 
   /**
@@ -306,6 +307,7 @@ export class ListExpensesComponent implements OnInit {
       this.expenseService.delete(id);
       this.toastService.show("Expense deleted successfully", 'success');
       this.closeModal();
+      this.searchData(this.searchQuery);
     }
   }
 

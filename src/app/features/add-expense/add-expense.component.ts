@@ -77,7 +77,7 @@ export class AddExpenseComponent implements OnInit {
    */
   createForm(): FormGroup {
     return this.fb.group({
-      amount: ['', [Validators.required, Validators.min(0)]],
+      amount: ['', [Validators.required, Validators.min(0), Validators.max(100000000)]],
       category_id: ['', Validators.required],
       date: ['', Validators.required],
       time: ['', Validators.required],
