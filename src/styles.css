@@ -53,3 +53,7 @@ body {
     background-color: var(--color-bg);
     color: var(--color-text);
 }
+html, body {
+  overscroll-behavior-y: contain; /* Prevents pull-to-refresh */
+  overscroll-behavior-x: none;
+}
