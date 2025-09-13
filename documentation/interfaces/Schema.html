@@ -185,7 +185,7 @@ interface Schema {
 export class StorageService {
     constructor(private appVersionService: AppVersionService) {
     }
-    
+
     private readonly categoryKey &#x3D; &#x27;categories&#x27;;
     private readonly expenseKey &#x3D; &#x27;expenses&#x27;;
     private readonly budgetKey &#x3D; &#x27;budget&#x27;;
@@ -339,7 +339,18 @@ export class StorageService {
         return this.userKey;
     }
 
-}
+    updateCategories(categories: any[]) {
+        localStorage.setItem(this.categoryKey, JSON.stringify(categories));
+    }
+
+    updateBudgets(budgets: any[]) {
+        localStorage.setItem(this.budgetKey, JSON.stringify(budgets));
+    }
+
+    updateUser(user: any) {
+        localStorage.setItem(this.userKey, JSON.stringify(user));
+    }
+} 
 </code></pre>
     </div>
 </div>

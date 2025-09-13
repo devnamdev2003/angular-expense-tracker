@@ -144,6 +144,13 @@
         </p>
 
 
+            <p class="comment">
+                <h3>Description</h3>
+            </p>
+            <p class="comment">
+                <p>Interface representing a category used to group expenses.</p>
+
+            </p>
 
 
         <section data-compodoc="block-index">
@@ -242,6 +249,12 @@
 
 
 
+                            <tr>
+                                <td class="col-md-4">
+                                    <div class="io-description"><p>Unique identifier for the category.</p>
+</div>
+                                </td>
+                            </tr>
                         </tbody>
                     </table>
                     <table class="table table-sm table-bordered">
@@ -275,6 +288,12 @@
 
 
 
+                            <tr>
+                                <td class="col-md-4">
+                                    <div class="io-description"><p>Color associated with the category (e.g., hex or CSS color).</p>
+</div>
+                                </td>
+                            </tr>
                         </tbody>
                     </table>
                     <table class="table table-sm table-bordered">
@@ -308,6 +327,13 @@
 
 
 
+                            <tr>
+                                <td class="col-md-4">
+                                    <div class="io-description"><p>Number of expenses linked to this category.
+(This is a computed field and not part of the stored table.)</p>
+</div>
+                                </td>
+                            </tr>
                         </tbody>
                     </table>
                     <table class="table table-sm table-bordered">
@@ -341,6 +367,12 @@
 
 
 
+                            <tr>
+                                <td class="col-md-4">
+                                    <div class="io-description"><p>Icon representing the category (e.g., from an icon set).</p>
+</div>
+                                </td>
+                            </tr>
                         </tbody>
                     </table>
                     <table class="table table-sm table-bordered">
@@ -374,6 +406,12 @@
 
 
 
+                            <tr>
+                                <td class="col-md-4">
+                                    <div class="io-description"><p>Indicates whether the category is active.</p>
+</div>
+                                </td>
+                            </tr>
                         </tbody>
                     </table>
                     <table class="table table-sm table-bordered">
@@ -407,6 +445,12 @@
 
 
 
+                            <tr>
+                                <td class="col-md-4">
+                                    <div class="io-description"><p>The display name of the category.</p>
+</div>
+                                </td>
+                            </tr>
                         </tbody>
                     </table>
                     <table class="table table-sm table-bordered">
@@ -440,6 +484,12 @@
 
 
 
+                            <tr>
+                                <td class="col-md-4">
+                                    <div class="io-description"><p>The user ID that owns this category.</p>
+</div>
+                                </td>
+                            </tr>
                         </tbody>
                     </table>
             </section>
@@ -452,27 +502,70 @@ import { Expense } from &#x27;./expense.service&#x27;;
 import { StorageService } from &#x27;./storage.service&#x27;;
 import { UserService } from &#x27;./user.service&#x27;;
 
+/**
+ * Interface representing a category used to group expenses.
+ */
 export interface Category {
+  /** Unique identifier for the category. */
   category_id: string;
-  name: string;
-  icon: string;
-  color: string;
-  user_id: string;
-  is_active: string,
 
-  // additional field not a part of table
+  /** The display name of the category. */
+  name: string;
+
+  /** Icon representing the category (e.g., from an icon set). */
+  icon: string;
+
+  /** Color associated with the category (e.g., hex or CSS color). */
+  color: string;
+
+  /** The user ID that owns this category. */
+  user_id: string;
+
+  /** Indicates whether the category is active. */
+  is_active: string;
+
+  /** 
+   * Number of expenses linked to this category.  
+   * (This is a computed field and not part of the stored table.)
+   */
   expense_count: number;
 }
 
+/**
+ * Service responsible for managing categories in local storage.
+ * Provides methods to create, read, update, delete, and sort categories,
+ * ensuring data consistency with associated expenses.
+ */
 @Injectable({ providedIn: &#x27;root&#x27; })
 export class CategoryService {
 
+  /**
+   * Creates an instance of CategoryService.
+   *
+   * @param storageService Service to handle local storage operations.
+   * @param userService Service to retrieve user-related values (like user ID).
+   */
+  constructor(
+    private storageService: StorageService,
+    private userService: UserService
+  ) { }
+
+  /**
+   * Checks if the code is running in a browser environment
+   * with &#x60;localStorage&#x60; available.
+   *
+   * @returns {boolean} True if running in the browser, false otherwise.
+   */
   private isBrowser(): boolean {
     return typeof window !&#x3D;&#x3D; &#x27;undefined&#x27; &amp;&amp; typeof window.localStorage !&#x3D;&#x3D; &#x27;undefined&#x27;;
   }
 
-  constructor(private storageService: StorageService, private userService: UserService) { };
-
+  /**
+   * Retrieves all categories sorted by the number of expenses assigned to each.
+   * If two categories have the same count, they are sorted alphabetically by name.
+   *
+   * @returns {Category[]} Sorted list of categories with expense counts.
+   */
   getSortedCategoriesByExpenseCount(): Category[] {
     const expenses: Expense[] &#x3D; this.storageService.getAllExpenses();
     const categories: Category[] &#x3D; this.storageService.getAllCategories();
@@ -490,11 +583,22 @@ export class CategoryService {
       .sort((a, b) &#x3D;&gt; b.expense_count - a.expense_count || a.name.localeCompare(b.name));
   }
 
+  /**
+   * Retrieves all categories from local storage.
+   *
+   * @returns {Category[]} List of all categories, or an empty array if not in the browser.
+   */
   getAll(): Category[] {
     if (!this.isBrowser()) return [];
     return this.storageService.getAllCategories();
   }
 
+  /**
+   * Adds a new category to local storage.
+   * Generates a unique &#x60;category_id&#x60; and associates it with the current user.
+   *
+   * @param data Category data excluding &#x60;category_id&#x60; and &#x60;user_id&#x60;.
+   */
   add(data: Omit&lt;Category, &#x27;category_id&#x27; | &#x27;user_id&#x27;&gt;): void {
     if (!this.isBrowser()) return;
     const all: Category[] &#x3D; this.getAll();
@@ -505,6 +609,12 @@ export class CategoryService {
     localStorage.setItem(this.storageService.getCategoryKey(), JSON.stringify(all));
   }
 
+  /**
+   * Updates an existing category in local storage.
+   *
+   * @param category_id The ID of the category to update.
+   * @param newData Partial category fields to update.
+   */
   update(category_id: string, newData: Partial&lt;Category&gt;): void {
     if (!this.isBrowser()) return;
     let all: Category[] &#x3D; this.getAll();
@@ -512,10 +622,17 @@ export class CategoryService {
     localStorage.setItem(this.storageService.getCategoryKey(), JSON.stringify(all));
   }
 
+  /**
+   * Deletes a category from local storage by its ID.
+   * If the category does not exist, a warning is logged.
+   *
+   * @param category_id The ID of the category to delete.
+   */
   delete(category_id: string): void {
     if (!this.isBrowser()) return;
     const all: Category[] &#x3D; this.getAll();
-    // Check if the category actually exists
+
+    // Check if the category actually exists before attempting deletion
     const categoryExists &#x3D; all.some(c &#x3D;&gt; c.category_id &#x3D;&#x3D;&#x3D; category_id);
     if (!categoryExists) {
       console.warn(&#x60;Category with ID ${category_id} not found.&#x60;);
@@ -524,6 +641,16 @@ export class CategoryService {
 
     const updated &#x3D; all.filter(c &#x3D;&gt; c.category_id !&#x3D;&#x3D; category_id);
     localStorage.setItem(this.storageService.getCategoryKey(), JSON.stringify(updated));
+  }
+
+  /**
+   * Replaces all categories in local storage with the provided list.
+   *
+   * @param categories The new list of categories to store.
+   */
+  updateAllCategories(categories: Category[]): void {
+    if (!this.isBrowser()) return;
+    this.storageService.updateCategories(categories);
   }
 }
 </code></pre>

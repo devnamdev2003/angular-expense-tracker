@@ -137,6 +137,15 @@
         </p>
 
 
+            <p class="comment">
+                <h3>Description</h3>
+            </p>
+            <p class="comment">
+                <p>Service responsible for managing categories in local storage.
+Provides methods to create, read, update, delete, and sort categories,
+ensuring data consistency with associated expenses.</p>
+
+            </p>
 
 
 
@@ -172,6 +181,9 @@
                             <li>
                                 <a href="#update" >update</a>
                             </li>
+                            <li>
+                                <a href="#updateAllCategories" >updateAllCategories</a>
+                            </li>
                         </ul>
                     </td>
                 </tr>
@@ -195,12 +207,14 @@
                 </tr>
                         <tr>
                             <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="23" class="link-to-prism">src/app/service/localStorage/category.service.ts:23</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="41" class="link-to-prism">src/app/service/localStorage/category.service.ts:41</a></div>
                             </td>
                         </tr>
 
                 <tr>
                     <td class="col-md-4">
+                            <div class="io-description"><p>Creates an instance of CategoryService.</p>
+</div>
                             <div>
                                     <b>Parameters :</b>
                                     <table class="params">
@@ -209,6 +223,7 @@
                                                 <td>Name</td>
                                                     <td>Type</td>
                                                 <td>Optional</td>
+                                                    <td>Description</td>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -223,6 +238,10 @@
                                                             No
                                                     </td>
                                                     
+                                                        <td>
+                                                                <p>Service to handle local storage operations.</p>
+
+                                                        </td>
                                                 </tr>
                                                 <tr>
                                                         <td>userService</td>
@@ -235,6 +254,10 @@
                                                             No
                                                     </td>
                                                     
+                                                        <td>
+                                                                <p>Service to retrieve user-related values (like user ID).</p>
+
+                                                        </td>
                                                 </tr>
                                         </tbody>
                                     </table>
@@ -270,14 +293,17 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="49"
-                                    class="link-to-prism">src/app/service/localStorage/category.service.ts:49</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="103"
+                                    class="link-to-prism">src/app/service/localStorage/category.service.ts:103</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
+                        <div class="io-description"><p>Adds a new category to local storage.
+Generates a unique <code>category_id</code> and associates it with the current user.</p>
+</div>
 
                             <div class="io-description">
                                 <b>Parameters :</b>
@@ -288,6 +314,7 @@
                                             <td>Name</td>
                                                 <td>Type</td>
                                             <td>Optional</td>
+                                                <td>Description</td>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -302,6 +329,10 @@
                                             </td>
 
 
+                                            <td>
+                                                    <p>Category data excluding <code>category_id</code> and <code>user_id</code>.</p>
+
+                                            </td>
                                         </tr>
                                     </tbody>
                                 </table>
@@ -337,14 +368,17 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="66"
-                                    class="link-to-prism">src/app/service/localStorage/category.service.ts:66</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="132"
+                                    class="link-to-prism">src/app/service/localStorage/category.service.ts:132</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
+                        <div class="io-description"><p>Deletes a category from local storage by its ID.
+If the category does not exist, a warning is logged.</p>
+</div>
 
                             <div class="io-description">
                                 <b>Parameters :</b>
@@ -355,6 +389,7 @@
                                             <td>Name</td>
                                                 <td>Type</td>
                                             <td>Optional</td>
+                                                <td>Description</td>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -369,6 +404,10 @@
                                             </td>
 
 
+                                            <td>
+                                                    <p>The ID of the category to delete.</p>
+
+                                            </td>
                                         </tr>
                                     </tbody>
                                 </table>
@@ -404,19 +443,25 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="44"
-                                    class="link-to-prism">src/app/service/localStorage/category.service.ts:44</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="92"
+                                    class="link-to-prism">src/app/service/localStorage/category.service.ts:92</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
+                        <div class="io-description"><p>Retrieves all categories from local storage.</p>
+</div>
 
                         <div class="io-description">
                             <b>Returns : </b>        <code><a href="../interfaces/Category.html" target="_self" >Category[]</a></code>
 
                         </div>
+                            <div class="io-description">
+                                <p>List of all categories, or an empty array if not in the browser.</p>
+
+                            </div>
                 </td>
             </tr>
         </tbody>
@@ -441,19 +486,26 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="27"
-                                    class="link-to-prism">src/app/service/localStorage/category.service.ts:27</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="70"
+                                    class="link-to-prism">src/app/service/localStorage/category.service.ts:70</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
+                        <div class="io-description"><p>Retrieves all categories sorted by the number of expenses assigned to each.
+If two categories have the same count, they are sorted alphabetically by name.</p>
+</div>
 
                         <div class="io-description">
                             <b>Returns : </b>        <code><a href="../interfaces/Category.html" target="_self" >Category[]</a></code>
 
                         </div>
+                            <div class="io-description">
+                                <p>Sorted list of categories with expense counts.</p>
+
+                            </div>
                 </td>
             </tr>
         </tbody>
@@ -480,19 +532,26 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="21"
-                                    class="link-to-prism">src/app/service/localStorage/category.service.ts:21</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="60"
+                                    class="link-to-prism">src/app/service/localStorage/category.service.ts:60</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
+                        <div class="io-description"><p>Checks if the code is running in a browser environment
+with <code>localStorage</code> available.</p>
+</div>
 
                         <div class="io-description">
                             <b>Returns : </b>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
 
                         </div>
+                            <div class="io-description">
+                                <p>True if running in the browser, false otherwise.</p>
+
+                            </div>
                 </td>
             </tr>
         </tbody>
@@ -517,14 +576,16 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="59"
-                                    class="link-to-prism">src/app/service/localStorage/category.service.ts:59</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="119"
+                                    class="link-to-prism">src/app/service/localStorage/category.service.ts:119</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
+                        <div class="io-description"><p>Updates an existing category in local storage.</p>
+</div>
 
                             <div class="io-description">
                                 <b>Parameters :</b>
@@ -535,6 +596,7 @@
                                             <td>Name</td>
                                                 <td>Type</td>
                                             <td>Optional</td>
+                                                <td>Description</td>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -549,6 +611,10 @@
                                             </td>
 
 
+                                            <td>
+                                                    <p>The ID of the category to update.</p>
+
+                                            </td>
                                         </tr>
                                         <tr>
                                                 <td>newData</td>
@@ -561,6 +627,84 @@
                                             </td>
 
 
+                                            <td>
+                                                    <p>Partial category fields to update.</p>
+
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="updateAllCategories"></a>
+                    <span class="name">
+                        <span ><b>updateAllCategories</b></span>
+                        <a href="#updateAllCategories"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>updateAllCategories(categories: <a href="../interfaces/Category.html" target="_self">Category[]</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="152"
+                                    class="link-to-prism">src/app/service/localStorage/category.service.ts:152</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-description"><p>Replaces all categories in local storage with the provided list.</p>
+</div>
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                                <td>Description</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>categories</td>
+                                            <td>
+                                                            <code><a href="../interfaces/Category.html" target="_self" >Category[]</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                            <td>
+                                                    <p>The new list of categories to store.</p>
+
+                                            </td>
                                         </tr>
                                     </tbody>
                                 </table>
@@ -587,27 +731,70 @@ import { Expense } from &#x27;./expense.service&#x27;;
 import { StorageService } from &#x27;./storage.service&#x27;;
 import { UserService } from &#x27;./user.service&#x27;;
 
+/**
+ * Interface representing a category used to group expenses.
+ */
 export interface Category {
+  /** Unique identifier for the category. */
   category_id: string;
-  name: string;
-  icon: string;
-  color: string;
-  user_id: string;
-  is_active: string,
 
-  // additional field not a part of table
+  /** The display name of the category. */
+  name: string;
+
+  /** Icon representing the category (e.g., from an icon set). */
+  icon: string;
+
+  /** Color associated with the category (e.g., hex or CSS color). */
+  color: string;
+
+  /** The user ID that owns this category. */
+  user_id: string;
+
+  /** Indicates whether the category is active. */
+  is_active: string;
+
+  /** 
+   * Number of expenses linked to this category.  
+   * (This is a computed field and not part of the stored table.)
+   */
   expense_count: number;
 }
 
+/**
+ * Service responsible for managing categories in local storage.
+ * Provides methods to create, read, update, delete, and sort categories,
+ * ensuring data consistency with associated expenses.
+ */
 @Injectable({ providedIn: &#x27;root&#x27; })
 export class CategoryService {
 
+  /**
+   * Creates an instance of CategoryService.
+   *
+   * @param storageService Service to handle local storage operations.
+   * @param userService Service to retrieve user-related values (like user ID).
+   */
+  constructor(
+    private storageService: StorageService,
+    private userService: UserService
+  ) { }
+
+  /**
+   * Checks if the code is running in a browser environment
+   * with &#x60;localStorage&#x60; available.
+   *
+   * @returns {boolean} True if running in the browser, false otherwise.
+   */
   private isBrowser(): boolean {
     return typeof window !&#x3D;&#x3D; &#x27;undefined&#x27; &amp;&amp; typeof window.localStorage !&#x3D;&#x3D; &#x27;undefined&#x27;;
   }
 
-  constructor(private storageService: StorageService, private userService: UserService) { };
-
+  /**
+   * Retrieves all categories sorted by the number of expenses assigned to each.
+   * If two categories have the same count, they are sorted alphabetically by name.
+   *
+   * @returns {Category[]} Sorted list of categories with expense counts.
+   */
   getSortedCategoriesByExpenseCount(): Category[] {
     const expenses: Expense[] &#x3D; this.storageService.getAllExpenses();
     const categories: Category[] &#x3D; this.storageService.getAllCategories();
@@ -625,11 +812,22 @@ export class CategoryService {
       .sort((a, b) &#x3D;&gt; b.expense_count - a.expense_count || a.name.localeCompare(b.name));
   }
 
+  /**
+   * Retrieves all categories from local storage.
+   *
+   * @returns {Category[]} List of all categories, or an empty array if not in the browser.
+   */
   getAll(): Category[] {
     if (!this.isBrowser()) return [];
     return this.storageService.getAllCategories();
   }
 
+  /**
+   * Adds a new category to local storage.
+   * Generates a unique &#x60;category_id&#x60; and associates it with the current user.
+   *
+   * @param data Category data excluding &#x60;category_id&#x60; and &#x60;user_id&#x60;.
+   */
   add(data: Omit&lt;Category, &#x27;category_id&#x27; | &#x27;user_id&#x27;&gt;): void {
     if (!this.isBrowser()) return;
     const all: Category[] &#x3D; this.getAll();
@@ -640,6 +838,12 @@ export class CategoryService {
     localStorage.setItem(this.storageService.getCategoryKey(), JSON.stringify(all));
   }
 
+  /**
+   * Updates an existing category in local storage.
+   *
+   * @param category_id The ID of the category to update.
+   * @param newData Partial category fields to update.
+   */
   update(category_id: string, newData: Partial&lt;Category&gt;): void {
     if (!this.isBrowser()) return;
     let all: Category[] &#x3D; this.getAll();
@@ -647,10 +851,17 @@ export class CategoryService {
     localStorage.setItem(this.storageService.getCategoryKey(), JSON.stringify(all));
   }
 
+  /**
+   * Deletes a category from local storage by its ID.
+   * If the category does not exist, a warning is logged.
+   *
+   * @param category_id The ID of the category to delete.
+   */
   delete(category_id: string): void {
     if (!this.isBrowser()) return;
     const all: Category[] &#x3D; this.getAll();
-    // Check if the category actually exists
+
+    // Check if the category actually exists before attempting deletion
     const categoryExists &#x3D; all.some(c &#x3D;&gt; c.category_id &#x3D;&#x3D;&#x3D; category_id);
     if (!categoryExists) {
       console.warn(&#x60;Category with ID ${category_id} not found.&#x60;);
@@ -659,6 +870,16 @@ export class CategoryService {
 
     const updated &#x3D; all.filter(c &#x3D;&gt; c.category_id !&#x3D;&#x3D; category_id);
     localStorage.setItem(this.storageService.getCategoryKey(), JSON.stringify(updated));
+  }
+
+  /**
+   * Replaces all categories in local storage with the provided list.
+   *
+   * @param categories The new list of categories to store.
+   */
+  updateAllCategories(categories: Category[]): void {
+    if (!this.isBrowser()) return;
+    this.storageService.updateCategories(categories);
   }
 }
 </code></pre>

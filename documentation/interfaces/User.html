@@ -144,6 +144,13 @@
         </p>
 
 
+            <p class="comment">
+                <h3>Description</h3>
+            </p>
+            <p class="comment">
+                <p>Interface representing a user profile and application settings.</p>
+
+            </p>
 
 
         <section data-compodoc="block-index">
@@ -278,6 +285,12 @@
 
 
 
+                            <tr>
+                                <td class="col-md-4">
+                                    <div class="io-description"><p>Application version associated with the user.</p>
+</div>
+                                </td>
+                            </tr>
                         </tbody>
                     </table>
                     <table class="table table-sm table-bordered">
@@ -311,6 +324,12 @@
 
 
 
+                            <tr>
+                                <td class="col-md-4">
+                                    <div class="io-description"><p>Frequency of backups (e.g., daily, weekly).</p>
+</div>
+                                </td>
+                            </tr>
                         </tbody>
                     </table>
                     <table class="table table-sm table-bordered">
@@ -344,6 +363,12 @@
 
 
 
+                            <tr>
+                                <td class="col-md-4">
+                                    <div class="io-description"><p>Preferred currency code (e.g., USD, INR).</p>
+</div>
+                                </td>
+                            </tr>
                         </tbody>
                     </table>
                     <table class="table table-sm table-bordered">
@@ -377,6 +402,12 @@
 
 
 
+                            <tr>
+                                <td class="col-md-4">
+                                    <div class="io-description"><p>User&#39;s email address.</p>
+</div>
+                                </td>
+                            </tr>
                         </tbody>
                     </table>
                     <table class="table table-sm table-bordered">
@@ -410,6 +441,12 @@
 
 
 
+                            <tr>
+                                <td class="col-md-4">
+                                    <div class="io-description"><p>Unique identifier for the user.</p>
+</div>
+                                </td>
+                            </tr>
                         </tbody>
                     </table>
                     <table class="table table-sm table-bordered">
@@ -443,6 +480,12 @@
 
 
 
+                            <tr>
+                                <td class="col-md-4">
+                                    <div class="io-description"><p>Whether the user account is active.</p>
+</div>
+                                </td>
+                            </tr>
                         </tbody>
                     </table>
                     <table class="table table-sm table-bordered">
@@ -476,6 +519,12 @@
 
 
 
+                            <tr>
+                                <td class="col-md-4">
+                                    <div class="io-description"><p>Whether the user’s app has been updated to the latest version.</p>
+</div>
+                                </td>
+                            </tr>
                         </tbody>
                     </table>
                     <table class="table table-sm table-bordered">
@@ -509,6 +558,12 @@
 
 
 
+                            <tr>
+                                <td class="col-md-4">
+                                    <div class="io-description"><p>Indicates if backup is enabled for the user.</p>
+</div>
+                                </td>
+                            </tr>
                         </tbody>
                     </table>
                     <table class="table table-sm table-bordered">
@@ -542,6 +597,12 @@
 
 
 
+                            <tr>
+                                <td class="col-md-4">
+                                    <div class="io-description"><p>Timestamp of the last performed backup.</p>
+</div>
+                                </td>
+                            </tr>
                         </tbody>
                     </table>
                     <table class="table table-sm table-bordered">
@@ -575,6 +636,12 @@
 
 
 
+                            <tr>
+                                <td class="col-md-4">
+                                    <div class="io-description"><p>User&#39;s display name.</p>
+</div>
+                                </td>
+                            </tr>
                         </tbody>
                     </table>
                     <table class="table table-sm table-bordered">
@@ -608,6 +675,12 @@
 
 
 
+                            <tr>
+                                <td class="col-md-4">
+                                    <div class="io-description"><p>Notification preferences (e.g., enabled/disabled).</p>
+</div>
+                                </td>
+                            </tr>
                         </tbody>
                     </table>
                     <table class="table table-sm table-bordered">
@@ -641,6 +714,12 @@
 
 
 
+                            <tr>
+                                <td class="col-md-4">
+                                    <div class="io-description"><p>Preferred theme mode (e.g., light, dark).</p>
+</div>
+                                </td>
+                            </tr>
                         </tbody>
                     </table>
                     <table class="table table-sm table-bordered">
@@ -674,6 +753,12 @@
 
 
 
+                            <tr>
+                                <td class="col-md-4">
+                                    <div class="io-description"><p>User&#39;s password (hashed or plain depending on storage implementation).</p>
+</div>
+                                </td>
+                            </tr>
                         </tbody>
                     </table>
             </section>
@@ -684,36 +769,90 @@
         <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Injectable } from &#x27;@angular/core&#x27;;
 import { StorageService } from &#x27;./storage.service&#x27;;
 
+/**
+ * Interface representing a user profile and application settings.
+ */
 export interface User {
-  id: string,
-  backup_frequency: string,
-  email: string,
-  is_active: string,
-  is_backup: string,
-  last_backup: string,
-  name: string,
-  notifications: string,
-  user_password: string,
-  theme_mode: string,
-  currency: string,
-  app_version: string,
-  is_app_updated: boolean
-};
+  /** Unique identifier for the user. */
+  id: string;
 
+  /** Frequency of backups (e.g., daily, weekly). */
+  backup_frequency: string;
+
+  /** User&#x27;s email address. */
+  email: string;
+
+  /** Whether the user account is active. */
+  is_active: string;
+
+  /** Indicates if backup is enabled for the user. */
+  is_backup: string;
+
+  /** Timestamp of the last performed backup. */
+  last_backup: string;
+
+  /** User&#x27;s display name. */
+  name: string;
+
+  /** Notification preferences (e.g., enabled/disabled). */
+  notifications: string;
+
+  /** User&#x27;s password (hashed or plain depending on storage implementation). */
+  user_password: string;
+
+  /** Preferred theme mode (e.g., light, dark). */
+  theme_mode: string;
+
+  /** Preferred currency code (e.g., USD, INR). */
+  currency: string;
+
+  /** Application version associated with the user. */
+  app_version: string;
+
+  /** Whether the user’s app has been updated to the latest version. */
+  is_app_updated: boolean;
+}
+
+/**
+ * Service for managing user data and preferences in local storage.
+ * Provides methods to read, update, and persist user settings.
+ */
 @Injectable({ providedIn: &#x27;root&#x27; })
 export class UserService {
 
-  constructor(private storageService: StorageService) { };
+  /**
+   * Creates an instance of UserService.
+   *
+   * @param storageService Service for handling local storage operations.
+   */
+  constructor(private storageService: StorageService) { }
 
+  /**
+   * Checks if the service is running in a browser environment
+   * with access to &#x60;localStorage&#x60;.
+   *
+   * @returns {boolean} True if running in the browser, false otherwise.
+   */
   private isBrowser(): boolean {
     return typeof window !&#x3D;&#x3D; &#x27;undefined&#x27; &amp;&amp; typeof window.localStorage !&#x3D;&#x3D; &#x27;undefined&#x27;;
   }
 
+  /**
+   * Retrieves the current user object from storage.
+   *
+   * @returns {Record&lt;string, any&gt;} User data object, or empty object if not available.
+   */
   get(): Record&lt;string, any&gt; {
     if (!this.isBrowser()) return {};
     return this.storageService.getUser();
   }
 
+  /**
+   * Updates a single user property in local storage.
+   *
+   * @param key The property key to update.
+   * @param value The new value to assign.
+   */
   update(key: string, value: any): void {
     if (!this.isBrowser()) return;
     const currentSettings &#x3D; this.get();
@@ -721,9 +860,36 @@ export class UserService {
     localStorage.setItem(this.storageService.getUserKey(), JSON.stringify(currentSettings));
   }
 
+  /**
+   * Retrieves a specific user property by key.
+   *
+   * @typeParam T The expected return type of the value.
+   * @param key The property key to retrieve.
+   * @returns {T | null} The value if it exists, otherwise &#x60;null&#x60;.
+   */
   getValue&lt;T &#x3D; any&gt;(key: string): T | null {
     const currentSettings &#x3D; this.get();
     return key in currentSettings ? currentSettings[key] : null;
+  }
+
+  /**
+   * Retrieves full user data.
+   *
+   * @returns {User | {}} The user object, or empty object if not available.
+   */
+  getUserData(): User | {} {
+    if (!this.isBrowser()) return {};
+    return this.storageService.getUser();
+  }
+
+  /**
+   * Updates the entire user object in local storage.
+   *
+   * @param user The new user object to save.
+   */
+  updateUserData(user: User | {}): void {
+    if (!this.isBrowser()) return;
+    this.storageService.updateUser(user);
   }
 }
 </code></pre>

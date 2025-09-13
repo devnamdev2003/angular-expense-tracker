@@ -1,15 +1,18 @@
 import { Component, ElementRef, ViewChild } from '@angular/core';
-import { UserService } from '../../service/localStorage/user.service';
-import { ExpenseService } from '../../service/localStorage/expense.service';
 import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { SettingItemComponent } from '../../component/settings-components/setting-item/setting-item.component';
-import { Category, CategoryService } from '../../service/localStorage/category.service';
 import { CategoryDropdownComponent } from '../../component/category-dropdown/category-dropdown.component';
 import { AbstractControl, ValidationErrors, ValidatorFn } from '@angular/forms';
 import { ToastService } from '../../service/toast/toast.service';
 import { FormModelComponent } from '../../component/form-model/form-model.component';
 import { DownloadComponentComponent } from '../../component/settings-components/download-component/download-component.component';
+
+import { UserService } from '../../service/localStorage/user.service';
+import { ExpenseService } from '../../service/localStorage/expense.service';
+import { Category, CategoryService } from '../../service/localStorage/category.service';
+import { BudgetService } from '../../service/localStorage/budget.service';
+import { UserData } from '../../component/settings-components/download-component/download-component.component';
 
 /**
  * @component
@@ -60,6 +63,7 @@ export class SettingsComponent {
     * @param userService User service for managing user preferences
     * @param expenseService Expense service for managing expenses
     * @param categoryService Category service for managing categories
+    * @param budgetService Budget service for managing budgets
     * @param fb FormBuilder instance for creating reactive forms
     * @param toastService Toast service for showing notifications
     * @constructor
@@ -69,6 +73,7 @@ export class SettingsComponent {
     public userService: UserService,
     private expenseService: ExpenseService,
     private categoryService: CategoryService,
+    private budgetService: BudgetService,
     private fb: FormBuilder,
     private toastService: ToastService,
   ) { }
@@ -283,12 +288,15 @@ export class SettingsComponent {
       try {
         const content = reader.result as string;
 
-        // ✅ Validate JSON parse
-        const json = JSON.parse(content);
-        if (!Array.isArray(json)) throw new Error('JSON must be an array of expense objects.');
+        // Validate JSON parse
+        const json: UserData = JSON.parse(content);
+        if (!Array.isArray(json.expenseData)) throw new Error('Invalid or missing expense data.');
+        if (typeof json.userData !== 'object' || json.userData === null) throw new Error('Invalid or missing user data.');
+        if (!Array.isArray(json.categoryData)) throw new Error('Invalid or missing category data.');
+        if (!Array.isArray(json.budgetData)) throw new Error('Invalid or missing budget data.');
 
-        // ✅ Validate each item
-        const validData = json.filter(item =>
+        // Validate each item
+        const validData = json.expenseData.filter(item =>
           typeof item.amount === 'number' &&
           typeof item.date === 'string' &&
           typeof item.time === 'string' &&
@@ -313,10 +321,15 @@ export class SettingsComponent {
           this.expenseService.add(expense);
         }
 
+        this.categoryService.updateAllCategories(json.categoryData);
+        this.userService.updateUserData(json.userData);
+        this.budgetService.updateAllBudgets(json.budgetData);
+
         this.toastService.show('Data imported successfully!', 'success');
       } catch (e) {
         console.error('Error parsing file:', e);
-        this.toastService.show('Invalid JSON structure.', 'error');
+        const errorMessage = typeof e === 'object' && e !== null && 'message' in e ? (e as { message?: string }).message : undefined;
+        this.toastService.show(errorMessage || 'Failed to parse JSON.', 'error');
       } finally {
         // ✅ Reset input so same file can be uploaded again
         input.value = '';

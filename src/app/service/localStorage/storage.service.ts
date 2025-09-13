@@ -12,7 +12,7 @@ interface Schema {
 export class StorageService {
     constructor(private appVersionService: AppVersionService) {
     }
-    
+
     private readonly categoryKey = 'categories';
     private readonly expenseKey = 'expenses';
     private readonly budgetKey = 'budget';
@@ -166,4 +166,15 @@ export class StorageService {
         return this.userKey;
     }
 
-}
+    updateCategories(categories: any[]) {
+        localStorage.setItem(this.categoryKey, JSON.stringify(categories));
+    }
+
+    updateBudgets(budgets: any[]) {
+        localStorage.setItem(this.budgetKey, JSON.stringify(budgets));
+    }
+
+    updateUser(user: any) {
+        localStorage.setItem(this.userKey, JSON.stringify(user));
+    }
+} 

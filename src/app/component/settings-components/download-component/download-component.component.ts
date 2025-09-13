@@ -1,4 +1,3 @@
-import { ExpenseService, Expense } from '../../../service/localStorage/expense.service';
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { CommonModule } from '@angular/common';
@@ -8,6 +7,20 @@ import jsPDF from 'jspdf';
 import autoTable from 'jspdf-autotable';
 import * as XLSX from 'xlsx';
 
+import { ExpenseService, Expense } from '../../../service/localStorage/expense.service';
+import { Category, CategoryService } from '../../../service/localStorage/category.service';
+import { UserService, User } from '../../../service/localStorage/user.service';
+import { Budget, BudgetService } from '../../../service/localStorage/budget.service';
+
+/**
+ * Interface representing the structure of user data
+ */
+export interface UserData {
+  userData: User | {},
+  expenseData: any[],
+  categoryData: Category[] | [],
+  budgetData: Budget[] | []
+};
 /**
  * Component responsible for exporting user expenses
  * into JSON, PDF, or Excel formats within a given date range.
@@ -51,11 +64,17 @@ export class DownloadComponentComponent {
    * @param expenseService Service used to fetch and filter expenses.
    * @param fb Angular `FormBuilder` to build the reactive form.
    * @param toastService Service used to show toast notifications.
+   * @param categoryService Service to fetch category data.
+   * @param userService Service to fetch user data.
+   * @param budgetService Service to fetch budget data.
    */
   constructor(
     private expenseService: ExpenseService,
     private fb: FormBuilder,
     private toastService: ToastService,
+    private categoryService: CategoryService,
+    private userService: UserService,
+    private budgetService: BudgetService,
   ) {
     this.today = new Date().toISOString().split('T')[0];
   }
@@ -97,15 +116,19 @@ export class DownloadComponentComponent {
       return;
     }
 
-    const data: Expense[] = this.expenseService.searchByDateRange(fromDate, toDate);
+    // Fetch data
+    const expenseData: Expense[] = this.expenseService.searchByDateRange(fromDate, toDate);
+    const categoryData: Category[] = this.categoryService.getAll();
+    const userData: User | {} = this.userService.getUserData();
+    const budgetData: Budget[] = this.budgetService.getAll();
 
-    if (!data || data.length === 0) {
+    if (!expenseData || expenseData.length === 0) {
       this.toastService.show('No expenses found in this date range', 'info', 3000);
       return;
     }
 
     // Filter fields for export
-    const filteredData = data.map(expense => ({
+    const filteredExpenseData = expenseData.map(expense => ({
       amount: expense.amount,
       date: expense.date,
       time: expense.time,
@@ -117,21 +140,29 @@ export class DownloadComponentComponent {
       expense_id: expense.expense_id,
       isExtraSpending: expense.isExtraSpending
     }));
+    
+    // Prepare final data object
+    const finalData: UserData = {
+      userData: userData || {},
+      expenseData: filteredExpenseData || [],
+      categoryData: categoryData || [],
+      budgetData: budgetData || []
+    };
 
     try {
       if (fileType === 'JSON') {
-        const jsonData = JSON.stringify(filteredData, null, 2);
+        const jsonData = JSON.stringify(finalData, null, 2);
         this.triggerDownload(jsonData, 'application/json', 'json');
         this.closeDownloadDataModal();
         this.toastService.show('JSON downloaded successfully!', 'success', 3000);
         return;
       } else if (fileType === 'PDF') {
-        this.exportToPDF(filteredData, fromDate, toDate);
+        this.exportToPDF(filteredExpenseData, fromDate, toDate);
         this.closeDownloadDataModal();
         this.toastService.show('PDF downloaded successfully!', 'success', 3000);
         return;
       } else if (fileType === 'EXCEL') {
-        this.exportToExcel(filteredData);
+        this.exportToExcel(filteredExpenseData);
         this.closeDownloadDataModal();
         this.toastService.show('Excel downloaded successfully!', 'success', 3000);
         return;

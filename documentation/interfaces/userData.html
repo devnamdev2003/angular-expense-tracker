@@ -1,0 +1,748 @@
+<!doctype html>
+<html class="no-js" lang="">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <title>expense-wise documentation</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <link rel="icon" type="image/x-icon" href="../images/favicon.ico">
+	   <link rel="stylesheet" href="../styles/style.css">
+        <link rel="stylesheet" href="../styles/dark.css">
+    </head>
+    <body>
+          <script>
+               // Blocking script to avoid flickering dark mode
+               // Dark mode toggle button
+               var useDark = window.matchMedia('(prefers-color-scheme: dark)');
+               var darkModeState = useDark.matches;
+               var $darkModeToggleSwitchers = document.querySelectorAll('.dark-mode-switch input');
+               var $darkModeToggles = document.querySelectorAll('.dark-mode-switch');
+               var darkModeStateLocal = localStorage.getItem('compodoc_darkmode-state');
+
+               function checkToggle(check) {
+                    for (var i = 0; i < $darkModeToggleSwitchers.length; i++) {
+                         $darkModeToggleSwitchers[i].checked = check;
+                    }
+               }
+
+               function toggleDarkMode(state) {
+                    if (window.localStorage) {
+                         localStorage.setItem('compodoc_darkmode-state', state);
+                    }
+
+                    checkToggle(state);
+
+                    const hasClass = document.body.classList.contains('dark');
+
+                    if (state) {
+                         for (var i = 0; i < $darkModeToggles.length; i++) {
+                              $darkModeToggles[i].classList.add('dark');
+                         }
+                         if (!hasClass) {
+                              document.body.classList.add('dark');
+                         }
+                    } else {
+                         for (var i = 0; i < $darkModeToggles.length; i++) {
+                              $darkModeToggles[i].classList.remove('dark');
+                         }
+                         if (hasClass) {
+                              document.body.classList.remove('dark');
+                         }
+                    }
+               }
+
+               useDark.addEventListener('change', function (evt) {
+                    toggleDarkMode(evt.matches);
+               });
+               if (darkModeStateLocal) {
+                    darkModeState = darkModeStateLocal === 'true';
+               }
+               toggleDarkMode(darkModeState);
+          </script>
+          <script>
+              // --- Iframe navigation tracking for Template Playground ---
+              function sendCurrentUrlToParent() {
+                  if (window.parent && window.parent !== window) {
+                      window.parent.postMessage({
+                          type: 'compodoc-iframe-navigate',
+                          url: window.location.pathname + window.location.hash
+                      }, '*');
+                  }
+              }
+              window.addEventListener('hashchange', sendCurrentUrlToParent, false);
+              window.addEventListener('popstate', sendCurrentUrlToParent, false);
+              window.addEventListener('DOMContentLoaded', sendCurrentUrlToParent, false);
+          </script>
+
+        <div class="navbar navbar-default navbar-fixed-top d-md-none p-0">
+               <div class="d-flex">
+                    <a href="../" class="navbar-brand">expense-wise documentation</a>
+                    <button type="button" class="btn btn-default btn-menu ion-ios-menu" id="btn-menu"></button>
+               </div>
+        </div>
+
+        <div class="xs-menu menu" id="mobile-menu">
+                <div id="book-search-input" role="search"><input type="text" placeholder="Type to search"></div>            <compodoc-menu></compodoc-menu>
+        </div>
+
+        <div class="container-fluid main">
+           <div class="row main">
+               <div class="d-none d-md-block menu">
+                   <compodoc-menu mode="normal"></compodoc-menu>
+               </div>
+               <!-- START CONTENT -->
+               <div class="content interface">
+                   <div class="content-data">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<ol class="breadcrumb">
+  <li class="breadcrumb-item">Interfaces</li>
+  <li class="breadcrumb-item"
+  >
+  UserData</li>
+</ol>
+
+<ul class="nav nav-tabs" role="tablist">
+        <li class="nav-item">
+            <a href="#info" 
+                class="nav-link"
+                class="nav-link active"
+                role="tab" id="info-tab" data-bs-toggle="tab" data-link="info">Info</a>
+        </li>
+        <li class="nav-item">
+            <a href="#source" 
+                class="nav-link"
+                
+                role="tab" id="source-tab" data-bs-toggle="tab" data-link="source">Source</a>
+        </li>
+</ul>
+
+<div class="tab-content">
+    <div class="tab-pane fade active in" id="info">
+        <p class="comment">
+            <h3>File</h3>
+        </p>
+        <p class="comment">
+            <code>src/app/component/settings-components/download-component/download-component.component.ts</code>
+        </p>
+
+
+            <p class="comment">
+                <h3>Description</h3>
+            </p>
+            <p class="comment">
+                <p>Interface representing the structure of user data</p>
+
+            </p>
+
+
+        <section data-compodoc="block-index">
+            <h3 id="index">Index</h3>
+            <table class="table table-sm table-bordered index-table">
+                <tbody>
+                    <tr>
+                        <td class="col-md-4">
+                            <h6><b>Properties</b></h6>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <ul class="index-list">
+                                <li>
+                                        <a href="#budgetData" 
+>
+                                            budgetData
+                                        </a>
+                                </li>
+                                <li>
+                                        <a href="#categoryData" 
+>
+                                            categoryData
+                                        </a>
+                                </li>
+                                <li>
+                                        <a href="#expenseData" 
+>
+                                            expenseData
+                                        </a>
+                                </li>
+                                <li>
+                                        <a href="#userData" 
+>
+                                            userData
+                                        </a>
+                                </li>
+                            </ul>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+
+
+
+            <section data-compodoc="block-properties">
+                <h3 id="inputs">Properties</h3>
+                    <table class="table table-sm table-bordered">
+                        <tbody>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <a name="budgetData"></a>
+                                        <span class="name "><b>budgetData</b>
+                                            <a href="#budgetData">
+                                                <span class="icon ion-ios-link"></span>
+                                            </a>
+                                        </span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <code>budgetData:         <code><a href="../interfaces/Budget.html" target="_self" >Budget[] | </a></code>
+</code>
+                                    </td>
+                                </tr>
+
+
+                                    <tr>
+                                        <td class="col-md-4">
+                                            <i>Type : </i>        <code><a href="../interfaces/Budget.html" target="_self" >Budget[] | </a></code>
+
+                                        </td>
+                                    </tr>
+
+
+
+
+
+                        </tbody>
+                    </table>
+                    <table class="table table-sm table-bordered">
+                        <tbody>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <a name="categoryData"></a>
+                                        <span class="name "><b>categoryData</b>
+                                            <a href="#categoryData">
+                                                <span class="icon ion-ios-link"></span>
+                                            </a>
+                                        </span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <code>categoryData:         <code><a href="../interfaces/Category.html" target="_self" >Category[] | </a></code>
+</code>
+                                    </td>
+                                </tr>
+
+
+                                    <tr>
+                                        <td class="col-md-4">
+                                            <i>Type : </i>        <code><a href="../interfaces/Category.html" target="_self" >Category[] | </a></code>
+
+                                        </td>
+                                    </tr>
+
+
+
+
+
+                        </tbody>
+                    </table>
+                    <table class="table table-sm table-bordered">
+                        <tbody>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <a name="expenseData"></a>
+                                        <span class="name "><b>expenseData</b>
+                                            <a href="#expenseData">
+                                                <span class="icon ion-ios-link"></span>
+                                            </a>
+                                        </span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <code>expenseData:     <code>any[]</code>
+</code>
+                                    </td>
+                                </tr>
+
+
+                                    <tr>
+                                        <td class="col-md-4">
+                                            <i>Type : </i>    <code>any[]</code>
+
+                                        </td>
+                                    </tr>
+
+
+
+
+
+                        </tbody>
+                    </table>
+                    <table class="table table-sm table-bordered">
+                        <tbody>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <a name="userData"></a>
+                                        <span class="name "><b>userData</b>
+                                            <a href="#userData">
+                                                <span class="icon ion-ios-link"></span>
+                                            </a>
+                                        </span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <code>userData:         <code><a href="../interfaces/User.html" target="_self" >User | literal type</a></code>
+</code>
+                                    </td>
+                                </tr>
+
+
+                                    <tr>
+                                        <td class="col-md-4">
+                                            <i>Type : </i>        <code><a href="../interfaces/User.html" target="_self" >User | literal type</a></code>
+
+                                        </td>
+                                    </tr>
+
+
+
+
+
+                        </tbody>
+                    </table>
+            </section>
+    </div>
+
+
+    <div class="tab-pane fade  tab-source-code" id="source">
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Component } from &#x27;@angular/core&#x27;;
+import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from &#x27;@angular/forms&#x27;;
+import { CommonModule } from &#x27;@angular/common&#x27;;
+import { ToastService } from &#x27;../../../service/toast/toast.service&#x27;;
+import { FormModelComponent } from &#x27;../../form-model/form-model.component&#x27;;
+import jsPDF from &#x27;jspdf&#x27;;
+import autoTable from &#x27;jspdf-autotable&#x27;;
+import * as XLSX from &#x27;xlsx&#x27;;
+
+import { ExpenseService, Expense } from &#x27;../../../service/localStorage/expense.service&#x27;;
+import { Category, CategoryService } from &#x27;../../../service/localStorage/category.service&#x27;;
+import { UserService, User } from &#x27;../../../service/localStorage/user.service&#x27;;
+import { Budget, BudgetService } from &#x27;../../../service/localStorage/budget.service&#x27;;
+
+/**
+ * Interface representing the structure of user data
+ */
+export interface UserData {
+  userData: User | {},
+  expenseData: any[],
+  categoryData: Category[] | [],
+  budgetData: Budget[] | []
+};
+/**
+ * Component responsible for exporting user expenses
+ * into JSON, PDF, or Excel formats within a given date range.
+ *
+ * This component provides a modal dialog with a form
+ * to select a date range and file type, validates the input,
+ * and triggers the download of filtered expense data.
+ */
+@Component({
+  selector: &#x27;app-download-component&#x27;,
+  imports: [
+    FormsModule,
+    CommonModule,
+    ReactiveFormsModule,
+    FormModelComponent,
+  ],
+  templateUrl: &#x27;./download-component.component.html&#x27;,
+  styleUrl: &#x27;./download-component.component.css&#x27;
+})
+export class DownloadComponentComponent {
+
+  /**
+   * Reactive form instance for selecting date range and file type.
+   */
+  downloadDataForm!: FormGroup;
+
+  /**
+   * Controls the visibility of the download data modal.
+   */
+  showDownloadDataModal &#x3D; false;
+
+  /**
+   * Current date in &#x60;yyyy-MM-dd&#x60; format,
+   * used for validation to prevent future dates.
+   */
+  today: string;
+
+  /**
+   * Creates an instance of &#x60;DownloadComponentComponent&#x60;.
+   *
+   * @param expenseService Service used to fetch and filter expenses.
+   * @param fb Angular &#x60;FormBuilder&#x60; to build the reactive form.
+   * @param toastService Service used to show toast notifications.
+   * @param categoryService Service to fetch category data.
+   * @param userService Service to fetch user data.
+   * @param budgetService Service to fetch budget data.
+   */
+  constructor(
+    private expenseService: ExpenseService,
+    private fb: FormBuilder,
+    private toastService: ToastService,
+    private categoryService: CategoryService,
+    private userService: UserService,
+    private budgetService: BudgetService,
+  ) {
+    this.today &#x3D; new Date().toISOString().split(&#x27;T&#x27;)[0];
+  }
+
+  /**
+   * Lifecycle hook that initializes the form
+   * with default controls and validators.
+   */
+  ngOnInit(): void {
+    this.downloadDataForm &#x3D; this.fb.group({
+      fromDate: [&#x27;&#x27;, [Validators.required]],
+      toDate: [&#x27;&#x27;, [Validators.required]],
+      fileType: [&#x27;JSON&#x27;, [Validators.required]],
+    });
+  }
+
+  /**
+   * Validates the form before triggering data download.
+   *
+   * Marks all controls as touched if the form is invalid.
+   */
+  downloadData(): void {
+    if (this.downloadDataForm.invalid) {
+      this.downloadDataForm.markAllAsTouched();
+      return;
+    }
+    this.confirmAndDownload();
+  }
+
+  /**
+   * Validates date range and triggers the appropriate
+   * export function (JSON, PDF, Excel) based on user selection.
+   */
+  confirmAndDownload(): void {
+    const { fromDate, toDate, fileType } &#x3D; this.downloadDataForm.value;
+
+    if (new Date(toDate) &lt; new Date(fromDate)) {
+      this.toastService.show(&#x27;Invalid date range: To Date must be after From Date&#x27;, &#x27;error&#x27;, 3000);
+      return;
+    }
+
+    // Fetch data
+    const expenseData: Expense[] &#x3D; this.expenseService.searchByDateRange(fromDate, toDate);
+    const categoryData: Category[] &#x3D; this.categoryService.getAll();
+    const userData: User | {} &#x3D; this.userService.getUserData();
+    const budgetData: Budget[] &#x3D; this.budgetService.getAll();
+
+    if (!expenseData || expenseData.length &#x3D;&#x3D;&#x3D; 0) {
+      this.toastService.show(&#x27;No expenses found in this date range&#x27;, &#x27;info&#x27;, 3000);
+      return;
+    }
+
+    // Filter fields for export
+    const filteredExpenseData &#x3D; expenseData.map(expense &#x3D;&gt; ({
+      amount: expense.amount,
+      date: expense.date,
+      time: expense.time,
+      location: expense.location,
+      note: expense.note,
+      payment_mode: expense.payment_mode,
+      category_name: expense.category_name,
+      category_id: expense.category_id,
+      expense_id: expense.expense_id,
+      isExtraSpending: expense.isExtraSpending
+    }));
+    
+    // Prepare final data object
+    const finalData: UserData &#x3D; {
+      userData: userData || {},
+      expenseData: filteredExpenseData || [],
+      categoryData: categoryData || [],
+      budgetData: budgetData || []
+    };
+
+    try {
+      if (fileType &#x3D;&#x3D;&#x3D; &#x27;JSON&#x27;) {
+        const jsonData &#x3D; JSON.stringify(finalData, null, 2);
+        this.triggerDownload(jsonData, &#x27;application/json&#x27;, &#x27;json&#x27;);
+        this.closeDownloadDataModal();
+        this.toastService.show(&#x27;JSON downloaded successfully!&#x27;, &#x27;success&#x27;, 3000);
+        return;
+      } else if (fileType &#x3D;&#x3D;&#x3D; &#x27;PDF&#x27;) {
+        this.exportToPDF(filteredExpenseData, fromDate, toDate);
+        this.closeDownloadDataModal();
+        this.toastService.show(&#x27;PDF downloaded successfully!&#x27;, &#x27;success&#x27;, 3000);
+        return;
+      } else if (fileType &#x3D;&#x3D;&#x3D; &#x27;EXCEL&#x27;) {
+        this.exportToExcel(filteredExpenseData);
+        this.closeDownloadDataModal();
+        this.toastService.show(&#x27;Excel downloaded successfully!&#x27;, &#x27;success&#x27;, 3000);
+        return;
+      }
+    } catch (error) {
+      console.error(&#x27;Download failed&#x27;, error);
+      this.toastService.show(&#x27;Failed to download data&#x27;, &#x27;error&#x27;);
+    }
+  }
+
+  /**
+   * Creates a file blob and triggers the browser to download it.
+   *
+   * @param content File content to download.
+   * @param mimeType MIME type of the file.
+   * @param extension File extension (json, pdf, xlsx).
+   */
+  private triggerDownload(content: string, mimeType: string, extension: string): void {
+    const blob &#x3D; new Blob([content], { type: mimeType });
+    const url &#x3D; window.URL.createObjectURL(blob);
+    const link &#x3D; document.createElement(&#x27;a&#x27;);
+    link.href &#x3D; url;
+    const timestamp &#x3D; new Date().toISOString().replace(/[:.]/g, &#x27;-&#x27;);
+    link.download &#x3D; &#x60;expenses-${timestamp}.${extension}&#x60;;
+
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+
+    window.URL.revokeObjectURL(url);
+  }
+
+  /**
+   * Opens the modal and resets the download form
+   * to its initial state.
+   */
+  openDownloadDataModal(): void {
+    this.downloadDataForm.reset({
+      fromDate: &#x27;&#x27;,
+      toDate: &#x27;&#x27;,
+      fileType: &#x27;JSON&#x27;
+    });
+    this.downloadDataForm.markAsPristine();
+    this.downloadDataForm.markAsUntouched();
+    this.showDownloadDataModal &#x3D; true;
+  }
+
+  /**
+   * Closes the download modal.
+   */
+  closeDownloadDataModal(): void {
+    this.showDownloadDataModal &#x3D; false;
+  }
+
+  /**
+   * Exports expense data to a formatted PDF file.
+   *
+   * @param data Filtered expense records.
+   * @param fromDate Start date of the report.
+   * @param toDate End date of the report.
+   */
+  private exportToPDF(data: any[], fromDate: string, toDate: string): void {
+    const doc &#x3D; new jsPDF(&#x27;p&#x27;, &#x27;pt&#x27;, &#x27;a4&#x27;);
+    const pageWidth &#x3D; doc.internal.pageSize.getWidth();
+
+    // Title + metadata
+    const title &#x3D; &#x27;Expenses Report&#x27;;
+    const sub &#x3D; &#x60;From: ${fromDate}  —  To: ${toDate}&#x60;;
+    doc.setFontSize(14);
+    doc.text(title, pageWidth / 2, 40, { align: &#x27;center&#x27; });
+    doc.setFontSize(10);
+    doc.text(sub, pageWidth / 2, 58, { align: &#x27;center&#x27; });
+
+    // Table headers (order matches rows below)
+    const headers &#x3D; [&#x27;Index&#x27;, &#x27;Category&#x27;, &#x27;Amount&#x27;, &#x27;Date&#x27;, &#x27;Time&#x27;, &#x27;Location&#x27;, &#x27;Note&#x27;, &#x27;Payment Mode&#x27;, &#x27;Extra Spending&#x27;];
+
+    // Rows
+    const rows &#x3D; data.map((exp, i) &#x3D;&gt; [
+      i + 1,
+      exp.category_name,
+      exp.amount,
+      exp.date,
+      exp.time,
+      exp.location,
+      exp.note,
+      exp.payment_mode,
+      exp.isExtraSpending ? &#x27;Yes&#x27; : &#x27;No&#x27;
+    ]);
+
+    autoTable(doc, {
+      startY: 70,
+      head: [headers],
+      body: rows,
+      styles: { fontSize: 9, overflow: &#x27;linebreak&#x27; },
+      headStyles: {
+        fillColor: [143, 145, 234],
+        halign: &#x27;center&#x27;,
+        valign: &#x27;middle&#x27;,
+        fontStyle: &#x27;bold&#x27;,
+        textColor: 255
+      },
+      margin: { left: 30, right: 30 },
+      bodyStyles: {
+        halign: &#x27;center&#x27;
+      },
+      columnStyles: {
+        0: { cellWidth: 33 },                      // Index
+        1: { cellWidth: 58, halign: &#x27;left&#x27; },      // Category
+        2: { cellWidth: 46 },                      // Amount
+        3: { cellWidth: 55 },                      // Date
+        4: { cellWidth: 50 },                      // Time
+        5: { cellWidth: 85, halign: &#x27;left&#x27; },      // Location
+        6: { cellWidth: 110, halign: &#x27;left&#x27; },     // Note (wraps)
+        7: { cellWidth: 48 },                      // Payment Mode
+        8: { cellWidth: 50 }                       // Extra Spending
+      }
+    });
+
+    // file name
+    const timestamp &#x3D; new Date().toISOString().replace(/[:.]/g, &#x27;-&#x27;);
+    doc.save(&#x60;expenses-${timestamp}.pdf&#x60;);
+  }
+
+  /**
+   * Exports expense data to an Excel file.
+   *
+   * @param data Filtered expense records.
+   */
+  private exportToExcel(data: any[]): void {
+    const excelData &#x3D; data.map((exp, i) &#x3D;&gt; ({
+      &#x27;Index&#x27;: i + 1,
+      Category: exp.category_name,
+      Amount: exp.amount,
+      Date: exp.date,
+      Time: exp.time,
+      Location: exp.location,
+      Note: exp.note,
+      &#x27;Payment Mode&#x27;: exp.payment_mode,
+      &#x27;Extra Spending&#x27;: exp.isExtraSpending ? &#x27;Yes&#x27; : &#x27;No&#x27;
+    }));
+
+    const workbook &#x3D; XLSX.utils.book_new();
+    const aoa: any[][] &#x3D; [];
+
+    if (excelData.length &gt; 0) {
+      const headerRow &#x3D; Object.keys(excelData[0]);
+      aoa.push(headerRow);
+
+      for (const row of excelData) {
+        aoa.push(Object.values(row));
+      }
+    }
+
+    const worksheet &#x3D; XLSX.utils.aoa_to_sheet(aoa);
+    XLSX.utils.book_append_sheet(workbook, worksheet, &#x27;Expenses&#x27;);
+
+    const timestamp &#x3D; new Date().toISOString().replace(/[:.]/g, &#x27;-&#x27;);
+    const filename &#x3D; &#x60;expenses-${timestamp}.xlsx&#x60;;
+    XLSX.writeFile(workbook, filename);
+  }
+
+}
+</code></pre>
+    </div>
+</div>
+
+
+
+
+
+
+
+
+                   </div><div class="search-results">
+    <div class="has-results">
+        <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+        <ul class="search-results-list"></ul>
+    </div>
+    <div class="no-results">
+        <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+    </div>
+</div>
+</div>
+               <!-- END CONTENT -->
+           </div>
+       </div>
+
+          <label class="dark-mode-switch">
+               <input type="checkbox">
+               <span class="slider">
+                    <svg class="slider-icon" viewBox="0 0 24 24" fill="none" height="20" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" width="20" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"></path>
+                    </svg>
+               </span>
+          </label>
+
+       <script>
+            var COMPODOC_CURRENT_PAGE_DEPTH = 1;
+            var COMPODOC_CURRENT_PAGE_CONTEXT = 'interface';
+            var COMPODOC_CURRENT_PAGE_URL = 'UserData.html';
+            var MAX_SEARCH_RESULTS = 15;
+       </script>
+
+       <script>
+               $darkModeToggleSwitchers = document.querySelectorAll('.dark-mode-switch input');
+               checkToggle(darkModeState);
+               if ($darkModeToggleSwitchers.length > 0) {
+                    for (var i = 0; i < $darkModeToggleSwitchers.length; i++) {
+                         $darkModeToggleSwitchers[i].addEventListener('change', function (event) {
+                              darkModeState = !darkModeState;
+                              toggleDarkMode(darkModeState);
+                         });
+                    }
+               }
+          </script>
+
+       <script src="../js/libs/custom-elements.min.js"></script>
+       <script src="../js/libs/lit-html.js"></script>
+
+       <script src="../js/menu-wc.js" defer></script>
+       <script nomodule src="../js/menu-wc_es5.js" defer></script>
+
+       <script src="../js/libs/bootstrap-native.js"></script>
+
+       <script src="../js/libs/es6-shim.min.js"></script>
+       <script src="../js/libs/EventDispatcher.js"></script>
+       <script src="../js/libs/promise.min.js"></script>
+
+       <script src="../js/compodoc.js"></script>
+
+       <script src="../js/tabs.js"></script>
+       <script src="../js/menu.js"></script>
+       <script src="../js/libs/clipboard.min.js"></script>
+       <script src="../js/libs/prism.js"></script>
+       <script src="../js/sourceCode.js"></script>
+          <script src="../js/search/search.js"></script>
+          <script src="../js/search/lunr.min.js"></script>
+          <script src="../js/search/search-lunr.js"></script>
+          <script src="../js/search/search_index.js"></script>
+       <script src="../js/lazy-load-graphs.js"></script>
+
+
+    </body>
+</html>
