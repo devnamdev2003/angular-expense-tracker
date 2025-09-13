@@ -644,9 +644,11 @@
 
   /**
    * Current environment type.
-   * Possible values: &#x27;local&#x27;, &#x27;live&#x27;
+   * - &#x27;local&#x27; for local development (uses localhost API endpoint)
+   * - &#x27;live&#x27; for production (uses production API endpoint)
+   * - leave empty for automatic detection based on current window location
    */
-  developmentEnvironment: &#x27;live&#x27;, // Change to &#x27;live&#x27; for production or &#x27;local&#x27; for local development
+  developmentEnvironment: &#x27;&#x27;, // Change to &#x27;live&#x27; for production or &#x27;local&#x27; for local development
 
   /**
    * Application version.

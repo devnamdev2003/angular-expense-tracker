@@ -295,7 +295,8 @@ export class ListExpensesComponent implements OnInit {
     this.expenseService.update(expense_id, newData);
     this.toastService.show('Expense updated successfully', 'success');
     this.isEditOpen = false;
-    this.searchData(this.searchQuery);
+    this.expenses = this.expenses.map(item => item.expense_id === expense_id ? { ...item, ...newData } : item);
+    this.expenses = this.expenses.map(item => ({ ...item, amount: Math.round(item.amount * 100) / 100 }));
   }
 
   /**
@@ -307,7 +308,7 @@ export class ListExpensesComponent implements OnInit {
       this.expenseService.delete(id);
       this.toastService.show("Expense deleted successfully", 'success');
       this.closeModal();
-      this.searchData(this.searchQuery);
+      this.expenses = this.expenses.filter(item => item.expense_id !== id);
     }
   }
 
@@ -317,7 +318,7 @@ export class ListExpensesComponent implements OnInit {
    */
   searchData(query: string): void {
     this.expenses = this.expenseService.getAll();
-    if(query.length === 0) {
+    if (query.length === 0) {
       return;
     }
     this.expenses = this.expenses.filter(ex => {

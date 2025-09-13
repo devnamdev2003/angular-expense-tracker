@@ -20,9 +20,11 @@ export const environment = {
 
   /**
    * Current environment type.
-   * Possible values: 'local', 'live'
+   * - 'local' for local development (uses localhost API endpoint)
+   * - 'live' for production (uses production API endpoint)
+   * - leave empty for automatic detection based on current window location
    */
-  developmentEnvironment: 'live', // Change to 'live' for production or 'local' for local development
+  developmentEnvironment: '', // Change to 'live' for production or 'local' for local development
 
   /**
    * Application version.

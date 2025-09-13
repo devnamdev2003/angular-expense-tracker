@@ -519,8 +519,8 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="357"
-                                    class="link-to-prism">src/app/features/list-expenses/list-expenses.component.ts:357</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="358"
+                                    class="link-to-prism">src/app/features/list-expenses/list-expenses.component.ts:358</a></div>
                         </td>
                     </tr>
 
@@ -705,8 +705,8 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="345"
-                                    class="link-to-prism">src/app/features/list-expenses/list-expenses.component.ts:345</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="346"
+                                    class="link-to-prism">src/app/features/list-expenses/list-expenses.component.ts:346</a></div>
                         </td>
                     </tr>
 
@@ -783,8 +783,8 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="305"
-                                    class="link-to-prism">src/app/features/list-expenses/list-expenses.component.ts:305</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="306"
+                                    class="link-to-prism">src/app/features/list-expenses/list-expenses.component.ts:306</a></div>
                         </td>
                     </tr>
 
@@ -1109,8 +1109,8 @@ Reapplies filters and sorting if active.</p>
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="357"
-                                    class="link-to-prism">src/app/features/list-expenses/list-expenses.component.ts:357</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="358"
+                                    class="link-to-prism">src/app/features/list-expenses/list-expenses.component.ts:358</a></div>
                         </td>
                     </tr>
 
@@ -1273,8 +1273,8 @@ Reapplies filters and sorting if active.</p>
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="333"
-                                    class="link-to-prism">src/app/features/list-expenses/list-expenses.component.ts:333</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="334"
+                                    class="link-to-prism">src/app/features/list-expenses/list-expenses.component.ts:334</a></div>
                         </td>
                     </tr>
 
@@ -1421,8 +1421,8 @@ Reapplies filters and sorting if active.</p>
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="318"
-                                    class="link-to-prism">src/app/features/list-expenses/list-expenses.component.ts:318</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="319"
+                                    class="link-to-prism">src/app/features/list-expenses/list-expenses.component.ts:319</a></div>
                         </td>
                     </tr>
 
@@ -2614,7 +2614,8 @@ export class ListExpensesComponent implements OnInit {
     this.expenseService.update(expense_id, newData);
     this.toastService.show(&#x27;Expense updated successfully&#x27;, &#x27;success&#x27;);
     this.isEditOpen &#x3D; false;
-    this.searchData(this.searchQuery);
+    this.expenses &#x3D; this.expenses.map(item &#x3D;&gt; item.expense_id &#x3D;&#x3D;&#x3D; expense_id ? { ...item, ...newData } : item);
+    this.expenses &#x3D; this.expenses.map(item &#x3D;&gt; ({ ...item, amount: Math.round(item.amount * 100) / 100 }));
   }
 
   /**
@@ -2626,7 +2627,7 @@ export class ListExpensesComponent implements OnInit {
       this.expenseService.delete(id);
       this.toastService.show(&quot;Expense deleted successfully&quot;, &#x27;success&#x27;);
       this.closeModal();
-      this.searchData(this.searchQuery);
+      this.expenses &#x3D; this.expenses.filter(item &#x3D;&gt; item.expense_id !&#x3D;&#x3D; id);
     }
   }
 
@@ -2636,7 +2637,7 @@ export class ListExpensesComponent implements OnInit {
    */
   searchData(query: string): void {
     this.expenses &#x3D; this.expenseService.getAll();
-    if(query.length &#x3D;&#x3D;&#x3D; 0) {
+    if (query.length &#x3D;&#x3D;&#x3D; 0) {
       return;
     }
     this.expenses &#x3D; this.expenses.filter(ex &#x3D;&gt; {

@@ -249,8 +249,8 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="40"
-                                    class="link-to-prism">src/app/service/util/config/config.service.ts:40</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="42"
+                                    class="link-to-prism">src/app/service/util/config/config.service.ts:42</a></div>
                         </td>
                     </tr>
 
@@ -261,7 +261,10 @@
 <ul>
 <li><code>&quot;local&quot;</code> → <code>http://localhost:8000</code></li>
 <li><code>&quot;live&quot;</code> → <code>https://exwiseapi.onrender.com</code></li>
-<li>Any other value defaults to <code>&quot;local&quot;</code></li>
+<li>Any other value → Determines based on current window location.</li>
+<li>If the URL contains <code>&quot;localhost&quot;</code>, returns <code>http://localhost:8000</code>.</li>
+<li>If the URL contains <code>&quot;exwiseapi&quot;</code>, returns <code>https://exwiseapi.onrender.com</code>.</li>
+<li>Defaults to <code>http://localhost:8000</code> if none of the above conditions are met.</li>
 </ul>
 </div>
 
@@ -297,8 +300,8 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="57"
-                                    class="link-to-prism">src/app/service/util/config/config.service.ts:57</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="65"
+                                    class="link-to-prism">src/app/service/util/config/config.service.ts:65</a></div>
                         </td>
                     </tr>
 
@@ -450,8 +453,10 @@ export class ConfigService {
    *
    * - &#x60;&quot;local&quot;&#x60; → &#x60;http://localhost:8000&#x60;
    * - &#x60;&quot;live&quot;&#x60; → &#x60;https://exwiseapi.onrender.com&#x60;
-   * - Any other value defaults to &#x60;&quot;local&quot;&#x60;
-   *
+   * - Any other value → Determines based on current window location.
+   * - If the URL contains &#x60;&quot;localhost&quot;&#x60;, returns &#x60;http://localhost:8000&#x60;.
+   * - If the URL contains &#x60;&quot;exwiseapi&quot;&#x60;, returns &#x60;https://exwiseapi.onrender.com&#x60;.
+   * - Defaults to &#x60;http://localhost:8000&#x60; if none of the above conditions are met.
    * @returns {string} The API base URL for the current environment.
    */
   getapiUrl(): string {
@@ -462,6 +467,12 @@ export class ConfigService {
       return &quot;https://exwiseapi.onrender.com&quot;;
     }
     else {
+      if (window.location.href.includes(&quot;localhost&quot;)) {
+        return &quot;http://localhost:8000&quot;;
+      }
+      else if (window.location.href.includes(&quot;exwiseapi&quot;)) {
+        return &quot;https://exwiseapi.onrender.com&quot;;
+      }
       return &quot;http://localhost:8000&quot;;
     }
   }
