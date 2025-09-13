@@ -1,1 +1,1 @@
-var ROUTES_INDEX = {"name":"<root>","kind":"module","children":[{"name":"AppComponent","kind":"component","path":"","filename":"src/app/app.routes.ts"},{"name":"AppComponent","kind":"component","path":"music","filename":"src/app/app.routes.ts"}]}
+var ROUTES_INDEX = {"name":"<root>","kind":"module","className":"TemplatePlaygroundModule","children":[{"name":"AppComponent","kind":"component","path":"","filename":"src/app/app.routes.ts"},{"name":"AppComponent","kind":"component","path":"music","filename":"src/app/app.routes.ts"}]}

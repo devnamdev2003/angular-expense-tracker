@@ -317,6 +317,9 @@ export class ListExpensesComponent implements OnInit {
    */
   searchData(query: string): void {
     this.expenses = this.expenseService.getAll();
+    if(query.length === 0) {
+      return;
+    }
     this.expenses = this.expenses.filter(ex => {
       return ((ex.location && ex.location.toLowerCase().includes(query.toLowerCase())) ||
         (ex.note && ex.note.toLowerCase().includes(query.toLowerCase())));
@@ -329,7 +332,7 @@ export class ListExpensesComponent implements OnInit {
    */
   onSearch(query: string): void {
     this.totalAmount = 0;
-    this.searchQuery = query;
+    this.searchQuery = query.trim();
     this.searchData(this.searchQuery);
     this.expenses.forEach((val) => {
       this.totalAmount = this.totalAmount + val.amount;
