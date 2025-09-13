@@ -35,7 +35,7 @@ export class ConfigService {
    * - `"live"` → `https://exwiseapi.onrender.com`
    * - Any other value → Determines based on current window location.
    * - If the URL contains `"localhost"`, returns `http://localhost:8000`.
-   * - If the URL contains `"exwiseapi"`, returns `https://exwiseapi.onrender.com`.
+   * - If the URL contains `"exwise"`, returns `https://exwiseapi.onrender.com`.
    * - Defaults to `http://localhost:8000` if none of the above conditions are met.
    * @returns {string} The API base URL for the current environment.
    */
@@ -50,7 +50,7 @@ export class ConfigService {
       if (window.location.href.includes("localhost")) {
         return "http://localhost:8000";
       }
-      else if (window.location.href.includes("exwiseapi")) {
+      else if (window.location.href.includes("exwise")) {
         return "https://exwiseapi.onrender.com";
       }
       return "http://localhost:8000";
