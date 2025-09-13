@@ -1,6 +1,6 @@
 # [📘 Expense Tracker](https://exwise.vercel.app/)
 
->### Expense Wisely – Where Your Money Stops Playing Hide and Seek!
+> ### Expense Wisely – Where Your Money Stops Playing Hide and Seek!
 
 ## 📌 Overview
 
@@ -12,11 +12,11 @@ This application leverages **Angular** as the frontend framework and **Tailwind 
 
 ## 🧰 Tech Stack
 
-| Technology   | Purpose                    |
-| ------------ | -------------------------- |
-| Angular      | Frontend application logic |
-| Tailwind CSS | Styling and responsive UI  |
-| LocalStorage | Persistent data storage    |
+| Technology           | Purpose                         |
+| -------------------- | ------------------------------- |
+| Angular              | Frontend application logic      |
+| Tailwind CSS         | Styling and responsive UI       |
+| LocalStorage         | Persistent data storage         |
 
 ---
 
@@ -60,7 +60,7 @@ All expenses are stored in the device's **LocalStorage** and reflected immediate
 * Displays all user expenses in a scrollable, and sortable list.
 * Users can:
 
-  * 🔍 **Search** expenses quickly by typing keywords (category, note, or payment mode).  
+  * 🔍 **Search** expenses quickly by typing keywords (category, note, or payment mode).
   * 🧾 **Sort** expenses by date, amount, or category.
   * 🎯 **Filter** by category, date, extra spending, and payment mode.
   * 🖱️ Tap any entry to open a **modal** with complete details and options to **edit** or **delete** the expense.
@@ -99,7 +99,7 @@ Provides customization and utility options for better personalization:
 
 * The application is specifically designed for **mobile devices**.
 * Features responsive components, intuitive touch controls, and visually appealing UI optimized for small screens.
-* Not intended for laptop or desktop usage.
+* Not intended for laptop or desktop usage (though it works as PWA).
 
 ---
 
@@ -128,7 +128,7 @@ All user data is stored using the **browser’s LocalStorage API**, ensuring:
 
 ## 📄 Code Documentation
 
-For developers and contributors, detailed code-level documentation is available here:  
+For developers and contributors, detailed code-level documentation is available here:
 👉 [Documentation](https://devnamdev2003.github.io/angular-expense-tracker/documentation/)
 
 ---

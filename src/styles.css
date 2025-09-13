@@ -1,10 +1,27 @@
 :root {
     --theme-color: #8f91ea;
+
     --color-bg: #ffffff;
+    --color-bg-100: #ffffff;
+    --color-bg-500: #f5f6fb;
+    --color-bg-600: #e5e7eb;
+
     --color-surface: #f5f6fb;
+    --color-surface-100: #ffffff;
+    --color-surface-500: #e5e7eb;
+    --color-surface-600: #d1d5db;
+
     --color-text: #000000;
+    --color-text-100: #f9fafb;
+    --color-text-500: #000000;
+    --color-text-600: #111827;
+
     --color-text2: #ffffff;
     --color-accent: var(--theme-color);
+    --color-accent-100: #ede9fe;
+    --color-accent-500: #8f91ea;
+    --color-accent-600: #6d6fe5;
+
     --list-hover: #e0e4ff;
 
     /* Input field colors */
@@ -15,19 +32,61 @@
     --icon-color2: invert(0%);
 
     --color-error: #ef4444;
+
     --color-red: #ef4444;
+    --color-red-100: #fee2e2;
+    --color-red-500: #ef4444;
+    --color-red-600: #dc2626;
+
     --color-white: #ffffff;
+    --color-white-100: #ffffff;
+    --color-white-500: #f9fafb;
+    --color-white-600: #f3f4f6;
+
     --color-green: #16a34a;
-    --color-gray-500: #6b7280;
+    --color-green-100: #d1fae5;
+    --color-green-500: #16a34a;
+    --color-green-600: #15803d;
+
+    --color-gray: #808080;
+    --color-gray-50: oklch(98.5% 0.002 247.839);
+    --color-gray-100: oklch(96.7% 0.003 264.542);
+    --color-gray-200: oklch(92.8% 0.006 264.531);
+    --color-gray-300: oklch(87.2% 0.01 258.338);
+    --color-gray-400: oklch(70.7% 0.022 261.325);
+    --color-gray-500: oklch(55.1% 0.027 264.364);
+    --color-gray-600: oklch(44.6% 0.03 256.802);
+    --color-gray-700: oklch(37.3% 0.034 259.733);
+    --color-gray-800: oklch(27.8% 0.033 256.848);
+    --color-gray-900: oklch(21% 0.034 264.665);
+    --color-gray-950: oklch(13% 0.028 261.692);
 }
 
 .dark {
     --theme-color: #8f91ea;
+
     --color-bg: #000000;
+    --color-bg-100: #111827;
+    --color-bg-500: #1e1e1e;
+    --color-bg-600: #2a2a2a;
+
     --color-surface: #1e1e1e;
+    --color-surface-100: #111827;
+    --color-surface-500: #2a2a2a;
+    --color-surface-600: #3a3a3a;
+
     --color-text: #ffffff;
+    --color-text-100: #d1d5db;
+    --color-text-500: #ffffff;
+    --color-text-600: #f9fafb;
+
     --color-text2: #000000;
+
     --color-accent: var(--theme-color);
+    --color-accent-100: #3730a3;
+    --color-accent-500: #8f91ea;
+    --color-accent-600: #6366f1;
+
     --list-hover: #2a2d57;
 
     /* Input field colors */
@@ -38,10 +97,35 @@
     --icon-color2: invert(100%);
 
     --color-error: #f87171;
+
     --color-red: #ef4444;
+    --color-red-100: #fee2e2;
+    --color-red-500: #f87171;
+    --color-red-600: #dc2626;
+
     --color-white: #ffffff;
+    --color-white-100: #f9fafb;
+    --color-white-500: #e5e7eb;
+    --color-white-600: #d1d5db;
+
     --color-green: #4ade80;
-    --color-gray-500: #6b7280;
+    --color-green-100: #bbf7d0;
+    --color-green-500: #4ade80;
+    --color-green-600: #15803d;
+
+    --color-gray: #808080;
+    --color-gray-50: oklch(98.5% 0.002 247.839);
+    --color-gray-100: oklch(96.7% 0.003 264.542);
+    --color-gray-200: oklch(92.8% 0.006 264.531);
+    --color-gray-300: oklch(87.2% 0.01 258.338);
+    --color-gray-400: oklch(70.7% 0.022 261.325);
+    --color-gray-500: oklch(55.1% 0.027 264.364);
+    --color-gray-600: oklch(44.6% 0.03 256.802);
+    --color-gray-700: oklch(37.3% 0.034 259.733);
+    --color-gray-800: oklch(27.8% 0.033 256.848);
+    --color-gray-900: oklch(21% 0.034 264.665);
+    --color-gray-950: oklch(13% 0.028 261.692);
+
 }
 
 /* Disable text selection */
@@ -53,7 +137,9 @@ body {
     background-color: var(--color-bg);
     color: var(--color-text);
 }
-html, body {
-  overscroll-behavior-y: contain; /* Prevents pull-to-refresh */
-  overscroll-behavior-x: none;
+
+html,
+body {
+    overscroll-behavior-y: contain;
+    overscroll-behavior-x: none;
 }

@@ -107,7 +107,7 @@
   <li class="breadcrumb-item">Components</li>
   <li class="breadcrumb-item"
   >
-  AiComponent</li>
+  InstallAppPopupComponentComponent</li>
 </ol>
 
 <ul class="nav nav-tabs" role="tablist">
@@ -134,10 +134,20 @@
     <h3>File</h3>
 </p>
 <p class="comment">
-    <code>src/app/features/ai/ai.component.ts</code>
+    <code>src/app/component/install-app-popup-component/install-app-popup-component.component.ts</code>
 </p>
 
 
+    <p class="comment">
+        <h3>Description</h3>
+    </p>
+    <p class="comment">
+        <p>Component that displays a popup prompting the user to install the app as a PWA.</p>
+<p>This component shows a modal with the app name and an install button when
+<code>showInstallButton</code> is set to true. It uses the <code>ConfigService</code> to retrieve
+the application name and emits an event when the user clicks install.</p>
+
+    </p>
 
 
 
@@ -160,7 +170,7 @@
 
             <tr>
                 <td class="col-md-3">selector</td>
-                <td class="col-md-9"><code>app-ai</code></td>
+                <td class="col-md-9"><code>app-install-app-popup-component</code></td>
             </tr>
 
             <tr>
@@ -172,8 +182,6 @@
                 <td class="col-md-3">imports</td>
                 <td class="col-md-9">
                             <code>CommonModule</code>
-                            <code>FormsModule</code>
-                            <code>HttpClientModule</code>
                 </td>
             </tr>
 
@@ -182,14 +190,14 @@
 
             <tr>
                 <td class="col-md-3">templateUrl</td>
-                <td class="col-md-9"><code>./ai.component.html</code></td>
+                <td class="col-md-9"><code>./install-app-popup-component.component.html</code></td>
             </tr>
 
 
 
             <tr>
                 <td class="col-md-3">styleUrl</td>
-                <td class="col-md-9"><code>./ai.component.css</code></td>
+                <td class="col-md-9"><code>./install-app-popup-component.component.css</code></td>
             </tr>
 
 
@@ -213,10 +221,7 @@
                     <td class="col-md-4">
                         <ul class="index-list">
                             <li>
-                                <a href="#responseHtml" >responseHtml</a>
-                            </li>
-                            <li>
-                                <a href="#userInput" >userInput</a>
+                                <a href="#appName" >appName</a>
                             </li>
                         </ul>
                     </td>
@@ -231,14 +236,44 @@
                     <td class="col-md-4">
                         <ul class="index-list">
                             <li>
-                                    <span class="modifier">Async</span>
-                                <a href="#send" >send</a>
+                                <a href="#dismissInstall" >dismissInstall</a>
+                            </li>
+                            <li>
+                                <a href="#onClickinstallApp" >onClickinstallApp</a>
                             </li>
                         </ul>
                     </td>
                 </tr>
 
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Inputs</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                <a href="#showInstallButton" >showInstallButton</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
 
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Outputs</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                <a href="#installApp" >installApp</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
 
 
 
@@ -252,17 +287,19 @@
             <tbody>
                 <tr>
                     <td class="col-md-4">
-<code>constructor(geminiApi: <a href="../injectables/GeminiApiService.html" target="_self">GeminiApiService</a>, sanitizer: DomSanitizer)</code>
+<code>constructor(configService: <a href="../injectables/ConfigService.html" target="_self">ConfigService</a>)</code>
                     </td>
                 </tr>
                         <tr>
                             <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="18" class="link-to-prism">src/app/features/ai/ai.component.ts:18</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="40" class="link-to-prism">src/app/component/install-app-popup-component/install-app-popup-component.component.ts:40</a></div>
                             </td>
                         </tr>
 
                 <tr>
                     <td class="col-md-4">
+                            <div class="io-description"><p>Creates an instance of the install popup component.</p>
+</div>
                             <div>
                                     <b>Parameters :</b>
                                     <table class="params">
@@ -271,32 +308,25 @@
                                                 <td>Name</td>
                                                     <td>Type</td>
                                                 <td>Optional</td>
+                                                    <td>Description</td>
                                             </tr>
                                         </thead>
                                         <tbody>
                                                 <tr>
-                                                        <td>geminiApi</td>
+                                                        <td>configService</td>
                                                   
                                                         <td>
-                                                                        <code><a href="../injectables/GeminiApiService.html" target="_self" >GeminiApiService</a></code>
+                                                                        <code><a href="../injectables/ConfigService.html" target="_self" >ConfigService</a></code>
                                                         </td>
                                                   
                                                     <td>
                                                             No
                                                     </td>
                                                     
-                                                </tr>
-                                                <tr>
-                                                        <td>sanitizer</td>
-                                                  
                                                         <td>
-                                                                    <code>DomSanitizer</code>
+                                                                <p>Service to fetch configuration values such as the app name.</p>
+
                                                         </td>
-                                                  
-                                                    <td>
-                                                            No
-                                                    </td>
-                                                    
                                                 </tr>
                                         </tbody>
                                     </table>
@@ -307,8 +337,74 @@
         </table>
 </section>
 
+    <section data-compodoc="block-inputs">
+    <h3 id="inputs">Inputs</h3>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="showInstallButton"></a>
+                        <b>showInstallButton</b>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
 
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>false</code>
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-2" colspan="2">
+                                    <div class="io-line">Defined in <a href="" data-line="26" class="link-to-prism">src/app/component/install-app-popup-component/install-app-popup-component.component.ts:26</a></div>
+                            </td>
+                        </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <div class="io-description"><p>Controls the visibility of the install popup.</p>
+<p>When set to true, the popup will be displayed.</p>
+</div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+</section>
+    <section data-compodoc="block-outputs">
+    <h3 id="outputs">Outputs</h3>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="installApp"></a>
+                        <b>installApp</b>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>EventEmitter</code>
 
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-2" colspan="2">
+                                    <div class="io-line">Defined in <a href="" data-line="40" class="link-to-prism">src/app/component/install-app-popup-component/install-app-popup-component.component.ts:40</a></div>
+                            </td>
+                        </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <div class="io-description"><p>Event emitted when the user clicks on the &quot;Install&quot; button.</p>
+<p>The parent component can listen to this event to trigger
+the actual PWA installation flow.</p>
+</div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+</section>
 
 
     <section data-compodoc="block-methods">
@@ -320,35 +416,77 @@
         <tbody>
             <tr>
                 <td class="col-md-4">
-                    <a name="send"></a>
+                    <a name="dismissInstall"></a>
                     <span class="name">
-                            <span class="modifier">Async</span>
-                        <span ><b>send</b></span>
-                        <a href="#send"><span class="icon ion-ios-link"></span></a>
+                        <span ><b>dismissInstall</b></span>
+                        <a href="#dismissInstall"><span class="icon ion-ios-link"></span></a>
                     </span>
                 </td>
             </tr>
             <tr>
                 <td class="col-md-4">
-                        <span class="modifier-icon icon ion-ios-reset"></span>
-                    <code>send()</code>
+<code>dismissInstall()</code>
                 </td>
             </tr>
 
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="25"
-                                    class="link-to-prism">src/app/features/ai/ai.component.ts:25</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="66"
+                                    class="link-to-prism">src/app/component/install-app-popup-component/install-app-popup-component.component.ts:66</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
+                        <div class="io-description"><p>Dismisses the install popup.</p>
+<p>Sets <code>showInstallButton</code> to false, hiding the popup from view.</p>
+</div>
 
                         <div class="io-description">
-                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="onClickinstallApp"></a>
+                    <span class="name">
+                        <span ><b>onClickinstallApp</b></span>
+                        <a href="#onClickinstallApp"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>onClickinstallApp()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="57"
+                                    class="link-to-prism">src/app/component/install-app-popup-component/install-app-popup-component.component.ts:57</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-description"><p>Handles the click event of the &quot;Install&quot; button.</p>
+<p>Emits the <code>installApp</code> event to notify the parent component
+that the installation process should be triggered.</p>
+</div>
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
 
                         </div>
                 </td>
@@ -365,41 +503,10 @@
         <tbody>
             <tr>
                 <td class="col-md-4">
-                    <a name="responseHtml"></a>
+                    <a name="appName"></a>
                     <span class="name">
-                        <span ><b>responseHtml</b></span>
-                        <a href="#responseHtml"><span class="icon ion-ios-link"></span></a>
-                    </span>
-                </td>
-            </tr>
-                <tr>
-                    <td class="col-md-4">
-                        <i>Type : </i>    <code>SafeHtml | null</code>
-
-                    </td>
-                </tr>
-                <tr>
-                    <td class="col-md-4">
-                        <i>Default value : </i><code>null</code>
-                    </td>
-                </tr>
-                    <tr>
-                        <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="18" class="link-to-prism">src/app/features/ai/ai.component.ts:18</a></div>
-                        </td>
-                    </tr>
-
-
-        </tbody>
-    </table>
-    <table class="table table-sm table-bordered">
-        <tbody>
-            <tr>
-                <td class="col-md-4">
-                    <a name="userInput"></a>
-                    <span class="name">
-                        <span ><b>userInput</b></span>
-                        <a href="#userInput"><span class="icon ion-ios-link"></span></a>
+                        <span ><b>appName</b></span>
+                        <a href="#appName"><span class="icon ion-ios-link"></span></a>
                     </span>
                 </td>
             </tr>
@@ -409,17 +516,19 @@
 
                     </td>
                 </tr>
-                <tr>
-                    <td class="col-md-4">
-                        <i>Default value : </i><code>&#x27;&#x27;</code>
-                    </td>
-                </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="17" class="link-to-prism">src/app/features/ai/ai.component.ts:17</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="32" class="link-to-prism">src/app/component/install-app-popup-component/install-app-popup-component.component.ts:32</a></div>
                         </td>
                     </tr>
 
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>The application name fetched from <code>ConfigService</code>.
+Displayed inside the popup UI.</p>
+</div>
+                </td>
+            </tr>
 
         </tbody>
     </table>
@@ -429,170 +538,105 @@
 
 
     <div class="tab-pane fade  tab-source-code" id="source">
-        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Component } from &#x27;@angular/core&#x27;;
-import { CommonModule } from &#x27;@angular/common&#x27;;
-import { FormsModule } from &#x27;@angular/forms&#x27;;
-import { HttpClientModule } from &#x27;@angular/common/http&#x27;;
-import { DomSanitizer, SafeHtml } from &#x27;@angular/platform-browser&#x27;;
-import { marked } from &#x27;marked&#x27;;
-import { GeminiApiService } from &#x27;../../service/gemini-api/gemini-api.service&#x27;;
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { CommonModule } from &#x27;@angular/common&#x27;;
+import { Component, EventEmitter, Input, Output } from &#x27;@angular/core&#x27;;
+import { ConfigService } from &#x27;../../service/util/config/config.service&#x27;;
 
+/**
+ * Component that displays a popup prompting the user to install the app as a PWA.
+ * 
+ * This component shows a modal with the app name and an install button when 
+ * &#x60;showInstallButton&#x60; is set to true. It uses the &#x60;ConfigService&#x60; to retrieve 
+ * the application name and emits an event when the user clicks install.
+ */
 @Component({
-  selector: &#x27;app-ai&#x27;,
+  selector: &#x27;app-install-app-popup-component&#x27;,
+  imports: [CommonModule],
+  templateUrl: &#x27;./install-app-popup-component.component.html&#x27;,
+  styleUrl: &#x27;./install-app-popup-component.component.css&#x27;,
   standalone: true,
-  imports: [CommonModule, FormsModule, HttpClientModule],
-  templateUrl: &#x27;./ai.component.html&#x27;,
-  styleUrl: &#x27;./ai.component.css&#x27;
 })
-export class AiComponent {
-  userInput &#x3D; &#x27;&#x27;;
-  responseHtml: SafeHtml | null &#x3D; null;
+export class InstallAppPopupComponentComponent {
 
-  constructor(
-    private geminiApi: GeminiApiService,
-    private sanitizer: DomSanitizer
-  ) { }
+  /**
+   * Controls the visibility of the install popup.
+   * 
+   * When set to true, the popup will be displayed.
+   */
+  @Input() showInstallButton: boolean &#x3D; false;
 
-  async send() {
-    const trimmedInput &#x3D; this.userInput.trim();
-    if (trimmedInput.length &lt; 2) {
-      this.userInput &#x3D; &#x27;&#x27;;
-      return;
-    }
+  /**
+   * The application name fetched from &#x60;ConfigService&#x60;.
+   * Displayed inside the popup UI.
+   */
+  appName: string;
 
-    const markdown &#x3D; await this.geminiApi.getResponse(trimmedInput);
-    const html &#x3D; await marked.parse(markdown);
-    this.responseHtml &#x3D; this.sanitizer.bypassSecurityTrustHtml(html);
+  /**
+   * Event emitted when the user clicks on the &quot;Install&quot; button.
+   * 
+   * The parent component can listen to this event to trigger
+   * the actual PWA installation flow.
+   */
+  @Output() installApp &#x3D; new EventEmitter&lt;void&gt;();
+
+  /**
+   * Creates an instance of the install popup component.
+   *
+   * @param configService Service to fetch configuration values such as the app name.
+   */
+  constructor(private configService: ConfigService) {
+    this.appName &#x3D; this.configService.getAppName();
+  }
+
+  /**
+   * Handles the click event of the &quot;Install&quot; button.
+   * 
+   * Emits the &#x60;installApp&#x60; event to notify the parent component
+   * that the installation process should be triggered.
+   */
+  onClickinstallApp() {
+    this.installApp.emit();
+  }
+
+  /**
+   * Dismisses the install popup.
+   * 
+   * Sets &#x60;showInstallButton&#x60; to false, hiding the popup from view.
+   */
+  dismissInstall() {
+    this.showInstallButton &#x3D; false;
   }
 }
-
-// for chat
-
-// import { Component } from &#x27;@angular/core&#x27;;
-// import { CommonModule } from &#x27;@angular/common&#x27;;
-// import { FormsModule } from &#x27;@angular/forms&#x27;;
-// import { HttpClientModule } from &#x27;@angular/common/http&#x27;;
-// import { GeminiApiService, ChatMessage } from &#x27;../../service/gemini-api/gemini-api.service&#x27;;
-// import { DomSanitizer, SafeHtml } from &#x27;@angular/platform-browser&#x27;;
-// import { marked } from &#x27;marked&#x27;;
-
-// @Component({
-//   selector: &#x27;app-ai&#x27;,
-//   standalone: true,
-//   imports: [CommonModule, FormsModule, HttpClientModule],
-//   templateUrl: &#x27;./ai.component.html&#x27;,
-//   styleUrl: &#x27;./ai.component.css&#x27;
-// })
-// export class AiComponent {
-//   userInput &#x3D; &#x27;&#x27;;
-//   messages: (ChatMessage &amp; { safeHtml?: SafeHtml })[] &#x3D; [];
-//   loading &#x3D; false;
-
-//   constructor(private geminiService: GeminiApiService, private sanitizer: DomSanitizer) {
-//     this.loadMessages();
-//   }
-
-//   async send() {
-//     const input &#x3D; this.userInput.trim();
-//     if (!input) return;
-
-//     this.loading &#x3D; true;
-//     this.userInput &#x3D; &#x27;&#x27;;
-
-//     await this.geminiService.sendMessage(input);
-//     this.loadMessages();
-
-//     this.loading &#x3D; false;
-//   }
-
-//   private async loadMessages() {
-//     const rawMessages &#x3D; this.geminiService.getHistory();
-//     const mapped &#x3D; await Promise.all(rawMessages.map(async msg &#x3D;&gt; {
-//       if (msg.role &#x3D;&#x3D;&#x3D; &#x27;model&#x27;) {
-//         const raw &#x3D; msg.parts[0].text;
-//         const html &#x3D; await marked.parse(raw); return {
-//           ...msg,
-//           safeHtml: this.sanitizer.bypassSecurityTrustHtml(html)
-//         };
-//       }
-//       return msg;
-//     }));
-
-//     this.messages &#x3D; mapped;
-//   }
-
-// }
-
-
 </code></pre>
     </div>
 
     <div class="tab-pane fade " id="templateData">
-        <pre class="line-numbers"><code class="language-html">&lt;section class&#x3D;&quot;section p-4 mb-4&quot;&gt;
-  &lt;div class&#x3D;&quot;transition-all duration-300 max-w-2xl mx-auto&quot;&gt;
-    &lt;div class&#x3D;&quot;sticky top-0 z-30 bg-[var(--color-bg)] py-2 pb-4&quot;&gt;
-      &lt;h2 class&#x3D;&quot;text-xl font-semibold mb-4 text-[var(--theme-color)] text-center&quot;&gt;💬 AI Assistant
-      &lt;/h2&gt;
-      &lt;!-- Chat-style Input Area --&gt;
-      &lt;div class&#x3D;&quot;flex gap-2 items-center&quot;&gt;
-        &lt;!-- Send Button with Icon --&gt;
+        <pre class="line-numbers"><code class="language-html">&lt;div *ngIf&#x3D;&quot;showInstallButton&quot; class&#x3D;&quot;fixed inset-0 bg-black bg-opacity-40 flex items-center justify-center z-[990]&quot;&gt;
+  &lt;div class&#x3D;&quot;bg-gray-900 text-white rounded-xl shadow-lg w-80 p-6 relative&quot;&gt;
+    &lt;!-- Close / Dismiss button --&gt;
+    &lt;button (click)&#x3D;&quot;dismissInstall()&quot;
+      class&#x3D;&quot;absolute top-2 right-3 text-[var(--color-gray-200)] hover:text-[var(--color-red)]&quot;&gt;✕&lt;/button&gt;
 
-        &lt;!-- Input Field --&gt;
-        &lt;input type&#x3D;&quot;text&quot; [(ngModel)]&#x3D;&quot;userInput&quot; placeholder&#x3D;&quot;Ask something related to your expenses...&quot;
-          class&#x3D;&quot;flex-1 px-4 py-2 rounded-lg border text-[var(--input-text)] bg-[var(--input-bg)] border-[var(--input-border)] focus:outline-none focus:ring-2 focus:ring-[var(--theme-color)] transition-all duration-200&quot; /&gt;
+    &lt;!-- Title --&gt;
+    &lt;h2 class&#x3D;&quot;text-lg font-bold mb-2 text-center&quot;&gt;Install {{ appName }}&lt;/h2&gt;
+    &lt;!-- Message --&gt;
+    &lt;p class&#x3D;&quot;text-sm text-[var(--color-gray-300)] text-center mb-4&quot;&gt;
+      Get a seamless experience and offline access by installing this app.
+    &lt;/p&gt;
 
-        &lt;button (click)&#x3D;&quot;send()&quot;
-          class&#x3D;&quot;shrink-0 bg-[var(--theme-color)] p-3 rounded-full shadow hover:scale-105 transition-transform duration-200&quot;
-          title&#x3D;&quot;Send&quot;&gt;
-          &lt;img src&#x3D;&quot;assets/img/icon/icons8-send-48.png&quot; alt&#x3D;&quot;Send&quot; class&#x3D;&quot;w-5 h-5&quot; style&#x3D;&quot;filter:invert(100%)&quot; /&gt;
-        &lt;/button&gt;
-      &lt;/div&gt;
-    &lt;/div&gt;
-    &lt;!-- AI Response Box --&gt;
-    &lt;div *ngIf&#x3D;&quot;responseHtml&quot; class&#x3D;&quot;mt-1 p-1 pb-4 bg-[var(--color-bg)] animate-fade-in overflow-auto&quot;
-      [innerHTML]&#x3D;&quot;responseHtml&quot;&gt;&lt;/div&gt;
-  &lt;/div&gt;
-&lt;/section&gt;
-
-
-
-
-
-&lt;!-- for chat --&gt;
-
-&lt;!-- &lt;section class&#x3D;&quot;p-4 section&quot;&gt;
-  &lt;div class&#x3D;&quot;p-4 max-w-xl mx-auto&quot;&gt;
-    &lt;div class&#x3D;&quot;space-y-4 mb-4&quot;&gt;
-      &lt;div *ngFor&#x3D;&quot;let msg of messages&quot;&gt;
-        &lt;div [ngClass]&#x3D;&quot;{
-          &#x27;text-right&#x27;: msg.role &#x3D;&#x3D;&#x3D; &#x27;user&#x27;,
-          &#x27;text-left&#x27;: msg.role &#x3D;&#x3D;&#x3D; &#x27;model&#x27;
-        }&quot;&gt;
-          &lt;div [ngClass]&#x3D;&quot;{
-            &#x27;bg-blue-100 text-blue-800&#x27;: msg.role &#x3D;&#x3D;&#x3D; &#x27;user&#x27;,
-            &#x27;bg-gray-100 text-gray-800&#x27;: msg.role &#x3D;&#x3D;&#x3D; &#x27;model&#x27;
-          }&quot; class&#x3D;&quot;inline-block px-4 py-2 rounded-lg max-w-full overflow-x-auto&quot;&gt;
-            &lt;ng-container *ngIf&#x3D;&quot;msg.role &#x3D;&#x3D;&#x3D; &#x27;user&#x27;; else markdownReply&quot;&gt;
-              {{ msg.parts[0].text }}
-            &lt;/ng-container&gt;
-            &lt;ng-template #markdownReply&gt;
-              &lt;div [innerHTML]&#x3D;&quot;msg.safeHtml&quot;&gt;&lt;/div&gt;
-            &lt;/ng-template&gt;
-          &lt;/div&gt;
-        &lt;/div&gt;
-      &lt;/div&gt;
-      &lt;div *ngIf&#x3D;&quot;loading&quot; class&#x3D;&quot;text-center text-gray-400&quot;&gt;Thinking...&lt;/div&gt;
-    &lt;/div&gt;
-
-    &lt;div class&#x3D;&quot;flex gap-2&quot;&gt;
-      &lt;input type&#x3D;&quot;text&quot; [(ngModel)]&#x3D;&quot;userInput&quot; placeholder&#x3D;&quot;Type your message...&quot; class&#x3D;&quot;w-full p-2 border rounded&quot;
-        (keydown.enter)&#x3D;&quot;send()&quot; /&gt;
-      &lt;button (click)&#x3D;&quot;send()&quot; class&#x3D;&quot;bg-blue-500 text-white px-4 py-2 rounded&quot; [disabled]&#x3D;&quot;loading&quot;&gt;
-        Send
+    &lt;!-- Buttons --&gt;
+    &lt;div class&#x3D;&quot;flex justify-center gap-3&quot;&gt;
+      &lt;button (click)&#x3D;&quot;onClickinstallApp()&quot;
+        class&#x3D;&quot;px-4 py-2 rounded-lg bg-[--color-accent] text-[--color-white] font-semibold  hover:bg-[var(--color-accent-600)]&quot;&gt;
+        Install
+      &lt;/button&gt;
+      &lt;button (click)&#x3D;&quot;dismissInstall()&quot;
+        class&#x3D;&quot;px-4 py-2 rounded-lg bg-[var(--color-gray-700)]  text-[var(--color-gray-300)] font-semibold hover:bg-[var(--color-gray-600)]&quot;&gt;
+        Dismiss
       &lt;/button&gt;
     &lt;/div&gt;
   &lt;/div&gt;
-&lt;/section&gt; --&gt;</code></pre>
+&lt;/div&gt;</code></pre>
     </div>
 
 
@@ -621,10 +665,10 @@ export class AiComponent {
 <script src="../js/libs/htmlparser.js"></script>
 <script src="../js/libs/deep-iterator.js"></script>
 <script>
-        var COMPONENT_TEMPLATE = '<div><section class="section p-4 mb-4">  <div class="transition-all duration-300 max-w-2xl mx-auto">    <div class="sticky top-0 z-30 bg-[var(--color-bg)] py-2 pb-4">      <h2 class="text-xl font-semibold mb-4 text-[var(--theme-color)] text-center">💬 AI Assistant      </h2>      <!-- Chat-style Input Area -->      <div class="flex gap-2 items-center">        <!-- Send Button with Icon -->        <!-- Input Field -->        <input type="text" [(ngModel)]="userInput" placeholder="Ask something related to your expenses..."          class="flex-1 px-4 py-2 rounded-lg border text-[var(--input-text)] bg-[var(--input-bg)] border-[var(--input-border)] focus:outline-none focus:ring-2 focus:ring-[var(--theme-color)] transition-all duration-200" />        <button (click)="send()"          class="shrink-0 bg-[var(--theme-color)] p-3 rounded-full shadow hover:scale-105 transition-transform duration-200"          title="Send">          <img src="assets/img/icon/icons8-send-48.png" alt="Send" class="w-5 h-5" style="filter:invert(100%)" />        </button>      </div>    </div>    <!-- AI Response Box -->    <div *ngIf="responseHtml" class="mt-1 p-1 pb-4 bg-[var(--color-bg)] animate-fade-in overflow-auto"      [innerHTML]="responseHtml"></div>  </div></section><!-- for chat --><!-- <section class="p-4 section">  <div class="p-4 max-w-xl mx-auto">    <div class="space-y-4 mb-4">      <div *ngFor="let msg of messages">        <div [ngClass]="{          \'text-right\': msg.role === \'user\',          \'text-left\': msg.role === \'model\'        }">          <div [ngClass]="{            \'bg-blue-100 text-blue-800\': msg.role === \'user\',            \'bg-gray-100 text-gray-800\': msg.role === \'model\'          }" class="inline-block px-4 py-2 rounded-lg max-w-full overflow-x-auto">            <ng-container *ngIf="msg.role === \'user\'; else markdownReply">              {{ msg.parts[0].text }}            </ng-container>            <ng-template #markdownReply>              <div [innerHTML]="msg.safeHtml"></div>            </ng-template>          </div>        </div>      </div>      <div *ngIf="loading" class="text-center text-gray-400">Thinking...</div>    </div>    <div class="flex gap-2">      <input type="text" [(ngModel)]="userInput" placeholder="Type your message..." class="w-full p-2 border rounded"        (keydown.enter)="send()" />      <button (click)="send()" class="bg-blue-500 text-white px-4 py-2 rounded" [disabled]="loading">        Send      </button>    </div>  </div></section> --></div>'
+        var COMPONENT_TEMPLATE = '<div><div *ngIf="showInstallButton" class="fixed inset-0 bg-black bg-opacity-40 flex items-center justify-center z-[990]">  <div class="bg-gray-900 text-white rounded-xl shadow-lg w-80 p-6 relative">    <!-- Close / Dismiss button -->    <button (click)="dismissInstall()"      class="absolute top-2 right-3 text-[var(--color-gray-200)] hover:text-[var(--color-red)]">✕</button>    <!-- Title -->    <h2 class="text-lg font-bold mb-2 text-center">Install {{ appName }}</h2>    <!-- Message -->    <p class="text-sm text-[var(--color-gray-300)] text-center mb-4">      Get a seamless experience and offline access by installing this app.    </p>    <!-- Buttons -->    <div class="flex justify-center gap-3">      <button (click)="onClickinstallApp()"        class="px-4 py-2 rounded-lg bg-[--color-accent] text-[--color-white] font-semibold  hover:bg-[var(--color-accent-600)]">        Install      </button>      <button (click)="dismissInstall()"        class="px-4 py-2 rounded-lg bg-[var(--color-gray-700)]  text-[var(--color-gray-300)] font-semibold hover:bg-[var(--color-gray-600)]">        Dismiss      </button>    </div>  </div></div></div>'
     var COMPONENTS = [{'name': 'AddExpenseComponent', 'selector': 'app-add-expense'},{'name': 'AiComponent', 'selector': 'app-ai'},{'name': 'AnalysisComponent', 'selector': 'app-analysis'},{'name': 'AppComponent', 'selector': 'app-root'},{'name': 'BudgetComponent', 'selector': 'app-budget'},{'name': 'CalendarComponent', 'selector': 'app-calendar'},{'name': 'CategoryDropdownComponent', 'selector': 'app-category-dropdown'},{'name': 'CustomModalComponent', 'selector': 'app-custom-modal'},{'name': 'DownloadComponentComponent', 'selector': 'app-download-component'},{'name': 'ExpenseDetailsModalComponent', 'selector': 'app-expense-details-modal'},{'name': 'ExpenseListComponent', 'selector': 'app-expense-list'},{'name': 'FooterComponent', 'selector': 'app-footer'},{'name': 'FormModelComponent', 'selector': 'app-form-model'},{'name': 'GlobalLoaderComponent', 'selector': 'app-global-loader'},{'name': 'GraphsComponent', 'selector': 'app-graphs'},{'name': 'HamburgerMenuComponent', 'selector': 'app-hamburger-menu'},{'name': 'HomeComponent', 'selector': 'app-home'},{'name': 'InfoIconComponent', 'selector': 'app-info-icon'},{'name': 'InstallAppPopupComponentComponent', 'selector': 'app-install-app-popup-component'},{'name': 'ListExpensesComponent', 'selector': 'app-list-expenses'},{'name': 'MusicComponent', 'selector': 'app-music'},{'name': 'NavbarComponent', 'selector': 'app-navbar'},{'name': 'PieChartComponent', 'selector': 'app-pie-chart'},{'name': 'SearchButtonComponent', 'selector': 'app-search-button'},{'name': 'SearchComponent', 'selector': 'app-search'},{'name': 'SettingItemComponent', 'selector': 'app-setting-item'},{'name': 'SettingsComponent', 'selector': 'app-settings'},{'name': 'SidebarComponent', 'selector': 'app-sidebar'},{'name': 'TemplatePlaygroundComponent', 'selector': 'template-playground-root'},{'name': 'ToastComponent', 'selector': 'app-toast'}];
     var DIRECTIVES = [];
-    var ACTUAL_COMPONENT = {'name': 'AiComponent'};
+    var ACTUAL_COMPONENT = {'name': 'InstallAppPopupComponentComponent'};
 </script>
 <script src="../js/tree.js"></script>
 
@@ -670,7 +714,7 @@ export class AiComponent {
        <script>
             var COMPODOC_CURRENT_PAGE_DEPTH = 1;
             var COMPODOC_CURRENT_PAGE_CONTEXT = 'component';
-            var COMPODOC_CURRENT_PAGE_URL = 'AiComponent.html';
+            var COMPODOC_CURRENT_PAGE_URL = 'InstallAppPopupComponentComponent.html';
             var MAX_SEARCH_RESULTS = 15;
        </script>
 

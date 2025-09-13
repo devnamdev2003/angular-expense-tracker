@@ -3,6 +3,9 @@
  * Use this file during development. It will be replaced by `environment.prod.ts` during build.
  */
 export const environment = {
+
+  /** Name of the application. */
+  appName: 'ExpenseWise',
   /**
    * Flag to indicate if the app is running in production mode.
    * Set to true in the production environment.
@@ -19,11 +22,11 @@ export const environment = {
    * Current environment type.
    * Possible values: 'local', 'live'
    */
-  developmentEnvironment: 'live', // Change to 'live' for production or 'local' for local development
+  developmentEnvironment: 'local', // Change to 'live' for production or 'local' for local development
 
   /**
    * Application version.
    * This should be updated with each release to track application versions.
    */
-  applicationVersion: '25.9.10', // Current application version
+  applicationVersion: '25.9.13', // Current application version
 };

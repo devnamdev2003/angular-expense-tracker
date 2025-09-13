@@ -3,7 +3,6 @@ import { environment } from '../../../../environments/environments';
 
 /**
  * Service responsible for providing configuration values across the application,
- * such as API base URLs based on the current environment (local or live).
  */
 @Injectable({
   providedIn: 'root'
@@ -11,18 +10,30 @@ import { environment } from '../../../../environments/environments';
 export class ConfigService {
 
   /**
-   * The current environment setting.
-   * Possible values: 'local' | 'live'.
-   * Change this value to switch API endpoints.
+   * The current environment setting taken from environment configuration.
+   * 
+   * Possible values:
+   * - `"local"` → Uses localhost API endpoint.
+   * - `"live"` → Uses production API endpoint.
    */
   private readonly developmentEnvironment: string = environment.developmentEnvironment;
+
+  /** 
+   * The application name, retrieved from environment settings. 
+   */
+  private readonly appName: string = environment.appName;
+
   /**
    * Creates an instance of ConfigService.
    */
   constructor() { }
 
   /**
-   * Returns the appropriate API base URL based on the development environment.
+   * Returns the appropriate API base URL depending on the environment.
+   *
+   * - `"local"` → `http://localhost:8000`
+   * - `"live"` → `https://exwiseapi.onrender.com`
+   * - Any other value defaults to `"local"`
    *
    * @returns {string} The API base URL for the current environment.
    */
@@ -36,5 +47,14 @@ export class ConfigService {
     else {
       return "http://localhost:8000";
     }
+  }
+
+  /**
+   * Returns the application name defined in environment settings.
+   *
+   * @returns {string} The application name.
+   */
+  getAppName(): string {
+    return this.appName;
   }
 }

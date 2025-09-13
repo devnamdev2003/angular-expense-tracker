@@ -1,5 +1,7 @@
 <main class="main">
   <app-global-loader></app-global-loader>
+  <app-install-app-popup-component [showInstallButton]="showInstallButton"
+    (installApp)="installApp()"></app-install-app-popup-component>
   <div *ngIf="isExpenseRoute" class="expense">
     <app-navbar></app-navbar>
     <div class="flex pt-14 pb-9 h-screen overflow-hidden">

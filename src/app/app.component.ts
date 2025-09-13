@@ -19,6 +19,7 @@ import { BudgetComponent } from './features/budget/budget.component';
 import { AnalysisComponent } from './features/analysis/analysis.component';
 import { AiComponent } from './features/ai/ai.component';
 import { MusicComponent } from './features/music/music.component';
+import { InstallAppPopupComponentComponent } from './component/install-app-popup-component/install-app-popup-component.component';
 
 import { StorageService } from './service/localStorage/storage.service';
 import { UserService } from './service/localStorage/user.service';
@@ -39,7 +40,7 @@ import { ToastService } from './service/toast/toast.service';
     NavbarComponent, SidebarComponent, FooterComponent, ToastComponent,
     GlobalLoaderComponent, CommonModule, AddExpenseComponent, SearchComponent,
     SettingsComponent, ListExpensesComponent, HomeComponent, BudgetComponent,
-    AnalysisComponent, CalendarComponent, AiComponent, MusicComponent
+    AnalysisComponent, CalendarComponent, AiComponent, MusicComponent, InstallAppPopupComponentComponent
   ],
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
@@ -65,6 +66,16 @@ export class AppComponent {
    * Boolean indicating whether the current route is the music page.
    */
   isMusicRoute = false;
+
+  /**
+   *  PWA installation prompt event
+   */
+  deferredPrompt: any;
+
+  /**
+   *  Flag to control the display of the installation prompt
+   */
+  showInstallButton = false;
 
   /**
    * Constructor for AppComponent.
@@ -148,6 +159,13 @@ export class AppComponent {
           this.toastService.show('🚀 Update available! Please update from ⚙️ Settings.', 'info', 5000);
         }, 500);
       }
+
+      // Listen for PWA installation prompt
+      window.addEventListener('beforeinstallprompt', (event: any) => {
+        event.preventDefault();
+        this.deferredPrompt = event;
+        this.showInstallButton = true;
+      });
     }
   }
 
@@ -187,5 +205,23 @@ export class AppComponent {
    */
   isAppUpdated(): boolean {
     return this.userService.getValue<boolean>('is_app_updated') ?? false;
+  }
+
+  /**
+   * Triggers the PWA installation prompt if available.
+   */
+  installApp() {
+    if (this.deferredPrompt) {
+      this.deferredPrompt.prompt();
+      this.deferredPrompt.userChoice.then((choiceResult: any) => {
+        if (choiceResult.outcome === 'accepted') {
+          this.showInstallButton = false;
+          console.log('User accepted the install prompt');
+        } else {
+          console.log('User dismissed the install prompt');
+        }
+        this.deferredPrompt = null;
+      });
+    }
   }
 }

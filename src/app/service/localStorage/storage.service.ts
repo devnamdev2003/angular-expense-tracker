@@ -69,7 +69,7 @@ export class StorageService {
             theme_mode: "dark",
             currency: "₹",
             app_version: "0",
-            is_app_updated: false
+            is_app_updated: true
         };
 
         return this.syncUser(this.userKey, userSchema);
