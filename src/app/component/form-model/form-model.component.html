@@ -1,11 +1,22 @@
-<div class="fixed inset-0 bg-black bg-opacity-40 z-50 flex items-center justify-center">
-    <div class="bg-[var(--color-bg)] p-6 rounded-xl w-11/12 md:w-1/2 max-h-[70vh] flex flex-col shadow-xl">
-        <div class="flex justify-between items-center mb-3">
+<div class="fixed inset-0 bg-black bg-opacity-40 flex items-center justify-center" [ngStyle]="{ 'z-index': '99'}">
+    <div class="bg-[var(--color-bg)] p-6 rounded-xl w-11/12 md:w-1/2 flex flex-col shadow-xl relative">
+
+        <!-- Header with dynamic text alignment -->
+        <div class="mb-3" [ngClass]="{
+        'text-left': labelAlignment === 'left',
+        'text-center': labelAlignment === 'center',
+        'text-right': labelAlignment === 'right'
+    }">
             <h2 class="text-lg font-bold text-[var(--color-text)]">
                 {{ label }}
             </h2>
-            <button (click)="closeModel()" class="text-[var(--color-red)] font-bold text-xl">&times;</button>
         </div>
+
+        <!-- Close Button (absolute top-right) -->
+        <button (click)="closeModel()" class="absolute top-4 right-4 text-[var(--color-red)] font-bold text-xl">
+            &times;
+        </button>
+
         <ng-content></ng-content>
     </div>
 </div>

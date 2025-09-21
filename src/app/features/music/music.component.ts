@@ -4,6 +4,7 @@ import { FormsModule } from '@angular/forms';
 import { SaavnService } from '../../service/saavan-api/saavan.service';
 import { ConfigService } from '../../service/config/config.service';
 import { isPlatformBrowser } from '@angular/common';
+import { FormModelComponent } from '../../component/form-model/form-model.component';
 
 /**
  * Component to search, play, and suggest songs using Saavn API and AI suggestions.
@@ -17,7 +18,7 @@ import { isPlatformBrowser } from '@angular/common';
 @Component({
   selector: 'app-music',
   standalone: true,
-  imports: [CommonModule, FormsModule],
+  imports: [CommonModule, FormsModule, FormModelComponent],
   templateUrl: './music.component.html',
   styleUrls: ['./music.component.css']
 })
@@ -258,4 +259,18 @@ export class MusicComponent implements OnDestroy {
       console.error('Download failed:', err);
     }
   }
+
+  /** Flag to show/hide the player modal */
+  showPlayerModal = false;
+
+  /** Open the player modal */
+  openPlayerModal() {
+    this.showPlayerModal = true;
+  }
+
+  /** Close the player modal */
+  closePlayerModal() {
+    this.showPlayerModal = false;
+  }
+
 }

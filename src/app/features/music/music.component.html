@@ -41,18 +41,17 @@
 
 <!-- Bottom Audio Bar -->
 <div *ngIf="currentSong"
-  class="max-w-xl mx-auto fixed bottom-0 left-0 right-0 shadow-lg py-4 px-2 flex items-center gap-4 z-20"
-  [ngStyle]="{'background-color': 'var(--color-surface)', 'color': 'var(--color-text)', 'z-index': '99'}">
+  class="max-w-xl mx-auto fixed bottom-0 left-0 right-0 shadow-lg py-4 px-2 flex items-center gap-4 cursor-pointer"
+  [ngStyle]="{'background-color': 'var(--color-surface)', 'color': 'var(--color-text)', 'z-index': '70'}">
 
   <!-- Song Image -->
-  <img [src]="currentSong.image?.[2]?.url || 'https://via.placeholder.com/50'" alt="Cover"
+  <img (click)="openPlayerModal()" [src]="currentSong.image?.[2]?.url || 'https://via.placeholder.com/50'" alt="Cover"
     class="w-12 h-12 rounded-md shadow-md shrink-0" />
 
   <!-- Song Info + Progress -->
   <div class="flex-1 flex flex-col overflow-hidden">
-    <!-- Top Row: Title + Artist + Time + Play -->
     <div class="flex items-center justify-between gap-2">
-      <div class="overflow-hidden">
+      <div class="overflow-hidden" (click)="openPlayerModal()">
         <div class="font-medium truncate">{{ currentSong.name }}</div>
         <div class="text-sm text-gray-500 dark:text-gray-400 truncate">
           {{ currentSong.artists.primary[0]?.name || 'Unknown Artist' }}
@@ -65,7 +64,7 @@
         </div>
 
         <!-- Play/Pause Button -->
-        <button (click)="playSong(currentSong.url, currentSong)"
+        <button (click)="playSong(currentSong.url, currentSong); $event.stopPropagation();"
           class="w-8 h-8 flex items-center justify-center rounded-full hover:bg-[var(--list-hover)] active:scale-90 transition-transform">
           <img
             [src]="audio?.paused ? 'assets/img/music_icon/icons8-play-50.png' : 'assets/img/music_icon/icons8-pause-50.png'"
@@ -75,7 +74,7 @@
         </button>
 
         <!-- Like Button -->
-        <button (click)="toggleLike()"
+        <button (click)="toggleLike(); $event.stopPropagation();"
           class="w-8 h-8 flex items-center justify-center rounded-full hover:bg-[var(--list-hover)] active:scale-90 transition-transform">
           <img
             [src]="isLiked() ? 'assets/img/music_icon/icons8-love-fill-48.png' : 'assets/img/music_icon/icons8-love-48.png'"
@@ -83,9 +82,10 @@
             [style]="isLiked() ? 'filter: var(--icon-color1);' : 'filter: var(--icon-color2);'" />
         </button>
 
-        <button (click)="downloadSong(currentSong)"
+        <!-- Download Button -->
+        <button (click)="downloadSong(currentSong); $event.stopPropagation();"
           class="w-8 h-8 flex items-center justify-center rounded-full hover:bg-[var(--list-hover)] active:scale-90 transition-transform">
-          <img src="assets/img/music_icon/icons8-download-48.png" alt="Download" 
+          <img src="assets/img/music_icon/icons8-download-48.png" alt="Download"
             class="w-6 h-6 object-contain transition-transform duration-300 ease-in-out"
             style="filter: var(--icon-color2);" />
         </button>
@@ -93,7 +93,8 @@
     </div>
 
     <!-- Progress Bar -->
-    <input type="range" min="0" [max]="duration()" [value]="progress()" (input)="onSeek($event)"
+    <input type="range" min="0" [max]="duration()" [value]="progress()"
+      (input)="onSeek($event); $event.stopPropagation();"
       class="w-full mt-2 mb-2 h-1 rounded accent-[var(--theme-color)] cursor-pointer"
       [ngStyle]="{'background-color': 'var(--input-border)', 'accent-color': 'var(--theme-color)'}" />
   </div>
@@ -102,3 +103,61 @@
 <footer class="fixed bottom-0 left-0 w-full bg-[var(--color-surface)] text-center text-sm py-2 z-50 text-muted">
   © 2025 exwise. All rights reserved. v{{appVersion}}
 </footer>
+
+<app-form-model *ngIf="showPlayerModal" [label]="''" (close)="closePlayerModal()"
+  [labelAlignment]="'center'">
+
+  <div
+    class="flex flex-col items-center justify-between w-full bg-[var(--color-bg)] rounded-2xl shadow-xl max-w-md mx-auto"
+    [ngStyle]="{'z-index': '199'}">
+    <!-- Cover Image -->
+    <img [src]="currentSong.image?.[2]?.url || 'https://via.placeholder.com/200'"
+      class="w-48 h-48 md:w-56 md:h-56 rounded-2xl shadow-lg object-cover mb-5" />
+
+    <!-- Song Info -->
+    <div class="text-center mb-6 w-full">
+      <h2 class="text-xl md:text-2xl font-semibold text-[var(--color-text)] truncate">
+        {{ currentSong.name }}
+      </h2>
+      <p class="text-sm text-gray-500 dark:text-gray-400 truncate mt-1">
+        {{ currentSong.artists.primary[0]?.name || 'Unknown Artist' }}
+      </p>
+    </div>
+
+    <!-- Progress Bar + Time -->
+    <div class="w-full mb-4">
+      <input type="range" min="0" [max]="duration()" [value]="progress()" (input)="onSeek($event)"
+        class="w-full h-2 rounded-lg accent-[var(--theme-color)] cursor-pointer" />
+      <div class="flex justify-between text-xs text-gray-500 dark:text-gray-400 mt-1 px-1">
+        <span>{{ formatTime(progress()) }}</span>
+        <span>{{ formatTime(duration()) }}</span>
+      </div>
+    </div>
+
+    <!-- Controls -->
+    <div class="flex items-center justify-center gap-10 mt-2">
+      <!-- Like -->
+      <button (click)="toggleLike()" class="hover:scale-110 transition-transform">
+        <img [src]="isLiked()
+          ? 'assets/img/music_icon/icons8-love-fill-48.png'
+          : 'assets/img/music_icon/icons8-love-48.png'" class="w-8 h-8"
+          [style]="isLiked() ? 'filter: var(--icon-color1);' : 'filter: var(--icon-color2);'" />
+      </button>
+
+      <!-- Play/Pause (emphasized) -->
+      <button (click)="playSong(currentSong.url, currentSong)"
+        class="bg-[var(--theme-color)] p-4 rounded-full shadow-md hover:scale-110 transition-transform">
+        <img [src]="audio?.paused
+          ? 'assets/img/music_icon/icons8-play-50.png'
+          : 'assets/img/music_icon/icons8-pause-50.png'" class="w-8 h-8" style="filter: var(--icon-color2);" />
+      </button>
+
+      <!-- Download -->
+      <button (click)="downloadSong(currentSong)" class="hover:scale-110 transition-transform">
+        <img src="assets/img/music_icon/icons8-download-48.png" alt="Download"
+          class="w-6 h-6 object-contain transition-transform duration-300 ease-in-out"
+          style="filter: var(--icon-color2);" />
+      </button>
+    </div>
+  </div>
+</app-form-model>

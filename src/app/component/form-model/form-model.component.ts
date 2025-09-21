@@ -1,3 +1,4 @@
+import { CommonModule } from '@angular/common';
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 
 /**
@@ -8,7 +9,7 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
  */
 @Component({
   selector: 'app-form-model',
-  imports: [],
+  imports: [CommonModule],
   templateUrl: './form-model.component.html',
   styleUrl: './form-model.component.css'
 })
@@ -19,7 +20,13 @@ export class FormModelComponent {
    * 
    * This property should be provided by the parent component.
    */
-  @Input() label!: string;
+  @Input() label: string = '';
+
+  /** Alignment of the label text: 'left', 'center', or 'right'.
+   * 
+   * Default is 'left'.
+   */
+  @Input() labelAlignment: 'left' | 'center' | 'right' = 'left';
 
   /**
    * Event emitted when the modal is closed.
