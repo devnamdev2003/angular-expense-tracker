@@ -224,7 +224,7 @@ export class MusicComponent implements OnDestroy {
   }
 
   /** Toggles the like status of a song */
-  toggleLike(song: any) {
+  toggleLike() {
     if (this.isCurrentSongLiked) {
       this.isCurrentSongLiked = false;
     } else {
@@ -233,20 +233,29 @@ export class MusicComponent implements OnDestroy {
   }
 
   /** Checks if a song is liked */
-  isLiked(song: any): boolean {
+  isLiked(): boolean {
     return this.isCurrentSongLiked;
   }
 
-  downloadSong(song: any) {
+  /** Downloads a song */
+  async downloadSong(song: any) {
     if (!song?.url) return;
 
-    const link = document.createElement('a');
-    link.href = song.url;
-    link.download = `${song.name}.mp3`;
-    document.body.appendChild(link);
-    link.click();
-    document.body.removeChild(link);
+    try {
+      const res = await fetch(song.url);
+      if (!res.ok) throw new Error('Failed to fetch song');
+
+      const blob = await res.blob(); // Convert response to Blob
+      const link = document.createElement('a');
+      link.href = URL.createObjectURL(blob);
+      link.download = `${song.name || 'song'}.mp3`;
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+      URL.revokeObjectURL(link.href);
+
+    } catch (err) {
+      console.error('Download failed:', err);
+    }
   }
-
-
 }

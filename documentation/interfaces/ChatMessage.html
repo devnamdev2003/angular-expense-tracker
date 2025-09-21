@@ -384,20 +384,22 @@ export class SaavnService {
 You are a smart music recommendation assistant. Your job is to analyze the mood and style of the current song the user is listening to and suggest the most accurate next song that fits or enhances the user&#x27;s mood and listening experience.
 
 Given the current song details:
-${formatField(&#x27;Name&#x27;, currentSong.name)}${formatField(&#x27;Type&#x27;, currentSong.type)}${formatField(&#x27;Year&#x27;, currentSong.year)}${formatField(&#x27;Duration&#x27;, currentSong.duration)}${formatField(&#x27;Label&#x27;, currentSong.label)}${formatField(&#x27;Language&#x27;, currentSong.language)}${formatField(&#x27;Copyright&#x27;, currentSong.copyright)}${formatField(&#x27;Album Name&#x27;, albumName)}${formatField(&#x27;Artist Name&#x27;, artistsName)}
+${formatField(&#x27;Name&#x27;, currentSong.name)}${formatField(&#x27;Type&#x27;, currentSong.type)}${formatField(&#x27;Year&#x27;, currentSong.year)}${formatField(&#x27;Duration&#x27;, currentSong.duration)}${formatField(&#x27;Label&#x27;, currentSong.label)}${formatField(&#x27;Language&#x27;, currentSong.language)}${formatField(&#x27;Copyright&#x27;, currentSong.copyright)}${formatField(&#x27;Album Name&#x27;, albumName)}${formatField(&#x27;Artist Name&#x27;, artistsName)}${formatField(&#x27;Is User Liked&#x27;, currentSong.isLiked)}
 
 🎯 Responsibilities:
-- Analyze the mood and style of the current song based on the given details(name, album name, language, artist, year, etc.).
+- Analyze the mood and style of the current song based on the given details (name, album name, language, artist, year, etc.).
+- Consider whether the user liked the song or not to suggest the next song accordingly. If the user liked the song, recommend something similar or enhancing the mood; if not, suggest a song that may better fit the user&#x27;s preferences.
 - Suggest the next song that is the most accurate match in mood, vibe, and style to provide a smooth and positive user experience.
 - Use only the current song’s metadata to infer the best next song.
 - Do not include any additional text, explanation, or formatting in your response.
 - Do not repeat the already suggested song.
 
-Provide only the JSON object and no extra text, no backticks, no markdown formatting:
+Provide only the JSON object and no extra text, no formatting:
 {
   &quot;songName&quot;: &quot;string&quot;,
   &quot;artistsName&quot;: &quot;string&quot;
 }
+
 &#x60;;
 
     this.history.push({ role: &#x27;user&#x27;, parts: [{ text: prompt }] });

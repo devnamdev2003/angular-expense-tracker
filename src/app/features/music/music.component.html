@@ -75,17 +75,17 @@
         </button>
 
         <!-- Like Button -->
-        <button (click)="toggleLike(currentSong)"
+        <button (click)="toggleLike()"
           class="w-8 h-8 flex items-center justify-center rounded-full hover:bg-[var(--list-hover)] active:scale-90 transition-transform">
           <img
-            [src]="isLiked(currentSong) ? 'assets/img/music_icon/icons8-love-fill-48.png' : 'assets/img/music_icon/icons8-love-48.png'"
+            [src]="isLiked() ? 'assets/img/music_icon/icons8-love-fill-48.png' : 'assets/img/music_icon/icons8-love-48.png'"
             alt="Like" class="w-6 h-6 object-contain transition-transform duration-300 ease-in-out"
-            style="filter: var(--icon-color2);" />
+            [style]="isLiked() ? 'filter: var(--icon-color1);' : 'filter: var(--icon-color2);'" />
         </button>
 
         <button (click)="downloadSong(currentSong)"
           class="w-8 h-8 flex items-center justify-center rounded-full hover:bg-[var(--list-hover)] active:scale-90 transition-transform">
-          <img src="assets/img/music_icon/icons8-download-48.png" alt="Download"
+          <img src="assets/img/music_icon/icons8-download-48.png" alt="Download" 
             class="w-6 h-6 object-contain transition-transform duration-300 ease-in-out"
             style="filter: var(--icon-color2);" />
         </button>
