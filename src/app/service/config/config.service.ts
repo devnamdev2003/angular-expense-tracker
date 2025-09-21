@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { environment } from '../../../../environments/environments';
+import { environment } from '../../../environments/environments';
 
 /**
  * Service responsible for providing configuration values across the application,
@@ -24,6 +24,25 @@ export class ConfigService {
   private readonly appName: string = environment.appName;
 
   /**
+   * Stores the application version from the environment file.
+   */
+  private readonly version: string = environment.applicationVersion;
+
+  /**
+   * The production (live) API base URL.
+   *
+   * Example: `https://exwiseapi.onrender.com`
+   */
+  private readonly liveAPIUrl: string = environment.liveAPIUrl;
+
+  /**
+   * The local development API base URL.
+   *
+   * Example: `http://localhost:8000`
+   */
+  private readonly localAPIUrl: string = environment.localAPIUrl;
+
+  /**
    * Creates an instance of ConfigService.
    */
   constructor() { }
@@ -41,19 +60,19 @@ export class ConfigService {
    */
   getapiUrl(): string {
     if (this.developmentEnvironment === "local") {
-      return "http://localhost:8000";
+      return this.localAPIUrl;
     }
     else if (this.developmentEnvironment === "live") {
-      return "https://exwiseapi.onrender.com";
+      return this.liveAPIUrl;
     }
     else {
       if (window.location.href.includes("localhost")) {
-        return "http://localhost:8000";
+        return this.localAPIUrl;
       }
       else if (window.location.href.includes("exwise")) {
-        return "https://exwiseapi.onrender.com";
+        return this.liveAPIUrl;
       }
-      return "http://localhost:8000";
+      return this.localAPIUrl;
     }
   }
 
@@ -64,5 +83,14 @@ export class ConfigService {
    */
   getAppName(): string {
     return this.appName;
+  }
+
+  /**
+   * Returns the current application version.
+   * 
+   * @returns A string representing the app version
+   */
+  getVersion(): string {
+    return this.version;
   }
 }

@@ -2,7 +2,7 @@ import { Component, signal, effect, OnDestroy } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { SaavnService } from '../../service/saavan-api/saavan.service';
-import { AppVersionService } from '../../service/util/app-version/app-version.service';
+import { ConfigService } from '../../service/config/config.service';
 
 @Component({
   selector: 'app-music',
@@ -21,8 +21,8 @@ export class MusicComponent implements OnDestroy {
   interval: any = null;
   appVersion: string;
 
-  constructor(private saavnService: SaavnService, private appVersionService: AppVersionService) { 
-    this.appVersion = this.appVersionService.getVersion();
+  constructor(private saavnService: SaavnService, private configService: ConfigService) { 
+    this.appVersion = this.configService.getVersion();
   }
   searchSong() {
     const q = this.query.trim();

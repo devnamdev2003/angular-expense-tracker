@@ -31,4 +31,18 @@ export const environment = {
    * This should be updated with each release to track application versions.
    */
   applicationVersion: '25.9.13', // Current application version
+
+  /**
+   * The production (live) API base URL.
+   *
+   * Example: `https://exwiseapi.onrender.com`
+   */
+  liveAPIUrl: "https://exwiseapi.onrender.com",
+
+  /**
+   * The local development API base URL.
+   *
+   * Example: `http://localhost:8000`
+   */
+  localAPIUrl: "http://localhost:8000"
 };

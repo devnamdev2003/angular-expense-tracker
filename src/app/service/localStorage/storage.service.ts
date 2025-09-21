@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Categories } from './data/categories';
-import { AppVersionService } from '../util/app-version/app-version.service';
+import { ConfigService } from '../config/config.service';
 
 interface Schema {
     [key: string]: any;
@@ -10,7 +10,7 @@ interface Schema {
     providedIn: 'root',
 })
 export class StorageService {
-    constructor(private appVersionService: AppVersionService) {
+    constructor(private configService: ConfigService) {
     }
 
     private readonly categoryKey = 'categories';
@@ -129,7 +129,7 @@ export class StorageService {
         schemaKeys.forEach((key: string) => {
             syncedSettings[key] = key in savedSettings ? savedSettings[key] : defaultSchema[key];
         });
-        syncedSettings['app_version'] = this.appVersionService.getVersion();
+        syncedSettings['app_version'] = this.configService.getVersion();
 
         localStorage.setItem(this.userKey, JSON.stringify(syncedSettings));
     }

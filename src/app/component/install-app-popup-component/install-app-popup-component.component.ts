@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { Component, EventEmitter, Input, Output } from '@angular/core';
-import { ConfigService } from '../../service/util/config/config.service';
+import { ConfigService } from '../../service/config/config.service';
 
 /**
  * Component that displays a popup prompting the user to install the app as a PWA.

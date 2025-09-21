@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { take } from 'rxjs/operators';
-import { ConfigService } from '../../util/config/config.service';
+import { ConfigService } from '../../config/config.service';
 import { StorageService } from '../../localStorage/storage.service';
 import { UserService } from '../../localStorage/user.service';
 import { ToastService } from '../../toast/toast.service';
