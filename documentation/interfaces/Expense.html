@@ -144,6 +144,13 @@
         </p>
 
 
+            <p class="comment">
+                <h3>Description</h3>
+            </p>
+            <p class="comment">
+                <p>Expense data</p>
+
+            </p>
 
 
         <section data-compodoc="block-index">
@@ -275,6 +282,12 @@
 
 
 
+                            <tr>
+                                <td class="col-md-4">
+                                    <div class="io-description"><p>Expense details</p>
+</div>
+                                </td>
+                            </tr>
                         </tbody>
                     </table>
                     <table class="table table-sm table-bordered">
@@ -308,6 +321,12 @@
 
 
 
+                            <tr>
+                                <td class="col-md-4">
+                                    <div class="io-description"><p>Category color</p>
+</div>
+                                </td>
+                            </tr>
                         </tbody>
                     </table>
                     <table class="table table-sm table-bordered">
@@ -341,6 +360,12 @@
 
 
 
+                            <tr>
+                                <td class="col-md-4">
+                                    <div class="io-description"><p>Category icon</p>
+</div>
+                                </td>
+                            </tr>
                         </tbody>
                     </table>
                     <table class="table table-sm table-bordered">
@@ -374,6 +399,12 @@
 
 
 
+                            <tr>
+                                <td class="col-md-4">
+                                    <div class="io-description"><p>Category ID</p>
+</div>
+                                </td>
+                            </tr>
                         </tbody>
                     </table>
                     <table class="table table-sm table-bordered">
@@ -407,6 +438,12 @@
 
 
 
+                            <tr>
+                                <td class="col-md-4">
+                                    <div class="io-description"><p>Category name</p>
+</div>
+                                </td>
+                            </tr>
                         </tbody>
                     </table>
                     <table class="table table-sm table-bordered">
@@ -440,6 +477,12 @@
 
 
 
+                            <tr>
+                                <td class="col-md-4">
+                                    <div class="io-description"><p>Date in YYYY-MM-DD format</p>
+</div>
+                                </td>
+                            </tr>
                         </tbody>
                     </table>
                     <table class="table table-sm table-bordered">
@@ -473,6 +516,12 @@
 
 
 
+                            <tr>
+                                <td class="col-md-4">
+                                    <div class="io-description"><p>Unique identifier</p>
+</div>
+                                </td>
+                            </tr>
                         </tbody>
                     </table>
                     <table class="table table-sm table-bordered">
@@ -511,6 +560,12 @@
 
 
 
+                            <tr>
+                                <td class="col-md-4">
+                                    <div class="io-description"><p>Is extra spending</p>
+</div>
+                                </td>
+                            </tr>
                         </tbody>
                     </table>
                     <table class="table table-sm table-bordered">
@@ -549,6 +604,12 @@
 
 
 
+                            <tr>
+                                <td class="col-md-4">
+                                    <div class="io-description"><p>Location</p>
+</div>
+                                </td>
+                            </tr>
                         </tbody>
                     </table>
                     <table class="table table-sm table-bordered">
@@ -587,6 +648,12 @@
 
 
 
+                            <tr>
+                                <td class="col-md-4">
+                                    <div class="io-description"><p>Note</p>
+</div>
+                                </td>
+                            </tr>
                         </tbody>
                     </table>
                     <table class="table table-sm table-bordered">
@@ -620,6 +687,12 @@
 
 
 
+                            <tr>
+                                <td class="col-md-4">
+                                    <div class="io-description"><p>Payment mode</p>
+</div>
+                                </td>
+                            </tr>
                         </tbody>
                     </table>
                     <table class="table table-sm table-bordered">
@@ -653,6 +726,12 @@
 
 
 
+                            <tr>
+                                <td class="col-md-4">
+                                    <div class="io-description"><p>Time in HH:MM:SS format</p>
+</div>
+                                </td>
+                            </tr>
                         </tbody>
                     </table>
             </section>
@@ -664,20 +743,43 @@
 import { Category } from &#x27;./category.service&#x27;;
 import { StorageService } from &#x27;./storage.service&#x27;;
 
-
+/** Expense data */
 export interface Expense {
+  /** Unique identifier */
   expense_id: string;
+
+  /** Expense details */
   amount: number;
+
+  /** Category ID */
   category_id: string;
+
+  /** Date in YYYY-MM-DD format */
   date: string;
+
+  /** Time in HH:MM:SS format */
   time: string;
+
+  /** Note */
   note?: string;
+
+  /** Payment mode */
   payment_mode: string;
+
+  /** Location */
   location?: string;
+
+  /** Is extra spending */
   isExtraSpending?: boolean;
+
   // additional field not a part of table
+  /** Category name */
   category_name: string;
+
+  /** Category icon */
   category_icon: string;
+
+  /** Category color */
   category_color: string;
 
 }

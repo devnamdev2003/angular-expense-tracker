@@ -4,6 +4,7 @@ import { provideServerRouting } from '@angular/ssr';
 import { appConfig } from './app.config';
 import { serverRoutes } from './app.routes.server';
 
+/** Server-specific application configuration */
 const serverConfig: ApplicationConfig = {
   providers: [
     provideServerRendering(),
@@ -11,4 +12,5 @@ const serverConfig: ApplicationConfig = {
   ]
 };
 
+/** Merged application configuration for server-side rendering */
 export const config = mergeApplicationConfig(appConfig, serverConfig);

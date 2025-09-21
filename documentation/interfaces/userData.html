@@ -231,6 +231,12 @@
 
 
 
+                            <tr>
+                                <td class="col-md-4">
+                                    <div class="io-description"><p>Budget data</p>
+</div>
+                                </td>
+                            </tr>
                         </tbody>
                     </table>
                     <table class="table table-sm table-bordered">
@@ -264,6 +270,12 @@
 
 
 
+                            <tr>
+                                <td class="col-md-4">
+                                    <div class="io-description"><p>Category data</p>
+</div>
+                                </td>
+                            </tr>
                         </tbody>
                     </table>
                     <table class="table table-sm table-bordered">
@@ -297,6 +309,12 @@
 
 
 
+                            <tr>
+                                <td class="col-md-4">
+                                    <div class="io-description"><p>Expense data</p>
+</div>
+                                </td>
+                            </tr>
                         </tbody>
                     </table>
                     <table class="table table-sm table-bordered">
@@ -330,6 +348,12 @@
 
 
 
+                            <tr>
+                                <td class="col-md-4">
+                                    <div class="io-description"><p>User information</p>
+</div>
+                                </td>
+                            </tr>
                         </tbody>
                     </table>
             </section>
@@ -355,11 +379,19 @@ import { Budget, BudgetService } from &#x27;../../../service/localStorage/budget
  * Interface representing the structure of user data
  */
 export interface UserData {
+  /** User information */
   userData: User | {},
+
+  /** Expense data */
   expenseData: any[],
+
+  /** Category data */
   categoryData: Category[] | [],
+  
+  /** Budget data */
   budgetData: Budget[] | []
 };
+
 /**
  * Component responsible for exporting user expenses
  * into JSON, PDF, or Excel formats within a given date range.

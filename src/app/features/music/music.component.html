@@ -65,8 +65,8 @@
         <button (click)="playSong(currentSong.url, currentSong)"
           class="w-8 h-8 flex items-center justify-center rounded-full hover:bg-[var(--list-hover)] active:scale-90 transition-transform">
           <img
-            [src]="audio.paused ? 'assets/img/music_icon/icons8-play-50.png' : 'assets/img/music_icon/icons8-pause-50.png'"
-            alt="{{ audio.paused ? 'Play' : 'Pause' }}"
+            [src]="audio?.paused ? 'assets/img/music_icon/icons8-play-50.png' : 'assets/img/music_icon/icons8-pause-50.png'"
+            alt="{{ audio?.paused ? 'Play' : 'Pause' }}"
             class="w-6 h-6 object-contain transition-transform duration-300 ease-in-out"
             style="filter: var(--icon-color2);" />
         </button>

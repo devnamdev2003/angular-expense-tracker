@@ -1,3 +1,4 @@
+/** Predefined categories for the application */
 export const Categories = [
   {
     category_id: '1',

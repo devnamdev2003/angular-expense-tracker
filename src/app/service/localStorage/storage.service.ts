@@ -2,7 +2,9 @@ import { Injectable } from '@angular/core';
 import { Categories } from './data/categories';
 import { ConfigService } from '../config/config.service';
 
+/** Schema for local storage items */
 interface Schema {
+    /** Unique identifier */
     [key: string]: any;
 }
 

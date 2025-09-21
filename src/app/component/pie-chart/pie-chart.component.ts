@@ -3,6 +3,7 @@ import { CategoryService, Category } from '../../service/localStorage/category.s
 import { ExpenseService, Expense } from '../../service/localStorage/expense.service';
 import { UserService } from '../../service/localStorage/user.service';
 
+/** Chart.js instance */
 declare const Chart: any;
 
 @Component({

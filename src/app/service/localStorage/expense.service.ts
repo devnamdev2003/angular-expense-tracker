@@ -2,20 +2,43 @@ import { Injectable } from '@angular/core';
 import { Category } from './category.service';
 import { StorageService } from './storage.service';
 
-
+/** Expense data */
 export interface Expense {
+  /** Unique identifier */
   expense_id: string;
+
+  /** Expense details */
   amount: number;
+
+  /** Category ID */
   category_id: string;
+
+  /** Date in YYYY-MM-DD format */
   date: string;
+
+  /** Time in HH:MM:SS format */
   time: string;
+
+  /** Note */
   note?: string;
+
+  /** Payment mode */
   payment_mode: string;
+
+  /** Location */
   location?: string;
+
+  /** Is extra spending */
   isExtraSpending?: boolean;
+
   // additional field not a part of table
+  /** Category name */
   category_name: string;
+
+  /** Category icon */
   category_icon: string;
+
+  /** Category color */
   category_color: string;
 
 }

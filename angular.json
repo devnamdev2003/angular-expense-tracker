@@ -34,7 +34,15 @@
             "outputMode": "server",
             "ssr": {
               "entry": "src/server.ts"
-            }
+            },
+            "allowedCommonJsDependencies": [
+              "canvg",
+              "jspdf",
+              "rgbcolor",
+              "raf",
+              "@babel/runtime",
+              "core-js"
+            ]
           },
           "configurations": {
             "production": {

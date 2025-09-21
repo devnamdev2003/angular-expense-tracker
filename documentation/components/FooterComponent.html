@@ -222,12 +222,12 @@
             <tbody>
                 <tr>
                     <td class="col-md-4">
-<code>constructor(appVersionService: <a href="../injectables/AppVersionService.html" target="_self">AppVersionService</a>)</code>
+<code>constructor(configService: <a href="../injectables/ConfigService.html" target="_self">ConfigService</a>)</code>
                     </td>
                 </tr>
                         <tr>
                             <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="10" class="link-to-prism">src/app/shared/footer/footer.component.ts:10</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="11" class="link-to-prism">src/app/shared/footer/footer.component.ts:11</a></div>
                             </td>
                         </tr>
 
@@ -245,10 +245,10 @@
                                         </thead>
                                         <tbody>
                                                 <tr>
-                                                        <td>appVersionService</td>
+                                                        <td>configService</td>
                                                   
                                                         <td>
-                                                                        <code><a href="../injectables/AppVersionService.html" target="_self" >AppVersionService</a></code>
+                                                                        <code><a href="../injectables/ConfigService.html" target="_self" >ConfigService</a></code>
                                                         </td>
                                                   
                                                     <td>
@@ -299,7 +299,7 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="10" class="link-to-prism">src/app/shared/footer/footer.component.ts:10</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="11" class="link-to-prism">src/app/shared/footer/footer.component.ts:11</a></div>
                         </td>
                     </tr>
 
@@ -313,7 +313,8 @@
 
     <div class="tab-pane fade  tab-source-code" id="source">
         <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Component } from &#x27;@angular/core&#x27;;
-import { AppVersionService } from &#x27;../../service/util/app-version/app-version.service&#x27;;
+import { ConfigService } from &#x27;../../service/config/config.service&#x27;;
+
 @Component({
   selector: &#x27;app-footer&#x27;,
   imports: [],
@@ -322,8 +323,8 @@ import { AppVersionService } from &#x27;../../service/util/app-version/app-versi
 })
 export class FooterComponent {
   appVersion: string &#x3D; &quot;&quot;;
-  constructor(private appVersionService: AppVersionService) {
-    this.appVersion &#x3D; this.appVersionService.getVersion();
+  constructor(private configService: ConfigService) {
+    this.appVersion &#x3D; this.configService.getVersion();
   }
 }
 </code></pre>
@@ -363,7 +364,7 @@ export class FooterComponent {
 <script src="../js/libs/deep-iterator.js"></script>
 <script>
         var COMPONENT_TEMPLATE = '<div><footer    class="hidden md:block fixed bottom-0 left-0 w-full bg-[var(--color-surface)] text-center text-sm py-2 z-50 text-muted">    © 2025 exwise. All rights reserved. v{{appVersion}}</footer></div>'
-    var COMPONENTS = [{'name': 'AddExpenseComponent', 'selector': 'app-add-expense'},{'name': 'AiComponent', 'selector': 'app-ai'},{'name': 'AnalysisComponent', 'selector': 'app-analysis'},{'name': 'AppComponent', 'selector': 'app-root'},{'name': 'BudgetComponent', 'selector': 'app-budget'},{'name': 'CalendarComponent', 'selector': 'app-calendar'},{'name': 'CategoryDropdownComponent', 'selector': 'app-category-dropdown'},{'name': 'CustomModalComponent', 'selector': 'app-custom-modal'},{'name': 'DownloadComponentComponent', 'selector': 'app-download-component'},{'name': 'ExpenseDetailsModalComponent', 'selector': 'app-expense-details-modal'},{'name': 'ExpenseListComponent', 'selector': 'app-expense-list'},{'name': 'FooterComponent', 'selector': 'app-footer'},{'name': 'FormModelComponent', 'selector': 'app-form-model'},{'name': 'GlobalLoaderComponent', 'selector': 'app-global-loader'},{'name': 'GraphsComponent', 'selector': 'app-graphs'},{'name': 'HamburgerMenuComponent', 'selector': 'app-hamburger-menu'},{'name': 'HomeComponent', 'selector': 'app-home'},{'name': 'InfoIconComponent', 'selector': 'app-info-icon'},{'name': 'InstallAppPopupComponentComponent', 'selector': 'app-install-app-popup-component'},{'name': 'ListExpensesComponent', 'selector': 'app-list-expenses'},{'name': 'MusicComponent', 'selector': 'app-music'},{'name': 'NavbarComponent', 'selector': 'app-navbar'},{'name': 'PieChartComponent', 'selector': 'app-pie-chart'},{'name': 'SearchButtonComponent', 'selector': 'app-search-button'},{'name': 'SearchComponent', 'selector': 'app-search'},{'name': 'SettingItemComponent', 'selector': 'app-setting-item'},{'name': 'SettingsComponent', 'selector': 'app-settings'},{'name': 'SidebarComponent', 'selector': 'app-sidebar'},{'name': 'TemplatePlaygroundComponent', 'selector': 'template-playground-root'},{'name': 'ToastComponent', 'selector': 'app-toast'}];
+    var COMPONENTS = [{'name': 'AddExpenseComponent', 'selector': 'app-add-expense'},{'name': 'AiComponent', 'selector': 'app-ai'},{'name': 'AppComponent', 'selector': 'app-root'},{'name': 'BudgetComponent', 'selector': 'app-budget'},{'name': 'CalendarComponent', 'selector': 'app-calendar'},{'name': 'CategoryDropdownComponent', 'selector': 'app-category-dropdown'},{'name': 'CustomModalComponent', 'selector': 'app-custom-modal'},{'name': 'DownloadComponentComponent', 'selector': 'app-download-component'},{'name': 'ExpenseDetailsModalComponent', 'selector': 'app-expense-details-modal'},{'name': 'ExpenseListComponent', 'selector': 'app-expense-list'},{'name': 'FooterComponent', 'selector': 'app-footer'},{'name': 'FormModelComponent', 'selector': 'app-form-model'},{'name': 'GlobalLoaderComponent', 'selector': 'app-global-loader'},{'name': 'GraphsComponent', 'selector': 'app-graphs'},{'name': 'HamburgerMenuComponent', 'selector': 'app-hamburger-menu'},{'name': 'HomeComponent', 'selector': 'app-home'},{'name': 'InstallAppPopupComponentComponent', 'selector': 'app-install-app-popup-component'},{'name': 'ListExpensesComponent', 'selector': 'app-list-expenses'},{'name': 'MusicComponent', 'selector': 'app-music'},{'name': 'NavbarComponent', 'selector': 'app-navbar'},{'name': 'PieChartComponent', 'selector': 'app-pie-chart'},{'name': 'SearchButtonComponent', 'selector': 'app-search-button'},{'name': 'SearchComponent', 'selector': 'app-search'},{'name': 'SettingItemComponent', 'selector': 'app-setting-item'},{'name': 'SettingsComponent', 'selector': 'app-settings'},{'name': 'SidebarComponent', 'selector': 'app-sidebar'},{'name': 'TemplatePlaygroundComponent', 'selector': 'template-playground-root'},{'name': 'ToastComponent', 'selector': 'app-toast'}];
     var DIRECTIVES = [];
     var ACTUAL_COMPONENT = {'name': 'FooterComponent'};
 </script>

@@ -8,10 +8,16 @@ import express from 'express';
 import { dirname, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
+/** Server distribution folder */
 const serverDistFolder = dirname(fileURLToPath(import.meta.url));
+
+/** Browser distribution folder */
 const browserDistFolder = resolve(serverDistFolder, '../browser');
 
+/** Express server */
 const app = express();
+
+/** Angular Universal Node.js app engine */
 const angularApp = new AngularNodeAppEngine();
 
 /**

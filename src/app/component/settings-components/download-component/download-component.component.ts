@@ -16,11 +16,19 @@ import { Budget, BudgetService } from '../../../service/localStorage/budget.serv
  * Interface representing the structure of user data
  */
 export interface UserData {
+  /** User information */
   userData: User | {},
+
+  /** Expense data */
   expenseData: any[],
+
+  /** Category data */
   categoryData: Category[] | [],
+  
+  /** Budget data */
   budgetData: Budget[] | []
 };
+
 /**
  * Component responsible for exporting user expenses
  * into JSON, PDF, or Excel formats within a given date range.

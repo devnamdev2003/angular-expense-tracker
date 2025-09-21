@@ -144,6 +144,13 @@
         </p>
 
 
+            <p class="comment">
+                <h3>Description</h3>
+            </p>
+            <p class="comment">
+                <p>Schema for local storage items</p>
+
+            </p>
 
 
 
@@ -160,9 +167,15 @@
                 </tr>
                         <tr>
                             <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="5" class="link-to-prism">src/app/service/localStorage/storage.service.ts:5</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="6" class="link-to-prism">src/app/service/localStorage/storage.service.ts:6</a></div>
                             </td>
                         </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <div class="io-description"><p>Unique identifier</p>
+</div>
+                    </td>
+                </tr>
             </tbody>
         </table>
 </section>
@@ -173,9 +186,11 @@
     <div class="tab-pane fade  tab-source-code" id="source">
         <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Injectable } from &#x27;@angular/core&#x27;;
 import { Categories } from &#x27;./data/categories&#x27;;
-import { AppVersionService } from &#x27;../util/app-version/app-version.service&#x27;;
+import { ConfigService } from &#x27;../config/config.service&#x27;;
 
+/** Schema for local storage items */
 interface Schema {
+    /** Unique identifier */
     [key: string]: any;
 }
 
@@ -183,7 +198,7 @@ interface Schema {
     providedIn: &#x27;root&#x27;,
 })
 export class StorageService {
-    constructor(private appVersionService: AppVersionService) {
+    constructor(private configService: ConfigService) {
     }
 
     private readonly categoryKey &#x3D; &#x27;categories&#x27;;
@@ -302,7 +317,7 @@ export class StorageService {
         schemaKeys.forEach((key: string) &#x3D;&gt; {
             syncedSettings[key] &#x3D; key in savedSettings ? savedSettings[key] : defaultSchema[key];
         });
-        syncedSettings[&#x27;app_version&#x27;] &#x3D; this.appVersionService.getVersion();
+        syncedSettings[&#x27;app_version&#x27;] &#x3D; this.configService.getVersion();
 
         localStorage.setItem(this.userKey, JSON.stringify(syncedSettings));
     }
