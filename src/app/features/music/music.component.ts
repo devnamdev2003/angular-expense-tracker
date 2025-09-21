@@ -273,4 +273,19 @@ export class MusicComponent implements OnDestroy {
     this.showPlayerModal = false;
   }
 
+  /** Restart current song when Previous is pressed */
+  restartSong() {
+    if (this.audio) {
+      this.audio.currentTime = 0;
+      if (this.audio.paused) {
+        this.audio.play();
+      }
+    }
+  }
+
+  /** Play next song when Next is pressed */
+  nextSong() {
+    this.onSongFinished();
+  }
+
 }
