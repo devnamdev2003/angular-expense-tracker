@@ -23,8 +23,9 @@
       <div
         class="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300"
         [class.opacity-100]="currentSong?.url === getSongUrl(song)">
-        <img [src]="currentSong?.url === getSongUrl(song)? 'assets/img/music_icon/icons8-pause-50.png' :'assets/img/music_icon/icons8-play-50.png'" alt="Play"
-          class="w-6 h-6 object-contain" style="filter: invert(100%);" />
+        <img
+          [src]="currentSong?.url === getSongUrl(song)? 'assets/img/music_icon/icons8-pause-50.png' :'assets/img/music_icon/icons8-play-50.png'"
+          alt="Play" class="w-6 h-6 object-contain" style="filter: invert(100%);" />
       </div>
     </div>
 
@@ -40,7 +41,7 @@
 
 <!-- Bottom Audio Bar -->
 <div *ngIf="currentSong"
-  class="max-w-xl mx-auto  fixed bottom-0 left-0 right-0 shadow-lg py-4 px-2 flex items-center gap-4 z-20"
+  class="max-w-xl mx-auto fixed bottom-0 left-0 right-0 shadow-lg py-4 px-2 flex items-center gap-4 z-20"
   [ngStyle]="{'background-color': 'var(--color-surface)', 'color': 'var(--color-text)', 'z-index': '99'}">
 
   <!-- Song Image -->
@@ -62,6 +63,8 @@
         <div class="text-sm text-gray-500 dark:text-gray-400 min-w-max">
           {{ formatTime(progress()) }} / {{ formatTime(duration()) }}
         </div>
+
+        <!-- Play/Pause Button -->
         <button (click)="playSong(currentSong.url, currentSong)"
           class="w-8 h-8 flex items-center justify-center rounded-full hover:bg-[var(--list-hover)] active:scale-90 transition-transform">
           <img
@@ -70,15 +73,29 @@
             class="w-6 h-6 object-contain transition-transform duration-300 ease-in-out"
             style="filter: var(--icon-color2);" />
         </button>
+
+        <!-- Like Button -->
+        <button (click)="toggleLike(currentSong)"
+          class="w-8 h-8 flex items-center justify-center rounded-full hover:bg-[var(--list-hover)] active:scale-90 transition-transform">
+          <img
+            [src]="isLiked(currentSong) ? 'assets/img/music_icon/icons8-love-fill-48.png' : 'assets/img/music_icon/icons8-love-48.png'"
+            alt="Like" class="w-6 h-6 object-contain transition-transform duration-300 ease-in-out"
+            style="filter: var(--icon-color2);" />
+        </button>
+
+        <button (click)="downloadSong(currentSong)"
+          class="w-8 h-8 flex items-center justify-center rounded-full hover:bg-[var(--list-hover)] active:scale-90 transition-transform">
+          <img src="assets/img/music_icon/icons8-download-48.png" alt="Download"
+            class="w-6 h-6 object-contain transition-transform duration-300 ease-in-out"
+            style="filter: var(--icon-color2);" />
+        </button>
       </div>
     </div>
 
     <!-- Progress Bar -->
     <input type="range" min="0" [max]="duration()" [value]="progress()" (input)="onSeek($event)"
-      class="w-full mt-2 mb-2 h-1 rounded accent-[var(--theme-color)] cursor-pointer" [ngStyle]="{
-        'background-color': 'var(--input-border)',
-        'accent-color': 'var(--theme-color)'
-      }" />
+      class="w-full mt-2 mb-2 h-1 rounded accent-[var(--theme-color)] cursor-pointer"
+      [ngStyle]="{'background-color': 'var(--input-border)', 'accent-color': 'var(--theme-color)'}" />
   </div>
 </div>
 

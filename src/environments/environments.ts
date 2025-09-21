@@ -4,8 +4,11 @@
  */
 export const environment = {
 
-  /** Name of the application. */
+  /** 
+   * Name of the application. 
+   */
   appName: 'ExpenseWise',
+
   /**
    * Flag to indicate if the app is running in production mode.
    * Set to true in the production environment.

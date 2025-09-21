@@ -50,6 +50,9 @@ export class MusicComponent implements OnDestroy {
   /** Flag to indicate if running in browser environment */
   isBrowser: boolean;
 
+  /** Set to store URLs of liked songs */
+  isCurrentSongLiked: boolean = false;
+
   /**
    * Creates an instance of MusicComponent.
    *
@@ -121,7 +124,7 @@ export class MusicComponent implements OnDestroy {
   async onSongFinished(): Promise<void> {
     if (!this.isBrowser) return;
     try {
-      const transformedData = this.transformSongData(this.currentSong);
+      const transformedData = this.transformSongData(this.currentSong, this.isCurrentSongLiked);
       const nextSong = await this.saavnService.suggestNextSong(transformedData);
 
       if (!nextSong || typeof nextSong !== 'string' || nextSong.trim() === '') return;
@@ -157,6 +160,7 @@ export class MusicComponent implements OnDestroy {
       this.currentSong = null;
       this.progress.set(0);
       clearInterval(this.interval);
+      this.isCurrentSongLiked = false;
     }
   }
 
@@ -191,7 +195,7 @@ export class MusicComponent implements OnDestroy {
    * @param data Original song object
    * @returns Transformed object with relevant song metadata
    */
-  transformSongData(data: any): any {
+  transformSongData(data: any, isLiked: boolean): any {
     return {
       name: data.name,
       type: data.type,
@@ -204,7 +208,8 @@ export class MusicComponent implements OnDestroy {
       album: { name: data.album?.name || '' },
       artists: {
         all: (data.artists?.primary || []).map((a: any) => ({ name: a.name }))
-      }
+      },
+      isLiked: isLiked
     };
   }
 
@@ -217,4 +222,31 @@ export class MusicComponent implements OnDestroy {
       this.audio = null;
     }
   }
+
+  /** Toggles the like status of a song */
+  toggleLike(song: any) {
+    if (this.isCurrentSongLiked) {
+      this.isCurrentSongLiked = false;
+    } else {
+      this.isCurrentSongLiked = true;
+    }
+  }
+
+  /** Checks if a song is liked */
+  isLiked(song: any): boolean {
+    return this.isCurrentSongLiked;
+  }
+
+  downloadSong(song: any) {
+    if (!song?.url) return;
+
+    const link = document.createElement('a');
+    link.href = song.url;
+    link.download = `${song.name}.mp3`;
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+  }
+
+
 }
