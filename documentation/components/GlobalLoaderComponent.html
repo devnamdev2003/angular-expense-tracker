@@ -138,6 +138,18 @@
 </p>
 
 
+    <p class="comment">
+        <h3>Description</h3>
+    </p>
+    <p class="comment">
+        <p>Global loader component to display a full-screen loading indicator.</p>
+<p>Features:</p>
+<ul>
+<li>Shows a loading message with optional custom text.</li>
+<li>Can be controlled globally via <a href="../injectables/GlobalLoaderService.html">GlobalLoaderService</a>.</li>
+</ul>
+
+    </p>
 
 
 
@@ -253,12 +265,16 @@
                 </tr>
                         <tr>
                             <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="13" class="link-to-prism">src/app/shared/global-loader/global-loader.component.ts:13</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="28" class="link-to-prism">src/app/shared/global-loader/global-loader.component.ts:28</a></div>
                             </td>
                         </tr>
 
                 <tr>
                     <td class="col-md-4">
+                            <div class="io-description"><p>Creates an instance of GlobalLoaderComponent.</p>
+<p>Registers this component with the <a href="../injectables/GlobalLoaderService.html">GlobalLoaderService</a>
+to allow global show/hide control.</p>
+</div>
                             <div>
                                     <b>Parameters :</b>
                                     <table class="params">
@@ -267,6 +283,7 @@
                                                 <td>Name</td>
                                                     <td>Type</td>
                                                 <td>Optional</td>
+                                                    <td>Description</td>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -281,6 +298,10 @@
                                                             No
                                                     </td>
                                                     
+                                                        <td>
+                                                                <p>Service for managing the global loader state.</p>
+
+                                                        </td>
                                                 </tr>
                                         </tbody>
                                     </table>
@@ -320,14 +341,16 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="24"
-                                    class="link-to-prism">src/app/shared/global-loader/global-loader.component.ts:24</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="55"
+                                    class="link-to-prism">src/app/shared/global-loader/global-loader.component.ts:55</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
+                        <div class="io-description"><p>Hides the global loader.</p>
+</div>
 
                         <div class="io-description">
                             <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
@@ -357,14 +380,16 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="19"
-                                    class="link-to-prism">src/app/shared/global-loader/global-loader.component.ts:19</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="47"
+                                    class="link-to-prism">src/app/shared/global-loader/global-loader.component.ts:47</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
+                        <div class="io-description"><p>Shows the global loader with an optional custom message.</p>
+</div>
 
                             <div class="io-description">
                                 <b>Parameters :</b>
@@ -376,6 +401,7 @@
                                                 <td>Type</td>
                                             <td>Optional</td>
                                                 <td>Default value</td>
+                                                <td>Description</td>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -390,9 +416,13 @@
                                             </td>
 
                                             <td>
-                                                    <code>&quot;Loading...&quot;</code>
+                                                    <code>&#x27;Loading...&#x27;</code>
                                             </td>
 
+                                            <td>
+                                                    <p>Optional message to display; defaults to &quot;Loading...&quot;.</p>
+
+                                            </td>
                                         </tr>
                                     </tbody>
                                 </table>
@@ -432,10 +462,16 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="12" class="link-to-prism">src/app/shared/global-loader/global-loader.component.ts:12</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="23" class="link-to-prism">src/app/shared/global-loader/global-loader.component.ts:23</a></div>
                         </td>
                     </tr>
 
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Indicates whether the loader is currently visible.</p>
+</div>
+                </td>
+            </tr>
 
         </tbody>
     </table>
@@ -458,15 +494,21 @@
                 </tr>
                 <tr>
                     <td class="col-md-4">
-                        <i>Default value : </i><code>&quot;&quot;</code>
+                        <i>Default value : </i><code>&#x27;&#x27;</code>
                     </td>
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="13" class="link-to-prism">src/app/shared/global-loader/global-loader.component.ts:13</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="28" class="link-to-prism">src/app/shared/global-loader/global-loader.component.ts:28</a></div>
                         </td>
                     </tr>
 
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Text message displayed on the loader.</p>
+</div>
+                </td>
+            </tr>
 
         </tbody>
     </table>
@@ -477,9 +519,16 @@
 
     <div class="tab-pane fade  tab-source-code" id="source">
         <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Component } from &#x27;@angular/core&#x27;;
-import { GlobalLoaderService } from &#x27;../../service/global-loader/global-loader.service&#x27;
+import { GlobalLoaderService } from &#x27;../../service/global-loader/global-loader.service&#x27;;
 import { CommonModule } from &#x27;@angular/common&#x27;;
 
+/**
+ * Global loader component to display a full-screen loading indicator.
+ *
+ * Features:
+ * - Shows a loading message with optional custom text.
+ * - Can be controlled globally via {@link GlobalLoaderService}.
+ */
 @Component({
   selector: &#x27;app-global-loader&#x27;,
   imports: [CommonModule],
@@ -487,31 +536,46 @@ import { CommonModule } from &#x27;@angular/common&#x27;;
   styleUrl: &#x27;./global-loader.component.css&#x27;
 })
 export class GlobalLoaderComponent {
-  isVisible &#x3D; false;
-  message &#x3D; &quot;&quot;;
 
+  /**
+   * Indicates whether the loader is currently visible.
+   */
+  isVisible &#x3D; false;
+
+  /**
+   * Text message displayed on the loader.
+   */
+  message &#x3D; &#x27;&#x27;;
+
+  /**
+   * Creates an instance of GlobalLoaderComponent.
+   *
+   * Registers this component with the {@link GlobalLoaderService}
+   * to allow global show/hide control.
+   *
+   * @param globalLoaderService Service for managing the global loader state.
+   */
   constructor(private globalLoaderService: GlobalLoaderService) {
     this.globalLoaderService.register(this);
   }
 
-  show(text: string &#x3D; &quot;Loading...&quot;) {
+  /**
+   * Shows the global loader with an optional custom message.
+   *
+   * @param text Optional message to display; defaults to &quot;Loading...&quot;.
+   */
+  show(text: string &#x3D; &#x27;Loading...&#x27;): void {
     this.message &#x3D; text;
     this.isVisible &#x3D; true;
   }
 
-  hide() {
+  /**
+   * Hides the global loader.
+   */
+  hide(): void {
     this.isVisible &#x3D; false;
   }
 }
-
-// constructor(private loader: LoaderService) {}
-
-// loadSomething() {
-//   this.loader.show();
-//   setTimeout(() &#x3D;&gt; {
-//     this.loader.hide();
-//   }, 3000);
-// }
 </code></pre>
     </div>
 
@@ -551,7 +615,7 @@ export class GlobalLoaderComponent {
 <script src="../js/libs/deep-iterator.js"></script>
 <script>
         var COMPONENT_TEMPLATE = '<div><div *ngIf="isVisible" class="loader">    <div class="inner one"></div>    <div class="inner two"></div>    <div class="inner three"></div>    <p>{{message}}</p></div></div>'
-    var COMPONENTS = [{'name': 'AddExpenseComponent', 'selector': 'app-add-expense'},{'name': 'AiComponent', 'selector': 'app-ai'},{'name': 'AppComponent', 'selector': 'app-root'},{'name': 'BudgetComponent', 'selector': 'app-budget'},{'name': 'CalendarComponent', 'selector': 'app-calendar'},{'name': 'CategoryDropdownComponent', 'selector': 'app-category-dropdown'},{'name': 'CustomModalComponent', 'selector': 'app-custom-modal'},{'name': 'DownloadComponentComponent', 'selector': 'app-download-component'},{'name': 'ExpenseDetailsModalComponent', 'selector': 'app-expense-details-modal'},{'name': 'ExpenseListComponent', 'selector': 'app-expense-list'},{'name': 'FooterComponent', 'selector': 'app-footer'},{'name': 'FormModelComponent', 'selector': 'app-form-model'},{'name': 'GlobalLoaderComponent', 'selector': 'app-global-loader'},{'name': 'GraphsComponent', 'selector': 'app-graphs'},{'name': 'HamburgerMenuComponent', 'selector': 'app-hamburger-menu'},{'name': 'HomeComponent', 'selector': 'app-home'},{'name': 'InstallAppPopupComponentComponent', 'selector': 'app-install-app-popup-component'},{'name': 'ListExpensesComponent', 'selector': 'app-list-expenses'},{'name': 'MusicComponent', 'selector': 'app-music'},{'name': 'NavbarComponent', 'selector': 'app-navbar'},{'name': 'PieChartComponent', 'selector': 'app-pie-chart'},{'name': 'SearchButtonComponent', 'selector': 'app-search-button'},{'name': 'SearchComponent', 'selector': 'app-search'},{'name': 'SettingItemComponent', 'selector': 'app-setting-item'},{'name': 'SettingsComponent', 'selector': 'app-settings'},{'name': 'SidebarComponent', 'selector': 'app-sidebar'},{'name': 'TemplatePlaygroundComponent', 'selector': 'template-playground-root'},{'name': 'ToastComponent', 'selector': 'app-toast'}];
+    var COMPONENTS = [{'name': 'AddExpenseComponent', 'selector': 'app-add-expense'},{'name': 'AiComponent', 'selector': 'app-ai'},{'name': 'AppComponent', 'selector': 'app-root'},{'name': 'BudgetComponent', 'selector': 'app-budget'},{'name': 'CalendarComponent', 'selector': 'app-calendar'},{'name': 'CategoryDropdownComponent', 'selector': 'app-category-dropdown'},{'name': 'DownloadComponentComponent', 'selector': 'app-download-component'},{'name': 'ExpenseDetailsModalComponent', 'selector': 'app-expense-details-modal'},{'name': 'ExpenseListComponent', 'selector': 'app-expense-list'},{'name': 'FooterComponent', 'selector': 'app-footer'},{'name': 'FormModelComponent', 'selector': 'app-form-model'},{'name': 'GlobalLoaderComponent', 'selector': 'app-global-loader'},{'name': 'GraphsComponent', 'selector': 'app-graphs'},{'name': 'HamburgerMenuComponent', 'selector': 'app-hamburger-menu'},{'name': 'HomeComponent', 'selector': 'app-home'},{'name': 'InstallAppPopupComponentComponent', 'selector': 'app-install-app-popup-component'},{'name': 'ListExpensesComponent', 'selector': 'app-list-expenses'},{'name': 'MusicComponent', 'selector': 'app-music'},{'name': 'NavbarComponent', 'selector': 'app-navbar'},{'name': 'PieChartComponent', 'selector': 'app-pie-chart'},{'name': 'SearchButtonComponent', 'selector': 'app-search-button'},{'name': 'SettingItemComponent', 'selector': 'app-setting-item'},{'name': 'SettingsComponent', 'selector': 'app-settings'},{'name': 'SidebarComponent', 'selector': 'app-sidebar'},{'name': 'TemplatePlaygroundComponent', 'selector': 'template-playground-root'},{'name': 'ToastComponent', 'selector': 'app-toast'}];
     var DIRECTIVES = [];
     var ACTUAL_COMPONENT = {'name': 'GlobalLoaderComponent'};
 </script>

@@ -124,9 +124,6 @@ customElements.define('compodoc-menu', class extends HTMLElement {
                                 <a href="components/CategoryDropdownComponent.html" data-type="entity-link" >CategoryDropdownComponent</a>
                             </li>
                             <li class="link">
-                                <a href="components/CustomModalComponent.html" data-type="entity-link" >CustomModalComponent</a>
-                            </li>
-                            <li class="link">
                                 <a href="components/DownloadComponentComponent.html" data-type="entity-link" >DownloadComponentComponent</a>
                             </li>
                             <li class="link">
@@ -172,9 +169,6 @@ customElements.define('compodoc-menu', class extends HTMLElement {
                                 <a href="components/SearchButtonComponent.html" data-type="entity-link" >SearchButtonComponent</a>
                             </li>
                             <li class="link">
-                                <a href="components/SearchComponent.html" data-type="entity-link" >SearchComponent</a>
-                            </li>
-                            <li class="link">
                                 <a href="components/SettingItemComponent.html" data-type="entity-link" >SettingItemComponent</a>
                             </li>
                             <li class="link">
@@ -210,9 +204,6 @@ customElements.define('compodoc-menu', class extends HTMLElement {
                                 </li>
                                 <li class="link">
                                     <a href="injectables/GeminiApiService.html" data-type="entity-link" >GeminiApiService</a>
-                                </li>
-                                <li class="link">
-                                    <a href="injectables/GetApiService.html" data-type="entity-link" >GetApiService</a>
                                 </li>
                                 <li class="link">
                                     <a href="injectables/GlobalLoaderService.html" data-type="entity-link" >GlobalLoaderService</a>

@@ -6,6 +6,14 @@ import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
 import { marked } from 'marked';
 import { GeminiApiService } from '../../service/gemini-api/gemini-api.service';
 
+/**
+ * Component for AI interaction using Gemini API.
+ * 
+ * Features:
+ * - Accepts user input.
+ * - Sends input to Gemini API for processing.
+ * - Converts AI Markdown response to sanitized HTML for display.
+ */
 @Component({
   selector: 'app-ai',
   standalone: true,
@@ -14,14 +22,29 @@ import { GeminiApiService } from '../../service/gemini-api/gemini-api.service';
   styleUrl: './ai.component.css'
 })
 export class AiComponent {
+
+  /** User input from the text box */
   userInput = '';
+
+  /** AI response rendered as sanitized HTML */
   responseHtml: SafeHtml | null = null;
 
+  /**
+   * Constructor to inject services.
+   * 
+   * @param geminiApi Service that handles AI requests.
+   * @param sanitizer Angular sanitizer for safe HTML rendering.
+   */
   constructor(
     private geminiApi: GeminiApiService,
     private sanitizer: DomSanitizer
   ) { }
 
+  /**
+   * Sends the user input to the Gemini API.
+   * - Ignores input shorter than 2 characters.
+   * - Converts returned Markdown to sanitized HTML.
+   */
   async send() {
     const trimmedInput = this.userInput.trim();
     if (trimmedInput.length < 2) {
@@ -29,11 +52,17 @@ export class AiComponent {
       return;
     }
 
+    // Fetch response from Gemini API
     const markdown = await this.geminiApi.getResponse(trimmedInput);
+
+    // Convert Markdown to HTML
     const html = await marked.parse(markdown);
+
+    // Sanitize HTML for safe rendering
     this.responseHtml = this.sanitizer.bypassSecurityTrustHtml(html);
   }
 }
+
 
 // for chat
 

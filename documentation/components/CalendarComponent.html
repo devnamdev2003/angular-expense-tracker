@@ -138,6 +138,20 @@
 </p>
 
 
+    <p class="comment">
+        <h3>Description</h3>
+    </p>
+    <p class="comment">
+        <p>Component that renders a monthly calendar view with expense tracking.</p>
+<p>Features:</p>
+<ul>
+<li>Displays days of the current month with previous/next month padding.</li>
+<li>Highlights today’s date.</li>
+<li>Calculates total expenses per month and per day.</li>
+<li>Opens modal to view daily expenses.</li>
+</ul>
+
+    </p>
 
 
     <p class="comment">
@@ -299,12 +313,14 @@
                 </tr>
                         <tr>
                             <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="24" class="link-to-prism">src/app/features/calendar/calendar.component.ts:24</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="51" class="link-to-prism">src/app/features/calendar/calendar.component.ts:51</a></div>
                             </td>
                         </tr>
 
                 <tr>
                     <td class="col-md-4">
+                            <div class="io-description"><p>Creates an instance of CalendarComponent.</p>
+</div>
                             <div>
                                     <b>Parameters :</b>
                                     <table class="params">
@@ -313,6 +329,7 @@
                                                 <td>Name</td>
                                                     <td>Type</td>
                                                 <td>Optional</td>
+                                                    <td>Description</td>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -327,6 +344,10 @@
                                                             No
                                                     </td>
                                                     
+                                                        <td>
+                                                                <p>Service to retrieve expenses from local storage.</p>
+
+                                                        </td>
                                                 </tr>
                                                 <tr>
                                                         <td>userService</td>
@@ -339,6 +360,10 @@
                                                             No
                                                     </td>
                                                     
+                                                        <td>
+                                                                <p>Service to retrieve user settings such as currency.</p>
+
+                                                        </td>
                                                 </tr>
                                         </tbody>
                                     </table>
@@ -378,14 +403,16 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="90"
-                                    class="link-to-prism">src/app/features/calendar/calendar.component.ts:90</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="141"
+                                    class="link-to-prism">src/app/features/calendar/calendar.component.ts:141</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
+                        <div class="io-description"><p>Calculates the total expenses for a given date range.</p>
+</div>
 
                             <div class="io-description">
                                 <b>Parameters :</b>
@@ -396,6 +423,7 @@
                                             <td>Name</td>
                                                 <td>Type</td>
                                             <td>Optional</td>
+                                                <td>Description</td>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -410,6 +438,10 @@
                                             </td>
 
 
+                                            <td>
+                                                    <p>Start date (YYYY-MM-DD)</p>
+
+                                            </td>
                                         </tr>
                                         <tr>
                                                 <td>toDate</td>
@@ -422,6 +454,10 @@
                                             </td>
 
 
+                                            <td>
+                                                    <p>End date (YYYY-MM-DD)</p>
+
+                                            </td>
                                         </tr>
                                     </tbody>
                                 </table>
@@ -457,14 +493,16 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="37"
-                                    class="link-to-prism">src/app/features/calendar/calendar.component.ts:37</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="76"
+                                    class="link-to-prism">src/app/features/calendar/calendar.component.ts:76</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
+                        <div class="io-description"><p>Changes the calendar month by a specified offset.</p>
+</div>
 
                             <div class="io-description">
                                 <b>Parameters :</b>
@@ -475,6 +513,7 @@
                                             <td>Name</td>
                                                 <td>Type</td>
                                             <td>Optional</td>
+                                                <td>Description</td>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -489,6 +528,10 @@
                                             </td>
 
 
+                                            <td>
+                                                    <p>Number of months to change (positive or negative)</p>
+
+                                            </td>
                                         </tr>
                                     </tbody>
                                 </table>
@@ -524,14 +567,16 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="112"
-                                    class="link-to-prism">src/app/features/calendar/calendar.component.ts:112</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="171"
+                                    class="link-to-prism">src/app/features/calendar/calendar.component.ts:171</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
+                        <div class="io-description"><p>Closes the daily expenses modal and clears modal data.</p>
+</div>
 
                         <div class="io-description">
                             <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
@@ -561,14 +606,16 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="33"
-                                    class="link-to-prism">src/app/features/calendar/calendar.component.ts:33</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="67"
+                                    class="link-to-prism">src/app/features/calendar/calendar.component.ts:67</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
+                        <div class="io-description"><p>Angular lifecycle hook that initializes the calendar view</p>
+</div>
 
                         <div class="io-description">
                             <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
@@ -598,14 +645,16 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="100"
-                                    class="link-to-prism">src/app/features/calendar/calendar.component.ts:100</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="156"
+                                    class="link-to-prism">src/app/features/calendar/calendar.component.ts:156</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
+                        <div class="io-description"><p>Opens the modal to show expenses for a specific day.</p>
+</div>
 
                             <div class="io-description">
                                 <b>Parameters :</b>
@@ -616,6 +665,7 @@
                                             <td>Name</td>
                                                 <td>Type</td>
                                             <td>Optional</td>
+                                                <td>Description</td>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -630,6 +680,10 @@
                                             </td>
 
 
+                                            <td>
+                                                    <p>Date string (YYYY-MM-DD)</p>
+
+                                            </td>
                                         </tr>
                                     </tbody>
                                 </table>
@@ -665,14 +719,16 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="49"
-                                    class="link-to-prism">src/app/features/calendar/calendar.component.ts:49</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="94"
+                                    class="link-to-prism">src/app/features/calendar/calendar.component.ts:94</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
+                        <div class="io-description"><p>Renders the calendar for a given year and month.</p>
+</div>
 
                             <div class="io-description">
                                 <b>Parameters :</b>
@@ -683,6 +739,7 @@
                                             <td>Name</td>
                                                 <td>Type</td>
                                             <td>Optional</td>
+                                                <td>Description</td>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -697,6 +754,10 @@
                                             </td>
 
 
+                                            <td>
+                                                    <p>Year to render</p>
+
+                                            </td>
                                         </tr>
                                         <tr>
                                                 <td>month</td>
@@ -709,6 +770,10 @@
                                             </td>
 
 
+                                            <td>
+                                                    <p>Month to render (0-11)</p>
+
+                                            </td>
                                         </tr>
                                     </tbody>
                                 </table>
@@ -754,10 +819,16 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="19" class="link-to-prism">src/app/features/calendar/calendar.component.ts:19</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="36" class="link-to-prism">src/app/features/calendar/calendar.component.ts:36</a></div>
                         </td>
                     </tr>
 
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Array of calendar day objects for rendering</p>
+</div>
+                </td>
+            </tr>
 
         </tbody>
     </table>
@@ -785,10 +856,16 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="17" class="link-to-prism">src/app/features/calendar/calendar.component.ts:17</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="30" class="link-to-prism">src/app/features/calendar/calendar.component.ts:30</a></div>
                         </td>
                     </tr>
 
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Calendar header title (e.g., &quot;September 2025&quot;)</p>
+</div>
+                </td>
+            </tr>
 
         </tbody>
     </table>
@@ -811,10 +888,16 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="23" class="link-to-prism">src/app/features/calendar/calendar.component.ts:23</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="48" class="link-to-prism">src/app/features/calendar/calendar.component.ts:48</a></div>
                         </td>
                     </tr>
 
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Currency symbol from user settings</p>
+</div>
+                </td>
+            </tr>
 
         </tbody>
     </table>
@@ -836,10 +919,16 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="16" class="link-to-prism">src/app/features/calendar/calendar.component.ts:16</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="27" class="link-to-prism">src/app/features/calendar/calendar.component.ts:27</a></div>
                         </td>
                     </tr>
 
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Current month of the calendar (0-11)</p>
+</div>
+                </td>
+            </tr>
 
         </tbody>
     </table>
@@ -861,10 +950,16 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="15" class="link-to-prism">src/app/features/calendar/calendar.component.ts:15</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="24" class="link-to-prism">src/app/features/calendar/calendar.component.ts:24</a></div>
                         </td>
                     </tr>
 
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Current year of the calendar</p>
+</div>
+                </td>
+            </tr>
 
         </tbody>
     </table>
@@ -892,10 +987,16 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="22" class="link-to-prism">src/app/features/calendar/calendar.component.ts:22</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="45" class="link-to-prism">src/app/features/calendar/calendar.component.ts:45</a></div>
                         </td>
                     </tr>
 
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>List of expenses for the selected day in the modal</p>
+</div>
+                </td>
+            </tr>
 
         </tbody>
     </table>
@@ -923,10 +1024,16 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="21" class="link-to-prism">src/app/features/calendar/calendar.component.ts:21</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="42" class="link-to-prism">src/app/features/calendar/calendar.component.ts:42</a></div>
                         </td>
                     </tr>
 
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Title of the modal showing daily expenses</p>
+</div>
+                </td>
+            </tr>
 
         </tbody>
     </table>
@@ -948,10 +1055,16 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="20" class="link-to-prism">src/app/features/calendar/calendar.component.ts:20</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="39" class="link-to-prism">src/app/features/calendar/calendar.component.ts:39</a></div>
                         </td>
                     </tr>
 
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Whether the daily expense modal is visible</p>
+</div>
+                </td>
+            </tr>
 
         </tbody>
     </table>
@@ -979,10 +1092,16 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="18" class="link-to-prism">src/app/features/calendar/calendar.component.ts:18</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="33" class="link-to-prism">src/app/features/calendar/calendar.component.ts:33</a></div>
                         </td>
                     </tr>
 
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Total expenses in the current month</p>
+</div>
+                </td>
+            </tr>
 
         </tbody>
     </table>
@@ -1006,10 +1125,15 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="28" class="link-to-prism">src/app/features/calendar/calendar.component.ts:28</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="61" class="link-to-prism">src/app/features/calendar/calendar.component.ts:61</a></div>
                         </td>
                     </tr>
 
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description">Service to retrieve user settings such as currency.</div>
+                </td>
+            </tr>
 
         </tbody>
     </table>
@@ -1037,10 +1161,16 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="24" class="link-to-prism">src/app/features/calendar/calendar.component.ts:24</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="51" class="link-to-prism">src/app/features/calendar/calendar.component.ts:51</a></div>
                         </td>
                     </tr>
 
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Weekday labels</p>
+</div>
+                </td>
+            </tr>
 
         </tbody>
     </table>
@@ -1055,26 +1185,59 @@ import { ExpenseService, Expense } from &#x27;../../service/localStorage/expense
 import { CommonModule } from &#x27;@angular/common&#x27;;
 import { UserService } from &#x27;../../service/localStorage/user.service&#x27;;
 
-
+/**
+ * Component that renders a monthly calendar view with expense tracking.
+ *
+ * Features:
+ * - Displays days of the current month with previous/next month padding.
+ * - Highlights today’s date.
+ * - Calculates total expenses per month and per day.
+ * - Opens modal to view daily expenses.
+ */
 @Component({
   selector: &#x27;app-calendar&#x27;,
   imports: [CommonModule],
   templateUrl: &#x27;./calendar.component.html&#x27;,
   styleUrl: &#x27;./calendar.component.css&#x27;
 })
-
 export class CalendarComponent implements OnInit {
+
+  /** Current year of the calendar */
   currentYear &#x3D; new Date().getFullYear();
+
+  /** Current month of the calendar (0-11) */
   currentMonth &#x3D; new Date().getMonth();
+
+  /** Calendar header title (e.g., &quot;September 2025&quot;) */
   calendarTitle &#x3D; &#x27;&#x27;;
+
+  /** Total expenses in the current month */
   totalExpenses &#x3D; 0;
+
+  /** Array of calendar day objects for rendering */
   calendarDays: any[] &#x3D; [];
+
+  /** Whether the daily expense modal is visible */
   showModal &#x3D; false;
+
+  /** Title of the modal showing daily expenses */
   modalTitle &#x3D; &#x27;&#x27;;
+
+  /** List of expenses for the selected day in the modal */
   modalExpenses: any[] &#x3D; [];
+
+  /** Currency symbol from user settings */
   currency: string | null;
+
+  /** Weekday labels */
   weekDays &#x3D; [&#x27;Sun&#x27;, &#x27;Mon&#x27;, &#x27;Tue&#x27;, &#x27;Wed&#x27;, &#x27;Thu&#x27;, &#x27;Fri&#x27;, &#x27;Sat&#x27;];
 
+  /**
+   * Creates an instance of CalendarComponent.
+   *
+   * @param expenseService Service to retrieve expenses from local storage.
+   * @param userService Service to retrieve user settings such as currency.
+   */
   constructor(
     private expenseService: ExpenseService,
     public userService: UserService
@@ -1082,10 +1245,16 @@ export class CalendarComponent implements OnInit {
     this.currency &#x3D; this.userService.getValue&lt;string&gt;(&#x27;currency&#x27;);
   }
 
+  /** Angular lifecycle hook that initializes the calendar view */
   ngOnInit(): void {
     this.renderCalendar(this.currentYear, this.currentMonth);
   }
 
+  /**
+   * Changes the calendar month by a specified offset.
+   *
+   * @param offset Number of months to change (positive or negative)
+   */
   changeMonth(offset: number): void {
     this.currentMonth +&#x3D; offset;
     if (this.currentMonth &lt; 0) {
@@ -1098,6 +1267,12 @@ export class CalendarComponent implements OnInit {
     this.renderCalendar(this.currentYear, this.currentMonth);
   }
 
+  /**
+   * Renders the calendar for a given year and month.
+   *
+   * @param year Year to render
+   * @param month Month to render (0-11)
+   */
   renderCalendar(year: number, month: number): void {
     this.calendarDays &#x3D; [];
     const today &#x3D; new Date();
@@ -1111,12 +1286,12 @@ export class CalendarComponent implements OnInit {
     const toDate &#x3D; &#x60;${year}-${monthStr}-${daysInMonth}&#x60;;
     this.calculateTotalExpenses(fromDate, toDate);
 
-    // Previous month days
+    // Render previous month days
     for (let i &#x3D; firstDay - 1; i &gt;&#x3D; 0; i--) {
       this.calendarDays.push({ label: prevMonthDays - i, classes: &#x27;text-[var(--color-gray-500)] bg-[var(--color-surface)] opacity-50&#x27;, isCurrentMonth: false });
     }
 
-    // Current month days
+    // Render current month days
     for (let day &#x3D; 1; day &lt;&#x3D; daysInMonth; day++) {
       const dateStr &#x3D; &#x60;${year}-${monthStr}-${String(day).padStart(2, &#x27;0&#x27;)}&#x60;;
       const isToday &#x3D; day &#x3D;&#x3D;&#x3D; today.getDate() &amp;&amp; month &#x3D;&#x3D;&#x3D; today.getMonth() &amp;&amp; year &#x3D;&#x3D;&#x3D; today.getFullYear();
@@ -1129,7 +1304,7 @@ export class CalendarComponent implements OnInit {
       });
     }
 
-    // Next month padding
+    // Render next month padding days
     const totalCells &#x3D; firstDay + daysInMonth;
     const nextDays &#x3D; 7 - (totalCells % 7);
     if (nextDays &lt; 7) {
@@ -1139,6 +1314,12 @@ export class CalendarComponent implements OnInit {
     }
   }
 
+  /**
+   * Calculates the total expenses for a given date range.
+   *
+   * @param fromDate Start date (YYYY-MM-DD)
+   * @param toDate End date (YYYY-MM-DD)
+   */
   calculateTotalExpenses(fromDate: string, toDate: string): void {
     try {
       const data: Expense[] &#x3D; this.expenseService.searchByDateRange(fromDate, toDate);
@@ -1149,6 +1330,11 @@ export class CalendarComponent implements OnInit {
     }
   }
 
+  /**
+   * Opens the modal to show expenses for a specific day.
+   *
+   * @param dateStr Date string (YYYY-MM-DD)
+   */
   openModal(dateStr: string): void {
     try {
       const expenses: Expense[] &#x3D; this.expenseService.searchByDateRange(dateStr, dateStr);
@@ -1161,6 +1347,9 @@ export class CalendarComponent implements OnInit {
     }
   }
 
+  /**
+   * Closes the daily expenses modal and clears modal data.
+   */
   closeModal(): void {
     this.showModal &#x3D; false;
     this.modalExpenses &#x3D; [];
@@ -1267,7 +1456,7 @@ export class CalendarComponent implements OnInit {
 <script src="../js/libs/deep-iterator.js"></script>
 <script>
         var COMPONENT_TEMPLATE = '<div><section id="calendar" class="section p-4">    <div class="flex flex-col justify-between">        <div class="flex justify-between m-auto items-center w-[350px] my-4">            <button (click)="changeMonth(-1)"                class="bg-[var(--color-accent)] text-[var(--color-white)] px-4 py-2 rounded mr-2 transition">&lt;            </button>            <div class="text-center font-semibold"><a href="/music">Total Expenses: </a><span class="text-[var(--color-green)]">{{currency}} {{                    totalExpenses }}</span>            </div>            <button (click)="changeMonth(1)"                class="bg-[var(--color-accent)] text-[var(--color-white)] px-4 py-2 rounded ml-2 transition">                &gt;</button>        </div>        <div>            <h2                class="border-b border-[var(--color-white)] p-2 bg-[var(--color-accent)] text-[var(--color-white)] text-lg font-semibold text-center">                {{ calendarTitle }}            </h2>            <div                class="grid grid-cols-7 text-center font-semibold shadow bg-[var(--color-accent)] text-[var(--color-white)] uppercase text-xs">                <div class="border-r border-[var(--color-white)] p-2" *ngFor="let day of weekDays">{{ day }}</div>            </div>            <div class="grid grid-cols-7 gap-2 mt-2 text-center text-sm">                <ng-container *ngFor="let day of calendarDays">                    <div [ngClass]="day.classes" class="p-2 rounded"                        (click)="day.isCurrentMonth && openModal(day.date)">                        {{ day.label }}                    </div>                </ng-container>            </div>        </div>    </div>    <!-- Modal -->    <div id="dayModal" class="fixed inset-0 bg-black bg-opacity-50 items-center justify-center z-50 flex"        *ngIf="showModal">        <div class="bg-[var(--color-bg)] p-6 rounded-xl w-11/12 md:w-1/2 max-h-[60vh] flex flex-col shadow-xl">            <div class="flex justify-between items-center mb-4">                <h2 class="text-lg font-bold text-[var(--color-text)]">{{ modalTitle }}</h2>                <button (click)="closeModal()" class="text-[var(--color-red)] font-bold text-xl">&times;</button>            </div>            <ul class="space-y-3 overflow-y-auto pr-2 scrollbar-thin scrollbar-thumb-[var(--color-gray-500)] scrollbar-track-[var(--color-gray-500)] "                style="max-height: 60vh;">                <li *ngIf="modalExpenses.length === 0" class="text-[var(--color-gray-500)]">No expenses found for this                    date.</li>                <li *ngFor="let exp of modalExpenses"                    class="bg-[var(--color-surface)] hover:bg-[var(--list-hover)] rounded-lg p-4 shadow-md">                    <div class="flex justify-between items-center mb-2">                        <span class="text-lg font-semibold text-[var(--color-green)]">{{currency}} {{ exp.amount }}</span>                        <span class="text-sm">{{ exp.category_name || \'Uncategorized\' }}</span>                    </div>                    <div class="text-sm space-y-1">                        <div><strong>Time:</strong> {{ exp.time }}</div>                        <div *ngIf="exp.note"><strong>Note:</strong> {{ exp.note }}</div>                        <div *ngIf="exp.location"><strong>Location:</strong> {{ exp.location }}</div>                        <div *ngIf="exp.payment_mode"><strong>Payment Mode:</strong> {{ exp.payment_mode }}</div>                    </div>                </li>            </ul>        </div>    </div></section></div>'
-    var COMPONENTS = [{'name': 'AddExpenseComponent', 'selector': 'app-add-expense'},{'name': 'AiComponent', 'selector': 'app-ai'},{'name': 'AppComponent', 'selector': 'app-root'},{'name': 'BudgetComponent', 'selector': 'app-budget'},{'name': 'CalendarComponent', 'selector': 'app-calendar'},{'name': 'CategoryDropdownComponent', 'selector': 'app-category-dropdown'},{'name': 'CustomModalComponent', 'selector': 'app-custom-modal'},{'name': 'DownloadComponentComponent', 'selector': 'app-download-component'},{'name': 'ExpenseDetailsModalComponent', 'selector': 'app-expense-details-modal'},{'name': 'ExpenseListComponent', 'selector': 'app-expense-list'},{'name': 'FooterComponent', 'selector': 'app-footer'},{'name': 'FormModelComponent', 'selector': 'app-form-model'},{'name': 'GlobalLoaderComponent', 'selector': 'app-global-loader'},{'name': 'GraphsComponent', 'selector': 'app-graphs'},{'name': 'HamburgerMenuComponent', 'selector': 'app-hamburger-menu'},{'name': 'HomeComponent', 'selector': 'app-home'},{'name': 'InstallAppPopupComponentComponent', 'selector': 'app-install-app-popup-component'},{'name': 'ListExpensesComponent', 'selector': 'app-list-expenses'},{'name': 'MusicComponent', 'selector': 'app-music'},{'name': 'NavbarComponent', 'selector': 'app-navbar'},{'name': 'PieChartComponent', 'selector': 'app-pie-chart'},{'name': 'SearchButtonComponent', 'selector': 'app-search-button'},{'name': 'SearchComponent', 'selector': 'app-search'},{'name': 'SettingItemComponent', 'selector': 'app-setting-item'},{'name': 'SettingsComponent', 'selector': 'app-settings'},{'name': 'SidebarComponent', 'selector': 'app-sidebar'},{'name': 'TemplatePlaygroundComponent', 'selector': 'template-playground-root'},{'name': 'ToastComponent', 'selector': 'app-toast'}];
+    var COMPONENTS = [{'name': 'AddExpenseComponent', 'selector': 'app-add-expense'},{'name': 'AiComponent', 'selector': 'app-ai'},{'name': 'AppComponent', 'selector': 'app-root'},{'name': 'BudgetComponent', 'selector': 'app-budget'},{'name': 'CalendarComponent', 'selector': 'app-calendar'},{'name': 'CategoryDropdownComponent', 'selector': 'app-category-dropdown'},{'name': 'DownloadComponentComponent', 'selector': 'app-download-component'},{'name': 'ExpenseDetailsModalComponent', 'selector': 'app-expense-details-modal'},{'name': 'ExpenseListComponent', 'selector': 'app-expense-list'},{'name': 'FooterComponent', 'selector': 'app-footer'},{'name': 'FormModelComponent', 'selector': 'app-form-model'},{'name': 'GlobalLoaderComponent', 'selector': 'app-global-loader'},{'name': 'GraphsComponent', 'selector': 'app-graphs'},{'name': 'HamburgerMenuComponent', 'selector': 'app-hamburger-menu'},{'name': 'HomeComponent', 'selector': 'app-home'},{'name': 'InstallAppPopupComponentComponent', 'selector': 'app-install-app-popup-component'},{'name': 'ListExpensesComponent', 'selector': 'app-list-expenses'},{'name': 'MusicComponent', 'selector': 'app-music'},{'name': 'NavbarComponent', 'selector': 'app-navbar'},{'name': 'PieChartComponent', 'selector': 'app-pie-chart'},{'name': 'SearchButtonComponent', 'selector': 'app-search-button'},{'name': 'SettingItemComponent', 'selector': 'app-setting-item'},{'name': 'SettingsComponent', 'selector': 'app-settings'},{'name': 'SidebarComponent', 'selector': 'app-sidebar'},{'name': 'TemplatePlaygroundComponent', 'selector': 'template-playground-root'},{'name': 'ToastComponent', 'selector': 'app-toast'}];
     var DIRECTIVES = [];
     var ACTUAL_COMPONENT = {'name': 'CalendarComponent'};
 </script>

@@ -142,6 +142,19 @@
 </p>
 
 
+    <p class="comment">
+        <h3>Description</h3>
+    </p>
+    <p class="comment">
+        <p>Sidebar navigation component.</p>
+<p>This component:</p>
+<ul>
+<li>Displays sidebar links for navigating between different application sections.</li>
+<li>Highlights the currently active section.</li>
+<li>Communicates with <a href="../injectables/SectionService.html">SectionService</a> to update and listen to the current active section.</li>
+</ul>
+
+    </p>
 
 
 
@@ -255,12 +268,16 @@
                 </tr>
                         <tr>
                             <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="13" class="link-to-prism">src/app/shared/sidebar/sidebar.component.ts:13</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="25" class="link-to-prism">src/app/shared/sidebar/sidebar.component.ts:25</a></div>
                             </td>
                         </tr>
 
                 <tr>
                     <td class="col-md-4">
+                            <div class="io-description"><p>Creates an instance of SidebarComponent.</p>
+<p>Subscribes to <a href="SectionService.currentSection$">SectionService.currentSection$</a> to keep track of
+the currently selected section and update the UI accordingly.</p>
+</div>
                             <div>
                                     <b>Parameters :</b>
                                     <table class="params">
@@ -269,6 +286,7 @@
                                                 <td>Name</td>
                                                     <td>Type</td>
                                                 <td>Optional</td>
+                                                    <td>Description</td>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -283,6 +301,10 @@
                                                             No
                                                     </td>
                                                     
+                                                        <td>
+                                                                <p>Service for managing and broadcasting the active section state.</p>
+
+                                                        </td>
                                                 </tr>
                                         </tbody>
                                     </table>
@@ -322,14 +344,17 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="21"
-                                    class="link-to-prism">src/app/shared/sidebar/sidebar.component.ts:21</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="48"
+                                    class="link-to-prism">src/app/shared/sidebar/sidebar.component.ts:48</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
+                        <div class="io-description"><p>Handles sidebar link clicks by updating the current section
+and preventing the default anchor navigation behavior.</p>
+</div>
 
                             <div class="io-description">
                                 <b>Parameters :</b>
@@ -340,6 +365,7 @@
                                             <td>Name</td>
                                                 <td>Type</td>
                                             <td>Optional</td>
+                                                <td>Description</td>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -354,6 +380,10 @@
                                             </td>
 
 
+                                            <td>
+                                                    <p>The section identifier to navigate to.</p>
+
+                                            </td>
                                         </tr>
                                         <tr>
                                                 <td>event</td>
@@ -366,6 +396,10 @@
                                             </td>
 
 
+                                            <td>
+                                                    <p>The click event object (used to prevent default navigation).</p>
+
+                                            </td>
                                         </tr>
                                     </tbody>
                                 </table>
@@ -411,10 +445,17 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="13" class="link-to-prism">src/app/shared/sidebar/sidebar.component.ts:13</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="25" class="link-to-prism">src/app/shared/sidebar/sidebar.component.ts:25</a></div>
                         </td>
                     </tr>
 
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Holds the name of the currently active navigation path/section.
+Used to apply active styling to the sidebar item.</p>
+</div>
+                </td>
+            </tr>
 
         </tbody>
     </table>
@@ -428,6 +469,14 @@
 import { Component } from &#x27;@angular/core&#x27;;
 import { SectionService } from &#x27;../../service/section/section.service&#x27;;
 
+/**
+ * Sidebar navigation component.
+ *
+ * This component:
+ * - Displays sidebar links for navigating between different application sections.
+ * - Highlights the currently active section.
+ * - Communicates with {@link SectionService} to update and listen to the current active section.
+ */
 @Component({
   selector: &#x27;app-sidebar&#x27;,
   standalone: true,
@@ -436,15 +485,34 @@ import { SectionService } from &#x27;../../service/section/section.service&#x27;
   styleUrls: [&#x27;./sidebar.component.css&#x27;]
 })
 export class SidebarComponent {
+  /**
+   * Holds the name of the currently active navigation path/section.
+   * Used to apply active styling to the sidebar item.
+   */
   activePath: string &#x3D; &#x27;&#x27;;
 
+  /**
+   * Creates an instance of SidebarComponent.
+   *
+   * Subscribes to {@link SectionService.currentSection$} to keep track of
+   * the currently selected section and update the UI accordingly.
+   *
+   * @param sectionService Service for managing and broadcasting the active section state.
+   */
   constructor(private sectionService: SectionService) {
     this.sectionService.currentSection$.subscribe(section &#x3D;&gt; {
       this.activePath &#x3D; section;
     });
   }
 
-  navigateAndClose(section: string, event: Event) {
+  /**
+   * Handles sidebar link clicks by updating the current section
+   * and preventing the default anchor navigation behavior.
+   *
+   * @param section The section identifier to navigate to.
+   * @param event The click event object (used to prevent default navigation).
+   */
+  navigateAndClose(section: string, event: Event): void {
     event.preventDefault();
     this.sectionService.setSection(section);
   }
@@ -561,7 +629,7 @@ export class SidebarComponent {
 <script src="../js/libs/deep-iterator.js"></script>
 <script>
         var COMPONENT_TEMPLATE = '<div><!-- Desktop Sidebar --><aside #sidebarRef id="sidebar"  class="fixed md:static z-40 w-64 bg-[var(--color-surface)] shadow p-4 transition-all duration-300 ease-in-out hidden md:block h-full">  <ul class="space-y-4">    <li>      <a href="#" (click)="navigateAndClose(\'home\', $event)" class="block hover:text-[var(--color-accent)]">🏠 Home</a>    </li>    <li>      <a href="#" (click)="navigateAndClose(\'add\', $event)" class="block hover:text-[var(--color-accent)]">➕ Add        Expense</a>    </li>    <li>      <a href="#" (click)="navigateAndClose(\'list\', $event)" class="block hover:text-[var(--color-accent)]">📋 List</a>    </li>    <li>      <a href="#" (click)="navigateAndClose(\'calendar\', $event)" class="block hover:text-[var(--color-accent)]">📅        Calendar</a>    </li>    <li>      <a href="#" (click)="navigateAndClose(\'budget\', $event)" class="block hover:text-[var(--color-accent)]">💰        Budget</a>    </li>    <li>      <a href="#" (click)="navigateAndClose(\'ai\', $event)" class="block hover:text-[var(--color-accent)]"> 💬 AI        Assistant</a>    </li>    <li>      <a href="#" (click)="navigateAndClose(\'settings\', $event)" class="block hover:text-[var(--color-accent)]">⚙️        Settings</a>    </li>  </ul></aside><!-- Mobile Bottom Nav --><nav  class="md:hidden fixed bottom-0 py-[5px] h-[50px] left-0 right-0 bg-[var(--color-surface)] shadow-t flex justify-around z-50">  <button (click)="navigateAndClose(\'list\', $event)"    [ngClass]="{\'scale-110  rounded-[50%] bg-[--list-hover]\': activePath === \'list\'}"    class="h-[40px] w-[40px] block px-2 text-sm relative transition-all duration-300 ease-in-out">    <img src="assets/img/icon/icons8-list-60.png" alt="list"      class="w-[25px] h-[25px] transition-all duration-300 ease-in-out" style="filter: var(--icon-color2);">  </button>  <button (click)="navigateAndClose(\'calendar\', $event)"    [ngClass]="{\'scale-110  rounded-[50%] bg-[--list-hover]\': activePath === \'calendar\'}"    class="h-[40px] w-[40px] block  px-2 text-sm relative transition-all duration-300 ease-in-out">    <img src="assets/img/icon/icons8-calendar-50.png" alt="calendar"      class="w-[25px] h-[25px] transition-all duration-300 ease-in-out" style="filter: var(--icon-color2);">  </button>  <button (click)="navigateAndClose(\'add\', $event)"    [ngClass]="{\'scale-110  rounded-[50%] bg-[--list-hover]\': activePath === \'add\'}"    class="h-[40px] w-[40px] block  px-2 text-sm relative transition-all duration-300 ease-in-out">    <img src="assets/img/icon/icons8-add-60.png" alt="add"      class="w-[25px] h-[25px] transition-all duration-300 ease-in-out" style="filter: var(--icon-color2);">  </button>  <button (click)="navigateAndClose(\'budget\', $event)"    [ngClass]="{\'scale-110  rounded-[50%] bg-[--list-hover]\': activePath === \'budget\'}"    class="h-[40px] w-[40px] block  px-2 text-sm relative transition-all duration-300 ease-in-out">    <img src="assets/img/icon/icons8-budget-50.png" alt="budget"      class="w-[25px] h-[25px] transition-all duration-300 ease-in-out" style="filter: var(--icon-color2);">  </button>  <button (click)="navigateAndClose(\'settings\', $event)"    [ngClass]="{\'scale-110  rounded-[50%] bg-[--list-hover]\': activePath === \'settings\'}"    class="h-[40px] w-[40px] block  px-2 text-sm relative transition-all duration-300 ease-in-out">    <img src="assets/img/icon/icons8-settings-50.png" alt="settings"      class="w-[25px] h-[25px] transition-all duration-300 ease-in-out" style="filter: var(--icon-color2);">  </button></nav></div>'
-    var COMPONENTS = [{'name': 'AddExpenseComponent', 'selector': 'app-add-expense'},{'name': 'AiComponent', 'selector': 'app-ai'},{'name': 'AppComponent', 'selector': 'app-root'},{'name': 'BudgetComponent', 'selector': 'app-budget'},{'name': 'CalendarComponent', 'selector': 'app-calendar'},{'name': 'CategoryDropdownComponent', 'selector': 'app-category-dropdown'},{'name': 'CustomModalComponent', 'selector': 'app-custom-modal'},{'name': 'DownloadComponentComponent', 'selector': 'app-download-component'},{'name': 'ExpenseDetailsModalComponent', 'selector': 'app-expense-details-modal'},{'name': 'ExpenseListComponent', 'selector': 'app-expense-list'},{'name': 'FooterComponent', 'selector': 'app-footer'},{'name': 'FormModelComponent', 'selector': 'app-form-model'},{'name': 'GlobalLoaderComponent', 'selector': 'app-global-loader'},{'name': 'GraphsComponent', 'selector': 'app-graphs'},{'name': 'HamburgerMenuComponent', 'selector': 'app-hamburger-menu'},{'name': 'HomeComponent', 'selector': 'app-home'},{'name': 'InstallAppPopupComponentComponent', 'selector': 'app-install-app-popup-component'},{'name': 'ListExpensesComponent', 'selector': 'app-list-expenses'},{'name': 'MusicComponent', 'selector': 'app-music'},{'name': 'NavbarComponent', 'selector': 'app-navbar'},{'name': 'PieChartComponent', 'selector': 'app-pie-chart'},{'name': 'SearchButtonComponent', 'selector': 'app-search-button'},{'name': 'SearchComponent', 'selector': 'app-search'},{'name': 'SettingItemComponent', 'selector': 'app-setting-item'},{'name': 'SettingsComponent', 'selector': 'app-settings'},{'name': 'SidebarComponent', 'selector': 'app-sidebar'},{'name': 'TemplatePlaygroundComponent', 'selector': 'template-playground-root'},{'name': 'ToastComponent', 'selector': 'app-toast'}];
+    var COMPONENTS = [{'name': 'AddExpenseComponent', 'selector': 'app-add-expense'},{'name': 'AiComponent', 'selector': 'app-ai'},{'name': 'AppComponent', 'selector': 'app-root'},{'name': 'BudgetComponent', 'selector': 'app-budget'},{'name': 'CalendarComponent', 'selector': 'app-calendar'},{'name': 'CategoryDropdownComponent', 'selector': 'app-category-dropdown'},{'name': 'DownloadComponentComponent', 'selector': 'app-download-component'},{'name': 'ExpenseDetailsModalComponent', 'selector': 'app-expense-details-modal'},{'name': 'ExpenseListComponent', 'selector': 'app-expense-list'},{'name': 'FooterComponent', 'selector': 'app-footer'},{'name': 'FormModelComponent', 'selector': 'app-form-model'},{'name': 'GlobalLoaderComponent', 'selector': 'app-global-loader'},{'name': 'GraphsComponent', 'selector': 'app-graphs'},{'name': 'HamburgerMenuComponent', 'selector': 'app-hamburger-menu'},{'name': 'HomeComponent', 'selector': 'app-home'},{'name': 'InstallAppPopupComponentComponent', 'selector': 'app-install-app-popup-component'},{'name': 'ListExpensesComponent', 'selector': 'app-list-expenses'},{'name': 'MusicComponent', 'selector': 'app-music'},{'name': 'NavbarComponent', 'selector': 'app-navbar'},{'name': 'PieChartComponent', 'selector': 'app-pie-chart'},{'name': 'SearchButtonComponent', 'selector': 'app-search-button'},{'name': 'SettingItemComponent', 'selector': 'app-setting-item'},{'name': 'SettingsComponent', 'selector': 'app-settings'},{'name': 'SidebarComponent', 'selector': 'app-sidebar'},{'name': 'TemplatePlaygroundComponent', 'selector': 'template-playground-root'},{'name': 'ToastComponent', 'selector': 'app-toast'}];
     var DIRECTIVES = [];
     var ACTUAL_COMPONENT = {'name': 'SidebarComponent'};
 </script>

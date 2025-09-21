@@ -142,6 +142,19 @@
 </p>
 
 
+    <p class="comment">
+        <h3>Description</h3>
+    </p>
+    <p class="comment">
+        <p>Navbar component that displays the top navigation bar.</p>
+<p>Features:</p>
+<ul>
+<li>Shows a back button when the current section is not &#39;home&#39;.</li>
+<li>Integrates with <a href="../injectables/SectionService.html">SectionService</a> to track and update the current section.</li>
+<li>Includes the <a href="../components/HamburgerMenuComponent.html">HamburgerMenuComponent</a> for mobile or compact navigation.</li>
+</ul>
+
+    </p>
 
 
 
@@ -252,12 +265,16 @@
                 </tr>
                         <tr>
                             <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="14" class="link-to-prism">src/app/shared/navbar/navbar.component.ts:14</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="25" class="link-to-prism">src/app/shared/navbar/navbar.component.ts:25</a></div>
                             </td>
                         </tr>
 
                 <tr>
                     <td class="col-md-4">
+                            <div class="io-description"><p>Creates an instance of NavbarComponent.</p>
+<p>Subscribes to <a href="SectionService.currentSection$">SectionService.currentSection$</a> to determine
+whether the back button should be visible based on the current section.</p>
+</div>
                             <div>
                                     <b>Parameters :</b>
                                     <table class="params">
@@ -266,6 +283,7 @@
                                                 <td>Name</td>
                                                     <td>Type</td>
                                                 <td>Optional</td>
+                                                    <td>Description</td>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -280,6 +298,10 @@
                                                             No
                                                     </td>
                                                     
+                                                        <td>
+                                                                <p>Service used to manage and broadcast the active section state.</p>
+
+                                                        </td>
                                                 </tr>
                                         </tbody>
                                     </table>
@@ -319,14 +341,17 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="22"
-                                    class="link-to-prism">src/app/shared/navbar/navbar.component.ts:22</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="48"
+                                    class="link-to-prism">src/app/shared/navbar/navbar.component.ts:48</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
+                        <div class="io-description"><p>Handles navigation link clicks by updating the current section
+and preventing default anchor navigation behavior.</p>
+</div>
 
                             <div class="io-description">
                                 <b>Parameters :</b>
@@ -337,6 +362,7 @@
                                             <td>Name</td>
                                                 <td>Type</td>
                                             <td>Optional</td>
+                                                <td>Description</td>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -351,6 +377,10 @@
                                             </td>
 
 
+                                            <td>
+                                                    <p>The section identifier to navigate to.</p>
+
+                                            </td>
                                         </tr>
                                         <tr>
                                                 <td>event</td>
@@ -363,6 +393,10 @@
                                             </td>
 
 
+                                            <td>
+                                                    <p>The click event object (used to prevent default behavior).</p>
+
+                                            </td>
                                         </tr>
                                     </tbody>
                                 </table>
@@ -402,10 +436,17 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="14" class="link-to-prism">src/app/shared/navbar/navbar.component.ts:14</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="25" class="link-to-prism">src/app/shared/navbar/navbar.component.ts:25</a></div>
                         </td>
                     </tr>
 
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Flag indicating whether the back button should be displayed.
+True when the current section is not &#39;home&#39;.</p>
+</div>
+                </td>
+            </tr>
 
         </tbody>
     </table>
@@ -420,27 +461,52 @@ import { CommonModule } from &#x27;@angular/common&#x27;;
 import { SectionService } from &#x27;../../service/section/section.service&#x27;;
 import { HamburgerMenuComponent } from &#x27;../hamburger-menu/hamburger-menu.component&#x27;;
 
+/**
+ * Navbar component that displays the top navigation bar.
+ *
+ * Features:
+ * - Shows a back button when the current section is not &#x27;home&#x27;.
+ * - Integrates with {@link SectionService} to track and update the current section.
+ * - Includes the {@link HamburgerMenuComponent} for mobile or compact navigation.
+ */
 @Component({
   selector: &#x27;app-navbar&#x27;,
   imports: [CommonModule, HamburgerMenuComponent],
   templateUrl: &#x27;./navbar.component.html&#x27;,
   styleUrls: [&#x27;./navbar.component.css&#x27;]
 })
-
 export class NavbarComponent {
+  /**
+   * Flag indicating whether the back button should be displayed.
+   * True when the current section is not &#x27;home&#x27;.
+   */
   showBackButton &#x3D; false;
 
+  /**
+   * Creates an instance of NavbarComponent.
+   *
+   * Subscribes to {@link SectionService.currentSection$} to determine
+   * whether the back button should be visible based on the current section.
+   *
+   * @param sectionService Service used to manage and broadcast the active section state.
+   */
   constructor(private sectionService: SectionService) {
     this.sectionService.currentSection$.subscribe(section &#x3D;&gt; {
       this.showBackButton &#x3D; section !&#x3D;&#x3D; &#x27;home&#x27;;
     });
   }
 
-  navigateAndClose(section: string, event: Event) {
+  /**
+   * Handles navigation link clicks by updating the current section
+   * and preventing default anchor navigation behavior.
+   *
+   * @param section The section identifier to navigate to.
+   * @param event The click event object (used to prevent default behavior).
+   */
+  navigateAndClose(section: string, event: Event): void {
     event.preventDefault();
     this.sectionService.setSection(section);
   }
-
 }
 </code></pre>
     </div>
@@ -496,7 +562,7 @@ export class NavbarComponent {
 <script src="../js/libs/deep-iterator.js"></script>
 <script>
         var COMPONENT_TEMPLATE = '<div><nav class="fixed top-0 left-0 w-full bg-[var(--color-accent)] text-[var(--color-text)] z-50 shadow">    <div class="flex items-center justify-between px-4 py-3 relative">        <!-- Back Button -->        <button *ngIf="showBackButton" (click)="navigateAndClose(\'home\', $event)"            class="absolute left-4 text-xl hover:text-[var(--color-text2)] p-1">            <img src="assets/img/icon/icons8-home-50.png" alt="Back" class="w-6 h-6"                style="filter: invert(100%); transition: filter 0.3s ease;">        </button>        <!-- Center Title -->        <h1 class="mx-auto text-lg text-[var(--color-white)] font-semibold">            Expense Tracker        </h1>    </div>    <app-hamburger-menu></app-hamburger-menu></nav></div>'
-    var COMPONENTS = [{'name': 'AddExpenseComponent', 'selector': 'app-add-expense'},{'name': 'AiComponent', 'selector': 'app-ai'},{'name': 'AppComponent', 'selector': 'app-root'},{'name': 'BudgetComponent', 'selector': 'app-budget'},{'name': 'CalendarComponent', 'selector': 'app-calendar'},{'name': 'CategoryDropdownComponent', 'selector': 'app-category-dropdown'},{'name': 'CustomModalComponent', 'selector': 'app-custom-modal'},{'name': 'DownloadComponentComponent', 'selector': 'app-download-component'},{'name': 'ExpenseDetailsModalComponent', 'selector': 'app-expense-details-modal'},{'name': 'ExpenseListComponent', 'selector': 'app-expense-list'},{'name': 'FooterComponent', 'selector': 'app-footer'},{'name': 'FormModelComponent', 'selector': 'app-form-model'},{'name': 'GlobalLoaderComponent', 'selector': 'app-global-loader'},{'name': 'GraphsComponent', 'selector': 'app-graphs'},{'name': 'HamburgerMenuComponent', 'selector': 'app-hamburger-menu'},{'name': 'HomeComponent', 'selector': 'app-home'},{'name': 'InstallAppPopupComponentComponent', 'selector': 'app-install-app-popup-component'},{'name': 'ListExpensesComponent', 'selector': 'app-list-expenses'},{'name': 'MusicComponent', 'selector': 'app-music'},{'name': 'NavbarComponent', 'selector': 'app-navbar'},{'name': 'PieChartComponent', 'selector': 'app-pie-chart'},{'name': 'SearchButtonComponent', 'selector': 'app-search-button'},{'name': 'SearchComponent', 'selector': 'app-search'},{'name': 'SettingItemComponent', 'selector': 'app-setting-item'},{'name': 'SettingsComponent', 'selector': 'app-settings'},{'name': 'SidebarComponent', 'selector': 'app-sidebar'},{'name': 'TemplatePlaygroundComponent', 'selector': 'template-playground-root'},{'name': 'ToastComponent', 'selector': 'app-toast'}];
+    var COMPONENTS = [{'name': 'AddExpenseComponent', 'selector': 'app-add-expense'},{'name': 'AiComponent', 'selector': 'app-ai'},{'name': 'AppComponent', 'selector': 'app-root'},{'name': 'BudgetComponent', 'selector': 'app-budget'},{'name': 'CalendarComponent', 'selector': 'app-calendar'},{'name': 'CategoryDropdownComponent', 'selector': 'app-category-dropdown'},{'name': 'DownloadComponentComponent', 'selector': 'app-download-component'},{'name': 'ExpenseDetailsModalComponent', 'selector': 'app-expense-details-modal'},{'name': 'ExpenseListComponent', 'selector': 'app-expense-list'},{'name': 'FooterComponent', 'selector': 'app-footer'},{'name': 'FormModelComponent', 'selector': 'app-form-model'},{'name': 'GlobalLoaderComponent', 'selector': 'app-global-loader'},{'name': 'GraphsComponent', 'selector': 'app-graphs'},{'name': 'HamburgerMenuComponent', 'selector': 'app-hamburger-menu'},{'name': 'HomeComponent', 'selector': 'app-home'},{'name': 'InstallAppPopupComponentComponent', 'selector': 'app-install-app-popup-component'},{'name': 'ListExpensesComponent', 'selector': 'app-list-expenses'},{'name': 'MusicComponent', 'selector': 'app-music'},{'name': 'NavbarComponent', 'selector': 'app-navbar'},{'name': 'PieChartComponent', 'selector': 'app-pie-chart'},{'name': 'SearchButtonComponent', 'selector': 'app-search-button'},{'name': 'SettingItemComponent', 'selector': 'app-setting-item'},{'name': 'SettingsComponent', 'selector': 'app-settings'},{'name': 'SidebarComponent', 'selector': 'app-sidebar'},{'name': 'TemplatePlaygroundComponent', 'selector': 'template-playground-root'},{'name': 'ToastComponent', 'selector': 'app-toast'}];
     var DIRECTIVES = [];
     var ACTUAL_COMPONENT = {'name': 'NavbarComponent'};
 </script>

@@ -137,6 +137,18 @@
         </p>
 
 
+            <p class="comment">
+                <h3>Description</h3>
+            </p>
+            <p class="comment">
+                <p>Service to control the global loading indicator component.</p>
+<p>Features:</p>
+<ul>
+<li>Allows showing and hiding a global loader with optional custom message.</li>
+<li>Connects with <a href="../components/GlobalLoaderComponent.html">GlobalLoaderComponent</a> to display the loader UI.</li>
+</ul>
+
+            </p>
 
 
 
@@ -215,14 +227,16 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="19"
-                                    class="link-to-prism">src/app/service/global-loader/global-loader.service.ts:19</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="40"
+                                    class="link-to-prism">src/app/service/global-loader/global-loader.service.ts:40</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
+                        <div class="io-description"><p>Hides the global loader.</p>
+</div>
 
                         <div class="io-description">
                             <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
@@ -252,14 +266,16 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="11"
-                                    class="link-to-prism">src/app/service/global-loader/global-loader.service.ts:11</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="24"
+                                    class="link-to-prism">src/app/service/global-loader/global-loader.service.ts:24</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
+                        <div class="io-description"><p>Registers the global loader component instance.</p>
+</div>
 
                             <div class="io-description">
                                 <b>Parameters :</b>
@@ -270,6 +286,7 @@
                                             <td>Name</td>
                                                 <td>Type</td>
                                             <td>Optional</td>
+                                                <td>Description</td>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -284,6 +301,10 @@
                                             </td>
 
 
+                                            <td>
+                                                    <p>The <a href="../components/GlobalLoaderComponent.html">GlobalLoaderComponent</a> instance to control.</p>
+
+                                            </td>
                                         </tr>
                                     </tbody>
                                 </table>
@@ -319,14 +340,16 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="15"
-                                    class="link-to-prism">src/app/service/global-loader/global-loader.service.ts:15</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="33"
+                                    class="link-to-prism">src/app/service/global-loader/global-loader.service.ts:33</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
+                        <div class="io-description"><p>Shows the global loader with an optional message.</p>
+</div>
 
                             <div class="io-description">
                                 <b>Parameters :</b>
@@ -338,6 +361,7 @@
                                                 <td>Type</td>
                                             <td>Optional</td>
                                                 <td>Default value</td>
+                                                <td>Description</td>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -355,6 +379,10 @@
                                                     <code>&quot;Loading...&quot;</code>
                                             </td>
 
+                                            <td>
+                                                    <p>Optional loading message; defaults to &quot;Loading...&quot;.</p>
+
+                                            </td>
                                         </tr>
                                     </tbody>
                                 </table>
@@ -396,10 +424,16 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="9" class="link-to-prism">src/app/service/global-loader/global-loader.service.ts:9</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="17" class="link-to-prism">src/app/service/global-loader/global-loader.service.ts:17</a></div>
                         </td>
                     </tr>
 
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Reference to the registered global loader component</p>
+</div>
+                </td>
+            </tr>
 
         </tbody>
     </table>
@@ -412,25 +446,47 @@
         <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Injectable } from &#x27;@angular/core&#x27;;
 import { GlobalLoaderComponent } from &#x27;../../shared/global-loader/global-loader.component&#x27;;
 
+/**
+ * Service to control the global loading indicator component.
+ *
+ * Features:
+ * - Allows showing and hiding a global loader with optional custom message.
+ * - Connects with {@link GlobalLoaderComponent} to display the loader UI.
+ */
 @Injectable({
   providedIn: &#x27;root&#x27;
 })
 export class GlobalLoaderService {
 
+  /** Reference to the registered global loader component */
   private globalLoaderComponent!: GlobalLoaderComponent;
 
-  register(component: GlobalLoaderComponent) {
+  /**
+   * Registers the global loader component instance.
+   *
+   * @param component The {@link GlobalLoaderComponent} instance to control.
+   */
+  register(component: GlobalLoaderComponent): void {
     this.globalLoaderComponent &#x3D; component;
   }
   
-  show(text: string &#x3D; &quot;Loading...&quot;) {
+  /**
+   * Shows the global loader with an optional message.
+   *
+   * @param text Optional loading message; defaults to &quot;Loading...&quot;.
+   */
+  show(text: string &#x3D; &quot;Loading...&quot;): void {
     this.globalLoaderComponent?.show(text);
   }
 
-  hide() {
+  /**
+   * Hides the global loader.
+   */
+  hide(): void {
     this.globalLoaderComponent?.hide();
   }
-}</code></pre>
+}
+</code></pre>
     </div>
 
 </div>

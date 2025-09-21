@@ -142,6 +142,20 @@
 </p>
 
 
+    <p class="comment">
+        <h3>Description</h3>
+    </p>
+    <p class="comment">
+        <p>Hamburger menu component for mobile or compact navigation.</p>
+<p>Features:</p>
+<ul>
+<li>Toggles visibility of the menu.</li>
+<li>Closes menu when clicking outside of it.</li>
+<li>Shows/hides AI button depending on the current section.</li>
+<li>Integrates with <a href="../injectables/SectionService.html">SectionService</a> to navigate between sections.</li>
+</ul>
+
+    </p>
 
 
 
@@ -275,12 +289,16 @@
                 </tr>
                         <tr>
                             <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="13" class="link-to-prism">src/app/shared/hamburger-menu/hamburger-menu.component.ts:13</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="31" class="link-to-prism">src/app/shared/hamburger-menu/hamburger-menu.component.ts:31</a></div>
                             </td>
                         </tr>
 
                 <tr>
                     <td class="col-md-4">
+                            <div class="io-description"><p>Creates an instance of HamburgerMenuComponent.</p>
+<p>Subscribes to <a href="SectionService.currentSection$">SectionService.currentSection$</a> to manage the
+visibility of the AI button based on the current section.</p>
+</div>
                             <div>
                                     <b>Parameters :</b>
                                     <table class="params">
@@ -289,6 +307,7 @@
                                                 <td>Name</td>
                                                     <td>Type</td>
                                                 <td>Optional</td>
+                                                    <td>Description</td>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -303,6 +322,10 @@
                                                             No
                                                     </td>
                                                     
+                                                        <td>
+                                                                <p>Service for managing and broadcasting the active section.</p>
+
+                                                        </td>
                                                 </tr>
                                         </tbody>
                                     </table>
@@ -342,12 +365,48 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="28"
-                                    class="link-to-prism">src/app/shared/hamburger-menu/hamburger-menu.component.ts:28</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="61"
+                                    class="link-to-prism">src/app/shared/hamburger-menu/hamburger-menu.component.ts:61</a></div>
                         </td>
                     </tr>
 
 
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-description"><p>Listens for clicks on the document to close the menu
+if the click occurs outside the hamburger menu container.</p>
+</div>
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                            <td>Optional</td>
+                                                <td>Description</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>event</td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                            <td>
+                                                    <p>The mouse click event.</p>
+
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                </td>
+            </tr>
         </tbody>
     </table>
 </section>
@@ -376,14 +435,16 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="35"
-                                    class="link-to-prism">src/app/shared/hamburger-menu/hamburger-menu.component.ts:35</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="75"
+                                    class="link-to-prism">src/app/shared/hamburger-menu/hamburger-menu.component.ts:75</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
+                        <div class="io-description"><p>Navigates to the selected section and closes the menu.</p>
+</div>
 
                             <div class="io-description">
                                 <b>Parameters :</b>
@@ -394,6 +455,7 @@
                                             <td>Name</td>
                                                 <td>Type</td>
                                             <td>Optional</td>
+                                                <td>Description</td>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -408,6 +470,10 @@
                                             </td>
 
 
+                                            <td>
+                                                    <p>The section identifier to navigate to.</p>
+
+                                            </td>
                                         </tr>
                                         <tr>
                                                 <td>event</td>
@@ -420,6 +486,10 @@
                                             </td>
 
 
+                                            <td>
+                                                    <p>The click event object (used to prevent default anchor behavior).</p>
+
+                                            </td>
                                         </tr>
                                     </tbody>
                                 </table>
@@ -464,14 +534,17 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="28"
-                                    class="link-to-prism">src/app/shared/hamburger-menu/hamburger-menu.component.ts:28</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="61"
+                                    class="link-to-prism">src/app/shared/hamburger-menu/hamburger-menu.component.ts:61</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
+                        <div class="io-description"><p>Listens for clicks on the document to close the menu
+if the click occurs outside the hamburger menu container.</p>
+</div>
 
                             <div class="io-description">
                                 <b>Parameters :</b>
@@ -482,6 +555,7 @@
                                             <td>Name</td>
                                                 <td>Type</td>
                                             <td>Optional</td>
+                                                <td>Description</td>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -496,6 +570,10 @@
                                             </td>
 
 
+                                            <td>
+                                                    <p>The mouse click event.</p>
+
+                                            </td>
                                         </tr>
                                     </tbody>
                                 </table>
@@ -531,14 +609,16 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="22"
-                                    class="link-to-prism">src/app/shared/hamburger-menu/hamburger-menu.component.ts:22</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="50"
+                                    class="link-to-prism">src/app/shared/hamburger-menu/hamburger-menu.component.ts:50</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
+                        <div class="io-description"><p>Toggles the hamburger menu open/closed state.</p>
+</div>
 
                         <div class="io-description">
                             <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
@@ -572,10 +652,16 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="19" class="link-to-prism">src/app/shared/hamburger-menu/hamburger-menu.component.ts:19</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="31" class="link-to-prism">src/app/shared/hamburger-menu/hamburger-menu.component.ts:31</a></div>
                         </td>
                     </tr>
 
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Tracks whether the hamburger menu is currently open.</p>
+</div>
+                </td>
+            </tr>
 
         </tbody>
     </table>
@@ -597,10 +683,17 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="13" class="link-to-prism">src/app/shared/hamburger-menu/hamburger-menu.component.ts:13</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="26" class="link-to-prism">src/app/shared/hamburger-menu/hamburger-menu.component.ts:26</a></div>
                         </td>
                     </tr>
 
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Determines whether the AI button should be displayed.
+Hidden when the current section is &#39;ai&#39;.</p>
+</div>
+                </td>
+            </tr>
 
         </tbody>
     </table>
@@ -614,6 +707,15 @@
 import { CommonModule } from &#x27;@angular/common&#x27;;
 import { SectionService } from &#x27;../../service/section/section.service&#x27;;
 
+/**
+ * Hamburger menu component for mobile or compact navigation.
+ *
+ * Features:
+ * - Toggles visibility of the menu.
+ * - Closes menu when clicking outside of it.
+ * - Shows/hides AI button depending on the current section.
+ * - Integrates with {@link SectionService} to navigate between sections.
+ */
 @Component({
   selector: &#x27;app-hamburger-menu&#x27;,
   imports: [CommonModule],
@@ -622,34 +724,64 @@ import { SectionService } from &#x27;../../service/section/section.service&#x27;
 })
 export class HamburgerMenuComponent {
 
+  /**
+   * Determines whether the AI button should be displayed.
+   * Hidden when the current section is &#x27;ai&#x27;.
+   */
   showAIButton &#x3D; false;
+
+  /**
+   * Tracks whether the hamburger menu is currently open.
+   */
+  isMenuOpen &#x3D; false;
+
+  /**
+   * Creates an instance of HamburgerMenuComponent.
+   *
+   * Subscribes to {@link SectionService.currentSection$} to manage the
+   * visibility of the AI button based on the current section.
+   *
+   * @param sectionService Service for managing and broadcasting the active section.
+   */
   constructor(private sectionService: SectionService) {
     this.sectionService.currentSection$.subscribe(section &#x3D;&gt; {
       this.showAIButton &#x3D; section !&#x3D;&#x3D; &#x27;ai&#x27;;
     });
   }
-  isMenuOpen &#x3D; false;
 
-  // Toggle the menu when the button is clicked
-  toggleMenu() {
+  /**
+   * Toggles the hamburger menu open/closed state.
+   */
+  toggleMenu(): void {
     this.isMenuOpen &#x3D; !this.isMenuOpen;
   }
 
-  // Close the menu if clicked outside
+  /**
+   * Listens for clicks on the document to close the menu
+   * if the click occurs outside the hamburger menu container.
+   *
+   * @param event The mouse click event.
+   */
   @HostListener(&#x27;document:click&#x27;, [&#x27;$event&#x27;])
-  onClick(event: MouseEvent) {
-    const clickedInside &#x3D; event.target instanceof HTMLElement &amp;&amp; event.target.closest(&#x27;.hamburger-menu-container&#x27;);
+  onClick(event: MouseEvent): void {
+    const clickedInside &#x3D; event.target instanceof HTMLElement 
+      &amp;&amp; event.target.closest(&#x27;.hamburger-menu-container&#x27;);
     if (!clickedInside) {
       this.isMenuOpen &#x3D; false;
     }
   }
 
-  navigateAndClose(section: string, event: Event) {
+  /**
+   * Navigates to the selected section and closes the menu.
+   *
+   * @param section The section identifier to navigate to.
+   * @param event The click event object (used to prevent default anchor behavior).
+   */
+  navigateAndClose(section: string, event: Event): void {
     event.preventDefault();
     this.sectionService.setSection(section);
     this.isMenuOpen &#x3D; !this.isMenuOpen;
   }
-
 }
 </code></pre>
     </div>
@@ -719,7 +851,7 @@ export class HamburgerMenuComponent {
 <script src="../js/libs/deep-iterator.js"></script>
 <script>
         var COMPONENT_TEMPLATE = '<div><!-- <div class="md:hidden fixed top-1 right-4 z-50 hamburger-menu-container">    <button (click)="toggleMenu()" class="text-lg text-[var(--color-white)] py-2">        <img src="assets/img/icon/icons8-menu-vertical-50.png" alt="Menu" class="w-[24px] h-[24px]"            style="filter: invert(100%); transition: filter 0.3s ease;">    </button>        <div *ngIf="isMenuOpen"        class="fixed top-[3rem] right-[0.2rem] bg-[--color-surface] rounded-lg shadow-lg mt-2 w-[10rem]">        <ul class="flex flex-col">            <li>                <a href="#" (click)="navigateAndClose(\'search\', $event)"                    class="block px-4 py-2 hover:bg-[--list-hover]">🔍 Search</a>            </li>            <li>                <a href="#" (click)="navigateAndClose(\'settings\', $event)"                    class="block px-4 py-2 hover:bg-[--list-hover]">⚙️ Settings</a>            </li>        </ul>    </div></div> --><div class="md:hidden fixed top-1 right-4 z-50 hamburger-menu-container">    <button *ngIf="showAIButton" (click)="navigateAndClose(\'ai\', $event)"        class="text-lg text-[var(--color-white)] py-[0.65rem]">        <img src="assets/img/icon/icons8-ai-96.png" alt="Menu" class="w-[24px] h-[24px]"            style="filter: invert(100%); transition: filter 0.3s ease;">    </button></div></div>'
-    var COMPONENTS = [{'name': 'AddExpenseComponent', 'selector': 'app-add-expense'},{'name': 'AiComponent', 'selector': 'app-ai'},{'name': 'AppComponent', 'selector': 'app-root'},{'name': 'BudgetComponent', 'selector': 'app-budget'},{'name': 'CalendarComponent', 'selector': 'app-calendar'},{'name': 'CategoryDropdownComponent', 'selector': 'app-category-dropdown'},{'name': 'CustomModalComponent', 'selector': 'app-custom-modal'},{'name': 'DownloadComponentComponent', 'selector': 'app-download-component'},{'name': 'ExpenseDetailsModalComponent', 'selector': 'app-expense-details-modal'},{'name': 'ExpenseListComponent', 'selector': 'app-expense-list'},{'name': 'FooterComponent', 'selector': 'app-footer'},{'name': 'FormModelComponent', 'selector': 'app-form-model'},{'name': 'GlobalLoaderComponent', 'selector': 'app-global-loader'},{'name': 'GraphsComponent', 'selector': 'app-graphs'},{'name': 'HamburgerMenuComponent', 'selector': 'app-hamburger-menu'},{'name': 'HomeComponent', 'selector': 'app-home'},{'name': 'InstallAppPopupComponentComponent', 'selector': 'app-install-app-popup-component'},{'name': 'ListExpensesComponent', 'selector': 'app-list-expenses'},{'name': 'MusicComponent', 'selector': 'app-music'},{'name': 'NavbarComponent', 'selector': 'app-navbar'},{'name': 'PieChartComponent', 'selector': 'app-pie-chart'},{'name': 'SearchButtonComponent', 'selector': 'app-search-button'},{'name': 'SearchComponent', 'selector': 'app-search'},{'name': 'SettingItemComponent', 'selector': 'app-setting-item'},{'name': 'SettingsComponent', 'selector': 'app-settings'},{'name': 'SidebarComponent', 'selector': 'app-sidebar'},{'name': 'TemplatePlaygroundComponent', 'selector': 'template-playground-root'},{'name': 'ToastComponent', 'selector': 'app-toast'}];
+    var COMPONENTS = [{'name': 'AddExpenseComponent', 'selector': 'app-add-expense'},{'name': 'AiComponent', 'selector': 'app-ai'},{'name': 'AppComponent', 'selector': 'app-root'},{'name': 'BudgetComponent', 'selector': 'app-budget'},{'name': 'CalendarComponent', 'selector': 'app-calendar'},{'name': 'CategoryDropdownComponent', 'selector': 'app-category-dropdown'},{'name': 'DownloadComponentComponent', 'selector': 'app-download-component'},{'name': 'ExpenseDetailsModalComponent', 'selector': 'app-expense-details-modal'},{'name': 'ExpenseListComponent', 'selector': 'app-expense-list'},{'name': 'FooterComponent', 'selector': 'app-footer'},{'name': 'FormModelComponent', 'selector': 'app-form-model'},{'name': 'GlobalLoaderComponent', 'selector': 'app-global-loader'},{'name': 'GraphsComponent', 'selector': 'app-graphs'},{'name': 'HamburgerMenuComponent', 'selector': 'app-hamburger-menu'},{'name': 'HomeComponent', 'selector': 'app-home'},{'name': 'InstallAppPopupComponentComponent', 'selector': 'app-install-app-popup-component'},{'name': 'ListExpensesComponent', 'selector': 'app-list-expenses'},{'name': 'MusicComponent', 'selector': 'app-music'},{'name': 'NavbarComponent', 'selector': 'app-navbar'},{'name': 'PieChartComponent', 'selector': 'app-pie-chart'},{'name': 'SearchButtonComponent', 'selector': 'app-search-button'},{'name': 'SettingItemComponent', 'selector': 'app-setting-item'},{'name': 'SettingsComponent', 'selector': 'app-settings'},{'name': 'SidebarComponent', 'selector': 'app-sidebar'},{'name': 'TemplatePlaygroundComponent', 'selector': 'template-playground-root'},{'name': 'ToastComponent', 'selector': 'app-toast'}];
     var DIRECTIVES = [];
     var ACTUAL_COMPONENT = {'name': 'HamburgerMenuComponent'};
 </script>

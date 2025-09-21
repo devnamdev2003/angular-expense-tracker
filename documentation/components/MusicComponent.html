@@ -142,6 +142,20 @@
 </p>
 
 
+    <p class="comment">
+        <h3>Description</h3>
+    </p>
+    <p class="comment">
+        <p>Component to search, play, and suggest songs using Saavn API and AI suggestions.</p>
+<p>Features:</p>
+<ul>
+<li>Search for songs by query.</li>
+<li>Play, pause, and track song progress.</li>
+<li>Automatically suggest next song based on AI suggestion.</li>
+<li>Handles time formatting and seeking within a song.</li>
+</ul>
+
+    </p>
 
 
     <p class="comment">
@@ -308,12 +322,14 @@
                 </tr>
                         <tr>
                             <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="24" class="link-to-prism">src/app/features/music/music.component.ts:24</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="51" class="link-to-prism">src/app/features/music/music.component.ts:51</a></div>
                             </td>
                         </tr>
 
                 <tr>
                     <td class="col-md-4">
+                            <div class="io-description"><p>Creates an instance of MusicComponent.</p>
+</div>
                             <div>
                                     <b>Parameters :</b>
                                     <table class="params">
@@ -322,6 +338,7 @@
                                                 <td>Name</td>
                                                     <td>Type</td>
                                                 <td>Optional</td>
+                                                    <td>Description</td>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -336,6 +353,10 @@
                                                             No
                                                     </td>
                                                     
+                                                        <td>
+                                                                <p>Service to interact with Saavn API.</p>
+
+                                                        </td>
                                                 </tr>
                                                 <tr>
                                                         <td>configService</td>
@@ -348,6 +369,10 @@
                                                             No
                                                     </td>
                                                     
+                                                        <td>
+                                                                <p>Service to retrieve application configuration.</p>
+
+                                                        </td>
                                                 </tr>
                                                 <tr>
                                                         <td>platformId</td>
@@ -360,6 +385,10 @@
                                                             No
                                                     </td>
                                                     
+                                                        <td>
+                                                                <p>Angular platform ID to detect browser/server environment.</p>
+
+                                                        </td>
                                                 </tr>
                                         </tbody>
                                     </table>
@@ -399,14 +428,16 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="111"
-                                    class="link-to-prism">src/app/features/music/music.component.ts:111</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="169"
+                                    class="link-to-prism">src/app/features/music/music.component.ts:169</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
+                        <div class="io-description"><p>Formats seconds into MM:SS string for display.</p>
+</div>
 
                             <div class="io-description">
                                 <b>Parameters :</b>
@@ -417,6 +448,7 @@
                                             <td>Name</td>
                                                 <td>Type</td>
                                             <td>Optional</td>
+                                                <td>Description</td>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -431,6 +463,10 @@
                                             </td>
 
 
+                                            <td>
+                                                    <p>Number of seconds</p>
+
+                                            </td>
                                         </tr>
                                     </tbody>
                                 </table>
@@ -440,7 +476,8 @@
 
                         </div>
                             <div class="io-description">
-                                
+                                <p>Formatted time string</p>
+
                             </div>
                 </td>
             </tr>
@@ -466,14 +503,16 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="44"
-                                    class="link-to-prism">src/app/features/music/music.component.ts:44</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="87"
+                                    class="link-to-prism">src/app/features/music/music.component.ts:87</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
+                        <div class="io-description"><p>Returns the highest quality 320kbps download URL of a song.</p>
+</div>
 
                             <div class="io-description">
                                 <b>Parameters :</b>
@@ -484,6 +523,7 @@
                                             <td>Name</td>
                                                 <td>Type</td>
                                             <td>Optional</td>
+                                                <td>Description</td>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -498,6 +538,10 @@
                                             </td>
 
 
+                                            <td>
+                                                    <p>Song object</p>
+
+                                            </td>
                                         </tr>
                                     </tbody>
                                 </table>
@@ -507,7 +551,8 @@
 
                         </div>
                             <div class="io-description">
-                                
+                                <p>URL string or empty string if not available</p>
+
                             </div>
                 </td>
             </tr>
@@ -533,14 +578,16 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="142"
-                                    class="link-to-prism">src/app/features/music/music.component.ts:142</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="212"
+                                    class="link-to-prism">src/app/features/music/music.component.ts:212</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
+                        <div class="io-description"><p>Angular lifecycle hook called on component destruction</p>
+</div>
 
                         <div class="io-description">
                             <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
@@ -570,14 +617,16 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="117"
-                                    class="link-to-prism">src/app/features/music/music.component.ts:117</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="180"
+                                    class="link-to-prism">src/app/features/music/music.component.ts:180</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
+                        <div class="io-description"><p>Seeks the audio playback to a specific time.</p>
+</div>
 
                             <div class="io-description">
                                 <b>Parameters :</b>
@@ -588,6 +637,7 @@
                                             <td>Name</td>
                                                 <td>Type</td>
                                             <td>Optional</td>
+                                                <td>Description</td>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -602,6 +652,10 @@
                                             </td>
 
 
+                                            <td>
+                                                    <p>Input change event from the seek bar</p>
+
+                                            </td>
                                         </tr>
                                     </tbody>
                                 </table>
@@ -639,17 +693,19 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="69"
-                                    class="link-to-prism">src/app/features/music/music.component.ts:69</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="121"
+                                    class="link-to-prism">src/app/features/music/music.component.ts:121</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
+                        <div class="io-description"><p>Handles the end of a song. Suggests the next song using AI and automatically plays it.</p>
+</div>
 
                         <div class="io-description">
-                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
+                            <b>Returns : </b>    <code>Promise&lt;void&gt;</code>
 
                         </div>
                 </td>
@@ -676,14 +732,16 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="48"
-                                    class="link-to-prism">src/app/features/music/music.component.ts:48</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="97"
+                                    class="link-to-prism">src/app/features/music/music.component.ts:97</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
+                        <div class="io-description"><p>Plays or pauses a song. If a new song is selected, plays it from the beginning.</p>
+</div>
 
                             <div class="io-description">
                                 <b>Parameters :</b>
@@ -694,6 +752,7 @@
                                             <td>Name</td>
                                                 <td>Type</td>
                                             <td>Optional</td>
+                                                <td>Description</td>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -708,6 +767,10 @@
                                             </td>
 
 
+                                            <td>
+                                                    <p>URL of the song to play</p>
+
+                                            </td>
                                         </tr>
                                         <tr>
                                                 <td>song</td>
@@ -720,6 +783,10 @@
                                             </td>
 
 
+                                            <td>
+                                                    <p>Song object</p>
+
+                                            </td>
                                         </tr>
                                     </tbody>
                                 </table>
@@ -755,14 +822,16 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="35"
-                                    class="link-to-prism">src/app/features/music/music.component.ts:35</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="72"
+                                    class="link-to-prism">src/app/features/music/music.component.ts:72</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
+                        <div class="io-description"><p>Searches for songs based on the current query.</p>
+</div>
 
                         <div class="io-description">
                             <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
@@ -792,14 +861,16 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="125"
-                                    class="link-to-prism">src/app/features/music/music.component.ts:125</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="194"
+                                    class="link-to-prism">src/app/features/music/music.component.ts:194</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
+                        <div class="io-description"><p>Transforms a song object to the expected format for AI suggestion.</p>
+</div>
 
                             <div class="io-description">
                                 <b>Parameters :</b>
@@ -810,6 +881,7 @@
                                             <td>Name</td>
                                                 <td>Type</td>
                                             <td>Optional</td>
+                                                <td>Description</td>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -824,16 +896,21 @@
                                             </td>
 
 
+                                            <td>
+                                                    <p>Original song object</p>
+
+                                            </td>
                                         </tr>
                                     </tbody>
                                 </table>
                             </div>
                         <div class="io-description">
-                            <b>Returns : </b>    <code>{ name: any; type: any; year: any; duration: any; label: any; playCount: any; language: any; copyright: any; album: { name: any; }; artists: { all: any; }; }</code>
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
 
                         </div>
                             <div class="io-description">
-                                
+                                <p>Transformed object with relevant song metadata</p>
+
                             </div>
                 </td>
             </tr>
@@ -864,10 +941,16 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="23" class="link-to-prism">src/app/features/music/music.component.ts:23</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="48" class="link-to-prism">src/app/features/music/music.component.ts:48</a></div>
                         </td>
                     </tr>
 
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Current application version</p>
+</div>
+                </td>
+            </tr>
 
         </tbody>
     </table>
@@ -895,10 +978,16 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="18" class="link-to-prism">src/app/features/music/music.component.ts:18</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="33" class="link-to-prism">src/app/features/music/music.component.ts:33</a></div>
                         </td>
                     </tr>
 
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>HTML audio element for playing songs</p>
+</div>
+                </td>
+            </tr>
 
         </tbody>
     </table>
@@ -926,10 +1015,16 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="19" class="link-to-prism">src/app/features/music/music.component.ts:19</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="36" class="link-to-prism">src/app/features/music/music.component.ts:36</a></div>
                         </td>
                     </tr>
 
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Currently playing song object</p>
+</div>
+                </td>
+            </tr>
 
         </tbody>
     </table>
@@ -951,10 +1046,16 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="21" class="link-to-prism">src/app/features/music/music.component.ts:21</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="42" class="link-to-prism">src/app/features/music/music.component.ts:42</a></div>
                         </td>
                     </tr>
 
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Total duration of the current song in seconds</p>
+</div>
+                </td>
+            </tr>
 
         </tbody>
     </table>
@@ -982,10 +1083,16 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="22" class="link-to-prism">src/app/features/music/music.component.ts:22</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="45" class="link-to-prism">src/app/features/music/music.component.ts:45</a></div>
                         </td>
                     </tr>
 
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Interval ID for updating song progress</p>
+</div>
+                </td>
+            </tr>
 
         </tbody>
     </table>
@@ -1008,10 +1115,16 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="24" class="link-to-prism">src/app/features/music/music.component.ts:24</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="51" class="link-to-prism">src/app/features/music/music.component.ts:51</a></div>
                         </td>
                     </tr>
 
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Flag to indicate if running in browser environment</p>
+</div>
+                </td>
+            </tr>
 
         </tbody>
     </table>
@@ -1033,10 +1146,16 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="20" class="link-to-prism">src/app/features/music/music.component.ts:20</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="39" class="link-to-prism">src/app/features/music/music.component.ts:39</a></div>
                         </td>
                     </tr>
 
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Progress of the current song in seconds</p>
+</div>
+                </td>
+            </tr>
 
         </tbody>
     </table>
@@ -1064,10 +1183,16 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="16" class="link-to-prism">src/app/features/music/music.component.ts:16</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="27" class="link-to-prism">src/app/features/music/music.component.ts:27</a></div>
                         </td>
                     </tr>
 
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Current search query for songs</p>
+</div>
+                </td>
+            </tr>
 
         </tbody>
     </table>
@@ -1089,10 +1214,16 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="17" class="link-to-prism">src/app/features/music/music.component.ts:17</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="30" class="link-to-prism">src/app/features/music/music.component.ts:30</a></div>
                         </td>
                     </tr>
 
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>List of songs retrieved from search results</p>
+</div>
+                </td>
+            </tr>
 
         </tbody>
     </table>
@@ -1109,6 +1240,15 @@ import { SaavnService } from &#x27;../../service/saavan-api/saavan.service&#x27;
 import { ConfigService } from &#x27;../../service/config/config.service&#x27;;
 import { isPlatformBrowser } from &#x27;@angular/common&#x27;;
 
+/**
+ * Component to search, play, and suggest songs using Saavn API and AI suggestions.
+ *
+ * Features:
+ * - Search for songs by query.
+ * - Play, pause, and track song progress.
+ * - Automatically suggest next song based on AI suggestion.
+ * - Handles time formatting and seeking within a song.
+ */
 @Component({
   selector: &#x27;app-music&#x27;,
   standalone: true,
@@ -1117,16 +1257,41 @@ import { isPlatformBrowser } from &#x27;@angular/common&#x27;;
   styleUrls: [&#x27;./music.component.css&#x27;]
 })
 export class MusicComponent implements OnDestroy {
+
+  /** Current search query for songs */
   query &#x3D; &#x27;&#x27;;
+
+  /** List of songs retrieved from search results */
   songs &#x3D; signal&lt;any[]&gt;([]);
+
+  /** HTML audio element for playing songs */
   audio: HTMLAudioElement | null &#x3D; null;
+
+  /** Currently playing song object */
   currentSong: any &#x3D; null;
+
+  /** Progress of the current song in seconds */
   progress &#x3D; signal(0);
+
+  /** Total duration of the current song in seconds */
   duration &#x3D; signal(0);
+
+  /** Interval ID for updating song progress */
   interval: any &#x3D; null;
+
+  /** Current application version */
   appVersion: string;
+
+  /** Flag to indicate if running in browser environment */
   isBrowser: boolean;
 
+  /**
+   * Creates an instance of MusicComponent.
+   *
+   * @param saavnService Service to interact with Saavn API.
+   * @param configService Service to retrieve application configuration.
+   * @param platformId Angular platform ID to detect browser/server environment.
+   */
   constructor(
     private saavnService: SaavnService,
     private configService: ConfigService,
@@ -1136,7 +1301,10 @@ export class MusicComponent implements OnDestroy {
     this.isBrowser &#x3D; isPlatformBrowser(this.platformId);
   }
 
-  searchSong() {
+  /**
+   * Searches for songs based on the current query.
+   */
+  searchSong(): void {
     const q &#x3D; this.query.trim();
     if (q) {
       this.saavnService.searchSongs(q).subscribe((res) &#x3D;&gt; {
@@ -1145,11 +1313,23 @@ export class MusicComponent implements OnDestroy {
     }
   }
 
+  /**
+   * Returns the highest quality 320kbps download URL of a song.
+   *
+   * @param song Song object
+   * @returns URL string or empty string if not available
+   */
   getSongUrl(song: any): string {
     return song.downloadUrl?.find((d: any) &#x3D;&gt; d.quality &#x3D;&#x3D;&#x3D; &#x27;320kbps&#x27;)?.url || &#x27;&#x27;;
   }
 
-  playSong(url: string, song: any) {
+  /**
+   * Plays or pauses a song. If a new song is selected, plays it from the beginning.
+   *
+   * @param url URL of the song to play
+   * @param song Song object
+   */
+  playSong(url: string, song: any): void {
     if (!this.isBrowser) return;
     if (!this.audio) this.audio &#x3D; new Audio();
 
@@ -1170,7 +1350,10 @@ export class MusicComponent implements OnDestroy {
     this.audio.onended &#x3D; () &#x3D;&gt; this.onSongFinished();
   }
 
-  async onSongFinished() {
+  /**
+   * Handles the end of a song. Suggests the next song using AI and automatically plays it.
+   */
+  async onSongFinished(): Promise&lt;void&gt; {
     if (!this.isBrowser) return;
     try {
       const transformedData &#x3D; this.transformSongData(this.currentSong);
@@ -1212,13 +1395,24 @@ export class MusicComponent implements OnDestroy {
     }
   }
 
-  formatTime(seconds: number) {
+  /**
+   * Formats seconds into MM:SS string for display.
+   *
+   * @param seconds Number of seconds
+   * @returns Formatted time string
+   */
+  formatTime(seconds: number): string {
     const min &#x3D; Math.floor(seconds / 60);
     const sec &#x3D; Math.floor(seconds % 60);
     return &#x60;${min}:${sec.toString().padStart(2, &#x27;0&#x27;)}&#x60;;
   }
 
-  onSeek(event: Event) {
+  /**
+   * Seeks the audio playback to a specific time.
+   *
+   * @param event Input change event from the seek bar
+   */
+  onSeek(event: Event): void {
     if (!this.isBrowser || !this.audio) return;
     const target &#x3D; event.target as HTMLInputElement;
     const seekTime &#x3D; Number(target.value);
@@ -1226,7 +1420,13 @@ export class MusicComponent implements OnDestroy {
     this.progress.set(seekTime);
   }
 
-  transformSongData(data: any) {
+  /**
+   * Transforms a song object to the expected format for AI suggestion.
+   *
+   * @param data Original song object
+   * @returns Transformed object with relevant song metadata
+   */
+  transformSongData(data: any): any {
     return {
       name: data.name,
       type: data.type,
@@ -1243,7 +1443,8 @@ export class MusicComponent implements OnDestroy {
     };
   }
 
-  ngOnDestroy() {
+  /** Angular lifecycle hook called on component destruction */
+  ngOnDestroy(): void {
     clearInterval(this.interval);
     if (this.audio) {
       this.audio.pause();
@@ -1386,7 +1587,7 @@ img {
 <script src="../js/libs/deep-iterator.js"></script>
 <script>
         var COMPONENT_TEMPLATE = '<div><div class="max-w-xl mx-auto  pb-24">  <!-- Sticky Search Input -->  <div class="sticky py-4 px-2 top-0 z-10 bg-[var(--color-bg)]">    <div class="flex items-center gap-2">      <input type="text" [(ngModel)]="query" (keyup.enter)="searchSong()" placeholder="Enter song name"        class="flex-1 p-2 rounded-md bg-[var(--input-bg)] text-[var(--input-text)] border border-[var(--input-border)] focus:outline-none focus:ring-2 focus:ring-[var(--theme-color)] transition" />      <button (click)="searchSong()"        class="bg-[var(--theme-color)] text-[var(--color-white)] px-4 py-2 rounded-md shadow hover:shadow-md active:scale-95 transition">Search</button>    </div>  </div>  <!-- Songs List -->  <div *ngFor="let song of songs()"    class="flex items-center gap-4 py-4 px-2 rounded-md hover:bg-[var(--list-hover)] transition-all cursor-pointer"    [class.bg-[var(--list-hover)]]="currentSong?.url === getSongUrl(song)">    <div class="relative w-12 h-12 rounded-md overflow-hidden group" (click)="playSong(getSongUrl(song), song)">      <img [src]="song.image?.[2]?.url || \'https://via.placeholder.com/48\'" alt="{{ song.name }}"        class="w-full h-full object-cover group-hover:brightness-75 transition-all duration-300 ease-in-out"        [class.brightness-75]="currentSong?.url === getSongUrl(song)" />      <div        class="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300"        [class.opacity-100]="currentSong?.url === getSongUrl(song)">        <img [src]="currentSong?.url === getSongUrl(song)? \'assets/img/music_icon/icons8-pause-50.png\' :\'assets/img/music_icon/icons8-play-50.png\'" alt="Play"          class="w-6 h-6 object-contain" style="filter: invert(100%);" />      </div>    </div>    <div class="flex-1">      <div class="font-medium text-[var(--color-text)]">{{ song.name }}</div>      <div class="text-sm text-[var(--color-gray-500)]">{{ song.artists.primary[0]?.name || \'Unknown Artist\' }}</div>    </div>    <div class="text-sm text-[var(--color-gray-500)]">{{ formatTime(song.duration) }}</div>  </div></div><!-- Bottom Audio Bar --><div *ngIf="currentSong"  class="max-w-xl mx-auto  fixed bottom-0 left-0 right-0 shadow-lg py-4 px-2 flex items-center gap-4 z-20"  [ngStyle]="{\'background-color\': \'var(--color-surface)\', \'color\': \'var(--color-text)\', \'z-index\': \'99\'}">  <!-- Song Image -->  <img [src]="currentSong.image?.[2]?.url || \'https://via.placeholder.com/50\'" alt="Cover"    class="w-12 h-12 rounded-md shadow-md shrink-0" />  <!-- Song Info + Progress -->  <div class="flex-1 flex flex-col overflow-hidden">    <!-- Top Row: Title + Artist + Time + Play -->    <div class="flex items-center justify-between gap-2">      <div class="overflow-hidden">        <div class="font-medium truncate">{{ currentSong.name }}</div>        <div class="text-sm text-gray-500 dark:text-gray-400 truncate">          {{ currentSong.artists.primary[0]?.name || \'Unknown Artist\' }}        </div>      </div>      <div class="flex items-center gap-2 shrink-0">        <div class="text-sm text-gray-500 dark:text-gray-400 min-w-max">          {{ formatTime(progress()) }} / {{ formatTime(duration()) }}        </div>        <button (click)="playSong(currentSong.url, currentSong)"          class="w-8 h-8 flex items-center justify-center rounded-full hover:bg-[var(--list-hover)] active:scale-90 transition-transform">          <img            [src]="audio?.paused ? \'assets/img/music_icon/icons8-play-50.png\' : \'assets/img/music_icon/icons8-pause-50.png\'"            alt="{{ audio?.paused ? \'Play\' : \'Pause\' }}"            class="w-6 h-6 object-contain transition-transform duration-300 ease-in-out"            style="filter: var(--icon-color2);" />        </button>      </div>    </div>    <!-- Progress Bar -->    <input type="range" min="0" [max]="duration()" [value]="progress()" (input)="onSeek($event)"      class="w-full mt-2 mb-2 h-1 rounded accent-[var(--theme-color)] cursor-pointer" [ngStyle]="{        \'background-color\': \'var(--input-border)\',        \'accent-color\': \'var(--theme-color)\'      }" />  </div></div><footer class="fixed bottom-0 left-0 w-full bg-[var(--color-surface)] text-center text-sm py-2 z-50 text-muted">  © 2025 exwise. All rights reserved. v{{appVersion}}</footer></div>'
-    var COMPONENTS = [{'name': 'AddExpenseComponent', 'selector': 'app-add-expense'},{'name': 'AiComponent', 'selector': 'app-ai'},{'name': 'AppComponent', 'selector': 'app-root'},{'name': 'BudgetComponent', 'selector': 'app-budget'},{'name': 'CalendarComponent', 'selector': 'app-calendar'},{'name': 'CategoryDropdownComponent', 'selector': 'app-category-dropdown'},{'name': 'CustomModalComponent', 'selector': 'app-custom-modal'},{'name': 'DownloadComponentComponent', 'selector': 'app-download-component'},{'name': 'ExpenseDetailsModalComponent', 'selector': 'app-expense-details-modal'},{'name': 'ExpenseListComponent', 'selector': 'app-expense-list'},{'name': 'FooterComponent', 'selector': 'app-footer'},{'name': 'FormModelComponent', 'selector': 'app-form-model'},{'name': 'GlobalLoaderComponent', 'selector': 'app-global-loader'},{'name': 'GraphsComponent', 'selector': 'app-graphs'},{'name': 'HamburgerMenuComponent', 'selector': 'app-hamburger-menu'},{'name': 'HomeComponent', 'selector': 'app-home'},{'name': 'InstallAppPopupComponentComponent', 'selector': 'app-install-app-popup-component'},{'name': 'ListExpensesComponent', 'selector': 'app-list-expenses'},{'name': 'MusicComponent', 'selector': 'app-music'},{'name': 'NavbarComponent', 'selector': 'app-navbar'},{'name': 'PieChartComponent', 'selector': 'app-pie-chart'},{'name': 'SearchButtonComponent', 'selector': 'app-search-button'},{'name': 'SearchComponent', 'selector': 'app-search'},{'name': 'SettingItemComponent', 'selector': 'app-setting-item'},{'name': 'SettingsComponent', 'selector': 'app-settings'},{'name': 'SidebarComponent', 'selector': 'app-sidebar'},{'name': 'TemplatePlaygroundComponent', 'selector': 'template-playground-root'},{'name': 'ToastComponent', 'selector': 'app-toast'}];
+    var COMPONENTS = [{'name': 'AddExpenseComponent', 'selector': 'app-add-expense'},{'name': 'AiComponent', 'selector': 'app-ai'},{'name': 'AppComponent', 'selector': 'app-root'},{'name': 'BudgetComponent', 'selector': 'app-budget'},{'name': 'CalendarComponent', 'selector': 'app-calendar'},{'name': 'CategoryDropdownComponent', 'selector': 'app-category-dropdown'},{'name': 'DownloadComponentComponent', 'selector': 'app-download-component'},{'name': 'ExpenseDetailsModalComponent', 'selector': 'app-expense-details-modal'},{'name': 'ExpenseListComponent', 'selector': 'app-expense-list'},{'name': 'FooterComponent', 'selector': 'app-footer'},{'name': 'FormModelComponent', 'selector': 'app-form-model'},{'name': 'GlobalLoaderComponent', 'selector': 'app-global-loader'},{'name': 'GraphsComponent', 'selector': 'app-graphs'},{'name': 'HamburgerMenuComponent', 'selector': 'app-hamburger-menu'},{'name': 'HomeComponent', 'selector': 'app-home'},{'name': 'InstallAppPopupComponentComponent', 'selector': 'app-install-app-popup-component'},{'name': 'ListExpensesComponent', 'selector': 'app-list-expenses'},{'name': 'MusicComponent', 'selector': 'app-music'},{'name': 'NavbarComponent', 'selector': 'app-navbar'},{'name': 'PieChartComponent', 'selector': 'app-pie-chart'},{'name': 'SearchButtonComponent', 'selector': 'app-search-button'},{'name': 'SettingItemComponent', 'selector': 'app-setting-item'},{'name': 'SettingsComponent', 'selector': 'app-settings'},{'name': 'SidebarComponent', 'selector': 'app-sidebar'},{'name': 'TemplatePlaygroundComponent', 'selector': 'template-playground-root'},{'name': 'ToastComponent', 'selector': 'app-toast'}];
     var DIRECTIVES = [];
     var ACTUAL_COMPONENT = {'name': 'MusicComponent'};
 </script>

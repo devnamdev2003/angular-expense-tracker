@@ -10,7 +10,6 @@ import { FooterComponent } from './shared/footer/footer.component';
 import { ToastComponent } from './shared/toast/toast.component';
 import { GlobalLoaderComponent } from './shared/global-loader/global-loader.component';
 import { AddExpenseComponent } from './features/add-expense/add-expense.component';
-import { SearchComponent } from './features/search/search.component';
 import { SettingsComponent } from './features/settings/settings.component';
 import { ListExpensesComponent } from './features/list-expenses/list-expenses.component';
 import { HomeComponent } from './features/home/home.component';
@@ -37,7 +36,7 @@ import { ToastService } from './service/toast/toast.service';
   standalone: true,
   imports: [
     NavbarComponent, SidebarComponent, FooterComponent, ToastComponent,
-    GlobalLoaderComponent, CommonModule, AddExpenseComponent, SearchComponent,
+    GlobalLoaderComponent, CommonModule, AddExpenseComponent,
     SettingsComponent, ListExpensesComponent, HomeComponent, BudgetComponent, CalendarComponent, AiComponent, MusicComponent, InstallAppPopupComponentComponent
   ],
   templateUrl: './app.component.html',

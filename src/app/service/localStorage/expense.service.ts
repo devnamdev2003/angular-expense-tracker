@@ -2,63 +2,90 @@ import { Injectable } from '@angular/core';
 import { Category } from './category.service';
 import { StorageService } from './storage.service';
 
-/** Expense data */
+/**
+ * Interface representing an expense entry.
+ */
 export interface Expense {
   /** Unique identifier */
   expense_id: string;
 
-  /** Expense details */
+  /** Expense amount */
   amount: number;
 
-  /** Category ID */
+  /** Category ID associated with this expense */
   category_id: string;
 
-  /** Date in YYYY-MM-DD format */
+  /** Date of the expense in YYYY-MM-DD format */
   date: string;
 
-  /** Time in HH:MM:SS format */
+  /** Time of the expense in HH:MM:SS format */
   time: string;
 
-  /** Note */
+  /** Optional note about the expense */
   note?: string;
 
-  /** Payment mode */
+  /** Payment mode used for the expense */
   payment_mode: string;
 
-  /** Location */
+  /** Optional location of the expense */
   location?: string;
 
-  /** Is extra spending */
+  /** Indicates if this is extra spending */
   isExtraSpending?: boolean;
 
-  // additional field not a part of table
-  /** Category name */
+  /** Category name (not part of stored table) */
   category_name: string;
 
-  /** Category icon */
+  /** Category icon (not part of stored table) */
   category_icon: string;
 
-  /** Category color */
+  /** Category color (not part of stored table) */
   category_color: string;
-
 }
 
+/**
+ * Service for managing expenses stored in localStorage.
+ *
+ * Features:
+ * - Add, update, delete, and retrieve expenses.
+ * - Automatically attaches category metadata to each expense.
+ * - Supports searching expenses by date range.
+ */
 @Injectable({ providedIn: 'root' })
 export class ExpenseService {
 
+  /**
+   * Creates an instance of ExpenseService.
+   *
+   * @param storageService Service for interacting with localStorage.
+   */
   constructor(private storageService: StorageService) { }
 
+  /**
+   * Checks if the environment supports localStorage.
+   *
+   * @returns True if running in a browser with localStorage.
+   */
   private isBrowser(): boolean {
     return typeof window !== 'undefined' && typeof window.localStorage !== 'undefined';
   }
 
+  /**
+   * Returns the current date and time in ISO format adjusted for local time.
+   *
+   * @returns Local ISO string (YYYY-MM-DDTHH:MM:SS)
+   */
   getLocalISOString(): string {
     const now = new Date();
     const pad = (n: number) => n.toString().padStart(2, '0');
-
     return `${now.getFullYear()}-${pad(now.getMonth() + 1)}-${pad(now.getDate())}T${pad(now.getHours())}:${pad(now.getMinutes())}:${pad(now.getSeconds())}`;
   }
 
+  /**
+   * Retrieves all expenses from localStorage with category metadata attached.
+   *
+   * @returns Array of formatted {@link Expense} sorted by date (newest first).
+   */
   getAll(): Expense[] {
     if (!this.isBrowser()) return [];
     const expenses: Expense[] = this.storageService.getAllExpenses();
@@ -84,6 +111,11 @@ export class ExpenseService {
       });
   }
 
+  /**
+   * Adds a new expense to localStorage.
+   *
+   * @param data Expense data excluding `expense_id`.
+   */
   add(data: Omit<Expense, 'expense_id'>): void {
     if (!this.isBrowser()) return;
     const all: Expense[] = this.getAll();
@@ -92,6 +124,12 @@ export class ExpenseService {
     localStorage.setItem(this.storageService.getExpenseKey(), JSON.stringify(all));
   }
 
+  /**
+   * Updates an existing expense by ID.
+   *
+   * @param expense_id The ID of the expense to update.
+   * @param newData Partial data to update the expense with.
+   */
   update(expense_id: string, newData: Partial<Expense>): void {
     if (!this.isBrowser()) return;
     let all: Expense[] = this.getAll();
@@ -100,11 +138,22 @@ export class ExpenseService {
     localStorage.setItem(this.storageService.getExpenseKey(), JSON.stringify(all));
   }
 
+  /**
+   * Retrieves a single expense by its ID.
+   *
+   * @param expense_id The ID of the expense to retrieve.
+   * @returns The expense object or null if not found.
+   */
   getByExpenseId(expense_id: string): Expense | null {
     if (!this.isBrowser()) return null;
     return this.getAll().find(item => item.expense_id === expense_id) || null;
   }
 
+  /**
+   * Deletes an expense by its ID.
+   *
+   * @param expense_id The ID of the expense to delete.
+   */
   delete(expense_id: string): void {
     if (!this.isBrowser()) return;
     let all: Expense[] = this.getAll();
@@ -112,6 +161,13 @@ export class ExpenseService {
     localStorage.setItem(this.storageService.getExpenseKey(), JSON.stringify(all));
   }
 
+  /**
+   * Searches expenses within a date range.
+   *
+   * @param fromDate Start date in YYYY-MM-DD format.
+   * @param toDate End date in YYYY-MM-DD format.
+   * @returns Array of expenses within the specified date range.
+   */
   searchByDateRange(fromDate: string, toDate: string): Expense[] {
     if (!this.isBrowser()) return [];
     const all: Expense[] = this.getAll();

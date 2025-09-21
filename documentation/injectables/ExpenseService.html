@@ -137,6 +137,19 @@
         </p>
 
 
+            <p class="comment">
+                <h3>Description</h3>
+            </p>
+            <p class="comment">
+                <p>Service for managing expenses stored in localStorage.</p>
+<p>Features:</p>
+<ul>
+<li>Add, update, delete, and retrieve expenses.</li>
+<li>Automatically attaches category metadata to each expense.</li>
+<li>Supports searching expenses by date range.</li>
+</ul>
+
+            </p>
 
 
 
@@ -201,12 +214,14 @@
                 </tr>
                         <tr>
                             <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="47" class="link-to-prism">src/app/service/localStorage/expense.service.ts:47</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="55" class="link-to-prism">src/app/service/localStorage/expense.service.ts:55</a></div>
                             </td>
                         </tr>
 
                 <tr>
                     <td class="col-md-4">
+                            <div class="io-description"><p>Creates an instance of ExpenseService.</p>
+</div>
                             <div>
                                     <b>Parameters :</b>
                                     <table class="params">
@@ -215,6 +230,7 @@
                                                 <td>Name</td>
                                                     <td>Type</td>
                                                 <td>Optional</td>
+                                                    <td>Description</td>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -229,6 +245,10 @@
                                                             No
                                                     </td>
                                                     
+                                                        <td>
+                                                                <p>Service for interacting with localStorage.</p>
+
+                                                        </td>
                                                 </tr>
                                         </tbody>
                                     </table>
@@ -264,14 +284,16 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="87"
-                                    class="link-to-prism">src/app/service/localStorage/expense.service.ts:87</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="119"
+                                    class="link-to-prism">src/app/service/localStorage/expense.service.ts:119</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
+                        <div class="io-description"><p>Adds a new expense to localStorage.</p>
+</div>
 
                             <div class="io-description">
                                 <b>Parameters :</b>
@@ -282,6 +304,7 @@
                                             <td>Name</td>
                                                 <td>Type</td>
                                             <td>Optional</td>
+                                                <td>Description</td>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -296,6 +319,10 @@
                                             </td>
 
 
+                                            <td>
+                                                    <p>Expense data excluding <code>expense_id</code>.</p>
+
+                                            </td>
                                         </tr>
                                     </tbody>
                                 </table>
@@ -331,14 +358,16 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="108"
-                                    class="link-to-prism">src/app/service/localStorage/expense.service.ts:108</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="157"
+                                    class="link-to-prism">src/app/service/localStorage/expense.service.ts:157</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
+                        <div class="io-description"><p>Deletes an expense by its ID.</p>
+</div>
 
                             <div class="io-description">
                                 <b>Parameters :</b>
@@ -349,6 +378,7 @@
                                             <td>Name</td>
                                                 <td>Type</td>
                                             <td>Optional</td>
+                                                <td>Description</td>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -363,6 +393,10 @@
                                             </td>
 
 
+                                            <td>
+                                                    <p>The ID of the expense to delete.</p>
+
+                                            </td>
                                         </tr>
                                     </tbody>
                                 </table>
@@ -398,19 +432,25 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="62"
-                                    class="link-to-prism">src/app/service/localStorage/expense.service.ts:62</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="89"
+                                    class="link-to-prism">src/app/service/localStorage/expense.service.ts:89</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
+                        <div class="io-description"><p>Retrieves all expenses from localStorage with category metadata attached.</p>
+</div>
 
                         <div class="io-description">
                             <b>Returns : </b>        <code><a href="../interfaces/Expense.html" target="_self" >Expense[]</a></code>
 
                         </div>
+                            <div class="io-description">
+                                <p>Array of formatted {@link Expense} sorted by date (newest first).</p>
+
+                            </div>
                 </td>
             </tr>
         </tbody>
@@ -435,14 +475,16 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="103"
-                                    class="link-to-prism">src/app/service/localStorage/expense.service.ts:103</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="147"
+                                    class="link-to-prism">src/app/service/localStorage/expense.service.ts:147</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
+                        <div class="io-description"><p>Retrieves a single expense by its ID.</p>
+</div>
 
                             <div class="io-description">
                                 <b>Parameters :</b>
@@ -453,6 +495,7 @@
                                             <td>Name</td>
                                                 <td>Type</td>
                                             <td>Optional</td>
+                                                <td>Description</td>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -467,6 +510,10 @@
                                             </td>
 
 
+                                            <td>
+                                                    <p>The ID of the expense to retrieve.</p>
+
+                                            </td>
                                         </tr>
                                     </tbody>
                                 </table>
@@ -476,7 +523,8 @@
 
                         </div>
                             <div class="io-description">
-                                
+                                <p>The expense object or null if not found.</p>
+
                             </div>
                 </td>
             </tr>
@@ -502,19 +550,25 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="55"
-                                    class="link-to-prism">src/app/service/localStorage/expense.service.ts:55</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="78"
+                                    class="link-to-prism">src/app/service/localStorage/expense.service.ts:78</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
+                        <div class="io-description"><p>Returns the current date and time in ISO format adjusted for local time.</p>
+</div>
 
                         <div class="io-description">
                             <b>Returns : </b>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
 
                         </div>
+                            <div class="io-description">
+                                <p>Local ISO string (YYYY-MM-DDTHH:MM:SS)</p>
+
+                            </div>
                 </td>
             </tr>
         </tbody>
@@ -541,19 +595,25 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="51"
-                                    class="link-to-prism">src/app/service/localStorage/expense.service.ts:51</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="69"
+                                    class="link-to-prism">src/app/service/localStorage/expense.service.ts:69</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
+                        <div class="io-description"><p>Checks if the environment supports localStorage.</p>
+</div>
 
                         <div class="io-description">
                             <b>Returns : </b>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
 
                         </div>
+                            <div class="io-description">
+                                <p>True if running in a browser with localStorage.</p>
+
+                            </div>
                 </td>
             </tr>
         </tbody>
@@ -578,14 +638,16 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="115"
-                                    class="link-to-prism">src/app/service/localStorage/expense.service.ts:115</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="171"
+                                    class="link-to-prism">src/app/service/localStorage/expense.service.ts:171</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
+                        <div class="io-description"><p>Searches expenses within a date range.</p>
+</div>
 
                             <div class="io-description">
                                 <b>Parameters :</b>
@@ -596,6 +658,7 @@
                                             <td>Name</td>
                                                 <td>Type</td>
                                             <td>Optional</td>
+                                                <td>Description</td>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -610,6 +673,10 @@
                                             </td>
 
 
+                                            <td>
+                                                    <p>Start date in YYYY-MM-DD format.</p>
+
+                                            </td>
                                         </tr>
                                         <tr>
                                                 <td>toDate</td>
@@ -622,6 +689,10 @@
                                             </td>
 
 
+                                            <td>
+                                                    <p>End date in YYYY-MM-DD format.</p>
+
+                                            </td>
                                         </tr>
                                     </tbody>
                                 </table>
@@ -631,7 +702,8 @@
 
                         </div>
                             <div class="io-description">
-                                
+                                <p>Array of expenses within the specified date range.</p>
+
                             </div>
                 </td>
             </tr>
@@ -657,14 +729,16 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="95"
-                                    class="link-to-prism">src/app/service/localStorage/expense.service.ts:95</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="133"
+                                    class="link-to-prism">src/app/service/localStorage/expense.service.ts:133</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
+                        <div class="io-description"><p>Updates an existing expense by ID.</p>
+</div>
 
                             <div class="io-description">
                                 <b>Parameters :</b>
@@ -675,6 +749,7 @@
                                             <td>Name</td>
                                                 <td>Type</td>
                                             <td>Optional</td>
+                                                <td>Description</td>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -689,6 +764,10 @@
                                             </td>
 
 
+                                            <td>
+                                                    <p>The ID of the expense to update.</p>
+
+                                            </td>
                                         </tr>
                                         <tr>
                                                 <td>newData</td>
@@ -701,6 +780,10 @@
                                             </td>
 
 
+                                            <td>
+                                                    <p>Partial data to update the expense with.</p>
+
+                                            </td>
                                         </tr>
                                     </tbody>
                                 </table>
@@ -726,63 +809,90 @@
 import { Category } from &#x27;./category.service&#x27;;
 import { StorageService } from &#x27;./storage.service&#x27;;
 
-/** Expense data */
+/**
+ * Interface representing an expense entry.
+ */
 export interface Expense {
   /** Unique identifier */
   expense_id: string;
 
-  /** Expense details */
+  /** Expense amount */
   amount: number;
 
-  /** Category ID */
+  /** Category ID associated with this expense */
   category_id: string;
 
-  /** Date in YYYY-MM-DD format */
+  /** Date of the expense in YYYY-MM-DD format */
   date: string;
 
-  /** Time in HH:MM:SS format */
+  /** Time of the expense in HH:MM:SS format */
   time: string;
 
-  /** Note */
+  /** Optional note about the expense */
   note?: string;
 
-  /** Payment mode */
+  /** Payment mode used for the expense */
   payment_mode: string;
 
-  /** Location */
+  /** Optional location of the expense */
   location?: string;
 
-  /** Is extra spending */
+  /** Indicates if this is extra spending */
   isExtraSpending?: boolean;
 
-  // additional field not a part of table
-  /** Category name */
+  /** Category name (not part of stored table) */
   category_name: string;
 
-  /** Category icon */
+  /** Category icon (not part of stored table) */
   category_icon: string;
 
-  /** Category color */
+  /** Category color (not part of stored table) */
   category_color: string;
-
 }
 
+/**
+ * Service for managing expenses stored in localStorage.
+ *
+ * Features:
+ * - Add, update, delete, and retrieve expenses.
+ * - Automatically attaches category metadata to each expense.
+ * - Supports searching expenses by date range.
+ */
 @Injectable({ providedIn: &#x27;root&#x27; })
 export class ExpenseService {
 
+  /**
+   * Creates an instance of ExpenseService.
+   *
+   * @param storageService Service for interacting with localStorage.
+   */
   constructor(private storageService: StorageService) { }
 
+  /**
+   * Checks if the environment supports localStorage.
+   *
+   * @returns True if running in a browser with localStorage.
+   */
   private isBrowser(): boolean {
     return typeof window !&#x3D;&#x3D; &#x27;undefined&#x27; &amp;&amp; typeof window.localStorage !&#x3D;&#x3D; &#x27;undefined&#x27;;
   }
 
+  /**
+   * Returns the current date and time in ISO format adjusted for local time.
+   *
+   * @returns Local ISO string (YYYY-MM-DDTHH:MM:SS)
+   */
   getLocalISOString(): string {
     const now &#x3D; new Date();
     const pad &#x3D; (n: number) &#x3D;&gt; n.toString().padStart(2, &#x27;0&#x27;);
-
     return &#x60;${now.getFullYear()}-${pad(now.getMonth() + 1)}-${pad(now.getDate())}T${pad(now.getHours())}:${pad(now.getMinutes())}:${pad(now.getSeconds())}&#x60;;
   }
 
+  /**
+   * Retrieves all expenses from localStorage with category metadata attached.
+   *
+   * @returns Array of formatted {@link Expense} sorted by date (newest first).
+   */
   getAll(): Expense[] {
     if (!this.isBrowser()) return [];
     const expenses: Expense[] &#x3D; this.storageService.getAllExpenses();
@@ -808,6 +918,11 @@ export class ExpenseService {
       });
   }
 
+  /**
+   * Adds a new expense to localStorage.
+   *
+   * @param data Expense data excluding &#x60;expense_id&#x60;.
+   */
   add(data: Omit&lt;Expense, &#x27;expense_id&#x27;&gt;): void {
     if (!this.isBrowser()) return;
     const all: Expense[] &#x3D; this.getAll();
@@ -816,6 +931,12 @@ export class ExpenseService {
     localStorage.setItem(this.storageService.getExpenseKey(), JSON.stringify(all));
   }
 
+  /**
+   * Updates an existing expense by ID.
+   *
+   * @param expense_id The ID of the expense to update.
+   * @param newData Partial data to update the expense with.
+   */
   update(expense_id: string, newData: Partial&lt;Expense&gt;): void {
     if (!this.isBrowser()) return;
     let all: Expense[] &#x3D; this.getAll();
@@ -824,11 +945,22 @@ export class ExpenseService {
     localStorage.setItem(this.storageService.getExpenseKey(), JSON.stringify(all));
   }
 
+  /**
+   * Retrieves a single expense by its ID.
+   *
+   * @param expense_id The ID of the expense to retrieve.
+   * @returns The expense object or null if not found.
+   */
   getByExpenseId(expense_id: string): Expense | null {
     if (!this.isBrowser()) return null;
     return this.getAll().find(item &#x3D;&gt; item.expense_id &#x3D;&#x3D;&#x3D; expense_id) || null;
   }
 
+  /**
+   * Deletes an expense by its ID.
+   *
+   * @param expense_id The ID of the expense to delete.
+   */
   delete(expense_id: string): void {
     if (!this.isBrowser()) return;
     let all: Expense[] &#x3D; this.getAll();
@@ -836,6 +968,13 @@ export class ExpenseService {
     localStorage.setItem(this.storageService.getExpenseKey(), JSON.stringify(all));
   }
 
+  /**
+   * Searches expenses within a date range.
+   *
+   * @param fromDate Start date in YYYY-MM-DD format.
+   * @param toDate End date in YYYY-MM-DD format.
+   * @returns Array of expenses within the specified date range.
+   */
   searchByDateRange(fromDate: string, toDate: string): Expense[] {
     if (!this.isBrowser()) return [];
     const all: Expense[] &#x3D; this.getAll();
