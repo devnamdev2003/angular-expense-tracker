@@ -16,7 +16,6 @@ import { ListExpensesComponent } from './features/list-expenses/list-expenses.co
 import { HomeComponent } from './features/home/home.component';
 import { CalendarComponent } from './features/calendar/calendar.component';
 import { BudgetComponent } from './features/budget/budget.component';
-import { AnalysisComponent } from './features/analysis/analysis.component';
 import { AiComponent } from './features/ai/ai.component';
 import { MusicComponent } from './features/music/music.component';
 import { InstallAppPopupComponentComponent } from './component/install-app-popup-component/install-app-popup-component.component';
@@ -39,8 +38,7 @@ import { ToastService } from './service/toast/toast.service';
   imports: [
     NavbarComponent, SidebarComponent, FooterComponent, ToastComponent,
     GlobalLoaderComponent, CommonModule, AddExpenseComponent, SearchComponent,
-    SettingsComponent, ListExpensesComponent, HomeComponent, BudgetComponent,
-    AnalysisComponent, CalendarComponent, AiComponent, MusicComponent, InstallAppPopupComponentComponent
+    SettingsComponent, ListExpensesComponent, HomeComponent, BudgetComponent, CalendarComponent, AiComponent, MusicComponent, InstallAppPopupComponentComponent
   ],
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
