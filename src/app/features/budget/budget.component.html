@@ -1,42 +1,74 @@
 <section id="budget">
+    <div *ngIf="showBudgetSection; else noBudgetMessage" class="p-4 space-y-4">
 
-    <!-- Budget Section -->
-    <div *ngIf="showBudgetSection; else noBudgetMessage" class="p-4">
-        <div *ngIf="showBudgetSection" class=" col-span-1 md:col-span-2">
-            <h2 class="text-xl font-semibold mb-4">💰 Budget Progress</h2>
-            <div class="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-6 overflow-hidden">
-                <div class="h-full rounded-full transition-all duration-700 ease-in-out flex items-center justify-center"
-                    [ngStyle]="{ width: animatedBudgetProgress + '%' }" [ngClass]="budgetColorClass">
+        <!-- Header -->
+        <header class="flex flex-wrap items-center justify-between">
+            <div>
+                <p class="text-xs"> {{ latestBudget.fromDate | date:'dd MMM yyyy' }}</p>
+            </div>
+            <div>
+                <p class="text-xs"> {{ latestBudget.toDate | date:'dd MMM yyyy' }}</p>
+            </div>
+        </header>
 
-                    <span class="text-white text-sm font-semibold">
-                        {{ displayedPercentage.toFixed(1) }}%
-                    </span>
+        <!-- Progress -->
+        <div class="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-6 overflow-hidden">
+            <div class="h-full rounded-full transition-all duration-700 ease-in-out flex items-center justify-center"
+                [ngStyle]="{ width: animatedBudgetProgress + '%' }" [ngClass]="budgetColorClass">
 
-                </div>
+                <span class="text-white text-sm font-semibold">
+                    {{ displayedPercentage.toFixed(1) }}%
+                </span>
+
+            </div>
+        </div>
+
+        <p class="mt-4 text-sm text-[var(--color-text)]">
+            {{ budgetMessage }}
+        </p>
+
+        <!-- Summary Row -->
+        <div class="grid gap-3 text-sm md:grid-cols-2">
+            <!-- Total Budget (Full width) -->
+            <div class="bg-[var(--input-bg)] p-3 rounded shadow flex justify-between items-center">
+                <p class="text-sm">Budget</p>
+                <p class="text-lg font-bold mt-1">{{currency}}{{ totalBudget }}</p>
             </div>
 
-            <p class="mt-4 text-sm text-[var(--color-text)]">
-                {{ budgetMessage }}
-            </p>
-
-        <!-- Daily Metrics -->
-            <div class="grid mt-4 grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 text-[var(--color-text)]">
-                <div class="bg-[var(--input-bg)] p-4 rounded shadow flex justify-between items-center">
-                    <p class="text-sm font-medium">Avg Allowed / Day</p>
-                    <p class="text-lg font-bold mt-1 text-blue-500">{{currency}}{{ avgAllowedPerDay.toFixed(2) }}</p>
+            <!-- Spent & Remaining (Half width each) -->
+            <div class="grid grid-cols-2 gap-3">
+                <div class="bg-[var(--input-bg)] p-3 rounded shadow items-center align-center">
+                    <p class="text-sm">Spent</p>
+                    <p class="text-lg font-bold mt-1 text-red-500">
+                        {{currency}}{{ totalSpent }}
+                    </p>
                 </div>
-                <div class="bg-[var(--input-bg)] p-4 rounded shadow flex justify-between items-center">
-                    <p class="text-sm font-medium">Spent / Day</p>
-                    <p class="text-lg font-bold mt-1 text-red-500">{{currency}}{{ avgSpentPerDay.toFixed(2) }}</p>
-                </div>
-                <div class="bg-[var(--input-bg)] p-4 rounded shadow flex justify-between items-center">
-                    <p class="text-sm font-medium">Suggested / Day</p>
-                    <p class="text-lg font-bold mt-1 text-green-500">{{currency}}{{ suggestedPerDay.toFixed(2) }}</p>
+                <div class="bg-[var(--input-bg)] p-3 rounded shadow items-center align-center">
+                    <p class="text-sm">Remaining</p>
+                    <p class="text-lg font-bold mt-1 text-green-600">
+                        {{currency}}{{ remainingBudgets }}
+                    </p>
                 </div>
             </div>
         </div>
+
+        <!-- Daily Metrics -->
+        <div class="grid mt-4 grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 text-[var(--color-text)]">
+            <div class="bg-[var(--input-bg)] p-3 rounded shadow flex justify-between items-center">
+                <p class="text-sm font-medium">Avg Allowed / Day</p>
+                <p class="text-lg font-bold mt-1 text-blue-500">{{currency}}{{ avgAllowedPerDay.toFixed(2) }}</p>
+            </div>
+            <div class="bg-[var(--input-bg)] p-3 rounded shadow flex justify-between items-center">
+                <p class="text-sm font-medium">Spent / Day</p>
+                <p class="text-lg font-bold mt-1 text-red-500">{{currency}}{{ avgSpentPerDay.toFixed(2) }}</p>
+            </div>
+            <div class="bg-[var(--input-bg)] p-3 rounded shadow flex justify-between items-center">
+                <p class="text-sm font-medium">Suggested / Day</p>
+                <p class="text-lg font-bold mt-1 text-green-500">{{currency}}{{ suggestedPerDay.toFixed(2) }}</p>
+            </div>
+        </div>
         <div class="w-full flex justify-start">
-            <div class="w-full max-w-[600px] py-4 flex space-x-3">
+            <div class="w-full max-w-[600px] py-2 flex space-x-3">
                 <button (click)="openEditModal()"
                     class="flex-1 bg-[var(--color-accent)] hover:opacity-90 text-white py-2 px-4 rounded-lg shadow-md transition">
                     Update

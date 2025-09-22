@@ -106,6 +106,15 @@ export class BudgetComponent implements OnInit {
    */
   displayedPercentage = 0;
 
+  /** Total budget amount */
+  totalBudget = '0';
+
+  /** Remaining budget amount */
+  remainingBudgets = '0';
+
+  /** Total amount spent within the budget period */
+  totalSpent = '0';
+
   /**
    * Creates an instance of BudgetComponent.
    *
@@ -280,16 +289,15 @@ export class BudgetComponent implements OnInit {
 
     // Generate budget status message
     if (spent > totalBudget) {
-      this.budgetMessage =
-        `⚠️ You have exceeded your budget! You spent ${this.currency}${spent.toFixed(2)} ` +
-        `which is ${this.currency}${(spent - totalBudget).toFixed(2)} over the limit set ` +
-        `between ${this.latestBudget.fromDate} and ${this.latestBudget.toDate}. 😰`;
+      this.totalSpent = spent.toFixed(2);
+      this.totalBudget = totalBudget.toFixed(2);
+      this.remainingBudgets = '0';
+      this.budgetMessage = `⚠️ You have exceeded your budget!`;
     } else {
-      this.budgetMessage =
-        `✅ You have spent ${this.currency}${spent.toFixed(2)} out of ` +
-        `${this.currency}${totalBudget.toFixed(2)} between ` +
-        `${this.latestBudget.fromDate} and ${this.latestBudget.toDate}. 💸 Remaining: ` +
-        `${this.currency}${remaining.toFixed(2)}`;
+      this.totalSpent = spent.toFixed(2);
+      this.totalBudget = totalBudget.toFixed(2);
+      this.remainingBudgets = remaining.toFixed(2);
+      this.budgetMessage = '';
     }
 
     // Calculate average daily insights

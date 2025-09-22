@@ -78,6 +78,14 @@
             style="filter: var(--icon-color2);" />
         </button>
 
+        <button (click)="toggleLike()"
+          class="w-8 h-8 flex items-center justify-center rounded-full hover:bg-[var(--list-hover)] active:scale-90 transition-transform">
+          <img [src]="isLiked()
+          ? 'assets/img/music_icon/icons8-love-fill-48.png'
+          : 'assets/img/music_icon/icons8-love-48.png'" class="w-6 h-6"
+            [style]="isLiked() ? 'filter: var(--icon-color1);' : 'filter: var(--icon-color2);'" />
+        </button>
+
       </div>
     </div>
 
