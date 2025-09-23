@@ -230,6 +230,9 @@ customElements.define('compodoc-menu', class extends HTMLElement {
                                     <a href="injectables/ToastService.html" data-type="entity-link" >ToastService</a>
                                 </li>
                                 <li class="link">
+                                    <a href="injectables/UserLikedSongsService.html" data-type="entity-link" >UserLikedSongsService</a>
+                                </li>
+                                <li class="link">
                                     <a href="injectables/UserService.html" data-type="entity-link" >UserService</a>
                                 </li>
                                 <li class="link">
@@ -265,6 +268,18 @@ customElements.define('compodoc-menu', class extends HTMLElement {
                             </li>
                             <li class="link">
                                 <a href="interfaces/Session.html" data-type="entity-link" >Session</a>
+                            </li>
+                            <li class="link">
+                                <a href="interfaces/Song.html" data-type="entity-link" >Song</a>
+                            </li>
+                            <li class="link">
+                                <a href="interfaces/SongArtists.html" data-type="entity-link" >SongArtists</a>
+                            </li>
+                            <li class="link">
+                                <a href="interfaces/SongDownloadUrl.html" data-type="entity-link" >SongDownloadUrl</a>
+                            </li>
+                            <li class="link">
+                                <a href="interfaces/SongImage.html" data-type="entity-link" >SongImage</a>
                             </li>
                             <li class="link">
                                 <a href="interfaces/Template.html" data-type="entity-link" >Template</a>

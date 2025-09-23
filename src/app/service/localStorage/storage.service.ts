@@ -37,12 +37,15 @@ export class StorageService {
   /** LocalStorage key for user settings */
   private readonly userKey = 'user';
 
+  /** LocalStorage key for user Liked songs */
+  private readonly userLikedSongsKey = 'user_liked_songs';
+
   /**
    * Creates an instance of StorageService.
    *
    * @param configService Service providing app configuration such as version.
    */
-  constructor(private configService: ConfigService) {}
+  constructor(private configService: ConfigService) { }
 
   /**
    * Checks if the current environment has access to localStorage.
@@ -119,6 +122,23 @@ export class StorageService {
       toDate: ""
     };
     return this.syncWithSchema(this.budgetKey, budgetSchema);
+  }
+
+  syncLikedSongsWithSchema(): void {
+    const likedSongSchema: Schema = {
+      song_id: '',
+      song_name: '',
+      year: '',
+      duration: 0,
+      language: '',
+      copyright: '',
+      albumName: '',
+      artistName: '',
+      image: '',
+      downloadUrl: '',
+      isLiked: false,
+    };
+    return this.syncWithSchema(this.userLikedSongsKey, likedSongSchema);
   }
 
   /**
@@ -213,6 +233,15 @@ export class StorageService {
     return JSON.parse(localStorage.getItem(this.expenseKey) || '[]');
   }
 
+  /**
+   * Retrieves all liked songs from localStorage.
+   *
+   * @returns Array of liked songs objects.
+   */
+  getAllSongs(): any[] {
+    return JSON.parse(localStorage.getItem(this.userLikedSongsKey) || '[]');
+  }
+
   /** Returns the localStorage key used for categories */
   getCategoryKey(): string { return this.categoryKey; }
 
@@ -224,6 +253,9 @@ export class StorageService {
 
   /** Returns the localStorage key used for user */
   getUserKey(): string { return this.userKey; }
+
+  /** Returns the localStorage key used for user liked songs */
+  getUserLikedSongsKey(): string { return this.userLikedSongsKey; }
 
   /**
    * Updates the categories in localStorage.

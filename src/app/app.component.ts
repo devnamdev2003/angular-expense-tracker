@@ -132,6 +132,7 @@ export class AppComponent {
       this.storageService.syncExpensesWithSchema();
       this.storageService.syncUserWithSchema();
       this.storageService.syncBudgetWithSchema();
+      this.storageService.syncLikedSongsWithSchema();
 
       // Apply saved theme mode
       const savedTheme = this.userService.getValue<string>('theme_mode');

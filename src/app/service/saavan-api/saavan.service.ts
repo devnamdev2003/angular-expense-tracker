@@ -138,6 +138,7 @@ Provide only the JSON object and no extra text, no formatting:
       const modelReply = parts?.map((p: any) => p.text).join('\n\n') || 'No response';
 
       this.history.push({ role: 'model', parts: [{ text: modelReply }] });
+      this.globalLoaderService.hide();
       return modelReply;
     } catch (err) {
       console.error('Error:', err);

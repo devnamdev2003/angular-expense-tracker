@@ -5,7 +5,7 @@ import { SaavnService } from '../../service/saavan-api/saavan.service';
 import { ConfigService } from '../../service/config/config.service';
 import { isPlatformBrowser } from '@angular/common';
 import { FormModelComponent } from '../../component/form-model/form-model.component';
-
+import { UserLikedSongsService } from '../../service/localStorage/user-liked-song.service';
 /**
  * Component to search, play, and suggest songs using Saavn API and AI suggestions.
  *
@@ -60,10 +60,12 @@ export class MusicComponent implements OnDestroy {
    * @param saavnService Service to interact with Saavn API.
    * @param configService Service to retrieve application configuration.
    * @param platformId Angular platform ID to detect browser/server environment.
+   * @param userLikedSongsService Service to manage user liked songs in localStorage.
    */
   constructor(
     private saavnService: SaavnService,
     private configService: ConfigService,
+    private userLikedSongsService: UserLikedSongsService,
     @Inject(PLATFORM_ID) private platformId: object
   ) {
     this.appVersion = this.configService.getVersion();
@@ -107,6 +109,8 @@ export class MusicComponent implements OnDestroy {
     } else {
       this.audio.src = url;
       this.audio.play();
+      const data = this.userLikedSongsService.getAll().filter(s => s.song_id === song.id);
+      this.isCurrentSongLiked = data.length > 0 ? true : false;
       this.currentSong = { ...song, url };
       this.duration.set(song.duration);
     }
@@ -203,7 +207,6 @@ export class MusicComponent implements OnDestroy {
       year: data.year,
       duration: data.duration,
       label: data.label,
-      playCount: data.playCount,
       language: data.language,
       copyright: data.copyright,
       album: { name: data.album?.name || '' },
@@ -227,14 +230,34 @@ export class MusicComponent implements OnDestroy {
   /** Toggles the like status of a song */
   toggleLike() {
     if (this.isCurrentSongLiked) {
+      this.userLikedSongsService.delete(this.currentSong.id);
       this.isCurrentSongLiked = false;
     } else {
+      this.userLikedSongsService.add(this.transformSongDataForAPI(this.currentSong));
       this.isCurrentSongLiked = true;
     }
   }
 
+  transformSongDataForAPI(data: any): any {
+    return {
+      song_id: data.id,
+      song_name: data.name,
+      song_type: data.type,
+      year: data.year,
+      duration: data.duration,
+      label: data.label,
+      language: data.language,
+      copyright: data.copyright,
+      albumName: data.album?.name || '',
+      artistName: data.artists.primary[0]?.name,
+      image: data.image?.[2]?.url,
+      downloadUrl: this.getSongUrl(data),
+      isLiked: true,
+    }
+  }
+
   /** Checks if a song is liked */
-  isLiked(): boolean {
+  isSongLiked(): boolean {
     return this.isCurrentSongLiked;
   }
 
