@@ -99,13 +99,19 @@ export class MusicComponent implements OnDestroy {
    *
    * @param url URL of the song to play
    * @param song Song object
+   * @param isbuttonClick Indicates if the play/pause was triggered by a button click
    */
-  playSong(url: string, song: any): void {
+  playSong(url: string, song: any, isbuttonClick: boolean = false): void {
     if (!this.isBrowser) return;
     if (!this.audio) this.audio = new Audio();
 
     if (this.currentSong?.url === url) {
-      this.audio.paused ? this.audio.play() : this.audio.pause();
+      if (isbuttonClick) {
+        this.audio.paused ? this.audio.play() : this.audio.pause();
+      }
+      else {
+        this.audio.play();
+      }
     } else {
       this.audio.src = url;
       this.audio.play();
