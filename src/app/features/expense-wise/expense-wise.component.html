@@ -1,0 +1,22 @@
+<div class="expense">
+    <app-navbar></app-navbar>
+    <div class="flex pt-14 pb-9 h-screen overflow-hidden">
+        <app-sidebar></app-sidebar>
+        <main class="flex-1 overflow-y-auto w-full h-full">
+            <ng-container [ngSwitch]="currentSection">
+                <app-home *ngSwitchCase="'home'"></app-home>
+                <div *ngSwitchCase="'add'" [class.mobile-slide-up]="isMobile">
+                    <app-add-expense></app-add-expense>
+                </div>
+                <app-list-expenses *ngSwitchCase="'list'"></app-list-expenses>
+                <app-calendar *ngSwitchCase="'calendar'"></app-calendar>
+                <app-settings *ngSwitchCase="'settings'"></app-settings>
+                <app-budget *ngSwitchCase="'budget'"></app-budget>
+                <app-ai *ngSwitchCase="'ai'"></app-ai>
+                <app-home *ngSwitchDefault></app-home>
+            </ng-container>
+        </main>
+    </div>
+    <app-footer></app-footer>
+    <app-toast></app-toast>
+</div>

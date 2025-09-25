@@ -1,9 +1,36 @@
 import { Routes } from '@angular/router';
-import { AppComponent } from './app.component';
 
-/** Application routes */
+/**
+ * Application routes configuration.
+ * 
+ * This configuration defines the routes for the application, including
+ * lazy-loaded feature modules.
+ */
 export const routes: Routes = [
-    { path: '', component: AppComponent }, // your main app content
-    { path: 'music', component: AppComponent }, // for music
-    { path: '**', redirectTo: '' }, // catch-all
+    {
+        path: '',
+        loadComponent: () =>
+            import('./features/expense-wise/expense-wise.component')
+                .then(m => m.ExpenseWiseComponent)
+    },
+    {
+        path: 'music',
+        loadComponent: () =>
+            import('./features/music/music.component')
+                .then(m => m.MusicComponent),
+    },
+    {
+        path: 'music/search',
+        loadComponent: () =>
+            import('./features/music/music-component/search-music/search-music.component')
+                .then(m => m.SearchMusicComponent)
+    },
+    {
+        path: 'music/playlist',
+        loadComponent: () =>
+            import('./features/music/music-component/playlist-music/playlist-music.component')
+                .then(m => m.PlaylistMusicComponent)
+    },
+    { path: '**', redirectTo: '' },
+    { path: 'music/**', redirectTo: '../music' }
 ];

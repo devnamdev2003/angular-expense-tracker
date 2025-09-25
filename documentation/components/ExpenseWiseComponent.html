@@ -107,7 +107,7 @@
   <li class="breadcrumb-item">Components</li>
   <li class="breadcrumb-item"
   >
-  HamburgerMenuComponent</li>
+  ExpenseWiseComponent</li>
 </ol>
 
 <ul class="nav nav-tabs" role="tablist">
@@ -124,10 +124,6 @@
                 role="tab" id="templateData-tab" data-bs-toggle="tab" data-link="template">Template</a>
         </li>
         <li class="nav-item">
-            <a href="#styleData" class="nav-link"
-                role="tab" id="styleData-tab" data-bs-toggle="tab" data-link="style">Styles</a>
-        </li>
-        <li class="nav-item">
             <a href="#tree" class="nav-link"
                 role="tab" id="tree-tab" data-bs-toggle="tab" data-link="dom-tree">DOM Tree</a>
         </li>
@@ -138,7 +134,7 @@
     <h3>File</h3>
 </p>
 <p class="comment">
-    <code>src/app/shared/hamburger-menu/hamburger-menu.component.ts</code>
+    <code>src/app/features/expense-wise/expense-wise.component.ts</code>
 </p>
 
 
@@ -146,14 +142,9 @@
         <h3>Description</h3>
     </p>
     <p class="comment">
-        <p>Hamburger menu component for mobile or compact navigation.</p>
-<p>Features:</p>
-<ul>
-<li>Toggles visibility of the menu.</li>
-<li>Closes menu when clicking outside of it.</li>
-<li>Shows/hides AI button depending on the current section.</li>
-<li>Integrates with <a href="../injectables/SectionService.html">SectionService</a> to navigate between sections.</li>
-</ul>
+        <p>Root component of the application.
+Manages global state, mobile view detection, section tracking,
+theme application, schema syncing, and PWA update activation.</p>
 
     </p>
 
@@ -178,31 +169,46 @@
 
             <tr>
                 <td class="col-md-3">selector</td>
-                <td class="col-md-9"><code>app-hamburger-menu</code></td>
+                <td class="col-md-9"><code>app-expense-wise</code></td>
             </tr>
 
+            <tr>
+                <td class="col-md-3">standalone</td>
+                <td class="col-md-9"><code>true</code></td>
+            </tr>
 
             <tr>
                 <td class="col-md-3">imports</td>
                 <td class="col-md-9">
+                                <code><a href="../components/NavbarComponent.html" target="_self" >NavbarComponent</a></code>
+                                <code><a href="../components/SidebarComponent.html" target="_self" >SidebarComponent</a></code>
+                                <code><a href="../components/FooterComponent.html" target="_self" >FooterComponent</a></code>
+                                <code><a href="../components/ToastComponent.html" target="_self" >ToastComponent</a></code>
                             <code>CommonModule</code>
+                                <code><a href="../components/AddExpenseComponent.html" target="_self" >AddExpenseComponent</a></code>
+                                <code><a href="../components/SettingsComponent.html" target="_self" >SettingsComponent</a></code>
+                                <code><a href="../components/ListExpensesComponent.html" target="_self" >ListExpensesComponent</a></code>
+                                <code><a href="../components/HomeComponent.html" target="_self" >HomeComponent</a></code>
+                                <code><a href="../components/BudgetComponent.html" target="_self" >BudgetComponent</a></code>
+                                <code><a href="../components/CalendarComponent.html" target="_self" >CalendarComponent</a></code>
+                                <code><a href="../components/AiComponent.html" target="_self" >AiComponent</a></code>
                 </td>
             </tr>
 
-            <tr>
-                <td class="col-md-3">styleUrls</td>
-                <td class="col-md-9"><code>./hamburger-menu.component.css</code></td>
-            </tr>
 
 
 
             <tr>
                 <td class="col-md-3">templateUrl</td>
-                <td class="col-md-9"><code>./hamburger-menu.component.html</code></td>
+                <td class="col-md-9"><code>./expense-wise.component.html</code></td>
             </tr>
 
 
 
+            <tr>
+                <td class="col-md-3">styleUrl</td>
+                <td class="col-md-9"><code>./expense-wise.component.css</code></td>
+            </tr>
 
 
 
@@ -225,10 +231,10 @@
                     <td class="col-md-4">
                         <ul class="index-list">
                             <li>
-                                <a href="#isMenuOpen" >isMenuOpen</a>
+                                <a href="#currentSection" >currentSection</a>
                             </li>
                             <li>
-                                <a href="#showAIButton" >showAIButton</a>
+                                <a href="#isMobile" >isMobile</a>
                             </li>
                         </ul>
                     </td>
@@ -243,14 +249,11 @@
                     <td class="col-md-4">
                         <ul class="index-list">
                             <li>
-                                <a href="#navigateAndClose" >navigateAndClose</a>
+                                <a href="#ngOnInit" >ngOnInit</a>
                             </li>
                             <li>
                                     <span class="modifier"></span>
-                                <a href="#onClick" >onClick</a>
-                            </li>
-                            <li>
-                                <a href="#toggleMenu" >toggleMenu</a>
+                                <a href="#onResize" >onResize</a>
                             </li>
                         </ul>
                     </td>
@@ -268,7 +271,7 @@
                     <td class="col-md-4">
                         <ul class="index-list">
                             <li>
-                                <a href="#document:click" >document:click</a>
+                                <a href="#window:resize" >window:resize</a>
                             </li>
                         </ul>
                     </td>
@@ -284,20 +287,19 @@
             <tbody>
                 <tr>
                     <td class="col-md-4">
-<code>constructor(sectionService: <a href="../injectables/SectionService.html" target="_self">SectionService</a>)</code>
+<code>constructor(sectionService: <a href="../injectables/SectionService.html" target="_self">SectionService</a>, platformId: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object" target="_blank">Object</a>)</code>
                     </td>
                 </tr>
                         <tr>
                             <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="31" class="link-to-prism">src/app/shared/hamburger-menu/hamburger-menu.component.ts:31</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="44" class="link-to-prism">src/app/features/expense-wise/expense-wise.component.ts:44</a></div>
                             </td>
                         </tr>
 
                 <tr>
                     <td class="col-md-4">
-                            <div class="io-description"><p>Creates an instance of HamburgerMenuComponent.</p>
-<p>Subscribes to <a href="SectionService.currentSection$">SectionService.currentSection$</a> to manage the
-visibility of the AI button based on the current section.</p>
+                            <div class="io-description"><p>Constructor for AppComponent.
+Initializes route tracking, section updates, PWA update listener, and services.</p>
 </div>
                             <div>
                                     <b>Parameters :</b>
@@ -323,7 +325,23 @@ visibility of the AI button based on the current section.</p>
                                                     </td>
                                                     
                                                         <td>
-                                                                <p>Service for managing and broadcasting the active section.</p>
+                                                                <p>Service to track current section changes</p>
+
+                                                        </td>
+                                                </tr>
+                                                <tr>
+                                                        <td>platformId</td>
+                                                  
+                                                        <td>
+                                                                        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object" target="_blank" >Object</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                        <td>
+                                                                <p>Angular platform ID to check if running in browser</p>
 
                                                         </td>
                                                 </tr>
@@ -344,10 +362,10 @@ visibility of the AI button based on the current section.</p>
         <tbody>
             <tr>
                 <td class="col-md-4">
-                    <a name="document:click"></a>
+                    <a name="window:resize"></a>
                     <span class="name">
-                        <span ><b>document:click</b></span>
-                        <a href="#document:click"><span class="icon ion-ios-link"></span></a>
+                        <span ><b>window:resize</b></span>
+                        <a href="#window:resize"><span class="icon ion-ios-link"></span></a>
                     </span>
                 </td>
             </tr>
@@ -358,23 +376,22 @@ visibility of the AI button based on the current section.</p>
             </tr>
             <tr>
                 <td class="col-md-4">
-<code>document:click(event: MouseEvent)</code>
+<code>window:resize(event: <a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank">any</a>)</code>
                 </td>
             </tr>
 
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="61"
-                                    class="link-to-prism">src/app/shared/hamburger-menu/hamburger-menu.component.ts:61</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="75"
+                                    class="link-to-prism">src/app/features/expense-wise/expense-wise.component.ts:75</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
-                        <div class="io-description"><p>Listens for clicks on the document to close the menu
-if the click occurs outside the hamburger menu container.</p>
+                        <div class="io-description"><p>Event listener for window resize to update mobile view detection.</p>
 </div>
 
                             <div class="io-description">
@@ -398,7 +415,7 @@ if the click occurs outside the hamburger menu container.</p>
 
 
                                             <td>
-                                                    <p>The mouse click event.</p>
+                                                    <p>Resize event object</p>
 
                                             </td>
                                         </tr>
@@ -419,88 +436,37 @@ if the click occurs outside the hamburger menu container.</p>
         <tbody>
             <tr>
                 <td class="col-md-4">
-                    <a name="navigateAndClose"></a>
+                    <a name="ngOnInit"></a>
                     <span class="name">
-                        <span ><b>navigateAndClose</b></span>
-                        <a href="#navigateAndClose"><span class="icon ion-ios-link"></span></a>
+                        <span ><b>ngOnInit</b></span>
+                        <a href="#ngOnInit"><span class="icon ion-ios-link"></span></a>
                     </span>
                 </td>
             </tr>
             <tr>
                 <td class="col-md-4">
-<code>navigateAndClose(section: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>, event: Event)</code>
+<code>ngOnInit()</code>
                 </td>
             </tr>
 
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="75"
-                                    class="link-to-prism">src/app/shared/hamburger-menu/hamburger-menu.component.ts:75</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="65"
+                                    class="link-to-prism">src/app/features/expense-wise/expense-wise.component.ts:65</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
-                        <div class="io-description"><p>Navigates to the selected section and closes the menu.</p>
+                        <div class="io-description"><p>OnInit lifecycle hook to set initial mobile view detection.</p>
 </div>
 
-                            <div class="io-description">
-                                <b>Parameters :</b>
-                                
-                                <table class="params">
-                                    <thead>
-                                        <tr>
-                                            <td>Name</td>
-                                                <td>Type</td>
-                                            <td>Optional</td>
-                                                <td>Description</td>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr>
-                                                <td>section</td>
-                                            <td>
-                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
-                                            </td>
-
-                                            <td>
-                                                    No
-                                            </td>
-
-
-                                            <td>
-                                                    <p>The section identifier to navigate to.</p>
-
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                                <td>event</td>
-                                            <td>
-                                                        <code>Event</code>
-                                            </td>
-
-                                            <td>
-                                                    No
-                                            </td>
-
-
-                                            <td>
-                                                    <p>The click event object (used to prevent default anchor behavior).</p>
-
-                                            </td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                            </div>
                         <div class="io-description">
                             <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
 
                         </div>
-                            <div class="io-description">
-                                
-                            </div>
                 </td>
             </tr>
         </tbody>
@@ -509,18 +475,18 @@ if the click occurs outside the hamburger menu container.</p>
         <tbody>
             <tr>
                 <td class="col-md-4">
-                    <a name="onClick"></a>
+                    <a name="onResize"></a>
                     <span class="name">
                             <span class="modifier"></span>
-                        <span ><b>onClick</b></span>
-                        <a href="#onClick"><span class="icon ion-ios-link"></span></a>
+                        <span ><b>onResize</b></span>
+                        <a href="#onResize"><span class="icon ion-ios-link"></span></a>
                     </span>
                 </td>
             </tr>
             <tr>
                 <td class="col-md-4">
                         <span class="modifier-icon icon ion-ios-reset"></span>
-                    <code>onClick(event: MouseEvent)</code>
+                    <code>onResize(event: <a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank">any</a>)</code>
                 </td>
             </tr>
 
@@ -528,22 +494,21 @@ if the click occurs outside the hamburger menu container.</p>
                 <td class="col-md-4">
                     <b>Decorators : </b>
                     <br />
-                    <code>@HostListener(&#x27;document:click&#x27;, [&#x27;$event&#x27;])<br /></code>
+                    <code>@HostListener(&#x27;window:resize&#x27;, [&#x27;$event&#x27;])<br /></code>
                 </td>
             </tr>
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="61"
-                                    class="link-to-prism">src/app/shared/hamburger-menu/hamburger-menu.component.ts:61</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="75"
+                                    class="link-to-prism">src/app/features/expense-wise/expense-wise.component.ts:75</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
-                        <div class="io-description"><p>Listens for clicks on the document to close the menu
-if the click occurs outside the hamburger menu container.</p>
+                        <div class="io-description"><p>Event listener for window resize to update mobile view detection.</p>
 </div>
 
                             <div class="io-description">
@@ -562,7 +527,7 @@ if the click occurs outside the hamburger menu container.</p>
                                         <tr>
                                                 <td>event</td>
                                             <td>
-                                                        <code>MouseEvent</code>
+                                                            <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
                                             </td>
 
                                             <td>
@@ -571,7 +536,7 @@ if the click occurs outside the hamburger menu container.</p>
 
 
                                             <td>
-                                                    <p>The mouse click event.</p>
+                                                    <p>Resize event object</p>
 
                                             </td>
                                         </tr>
@@ -585,45 +550,6 @@ if the click occurs outside the hamburger menu container.</p>
                             <div class="io-description">
                                 
                             </div>
-                </td>
-            </tr>
-        </tbody>
-    </table>
-    <table class="table table-sm table-bordered">
-        <tbody>
-            <tr>
-                <td class="col-md-4">
-                    <a name="toggleMenu"></a>
-                    <span class="name">
-                        <span ><b>toggleMenu</b></span>
-                        <a href="#toggleMenu"><span class="icon ion-ios-link"></span></a>
-                    </span>
-                </td>
-            </tr>
-            <tr>
-                <td class="col-md-4">
-<code>toggleMenu()</code>
-                </td>
-            </tr>
-
-
-                    <tr>
-                        <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="50"
-                                    class="link-to-prism">src/app/shared/hamburger-menu/hamburger-menu.component.ts:50</a></div>
-                        </td>
-                    </tr>
-
-
-            <tr>
-                <td class="col-md-4">
-                        <div class="io-description"><p>Toggles the hamburger menu open/closed state.</p>
-</div>
-
-                        <div class="io-description">
-                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
-
-                        </div>
                 </td>
             </tr>
         </tbody>
@@ -638,27 +564,33 @@ if the click occurs outside the hamburger menu container.</p>
         <tbody>
             <tr>
                 <td class="col-md-4">
-                    <a name="isMenuOpen"></a>
+                    <a name="currentSection"></a>
                     <span class="name">
-                        <span ><b>isMenuOpen</b></span>
-                        <a href="#isMenuOpen"><span class="icon ion-ios-link"></span></a>
+                        <span ><b>currentSection</b></span>
+                        <a href="#currentSection"><span class="icon ion-ios-link"></span></a>
                     </span>
                 </td>
             </tr>
                 <tr>
                     <td class="col-md-4">
-                        <i>Default value : </i><code>false</code>
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>&#x27;home&#x27;</code>
                     </td>
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="31" class="link-to-prism">src/app/shared/hamburger-menu/hamburger-menu.component.ts:31</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="39" class="link-to-prism">src/app/features/expense-wise/expense-wise.component.ts:39</a></div>
                         </td>
                     </tr>
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-description"><p>Tracks whether the hamburger menu is currently open.</p>
+                    <div class="io-description"><p>Currently active section of the app (e.g., &#39;home&#39;, &#39;settings&#39;).</p>
 </div>
                 </td>
             </tr>
@@ -669,13 +601,19 @@ if the click occurs outside the hamburger menu container.</p>
         <tbody>
             <tr>
                 <td class="col-md-4">
-                    <a name="showAIButton"></a>
+                    <a name="isMobile"></a>
                     <span class="name">
-                        <span ><b>showAIButton</b></span>
-                        <a href="#showAIButton"><span class="icon ion-ios-link"></span></a>
+                        <span ><b>isMobile</b></span>
+                        <a href="#isMobile"><span class="icon ion-ios-link"></span></a>
                     </span>
                 </td>
             </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
+
+                    </td>
+                </tr>
                 <tr>
                     <td class="col-md-4">
                         <i>Default value : </i><code>false</code>
@@ -683,14 +621,13 @@ if the click occurs outside the hamburger menu container.</p>
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="26" class="link-to-prism">src/app/shared/hamburger-menu/hamburger-menu.component.ts:26</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="44" class="link-to-prism">src/app/features/expense-wise/expense-wise.component.ts:44</a></div>
                         </td>
                     </tr>
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-description"><p>Determines whether the AI button should be displayed.
-Hidden when the current section is &#39;ai&#39;.</p>
+                    <div class="io-description"><p>Boolean indicating whether the app is being viewed on a mobile device.</p>
 </div>
                 </td>
             </tr>
@@ -703,127 +640,113 @@ Hidden when the current section is &#39;ai&#39;.</p>
 
 
     <div class="tab-pane fade  tab-source-code" id="source">
-        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Component, HostListener } from &#x27;@angular/core&#x27;;
-import { CommonModule } from &#x27;@angular/common&#x27;;
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Component, HostListener, Inject } from &#x27;@angular/core&#x27;;
+import { CommonModule, isPlatformBrowser } from &#x27;@angular/common&#x27;;
+import { PLATFORM_ID } from &#x27;@angular/core&#x27;;
+
+import { NavbarComponent } from &#x27;../../shared/navbar/navbar.component&#x27;;
+import { SidebarComponent } from &#x27;../../shared/sidebar/sidebar.component&#x27;;
+import { FooterComponent } from &#x27;../../shared/footer/footer.component&#x27;;
+import { ToastComponent } from &#x27;../../shared/toast/toast.component&#x27;;
+import { AddExpenseComponent } from &#x27;../../features/add-expense/add-expense.component&#x27;;
+import { SettingsComponent } from &#x27;../../features/settings/settings.component&#x27;;
+import { ListExpensesComponent } from &#x27;../../features/list-expenses/list-expenses.component&#x27;;
+import { HomeComponent } from &#x27;../../features/home/home.component&#x27;;
+import { CalendarComponent } from &#x27;../../features/calendar/calendar.component&#x27;;
+import { BudgetComponent } from &#x27;../../features/budget/budget.component&#x27;;
+import { AiComponent } from &#x27;../../features/ai/ai.component&#x27;;
+
 import { SectionService } from &#x27;../../service/section/section.service&#x27;;
 
 /**
- * Hamburger menu component for mobile or compact navigation.
- *
- * Features:
- * - Toggles visibility of the menu.
- * - Closes menu when clicking outside of it.
- * - Shows/hides AI button depending on the current section.
- * - Integrates with {@link SectionService} to navigate between sections.
+ * Root component of the application.
+ * Manages global state, mobile view detection, section tracking,
+ * theme application, schema syncing, and PWA update activation.
  */
 @Component({
-  selector: &#x27;app-hamburger-menu&#x27;,
-  imports: [CommonModule],
-  templateUrl: &#x27;./hamburger-menu.component.html&#x27;,
-  styleUrls: [&#x27;./hamburger-menu.component.css&#x27;],
+  selector: &#x27;app-expense-wise&#x27;,
+  standalone: true,
+  imports: [
+    NavbarComponent, SidebarComponent, FooterComponent, ToastComponent, CommonModule, AddExpenseComponent,
+    SettingsComponent, ListExpensesComponent, HomeComponent, BudgetComponent, CalendarComponent, AiComponent
+  ],
+  templateUrl: &#x27;./expense-wise.component.html&#x27;,
+  styleUrl: &#x27;./expense-wise.component.css&#x27;
 })
-export class HamburgerMenuComponent {
+export class ExpenseWiseComponent {
 
   /**
-   * Determines whether the AI button should be displayed.
-   * Hidden when the current section is &#x27;ai&#x27;.
+   * Currently active section of the app (e.g., &#x27;home&#x27;, &#x27;settings&#x27;).
    */
-  showAIButton &#x3D; false;
+  currentSection: string &#x3D; &#x27;home&#x27;;
 
   /**
-   * Tracks whether the hamburger menu is currently open.
+   * Boolean indicating whether the app is being viewed on a mobile device.
    */
-  isMenuOpen &#x3D; false;
-
+  isMobile: boolean &#x3D; false;
   /**
-   * Creates an instance of HamburgerMenuComponent.
-   *
-   * Subscribes to {@link SectionService.currentSection$} to manage the
-   * visibility of the AI button based on the current section.
-   *
-   * @param sectionService Service for managing and broadcasting the active section.
+   * Constructor for AppComponent.
+   * Initializes route tracking, section updates, PWA update listener, and services.
+   * 
+   * @param sectionService Service to track current section changes
+   * @param platformId Angular platform ID to check if running in browser
    */
-  constructor(private sectionService: SectionService) {
+  constructor(
+    private sectionService: SectionService,
+    @Inject(PLATFORM_ID) private platformId: Object
+
+  ) {
+    // Track current section name
     this.sectionService.currentSection$.subscribe(section &#x3D;&gt; {
-      this.showAIButton &#x3D; section !&#x3D;&#x3D; &#x27;ai&#x27;;
+      this.currentSection &#x3D; section;
     });
   }
-
   /**
-   * Toggles the hamburger menu open/closed state.
+   * OnInit lifecycle hook to set initial mobile view detection.
    */
-  toggleMenu(): void {
-    this.isMenuOpen &#x3D; !this.isMenuOpen;
-  }
-
-  /**
-   * Listens for clicks on the document to close the menu
-   * if the click occurs outside the hamburger menu container.
-   *
-   * @param event The mouse click event.
-   */
-  @HostListener(&#x27;document:click&#x27;, [&#x27;$event&#x27;])
-  onClick(event: MouseEvent): void {
-    const clickedInside &#x3D; event.target instanceof HTMLElement 
-      &amp;&amp; event.target.closest(&#x27;.hamburger-menu-container&#x27;);
-    if (!clickedInside) {
-      this.isMenuOpen &#x3D; false;
+  ngOnInit() {
+    if (isPlatformBrowser(this.platformId)) {
+      this.isMobile &#x3D; window.innerWidth &lt;&#x3D; 768;
     }
   }
-
   /**
-   * Navigates to the selected section and closes the menu.
-   *
-   * @param section The section identifier to navigate to.
-   * @param event The click event object (used to prevent default anchor behavior).
-   */
-  navigateAndClose(section: string, event: Event): void {
-    event.preventDefault();
-    this.sectionService.setSection(section);
-    this.isMenuOpen &#x3D; !this.isMenuOpen;
+ * Event listener for window resize to update mobile view detection.
+ * @param event Resize event object
+ */
+  @HostListener(&#x27;window:resize&#x27;, [&#x27;$event&#x27;])
+  onResize(event: any) {
+    if (isPlatformBrowser(this.platformId)) {
+      this.isMobile &#x3D; event.target.innerWidth &lt;&#x3D; 768;
+    }
   }
-}
-</code></pre>
+}</code></pre>
     </div>
 
     <div class="tab-pane fade " id="templateData">
-        <pre class="line-numbers"><code class="language-html">&lt;!-- &lt;div class&#x3D;&quot;md:hidden fixed top-1 right-4 z-50 hamburger-menu-container&quot;&gt;
-    &lt;button (click)&#x3D;&quot;toggleMenu()&quot; class&#x3D;&quot;text-lg text-[var(--color-white)] py-2&quot;&gt;
-        &lt;img src&#x3D;&quot;assets/img/icon/icons8-menu-vertical-50.png&quot; alt&#x3D;&quot;Menu&quot; class&#x3D;&quot;w-[24px] h-[24px]&quot;
-            style&#x3D;&quot;filter: invert(100%); transition: filter 0.3s ease;&quot;&gt;
-    &lt;/button&gt;
-
-    
-    &lt;div *ngIf&#x3D;&quot;isMenuOpen&quot;
-        class&#x3D;&quot;fixed top-[3rem] right-[0.2rem] bg-[--color-surface] rounded-lg shadow-lg mt-2 w-[10rem]&quot;&gt;
-        &lt;ul class&#x3D;&quot;flex flex-col&quot;&gt;
-            &lt;li&gt;
-                &lt;a href&#x3D;&quot;#&quot; (click)&#x3D;&quot;navigateAndClose(&#x27;search&#x27;, $event)&quot;
-                    class&#x3D;&quot;block px-4 py-2 hover:bg-[--list-hover]&quot;&gt;🔍 Search&lt;/a&gt;
-            &lt;/li&gt;
-            &lt;li&gt;
-                &lt;a href&#x3D;&quot;#&quot; (click)&#x3D;&quot;navigateAndClose(&#x27;settings&#x27;, $event)&quot;
-                    class&#x3D;&quot;block px-4 py-2 hover:bg-[--list-hover]&quot;&gt;⚙️ Settings&lt;/a&gt;
-            &lt;/li&gt;
-        &lt;/ul&gt;
+        <pre class="line-numbers"><code class="language-html">&lt;div class&#x3D;&quot;expense&quot;&gt;
+    &lt;app-navbar&gt;&lt;/app-navbar&gt;
+    &lt;div class&#x3D;&quot;flex pt-14 pb-9 h-screen overflow-hidden&quot;&gt;
+        &lt;app-sidebar&gt;&lt;/app-sidebar&gt;
+        &lt;main class&#x3D;&quot;flex-1 overflow-y-auto w-full h-full&quot;&gt;
+            &lt;ng-container [ngSwitch]&#x3D;&quot;currentSection&quot;&gt;
+                &lt;app-home *ngSwitchCase&#x3D;&quot;&#x27;home&#x27;&quot;&gt;&lt;/app-home&gt;
+                &lt;div *ngSwitchCase&#x3D;&quot;&#x27;add&#x27;&quot; [class.mobile-slide-up]&#x3D;&quot;isMobile&quot;&gt;
+                    &lt;app-add-expense&gt;&lt;/app-add-expense&gt;
+                &lt;/div&gt;
+                &lt;app-list-expenses *ngSwitchCase&#x3D;&quot;&#x27;list&#x27;&quot;&gt;&lt;/app-list-expenses&gt;
+                &lt;app-calendar *ngSwitchCase&#x3D;&quot;&#x27;calendar&#x27;&quot;&gt;&lt;/app-calendar&gt;
+                &lt;app-settings *ngSwitchCase&#x3D;&quot;&#x27;settings&#x27;&quot;&gt;&lt;/app-settings&gt;
+                &lt;app-budget *ngSwitchCase&#x3D;&quot;&#x27;budget&#x27;&quot;&gt;&lt;/app-budget&gt;
+                &lt;app-ai *ngSwitchCase&#x3D;&quot;&#x27;ai&#x27;&quot;&gt;&lt;/app-ai&gt;
+                &lt;app-home *ngSwitchDefault&gt;&lt;/app-home&gt;
+            &lt;/ng-container&gt;
+        &lt;/main&gt;
     &lt;/div&gt;
-&lt;/div&gt; --&gt;
-
-&lt;div class&#x3D;&quot;md:hidden fixed top-1 right-4 z-50 hamburger-menu-container&quot;&gt;
-    &lt;button *ngIf&#x3D;&quot;showAIButton&quot; (click)&#x3D;&quot;navigateAndClose(&#x27;ai&#x27;, $event)&quot;
-        class&#x3D;&quot;text-lg text-[var(--color-white)] py-[0.65rem]&quot;&gt;
-        &lt;img src&#x3D;&quot;assets/img/icon/icons8-ai-96.png&quot; alt&#x3D;&quot;Menu&quot; class&#x3D;&quot;w-[24px] h-[24px]&quot;
-            style&#x3D;&quot;filter: invert(100%); transition: filter 0.3s ease;&quot;&gt;
-    &lt;/button&gt;
+    &lt;app-footer&gt;&lt;/app-footer&gt;
+    &lt;app-toast&gt;&lt;/app-toast&gt;
 &lt;/div&gt;</code></pre>
     </div>
 
-    <div class="tab-pane fade " id="styleData">
-                <p class="comment">
-                    <code>./hamburger-menu.component.css</code>
-                </p>
-                <pre class="line-numbers"><code class="language-scss"></code></pre>
-    </div>
 
     <div class="tab-pane fade " id="tree">
         <div id="tree-container"></div>
@@ -850,10 +773,10 @@ export class HamburgerMenuComponent {
 <script src="../js/libs/htmlparser.js"></script>
 <script src="../js/libs/deep-iterator.js"></script>
 <script>
-        var COMPONENT_TEMPLATE = '<div><!-- <div class="md:hidden fixed top-1 right-4 z-50 hamburger-menu-container">    <button (click)="toggleMenu()" class="text-lg text-[var(--color-white)] py-2">        <img src="assets/img/icon/icons8-menu-vertical-50.png" alt="Menu" class="w-[24px] h-[24px]"            style="filter: invert(100%); transition: filter 0.3s ease;">    </button>        <div *ngIf="isMenuOpen"        class="fixed top-[3rem] right-[0.2rem] bg-[--color-surface] rounded-lg shadow-lg mt-2 w-[10rem]">        <ul class="flex flex-col">            <li>                <a href="#" (click)="navigateAndClose(\'search\', $event)"                    class="block px-4 py-2 hover:bg-[--list-hover]">🔍 Search</a>            </li>            <li>                <a href="#" (click)="navigateAndClose(\'settings\', $event)"                    class="block px-4 py-2 hover:bg-[--list-hover]">⚙️ Settings</a>            </li>        </ul>    </div></div> --><div class="md:hidden fixed top-1 right-4 z-50 hamburger-menu-container">    <button *ngIf="showAIButton" (click)="navigateAndClose(\'ai\', $event)"        class="text-lg text-[var(--color-white)] py-[0.65rem]">        <img src="assets/img/icon/icons8-ai-96.png" alt="Menu" class="w-[24px] h-[24px]"            style="filter: invert(100%); transition: filter 0.3s ease;">    </button></div></div>'
+        var COMPONENT_TEMPLATE = '<div><div class="expense">    <app-navbar></app-navbar>    <div class="flex pt-14 pb-9 h-screen overflow-hidden">        <app-sidebar></app-sidebar>        <main class="flex-1 overflow-y-auto w-full h-full">            <ng-container [ngSwitch]="currentSection">                <app-home *ngSwitchCase="\'home\'"></app-home>                <div *ngSwitchCase="\'add\'" [class.mobile-slide-up]="isMobile">                    <app-add-expense></app-add-expense>                </div>                <app-list-expenses *ngSwitchCase="\'list\'"></app-list-expenses>                <app-calendar *ngSwitchCase="\'calendar\'"></app-calendar>                <app-settings *ngSwitchCase="\'settings\'"></app-settings>                <app-budget *ngSwitchCase="\'budget\'"></app-budget>                <app-ai *ngSwitchCase="\'ai\'"></app-ai>                <app-home *ngSwitchDefault></app-home>            </ng-container>        </main>    </div>    <app-footer></app-footer>    <app-toast></app-toast></div></div>'
     var COMPONENTS = [{'name': 'AddExpenseComponent', 'selector': 'app-add-expense'},{'name': 'AiComponent', 'selector': 'app-ai'},{'name': 'AppComponent', 'selector': 'app-root'},{'name': 'BudgetComponent', 'selector': 'app-budget'},{'name': 'CalendarComponent', 'selector': 'app-calendar'},{'name': 'CategoryDropdownComponent', 'selector': 'app-category-dropdown'},{'name': 'DownloadComponentComponent', 'selector': 'app-download-component'},{'name': 'ExpenseDetailsModalComponent', 'selector': 'app-expense-details-modal'},{'name': 'ExpenseListComponent', 'selector': 'app-expense-list'},{'name': 'ExpenseWiseComponent', 'selector': 'app-expense-wise'},{'name': 'FooterComponent', 'selector': 'app-footer'},{'name': 'FormModelComponent', 'selector': 'app-form-model'},{'name': 'GlobalLoaderComponent', 'selector': 'app-global-loader'},{'name': 'GraphsComponent', 'selector': 'app-graphs'},{'name': 'HamburgerMenuComponent', 'selector': 'app-hamburger-menu'},{'name': 'HomeComponent', 'selector': 'app-home'},{'name': 'InstallAppPopupComponentComponent', 'selector': 'app-install-app-popup-component'},{'name': 'ListExpensesComponent', 'selector': 'app-list-expenses'},{'name': 'MusicComponent', 'selector': 'app-music'},{'name': 'NavbarComponent', 'selector': 'app-navbar'},{'name': 'PieChartComponent', 'selector': 'app-pie-chart'},{'name': 'PlaylistMusicComponent', 'selector': 'app-playlist-music'},{'name': 'SearchButtonComponent', 'selector': 'app-search-button'},{'name': 'SearchMusicComponent', 'selector': 'app-search-music'},{'name': 'SettingItemComponent', 'selector': 'app-setting-item'},{'name': 'SettingsComponent', 'selector': 'app-settings'},{'name': 'SidebarComponent', 'selector': 'app-sidebar'},{'name': 'TemplatePlaygroundComponent', 'selector': 'template-playground-root'},{'name': 'ToastComponent', 'selector': 'app-toast'}];
     var DIRECTIVES = [];
-    var ACTUAL_COMPONENT = {'name': 'HamburgerMenuComponent'};
+    var ACTUAL_COMPONENT = {'name': 'ExpenseWiseComponent'};
 </script>
 <script src="../js/tree.js"></script>
 
@@ -899,7 +822,7 @@ export class HamburgerMenuComponent {
        <script>
             var COMPODOC_CURRENT_PAGE_DEPTH = 1;
             var COMPODOC_CURRENT_PAGE_CONTEXT = 'component';
-            var COMPODOC_CURRENT_PAGE_URL = 'HamburgerMenuComponent.html';
+            var COMPODOC_CURRENT_PAGE_URL = 'ExpenseWiseComponent.html';
             var MAX_SEARCH_RESULTS = 15;
        </script>
 

@@ -1,12 +1,10 @@
 import { Injectable } from '@angular/core';
-import { Categories } from './data/categories';
-import { ConfigService } from '../config/config.service';
 
 /**
  * Schema interface for local storage items.
  * Defines a generic structure for syncing data with default values.
  */
-interface Schema {
+export interface Schema {
   /** Key-value pairs representing item properties */
   [key: string]: any;
 }
@@ -15,10 +13,7 @@ interface Schema {
  * Service for managing LocalStorage data in a structured and schema-compliant way.
  *
  * Features:
- * - Syncs categories, expenses, user, and budget data with predefined schemas.
  * - Provides helper methods to get and update local storage items.
- * - Ensures default values exist for missing properties.
- * - Integrates with {@link ConfigService} to retrieve app version for user data.
  */
 @Injectable({
   providedIn: 'root',
@@ -40,162 +35,68 @@ export class StorageService {
   /** LocalStorage key for user Liked songs */
   private readonly userLikedSongsKey = 'user_liked_songs';
 
-  /**
-   * Creates an instance of StorageService.
-   *
-   * @param configService Service providing app configuration such as version.
-   */
-  constructor(private configService: ConfigService) { }
+  /** Schema for categories */
+  private readonly categorySchema: Schema = {
+    category_id: "",
+    name: "",
+    icon: "",
+    color: "",
+    is_active: "",
+    user_id: ""
+  };
 
-  /**
-   * Checks if the current environment has access to localStorage.
-   *
-   * @returns `true` if localStorage is available, `false` otherwise.
-   */
-  private static isBrowser(): boolean {
-    return typeof window !== 'undefined' && typeof window.localStorage !== 'undefined';
-  }
+  /** Schema for expenses */
+  private readonly expenseSchema: Schema = {
+    expense_id: "",
+    category_id: "",
+    amount: "",
+    date: "",
+    location: "",
+    note: "",
+    payment_mode: "",
+    time: "",
+    isExtraSpending: false
+  };
 
-  /**
-   * Syncs categories in localStorage with the default schema and predefined categories.
-   */
-  syncCategoriesWithSchema(): void {
-    const categorySchema: Schema = {
-      category_id: "",
-      name: "",
-      icon: "",
-      color: "",
-      is_active: "",
-      user_id: ""
-    };
-    return this.syncWithSchema(this.categoryKey, categorySchema);
-  }
+  /** Schema for user */
+  private readonly userSchema: Schema = {
+    id: "",
+    backup_frequency: "",
+    email: "",
+    is_active: "",
+    is_backup: "",
+    last_backup: "",
+    name: "",
+    notifications: "",
+    user_password: "",
+    theme_mode: "dark",
+    currency: "₹",
+    app_version: "0",
+    is_app_updated: true
+  };
 
-  /**
-   * Syncs expenses in localStorage with the default schema.
-   */
-  syncExpensesWithSchema(): void {
-    const expenseSchema: Schema = {
-      expense_id: "",
-      category_id: "",
-      amount: "",
-      date: "",
-      location: "",
-      note: "",
-      payment_mode: "",
-      time: "",
-      isExtraSpending: false
-    };
-    return this.syncWithSchema(this.expenseKey, expenseSchema);
-  }
+  /** Schema for budget */
+  private readonly budgetSchema: Schema = {
+    budget_id: "",
+    amount: 0,
+    fromDate: "",
+    toDate: ""
+  };
 
-  /**
-   * Syncs user data in localStorage with the default schema.
-   */
-  syncUserWithSchema(): void {
-    const userSchema: Schema = {
-      id: "",
-      backup_frequency: "",
-      email: "",
-      is_active: "",
-      is_backup: "",
-      last_backup: "",
-      name: "",
-      notifications: "",
-      user_password: "",
-      theme_mode: "dark",
-      currency: "₹",
-      app_version: "0",
-      is_app_updated: true
-    };
-    return this.syncUser(this.userKey, userSchema);
-  }
-
-  /**
-   * Syncs budget data in localStorage with the default schema.
-   */
-  syncBudgetWithSchema(): void {
-    const budgetSchema: Schema = {
-      budget_id: "",
-      amount: 0,
-      fromDate: "",
-      toDate: ""
-    };
-    return this.syncWithSchema(this.budgetKey, budgetSchema);
-  }
-
-  syncLikedSongsWithSchema(): void {
-    const likedSongSchema: Schema = {
-      song_id: '',
-      song_name: '',
-      year: '',
-      duration: 0,
-      language: '',
-      copyright: '',
-      albumName: '',
-      artistName: '',
-      image: '',
-      downloadUrl: '',
-      isLiked: false,
-    };
-    return this.syncWithSchema(this.userLikedSongsKey, likedSongSchema);
-  }
-
-  /**
-   * Helper function to sync any localStorage data array with a given schema.
-   *
-   * @param storageKey The localStorage key to sync.
-   * @param defaultSchema The default schema to apply to missing properties.
-   */
-  private syncWithSchema(storageKey: string, defaultSchema: Schema): void {
-    if (!StorageService.isBrowser()) {
-      console.error('localStorage is not available in this environment.');
-      return;
-    }
-
-    let savedData = JSON.parse(localStorage.getItem(storageKey) || '[]');
-
-    if (storageKey === this.categoryKey) {
-      const pastData = JSON.parse(localStorage.getItem(this.categoryKey) || '[]');
-      const filteredPastData = pastData.filter((item: any) => item.user_id !== "0");
-      savedData = [...filteredPastData, ...Categories];
-    }
-
-    const schemaKeys = Object.keys(defaultSchema);
-    const updatedData = savedData.map((item: Schema) => {
-      const synced: Schema = {};
-      schemaKeys.forEach((key: string) => {
-        synced[key] = key in item ? item[key] : defaultSchema[key];
-      });
-      return synced;
-    });
-
-    localStorage.setItem(storageKey, JSON.stringify(updatedData));
-  }
-
-  /**
-   * Syncs user data in localStorage with a schema and updates the app version.
-   *
-   * @param storageKey The localStorage key for the user.
-   * @param defaultSchema The default schema to apply.
-   */
-  private syncUser(storageKey: string, defaultSchema: Schema): void {
-    if (!StorageService.isBrowser()) {
-      console.error('localStorage is not available in this environment.');
-      return;
-    }
-
-    const savedSettings = JSON.parse(localStorage.getItem(storageKey) || '{}');
-    const schemaKeys = Object.keys(defaultSchema);
-    const syncedSettings: Schema = {};
-
-    schemaKeys.forEach((key: string) => {
-      syncedSettings[key] = key in savedSettings ? savedSettings[key] : defaultSchema[key];
-    });
-    syncedSettings['app_version'] = this.configService.getVersion();
-
-    localStorage.setItem(this.userKey, JSON.stringify(syncedSettings));
-  }
+  /** Schema for Liked song */
+  private readonly likedSongSchema: Schema = {
+    song_id: '',
+    song_name: '',
+    year: '',
+    duration: 0,
+    language: '',
+    copyright: '',
+    albumName: '',
+    artistName: '',
+    image: '',
+    downloadUrl: '',
+    isLiked: false,
+  };
 
   /**
    * Retrieves all categories from localStorage.
@@ -282,5 +183,45 @@ export class StorageService {
    */
   updateUser(user: any): void {
     localStorage.setItem(this.userKey, JSON.stringify(user));
+  }
+
+  /** Returns the schema for categories
+   * 
+   * @returns Schema object for categories
+   */
+  getcategorySchema(): Schema {
+    return this.categorySchema;
+  }
+
+  /** Returns the schema for expenses
+   * 
+   * @returns Schema object for expenses  
+   */
+  getexpenseSchema(): Schema {
+    return this.expenseSchema;
+  }
+
+  /** Returns the schema for user 
+   * 
+   * @returns Schema object for user
+  */
+  getuserSchema(): Schema {
+    return this.userSchema;
+  }
+
+  /** Returns the schema for budgets 
+   * 
+   * @returns Schema object for  budgets
+  */
+  getbudgetSchema(): Schema {
+    return this.budgetSchema;
+  }
+
+  /** Returns the schema for liked songs 
+   * 
+   * @returns Schema object for Liked Song
+  */
+  getlikedSongSchema(): Schema {
+    return this.likedSongSchema;
   }
 }

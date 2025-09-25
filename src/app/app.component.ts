@@ -1,28 +1,13 @@
 import { Component, HostListener, Inject } from '@angular/core';
 import { CommonModule, isPlatformBrowser } from '@angular/common';
 import { PLATFORM_ID } from '@angular/core';
-import { Router, NavigationEnd } from '@angular/router';
-import { filter } from 'rxjs/operators';
-
-import { NavbarComponent } from './shared/navbar/navbar.component';
-import { SidebarComponent } from './shared/sidebar/sidebar.component';
-import { FooterComponent } from './shared/footer/footer.component';
-import { ToastComponent } from './shared/toast/toast.component';
+import { RouterOutlet } from '@angular/router';
 import { GlobalLoaderComponent } from './shared/global-loader/global-loader.component';
-import { AddExpenseComponent } from './features/add-expense/add-expense.component';
-import { SettingsComponent } from './features/settings/settings.component';
-import { ListExpensesComponent } from './features/list-expenses/list-expenses.component';
-import { HomeComponent } from './features/home/home.component';
-import { CalendarComponent } from './features/calendar/calendar.component';
-import { BudgetComponent } from './features/budget/budget.component';
-import { AiComponent } from './features/ai/ai.component';
-import { MusicComponent } from './features/music/music.component';
 import { InstallAppPopupComponentComponent } from './component/install-app-popup-component/install-app-popup-component.component';
 
-import { StorageService } from './service/localStorage/storage.service';
+import { SyncSchemaService } from './service/localStorage/sync-schema.service';
 import { UserService } from './service/localStorage/user.service';
 import { GlobalLoaderService } from './service/global-loader/global-loader.service';
-import { SectionService } from './service/section/section.service';
 import { PostApiService } from './service/backend-api/post/post-api.service';
 import { ToastService } from './service/toast/toast.service';
 
@@ -35,25 +20,12 @@ import { ToastService } from './service/toast/toast.service';
   selector: 'app-root',
   standalone: true,
   imports: [
-    NavbarComponent, SidebarComponent, FooterComponent, ToastComponent,
-    GlobalLoaderComponent, CommonModule, AddExpenseComponent,
-    SettingsComponent, ListExpensesComponent, HomeComponent, BudgetComponent, CalendarComponent, AiComponent, MusicComponent, InstallAppPopupComponentComponent
+    GlobalLoaderComponent, CommonModule, InstallAppPopupComponentComponent, RouterOutlet
   ],
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-
-  /**
-   * Currently active section of the app (e.g., 'home', 'settings').
-   */
-  currentSection: string = 'home';
-
-  /**
-   * Boolean indicating whether the app is being viewed on a mobile device.
-   */
-  isMobile: boolean = false;
-
   /**
    * Boolean indicating whether the current route is the root/expenses page.
    */
@@ -80,38 +52,19 @@ export class AppComponent {
    * 
    * @param userService Service for managing user preferences
    * @param loader Global loader overlay service
-   * @param sectionService Service to track current section changes
    * @param storageService Local storage schema sync service
-   * @param router Angular Router to track route changes
    * @param postApiService Backend API post service
-   * @param swUpdate Service Worker update manager
-   * @param platformId Angular platform ID to check if running in browser
    * @param toastService Service for displaying toast notifications
+   * @param platformId Angular platform ID to check if running in browser
    */
   constructor(
     public userService: UserService,
     private loader: GlobalLoaderService,
-    private sectionService: SectionService,
-    private storageService: StorageService,
-    private router: Router,
     private postApiService: PostApiService,
     private toastService: ToastService,
+    private syncSchemaService: SyncSchemaService,
     @Inject(PLATFORM_ID) private platformId: Object
   ) {
-
-    // Track current section name
-    this.sectionService.currentSection$.subscribe(section => {
-      this.currentSection = section;
-    });
-
-    // Track route changes to detect page-specific routes
-    this.router.events
-      .pipe(filter(event => event instanceof NavigationEnd))
-      .subscribe((event: any) => {
-        const url = event.urlAfterRedirects || event.url;
-        this.isExpenseRoute = url === '/';
-        this.isMusicRoute = url.startsWith('/music');
-      });
   }
 
   /**
@@ -120,19 +73,13 @@ export class AppComponent {
    */
   ngOnInit() {
     if (isPlatformBrowser(this.platformId)) {
-      this.isMobile = window.innerWidth <= 768;
 
       this.loader.show();
       setTimeout(() => {
         this.loader.hide();
       }, 500);
 
-      // Sync schema for stored data
-      this.storageService.syncCategoriesWithSchema();
-      this.storageService.syncExpensesWithSchema();
-      this.storageService.syncUserWithSchema();
-      this.storageService.syncBudgetWithSchema();
-      this.storageService.syncLikedSongsWithSchema();
+      this.syncSchemaService.syncAllSchema();
 
       // Apply saved theme mode
       const savedTheme = this.userService.getValue<string>('theme_mode');
@@ -164,17 +111,6 @@ export class AppComponent {
         this.deferredPrompt = event;
         this.showInstallButton = true;
       });
-    }
-  }
-
-  /**
-   * Event listener for window resize to update mobile view detection.
-   * @param event Resize event object
-   */
-  @HostListener('window:resize', ['$event'])
-  onResize(event: any) {
-    if (isPlatformBrowser(this.platformId)) {
-      this.isMobile = event.target.innerWidth <= 768;
     }
   }
 

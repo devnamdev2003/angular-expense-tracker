@@ -841,16 +841,41 @@ Use this file during development. It will be replaced by <code>environment.prod.
                 <tr>
                     <td class="col-md-4">
                         <i>Default value : </i><code>[
-    { path: &#x27;&#x27;, component: AppComponent }, // your main app content
-    { path: &#x27;music&#x27;, component: AppComponent }, // for music
-    { path: &#x27;**&#x27;, redirectTo: &#x27;&#x27; }, // catch-all
+    {
+        path: &#x27;&#x27;,
+        loadComponent: () &#x3D;&gt;
+            &quot;import(&#x27;./features/expense-wise/expense-wise.component&#x27;)\r\n\
+                .then(m &#x3D;&gt; m.ExpenseWiseComponent)&quot;
+    },
+    {
+        path: &#x27;music&#x27;,
+        loadComponent: () &#x3D;&gt;
+            &quot;import(&#x27;./features/music/music.component&#x27;)\r\n\
+                .then(m &#x3D;&gt; m.MusicComponent)&quot;,
+    },
+    {
+        path: &#x27;music/search&#x27;,
+        loadComponent: () &#x3D;&gt;
+            &quot;import(&#x27;./features/music/music-component/search-music/search-music.component&#x27;)\r\n\
+                .then(m &#x3D;&gt; m.SearchMusicComponent)&quot;
+    },
+    {
+        path: &#x27;music/playlist&#x27;,
+        loadComponent: () &#x3D;&gt;
+            &quot;import(&#x27;./features/music/music-component/playlist-music/playlist-music.component&#x27;)\r\n\
+                .then(m &#x3D;&gt; m.PlaylistMusicComponent)&quot;
+    },
+    { path: &#x27;**&#x27;, redirectTo: &#x27;&#x27; },
+    { path: &#x27;music/**&#x27;, redirectTo: &#x27;../music&#x27; }
 ]</code>
                     </td>
                 </tr>
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-description"><p>Application routes</p>
+                    <div class="io-description"><p>Application routes configuration.</p>
+<p>This configuration defines the routes for the application, including
+lazy-loaded feature modules.</p>
 </div>
                 </td>
             </tr>

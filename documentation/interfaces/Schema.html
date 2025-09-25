@@ -168,7 +168,7 @@ Defines a generic structure for syncing data with default values.</p>
                 </tr>
                         <tr>
                             <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="9" class="link-to-prism">src/app/service/localStorage/storage.service.ts:9</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="7" class="link-to-prism">src/app/service/localStorage/storage.service.ts:7</a></div>
                             </td>
                         </tr>
                 <tr>
@@ -186,14 +186,12 @@ Defines a generic structure for syncing data with default values.</p>
 
     <div class="tab-pane fade  tab-source-code" id="source">
         <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Injectable } from &#x27;@angular/core&#x27;;
-import { Categories } from &#x27;./data/categories&#x27;;
-import { ConfigService } from &#x27;../config/config.service&#x27;;
 
 /**
  * Schema interface for local storage items.
  * Defines a generic structure for syncing data with default values.
  */
-interface Schema {
+export interface Schema {
   /** Key-value pairs representing item properties */
   [key: string]: any;
 }
@@ -202,10 +200,7 @@ interface Schema {
  * Service for managing LocalStorage data in a structured and schema-compliant way.
  *
  * Features:
- * - Syncs categories, expenses, user, and budget data with predefined schemas.
  * - Provides helper methods to get and update local storage items.
- * - Ensures default values exist for missing properties.
- * - Integrates with {@link ConfigService} to retrieve app version for user data.
  */
 @Injectable({
   providedIn: &#x27;root&#x27;,
@@ -227,162 +222,68 @@ export class StorageService {
   /** LocalStorage key for user Liked songs */
   private readonly userLikedSongsKey &#x3D; &#x27;user_liked_songs&#x27;;
 
-  /**
-   * Creates an instance of StorageService.
-   *
-   * @param configService Service providing app configuration such as version.
-   */
-  constructor(private configService: ConfigService) { }
+  /** Schema for categories */
+  private readonly categorySchema: Schema &#x3D; {
+    category_id: &quot;&quot;,
+    name: &quot;&quot;,
+    icon: &quot;&quot;,
+    color: &quot;&quot;,
+    is_active: &quot;&quot;,
+    user_id: &quot;&quot;
+  };
 
-  /**
-   * Checks if the current environment has access to localStorage.
-   *
-   * @returns &#x60;true&#x60; if localStorage is available, &#x60;false&#x60; otherwise.
-   */
-  private static isBrowser(): boolean {
-    return typeof window !&#x3D;&#x3D; &#x27;undefined&#x27; &amp;&amp; typeof window.localStorage !&#x3D;&#x3D; &#x27;undefined&#x27;;
-  }
+  /** Schema for expenses */
+  private readonly expenseSchema: Schema &#x3D; {
+    expense_id: &quot;&quot;,
+    category_id: &quot;&quot;,
+    amount: &quot;&quot;,
+    date: &quot;&quot;,
+    location: &quot;&quot;,
+    note: &quot;&quot;,
+    payment_mode: &quot;&quot;,
+    time: &quot;&quot;,
+    isExtraSpending: false
+  };
 
-  /**
-   * Syncs categories in localStorage with the default schema and predefined categories.
-   */
-  syncCategoriesWithSchema(): void {
-    const categorySchema: Schema &#x3D; {
-      category_id: &quot;&quot;,
-      name: &quot;&quot;,
-      icon: &quot;&quot;,
-      color: &quot;&quot;,
-      is_active: &quot;&quot;,
-      user_id: &quot;&quot;
-    };
-    return this.syncWithSchema(this.categoryKey, categorySchema);
-  }
+  /** Schema for user */
+  private readonly userSchema: Schema &#x3D; {
+    id: &quot;&quot;,
+    backup_frequency: &quot;&quot;,
+    email: &quot;&quot;,
+    is_active: &quot;&quot;,
+    is_backup: &quot;&quot;,
+    last_backup: &quot;&quot;,
+    name: &quot;&quot;,
+    notifications: &quot;&quot;,
+    user_password: &quot;&quot;,
+    theme_mode: &quot;dark&quot;,
+    currency: &quot;₹&quot;,
+    app_version: &quot;0&quot;,
+    is_app_updated: true
+  };
 
-  /**
-   * Syncs expenses in localStorage with the default schema.
-   */
-  syncExpensesWithSchema(): void {
-    const expenseSchema: Schema &#x3D; {
-      expense_id: &quot;&quot;,
-      category_id: &quot;&quot;,
-      amount: &quot;&quot;,
-      date: &quot;&quot;,
-      location: &quot;&quot;,
-      note: &quot;&quot;,
-      payment_mode: &quot;&quot;,
-      time: &quot;&quot;,
-      isExtraSpending: false
-    };
-    return this.syncWithSchema(this.expenseKey, expenseSchema);
-  }
+  /** Schema for budget */
+  private readonly budgetSchema: Schema &#x3D; {
+    budget_id: &quot;&quot;,
+    amount: 0,
+    fromDate: &quot;&quot;,
+    toDate: &quot;&quot;
+  };
 
-  /**
-   * Syncs user data in localStorage with the default schema.
-   */
-  syncUserWithSchema(): void {
-    const userSchema: Schema &#x3D; {
-      id: &quot;&quot;,
-      backup_frequency: &quot;&quot;,
-      email: &quot;&quot;,
-      is_active: &quot;&quot;,
-      is_backup: &quot;&quot;,
-      last_backup: &quot;&quot;,
-      name: &quot;&quot;,
-      notifications: &quot;&quot;,
-      user_password: &quot;&quot;,
-      theme_mode: &quot;dark&quot;,
-      currency: &quot;₹&quot;,
-      app_version: &quot;0&quot;,
-      is_app_updated: true
-    };
-    return this.syncUser(this.userKey, userSchema);
-  }
-
-  /**
-   * Syncs budget data in localStorage with the default schema.
-   */
-  syncBudgetWithSchema(): void {
-    const budgetSchema: Schema &#x3D; {
-      budget_id: &quot;&quot;,
-      amount: 0,
-      fromDate: &quot;&quot;,
-      toDate: &quot;&quot;
-    };
-    return this.syncWithSchema(this.budgetKey, budgetSchema);
-  }
-
-  syncLikedSongsWithSchema(): void {
-    const likedSongSchema: Schema &#x3D; {
-      song_id: &#x27;&#x27;,
-      song_name: &#x27;&#x27;,
-      year: &#x27;&#x27;,
-      duration: 0,
-      language: &#x27;&#x27;,
-      copyright: &#x27;&#x27;,
-      albumName: &#x27;&#x27;,
-      artistName: &#x27;&#x27;,
-      image: &#x27;&#x27;,
-      downloadUrl: &#x27;&#x27;,
-      isLiked: false,
-    };
-    return this.syncWithSchema(this.userLikedSongsKey, likedSongSchema);
-  }
-
-  /**
-   * Helper function to sync any localStorage data array with a given schema.
-   *
-   * @param storageKey The localStorage key to sync.
-   * @param defaultSchema The default schema to apply to missing properties.
-   */
-  private syncWithSchema(storageKey: string, defaultSchema: Schema): void {
-    if (!StorageService.isBrowser()) {
-      console.error(&#x27;localStorage is not available in this environment.&#x27;);
-      return;
-    }
-
-    let savedData &#x3D; JSON.parse(localStorage.getItem(storageKey) || &#x27;[]&#x27;);
-
-    if (storageKey &#x3D;&#x3D;&#x3D; this.categoryKey) {
-      const pastData &#x3D; JSON.parse(localStorage.getItem(this.categoryKey) || &#x27;[]&#x27;);
-      const filteredPastData &#x3D; pastData.filter((item: any) &#x3D;&gt; item.user_id !&#x3D;&#x3D; &quot;0&quot;);
-      savedData &#x3D; [...filteredPastData, ...Categories];
-    }
-
-    const schemaKeys &#x3D; Object.keys(defaultSchema);
-    const updatedData &#x3D; savedData.map((item: Schema) &#x3D;&gt; {
-      const synced: Schema &#x3D; {};
-      schemaKeys.forEach((key: string) &#x3D;&gt; {
-        synced[key] &#x3D; key in item ? item[key] : defaultSchema[key];
-      });
-      return synced;
-    });
-
-    localStorage.setItem(storageKey, JSON.stringify(updatedData));
-  }
-
-  /**
-   * Syncs user data in localStorage with a schema and updates the app version.
-   *
-   * @param storageKey The localStorage key for the user.
-   * @param defaultSchema The default schema to apply.
-   */
-  private syncUser(storageKey: string, defaultSchema: Schema): void {
-    if (!StorageService.isBrowser()) {
-      console.error(&#x27;localStorage is not available in this environment.&#x27;);
-      return;
-    }
-
-    const savedSettings &#x3D; JSON.parse(localStorage.getItem(storageKey) || &#x27;{}&#x27;);
-    const schemaKeys &#x3D; Object.keys(defaultSchema);
-    const syncedSettings: Schema &#x3D; {};
-
-    schemaKeys.forEach((key: string) &#x3D;&gt; {
-      syncedSettings[key] &#x3D; key in savedSettings ? savedSettings[key] : defaultSchema[key];
-    });
-    syncedSettings[&#x27;app_version&#x27;] &#x3D; this.configService.getVersion();
-
-    localStorage.setItem(this.userKey, JSON.stringify(syncedSettings));
-  }
+  /** Schema for Liked song */
+  private readonly likedSongSchema: Schema &#x3D; {
+    song_id: &#x27;&#x27;,
+    song_name: &#x27;&#x27;,
+    year: &#x27;&#x27;,
+    duration: 0,
+    language: &#x27;&#x27;,
+    copyright: &#x27;&#x27;,
+    albumName: &#x27;&#x27;,
+    artistName: &#x27;&#x27;,
+    image: &#x27;&#x27;,
+    downloadUrl: &#x27;&#x27;,
+    isLiked: false,
+  };
 
   /**
    * Retrieves all categories from localStorage.
@@ -469,6 +370,46 @@ export class StorageService {
    */
   updateUser(user: any): void {
     localStorage.setItem(this.userKey, JSON.stringify(user));
+  }
+
+  /** Returns the schema for categories
+   * 
+   * @returns Schema object for categories
+   */
+  getcategorySchema(): Schema {
+    return this.categorySchema;
+  }
+
+  /** Returns the schema for expenses
+   * 
+   * @returns Schema object for expenses  
+   */
+  getexpenseSchema(): Schema {
+    return this.expenseSchema;
+  }
+
+  /** Returns the schema for user 
+   * 
+   * @returns Schema object for user
+  */
+  getuserSchema(): Schema {
+    return this.userSchema;
+  }
+
+  /** Returns the schema for budgets 
+   * 
+   * @returns Schema object for  budgets
+  */
+  getbudgetSchema(): Schema {
+    return this.budgetSchema;
+  }
+
+  /** Returns the schema for liked songs 
+   * 
+   * @returns Schema object for Liked Song
+  */
+  getlikedSongSchema(): Schema {
+    return this.likedSongSchema;
   }
 }
 </code></pre>

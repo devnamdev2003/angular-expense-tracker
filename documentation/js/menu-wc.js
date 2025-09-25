@@ -133,6 +133,9 @@ customElements.define('compodoc-menu', class extends HTMLElement {
                                 <a href="components/ExpenseListComponent.html" data-type="entity-link" >ExpenseListComponent</a>
                             </li>
                             <li class="link">
+                                <a href="components/ExpenseWiseComponent.html" data-type="entity-link" >ExpenseWiseComponent</a>
+                            </li>
+                            <li class="link">
                                 <a href="components/FooterComponent.html" data-type="entity-link" >FooterComponent</a>
                             </li>
                             <li class="link">
@@ -166,7 +169,13 @@ customElements.define('compodoc-menu', class extends HTMLElement {
                                 <a href="components/PieChartComponent.html" data-type="entity-link" >PieChartComponent</a>
                             </li>
                             <li class="link">
+                                <a href="components/PlaylistMusicComponent.html" data-type="entity-link" >PlaylistMusicComponent</a>
+                            </li>
+                            <li class="link">
                                 <a href="components/SearchButtonComponent.html" data-type="entity-link" >SearchButtonComponent</a>
+                            </li>
+                            <li class="link">
+                                <a href="components/SearchMusicComponent.html" data-type="entity-link" >SearchMusicComponent</a>
                             </li>
                             <li class="link">
                                 <a href="components/SettingItemComponent.html" data-type="entity-link" >SettingItemComponent</a>
@@ -222,6 +231,9 @@ customElements.define('compodoc-menu', class extends HTMLElement {
                                 </li>
                                 <li class="link">
                                     <a href="injectables/StorageService.html" data-type="entity-link" >StorageService</a>
+                                </li>
+                                <li class="link">
+                                    <a href="injectables/SyncSchemaService.html" data-type="entity-link" >SyncSchemaService</a>
                                 </li>
                                 <li class="link">
                                     <a href="injectables/TemplateEditorService.html" data-type="entity-link" >TemplateEditorService</a>

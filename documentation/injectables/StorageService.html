@@ -144,10 +144,7 @@
                 <p>Service for managing LocalStorage data in a structured and schema-compliant way.</p>
 <p>Features:</p>
 <ul>
-<li>Syncs categories, expenses, user, and budget data with predefined schemas.</li>
 <li>Provides helper methods to get and update local storage items.</li>
-<li>Ensures default values exist for missing properties.</li>
-<li>Integrates with <a href="../injectables/ConfigService.html">ConfigService</a> to retrieve app version for user data.</li>
 </ul>
 
             </p>
@@ -174,12 +171,32 @@
                             <li>
                                     <span class="modifier">Private</span>
                                     <span class="modifier">Readonly</span>
+                                <a href="#budgetSchema" >budgetSchema</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Private</span>
+                                    <span class="modifier">Readonly</span>
                                 <a href="#categoryKey" >categoryKey</a>
                             </li>
                             <li>
                                     <span class="modifier">Private</span>
                                     <span class="modifier">Readonly</span>
+                                <a href="#categorySchema" >categorySchema</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Private</span>
+                                    <span class="modifier">Readonly</span>
                                 <a href="#expenseKey" >expenseKey</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Private</span>
+                                    <span class="modifier">Readonly</span>
+                                <a href="#expenseSchema" >expenseSchema</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Private</span>
+                                    <span class="modifier">Readonly</span>
+                                <a href="#likedSongSchema" >likedSongSchema</a>
                             </li>
                             <li>
                                     <span class="modifier">Private</span>
@@ -190,6 +207,11 @@
                                     <span class="modifier">Private</span>
                                     <span class="modifier">Readonly</span>
                                 <a href="#userLikedSongsKey" >userLikedSongsKey</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Private</span>
+                                    <span class="modifier">Readonly</span>
+                                <a href="#userSchema" >userSchema</a>
                             </li>
                         </ul>
                     </td>
@@ -219,10 +241,22 @@
                                 <a href="#getBudgetKey" >getBudgetKey</a>
                             </li>
                             <li>
+                                <a href="#getbudgetSchema" >getbudgetSchema</a>
+                            </li>
+                            <li>
                                 <a href="#getCategoryKey" >getCategoryKey</a>
                             </li>
                             <li>
+                                <a href="#getcategorySchema" >getcategorySchema</a>
+                            </li>
+                            <li>
                                 <a href="#getExpenseKey" >getExpenseKey</a>
+                            </li>
+                            <li>
+                                <a href="#getexpenseSchema" >getexpenseSchema</a>
+                            </li>
+                            <li>
+                                <a href="#getlikedSongSchema" >getlikedSongSchema</a>
                             </li>
                             <li>
                                 <a href="#getUser" >getUser</a>
@@ -234,32 +268,7 @@
                                 <a href="#getUserLikedSongsKey" >getUserLikedSongsKey</a>
                             </li>
                             <li>
-                                    <span class="modifier">Private</span>
-                                    <span class="modifier">Static</span>
-                                <a href="#isBrowser" >isBrowser</a>
-                            </li>
-                            <li>
-                                <a href="#syncBudgetWithSchema" >syncBudgetWithSchema</a>
-                            </li>
-                            <li>
-                                <a href="#syncCategoriesWithSchema" >syncCategoriesWithSchema</a>
-                            </li>
-                            <li>
-                                <a href="#syncExpensesWithSchema" >syncExpensesWithSchema</a>
-                            </li>
-                            <li>
-                                <a href="#syncLikedSongsWithSchema" >syncLikedSongsWithSchema</a>
-                            </li>
-                            <li>
-                                    <span class="modifier">Private</span>
-                                <a href="#syncUser" >syncUser</a>
-                            </li>
-                            <li>
-                                <a href="#syncUserWithSchema" >syncUserWithSchema</a>
-                            </li>
-                            <li>
-                                    <span class="modifier">Private</span>
-                                <a href="#syncWithSchema" >syncWithSchema</a>
+                                <a href="#getuserSchema" >getuserSchema</a>
                             </li>
                             <li>
                                 <a href="#updateBudgets" >updateBudgets</a>
@@ -282,61 +291,6 @@
     </table>
 </section>
 
-            <section data-compodoc="block-constructor">
-    <h3 id="constructor">Constructor</h3>
-        <table class="table table-sm table-bordered">
-            <tbody>
-                <tr>
-                    <td class="col-md-4">
-<code>constructor(configService: <a href="../injectables/ConfigService.html" target="_self">ConfigService</a>)</code>
-                    </td>
-                </tr>
-                        <tr>
-                            <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="41" class="link-to-prism">src/app/service/localStorage/storage.service.ts:41</a></div>
-                            </td>
-                        </tr>
-
-                <tr>
-                    <td class="col-md-4">
-                            <div class="io-description"><p>Creates an instance of StorageService.</p>
-</div>
-                            <div>
-                                    <b>Parameters :</b>
-                                    <table class="params">
-                                        <thead>
-                                            <tr>
-                                                <td>Name</td>
-                                                    <td>Type</td>
-                                                <td>Optional</td>
-                                                    <td>Description</td>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                                <tr>
-                                                        <td>configService</td>
-                                                  
-                                                        <td>
-                                                                        <code><a href="../injectables/ConfigService.html" target="_self" >ConfigService</a></code>
-                                                        </td>
-                                                  
-                                                    <td>
-                                                            No
-                                                    </td>
-                                                    
-                                                        <td>
-                                                                <p>Service providing app configuration such as version.</p>
-
-                                                        </td>
-                                                </tr>
-                                        </tbody>
-                                    </table>
-                            </div>
-                    </td>
-                </tr>
-            </tbody>
-        </table>
-</section>
 
             <section data-compodoc="block-methods">
     
@@ -363,8 +317,8 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="214"
-                                    class="link-to-prism">src/app/service/localStorage/storage.service.ts:214</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="115"
+                                    class="link-to-prism">src/app/service/localStorage/storage.service.ts:115</a></div>
                         </td>
                     </tr>
 
@@ -406,8 +360,8 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="205"
-                                    class="link-to-prism">src/app/service/localStorage/storage.service.ts:205</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="106"
+                                    class="link-to-prism">src/app/service/localStorage/storage.service.ts:106</a></div>
                         </td>
                     </tr>
 
@@ -449,8 +403,8 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="232"
-                                    class="link-to-prism">src/app/service/localStorage/storage.service.ts:232</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="133"
+                                    class="link-to-prism">src/app/service/localStorage/storage.service.ts:133</a></div>
                         </td>
                     </tr>
 
@@ -492,8 +446,8 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="241"
-                                    class="link-to-prism">src/app/service/localStorage/storage.service.ts:241</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="142"
+                                    class="link-to-prism">src/app/service/localStorage/storage.service.ts:142</a></div>
                         </td>
                     </tr>
 
@@ -535,8 +489,8 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="252"
-                                    class="link-to-prism">src/app/service/localStorage/storage.service.ts:252</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="153"
+                                    class="link-to-prism">src/app/service/localStorage/storage.service.ts:153</a></div>
                         </td>
                     </tr>
 
@@ -550,6 +504,49 @@
                             <b>Returns : </b>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
 
                         </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="getbudgetSchema"></a>
+                    <span class="name">
+                        <span ><b>getbudgetSchema</b></span>
+                        <a href="#getbudgetSchema"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>getbudgetSchema()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="216"
+                                    class="link-to-prism">src/app/service/localStorage/storage.service.ts:216</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-description"><p>Returns the schema for budgets</p>
+</div>
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="../interfaces/Schema.html" target="_self" >Schema</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                <p>Schema object for  budgets</p>
+
+                            </div>
                 </td>
             </tr>
         </tbody>
@@ -574,8 +571,8 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="246"
-                                    class="link-to-prism">src/app/service/localStorage/storage.service.ts:246</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="147"
+                                    class="link-to-prism">src/app/service/localStorage/storage.service.ts:147</a></div>
                         </td>
                     </tr>
 
@@ -589,6 +586,49 @@
                             <b>Returns : </b>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
 
                         </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="getcategorySchema"></a>
+                    <span class="name">
+                        <span ><b>getcategorySchema</b></span>
+                        <a href="#getcategorySchema"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>getcategorySchema()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="192"
+                                    class="link-to-prism">src/app/service/localStorage/storage.service.ts:192</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-description"><p>Returns the schema for categories</p>
+</div>
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="../interfaces/Schema.html" target="_self" >Schema</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                <p>Schema object for categories</p>
+
+                            </div>
                 </td>
             </tr>
         </tbody>
@@ -613,8 +653,8 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="249"
-                                    class="link-to-prism">src/app/service/localStorage/storage.service.ts:249</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="150"
+                                    class="link-to-prism">src/app/service/localStorage/storage.service.ts:150</a></div>
                         </td>
                     </tr>
 
@@ -628,6 +668,92 @@
                             <b>Returns : </b>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
 
                         </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="getexpenseSchema"></a>
+                    <span class="name">
+                        <span ><b>getexpenseSchema</b></span>
+                        <a href="#getexpenseSchema"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>getexpenseSchema()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="200"
+                                    class="link-to-prism">src/app/service/localStorage/storage.service.ts:200</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-description"><p>Returns the schema for expenses</p>
+</div>
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="../interfaces/Schema.html" target="_self" >Schema</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                <p>Schema object for expenses</p>
+
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="getlikedSongSchema"></a>
+                    <span class="name">
+                        <span ><b>getlikedSongSchema</b></span>
+                        <a href="#getlikedSongSchema"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>getlikedSongSchema()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="224"
+                                    class="link-to-prism">src/app/service/localStorage/storage.service.ts:224</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-description"><p>Returns the schema for liked songs</p>
+</div>
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="../interfaces/Schema.html" target="_self" >Schema</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                <p>Schema object for Liked Song</p>
+
+                            </div>
                 </td>
             </tr>
         </tbody>
@@ -652,8 +778,8 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="223"
-                                    class="link-to-prism">src/app/service/localStorage/storage.service.ts:223</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="124"
+                                    class="link-to-prism">src/app/service/localStorage/storage.service.ts:124</a></div>
                         </td>
                     </tr>
 
@@ -695,8 +821,8 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="255"
-                                    class="link-to-prism">src/app/service/localStorage/storage.service.ts:255</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="156"
+                                    class="link-to-prism">src/app/service/localStorage/storage.service.ts:156</a></div>
                         </td>
                     </tr>
 
@@ -734,8 +860,8 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="258"
-                                    class="link-to-prism">src/app/service/localStorage/storage.service.ts:258</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="159"
+                                    class="link-to-prism">src/app/service/localStorage/storage.service.ts:159</a></div>
                         </td>
                     </tr>
 
@@ -757,420 +883,40 @@
         <tbody>
             <tr>
                 <td class="col-md-4">
-                    <a name="isBrowser"></a>
+                    <a name="getuserSchema"></a>
                     <span class="name">
-                            <span class="modifier">Private</span>
-                            <span class="modifier">Static</span>
-                        <span ><b>isBrowser</b></span>
-                        <a href="#isBrowser"><span class="icon ion-ios-link"></span></a>
+                        <span ><b>getuserSchema</b></span>
+                        <a href="#getuserSchema"><span class="icon ion-ios-link"></span></a>
                     </span>
                 </td>
             </tr>
             <tr>
                 <td class="col-md-4">
-                        <span class="modifier-icon icon ion-ios-reset"></span>
-                    <code>isBrowser()</code>
+<code>getuserSchema()</code>
                 </td>
             </tr>
 
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="55"
-                                    class="link-to-prism">src/app/service/localStorage/storage.service.ts:55</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="208"
+                                    class="link-to-prism">src/app/service/localStorage/storage.service.ts:208</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
-                        <div class="io-description"><p>Checks if the current environment has access to localStorage.</p>
+                        <div class="io-description"><p>Returns the schema for user</p>
 </div>
 
                         <div class="io-description">
-                            <b>Returns : </b>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
+                            <b>Returns : </b>        <code><a href="../interfaces/Schema.html" target="_self" >Schema</a></code>
 
                         </div>
                             <div class="io-description">
-                                <p><code>true</code> if localStorage is available, <code>false</code> otherwise.</p>
+                                <p>Schema object for user</p>
 
-                            </div>
-                </td>
-            </tr>
-        </tbody>
-    </table>
-    <table class="table table-sm table-bordered">
-        <tbody>
-            <tr>
-                <td class="col-md-4">
-                    <a name="syncBudgetWithSchema"></a>
-                    <span class="name">
-                        <span ><b>syncBudgetWithSchema</b></span>
-                        <a href="#syncBudgetWithSchema"><span class="icon ion-ios-link"></span></a>
-                    </span>
-                </td>
-            </tr>
-            <tr>
-                <td class="col-md-4">
-<code>syncBudgetWithSchema()</code>
-                </td>
-            </tr>
-
-
-                    <tr>
-                        <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="117"
-                                    class="link-to-prism">src/app/service/localStorage/storage.service.ts:117</a></div>
-                        </td>
-                    </tr>
-
-
-            <tr>
-                <td class="col-md-4">
-                        <div class="io-description"><p>Syncs budget data in localStorage with the default schema.</p>
-</div>
-
-                        <div class="io-description">
-                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
-
-                        </div>
-                </td>
-            </tr>
-        </tbody>
-    </table>
-    <table class="table table-sm table-bordered">
-        <tbody>
-            <tr>
-                <td class="col-md-4">
-                    <a name="syncCategoriesWithSchema"></a>
-                    <span class="name">
-                        <span ><b>syncCategoriesWithSchema</b></span>
-                        <a href="#syncCategoriesWithSchema"><span class="icon ion-ios-link"></span></a>
-                    </span>
-                </td>
-            </tr>
-            <tr>
-                <td class="col-md-4">
-<code>syncCategoriesWithSchema()</code>
-                </td>
-            </tr>
-
-
-                    <tr>
-                        <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="62"
-                                    class="link-to-prism">src/app/service/localStorage/storage.service.ts:62</a></div>
-                        </td>
-                    </tr>
-
-
-            <tr>
-                <td class="col-md-4">
-                        <div class="io-description"><p>Syncs categories in localStorage with the default schema and predefined categories.</p>
-</div>
-
-                        <div class="io-description">
-                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
-
-                        </div>
-                </td>
-            </tr>
-        </tbody>
-    </table>
-    <table class="table table-sm table-bordered">
-        <tbody>
-            <tr>
-                <td class="col-md-4">
-                    <a name="syncExpensesWithSchema"></a>
-                    <span class="name">
-                        <span ><b>syncExpensesWithSchema</b></span>
-                        <a href="#syncExpensesWithSchema"><span class="icon ion-ios-link"></span></a>
-                    </span>
-                </td>
-            </tr>
-            <tr>
-                <td class="col-md-4">
-<code>syncExpensesWithSchema()</code>
-                </td>
-            </tr>
-
-
-                    <tr>
-                        <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="77"
-                                    class="link-to-prism">src/app/service/localStorage/storage.service.ts:77</a></div>
-                        </td>
-                    </tr>
-
-
-            <tr>
-                <td class="col-md-4">
-                        <div class="io-description"><p>Syncs expenses in localStorage with the default schema.</p>
-</div>
-
-                        <div class="io-description">
-                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
-
-                        </div>
-                </td>
-            </tr>
-        </tbody>
-    </table>
-    <table class="table table-sm table-bordered">
-        <tbody>
-            <tr>
-                <td class="col-md-4">
-                    <a name="syncLikedSongsWithSchema"></a>
-                    <span class="name">
-                        <span ><b>syncLikedSongsWithSchema</b></span>
-                        <a href="#syncLikedSongsWithSchema"><span class="icon ion-ios-link"></span></a>
-                    </span>
-                </td>
-            </tr>
-            <tr>
-                <td class="col-md-4">
-<code>syncLikedSongsWithSchema()</code>
-                </td>
-            </tr>
-
-
-                    <tr>
-                        <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="127"
-                                    class="link-to-prism">src/app/service/localStorage/storage.service.ts:127</a></div>
-                        </td>
-                    </tr>
-
-
-            <tr>
-                <td class="col-md-4">
-
-                        <div class="io-description">
-                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
-
-                        </div>
-                </td>
-            </tr>
-        </tbody>
-    </table>
-    <table class="table table-sm table-bordered">
-        <tbody>
-            <tr>
-                <td class="col-md-4">
-                    <a name="syncUser"></a>
-                    <span class="name">
-                            <span class="modifier">Private</span>
-                        <span ><b>syncUser</b></span>
-                        <a href="#syncUser"><span class="icon ion-ios-link"></span></a>
-                    </span>
-                </td>
-            </tr>
-            <tr>
-                <td class="col-md-4">
-                        <span class="modifier-icon icon ion-ios-reset"></span>
-                    <code>syncUser(storageKey: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>, defaultSchema: <a href="../interfaces/Schema.html" target="_self">Schema</a>)</code>
-                </td>
-            </tr>
-
-
-                    <tr>
-                        <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="182"
-                                    class="link-to-prism">src/app/service/localStorage/storage.service.ts:182</a></div>
-                        </td>
-                    </tr>
-
-
-            <tr>
-                <td class="col-md-4">
-                        <div class="io-description"><p>Syncs user data in localStorage with a schema and updates the app version.</p>
-</div>
-
-                            <div class="io-description">
-                                <b>Parameters :</b>
-                                
-                                <table class="params">
-                                    <thead>
-                                        <tr>
-                                            <td>Name</td>
-                                                <td>Type</td>
-                                            <td>Optional</td>
-                                                <td>Description</td>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr>
-                                                <td>storageKey</td>
-                                            <td>
-                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
-                                            </td>
-
-                                            <td>
-                                                    No
-                                            </td>
-
-
-                                            <td>
-                                                    <p>The localStorage key for the user.</p>
-
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                                <td>defaultSchema</td>
-                                            <td>
-                                                            <code><a href="../interfaces/Schema.html" target="_self" >Schema</a></code>
-                                            </td>
-
-                                            <td>
-                                                    No
-                                            </td>
-
-
-                                            <td>
-                                                    <p>The default schema to apply.</p>
-
-                                            </td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                            </div>
-                        <div class="io-description">
-                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
-
-                        </div>
-                            <div class="io-description">
-                                
-                            </div>
-                </td>
-            </tr>
-        </tbody>
-    </table>
-    <table class="table table-sm table-bordered">
-        <tbody>
-            <tr>
-                <td class="col-md-4">
-                    <a name="syncUserWithSchema"></a>
-                    <span class="name">
-                        <span ><b>syncUserWithSchema</b></span>
-                        <a href="#syncUserWithSchema"><span class="icon ion-ios-link"></span></a>
-                    </span>
-                </td>
-            </tr>
-            <tr>
-                <td class="col-md-4">
-<code>syncUserWithSchema()</code>
-                </td>
-            </tr>
-
-
-                    <tr>
-                        <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="95"
-                                    class="link-to-prism">src/app/service/localStorage/storage.service.ts:95</a></div>
-                        </td>
-                    </tr>
-
-
-            <tr>
-                <td class="col-md-4">
-                        <div class="io-description"><p>Syncs user data in localStorage with the default schema.</p>
-</div>
-
-                        <div class="io-description">
-                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
-
-                        </div>
-                </td>
-            </tr>
-        </tbody>
-    </table>
-    <table class="table table-sm table-bordered">
-        <tbody>
-            <tr>
-                <td class="col-md-4">
-                    <a name="syncWithSchema"></a>
-                    <span class="name">
-                            <span class="modifier">Private</span>
-                        <span ><b>syncWithSchema</b></span>
-                        <a href="#syncWithSchema"><span class="icon ion-ios-link"></span></a>
-                    </span>
-                </td>
-            </tr>
-            <tr>
-                <td class="col-md-4">
-                        <span class="modifier-icon icon ion-ios-reset"></span>
-                    <code>syncWithSchema(storageKey: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>, defaultSchema: <a href="../interfaces/Schema.html" target="_self">Schema</a>)</code>
-                </td>
-            </tr>
-
-
-                    <tr>
-                        <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="150"
-                                    class="link-to-prism">src/app/service/localStorage/storage.service.ts:150</a></div>
-                        </td>
-                    </tr>
-
-
-            <tr>
-                <td class="col-md-4">
-                        <div class="io-description"><p>Helper function to sync any localStorage data array with a given schema.</p>
-</div>
-
-                            <div class="io-description">
-                                <b>Parameters :</b>
-                                
-                                <table class="params">
-                                    <thead>
-                                        <tr>
-                                            <td>Name</td>
-                                                <td>Type</td>
-                                            <td>Optional</td>
-                                                <td>Description</td>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr>
-                                                <td>storageKey</td>
-                                            <td>
-                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
-                                            </td>
-
-                                            <td>
-                                                    No
-                                            </td>
-
-
-                                            <td>
-                                                    <p>The localStorage key to sync.</p>
-
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                                <td>defaultSchema</td>
-                                            <td>
-                                                            <code><a href="../interfaces/Schema.html" target="_self" >Schema</a></code>
-                                            </td>
-
-                                            <td>
-                                                    No
-                                            </td>
-
-
-                                            <td>
-                                                    <p>The default schema to apply to missing properties.</p>
-
-                                            </td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                            </div>
-                        <div class="io-description">
-                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
-
-                        </div>
-                            <div class="io-description">
-                                
                             </div>
                 </td>
             </tr>
@@ -1196,8 +942,8 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="274"
-                                    class="link-to-prism">src/app/service/localStorage/storage.service.ts:274</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="175"
+                                    class="link-to-prism">src/app/service/localStorage/storage.service.ts:175</a></div>
                         </td>
                     </tr>
 
@@ -1270,8 +1016,8 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="265"
-                                    class="link-to-prism">src/app/service/localStorage/storage.service.ts:265</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="166"
+                                    class="link-to-prism">src/app/service/localStorage/storage.service.ts:166</a></div>
                         </td>
                     </tr>
 
@@ -1344,8 +1090,8 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="283"
-                                    class="link-to-prism">src/app/service/localStorage/storage.service.ts:283</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="184"
+                                    class="link-to-prism">src/app/service/localStorage/storage.service.ts:184</a></div>
                         </td>
                     </tr>
 
@@ -1430,13 +1176,57 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="35" class="link-to-prism">src/app/service/localStorage/storage.service.ts:35</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="30" class="link-to-prism">src/app/service/localStorage/storage.service.ts:30</a></div>
                         </td>
                     </tr>
 
             <tr>
                 <td class="col-md-4">
                     <div class="io-description"><p>LocalStorage key for budgets</p>
+</div>
+                </td>
+            </tr>
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="budgetSchema"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                            <span class="modifier">Readonly</span>
+                        <span ><b>budgetSchema</b></span>
+                        <a href="#budgetSchema"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="../interfaces/Schema.html" target="_self" >Schema</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>{
+    budget_id: &quot;&quot;,
+    amount: 0,
+    fromDate: &quot;&quot;,
+    toDate: &quot;&quot;
+  }</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="79" class="link-to-prism">src/app/service/localStorage/storage.service.ts:79</a></div>
+                        </td>
+                    </tr>
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Schema for budget</p>
 </div>
                 </td>
             </tr>
@@ -1469,13 +1259,59 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="29" class="link-to-prism">src/app/service/localStorage/storage.service.ts:29</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="24" class="link-to-prism">src/app/service/localStorage/storage.service.ts:24</a></div>
                         </td>
                     </tr>
 
             <tr>
                 <td class="col-md-4">
                     <div class="io-description"><p>LocalStorage key for categories</p>
+</div>
+                </td>
+            </tr>
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="categorySchema"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                            <span class="modifier">Readonly</span>
+                        <span ><b>categorySchema</b></span>
+                        <a href="#categorySchema"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="../interfaces/Schema.html" target="_self" >Schema</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>{
+    category_id: &quot;&quot;,
+    name: &quot;&quot;,
+    icon: &quot;&quot;,
+    color: &quot;&quot;,
+    is_active: &quot;&quot;,
+    user_id: &quot;&quot;
+  }</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="39" class="link-to-prism">src/app/service/localStorage/storage.service.ts:39</a></div>
+                        </td>
+                    </tr>
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Schema for categories</p>
 </div>
                 </td>
             </tr>
@@ -1508,13 +1344,113 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="32" class="link-to-prism">src/app/service/localStorage/storage.service.ts:32</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="27" class="link-to-prism">src/app/service/localStorage/storage.service.ts:27</a></div>
                         </td>
                     </tr>
 
             <tr>
                 <td class="col-md-4">
                     <div class="io-description"><p>LocalStorage key for expenses</p>
+</div>
+                </td>
+            </tr>
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="expenseSchema"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                            <span class="modifier">Readonly</span>
+                        <span ><b>expenseSchema</b></span>
+                        <a href="#expenseSchema"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="../interfaces/Schema.html" target="_self" >Schema</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>{
+    expense_id: &quot;&quot;,
+    category_id: &quot;&quot;,
+    amount: &quot;&quot;,
+    date: &quot;&quot;,
+    location: &quot;&quot;,
+    note: &quot;&quot;,
+    payment_mode: &quot;&quot;,
+    time: &quot;&quot;,
+    isExtraSpending: false
+  }</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="49" class="link-to-prism">src/app/service/localStorage/storage.service.ts:49</a></div>
+                        </td>
+                    </tr>
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Schema for expenses</p>
+</div>
+                </td>
+            </tr>
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="likedSongSchema"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                            <span class="modifier">Readonly</span>
+                        <span ><b>likedSongSchema</b></span>
+                        <a href="#likedSongSchema"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="../interfaces/Schema.html" target="_self" >Schema</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>{
+    song_id: &#x27;&#x27;,
+    song_name: &#x27;&#x27;,
+    year: &#x27;&#x27;,
+    duration: 0,
+    language: &#x27;&#x27;,
+    copyright: &#x27;&#x27;,
+    albumName: &#x27;&#x27;,
+    artistName: &#x27;&#x27;,
+    image: &#x27;&#x27;,
+    downloadUrl: &#x27;&#x27;,
+    isLiked: false,
+  }</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="87" class="link-to-prism">src/app/service/localStorage/storage.service.ts:87</a></div>
+                        </td>
+                    </tr>
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Schema for Liked song</p>
 </div>
                 </td>
             </tr>
@@ -1547,7 +1483,7 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="38" class="link-to-prism">src/app/service/localStorage/storage.service.ts:38</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="33" class="link-to-prism">src/app/service/localStorage/storage.service.ts:33</a></div>
                         </td>
                     </tr>
 
@@ -1586,13 +1522,66 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="41" class="link-to-prism">src/app/service/localStorage/storage.service.ts:41</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="36" class="link-to-prism">src/app/service/localStorage/storage.service.ts:36</a></div>
                         </td>
                     </tr>
 
             <tr>
                 <td class="col-md-4">
                     <div class="io-description"><p>LocalStorage key for user Liked songs</p>
+</div>
+                </td>
+            </tr>
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="userSchema"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                            <span class="modifier">Readonly</span>
+                        <span ><b>userSchema</b></span>
+                        <a href="#userSchema"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="../interfaces/Schema.html" target="_self" >Schema</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>{
+    id: &quot;&quot;,
+    backup_frequency: &quot;&quot;,
+    email: &quot;&quot;,
+    is_active: &quot;&quot;,
+    is_backup: &quot;&quot;,
+    last_backup: &quot;&quot;,
+    name: &quot;&quot;,
+    notifications: &quot;&quot;,
+    user_password: &quot;&quot;,
+    theme_mode: &quot;dark&quot;,
+    currency: &quot;₹&quot;,
+    app_version: &quot;0&quot;,
+    is_app_updated: true
+  }</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="62" class="link-to-prism">src/app/service/localStorage/storage.service.ts:62</a></div>
+                        </td>
+                    </tr>
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Schema for user</p>
 </div>
                 </td>
             </tr>
@@ -1606,14 +1595,12 @@
 
     <div class="tab-pane fade  tab-source-code" id="source">
         <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Injectable } from &#x27;@angular/core&#x27;;
-import { Categories } from &#x27;./data/categories&#x27;;
-import { ConfigService } from &#x27;../config/config.service&#x27;;
 
 /**
  * Schema interface for local storage items.
  * Defines a generic structure for syncing data with default values.
  */
-interface Schema {
+export interface Schema {
   /** Key-value pairs representing item properties */
   [key: string]: any;
 }
@@ -1622,10 +1609,7 @@ interface Schema {
  * Service for managing LocalStorage data in a structured and schema-compliant way.
  *
  * Features:
- * - Syncs categories, expenses, user, and budget data with predefined schemas.
  * - Provides helper methods to get and update local storage items.
- * - Ensures default values exist for missing properties.
- * - Integrates with {@link ConfigService} to retrieve app version for user data.
  */
 @Injectable({
   providedIn: &#x27;root&#x27;,
@@ -1647,162 +1631,68 @@ export class StorageService {
   /** LocalStorage key for user Liked songs */
   private readonly userLikedSongsKey &#x3D; &#x27;user_liked_songs&#x27;;
 
-  /**
-   * Creates an instance of StorageService.
-   *
-   * @param configService Service providing app configuration such as version.
-   */
-  constructor(private configService: ConfigService) { }
+  /** Schema for categories */
+  private readonly categorySchema: Schema &#x3D; {
+    category_id: &quot;&quot;,
+    name: &quot;&quot;,
+    icon: &quot;&quot;,
+    color: &quot;&quot;,
+    is_active: &quot;&quot;,
+    user_id: &quot;&quot;
+  };
 
-  /**
-   * Checks if the current environment has access to localStorage.
-   *
-   * @returns &#x60;true&#x60; if localStorage is available, &#x60;false&#x60; otherwise.
-   */
-  private static isBrowser(): boolean {
-    return typeof window !&#x3D;&#x3D; &#x27;undefined&#x27; &amp;&amp; typeof window.localStorage !&#x3D;&#x3D; &#x27;undefined&#x27;;
-  }
+  /** Schema for expenses */
+  private readonly expenseSchema: Schema &#x3D; {
+    expense_id: &quot;&quot;,
+    category_id: &quot;&quot;,
+    amount: &quot;&quot;,
+    date: &quot;&quot;,
+    location: &quot;&quot;,
+    note: &quot;&quot;,
+    payment_mode: &quot;&quot;,
+    time: &quot;&quot;,
+    isExtraSpending: false
+  };
 
-  /**
-   * Syncs categories in localStorage with the default schema and predefined categories.
-   */
-  syncCategoriesWithSchema(): void {
-    const categorySchema: Schema &#x3D; {
-      category_id: &quot;&quot;,
-      name: &quot;&quot;,
-      icon: &quot;&quot;,
-      color: &quot;&quot;,
-      is_active: &quot;&quot;,
-      user_id: &quot;&quot;
-    };
-    return this.syncWithSchema(this.categoryKey, categorySchema);
-  }
+  /** Schema for user */
+  private readonly userSchema: Schema &#x3D; {
+    id: &quot;&quot;,
+    backup_frequency: &quot;&quot;,
+    email: &quot;&quot;,
+    is_active: &quot;&quot;,
+    is_backup: &quot;&quot;,
+    last_backup: &quot;&quot;,
+    name: &quot;&quot;,
+    notifications: &quot;&quot;,
+    user_password: &quot;&quot;,
+    theme_mode: &quot;dark&quot;,
+    currency: &quot;₹&quot;,
+    app_version: &quot;0&quot;,
+    is_app_updated: true
+  };
 
-  /**
-   * Syncs expenses in localStorage with the default schema.
-   */
-  syncExpensesWithSchema(): void {
-    const expenseSchema: Schema &#x3D; {
-      expense_id: &quot;&quot;,
-      category_id: &quot;&quot;,
-      amount: &quot;&quot;,
-      date: &quot;&quot;,
-      location: &quot;&quot;,
-      note: &quot;&quot;,
-      payment_mode: &quot;&quot;,
-      time: &quot;&quot;,
-      isExtraSpending: false
-    };
-    return this.syncWithSchema(this.expenseKey, expenseSchema);
-  }
+  /** Schema for budget */
+  private readonly budgetSchema: Schema &#x3D; {
+    budget_id: &quot;&quot;,
+    amount: 0,
+    fromDate: &quot;&quot;,
+    toDate: &quot;&quot;
+  };
 
-  /**
-   * Syncs user data in localStorage with the default schema.
-   */
-  syncUserWithSchema(): void {
-    const userSchema: Schema &#x3D; {
-      id: &quot;&quot;,
-      backup_frequency: &quot;&quot;,
-      email: &quot;&quot;,
-      is_active: &quot;&quot;,
-      is_backup: &quot;&quot;,
-      last_backup: &quot;&quot;,
-      name: &quot;&quot;,
-      notifications: &quot;&quot;,
-      user_password: &quot;&quot;,
-      theme_mode: &quot;dark&quot;,
-      currency: &quot;₹&quot;,
-      app_version: &quot;0&quot;,
-      is_app_updated: true
-    };
-    return this.syncUser(this.userKey, userSchema);
-  }
-
-  /**
-   * Syncs budget data in localStorage with the default schema.
-   */
-  syncBudgetWithSchema(): void {
-    const budgetSchema: Schema &#x3D; {
-      budget_id: &quot;&quot;,
-      amount: 0,
-      fromDate: &quot;&quot;,
-      toDate: &quot;&quot;
-    };
-    return this.syncWithSchema(this.budgetKey, budgetSchema);
-  }
-
-  syncLikedSongsWithSchema(): void {
-    const likedSongSchema: Schema &#x3D; {
-      song_id: &#x27;&#x27;,
-      song_name: &#x27;&#x27;,
-      year: &#x27;&#x27;,
-      duration: 0,
-      language: &#x27;&#x27;,
-      copyright: &#x27;&#x27;,
-      albumName: &#x27;&#x27;,
-      artistName: &#x27;&#x27;,
-      image: &#x27;&#x27;,
-      downloadUrl: &#x27;&#x27;,
-      isLiked: false,
-    };
-    return this.syncWithSchema(this.userLikedSongsKey, likedSongSchema);
-  }
-
-  /**
-   * Helper function to sync any localStorage data array with a given schema.
-   *
-   * @param storageKey The localStorage key to sync.
-   * @param defaultSchema The default schema to apply to missing properties.
-   */
-  private syncWithSchema(storageKey: string, defaultSchema: Schema): void {
-    if (!StorageService.isBrowser()) {
-      console.error(&#x27;localStorage is not available in this environment.&#x27;);
-      return;
-    }
-
-    let savedData &#x3D; JSON.parse(localStorage.getItem(storageKey) || &#x27;[]&#x27;);
-
-    if (storageKey &#x3D;&#x3D;&#x3D; this.categoryKey) {
-      const pastData &#x3D; JSON.parse(localStorage.getItem(this.categoryKey) || &#x27;[]&#x27;);
-      const filteredPastData &#x3D; pastData.filter((item: any) &#x3D;&gt; item.user_id !&#x3D;&#x3D; &quot;0&quot;);
-      savedData &#x3D; [...filteredPastData, ...Categories];
-    }
-
-    const schemaKeys &#x3D; Object.keys(defaultSchema);
-    const updatedData &#x3D; savedData.map((item: Schema) &#x3D;&gt; {
-      const synced: Schema &#x3D; {};
-      schemaKeys.forEach((key: string) &#x3D;&gt; {
-        synced[key] &#x3D; key in item ? item[key] : defaultSchema[key];
-      });
-      return synced;
-    });
-
-    localStorage.setItem(storageKey, JSON.stringify(updatedData));
-  }
-
-  /**
-   * Syncs user data in localStorage with a schema and updates the app version.
-   *
-   * @param storageKey The localStorage key for the user.
-   * @param defaultSchema The default schema to apply.
-   */
-  private syncUser(storageKey: string, defaultSchema: Schema): void {
-    if (!StorageService.isBrowser()) {
-      console.error(&#x27;localStorage is not available in this environment.&#x27;);
-      return;
-    }
-
-    const savedSettings &#x3D; JSON.parse(localStorage.getItem(storageKey) || &#x27;{}&#x27;);
-    const schemaKeys &#x3D; Object.keys(defaultSchema);
-    const syncedSettings: Schema &#x3D; {};
-
-    schemaKeys.forEach((key: string) &#x3D;&gt; {
-      syncedSettings[key] &#x3D; key in savedSettings ? savedSettings[key] : defaultSchema[key];
-    });
-    syncedSettings[&#x27;app_version&#x27;] &#x3D; this.configService.getVersion();
-
-    localStorage.setItem(this.userKey, JSON.stringify(syncedSettings));
-  }
+  /** Schema for Liked song */
+  private readonly likedSongSchema: Schema &#x3D; {
+    song_id: &#x27;&#x27;,
+    song_name: &#x27;&#x27;,
+    year: &#x27;&#x27;,
+    duration: 0,
+    language: &#x27;&#x27;,
+    copyright: &#x27;&#x27;,
+    albumName: &#x27;&#x27;,
+    artistName: &#x27;&#x27;,
+    image: &#x27;&#x27;,
+    downloadUrl: &#x27;&#x27;,
+    isLiked: false,
+  };
 
   /**
    * Retrieves all categories from localStorage.
@@ -1889,6 +1779,46 @@ export class StorageService {
    */
   updateUser(user: any): void {
     localStorage.setItem(this.userKey, JSON.stringify(user));
+  }
+
+  /** Returns the schema for categories
+   * 
+   * @returns Schema object for categories
+   */
+  getcategorySchema(): Schema {
+    return this.categorySchema;
+  }
+
+  /** Returns the schema for expenses
+   * 
+   * @returns Schema object for expenses  
+   */
+  getexpenseSchema(): Schema {
+    return this.expenseSchema;
+  }
+
+  /** Returns the schema for user 
+   * 
+   * @returns Schema object for user
+  */
+  getuserSchema(): Schema {
+    return this.userSchema;
+  }
+
+  /** Returns the schema for budgets 
+   * 
+   * @returns Schema object for  budgets
+  */
+  getbudgetSchema(): Schema {
+    return this.budgetSchema;
+  }
+
+  /** Returns the schema for liked songs 
+   * 
+   * @returns Schema object for Liked Song
+  */
+  getlikedSongSchema(): Schema {
+    return this.likedSongSchema;
   }
 }
 </code></pre>
