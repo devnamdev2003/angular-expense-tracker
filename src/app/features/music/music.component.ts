@@ -109,6 +109,7 @@ export class MusicComponent implements OnDestroy {
    */
   playSong(url: string, song: any, isbuttonClick: boolean = false): void {
     if (!this.isBrowser) return;
+    this.removeFocus();
     if (!this.audio) this.audio = new Audio();
 
     if (this.currentSong?.url === url) {
@@ -140,6 +141,7 @@ export class MusicComponent implements OnDestroy {
    */
   async onSongFinished(): Promise<void> {
     if (!this.isBrowser) return;
+    this.removeFocus();
     try {
       const transformedData = this.transformSongData(this.currentSong, this.isCurrentSongLiked);
       const nextSong = await this.saavnService.suggestNextSong(transformedData);
@@ -241,6 +243,7 @@ export class MusicComponent implements OnDestroy {
 
   /** Toggles the like status of a song */
   toggleLike() {
+    this.removeFocus();
     if (this.isCurrentSongLiked) {
       this.userLikedSongsService.delete(this.currentSong.id);
       this.isCurrentSongLiked = false;
@@ -276,6 +279,7 @@ export class MusicComponent implements OnDestroy {
   /** Downloads a song */
   async downloadSong(song: any) {
     if (!song?.url) return;
+    this.removeFocus();
 
     try {
       const res = await fetch(song.url);
@@ -300,16 +304,19 @@ export class MusicComponent implements OnDestroy {
 
   /** Open the player modal */
   openPlayerModal() {
+    this.removeFocus();
     this.showPlayerModal = true;
   }
 
   /** Close the player modal */
   closePlayerModal() {
+    this.removeFocus();
     this.showPlayerModal = false;
   }
 
   /** Restart current song when Previous is pressed */
   restartSong() {
+    this.removeFocus();
     if (this.audio) {
       this.audio.currentTime = 0;
       if (this.audio.paused) {
