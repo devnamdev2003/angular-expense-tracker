@@ -6,6 +6,8 @@ import { ConfigService } from '../../service/config/config.service';
 import { isPlatformBrowser } from '@angular/common';
 import { FormModelComponent } from '../../component/form-model/form-model.component';
 import { UserLikedSongsService } from '../../service/localStorage/user-liked-song.service';
+import { ViewChild, ElementRef } from '@angular/core';
+
 /**
  * Component to search, play, and suggest songs using Saavn API and AI suggestions.
  *
@@ -54,6 +56,9 @@ export class MusicComponent implements OnDestroy {
   /** Set to store URLs of liked songs */
   isCurrentSongLiked: boolean = false;
 
+  /** Reference to the search input element */
+  @ViewChild('searchSongInput') searchSongInput!: ElementRef;
+
   /**
    * Creates an instance of MusicComponent.
    *
@@ -76,6 +81,7 @@ export class MusicComponent implements OnDestroy {
    * Searches for songs based on the current query.
    */
   searchSong(): void {
+    this.removeFocus();
     const q = this.query.trim();
     if (q) {
       this.saavnService.searchSongs(q).subscribe((res) => {
@@ -315,6 +321,11 @@ export class MusicComponent implements OnDestroy {
   /** Play next song when Next is pressed */
   nextSong() {
     this.onSongFinished();
+  }
+
+  /** Removes focus from the search input */
+  removeFocus() {
+    this.searchSongInput.nativeElement.blur();
   }
 
 }

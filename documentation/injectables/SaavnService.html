@@ -164,15 +164,15 @@ It manages search, AI-based suggestions, and conversation history.</p>
                         <ul class="index-list">
                             <li>
                                     <span class="modifier">Private</span>
-                                <a href="#apiUrl" >apiUrl</a>
-                            </li>
-                            <li>
-                                    <span class="modifier">Private</span>
-                                <a href="#baseUrl" >baseUrl</a>
+                                <a href="#geminiApiUrl" >geminiApiUrl</a>
                             </li>
                             <li>
                                     <span class="modifier">Private</span>
                                 <a href="#history" >history</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Private</span>
+                                <a href="#savvanApiUrl" >savvanApiUrl</a>
                             </li>
                         </ul>
                     </td>
@@ -491,11 +491,11 @@ Uses Gemini API to infer mood and style, and returns the most suitable next trac
         <tbody>
             <tr>
                 <td class="col-md-4">
-                    <a name="apiUrl"></a>
+                    <a name="geminiApiUrl"></a>
                     <span class="name">
                             <span class="modifier">Private</span>
-                        <span ><b>apiUrl</b></span>
-                        <a href="#apiUrl"><span class="icon ion-ios-link"></span></a>
+                        <span ><b>geminiApiUrl</b></span>
+                        <a href="#geminiApiUrl"><span class="icon ion-ios-link"></span></a>
                     </span>
                 </td>
             </tr>
@@ -513,44 +513,6 @@ Uses Gemini API to infer mood and style, and returns the most suitable next trac
             <tr>
                 <td class="col-md-4">
                     <div class="io-description"><p>Gemini API URL with authentication key from environment.</p>
-</div>
-                </td>
-            </tr>
-
-        </tbody>
-    </table>
-    <table class="table table-sm table-bordered">
-        <tbody>
-            <tr>
-                <td class="col-md-4">
-                    <a name="baseUrl"></a>
-                    <span class="name">
-                            <span class="modifier">Private</span>
-                        <span ><b>baseUrl</b></span>
-                        <a href="#baseUrl"><span class="icon ion-ios-link"></span></a>
-                    </span>
-                </td>
-            </tr>
-                <tr>
-                    <td class="col-md-4">
-                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
-
-                    </td>
-                </tr>
-                <tr>
-                    <td class="col-md-4">
-                        <i>Default value : </i><code>&#x27;https://saavn.dev/api/search/songs&#x27;</code>
-                    </td>
-                </tr>
-                    <tr>
-                        <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="39" class="link-to-prism">src/app/service/saavan-api/saavan.service.ts:39</a></div>
-                        </td>
-                    </tr>
-
-            <tr>
-                <td class="col-md-4">
-                    <div class="io-description"><p>Base URL for Saavn song search API.</p>
 </div>
                 </td>
             </tr>
@@ -589,6 +551,44 @@ Uses Gemini API to infer mood and style, and returns the most suitable next trac
             <tr>
                 <td class="col-md-4">
                     <div class="io-description"><p>Conversation history between user and AI model.</p>
+</div>
+                </td>
+            </tr>
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="savvanApiUrl"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                        <span ><b>savvanApiUrl</b></span>
+                        <a href="#savvanApiUrl"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>&#x27;https://saavn.dev/api/search/songs&#x27;</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="39" class="link-to-prism">src/app/service/saavan-api/saavan.service.ts:39</a></div>
+                        </td>
+                    </tr>
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Base URL for Saavn song search API.</p>
 </div>
                 </td>
             </tr>
@@ -639,12 +639,12 @@ export class SaavnService {
   /**
    * Base URL for Saavn song search API.
    */
-  private baseUrl &#x3D; &#x27;https://saavn.dev/api/search/songs&#x27;;
+  private savvanApiUrl &#x3D; &#x27;https://saavn.dev/api/search/songs&#x27;;
 
   /**
    * Gemini API URL with authentication key from environment.
    */
-  private apiUrl &#x3D; &#x60;https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key&#x3D;${environment.geminiApiKey}&#x60;;
+  private geminiApiUrl &#x3D; &#x60;https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key&#x3D;${environment.geminiApiKey}&#x60;;
 
   /**
    * Creates an instance of SaavnService.
@@ -655,7 +655,7 @@ export class SaavnService {
   constructor(
     private http: HttpClient,
     private globalLoaderService: GlobalLoaderService
-  ) {}
+  ) { }
 
   /**
    * Searches for songs using the Saavn API.
@@ -666,7 +666,7 @@ export class SaavnService {
   searchSongs(query: string) {
     this.globalLoaderService.show(&quot;Searching songs...&quot;);
 
-    return this.http.get&lt;any&gt;(&#x60;${this.baseUrl}?query&#x3D;${query}&amp;limit&#x3D;10&amp;page&#x3D;0&#x60;).pipe(
+    return this.http.get&lt;any&gt;(&#x60;${this.savvanApiUrl}?query&#x3D;${query}&amp;limit&#x3D;10&amp;page&#x3D;0&#x60;).pipe(
       finalize(() &#x3D;&gt; {
         this.globalLoaderService.hide();
       })
@@ -736,7 +736,7 @@ Provide only the JSON object and no extra text, no formatting:
     const body &#x3D; { contents: this.history };
 
     try {
-      const res: any &#x3D; await firstValueFrom(this.http.post(this.apiUrl, body, { headers }));
+      const res: any &#x3D; await firstValueFrom(this.http.post(this.geminiApiUrl, body, { headers }));
       const parts &#x3D; res?.candidates?.[0]?.content?.parts;
       const modelReply &#x3D; parts?.map((p: any) &#x3D;&gt; p.text).join(&#x27;\n\n&#x27;) || &#x27;No response&#x27;;
 

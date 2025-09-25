@@ -310,12 +310,12 @@ export class SaavnService {
   /**
    * Base URL for Saavn song search API.
    */
-  private baseUrl &#x3D; &#x27;https://saavn.dev/api/search/songs&#x27;;
+  private savvanApiUrl &#x3D; &#x27;https://saavn.dev/api/search/songs&#x27;;
 
   /**
    * Gemini API URL with authentication key from environment.
    */
-  private apiUrl &#x3D; &#x60;https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key&#x3D;${environment.geminiApiKey}&#x60;;
+  private geminiApiUrl &#x3D; &#x60;https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key&#x3D;${environment.geminiApiKey}&#x60;;
 
   /**
    * Creates an instance of SaavnService.
@@ -326,7 +326,7 @@ export class SaavnService {
   constructor(
     private http: HttpClient,
     private globalLoaderService: GlobalLoaderService
-  ) {}
+  ) { }
 
   /**
    * Searches for songs using the Saavn API.
@@ -337,7 +337,7 @@ export class SaavnService {
   searchSongs(query: string) {
     this.globalLoaderService.show(&quot;Searching songs...&quot;);
 
-    return this.http.get&lt;any&gt;(&#x60;${this.baseUrl}?query&#x3D;${query}&amp;limit&#x3D;10&amp;page&#x3D;0&#x60;).pipe(
+    return this.http.get&lt;any&gt;(&#x60;${this.savvanApiUrl}?query&#x3D;${query}&amp;limit&#x3D;10&amp;page&#x3D;0&#x60;).pipe(
       finalize(() &#x3D;&gt; {
         this.globalLoaderService.hide();
       })
@@ -407,7 +407,7 @@ Provide only the JSON object and no extra text, no formatting:
     const body &#x3D; { contents: this.history };
 
     try {
-      const res: any &#x3D; await firstValueFrom(this.http.post(this.apiUrl, body, { headers }));
+      const res: any &#x3D; await firstValueFrom(this.http.post(this.geminiApiUrl, body, { headers }));
       const parts &#x3D; res?.candidates?.[0]?.content?.parts;
       const modelReply &#x3D; parts?.map((p: any) &#x3D;&gt; p.text).join(&#x27;\n\n&#x27;) || &#x27;No response&#x27;;
 

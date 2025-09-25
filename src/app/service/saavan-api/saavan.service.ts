@@ -36,12 +36,12 @@ export class SaavnService {
   /**
    * Base URL for Saavn song search API.
    */
-  private baseUrl = 'https://saavn.dev/api/search/songs';
+  private savvanApiUrl = 'https://saavn.dev/api/search/songs';
 
   /**
    * Gemini API URL with authentication key from environment.
    */
-  private apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${environment.geminiApiKey}`;
+  private geminiApiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${environment.geminiApiKey}`;
 
   /**
    * Creates an instance of SaavnService.
@@ -52,7 +52,7 @@ export class SaavnService {
   constructor(
     private http: HttpClient,
     private globalLoaderService: GlobalLoaderService
-  ) {}
+  ) { }
 
   /**
    * Searches for songs using the Saavn API.
@@ -63,7 +63,7 @@ export class SaavnService {
   searchSongs(query: string) {
     this.globalLoaderService.show("Searching songs...");
 
-    return this.http.get<any>(`${this.baseUrl}?query=${query}&limit=10&page=0`).pipe(
+    return this.http.get<any>(`${this.savvanApiUrl}?query=${query}&limit=10&page=0`).pipe(
       finalize(() => {
         this.globalLoaderService.hide();
       })
@@ -133,7 +133,7 @@ Provide only the JSON object and no extra text, no formatting:
     const body = { contents: this.history };
 
     try {
-      const res: any = await firstValueFrom(this.http.post(this.apiUrl, body, { headers }));
+      const res: any = await firstValueFrom(this.http.post(this.geminiApiUrl, body, { headers }));
       const parts = res?.candidates?.[0]?.content?.parts;
       const modelReply = parts?.map((p: any) => p.text).join('\n\n') || 'No response';
 

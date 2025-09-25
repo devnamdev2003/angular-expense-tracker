@@ -2,7 +2,7 @@
   <!-- Sticky Search Input -->
   <div class="sticky py-4 px-2 top-0 z-10 bg-[var(--color-bg)]">
     <div class="flex items-center gap-2">
-      <input type="text" [(ngModel)]="query" (keyup.enter)="searchSong()" placeholder="Enter song name"
+      <input  #searchSongInput type="text" [(ngModel)]="query" (keyup.enter)="searchSong()" placeholder="Enter song name"
         class="flex-1 p-2 rounded-md bg-[var(--input-bg)] text-[var(--input-text)] border border-[var(--input-border)] focus:outline-none focus:ring-2 focus:ring-[var(--theme-color)] transition" />
       <button (click)="searchSong()"
         class="bg-[var(--theme-color)] text-[var(--color-white)] px-4 py-2 rounded-md shadow hover:shadow-md active:scale-95 transition">Search</button>
@@ -11,9 +11,8 @@
 
   <!-- Songs List -->
   <div *ngFor="let song of songs()"
-    class="flex items-center gap-4 py-4 px-2 rounded-md hover:bg-[var(--list-hover)] transition-all cursor-pointer"
-    (click)="playSong(getSongUrl(song), song)">
-    <div class="relative w-12 h-12 rounded-md overflow-hidden group">
+    class="flex items-center gap-4 py-4 px-2 rounded-md hover:bg-[var(--list-hover)] transition-all cursor-pointer">
+    <div class="relative w-12 h-12 rounded-md overflow-hidden group" (click)="playSong(getSongUrl(song), song, true)">
       <img [src]="song.image?.[2]?.url || 'assets/img/music_icon/icons8-airpods-pro-max-100.png'" alt="{{ song.name }}"
         class="w-full h-full object-cover group-hover:brightness-75 transition-all duration-300 ease-in-out"
         [class.brightness-75]="currentSong?.url === getSongUrl(song)" />
@@ -27,7 +26,7 @@
       </div>
     </div>
 
-    <div class="flex-1">
+    <div class="flex-1" (click)="playSong(getSongUrl(song), song)">
       <div class="flex items-center space-x-2 font-medium"
         [ngClass]="currentSong?.url === getSongUrl(song) ? 'text-[var(--theme-color)]' : 'text-[var(--color-text)]'">
         <img *ngIf="currentSong?.url === getSongUrl(song)" src="assets/img/music_icon/waves.gif"
