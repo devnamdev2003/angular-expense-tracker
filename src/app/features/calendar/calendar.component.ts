@@ -2,19 +2,20 @@ import { Component, OnInit } from '@angular/core';
 import { ExpenseService, Expense } from '../../service/localStorage/expense.service';
 import { CommonModule } from '@angular/common';
 import { UserService } from '../../service/localStorage/user.service';
+import { FormsModule } from '@angular/forms';
 
 /**
  * Component that renders a monthly calendar view with expense tracking.
  *
  * Features:
  * - Displays days of the current month with previous/next month padding.
- * - Highlights today’s date.
+ * - Heatmap visualization based on daily expenses.
  * - Calculates total expenses per month and per day.
  * - Opens modal to view daily expenses.
  */
 @Component({
   selector: 'app-calendar',
-  imports: [CommonModule],
+  imports: [CommonModule, FormsModule],
   templateUrl: './calendar.component.html',
   styleUrl: './calendar.component.css'
 })
@@ -50,6 +51,9 @@ export class CalendarComponent implements OnInit {
   /** Weekday labels */
   weekDays = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
 
+  /** Whether to show heatmap colors on the calendar */
+  isShowHeatmap: boolean = false;
+
   /**
    * Creates an instance of CalendarComponent.
    *
@@ -61,6 +65,7 @@ export class CalendarComponent implements OnInit {
     public userService: UserService
   ) {
     this.currency = this.userService.getValue<string>('currency');
+    this.isShowHeatmap = this.userService.getValue<boolean>('is_show_heatmap') ?? false;
   }
 
   /** Angular lifecycle hook that initializes the calendar view */
@@ -113,12 +118,12 @@ export class CalendarComponent implements OnInit {
     for (let day = 1; day <= daysInMonth; day++) {
       const dateStr = `${year}-${monthStr}-${String(day).padStart(2, '0')}`;
       const isToday = day === today.getDate() && month === today.getMonth() && year === today.getFullYear();
-
+      const heat = this.getHeatClass(this.getTotalAmount(dateStr));
       this.calendarDays.push({
         label: day,
         date: dateStr,
         isCurrentMonth: true,
-        classes: isToday ? 'bg-[var(--color-accent)] text-white font-bold cursor-pointer' : 'bg-[var(--color-surface)] cursor-pointer dayCell-list-item hover:bg-[var(--list-hover)]'
+        classes: isToday ? 'bg-[var(--color-accent)] text-white font-bold cursor-pointer' : `${heat} cursor-pointer dayCell-list-item hover:bg-[var(--list-hover)]`
       });
     }
 
@@ -171,5 +176,36 @@ export class CalendarComponent implements OnInit {
   closeModal(): void {
     this.showModal = false;
     this.modalExpenses = [];
+  }
+
+  /**
+   * Gets the heatmap class for a given expense amount.
+   * @param amount The total expense amount for the day.
+   * @returns The corresponding heatmap class.
+   */
+  private getHeatClass(amount: number): string {
+    if (this.isShowHeatmap === false) return 'bg-[var(--color-surface)]';
+    if (amount === 0) return 'bg-[var(--color-gray)]';
+    if (amount < 300) return 'bg-[var(--color-emerald)]';
+    if (amount < 1000) return 'bg-[var(--color-amber)]';
+    return 'bg-[var(--color-rose)]';
+  }
+
+  /**
+   * Gets the total expenses for a specific date.
+   * @param dateStr Date string in YYYY-MM-DD format
+   * @returns The total expense amount for the date
+   */
+  getTotalAmount(dateStr: string): number {
+    return this.expenseService.searchByDateRange(dateStr, dateStr).reduce((acc, exp) => acc + exp.amount || 0, 0);
+  }
+
+  /**
+   * Toggles the heatmap display and re-renders the calendar.
+   */
+  toggleHeatmap(): void {
+    this.isShowHeatmap = !this.isShowHeatmap;
+    this.userService.update('is_show_heatmap', this.isShowHeatmap);
+    this.renderCalendar(this.currentYear, this.currentMonth);
   }
 }

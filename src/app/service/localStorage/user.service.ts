@@ -43,6 +43,9 @@ export interface User {
 
   /** Whether the user’s app has been updated to the latest version. */
   is_app_updated: boolean;
+
+  /** Whether to show heatmap on calendar. */
+  is_show_heatmap: boolean;
 }
 
 /**

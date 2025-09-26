@@ -72,7 +72,8 @@ export class StorageService {
     theme_mode: "dark",
     currency: "₹",
     app_version: "0",
-    is_app_updated: true
+    is_app_updated: true,
+    is_show_heatmap: false
   };
 
   /** Schema for budget */

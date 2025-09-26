@@ -1,18 +1,40 @@
 <section id="calendar" class="section p-4">
 
-
-    <div class="flex flex-col justify-between">
-        <div class="flex justify-between m-auto items-center w-[350px] my-4">
-            <button (click)="changeMonth(-1)"
-                class="bg-[var(--color-accent)] text-[var(--color-white)] px-4 py-2 rounded mr-2 transition">&lt;
-            </button>
-            <div class="text-center font-semibold"><a href="/music">Total Expenses: </a><span class="text-[var(--color-green)]">{{currency}} {{
-                    totalExpenses }}</span>
-            </div>
-            <button (click)="changeMonth(1)"
-                class="bg-[var(--color-accent)] text-[var(--color-white)] px-4 py-2 rounded ml-2 transition">
-                &gt;</button>
+    <!-- ░░ TOP BAR ░░ -->
+    <div class="flex flex-col justify-between md:w-[60%] m-auto">
+        <div class="flex items-center justify-start pb-2">
+            <label for="isShowHeatmap" class="font-semibold pr-2">Show HeatMap</label>
+            <label class="relative inline-flex items-center cursor-pointer">
+                <input type="checkbox" id="isShowHeatmap" [checked]="isShowHeatmap" (change)="toggleHeatmap()"
+                    class="sr-only peer">
+                <div
+                    class="w-10 h-6 bg-gray-600 rounded-full peer peer-checked:bg-[var(--color-accent)] transition-all">
+                </div>
+                <span
+                    class="absolute left-1 top-1 w-4 h-4 bg-white rounded-full transition-all peer-checked:translate-x-4"></span>
+            </label>
         </div>
+
+        <div class="flex justify-between items-center pt-2 pb-6">
+            <button class="shrink-0" (click)="changeMonth(-1)">
+                <img src="assets/img/icon/icons8-left-arrow-50.png" alt="prev"
+                    class="w-[25px] h-[25px] transition-all duration-300 ease-in-out"
+                    style="filter: var(--icon-color2);">
+            </button>
+
+            <div class="text-center font-semibold">
+                <a href="/music">Total Expenses: </a>
+                <span class="text-[var(--color-green)]">{{currency}} {{ totalExpenses }}</span>
+            </div>
+
+            <button class="shrink-0" (click)="changeMonth(1)">
+                <img src="assets/img/icon/icons8-right-arrow-50.png" alt="next"
+                    class="w-[25px] h-[25px] transition-all duration-300 ease-in-out"
+                    style="filter: var(--icon-color2);">
+            </button>
+        </div>
+
+        <!-- ░░ CALENDAR ░░ -->
         <div>
             <h2
                 class="border-b border-[var(--color-white)] p-2 bg-[var(--color-accent)] text-[var(--color-white)] text-lg font-semibold text-center">
@@ -35,6 +57,31 @@
         </div>
     </div>
 
+    <!-- ░░ HEATMAP LEGEND ░░ -->
+    <div class="mt-10" *ngIf="isShowHeatmap">
+        <!-- <h3 class="text-center font-semibold text-[var(--color-text)] mb-2">
+            Heatmap Legend
+        </h3> -->
+        <div class="flex justify-center gap-4 text-sm">
+            <div class="flex items-center gap-1">
+                <span class="w-5 h-5 rounded bg-[var(--color-gray)] inline-block"></span>
+                <span class="text-[var(--color-text)]">No expense</span>
+            </div>
+            <div class="flex items-center gap-1">
+                <span class="w-5 h-5 rounded bg-[var(--color-emerald)] inline-block"></span>
+                <span class="text-[var(--color-text)]">&lt; 300</span>
+            </div>
+            <div class="flex items-center gap-1">
+                <span class="w-5 h-5 rounded bg-[var(--color-amber)] inline-block"></span>
+                <span class="text-[var(--color-text)]">300 – 1000</span>
+            </div>
+            <div class="flex items-center gap-1">
+                <span class="w-5 h-5 rounded bg-[var(--color-rose)] inline-block"></span>
+                <span class="text-[var(--color-text)]">&gt; 1000</span>
+            </div>
+        </div>
+    </div>
+
     <!-- Modal -->
     <div id="dayModal" class="fixed inset-0 bg-black bg-opacity-50 items-center justify-center z-50 flex"
         *ngIf="showModal">
@@ -52,7 +99,8 @@
                 <li *ngFor="let exp of modalExpenses"
                     class="bg-[var(--color-surface)] hover:bg-[var(--list-hover)] rounded-lg p-4 shadow-md">
                     <div class="flex justify-between items-center mb-2">
-                        <span class="text-lg font-semibold text-[var(--color-green)]">{{currency}} {{ exp.amount }}</span>
+                        <span class="text-lg font-semibold text-[var(--color-green)]">{{currency}} {{ exp.amount
+                            }}</span>
                         <span class="text-sm">{{ exp.category_name || 'Uncategorized' }}</span>
                     </div>
                     <div class="text-sm space-y-1">
