@@ -3,6 +3,7 @@ import { ExpenseService, Expense } from '../../service/localStorage/expense.serv
 import { CommonModule } from '@angular/common';
 import { UserService } from '../../service/localStorage/user.service';
 import { FormsModule } from '@angular/forms';
+import { HeatmapSummary } from '../../models/heatMap-summary.service';
 
 /**
  * Component that renders a monthly calendar view with expense tracking.
@@ -54,6 +55,14 @@ export class CalendarComponent implements OnInit {
   /** Whether to show heatmap colors on the calendar */
   isShowHeatmap: boolean = false;
 
+  /** 
+   * Stores the generated heatmap summary data for the current month.
+   * Each item contains the color category, total days, and total amount
+   * used to render the heatmap legend and summary table.
+   */
+  heatmapSummary: HeatmapSummary[] = [];
+
+
   /**
    * Creates an instance of CalendarComponent.
    *
@@ -98,6 +107,7 @@ export class CalendarComponent implements OnInit {
    */
   renderCalendar(year: number, month: number): void {
     this.calendarDays = [];
+    this.heatmapSummary = [];
     const today = new Date();
     const firstDay = new Date(year, month, 1).getDay();
     const daysInMonth = new Date(year, month + 1, 0).getDate();
@@ -118,7 +128,15 @@ export class CalendarComponent implements OnInit {
     for (let day = 1; day <= daysInMonth; day++) {
       const dateStr = `${year}-${monthStr}-${String(day).padStart(2, '0')}`;
       const isToday = day === today.getDate() && month === today.getMonth() && year === today.getFullYear();
-      const heat = this.getHeatClass(this.getTotalAmount(dateStr));
+      const cellDate = new Date(`${year}-${monthStr}-${String(day).padStart(2, '0')}`);
+
+      let heat = '';
+      if (cellDate <= today) {
+        heat = this.getHeatClass(this.getTotalAmount(dateStr));
+      }
+      else {
+        heat = 'bg-[var(--color-surface)]';
+      }
       this.calendarDays.push({
         label: day,
         date: dateStr,
@@ -179,15 +197,26 @@ export class CalendarComponent implements OnInit {
   }
 
   /**
-   * Gets the heatmap class for a given expense amount.
+   * Gets the heatmap class for a given expense amount and update the heatmapSummary
+ .
    * @param amount The total expense amount for the day.
    * @returns The corresponding heatmap class.
    */
   private getHeatClass(amount: number): string {
     if (this.isShowHeatmap === false) return 'bg-[var(--color-surface)]';
-    if (amount === 0) return 'bg-[var(--color-gray)]';
-    if (amount < 300) return 'bg-[var(--color-emerald)]';
-    if (amount < 1000) return 'bg-[var(--color-amber)]';
+    if (amount === 0) {
+      this.addOrUpdateHeatMapSummary('bg-[var(--color-gray)]', amount)
+      return 'bg-[var(--color-gray)]';
+    }
+    if (amount < 300) {
+      this.addOrUpdateHeatMapSummary('bg-[var(--color-emerald)]', amount)
+      return 'bg-[var(--color-emerald)]';
+    }
+    if (amount < 1000) {
+      this.addOrUpdateHeatMapSummary('bg-[var(--color-amber)]', amount)
+      return 'bg-[var(--color-amber)]';
+    }
+    this.addOrUpdateHeatMapSummary('bg-[var(--color-rose)]', amount)
     return 'bg-[var(--color-rose)]';
   }
 
@@ -207,5 +236,29 @@ export class CalendarComponent implements OnInit {
     this.isShowHeatmap = !this.isShowHeatmap;
     this.userService.update('is_show_heatmap', this.isShowHeatmap);
     this.renderCalendar(this.currentYear, this.currentMonth);
+  }
+
+  /**
+   * Adds a new entry to the heatmap summary or updates an existing one.
+   *
+   * @param color - The color representing the heat intensity for the day.
+   * @param amount - The expense amount to be added for that color.
+   *
+   * If an entry with the given color already exists in `heatmapSummary`, 
+   * it increments the `days` count by 1 and adds the `amount` to the existing total.
+   * Otherwise, it creates a new entry with `days` initialized to 1 and `amount` as provided.
+   */
+  addOrUpdateHeatMapSummary(color: string, amount: number) {
+    const existing = this.heatmapSummary.find(item => item.color === color);
+    if (existing) {
+      existing.days += 1;
+      existing.amount += amount;
+    } else {
+      this.heatmapSummary.push({
+        color: color,
+        days: 1,
+        amount: amount
+      });
+    }
   }
 }

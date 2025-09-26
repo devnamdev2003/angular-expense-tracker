@@ -58,10 +58,7 @@
     </div>
 
     <!-- ░░ HEATMAP LEGEND ░░ -->
-    <div class="mt-10" *ngIf="isShowHeatmap">
-        <!-- <h3 class="text-center font-semibold text-[var(--color-text)] mb-2">
-            Heatmap Legend
-        </h3> -->
+    <div class="mt-6" *ngIf="isShowHeatmap">
         <div class="flex justify-around md:justify-center md:gap-4 text-[0.8rem]">
             <div class="flex items-center gap-1">
                 <span class="w-4 h-4 rounded bg-[var(--color-gray)] inline-block"></span>
@@ -79,6 +76,38 @@
                 <span class="w-4 h-4 rounded bg-[var(--color-rose)] inline-block"></span>
                 <span class="text-[var(--color-text)]">&gt; 1000</span>
             </div>
+        </div>
+    </div>
+
+    <!-- ░░ HEATMAP SUMMARY ░░ -->
+    <div class="my-6 text-center" *ngIf="isShowHeatmap">
+        <div
+            class="max-w-[300px] md:max-w-md mx-auto w-full border border-[var(--input-border)] rounded-lg overflow-hidden text-sm">
+
+            <!-- Table Header -->
+            <div class="grid grid-cols-3 bg-[var(--color-gray)] text-[var(--color-text)] font-semibold py-2">
+                <span>Color</span>
+                <span>Days</span>
+                <span>Amount</span>
+            </div>
+
+            <!-- Table Rows -->
+            <div *ngFor="let item of heatmapSummary"
+                class="grid grid-cols-3 items-center py-2 border-t border-[var(--input-border)] text-[var(--color-text)] text-[0.8rem]  hover:bg-[var(--list-hover)]">
+                <span class="flex justify-center">
+                    <span class="w-4 h-4 rounded inline-block" [ngClass]="item.color"></span>
+                </span>
+                <span class="font-medium">{{ item.days }}</span>
+                <span class="font-medium">{{ currency }} {{ item.amount}}</span>
+            </div>
+            
+            <!-- Total Row -->
+            <div class="grid grid-cols-3 items-center py-2 border-t border-[var(--input-border)]
+         text-[var(--color-text)] font-semibold">
+                <span class="col-span-2 text-center">Total</span>
+                <span class="text-center text-green-500">{{ currency }} {{ totalExpenses }}</span>
+            </div>
+
         </div>
     </div>
 

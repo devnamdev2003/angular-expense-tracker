@@ -39,8 +39,8 @@ Allows users to add new expense entries through a form. Input fields include:
 * 📅 **Date & Time**
 * 🏷️ **Category** (chosen from a dropdown list)
 * 💳 **Payment Mode**
-* 📍 **Location**
-* 📝 **Note**
+* 📍 **Location** (chosen from a dropdown list or manually typed)
+* 📝 **Note** (chosen from a dropdown list or manually typed)
 * 💡 **Extra Spending**
 
 All expenses are stored in the device's **LocalStorage** and reflected immediately in graphs and listings.
@@ -52,6 +52,10 @@ All expenses are stored in the device's **LocalStorage** and reflected immediate
 * Users can view a **monthly calendar** to explore expenses on specific dates.
 * Tap any date to open a **popup modal** displaying all expenses for that day.
 * Navigate across **months and years** to view past or future expenses.
+* Toggle the Show HeatMap switch to highlight each day based on spending intensity.
+  - Days are color-coded (e.g. No expense, < ₹300, ₹300–₹1000, > ₹1000) for quick insights.
+  - A legend below the calendar explains each color category.
+  - A summary table displays color, days count, and total amount for each category.
 
 ---
 
@@ -87,7 +91,7 @@ All expenses are stored in the device's **LocalStorage** and reflected immediate
 Provides customization and utility options for better personalization:
 
 * 🎨 **Theme Mode Toggle** (Dark / Light)
-* ⬇️ **Download Data** (export expenses data in pdf, json, excel formats)
+* ⬇️ **Download Data** (export expenses data in pdf, json, excel formats. between the selected date range)
 * 📤 **Import Data** (upload expense data)
 * ➕ **Add Category** (custom categories for better organization)
 * ❌ **Delete Category** (remove unused or incorrect categories)
