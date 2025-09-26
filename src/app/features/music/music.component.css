@@ -1,8 +1,14 @@
-/* Optional: Style the bottom bar */
 .fixed {
   z-index: 50;
 }
 
 img {
   object-fit: cover;
+}
+
+input.no-select {
+  user-select: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
 }
