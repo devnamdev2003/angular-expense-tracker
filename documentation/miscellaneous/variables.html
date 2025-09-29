@@ -166,6 +166,9 @@
                             <a href="#monaco" title="documentation/template-playground/template-editor.service.ts" ><b>monaco</b>&nbsp;&nbsp;&nbsp;(documentation/.../template-editor.service.ts)</a>
                         </li>
                         <li>
+                            <a href="#musicAccessGuard" title="src/guards/music-url-access.guard.ts" ><b>musicAccessGuard</b>&nbsp;&nbsp;&nbsp;(src/.../music-url-access.guard.ts)</a>
+                        </li>
+                        <li>
                             <a href="#reqHandler" title="src/server.ts" ><b>reqHandler</b>&nbsp;&nbsp;&nbsp;(src/.../server.ts)</a>
                         </li>
                         <li>
@@ -703,7 +706,7 @@
    * API key for accessing the Gemini AI API.
    * Replace or secure this key before deploying to production.
    */
-  geminiApiKey: &#x27;AIzaSyBkBmHCsVna6d8bPYjQQhbpdymn7_Nvm2w&#x27;,
+  geminiApiKey: &#x27;AIzaSyDTDiOZvUYymqHU11EqbnCzk66mexWt2y4&#x27;,
 
   /**
    * Current environment type.
@@ -819,6 +822,67 @@ Use this file during development. It will be replaced by <code>environment.prod.
         </tbody>
     </table>
 </section>
+    <h3>src/guards/music-url-access.guard.ts</h3>
+    <section data-compodoc="block-properties">
+    <h3></h3>    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="musicAccessGuard"></a>
+                    <span class="name">
+                        <span ><b>musicAccessGuard</b></span>
+                        <a href="#musicAccessGuard"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>CanActivateFn</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>() &#x3D;&gt; {
+
+    const userService &#x3D; inject(UserService);
+    const router &#x3D; inject(Router);
+    const hasAccess &#x3D;
+        userService.getValue&lt;boolean&gt;(&#x27;has_music_url_access&#x27;) ?? false;
+
+    if (hasAccess) {
+        return true;
+    } else {
+        router.navigateByUrl(&#x27;/&#x27;);
+        return false;
+    }
+}</code>
+                    </td>
+                </tr>
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Music Access Guard</p>
+<p>This route guard is used to control access to routes that require
+the user to have permission to access music URLs.</p>
+<p>It retrieves the <code>has_music_url_access</code> flag from the <code>UserService</code>.</p>
+<ul>
+<li>If the flag is <code>true</code>, the guard allows navigation to the route.</li>
+<li>If the flag is <code>false</code> or not set, the guard redirects the user
+to the home page (<code>&#39;/&#39;</code>) and prevents access to the protected route.</li>
+</ul>
+<p>Usage:</p>
+<b>Example :</b><div><pre class="line-numbers"><code class="language-ts">{
+  path: &#39;music&#39;,
+  canActivate: [musicAccessGuard],
+  loadChildren: () =&gt; import(&#39;./music/music.module&#39;).then(m =&gt; m.MusicModule)
+}</code></pre></div></div>
+                </td>
+            </tr>
+
+        </tbody>
+    </table>
+</section>
     <h3>src/app/app.routes.ts</h3>
     <section data-compodoc="block-properties">
     <h3></h3>    <table class="table table-sm table-bordered">
@@ -849,24 +913,26 @@ Use this file during development. It will be replaced by <code>environment.prod.
     },
     {
         path: &#x27;music&#x27;,
+        canActivate: [musicAccessGuard],
         loadComponent: () &#x3D;&gt;
             &quot;import(&#x27;./features/music/music.component&#x27;)\r\n\
                 .then(m &#x3D;&gt; m.MusicComponent)&quot;,
     },
     {
         path: &#x27;music/search&#x27;,
+        canActivate: [musicAccessGuard],
         loadComponent: () &#x3D;&gt;
             &quot;import(&#x27;./features/music/music-component/search-music/search-music.component&#x27;)\r\n\
                 .then(m &#x3D;&gt; m.SearchMusicComponent)&quot;
     },
     {
         path: &#x27;music/playlist&#x27;,
+        canActivate: [musicAccessGuard],
         loadComponent: () &#x3D;&gt;
             &quot;import(&#x27;./features/music/music-component/playlist-music/playlist-music.component&#x27;)\r\n\
                 .then(m &#x3D;&gt; m.PlaylistMusicComponent)&quot;
     },
-    { path: &#x27;**&#x27;, redirectTo: &#x27;&#x27; },
-    { path: &#x27;music/**&#x27;, redirectTo: &#x27;../music&#x27; }
+    { path: &#x27;**&#x27;, redirectTo: &#x27;&#x27; }
 ]</code>
                     </td>
                 </tr>

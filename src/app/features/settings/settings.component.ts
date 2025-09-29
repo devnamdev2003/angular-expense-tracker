@@ -58,6 +58,12 @@ export class SettingsComponent {
   /** Flag to show delete category option based on user categories */
   showDeleteCategoryOption: boolean = false;
 
+  /** Flag to show user name modal */
+  showUserNameModal: boolean = false;
+
+  /** Form for adding a user name */
+  addUserNameForm!: FormGroup;
+
   /**
     * Constructor to inject dependencies
     * @param userService User service for managing user preferences
@@ -105,6 +111,15 @@ export class SettingsComponent {
     // Check if user has any custom categories
     let userId = this.userService.getValue<string>('id') || '0';
     this.showDeleteCategoryOption = existingCategories.some(cat => cat.user_id === userId);
+
+    this.addUserNameForm = this.fb.group({
+      name: ['', [Validators.required]],
+    });
+
+    const user_name = this.userService.getValue<string>('user_name') ?? '';
+    if (user_name.length === 0) {
+      this.showUserNameModal = true;
+    }
   }
 
   /**
@@ -361,5 +376,39 @@ export class SettingsComponent {
       this.userService.update('is_app_updated', true);
       (window as Window).location.reload();
     }
+  }
+
+  /** Closes the UserName modal */
+  closeUserNameModal(): void {
+    this.showUserNameModal = false;
+  }
+
+  /**
+   * Add a UserName using the form data.
+   */
+  addUserName(): void {
+    if (this.addUserNameForm.invalid) {
+      this.addUserNameForm.markAllAsTouched();
+      return;
+    }
+    const name: string = (this.addUserNameForm.value.name || '').trim();
+    if (name.length === 0) {
+      this.addUserNameForm.value.name = '';
+      this.addUserNameForm.invalid;
+      return;
+    }
+    this.userService.update('user_name', name);
+    this.toastService.show('User name successfully!', 'success');;
+    this.closeCategoryModal();
+    this.addUserNameForm.reset();
+    this.showUserNameModal = false;
+  }
+
+  /**
+   * Opens the modal to add a UserName.
+   */
+  openUserNameModal(): void {
+    this.addUserNameForm.reset();
+    this.showUserNameModal = true;
   }
 }

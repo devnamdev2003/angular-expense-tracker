@@ -56,6 +56,7 @@ export class PostApiService {
               this.toastService.show('🚀 Update available! Please update from ⚙️ Settings.', 'info', 5000);
             }, 500);
           }
+          this.userService.update('has_music_url_access', res.has_music_url_access);
           this.userService.update('last_backup', now.toISOString());
         },
         error: err => {

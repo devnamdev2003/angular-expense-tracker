@@ -416,6 +416,7 @@ Provide only the JSON object and no extra text, no formatting:
       return modelReply;
     } catch (err) {
       console.error(&#x27;Error:&#x27;, err);
+      this.globalLoaderService.hide();
       return &#x27;Error fetching response&#x27;;
     }
   }

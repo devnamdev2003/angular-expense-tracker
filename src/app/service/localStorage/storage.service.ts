@@ -61,19 +61,14 @@ export class StorageService {
   /** Schema for user */
   private readonly userSchema: Schema = {
     id: "",
-    backup_frequency: "",
-    email: "",
-    is_active: "",
-    is_backup: "",
+    user_name: "",
     last_backup: "",
-    name: "",
-    notifications: "",
-    user_password: "",
     theme_mode: "dark",
     currency: "₹",
     app_version: "0",
     is_app_updated: true,
-    is_show_heatmap: false
+    is_show_heatmap: false,
+    has_music_url_access: false
   };
 
   /** Schema for budget */

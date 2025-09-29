@@ -55,6 +55,9 @@ export class CalendarComponent implements OnInit {
   /** Whether to show heatmap colors on the calendar */
   isShowHeatmap: boolean = false;
 
+  /** Flag to determine if the user can access music URLs for streaming and downloading. */
+  has_music_url_access: boolean = false;
+
   /** 
    * Stores the generated heatmap summary data for the current month.
    * Each item contains the color category, total days, and total amount
@@ -75,6 +78,7 @@ export class CalendarComponent implements OnInit {
   ) {
     this.currency = this.userService.getValue<string>('currency');
     this.isShowHeatmap = this.userService.getValue<boolean>('is_show_heatmap') ?? false;
+    this.has_music_url_access = this.userService.getValue<boolean>('has_music_url_access') ?? false;
   }
 
   /** Angular lifecycle hook that initializes the calendar view */

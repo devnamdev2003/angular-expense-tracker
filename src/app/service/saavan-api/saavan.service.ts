@@ -142,6 +142,7 @@ Provide only the JSON object and no extra text, no formatting:
       return modelReply;
     } catch (err) {
       console.error('Error:', err);
+      this.globalLoaderService.hide();
       return 'Error fetching response';
     }
   }
