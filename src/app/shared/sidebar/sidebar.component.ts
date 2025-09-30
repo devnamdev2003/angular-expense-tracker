@@ -1,6 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import { SectionService } from '../../service/section/section.service';
+import { UserService } from '../../service/localStorage/user.service';
 
 /**
  * Sidebar navigation component.
@@ -24,6 +25,9 @@ export class SidebarComponent {
    */
   activePath: string = '';
 
+  /** Flag to determine if the user can access ai ssection for analysis data*/
+  has_ai_access: boolean = false;
+
   /**
    * Creates an instance of SidebarComponent.
    *
@@ -31,11 +35,13 @@ export class SidebarComponent {
    * the currently selected section and update the UI accordingly.
    *
    * @param sectionService Service for managing and broadcasting the active section state.
+   * @param userService Service for managing user preferences 
    */
-  constructor(private sectionService: SectionService) {
+  constructor(private sectionService: SectionService, private userService: UserService) {
     this.sectionService.currentSection$.subscribe(section => {
       this.activePath = section;
     });
+    this.has_ai_access = this.userService.getValue<boolean>('has_ai_access') ?? false;
   }
 
   /**

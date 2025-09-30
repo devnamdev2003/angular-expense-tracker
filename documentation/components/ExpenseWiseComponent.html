@@ -287,12 +287,12 @@ theme application, schema syncing, and PWA update activation.</p>
             <tbody>
                 <tr>
                     <td class="col-md-4">
-<code>constructor(sectionService: <a href="../injectables/SectionService.html" target="_self">SectionService</a>, platformId: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object" target="_blank">Object</a>)</code>
+<code>constructor(sectionService: <a href="../injectables/SectionService.html" target="_self">SectionService</a>, screenTypeService: <a href="../injectables/ScreenTypeService.html" target="_self">ScreenTypeService</a>, platformId: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object" target="_blank">Object</a>)</code>
                     </td>
                 </tr>
                         <tr>
                             <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="44" class="link-to-prism">src/app/features/expense-wise/expense-wise.component.ts:44</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="45" class="link-to-prism">src/app/features/expense-wise/expense-wise.component.ts:45</a></div>
                             </td>
                         </tr>
 
@@ -326,6 +326,22 @@ Initializes route tracking, section updates, PWA update listener, and services.<
                                                     
                                                         <td>
                                                                 <p>Service to track current section changes</p>
+
+                                                        </td>
+                                                </tr>
+                                                <tr>
+                                                        <td>screenTypeService</td>
+                                                  
+                                                        <td>
+                                                                        <code><a href="../injectables/ScreenTypeService.html" target="_self" >ScreenTypeService</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                        <td>
+                                                                <p>Service to track the screentype is mobile, tablet, and laptop</p>
 
                                                         </td>
                                                 </tr>
@@ -383,8 +399,8 @@ Initializes route tracking, section updates, PWA update listener, and services.<
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="75"
-                                    class="link-to-prism">src/app/features/expense-wise/expense-wise.component.ts:75</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="78"
+                                    class="link-to-prism">src/app/features/expense-wise/expense-wise.component.ts:78</a></div>
                         </td>
                     </tr>
 
@@ -452,8 +468,8 @@ Initializes route tracking, section updates, PWA update listener, and services.<
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="65"
-                                    class="link-to-prism">src/app/features/expense-wise/expense-wise.component.ts:65</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="68"
+                                    class="link-to-prism">src/app/features/expense-wise/expense-wise.component.ts:68</a></div>
                         </td>
                     </tr>
 
@@ -500,8 +516,8 @@ Initializes route tracking, section updates, PWA update listener, and services.<
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="75"
-                                    class="link-to-prism">src/app/features/expense-wise/expense-wise.component.ts:75</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="78"
+                                    class="link-to-prism">src/app/features/expense-wise/expense-wise.component.ts:78</a></div>
                         </td>
                     </tr>
 
@@ -584,7 +600,7 @@ Initializes route tracking, section updates, PWA update listener, and services.<
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="39" class="link-to-prism">src/app/features/expense-wise/expense-wise.component.ts:39</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="40" class="link-to-prism">src/app/features/expense-wise/expense-wise.component.ts:40</a></div>
                         </td>
                     </tr>
 
@@ -621,7 +637,7 @@ Initializes route tracking, section updates, PWA update listener, and services.<
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="44" class="link-to-prism">src/app/features/expense-wise/expense-wise.component.ts:44</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="45" class="link-to-prism">src/app/features/expense-wise/expense-wise.component.ts:45</a></div>
                         </td>
                     </tr>
 
@@ -657,6 +673,7 @@ import { BudgetComponent } from &#x27;../../features/budget/budget.component&#x2
 import { AiComponent } from &#x27;../../features/ai/ai.component&#x27;;
 
 import { SectionService } from &#x27;../../service/section/section.service&#x27;;
+import { ScreenTypeService } from &#x27;../../service/screen-type/screen-type.service&#x27;;
 
 /**
  * Root component of the application.
@@ -689,10 +706,12 @@ export class ExpenseWiseComponent {
    * Initializes route tracking, section updates, PWA update listener, and services.
    * 
    * @param sectionService Service to track current section changes
+   * @param screenTypeService Service to track the screentype is mobile, tablet, and laptop
    * @param platformId Angular platform ID to check if running in browser
    */
   constructor(
     private sectionService: SectionService,
+    private screenTypeService: ScreenTypeService,
     @Inject(PLATFORM_ID) private platformId: Object
 
   ) {
@@ -706,7 +725,7 @@ export class ExpenseWiseComponent {
    */
   ngOnInit() {
     if (isPlatformBrowser(this.platformId)) {
-      this.isMobile &#x3D; window.innerWidth &lt;&#x3D; 768;
+      this.isMobile &#x3D; this.screenTypeService.isMobile();
     }
   }
   /**
@@ -716,7 +735,7 @@ export class ExpenseWiseComponent {
   @HostListener(&#x27;window:resize&#x27;, [&#x27;$event&#x27;])
   onResize(event: any) {
     if (isPlatformBrowser(this.platformId)) {
-      this.isMobile &#x3D; event.target.innerWidth &lt;&#x3D; 768;
+      this.isMobile &#x3D; this.screenTypeService.isMobile();
     }
   }
 }</code></pre>
@@ -724,8 +743,8 @@ export class ExpenseWiseComponent {
 
     <div class="tab-pane fade " id="templateData">
         <pre class="line-numbers"><code class="language-html">&lt;div class&#x3D;&quot;expense&quot;&gt;
-    &lt;app-navbar&gt;&lt;/app-navbar&gt;
-    &lt;div class&#x3D;&quot;flex pt-14 pb-9 h-screen overflow-hidden&quot;&gt;
+    &lt;app-navbar class&#x3D;&quot;hidden md:block&quot;&gt;&lt;/app-navbar&gt;
+    &lt;div class&#x3D;&quot;flex md:pt-14 pb-9 h-screen overflow-hidden&quot;&gt;
         &lt;app-sidebar&gt;&lt;/app-sidebar&gt;
         &lt;main class&#x3D;&quot;flex-1 overflow-y-auto w-full h-full&quot;&gt;
             &lt;ng-container [ngSwitch]&#x3D;&quot;currentSection&quot;&gt;
@@ -773,7 +792,7 @@ export class ExpenseWiseComponent {
 <script src="../js/libs/htmlparser.js"></script>
 <script src="../js/libs/deep-iterator.js"></script>
 <script>
-        var COMPONENT_TEMPLATE = '<div><div class="expense">    <app-navbar></app-navbar>    <div class="flex pt-14 pb-9 h-screen overflow-hidden">        <app-sidebar></app-sidebar>        <main class="flex-1 overflow-y-auto w-full h-full">            <ng-container [ngSwitch]="currentSection">                <app-home *ngSwitchCase="\'home\'"></app-home>                <div *ngSwitchCase="\'add\'" [class.mobile-slide-up]="isMobile">                    <app-add-expense></app-add-expense>                </div>                <app-list-expenses *ngSwitchCase="\'list\'"></app-list-expenses>                <app-calendar *ngSwitchCase="\'calendar\'"></app-calendar>                <app-settings *ngSwitchCase="\'settings\'"></app-settings>                <app-budget *ngSwitchCase="\'budget\'"></app-budget>                <app-ai *ngSwitchCase="\'ai\'"></app-ai>                <app-home *ngSwitchDefault></app-home>            </ng-container>        </main>    </div>    <app-footer></app-footer>    <app-toast></app-toast></div></div>'
+        var COMPONENT_TEMPLATE = '<div><div class="expense">    <app-navbar class="hidden md:block"></app-navbar>    <div class="flex md:pt-14 pb-9 h-screen overflow-hidden">        <app-sidebar></app-sidebar>        <main class="flex-1 overflow-y-auto w-full h-full">            <ng-container [ngSwitch]="currentSection">                <app-home *ngSwitchCase="\'home\'"></app-home>                <div *ngSwitchCase="\'add\'" [class.mobile-slide-up]="isMobile">                    <app-add-expense></app-add-expense>                </div>                <app-list-expenses *ngSwitchCase="\'list\'"></app-list-expenses>                <app-calendar *ngSwitchCase="\'calendar\'"></app-calendar>                <app-settings *ngSwitchCase="\'settings\'"></app-settings>                <app-budget *ngSwitchCase="\'budget\'"></app-budget>                <app-ai *ngSwitchCase="\'ai\'"></app-ai>                <app-home *ngSwitchDefault></app-home>            </ng-container>        </main>    </div>    <app-footer></app-footer>    <app-toast></app-toast></div></div>'
     var COMPONENTS = [{'name': 'AddExpenseComponent', 'selector': 'app-add-expense'},{'name': 'AiComponent', 'selector': 'app-ai'},{'name': 'AppComponent', 'selector': 'app-root'},{'name': 'BudgetComponent', 'selector': 'app-budget'},{'name': 'CalendarComponent', 'selector': 'app-calendar'},{'name': 'CategoryDropdownComponent', 'selector': 'app-category-dropdown'},{'name': 'DownloadComponentComponent', 'selector': 'app-download-component'},{'name': 'ExpenseDetailsModalComponent', 'selector': 'app-expense-details-modal'},{'name': 'ExpenseListComponent', 'selector': 'app-expense-list'},{'name': 'ExpenseWiseComponent', 'selector': 'app-expense-wise'},{'name': 'FooterComponent', 'selector': 'app-footer'},{'name': 'FormModelComponent', 'selector': 'app-form-model'},{'name': 'GlobalLoaderComponent', 'selector': 'app-global-loader'},{'name': 'GraphsComponent', 'selector': 'app-graphs'},{'name': 'HamburgerMenuComponent', 'selector': 'app-hamburger-menu'},{'name': 'HomeComponent', 'selector': 'app-home'},{'name': 'InstallAppPopupComponentComponent', 'selector': 'app-install-app-popup-component'},{'name': 'ListExpensesComponent', 'selector': 'app-list-expenses'},{'name': 'MusicComponent', 'selector': 'app-music'},{'name': 'NavbarComponent', 'selector': 'app-navbar'},{'name': 'PieChartComponent', 'selector': 'app-pie-chart'},{'name': 'PlaylistMusicComponent', 'selector': 'app-playlist-music'},{'name': 'SearchButtonComponent', 'selector': 'app-search-button'},{'name': 'SearchMusicComponent', 'selector': 'app-search-music'},{'name': 'SettingItemComponent', 'selector': 'app-setting-item'},{'name': 'SettingsComponent', 'selector': 'app-settings'},{'name': 'SidebarComponent', 'selector': 'app-sidebar'},{'name': 'TemplatePlaygroundComponent', 'selector': 'template-playground-root'},{'name': 'ToastComponent', 'selector': 'app-toast'}];
     var DIRECTIVES = [];
     var ACTUAL_COMPONENT = {'name': 'ExpenseWiseComponent'};

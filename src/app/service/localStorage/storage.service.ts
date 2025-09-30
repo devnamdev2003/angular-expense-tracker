@@ -68,7 +68,8 @@ export class StorageService {
     app_version: "0",
     is_app_updated: true,
     is_show_heatmap: false,
-    has_music_url_access: false
+    has_music_url_access: false,
+    has_ai_access: false
   };
 
   /** Schema for budget */

@@ -15,6 +15,7 @@ import { BudgetComponent } from '../../features/budget/budget.component';
 import { AiComponent } from '../../features/ai/ai.component';
 
 import { SectionService } from '../../service/section/section.service';
+import { ScreenTypeService } from '../../service/screen-type/screen-type.service';
 
 /**
  * Root component of the application.
@@ -47,10 +48,12 @@ export class ExpenseWiseComponent {
    * Initializes route tracking, section updates, PWA update listener, and services.
    * 
    * @param sectionService Service to track current section changes
+   * @param screenTypeService Service to track the screentype is mobile, tablet, and laptop
    * @param platformId Angular platform ID to check if running in browser
    */
   constructor(
     private sectionService: SectionService,
+    private screenTypeService: ScreenTypeService,
     @Inject(PLATFORM_ID) private platformId: Object
 
   ) {
@@ -64,7 +67,7 @@ export class ExpenseWiseComponent {
    */
   ngOnInit() {
     if (isPlatformBrowser(this.platformId)) {
-      this.isMobile = window.innerWidth <= 768;
+      this.isMobile = this.screenTypeService.isMobile();
     }
   }
   /**
@@ -74,7 +77,7 @@ export class ExpenseWiseComponent {
   @HostListener('window:resize', ['$event'])
   onResize(event: any) {
     if (isPlatformBrowser(this.platformId)) {
-      this.isMobile = event.target.innerWidth <= 768;
+      this.isMobile = this.screenTypeService.isMobile();
     }
   }
 }

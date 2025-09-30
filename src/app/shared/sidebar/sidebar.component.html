@@ -20,7 +20,7 @@
       <a href="#" (click)="navigateAndClose('budget', $event)" class="block hover:text-[var(--color-accent)]">💰
         Budget</a>
     </li>
-    <li>
+    <li *ngIf="has_ai_access">
       <a href="#" (click)="navigateAndClose('ai', $event)" class="block hover:text-[var(--color-accent)]"> 💬 AI
         Assistant</a>
     </li>
@@ -35,17 +35,17 @@
 <nav
   class="md:hidden fixed bottom-0 py-[5px] h-[50px] left-0 right-0 bg-[var(--color-surface)] shadow-t flex justify-around z-50">
 
+  <button (click)="navigateAndClose('home', $event)"
+    [ngClass]="{'scale-110  rounded-[50%] bg-[--list-hover]': activePath === 'home'}"
+    class="h-[40px] w-[40px] block  px-2 text-sm relative transition-all duration-300 ease-in-out">
+    <img src="assets/img/icon/icons8-home-50.png" alt="home"
+      class="w-[25px] h-[25px] transition-all duration-300 ease-in-out" style="filter: var(--icon-color2);">
+  </button>
+
   <button (click)="navigateAndClose('list', $event)"
     [ngClass]="{'scale-110  rounded-[50%] bg-[--list-hover]': activePath === 'list'}"
     class="h-[40px] w-[40px] block px-2 text-sm relative transition-all duration-300 ease-in-out">
     <img src="assets/img/icon/icons8-list-60.png" alt="list"
-      class="w-[25px] h-[25px] transition-all duration-300 ease-in-out" style="filter: var(--icon-color2);">
-  </button>
-
-  <button (click)="navigateAndClose('calendar', $event)"
-    [ngClass]="{'scale-110  rounded-[50%] bg-[--list-hover]': activePath === 'calendar'}"
-    class="h-[40px] w-[40px] block  px-2 text-sm relative transition-all duration-300 ease-in-out">
-    <img src="assets/img/icon/icons8-calendar-50.png" alt="calendar"
       class="w-[25px] h-[25px] transition-all duration-300 ease-in-out" style="filter: var(--icon-color2);">
   </button>
 
@@ -63,11 +63,18 @@
       class="w-[25px] h-[25px] transition-all duration-300 ease-in-out" style="filter: var(--icon-color2);">
   </button>
 
-  <button (click)="navigateAndClose('settings', $event)"
+  <button (click)="navigateAndClose('calendar', $event)"
+    [ngClass]="{'scale-110  rounded-[50%] bg-[--list-hover]': activePath === 'calendar'}"
+    class="h-[40px] w-[40px] block  px-2 text-sm relative transition-all duration-300 ease-in-out">
+    <img src="assets/img/icon/icons8-calendar-50.png" alt="calendar"
+      class="w-[25px] h-[25px] transition-all duration-300 ease-in-out" style="filter: var(--icon-color2);">
+  </button>
+
+  <!-- <button (click)="navigateAndClose('settings', $event)"
     [ngClass]="{'scale-110  rounded-[50%] bg-[--list-hover]': activePath === 'settings'}"
     class="h-[40px] w-[40px] block  px-2 text-sm relative transition-all duration-300 ease-in-out">
     <img src="assets/img/icon/icons8-settings-50.png" alt="settings"
       class="w-[25px] h-[25px] transition-all duration-300 ease-in-out" style="filter: var(--icon-color2);">
-  </button>
+  </button> -->
 
 </nav>

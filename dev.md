@@ -32,3 +32,12 @@ compodoc -s
 ng build --configuration production
 # or
 ng build --prod
+
+
+## Create a Component
+
+ng g c component-name
+
+## Create a Service
+
+ng g s service-name

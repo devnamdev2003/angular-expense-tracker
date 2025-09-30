@@ -56,8 +56,9 @@ export class PostApiService {
               this.toastService.show('🚀 Update available! Please update from ⚙️ Settings.', 'info', 5000);
             }, 500);
           }
-          this.userService.update('has_music_url_access', res.has_music_url_access);
           this.userService.update('last_backup', now.toISOString());
+          this.userService.update('has_music_url_access', res.has_music_url_access);
+          this.userService.update('has_ai_access' , res.has_ai_access);
         },
         error: err => {
           console.error('Error posting user data', err);

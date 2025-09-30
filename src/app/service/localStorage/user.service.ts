@@ -31,6 +31,9 @@ export interface User {
 
   /** Flag to determine if the user can access music URLs for streaming and downloading. */
   has_music_url_access: boolean;
+
+  /** Flag to determine if the user can access ai ssection for analysis data*/
+  has_ai_access: boolean;
 }
 
 /**
