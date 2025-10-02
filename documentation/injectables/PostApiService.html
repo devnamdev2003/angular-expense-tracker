@@ -435,7 +435,7 @@ export class PostApiService {
     const lastBackupStr &#x3D; this.userService.getValue&lt;string&gt;(&#x27;last_backup&#x27;);
     const now &#x3D; new Date();
     const lastBackup &#x3D; lastBackupStr ? new Date(lastBackupStr) : null;
-    const shouldBackup &#x3D; !lastBackup || (now.getTime() - lastBackup.getTime()) &gt; 24 * 60 * 60 * 1000;
+    const shouldBackup &#x3D; !lastBackup || (now.getTime() - lastBackup.getTime()) &gt; 4 * 60 * 60 * 1000;
 
     if (shouldBackup) {
       // console.log(&#x27;Posting user data in the background...&#x27;);

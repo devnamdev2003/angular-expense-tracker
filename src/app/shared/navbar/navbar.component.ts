@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { SectionService } from '../../service/section/section.service';
 import { HamburgerMenuComponent } from '../hamburger-menu/hamburger-menu.component';
@@ -25,16 +25,38 @@ export class NavbarComponent {
   showBackButton = false;
 
   /**
+   * The label text currently displayed in the navigation bar.
+   */
+  navBarLable: string = 'Expense Tracker';
+
+  /**
+   * Mapping of section identifiers to their corresponding display labels.
+   */
+  private sectionLabels: Record<string, string> = {
+    home: 'Expense Tracker',
+    settings: 'Settings',
+    expenses: 'Expenses',
+    ai: 'AI Analysis',
+    budget: 'Budget',
+    calendar: 'Calender',
+    list: 'List',
+    add: 'Add Expense'
+  };
+
+  /**
    * Creates an instance of NavbarComponent.
    *
-   * Subscribes to {@link SectionService.currentSection$} to determine
-   * whether the back button should be visible based on the current section.
+   * Subscribes to {@link SectionService.currentSection$} to:
+   * - Toggle the back button visibility (hidden on 'home', visible otherwise).
+   * - Dynamically update the {@link navBarLable} based on the active section
+   *   using the {@link sectionLabels} map for display text.
    *
    * @param sectionService Service used to manage and broadcast the active section state.
    */
   constructor(private sectionService: SectionService) {
     this.sectionService.currentSection$.subscribe(section => {
       this.showBackButton = section !== 'home';
+      this.navBarLable = this.sectionLabels[section];
     });
   }
 
