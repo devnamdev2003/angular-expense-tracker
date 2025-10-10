@@ -147,8 +147,8 @@
 <li>📅 <strong>Date &amp; Time</strong></li>
 <li>🏷️ <strong>Category</strong> (chosen from a dropdown list)</li>
 <li>💳 <strong>Payment Mode</strong></li>
-<li>📍 <strong>Location</strong></li>
-<li>📝 <strong>Note</strong></li>
+<li>📍 <strong>Location</strong> (chosen from a dropdown list or manually typed)</li>
+<li>📝 <strong>Note</strong> (chosen from a dropdown list or manually typed)</li>
 <li>💡 <strong>Extra Spending</strong></li>
 </ul>
 <p>All expenses are stored in the device&#39;s <strong>LocalStorage</strong> and reflected immediately in graphs and listings.</p>
@@ -158,6 +158,12 @@
 <li>Users can view a <strong>monthly calendar</strong> to explore expenses on specific dates.</li>
 <li>Tap any date to open a <strong>popup modal</strong> displaying all expenses for that day.</li>
 <li>Navigate across <strong>months and years</strong> to view past or future expenses.</li>
+<li>Toggle the Show HeatMap switch to highlight each day based on spending intensity.<ul>
+<li>Days are color-coded (e.g. No expense, &lt; ₹300, ₹300–₹1000, &gt; ₹1000) for quick insights.</li>
+<li>A legend below the calendar explains each color category.</li>
+<li>A summary table displays color, days count, and total amount for each category.</li>
+</ul>
+</li>
 </ul>
 <hr>
 <h3>4. <strong>List View</strong></h3>
@@ -199,7 +205,7 @@
 <p>Provides customization and utility options for better personalization:</p>
 <ul>
 <li>🎨 <strong>Theme Mode Toggle</strong> (Dark / Light)</li>
-<li>⬇️ <strong>Download Data</strong> (export expenses data in pdf, json, excel formats)</li>
+<li>⬇️ <strong>Download Data</strong> (export expenses data in pdf, json, excel formats. between the selected date range)</li>
 <li>📤 <strong>Import Data</strong> (upload expense data)</li>
 <li>➕ <strong>Add Category</strong> (custom categories for better organization)</li>
 <li>❌ <strong>Delete Category</strong> (remove unused or incorrect categories)</li>

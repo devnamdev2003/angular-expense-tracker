@@ -19,7 +19,7 @@ export const environment = {
    * API key for accessing the Gemini AI API.
    * Replace or secure this key before deploying to production.
    */
-  geminiApiKey: 'AIzaSyBkBmHCsVna6d8bPYjQQhbpdymn7_Nvm2w',
+  geminiApiKey: 'AIzaSyDTDiOZvUYymqHU11EqbnCzk66mexWt2y4',
 
   /**
    * Current environment type.
@@ -32,8 +32,9 @@ export const environment = {
   /**
    * Application version.
    * This should be updated with each release to track application versions.
+   * format: y.m.d
    */
-  applicationVersion: '25.9.21', // Current application version
+  applicationVersion: '25.10.11', // Current application version
 
   /**
    * The production (live) API base URL.

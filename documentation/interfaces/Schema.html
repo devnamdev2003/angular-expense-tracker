@@ -248,19 +248,15 @@ export class StorageService {
   /** Schema for user */
   private readonly userSchema: Schema &#x3D; {
     id: &quot;&quot;,
-    backup_frequency: &quot;&quot;,
-    email: &quot;&quot;,
-    is_active: &quot;&quot;,
-    is_backup: &quot;&quot;,
+    user_name: &quot;&quot;,
     last_backup: &quot;&quot;,
-    name: &quot;&quot;,
-    notifications: &quot;&quot;,
-    user_password: &quot;&quot;,
     theme_mode: &quot;dark&quot;,
     currency: &quot;₹&quot;,
     app_version: &quot;0&quot;,
     is_app_updated: true,
-    is_show_heatmap: false
+    is_show_heatmap: false,
+    has_music_url_access: false,
+    has_ai_access: false
   };
 
   /** Schema for budget */

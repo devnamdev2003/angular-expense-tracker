@@ -227,6 +227,9 @@ customElements.define('compodoc-menu', class extends HTMLElement {
                                     <a href="injectables/SaavnService.html" data-type="entity-link" >SaavnService</a>
                                 </li>
                                 <li class="link">
+                                    <a href="injectables/ScreenTypeService.html" data-type="entity-link" >ScreenTypeService</a>
+                                </li>
+                                <li class="link">
                                     <a href="injectables/SectionService.html" data-type="entity-link" >SectionService</a>
                                 </li>
                                 <li class="link">
@@ -276,6 +279,9 @@ customElements.define('compodoc-menu', class extends HTMLElement {
                                 <a href="interfaces/Expense.html" data-type="entity-link" >Expense</a>
                             </li>
                             <li class="link">
+                                <a href="interfaces/HeatmapSummary.html" data-type="entity-link" >HeatmapSummary</a>
+                            </li>
+                            <li class="link">
                                 <a href="interfaces/Schema.html" data-type="entity-link" >Schema</a>
                             </li>
                             <li class="link">
@@ -312,6 +318,9 @@ customElements.define('compodoc-menu', class extends HTMLElement {
                             <span class="icon ion-ios-arrow-down"></span>
                         </div>
                         <ul class="links collapse " ${ isNormalMode ? 'id="miscellaneous-links"' : 'id="xs-miscellaneous-links"' }>
+                            <li class="link">
+                                <a href="miscellaneous/typealiases.html" data-type="entity-link">Type aliases</a>
+                            </li>
                             <li class="link">
                                 <a href="miscellaneous/variables.html" data-type="entity-link">Variables</a>
                             </li>

@@ -2,7 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { ExpenseService, Expense } from '../../service/localStorage/expense.service';
 import { CommonModule } from '@angular/common';
 import { UserService } from '../../service/localStorage/user.service';
-import { FormsModule } from '@angular/forms';
+import { HeatmapSummary } from '../../models/heatMap-summary.service';
+import { FormModelComponent } from '../../component/form-model/form-model.component';
+import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 
 /**
  * Component that renders a monthly calendar view with expense tracking.
@@ -15,9 +17,9 @@ import { FormsModule } from '@angular/forms';
  */
 @Component({
   selector: 'app-calendar',
-  imports: [CommonModule, FormsModule],
+  imports: [CommonModule, FormModelComponent, FormsModule, ReactiveFormsModule],
   templateUrl: './calendar.component.html',
-  styleUrl: './calendar.component.css'
+  styleUrls: ['./calendar.component.css']
 })
 export class CalendarComponent implements OnInit {
 
@@ -54,23 +56,54 @@ export class CalendarComponent implements OnInit {
   /** Whether to show heatmap colors on the calendar */
   isShowHeatmap: boolean = false;
 
+  /** Flag to determine if the user can access music URLs for streaming and downloading. */
+  has_music_url_access: boolean = false;
+
+  /** 
+   * Stores the generated heatmap summary data for the current month.
+   * Each item contains the color category, total days, and total amount
+   * used to render the heatmap legend and summary table.
+   */
+  heatmapSummary: HeatmapSummary[] = [];
+
+  /** Controls the visibility of the Edit Heatmap modal */
+  showEditHeatMapModel = false;
+
+  /** Form group for handling Heatmap edit form inputs and validations */
+  heatMapForm!: FormGroup;
+
+  /** Tracks whether the Rose color modal is currently open */
+  isRoseModelOpen: boolean = false;
+
+  /** Tracks whether the Emerald color modal is currently open */
+  isEmeraldModelOpen: boolean = false;
+
+  /** Tracks whether the Amber color modal is currently open */
+  isAmberModelOpen: boolean = false;
+
   /**
    * Creates an instance of CalendarComponent.
    *
    * @param expenseService Service to retrieve expenses from local storage.
    * @param userService Service to retrieve user settings such as currency.
+   * @param fb Angular `FormBuilder` to build the reactive form.
    */
   constructor(
     private expenseService: ExpenseService,
-    public userService: UserService
+    public userService: UserService,
+    private fb: FormBuilder,
   ) {
     this.currency = this.userService.getValue<string>('currency');
     this.isShowHeatmap = this.userService.getValue<boolean>('is_show_heatmap') ?? false;
+    this.has_music_url_access = this.userService.getValue<boolean>('has_music_url_access') ?? false;
   }
 
   /** Angular lifecycle hook that initializes the calendar view */
   ngOnInit(): void {
     this.renderCalendar(this.currentYear, this.currentMonth);
+    this.heatMapForm = this.fb.group({
+      amount: [0, [Validators.required]]
+    });
   }
 
   /**
@@ -98,6 +131,7 @@ export class CalendarComponent implements OnInit {
    */
   renderCalendar(year: number, month: number): void {
     this.calendarDays = [];
+    this.heatmapSummary = [];
     const today = new Date();
     const firstDay = new Date(year, month, 1).getDay();
     const daysInMonth = new Date(year, month + 1, 0).getDate();
@@ -118,7 +152,15 @@ export class CalendarComponent implements OnInit {
     for (let day = 1; day <= daysInMonth; day++) {
       const dateStr = `${year}-${monthStr}-${String(day).padStart(2, '0')}`;
       const isToday = day === today.getDate() && month === today.getMonth() && year === today.getFullYear();
-      const heat = this.getHeatClass(this.getTotalAmount(dateStr));
+      const cellDate = new Date(`${year}-${monthStr}-${String(day).padStart(2, '0')}`);
+
+      let heat = '';
+      if (cellDate <= today) {
+        heat = this.getHeatClass(this.getTotalAmount(dateStr));
+      }
+      else {
+        heat = 'bg-[var(--color-surface)]';
+      }
       this.calendarDays.push({
         label: day,
         date: dateStr,
@@ -179,15 +221,28 @@ export class CalendarComponent implements OnInit {
   }
 
   /**
-   * Gets the heatmap class for a given expense amount.
+   * Gets the heatmap class for a given expense amount and update the heatmapSummary
+ .
    * @param amount The total expense amount for the day.
    * @returns The corresponding heatmap class.
    */
   private getHeatClass(amount: number): string {
     if (this.isShowHeatmap === false) return 'bg-[var(--color-surface)]';
-    if (amount === 0) return 'bg-[var(--color-gray)]';
-    if (amount < 300) return 'bg-[var(--color-emerald)]';
-    if (amount < 1000) return 'bg-[var(--color-amber)]';
+    const rose_amount = this.userService.getValue<number>('rose_amount') ?? 1000;
+    const emerald_amount = this.userService.getValue<number>('emerald_amount') ?? 300;
+    if (amount === 0) {
+      this.addOrUpdateHeatMapSummary('bg-[var(--color-gray)]', amount, 'No expenses')
+      return 'bg-[var(--color-gray)]';
+    }
+    if (amount < emerald_amount) {
+      this.addOrUpdateHeatMapSummary('bg-[var(--color-emerald)]', amount, `< ${emerald_amount}`)
+      return 'bg-[var(--color-emerald)]';
+    }
+    if (amount < rose_amount) {
+      this.addOrUpdateHeatMapSummary('bg-[var(--color-amber)]', amount, `${emerald_amount} - ${rose_amount}`)
+      return 'bg-[var(--color-amber)]';
+    }
+    this.addOrUpdateHeatMapSummary('bg-[var(--color-rose)]', amount, `> ${rose_amount}`)
     return 'bg-[var(--color-rose)]';
   }
 
@@ -207,5 +262,89 @@ export class CalendarComponent implements OnInit {
     this.isShowHeatmap = !this.isShowHeatmap;
     this.userService.update('is_show_heatmap', this.isShowHeatmap);
     this.renderCalendar(this.currentYear, this.currentMonth);
+  }
+
+  /**
+   * Adds a new entry to the heatmap summary or updates an existing one.
+   *
+   * @param color - The color representing the heat intensity for the day.
+   * @param amount - The expense amount to be added for that color.
+   *
+   * If an entry with the given color already exists in `heatmapSummary`, 
+   * it increments the `days` count by 1 and adds the `amount` to the existing total.
+   * Otherwise, it creates a new entry with `days` initialized to 1 and `amount` as provided.
+   */
+  addOrUpdateHeatMapSummary(color: string, amount: number, message: string) {
+    const existing = this.heatmapSummary.find(item => item.color === color);
+    if (existing) {
+      existing.days += 1;
+      existing.amount += amount;
+    } else {
+      this.heatmapSummary.push({
+        color: color,
+        days: 1,
+        amount: amount,
+        text: message
+      });
+    }
+    this.heatmapSummary.sort((a, b) => b.amount - a.amount);
+  }
+
+  /**
+    * Closes the Edit Heatmap modal and resets all color-specific modal states.
+    */
+  closeEditHeatMapModel(): void {
+    this.showEditHeatMapModel = false;
+    this.isEmeraldModelOpen = false;
+    this.isRoseModelOpen = false;
+    this.isAmberModelOpen = false;
+  }
+
+  /**
+   * Opens the Edit Heatmap modal for a specific color.
+   * Resets the form with the corresponding saved amount value.
+   *
+   * @param color - The background color class of the heatmap block ('bg-[var(--color-rose)]', 'bg-[var(--color-emerald)]', 'bg-[var(--color-amber)]')
+   */
+  openEditHeapMapModel(color: string): void {
+    if (color === 'bg-[var(--color-rose)]') {
+      this.heatMapForm.reset({
+        amount: this.userService.getValue<number>('rose_amount') ?? 1000,
+      });
+      this.isRoseModelOpen = true;
+    }
+    if (color === 'bg-[var(--color-emerald)]') {
+      this.heatMapForm.reset({
+        amount: this.userService.getValue<number>('emerald_amount') ?? 300,
+      });
+      this.isEmeraldModelOpen = true;
+    }
+    if (color === 'bg-[var(--color-amber)]') {
+      this.heatMapForm.reset({
+        amount: this.userService.getValue<number>('emerald_amount') ?? 300,
+      });
+      this.isAmberModelOpen = true;
+    }
+    this.showEditHeatMapModel = !this.showEditHeatMapModel;
+  }
+
+  /**
+   * Validates and updates the Heatmap amount for the currently open color modal.
+   * Persists the new amount to the user service and refreshes the calendar view.
+   */
+  updateHeatMap(): void {
+    if (this.heatMapForm.invalid) {
+      this.heatMapForm.markAllAsTouched();
+      return;
+    }
+    const { amount } = this.heatMapForm.value;
+    if (this.isEmeraldModelOpen || this.isAmberModelOpen) {
+      this.userService.update('emerald_amount', amount);
+    }
+    if (this.isRoseModelOpen) {
+      this.userService.update('rose_amount', amount);
+    }
+    this.renderCalendar(this.currentYear, this.currentMonth);
+    this.closeEditHeatMapModel();
   }
 }

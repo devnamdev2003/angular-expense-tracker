@@ -18,16 +18,14 @@
             <button
                 class="relative z-10 w-1/2 flex-1 text-center text-sm font-medium py-2 rounded-full transition-colors duration-300"
                 [class.text-[var(--color-text)]]="viewType !== 'day'"
-                [class.text-[var(--color-white)]]="viewType === 'day'"
-                (click)="setViewType('day')">
+                [class.text-[var(--color-white)]]="viewType === 'day'" (click)="setViewType('day')">
                 {{ "day" | titlecase }}
             </button>
 
             <button
                 class="relative z-10 w-1/2 flex-1 text-center text-sm font-medium py-2 rounded-full transition-colors duration-300"
                 [class.text-[var(--color-text)]]="viewType !== 'year'"
-                [class.text-[var(--color-white)]]="viewType === 'year'"
-                (click)="setViewType('year')">
+                [class.text-[var(--color-white)]]="viewType === 'year'" (click)="setViewType('year')">
                 {{ "year" | titlecase }}
             </button>
         </div>

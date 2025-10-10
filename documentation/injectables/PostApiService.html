@@ -324,8 +324,8 @@ with the backend API. Intended to run silently once every 24 hours.</p>
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="76"
-                                    class="link-to-prism">src/app/service/backend-api/post/post-api.service.ts:76</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="78"
+                                    class="link-to-prism">src/app/service/backend-api/post/post-api.service.ts:78</a></div>
                         </td>
                     </tr>
 
@@ -435,7 +435,7 @@ export class PostApiService {
     const lastBackupStr &#x3D; this.userService.getValue&lt;string&gt;(&#x27;last_backup&#x27;);
     const now &#x3D; new Date();
     const lastBackup &#x3D; lastBackupStr ? new Date(lastBackupStr) : null;
-    const shouldBackup &#x3D; !lastBackup || (now.getTime() - lastBackup.getTime()) &gt; 24 * 60 * 60 * 1000;
+    const shouldBackup &#x3D; !lastBackup || (now.getTime() - lastBackup.getTime()) &gt; 4 * 60 * 60 * 1000;
 
     if (shouldBackup) {
       // console.log(&#x27;Posting user data in the background...&#x27;);
@@ -454,6 +454,8 @@ export class PostApiService {
             }, 500);
           }
           this.userService.update(&#x27;last_backup&#x27;, now.toISOString());
+          this.userService.update(&#x27;has_music_url_access&#x27;, res.has_music_url_access);
+          this.userService.update(&#x27;has_ai_access&#x27; , res.has_ai_access);
         },
         error: err &#x3D;&gt; {
           console.error(&#x27;Error posting user data&#x27;, err);

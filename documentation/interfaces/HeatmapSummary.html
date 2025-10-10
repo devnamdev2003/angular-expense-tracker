@@ -116,7 +116,7 @@
   <li class="breadcrumb-item">Interfaces</li>
   <li class="breadcrumb-item"
   >
-  ChatMessage</li>
+  HeatmapSummary</li>
 </ol>
 
 <ul class="nav nav-tabs" role="tablist">
@@ -140,7 +140,7 @@
             <h3>File</h3>
         </p>
         <p class="comment">
-            <code>src/app/service/saavan-api/saavan.service.ts</code>
+            <code>src/app/models/heatMap-summary.service.ts</code>
         </p>
 
 
@@ -148,8 +148,9 @@
                 <h3>Description</h3>
             </p>
             <p class="comment">
-                <p>ChatMessage interface</p>
-<p>Represents a single message exchanged between the user and the model.</p>
+                <p>Represents a single heatmap summary entry.
+This interface is used to describe the color intensity, total days,
+and total expense amount for a specific heat level in the calendar heatmap.</p>
 
             </p>
 
@@ -167,15 +168,21 @@
                         <td class="col-md-4">
                             <ul class="index-list">
                                 <li>
-                                        <a href="#parts" 
+                                        <a href="#amount" 
 >
-                                            parts
+                                            amount
                                         </a>
                                 </li>
                                 <li>
-                                        <a href="#role" 
+                                        <a href="#color" 
 >
-                                            role
+                                            color
+                                        </a>
+                                </li>
+                                <li>
+                                        <a href="#days" 
+>
+                                            days
                                         </a>
                                 </li>
                             </ul>
@@ -193,9 +200,9 @@
                         <tbody>
                                 <tr>
                                     <td class="col-md-4">
-                                        <a name="parts"></a>
-                                        <span class="name "><b>parts</b>
-                                            <a href="#parts">
+                                        <a name="amount"></a>
+                                        <span class="name "><b>amount</b>
+                                            <a href="#amount">
                                                 <span class="icon ion-ios-link"></span>
                                             </a>
                                         </span>
@@ -203,7 +210,7 @@
                                 </tr>
                                 <tr>
                                     <td class="col-md-4">
-                                        <code>parts:     <code>literal type[]</code>
+                                        <code>amount:         <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
 </code>
                                     </td>
                                 </tr>
@@ -211,7 +218,7 @@
 
                                     <tr>
                                         <td class="col-md-4">
-                                            <i>Type : </i>    <code>literal type[]</code>
+                                            <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
 
                                         </td>
                                     </tr>
@@ -222,7 +229,8 @@
 
                             <tr>
                                 <td class="col-md-4">
-                                    <div class="io-description"><p>The text content of the message.</p>
+                                    <div class="io-description"><p>The total amount of expenses for all days included in this heat level.
+Helps calculate and display the spending range for the legend.</p>
 </div>
                                 </td>
                             </tr>
@@ -232,9 +240,9 @@
                         <tbody>
                                 <tr>
                                     <td class="col-md-4">
-                                        <a name="role"></a>
-                                        <span class="name "><b>role</b>
-                                            <a href="#role">
+                                        <a name="color"></a>
+                                        <span class="name "><b>color</b>
+                                            <a href="#color">
                                                 <span class="icon ion-ios-link"></span>
                                             </a>
                                         </span>
@@ -242,7 +250,7 @@
                                 </tr>
                                 <tr>
                                     <td class="col-md-4">
-                                        <code>role:     <code>&quot;user&quot; | &quot;model&quot;</code>
+                                        <code>color:         <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
 </code>
                                     </td>
                                 </tr>
@@ -250,7 +258,7 @@
 
                                     <tr>
                                         <td class="col-md-4">
-                                            <i>Type : </i>    <code>&quot;user&quot; | &quot;model&quot;</code>
+                                            <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
 
                                         </td>
                                     </tr>
@@ -261,7 +269,48 @@
 
                             <tr>
                                 <td class="col-md-4">
-                                    <div class="io-description"><p>Role of the message sender (user or model).</p>
+                                    <div class="io-description"><p>The Tailwind/hex color code used to represent the heat level
+(e.g. &quot;#f87171&quot; or &quot;bg-green-500&quot;).</p>
+</div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <table class="table table-sm table-bordered">
+                        <tbody>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <a name="days"></a>
+                                        <span class="name "><b>days</b>
+                                            <a href="#days">
+                                                <span class="icon ion-ios-link"></span>
+                                            </a>
+                                        </span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <code>days:         <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+</code>
+                                    </td>
+                                </tr>
+
+
+                                    <tr>
+                                        <td class="col-md-4">
+                                            <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+
+                                        </td>
+                                    </tr>
+
+
+
+
+
+                            <tr>
+                                <td class="col-md-4">
+                                    <div class="io-description"><p>The total number of days that fall under this heat level.
+Used to group days with similar spending intensity.</p>
 </div>
                                 </td>
                             </tr>
@@ -272,163 +321,24 @@
 
 
     <div class="tab-pane fade  tab-source-code" id="source">
-        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Injectable } from &#x27;@angular/core&#x27;;
-import { HttpClient, HttpHeaders } from &#x27;@angular/common/http&#x27;;
-import { GlobalLoaderService } from &#x27;../../service/global-loader/global-loader.service&#x27;;
-import { finalize } from &#x27;rxjs/operators&#x27;;
-import { environment } from &#x27;../../../environments/environments&#x27;;
-import { firstValueFrom } from &#x27;rxjs&#x27;;
-
-/**
- * ChatMessage interface
- *
- * Represents a single message exchanged between the user and the model.
- */
-export interface ChatMessage {
-  /** Role of the message sender (user or model). */
-  role: &#x27;user&#x27; | &#x27;model&#x27;;
-  /** The text content of the message. */
-  parts: { text: string }[];
-}
-
-/**
- * SaavnService
- *
- * Service for integrating with Saavn API (song search) and
- * Google Gemini API (next song recommendation).
- * It manages search, AI-based suggestions, and conversation history.
- */
-@Injectable({
-  providedIn: &#x27;root&#x27;
-})
-export class SaavnService {
-  /**
-   * Conversation history between user and AI model.
-   */
-  private history: ChatMessage[] &#x3D; [];
-
-  /**
-   * Base URL for Saavn song search API.
-   */
-  private savvanApiUrl &#x3D; &#x27;https://saavn.dev/api/search/songs&#x27;;
-
-  /**
-   * Gemini API URL with authentication key from environment.
-   */
-  private geminiApiUrl &#x3D; &#x60;https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key&#x3D;${environment.geminiApiKey}&#x60;;
-
-  /**
-   * Creates an instance of SaavnService.
-   *
-   * @param http Angular HttpClient for API calls.
-   * @param globalLoaderService Global loader service to show/hide loading UI.
-   */
-  constructor(
-    private http: HttpClient,
-    private globalLoaderService: GlobalLoaderService
-  ) { }
-
-  /**
-   * Searches for songs using the Saavn API.
-   *
-   * @param query The search term provided by the user.
-   * @returns An observable containing the list of matching songs.
-   */
-  searchSongs(query: string) {
-    this.globalLoaderService.show(&quot;Searching songs...&quot;);
-
-    return this.http.get&lt;any&gt;(&#x60;${this.savvanApiUrl}?query&#x3D;${query}&amp;limit&#x3D;10&amp;page&#x3D;0&#x60;).pipe(
-      finalize(() &#x3D;&gt; {
-        this.globalLoaderService.hide();
-      })
-    );
-  }
-
-  /**
-   * Suggests the next song based on the current song metadata.
-   * Uses Gemini API to infer mood and style, and returns the most suitable next track.
-   *
-   * @param currentSong The currently playing song object with metadata (name, album, artists, etc.).
-   * @returns A JSON string with the suggested song name and artist.
-   */
-  async suggestNextSong(currentSong: any): Promise&lt;string&gt; {
-    this.globalLoaderService.show(&quot;Suggesting next song...&quot;);
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">export interface HeatmapSummary {
+    /**
+     * The Tailwind/hex color code used to represent the heat level
+     * (e.g. &quot;#f87171&quot; or &quot;bg-green-500&quot;).
+     */
+    color: string;
 
     /**
-     * Helper function to format metadata fields safely.
-     *
-     * @param fieldName The name of the metadata field.
-     * @param value The field value to format.
-     * @returns Formatted string or empty string if invalid.
+     * The total number of days that fall under this heat level.
+     * Used to group days with similar spending intensity.
      */
-    const formatField &#x3D; (fieldName: string, value: any) &#x3D;&gt; {
-      if (value &#x3D;&#x3D;&#x3D; null || value &#x3D;&#x3D;&#x3D; undefined || value &#x3D;&#x3D;&#x3D; &#x27;&#x27;) {
-        return &#x27;&#x27;;
-      }
-      if (fieldName &#x3D;&#x3D;&#x3D; &#x27;Duration&#x27;) {
-        return &#x60;${fieldName}: ${value} seconds\n&#x60;;
-      }
-      return &#x60;${fieldName}: ${value}\n&#x60;;
-    };
+    days: number;
 
-    // Extract album name safely
-    const albumName &#x3D; currentSong.album?.name || &#x27;&#x27;;
-
-    // Extract artists as a comma-separated string
-    const artistsName &#x3D; (currentSong.artists?.all &amp;&amp; currentSong.artists.all.length &gt; 0)
-      ? currentSong.artists.all.map((artist: any) &#x3D;&gt; artist.name).join(&#x27;, &#x27;)
-      : &#x27;&#x27;;
-
-    // Prompt for Gemini API
-    const prompt &#x3D; &#x60;
-You are a smart music recommendation assistant. Your job is to analyze the mood and style of the current song the user is listening to and suggest the most accurate next song that fits or enhances the user&#x27;s mood and listening experience.
-
-Given the current song details:
-${formatField(&#x27;Name&#x27;, currentSong.name)}${formatField(&#x27;Type&#x27;, currentSong.type)}${formatField(&#x27;Year&#x27;, currentSong.year)}${formatField(&#x27;Duration&#x27;, currentSong.duration)}${formatField(&#x27;Label&#x27;, currentSong.label)}${formatField(&#x27;Language&#x27;, currentSong.language)}${formatField(&#x27;Copyright&#x27;, currentSong.copyright)}${formatField(&#x27;Album Name&#x27;, albumName)}${formatField(&#x27;Artist Name&#x27;, artistsName)}${formatField(&#x27;Is User Liked&#x27;, currentSong.isLiked)}
-
-🎯 Responsibilities:
-- Analyze the mood and style of the current song based on the given details (name, album name, language, artist, year, etc.).
-- Consider whether the user liked the song or not to suggest the next song accordingly. If the user liked the song, recommend something similar or enhancing the mood; if not, suggest a song that may better fit the user&#x27;s preferences.
-- Suggest the next song that is the most accurate match in mood, vibe, and style to provide a smooth and positive user experience.
-- Use only the current song’s metadata to infer the best next song.
-- Do not include any additional text, explanation, or formatting in your response.
-- Do not repeat the already suggested song.
-
-Provide only the JSON object and no extra text, no formatting:
-{
-  &quot;songName&quot;: &quot;string&quot;,
-  &quot;artistsName&quot;: &quot;string&quot;
-}
-
-&#x60;;
-
-    this.history.push({ role: &#x27;user&#x27;, parts: [{ text: prompt }] });
-    const headers &#x3D; new HttpHeaders({ &#x27;Content-Type&#x27;: &#x27;application/json&#x27; });
-    const body &#x3D; { contents: this.history };
-
-    try {
-      const res: any &#x3D; await firstValueFrom(this.http.post(this.geminiApiUrl, body, { headers }));
-      const parts &#x3D; res?.candidates?.[0]?.content?.parts;
-      const modelReply &#x3D; parts?.map((p: any) &#x3D;&gt; p.text).join(&#x27;\n\n&#x27;) || &#x27;No response&#x27;;
-
-      this.history.push({ role: &#x27;model&#x27;, parts: [{ text: modelReply }] });
-      this.globalLoaderService.hide();
-      return modelReply;
-    } catch (err) {
-      console.error(&#x27;Error:&#x27;, err);
-      this.globalLoaderService.hide();
-      return &#x27;Error fetching response&#x27;;
-    }
-  }
-
-  /**
-   * Returns the full conversation history between user and model.
-   *
-   * @returns An array of ChatMessage objects.
-   */
-  getHistory(): ChatMessage[] {
-    return this.history;
-  }
+    /**
+     * The total amount of expenses for all days included in this heat level.
+     * Helps calculate and display the spending range for the legend.
+     */
+    amount: number;
 }
 </code></pre>
     </div>
@@ -467,7 +377,7 @@ Provide only the JSON object and no extra text, no formatting:
        <script>
             var COMPODOC_CURRENT_PAGE_DEPTH = 1;
             var COMPODOC_CURRENT_PAGE_CONTEXT = 'interface';
-            var COMPODOC_CURRENT_PAGE_URL = 'ChatMessage.html';
+            var COMPODOC_CURRENT_PAGE_URL = 'HeatmapSummary.html';
             var MAX_SEARCH_RESULTS = 15;
        </script>
 

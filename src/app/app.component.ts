@@ -27,16 +27,6 @@ import { ToastService } from './service/toast/toast.service';
 })
 export class AppComponent {
   /**
-   * Boolean indicating whether the current route is the root/expenses page.
-   */
-  isExpenseRoute = false;
-
-  /**
-   * Boolean indicating whether the current route is the music page.
-   */
-  isMusicRoute = false;
-
-  /**
    *  PWA installation prompt event
    */
   deferredPrompt: any;

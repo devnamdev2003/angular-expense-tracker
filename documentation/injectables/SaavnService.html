@@ -305,8 +305,8 @@ It manages search, AI-based suggestions, and conversation history.</p>
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="154"
-                                    class="link-to-prism">src/app/service/saavan-api/saavan.service.ts:154</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="155"
+                                    class="link-to-prism">src/app/service/saavan-api/saavan.service.ts:155</a></div>
                         </td>
                     </tr>
 
@@ -745,6 +745,7 @@ Provide only the JSON object and no extra text, no formatting:
       return modelReply;
     } catch (err) {
       console.error(&#x27;Error:&#x27;, err);
+      this.globalLoaderService.hide();
       return &#x27;Error fetching response&#x27;;
     }
   }

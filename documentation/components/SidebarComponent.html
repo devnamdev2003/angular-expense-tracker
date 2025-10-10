@@ -230,6 +230,9 @@
                             <li>
                                 <a href="#activePath" >activePath</a>
                             </li>
+                            <li>
+                                <a href="#has_ai_access" >has_ai_access</a>
+                            </li>
                         </ul>
                     </td>
                 </tr>
@@ -263,12 +266,12 @@
             <tbody>
                 <tr>
                     <td class="col-md-4">
-<code>constructor(sectionService: <a href="../injectables/SectionService.html" target="_self">SectionService</a>)</code>
+<code>constructor(sectionService: <a href="../injectables/SectionService.html" target="_self">SectionService</a>, userService: <a href="../injectables/UserService.html" target="_self">UserService</a>)</code>
                     </td>
                 </tr>
                         <tr>
                             <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="25" class="link-to-prism">src/app/shared/sidebar/sidebar.component.ts:25</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="29" class="link-to-prism">src/app/shared/sidebar/sidebar.component.ts:29</a></div>
                             </td>
                         </tr>
 
@@ -303,6 +306,22 @@ the currently selected section and update the UI accordingly.</p>
                                                     
                                                         <td>
                                                                 <p>Service for managing and broadcasting the active section state.</p>
+
+                                                        </td>
+                                                </tr>
+                                                <tr>
+                                                        <td>userService</td>
+                                                  
+                                                        <td>
+                                                                        <code><a href="../injectables/UserService.html" target="_self" >UserService</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                        <td>
+                                                                <p>Service for managing user preferences</p>
 
                                                         </td>
                                                 </tr>
@@ -344,8 +363,8 @@ the currently selected section and update the UI accordingly.</p>
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="48"
-                                    class="link-to-prism">src/app/shared/sidebar/sidebar.component.ts:48</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="54"
+                                    class="link-to-prism">src/app/shared/sidebar/sidebar.component.ts:54</a></div>
                         </td>
                     </tr>
 
@@ -445,7 +464,7 @@ and preventing the default anchor navigation behavior.</p>
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="25" class="link-to-prism">src/app/shared/sidebar/sidebar.component.ts:25</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="26" class="link-to-prism">src/app/shared/sidebar/sidebar.component.ts:26</a></div>
                         </td>
                     </tr>
 
@@ -453,6 +472,43 @@ and preventing the default anchor navigation behavior.</p>
                 <td class="col-md-4">
                     <div class="io-description"><p>Holds the name of the currently active navigation path/section.
 Used to apply active styling to the sidebar item.</p>
+</div>
+                </td>
+            </tr>
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="has_ai_access"></a>
+                    <span class="name">
+                        <span ><b>has_ai_access</b></span>
+                        <a href="#has_ai_access"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>false</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="29" class="link-to-prism">src/app/shared/sidebar/sidebar.component.ts:29</a></div>
+                        </td>
+                    </tr>
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Flag to determine if the user can access ai ssection for analysis data</p>
 </div>
                 </td>
             </tr>
@@ -468,6 +524,7 @@ Used to apply active styling to the sidebar item.</p>
         <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { CommonModule } from &#x27;@angular/common&#x27;;
 import { Component } from &#x27;@angular/core&#x27;;
 import { SectionService } from &#x27;../../service/section/section.service&#x27;;
+import { UserService } from &#x27;../../service/localStorage/user.service&#x27;;
 
 /**
  * Sidebar navigation component.
@@ -491,6 +548,9 @@ export class SidebarComponent {
    */
   activePath: string &#x3D; &#x27;&#x27;;
 
+  /** Flag to determine if the user can access ai ssection for analysis data*/
+  has_ai_access: boolean &#x3D; false;
+
   /**
    * Creates an instance of SidebarComponent.
    *
@@ -498,11 +558,13 @@ export class SidebarComponent {
    * the currently selected section and update the UI accordingly.
    *
    * @param sectionService Service for managing and broadcasting the active section state.
+   * @param userService Service for managing user preferences 
    */
-  constructor(private sectionService: SectionService) {
+  constructor(private sectionService: SectionService, private userService: UserService) {
     this.sectionService.currentSection$.subscribe(section &#x3D;&gt; {
       this.activePath &#x3D; section;
     });
+    this.has_ai_access &#x3D; this.userService.getValue&lt;boolean&gt;(&#x27;has_ai_access&#x27;) ?? false;
   }
 
   /**
@@ -543,7 +605,7 @@ export class SidebarComponent {
       &lt;a href&#x3D;&quot;#&quot; (click)&#x3D;&quot;navigateAndClose(&#x27;budget&#x27;, $event)&quot; class&#x3D;&quot;block hover:text-[var(--color-accent)]&quot;&gt;💰
         Budget&lt;/a&gt;
     &lt;/li&gt;
-    &lt;li&gt;
+    &lt;li *ngIf&#x3D;&quot;has_ai_access&quot;&gt;
       &lt;a href&#x3D;&quot;#&quot; (click)&#x3D;&quot;navigateAndClose(&#x27;ai&#x27;, $event)&quot; class&#x3D;&quot;block hover:text-[var(--color-accent)]&quot;&gt; 💬 AI
         Assistant&lt;/a&gt;
     &lt;/li&gt;
@@ -628,7 +690,7 @@ export class SidebarComponent {
 <script src="../js/libs/htmlparser.js"></script>
 <script src="../js/libs/deep-iterator.js"></script>
 <script>
-        var COMPONENT_TEMPLATE = '<div><!-- Desktop Sidebar --><aside #sidebarRef id="sidebar"  class="fixed md:static z-40 w-64 bg-[var(--color-surface)] shadow p-4 transition-all duration-300 ease-in-out hidden md:block h-full">  <ul class="space-y-4">    <li>      <a href="#" (click)="navigateAndClose(\'home\', $event)" class="block hover:text-[var(--color-accent)]">🏠 Home</a>    </li>    <li>      <a href="#" (click)="navigateAndClose(\'add\', $event)" class="block hover:text-[var(--color-accent)]">➕ Add        Expense</a>    </li>    <li>      <a href="#" (click)="navigateAndClose(\'list\', $event)" class="block hover:text-[var(--color-accent)]">📋 List</a>    </li>    <li>      <a href="#" (click)="navigateAndClose(\'calendar\', $event)" class="block hover:text-[var(--color-accent)]">📅        Calendar</a>    </li>    <li>      <a href="#" (click)="navigateAndClose(\'budget\', $event)" class="block hover:text-[var(--color-accent)]">💰        Budget</a>    </li>    <li>      <a href="#" (click)="navigateAndClose(\'ai\', $event)" class="block hover:text-[var(--color-accent)]"> 💬 AI        Assistant</a>    </li>    <li>      <a href="#" (click)="navigateAndClose(\'settings\', $event)" class="block hover:text-[var(--color-accent)]">⚙️        Settings</a>    </li>  </ul></aside><!-- Mobile Bottom Nav --><nav  class="md:hidden fixed bottom-0 py-[5px] h-[50px] left-0 right-0 bg-[var(--color-surface)] shadow-t flex justify-around z-50">  <button (click)="navigateAndClose(\'list\', $event)"    [ngClass]="{\'scale-110  rounded-[50%] bg-[--list-hover]\': activePath === \'list\'}"    class="h-[40px] w-[40px] block px-2 text-sm relative transition-all duration-300 ease-in-out">    <img src="assets/img/icon/icons8-list-60.png" alt="list"      class="w-[25px] h-[25px] transition-all duration-300 ease-in-out" style="filter: var(--icon-color2);">  </button>  <button (click)="navigateAndClose(\'calendar\', $event)"    [ngClass]="{\'scale-110  rounded-[50%] bg-[--list-hover]\': activePath === \'calendar\'}"    class="h-[40px] w-[40px] block  px-2 text-sm relative transition-all duration-300 ease-in-out">    <img src="assets/img/icon/icons8-calendar-50.png" alt="calendar"      class="w-[25px] h-[25px] transition-all duration-300 ease-in-out" style="filter: var(--icon-color2);">  </button>  <button (click)="navigateAndClose(\'add\', $event)"    [ngClass]="{\'scale-110  rounded-[50%] bg-[--list-hover]\': activePath === \'add\'}"    class="h-[40px] w-[40px] block  px-2 text-sm relative transition-all duration-300 ease-in-out">    <img src="assets/img/icon/icons8-add-60.png" alt="add"      class="w-[25px] h-[25px] transition-all duration-300 ease-in-out" style="filter: var(--icon-color2);">  </button>  <button (click)="navigateAndClose(\'budget\', $event)"    [ngClass]="{\'scale-110  rounded-[50%] bg-[--list-hover]\': activePath === \'budget\'}"    class="h-[40px] w-[40px] block  px-2 text-sm relative transition-all duration-300 ease-in-out">    <img src="assets/img/icon/icons8-budget-50.png" alt="budget"      class="w-[25px] h-[25px] transition-all duration-300 ease-in-out" style="filter: var(--icon-color2);">  </button>  <button (click)="navigateAndClose(\'settings\', $event)"    [ngClass]="{\'scale-110  rounded-[50%] bg-[--list-hover]\': activePath === \'settings\'}"    class="h-[40px] w-[40px] block  px-2 text-sm relative transition-all duration-300 ease-in-out">    <img src="assets/img/icon/icons8-settings-50.png" alt="settings"      class="w-[25px] h-[25px] transition-all duration-300 ease-in-out" style="filter: var(--icon-color2);">  </button></nav></div>'
+        var COMPONENT_TEMPLATE = '<div><!-- Desktop Sidebar --><aside #sidebarRef id="sidebar"  class="fixed md:static z-40 w-64 bg-[var(--color-surface)] shadow p-4 transition-all duration-300 ease-in-out hidden md:block h-full">  <ul class="space-y-4">    <li>      <a href="#" (click)="navigateAndClose(\'home\', $event)" class="block hover:text-[var(--color-accent)]">🏠 Home</a>    </li>    <li>      <a href="#" (click)="navigateAndClose(\'add\', $event)" class="block hover:text-[var(--color-accent)]">➕ Add        Expense</a>    </li>    <li>      <a href="#" (click)="navigateAndClose(\'list\', $event)" class="block hover:text-[var(--color-accent)]">📋 List</a>    </li>    <li>      <a href="#" (click)="navigateAndClose(\'calendar\', $event)" class="block hover:text-[var(--color-accent)]">📅        Calendar</a>    </li>    <li>      <a href="#" (click)="navigateAndClose(\'budget\', $event)" class="block hover:text-[var(--color-accent)]">💰        Budget</a>    </li>    <li *ngIf="has_ai_access">      <a href="#" (click)="navigateAndClose(\'ai\', $event)" class="block hover:text-[var(--color-accent)]"> 💬 AI        Assistant</a>    </li>    <li>      <a href="#" (click)="navigateAndClose(\'settings\', $event)" class="block hover:text-[var(--color-accent)]">⚙️        Settings</a>    </li>  </ul></aside><!-- Mobile Bottom Nav --><nav  class="md:hidden fixed bottom-0 py-[5px] h-[50px] left-0 right-0 bg-[var(--color-surface)] shadow-t flex justify-around z-50">  <button (click)="navigateAndClose(\'list\', $event)"    [ngClass]="{\'scale-110  rounded-[50%] bg-[--list-hover]\': activePath === \'list\'}"    class="h-[40px] w-[40px] block px-2 text-sm relative transition-all duration-300 ease-in-out">    <img src="assets/img/icon/icons8-list-60.png" alt="list"      class="w-[25px] h-[25px] transition-all duration-300 ease-in-out" style="filter: var(--icon-color2);">  </button>  <button (click)="navigateAndClose(\'calendar\', $event)"    [ngClass]="{\'scale-110  rounded-[50%] bg-[--list-hover]\': activePath === \'calendar\'}"    class="h-[40px] w-[40px] block  px-2 text-sm relative transition-all duration-300 ease-in-out">    <img src="assets/img/icon/icons8-calendar-50.png" alt="calendar"      class="w-[25px] h-[25px] transition-all duration-300 ease-in-out" style="filter: var(--icon-color2);">  </button>  <button (click)="navigateAndClose(\'add\', $event)"    [ngClass]="{\'scale-110  rounded-[50%] bg-[--list-hover]\': activePath === \'add\'}"    class="h-[40px] w-[40px] block  px-2 text-sm relative transition-all duration-300 ease-in-out">    <img src="assets/img/icon/icons8-add-60.png" alt="add"      class="w-[25px] h-[25px] transition-all duration-300 ease-in-out" style="filter: var(--icon-color2);">  </button>  <button (click)="navigateAndClose(\'budget\', $event)"    [ngClass]="{\'scale-110  rounded-[50%] bg-[--list-hover]\': activePath === \'budget\'}"    class="h-[40px] w-[40px] block  px-2 text-sm relative transition-all duration-300 ease-in-out">    <img src="assets/img/icon/icons8-budget-50.png" alt="budget"      class="w-[25px] h-[25px] transition-all duration-300 ease-in-out" style="filter: var(--icon-color2);">  </button>  <button (click)="navigateAndClose(\'settings\', $event)"    [ngClass]="{\'scale-110  rounded-[50%] bg-[--list-hover]\': activePath === \'settings\'}"    class="h-[40px] w-[40px] block  px-2 text-sm relative transition-all duration-300 ease-in-out">    <img src="assets/img/icon/icons8-settings-50.png" alt="settings"      class="w-[25px] h-[25px] transition-all duration-300 ease-in-out" style="filter: var(--icon-color2);">  </button></nav></div>'
     var COMPONENTS = [{'name': 'AddExpenseComponent', 'selector': 'app-add-expense'},{'name': 'AiComponent', 'selector': 'app-ai'},{'name': 'AppComponent', 'selector': 'app-root'},{'name': 'BudgetComponent', 'selector': 'app-budget'},{'name': 'CalendarComponent', 'selector': 'app-calendar'},{'name': 'CategoryDropdownComponent', 'selector': 'app-category-dropdown'},{'name': 'DownloadComponentComponent', 'selector': 'app-download-component'},{'name': 'ExpenseDetailsModalComponent', 'selector': 'app-expense-details-modal'},{'name': 'ExpenseListComponent', 'selector': 'app-expense-list'},{'name': 'ExpenseWiseComponent', 'selector': 'app-expense-wise'},{'name': 'FooterComponent', 'selector': 'app-footer'},{'name': 'FormModelComponent', 'selector': 'app-form-model'},{'name': 'GlobalLoaderComponent', 'selector': 'app-global-loader'},{'name': 'GraphsComponent', 'selector': 'app-graphs'},{'name': 'HamburgerMenuComponent', 'selector': 'app-hamburger-menu'},{'name': 'HomeComponent', 'selector': 'app-home'},{'name': 'InstallAppPopupComponentComponent', 'selector': 'app-install-app-popup-component'},{'name': 'ListExpensesComponent', 'selector': 'app-list-expenses'},{'name': 'MusicComponent', 'selector': 'app-music'},{'name': 'NavbarComponent', 'selector': 'app-navbar'},{'name': 'PieChartComponent', 'selector': 'app-pie-chart'},{'name': 'PlaylistMusicComponent', 'selector': 'app-playlist-music'},{'name': 'SearchButtonComponent', 'selector': 'app-search-button'},{'name': 'SearchMusicComponent', 'selector': 'app-search-music'},{'name': 'SettingItemComponent', 'selector': 'app-setting-item'},{'name': 'SettingsComponent', 'selector': 'app-settings'},{'name': 'SidebarComponent', 'selector': 'app-sidebar'},{'name': 'TemplatePlaygroundComponent', 'selector': 'template-playground-root'},{'name': 'ToastComponent', 'selector': 'app-toast'}];
     var DIRECTIVES = [];
     var ACTUAL_COMPONENT = {'name': 'SidebarComponent'};

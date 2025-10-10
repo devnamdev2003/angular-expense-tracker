@@ -3,6 +3,8 @@ import { GraphsComponent } from '../../component/graphs/graphs.component';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { PieChartComponent } from '../../component/pie-chart/pie-chart.component';
+import { SectionService } from '../../service/section/section.service';
+import { UserService } from '../../service/localStorage/user.service';
 
 /**
  * HomeComponent is the main dashboard that displays graphs and charts
@@ -46,6 +48,22 @@ export class HomeComponent {
    * Boolean to force resetting of input fields.
    */
   forceInputReset: boolean = false;
+
+  /** Flag to determine if the user can access ai ssection for analysis data*/
+  has_ai_access: boolean = false;
+
+  /**
+   * Creates an instance of the HomeComponent.
+   *
+   * @param sectionService the currently active application section.
+   * @param userService user-specific data stored in local storage.
+   */
+  constructor(
+    private sectionService: SectionService,
+    private userService: UserService
+  ) {
+    this.has_ai_access = this.userService.getValue<boolean>('has_ai_access') ?? false;
+  }
 
   /**
    * Sets the active view type and resets state flags accordingly.
@@ -180,4 +198,19 @@ export class HomeComponent {
       event.preventDefault();
     }
   }
+
+  /**
+   * Handles button link clicks by updating the current application section
+   * and preventing the default anchor navigation behavior.
+   *
+   *
+   * @param section to activate. Examples: `'home'`, `'settings'`, `'ai'`.
+   * @param event The DOM click event used to prevent the default
+   * @returns void
+   */
+  navigateAndClose(section: string, event: Event): void {
+    event.preventDefault();
+    this.sectionService.setSection(section);
+  }
+
 }

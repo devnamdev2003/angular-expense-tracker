@@ -8,29 +8,11 @@ export interface User {
   /** Unique identifier for the user. */
   id: string;
 
-  /** Frequency of backups (e.g., daily, weekly). */
-  backup_frequency: string;
-
-  /** User's email address. */
-  email: string;
-
-  /** Whether the user account is active. */
-  is_active: string;
-
-  /** Indicates if backup is enabled for the user. */
-  is_backup: string;
+  /** User's display name. */
+  user_name: string;
 
   /** Timestamp of the last performed backup. */
   last_backup: string;
-
-  /** User's display name. */
-  name: string;
-
-  /** Notification preferences (e.g., enabled/disabled). */
-  notifications: string;
-
-  /** User's password (hashed or plain depending on storage implementation). */
-  user_password: string;
 
   /** Preferred theme mode (e.g., light, dark). */
   theme_mode: string;
@@ -46,6 +28,19 @@ export interface User {
 
   /** Whether to show heatmap on calendar. */
   is_show_heatmap: boolean;
+
+  /** Flag to determine if the user can access music URLs for streaming and downloading. */
+  has_music_url_access: boolean;
+
+  /** Flag to determine if the user can access ai ssection for analysis data*/
+  has_ai_access: boolean;
+
+  /** Stores the amount associated with the Rose heatmap color */
+  rose_amount: number;
+
+  /** Stores the amount associated with the Emerald heatmap color */
+  emerald_amount: number;
+
 }
 
 /**

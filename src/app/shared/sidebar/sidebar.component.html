@@ -20,7 +20,7 @@
       <a href="#" (click)="navigateAndClose('budget', $event)" class="block hover:text-[var(--color-accent)]">💰
         Budget</a>
     </li>
-    <li>
+    <li *ngIf="has_ai_access">
       <a href="#" (click)="navigateAndClose('ai', $event)" class="block hover:text-[var(--color-accent)]"> 💬 AI
         Assistant</a>
     </li>

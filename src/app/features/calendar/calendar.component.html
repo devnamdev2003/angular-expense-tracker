@@ -23,8 +23,13 @@
             </button>
 
             <div class="text-center font-semibold">
-                <a href="/music">Total Expenses: </a>
-                <span class="text-[var(--color-green)]">{{currency}} {{ totalExpenses }}</span>
+                <a href="/music" [ngClass]="{
+                'cursor-pointer': has_music_url_access,
+                'pointer-events-none cursor-default': !has_music_url_access
+                }">
+                    Total Expenses:
+                </a>
+                <span class="text-[var(--color-green)]">{{ currency }} {{ totalExpenses }}</span>
             </div>
 
             <button class="shrink-0" (click)="changeMonth(1)">
@@ -37,7 +42,7 @@
         <!-- ░░ CALENDAR ░░ -->
         <div>
             <h2
-                class="border-b border-[var(--color-white)] p-2 bg-[var(--color-accent)] text-[var(--color-white)] text-lg font-semibold text-center">
+                class="rounded-t-lg border-b border-[var(--color-white)] p-2 bg-[var(--color-accent)] text-[var(--color-white)] text-lg font-semibold text-center">
                 {{ calendarTitle }}
             </h2>
 
@@ -57,28 +62,50 @@
         </div>
     </div>
 
-    <!-- ░░ HEATMAP LEGEND ░░ -->
-    <div class="mt-10" *ngIf="isShowHeatmap">
-        <!-- <h3 class="text-center font-semibold text-[var(--color-text)] mb-2">
-            Heatmap Legend
-        </h3> -->
-        <div class="flex justify-around md:justify-center md:gap-4 text-[0.8rem]">
-            <div class="flex items-center gap-1">
-                <span class="w-4 h-4 rounded bg-[var(--color-gray)] inline-block"></span>
-                <span class="text-[var(--color-text)]">No expense</span>
+    <!-- ░░ HEATMAP SUMMARY ░░ -->
+    <div class="my-6 text-center" *ngIf="heatmapSummary.length > 0">
+        <div
+            class="max-w-[300px] md:max-w-md mx-auto w-full border border-[var(--input-border)] rounded-lg overflow-hidden text-sm">
+
+            <!-- Table Header -->
+            <div class="grid grid-cols-[40%_15%_30%_15%] bg-[var(--color-gray)] text-[var(--color-text)] font-semibold py-2 text-left">
+                <span class="pl-3">Color</span>
+                <span class="text-center">Days</span>
+                <span class="text-center">Amount</span>
+                <span class="text-center">Edit</span>
             </div>
-            <div class="flex items-center gap-1">
-                <span class="w-4 h-4 rounded bg-[var(--color-emerald)] inline-block"></span>
-                <span class="text-[var(--color-text)]">&lt; 300</span>
+
+            <!-- Table Rows -->
+            <div *ngFor="let item of heatmapSummary"
+                class="grid grid-cols-[40%_15%_30%_15%] items-center py-2 border-t border-[var(--input-border)] text-[var(--color-text)] text-[0.8rem]">
+
+                <!-- Color + Label -->
+                <div class="flex items-center justify-start gap-2 pl-2">
+                    <span class="w-4 h-4 rounded inline-block" [ngClass]="item.color"></span>
+                    <span>{{ item.text }}</span>
+                </div>
+
+                <!-- Days -->
+                <div class="font-medium text-center">{{ item.days }}</div>
+
+                <!-- Amount -->
+                <div class="font-medium text-center">{{ currency }} {{ item.amount }}</div>
+                <!-- Edit button (perfectly centered) -->
+                <div class="flex items-center justify-center">
+                    <button *ngIf="!(item.text === 'No expenses')" (click)="openEditHeapMapModel(item.color)"
+                        class="w-7 h-7 flex items-center justify-center rounded-full hover:bg-[var(--list-hover)] transition-all duration-200 ease-in-out">
+                        <img src="assets/img/icon/icons8-edit-50.png" alt="edit"
+                            class="w-[14px] h-[14px] pointer-events-none" style="filter: var(--icon-color2);" />
+                    </button>
+                </div>
             </div>
-            <div class="flex items-center gap-1">
-                <span class="w-4 h-4 rounded bg-[var(--color-amber)] inline-block"></span>
-                <span class="text-[var(--color-text)]">300 – 1000</span>
+
+            <!-- Total Row -->
+            <div class="grid grid-cols-[40%_15%_30%_15%] items-center py-2 border-t border-[var(--input-border)] text-[var(--color-text)] font-semibold">
+                <span class="col-span-2 text-center">Total</span>
+                <span class="text-center text-green-500">{{ currency }} {{ totalExpenses }}</span>
             </div>
-            <div class="flex items-center gap-1">
-                <span class="w-4 h-4 rounded bg-[var(--color-rose)] inline-block"></span>
-                <span class="text-[var(--color-text)]">&gt; 1000</span>
-            </div>
+
         </div>
     </div>
 
@@ -114,3 +141,20 @@
         </div>
     </div>
 </section>
+
+<app-form-model *ngIf="showEditHeatMapModel" [label]="'Edit HeatMap'" (close)="closeEditHeatMapModel()">
+    <form [formGroup]="heatMapForm" (ngSubmit)="updateHeatMap()">
+        <label class="block mb-1 font-medium">From Date</label>
+        <input formControlName="amount" type="number" autocomplete="off" min="0" max="100000000" placeholder="Enter Amount"
+            class="w-full p-2 rounded border text-[var(--input-text)] bg-[var(--input-bg)] border-[var(--input-border)] focus:outline-none focus:ring-2 focus:ring-[var(--theme-color)] transition-all duration-200" />
+        <div class="error-message text-[var(--color-error)]"
+            *ngIf="heatMapForm.get('amount')?.touched && heatMapForm.get('amount')?.errors?.['required']">
+            Amount is required
+        </div>
+        <div class="flex justify-end mt-2">
+            <button type="button" (click)="closeEditHeatMapModel()"
+                class="mr-2 px-4 py-2 bg-[var(--color-gray-500)] text-white rounded">Cancel</button>
+            <button type="submit" class="px-4 py-2 bg-[var(--color-accent)] text-white rounded">Update</button>
+        </div>
+    </form>
+</app-form-model>
