@@ -1,7 +1,7 @@
 /**
  * Represents a single heatmap summary entry.
- * This interface is used to describe the color intensity, total days,
- * and total expense amount for a specific heat level in the calendar heatmap.
+ * Describes the color intensity, total days, total expense amount,
+ * and label text for a specific heat level in the calendar heatmap.
  */
 export interface HeatmapSummary {
     /**
@@ -21,4 +21,10 @@ export interface HeatmapSummary {
      * Helps calculate and display the spending range for the legend.
      */
     amount: number;
+
+    /**
+     * The label or descriptive text associated with this heat level.
+     * Can be used in UI legends or tooltips.
+     */
+    text: string;
 }

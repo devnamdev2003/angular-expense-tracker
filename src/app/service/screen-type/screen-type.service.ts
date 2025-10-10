@@ -35,7 +35,7 @@ export class ScreenTypeService {
    * Internal BehaviorSubject that stores the latest detected {@link DeviceType}.
    * Initialized with the current screen type on service creation.
    */
-  private deviceTypeSubject = new BehaviorSubject<DeviceType>(this.getDeviceType());
+  private deviceTypeSubject: BehaviorSubject<DeviceType>;
 
   /**
    * Observable stream that emits the latest {@link DeviceType} whenever
@@ -46,7 +46,7 @@ export class ScreenTypeService {
    * this.screenTypeService.deviceType$.subscribe(type => { ... });
    * ```
    */
-  deviceType$ = this.deviceTypeSubject.asObservable();
+  deviceType$;
 
   /**
    * Creates an instance of ScreenTypeService.
@@ -56,11 +56,21 @@ export class ScreenTypeService {
    */
   constructor(private ngZone: NgZone) {
     // Listen to window resize events inside Angular zone
-    window.addEventListener('resize', () => {
-      this.ngZone.run(() => {
-        this.deviceTypeSubject.next(this.getDeviceType());
+    const initialType = this.isBrowser() ? this.getDeviceType() : 'desktop';
+    this.deviceTypeSubject = new BehaviorSubject<DeviceType>(initialType);
+    this.deviceType$ = this.deviceTypeSubject.asObservable();
+
+    if (this.isBrowser()) {
+      window.addEventListener('resize', () => {
+        this.ngZone.run(() => {
+          this.deviceTypeSubject.next(this.getDeviceType());
+        });
       });
-    });
+    }
+  }
+
+  private isBrowser(): boolean {
+    return typeof window !== 'undefined';
   }
 
   /**
@@ -72,15 +82,11 @@ export class ScreenTypeService {
    * - `'desktop'` if width > 1024px
    */
   getDeviceType(): DeviceType {
+    if (!this.isBrowser()) return 'desktop';
     const width = window.innerWidth;
-
-    if (width <= 768) {
-      return 'mobile';
-    } else if (width <= 1024) {
-      return 'tablet';
-    } else {
-      return 'desktop';
-    }
+    if (width <= 768) return 'mobile';
+    if (width <= 1024) return 'tablet';
+    return 'desktop';
   }
 
   /**

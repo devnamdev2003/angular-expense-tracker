@@ -1,6 +1,7 @@
 import { Component, HostListener } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { SectionService } from '../../service/section/section.service';
+import { UserService } from '../../service/localStorage/user.service';
 
 /**
  * Hamburger menu component for mobile or compact navigation.
@@ -30,6 +31,9 @@ export class HamburgerMenuComponent {
    */
   isMenuOpen = false;
 
+  /** Flag to determine if the user can access ai ssection for analysis data*/
+  has_ai_access: boolean = false;
+
   /**
    * Creates an instance of HamburgerMenuComponent.
    *
@@ -37,11 +41,13 @@ export class HamburgerMenuComponent {
    * visibility of the AI button based on the current section.
    *
    * @param sectionService Service for managing and broadcasting the active section.
+   * @param userService Service for managing user preferences
    */
-  constructor(private sectionService: SectionService) {
+  constructor(private sectionService: SectionService, private userService: UserService) {
     this.sectionService.currentSection$.subscribe(section => {
       this.showAIButton = section !== 'ai';
     });
+    this.has_ai_access = this.userService.getValue<boolean>('has_ai_access') ?? false;
   }
 
   /**

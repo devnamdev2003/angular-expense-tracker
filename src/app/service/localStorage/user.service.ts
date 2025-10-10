@@ -34,6 +34,13 @@ export interface User {
 
   /** Flag to determine if the user can access ai ssection for analysis data*/
   has_ai_access: boolean;
+
+  /** Stores the amount associated with the Rose heatmap color */
+  rose_amount: number;
+
+  /** Stores the amount associated with the Emerald heatmap color */
+  emerald_amount: number;
+
 }
 
 /**
