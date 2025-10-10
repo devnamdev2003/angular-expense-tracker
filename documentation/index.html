@@ -159,9 +159,17 @@
 <li>Tap any date to open a <strong>popup modal</strong> displaying all expenses for that day.</li>
 <li>Navigate across <strong>months and years</strong> to view past or future expenses.</li>
 <li>Toggle the Show HeatMap switch to highlight each day based on spending intensity.<ul>
-<li>Days are color-coded (e.g. No expense, &lt; ₹300, ₹300–₹1000, &gt; ₹1000) for quick insights.</li>
-<li>A legend below the calendar explains each color category.</li>
-<li>A summary table displays color, days count, and total amount for each category.</li>
+<li>Days are color-coded based on spending thresholds (e.g. No expense, &lt; threshold, between thresholds, &gt; threshold) for quick insights.</li>
+<li>Users can now <strong>customize the threshold amounts</strong> for each heatmap color:<ul>
+<li><strong>Red (Rose)</strong> – default  &gt; ₹1000</li>
+<li><strong>Yellow (Amber)</strong> – default ₹500 - 1000</li>
+<li><strong>Green (Emerald)</strong> – default &lt; ₹500</li>
+</ul>
+</li>
+<li>A <strong>summary table</strong> displays each color, the number of days, the total expense, and an <strong>Edit button</strong> for updating the thresholds.<ul>
+<li>Editing allows users to set a new amount for the corresponding color, immediately updating the heatmap visualization.</li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>
