@@ -77,6 +77,9 @@ export class ListExpensesComponent implements OnInit {
   /** Whether list is sorted. */
   isSorted: boolean = false;
 
+  /** Whether list is sorted. */
+  isFilterdData: boolean = false;
+
   /** Whether edit modal is open. */
   isEditOpen: boolean = false;
 
@@ -118,14 +121,10 @@ export class ListExpensesComponent implements OnInit {
    * Reapplies filters and sorting if active.
    */
   listExpenses(): void {
-    this.totalAmount = 0;
     try {
       this.expenses = this.expenseService.getAll();
       this.categories = this.categoryService.getSortedCategoriesByExpenseCount();
-      this.expenses.forEach((val) => {
-        this.totalAmount = this.totalAmount + val.amount;
-      })
-      this.totalAmount = parseFloat(this.totalAmount.toFixed(2));
+      this.setTotalAmount();
     } catch (err) {
       console.error("Failed to load expenses:", err);
     }
@@ -176,7 +175,6 @@ export class ListExpensesComponent implements OnInit {
    * Applies filters (date, category, payment, extra spending).
    */
   applyFilter(): void {
-    this.totalAmount = 0;
     this.searchData(this.searchQuery);
     let filtered: Expense[] = this.expenses;
     this.appliedFilter = structuredClone(this.filter);
@@ -202,15 +200,21 @@ export class ListExpensesComponent implements OnInit {
     }
 
     this.expenses = filtered;
-    this.expenses.forEach((val) => {
-      this.totalAmount = this.totalAmount + val.amount;
-    })
-    this.totalAmount = parseFloat(this.totalAmount.toFixed(2));
-
+    this.setTotalAmount();
     if (this.isSorted) {
       this.sortList(this.fieldColIndex, this.selectedFieldName, this.fieldDirection);
     }
+    if (this.appliedFilter.fromDate
+      || this.appliedFilter.toDate
+      || this.appliedFilter.selectedCategoryIds.length
+      || this.appliedFilter.paymentMode.length
+      || this.appliedFilter.isExtraSpending) {
 
+      this.isFilterdData = true;
+    }
+    else {
+      this.isFilterdData = false;
+    }
     this.isFilterDropdownOpen = false;
   }
 
@@ -290,13 +294,21 @@ export class ListExpensesComponent implements OnInit {
    */
   editExpense(expense: Expense): void {
     this.isEditOpen = true;
-    this.selectedExpense = expense;
-    const { expense_id, ...newData } = expense;
+    let { expense_id, ...newData } = expense;
     this.expenseService.update(expense_id, newData);
+    expense = this.expenseService.getByExpenseId(expense.expense_id) ?? expense;
     this.toastService.show('Expense updated successfully', 'success');
     this.isEditOpen = false;
-    this.expenses = this.expenses.map(item => item.expense_id === expense_id ? { ...item, ...newData } : item);
+    this.selectedExpense = expense;
+    this.expenses = this.expenses.map(item => item.expense_id === expense_id ? { ...item, ...expense } : item);
     this.expenses = this.expenses.map(item => ({ ...item, amount: Math.round(item.amount * 100) / 100 }));
+    this.searchData(this.searchQuery);
+    if (this.isSorted) {
+      this.sortList(this.fieldColIndex, this.selectedFieldName, this.fieldDirection);
+    }
+    if (this.isFilterdData) {
+      this.applyFilter();
+    }
   }
 
   /**
@@ -325,6 +337,7 @@ export class ListExpensesComponent implements OnInit {
       return ((ex.location && ex.location.toLowerCase().includes(query.toLowerCase())) ||
         (ex.note && ex.note.toLowerCase().includes(query.toLowerCase())));
     });
+    this.setTotalAmount();
   }
 
   /**
@@ -332,14 +345,19 @@ export class ListExpensesComponent implements OnInit {
    * @param query Search query string
    */
   onSearch(query: string): void {
-    this.totalAmount = 0;
     this.searchQuery = query.trim();
     this.searchData(this.searchQuery);
-    this.expenses.forEach((val) => {
-      this.totalAmount = this.totalAmount + val.amount;
-    })
-    this.totalAmount = parseFloat(this.totalAmount.toFixed(2));
-    this.clearFiltersAndSorting();
+
+    if (this.isSorted) {
+      this.sortList(this.fieldColIndex, this.selectedFieldName, this.fieldDirection);
+    }
+    if (this.isFilterdData) {
+      this.applyFilter();
+    }
+    else {
+      this.clearFiltersAndSorting();
+    }
+    this.setTotalAmount();
   }
 
   /** Resets both filters and sorting state. */
@@ -347,6 +365,7 @@ export class ListExpensesComponent implements OnInit {
     this.clearFilter();
     this.clearAppliedFilter();
     this.isSorted = false;
+    this.isFilterdData = false;
     this.selectedFieldName = "Sort By";
   }
 
@@ -363,5 +382,14 @@ export class ListExpensesComponent implements OnInit {
     if (this.isFilterDropdownOpen && this.filterRef && !this.filterRef.nativeElement.contains(target)) {
       this.toggleFilterDropdown();
     }
+  }
+
+  /** calculate total amount. */
+  setTotalAmount(): void {
+    this.totalAmount = 0;
+    this.expenses.forEach((val) => {
+      this.totalAmount = this.totalAmount + val.amount;
+    })
+    this.totalAmount = parseFloat(this.totalAmount.toFixed(2));
   }
 }
