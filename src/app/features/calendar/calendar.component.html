@@ -68,7 +68,8 @@
             class="max-w-[300px] md:max-w-md mx-auto w-full border border-[var(--input-border)] rounded-lg overflow-hidden text-sm">
 
             <!-- Table Header -->
-            <div class="grid grid-cols-[40%_15%_30%_15%] bg-[var(--color-gray)] text-[var(--color-text)] font-semibold py-2 text-left">
+            <div
+                class="grid grid-cols-[40%_15%_30%_15%] bg-[var(--color-gray)] text-[var(--color-text)] font-semibold py-2 text-left">
                 <span class="pl-3">Color</span>
                 <span class="text-center">Days</span>
                 <span class="text-center">Amount</span>
@@ -92,8 +93,9 @@
                 <div class="font-medium text-center">{{ currency }} {{ item.amount }}</div>
                 <!-- Edit button (perfectly centered) -->
                 <div class="flex items-center justify-center">
-                    <button *ngIf="!(item.text === 'No expenses')" (click)="openEditHeapMapModel(item.color)"
-                        class="w-7 h-7 flex items-center justify-center rounded-full hover:bg-[var(--list-hover)] transition-all duration-200 ease-in-out">
+                    <button *ngIf="!(item.text === 'No expenses' || item.color === 'bg-[var(--color-amber)]')"
+                        (click)="openEditHeapMapModel(item.color)"
+                        class="w-[14px] h-[14px] flex items-center justify-center rounded-full transition-all duration-200 ease-in-out">
                         <img src="assets/img/icon/icons8-edit-50.png" alt="edit"
                             class="w-[14px] h-[14px] pointer-events-none" style="filter: var(--icon-color2);" />
                     </button>
@@ -101,7 +103,8 @@
             </div>
 
             <!-- Total Row -->
-            <div class="grid grid-cols-[40%_15%_30%_15%] items-center py-2 border-t border-[var(--input-border)] text-[var(--color-text)] font-semibold">
+            <div
+                class="grid grid-cols-[40%_15%_30%_15%] items-center py-2 border-t border-[var(--input-border)] text-[var(--color-text)] font-semibold">
                 <span class="col-span-2 text-center">Total</span>
                 <span class="text-center text-green-500">{{ currency }} {{ totalExpenses }}</span>
             </div>
@@ -145,8 +148,23 @@
 <app-form-model *ngIf="showEditHeatMapModel" [label]="'Edit HeatMap'" (close)="closeEditHeatMapModel()">
     <form [formGroup]="heatMapForm" (ngSubmit)="updateHeatMap()">
         <label class="block mb-1 font-medium">Amount</label>
-        <input formControlName="amount" type="number" autocomplete="off" min="0" max="100000000" placeholder="Enter Amount"
+        <input formControlName="amount" type="number" [min]="minHeatMapAmount" [max]="maxHeatMapAmount"
+            placeholder="Enter Amount"
             class="w-full p-2 rounded border text-[var(--input-text)] bg-[var(--input-bg)] border-[var(--input-border)] focus:outline-none focus:ring-2 focus:ring-[var(--theme-color)] transition-all duration-200" />
+        <div class="error-message text-[var(--color-error)]"
+            *ngIf="heatMapForm.get('amount')?.touched && heatMapForm.get('amount')?.errors?.['min'] && isEmeraldModelOpen">
+            Amount cannot be negative or 0
+        </div>
+
+        <div class="error-message text-[var(--color-error)]"
+            *ngIf="heatMapForm.get('amount')?.touched && heatMapForm.get('amount')?.errors?.['min'] && isRoseModelOpen">
+            Amount should be between {{ minHeatMapAmount }} and {{ maxHeatMapAmount }}
+        </div>
+
+        <div class="error-message text-[var(--color-error)]"
+            *ngIf="heatMapForm.get('amount')?.touched && heatMapForm.get('amount')?.errors?.['max']">
+            Amount should be between {{ minHeatMapAmount }} and {{ maxHeatMapAmount }}
+        </div>
         <div class="error-message text-[var(--color-error)]"
             *ngIf="heatMapForm.get('amount')?.touched && heatMapForm.get('amount')?.errors?.['required']">
             Amount is required

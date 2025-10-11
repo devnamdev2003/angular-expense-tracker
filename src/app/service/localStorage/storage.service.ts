@@ -71,7 +71,7 @@ export class StorageService {
     has_music_url_access: false,
     has_ai_access: false,
     rose_amount: 1000,
-    emerald_amount: 300,
+    emerald_amount: 500,
   };
 
   /** Schema for budget */
