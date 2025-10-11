@@ -24,7 +24,7 @@ export interface UserData {
 
   /** Category data */
   categoryData: Category[] | [],
-  
+
   /** Budget data */
   budgetData: Budget[] | []
 };
@@ -95,7 +95,7 @@ export class DownloadComponentComponent {
     this.downloadDataForm = this.fb.group({
       fromDate: ['', [Validators.required]],
       toDate: ['', [Validators.required]],
-      fileType: ['JSON', [Validators.required]],
+      fileType: ['PDF', [Validators.required]],
     });
   }
 
@@ -148,7 +148,7 @@ export class DownloadComponentComponent {
       expense_id: expense.expense_id,
       isExtraSpending: expense.isExtraSpending
     }));
-    
+
     // Prepare final data object
     const finalData: UserData = {
       userData: userData || {},
@@ -211,7 +211,7 @@ export class DownloadComponentComponent {
     this.downloadDataForm.reset({
       fromDate: '',
       toDate: '',
-      fileType: 'JSON'
+      fileType: 'PDF'
     });
     this.downloadDataForm.markAsPristine();
     this.downloadDataForm.markAsUntouched();
@@ -332,4 +332,24 @@ export class DownloadComponentComponent {
     XLSX.writeFile(workbook, filename);
   }
 
+  /**
+   * Populates the date fields with the entire expense history range.
+   *
+   * Fetches all expenses, determines the earliest and latest expense dates,
+   * and sets the 'From Date' and 'To Date' fields in the form to cover
+   * the full date range of the user's data, defaulting the file type to JSON.
+   */
+  downloadAllData(): void {
+    const expenseData: Expense[] = this.expenseService.getAll();
+    if (expenseData.length > 0) {
+      expenseData.sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
+      const fromDate = expenseData[expenseData.length - 1].date;
+      const toDate = expenseData[0].date;
+      this.downloadDataForm.reset({
+        fromDate: fromDate,
+        toDate: toDate,
+        fileType: this.downloadDataForm.get('fileType')?.value || 'PDF'
+      });
+    }
+  }
 }

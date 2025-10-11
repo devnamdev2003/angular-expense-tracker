@@ -387,7 +387,7 @@ export interface UserData {
 
   /** Category data */
   categoryData: Category[] | [],
-  
+
   /** Budget data */
   budgetData: Budget[] | []
 };
@@ -458,7 +458,7 @@ export class DownloadComponentComponent {
     this.downloadDataForm &#x3D; this.fb.group({
       fromDate: [&#x27;&#x27;, [Validators.required]],
       toDate: [&#x27;&#x27;, [Validators.required]],
-      fileType: [&#x27;JSON&#x27;, [Validators.required]],
+      fileType: [&#x27;PDF&#x27;, [Validators.required]],
     });
   }
 
@@ -511,7 +511,7 @@ export class DownloadComponentComponent {
       expense_id: expense.expense_id,
       isExtraSpending: expense.isExtraSpending
     }));
-    
+
     // Prepare final data object
     const finalData: UserData &#x3D; {
       userData: userData || {},
@@ -574,7 +574,7 @@ export class DownloadComponentComponent {
     this.downloadDataForm.reset({
       fromDate: &#x27;&#x27;,
       toDate: &#x27;&#x27;,
-      fileType: &#x27;JSON&#x27;
+      fileType: &#x27;PDF&#x27;
     });
     this.downloadDataForm.markAsPristine();
     this.downloadDataForm.markAsUntouched();
@@ -695,6 +695,26 @@ export class DownloadComponentComponent {
     XLSX.writeFile(workbook, filename);
   }
 
+  /**
+   * Populates the date fields with the entire expense history range.
+   *
+   * Fetches all expenses, determines the earliest and latest expense dates,
+   * and sets the &#x27;From Date&#x27; and &#x27;To Date&#x27; fields in the form to cover
+   * the full date range of the user&#x27;s data, defaulting the file type to JSON.
+   */
+  downloadAllData(): void {
+    const expenseData: Expense[] &#x3D; this.expenseService.getAll();
+    if (expenseData.length &gt; 0) {
+      expenseData.sort((a, b) &#x3D;&gt; new Date(b.date).getTime() - new Date(a.date).getTime());
+      const fromDate &#x3D; expenseData[expenseData.length - 1].date;
+      const toDate &#x3D; expenseData[0].date;
+      this.downloadDataForm.reset({
+        fromDate: fromDate,
+        toDate: toDate,
+        fileType: this.downloadDataForm.get(&#x27;fileType&#x27;)?.value || &#x27;PDF&#x27;
+      });
+    }
+  }
 }
 </code></pre>
     </div>
