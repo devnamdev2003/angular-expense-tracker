@@ -5,6 +5,7 @@ import { UserService } from '../../service/localStorage/user.service';
 import { HeatmapSummary } from '../../models/heatMap-summary.service';
 import { FormModelComponent } from '../../component/form-model/form-model.component';
 import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
+import { ConfigService } from '../../service/config/config.service';
 
 /**
  * Component that renders a monthly calendar view with expense tracking.
@@ -87,11 +88,13 @@ export class CalendarComponent implements OnInit {
    * @param expenseService Service to retrieve expenses from local storage.
    * @param userService Service to retrieve user settings such as currency.
    * @param fb Angular `FormBuilder` to build the reactive form.
+   * @param configService Service to fetch configuration values 
    */
   constructor(
     private expenseService: ExpenseService,
     public userService: UserService,
     private fb: FormBuilder,
+    private configService: ConfigService
   ) {
     this.currency = this.userService.getValue<string>('currency');
     this.isShowHeatmap = this.userService.getValue<boolean>('is_show_heatmap') ?? false;
@@ -132,7 +135,7 @@ export class CalendarComponent implements OnInit {
   renderCalendar(year: number, month: number): void {
     this.calendarDays = [];
     this.heatmapSummary = [];
-    const today = new Date();
+    const today = new Date(this.configService.getLocalTime());
     const firstDay = new Date(year, month, 1).getDay();
     const daysInMonth = new Date(year, month + 1, 0).getDate();
     const prevMonthDays = new Date(year, month, 0).getDate();

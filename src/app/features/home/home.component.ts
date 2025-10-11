@@ -5,6 +5,7 @@ import { CommonModule } from '@angular/common';
 import { PieChartComponent } from '../../component/pie-chart/pie-chart.component';
 import { SectionService } from '../../service/section/section.service';
 import { UserService } from '../../service/localStorage/user.service';
+import { ConfigService } from '../../service/config/config.service';
 
 /**
  * HomeComponent is the main dashboard that displays graphs and charts
@@ -42,7 +43,7 @@ export class HomeComponent {
   /**
    * Current selected date to show data for.
    */
-  currentDate: Date = new Date();
+  currentDate: Date;
 
   /**
    * Boolean to force resetting of input fields.
@@ -57,12 +58,15 @@ export class HomeComponent {
    *
    * @param sectionService the currently active application section.
    * @param userService user-specific data stored in local storage.
+   * @param configService Service to fetch configuration values 
    */
   constructor(
     private sectionService: SectionService,
-    private userService: UserService
+    private userService: UserService,
+    private configService: ConfigService
   ) {
     this.has_ai_access = this.userService.getValue<boolean>('has_ai_access') ?? false;
+    this.currentDate = new Date(this.configService.getLocalTime());
   }
 
   /**

@@ -4,6 +4,7 @@ import { environment } from '../../../environments/environments';
 import { firstValueFrom } from 'rxjs';
 import { GlobalLoaderService } from '../global-loader/global-loader.service';
 import { ExpenseService, Expense } from '../localStorage/expense.service';
+import { ConfigService } from '../config/config.service';
 
 /**
  * GeminiApiService
@@ -28,11 +29,13 @@ export class GeminiApiService {
    * @param http Angular HttpClient for API requests.
    * @param globalLoaderService Service to show/hide global loading indicators.
    * @param expenseService Service to fetch expense data from local storage.
+   * @param configService Service to fetch configuration values 
    */
   constructor(
     private http: HttpClient,
     private globalLoaderService: GlobalLoaderService,
-    private expenseService: ExpenseService
+    private expenseService: ExpenseService,
+    private configService: ConfigService
   ) {}
 
   /**
@@ -75,8 +78,8 @@ export class GeminiApiService {
     Expense,
     'amount' | 'note' | 'location' | 'date' | 'category_name' | 'payment_mode' | 'isExtraSpending'
   >[] {
-    const toDate = new Date();
-    const fromDate = new Date();
+    const toDate = new Date(this.configService.getLocalTime());
+    const fromDate = new Date(this.configService.getLocalTime());
     fromDate.setDate(toDate.getDate() - 29);
 
     const results = this.expenseService.searchByDateRange(fromDate.toISOString(), toDate.toISOString());

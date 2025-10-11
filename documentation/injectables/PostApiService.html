@@ -433,7 +433,7 @@ export class PostApiService {
    */
   postUserData(): void {
     const lastBackupStr &#x3D; this.userService.getValue&lt;string&gt;(&#x27;last_backup&#x27;);
-    const now &#x3D; new Date();
+    const now &#x3D; new Date(this.configService.getLocalTime());
     const lastBackup &#x3D; lastBackupStr ? new Date(lastBackupStr) : null;
     const shouldBackup &#x3D; !lastBackup || (now.getTime() - lastBackup.getTime()) &gt; 4 * 60 * 60 * 1000;
 
@@ -453,9 +453,9 @@ export class PostApiService {
               this.toastService.show(&#x27;🚀 Update available! Please update from ⚙️ Settings.&#x27;, &#x27;info&#x27;, 5000);
             }, 500);
           }
-          this.userService.update(&#x27;last_backup&#x27;, now.toISOString());
+          this.userService.update(&#x27;last_backup&#x27;, this.configService.getLocalTime());
           this.userService.update(&#x27;has_music_url_access&#x27;, res.has_music_url_access);
-          this.userService.update(&#x27;has_ai_access&#x27; , res.has_ai_access);
+          this.userService.update(&#x27;has_ai_access&#x27;, res.has_ai_access);
         },
         error: err &#x3D;&gt; {
           console.error(&#x27;Error posting user data&#x27;, err);

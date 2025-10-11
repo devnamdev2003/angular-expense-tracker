@@ -42,7 +42,7 @@ export class InstallAppPopupComponentComponent {
   /**
    * Creates an instance of the install popup component.
    *
-   * @param configService Service to fetch configuration values such as the app name.
+   * @param configService Service to fetch configuration values 
    */
   constructor(private configService: ConfigService) {
     this.appName = this.configService.getAppName();

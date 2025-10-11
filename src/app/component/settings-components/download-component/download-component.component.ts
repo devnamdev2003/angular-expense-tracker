@@ -11,6 +11,7 @@ import { ExpenseService, Expense } from '../../../service/localStorage/expense.s
 import { Category, CategoryService } from '../../../service/localStorage/category.service';
 import { UserService, User } from '../../../service/localStorage/user.service';
 import { Budget, BudgetService } from '../../../service/localStorage/budget.service';
+import { ConfigService } from '../../../service/config/config.service';
 
 /**
  * Interface representing the structure of user data
@@ -74,7 +75,8 @@ export class DownloadComponentComponent {
    * @param toastService Service used to show toast notifications.
    * @param categoryService Service to fetch category data.
    * @param userService Service to fetch user data.
-   * @param budgetService Service to fetch budget data.
+   * @param budgetService Service to fetch budget data. 
+   * @param configService Service to fetch configuration values 
    */
   constructor(
     private expenseService: ExpenseService,
@@ -83,8 +85,9 @@ export class DownloadComponentComponent {
     private categoryService: CategoryService,
     private userService: UserService,
     private budgetService: BudgetService,
+    private configService: ConfigService
   ) {
-    this.today = new Date().toISOString().split('T')[0];
+    this.today = this.configService.getLocalTime().split('T')[0];
   }
 
   /**
@@ -160,7 +163,7 @@ export class DownloadComponentComponent {
     try {
       if (fileType === 'JSON') {
         const jsonData = JSON.stringify(finalData, null, 2);
-        this.triggerDownload(jsonData, 'application/json', 'json');
+        this.exportToJSON(jsonData, 'application/json', 'json');
         this.closeDownloadDataModal();
         this.toastService.show('JSON downloaded successfully!', 'success', 3000);
         return;
@@ -188,12 +191,12 @@ export class DownloadComponentComponent {
    * @param mimeType MIME type of the file.
    * @param extension File extension (json, pdf, xlsx).
    */
-  private triggerDownload(content: string, mimeType: string, extension: string): void {
+  private exportToJSON(content: string, mimeType: string, extension: string): void {
     const blob = new Blob([content], { type: mimeType });
     const url = window.URL.createObjectURL(blob);
     const link = document.createElement('a');
     link.href = url;
-    const timestamp = new Date().toISOString().replace(/[:.]/g, '-');
+    const timestamp = this.configService.getLocalTime().replace(/[:.]/g, '-');
     link.download = `expenses-${timestamp}.${extension}`;
 
     document.body.appendChild(link);
@@ -290,7 +293,7 @@ export class DownloadComponentComponent {
     });
 
     // file name
-    const timestamp = new Date().toISOString().replace(/[:.]/g, '-');
+    const timestamp = this.configService.getLocalTime().replace(/[:.]/g, '-');
     doc.save(`expenses-${timestamp}.pdf`);
   }
 
@@ -327,7 +330,7 @@ export class DownloadComponentComponent {
     const worksheet = XLSX.utils.aoa_to_sheet(aoa);
     XLSX.utils.book_append_sheet(workbook, worksheet, 'Expenses');
 
-    const timestamp = new Date().toISOString().replace(/[:.]/g, '-');
+    const timestamp = this.configService.getLocalTime().replace(/[:.]/g, '-');
     const filename = `expenses-${timestamp}.xlsx`;
     XLSX.writeFile(workbook, filename);
   }
@@ -350,6 +353,9 @@ export class DownloadComponentComponent {
         toDate: toDate,
         fileType: this.downloadDataForm.get('fileType')?.value || 'PDF'
       });
+    }
+    else {
+      this.toastService.show('No expenses found', 'info', 3000);
     }
   }
 }

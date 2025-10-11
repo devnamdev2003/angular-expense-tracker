@@ -93,4 +93,27 @@ export class ConfigService {
   getVersion(): string {
     return this.version;
   }
+
+  /**
+  * Returns the current local time as a string in HH:MM:SS format
+  */
+  getLocalTime(): string {
+    // 1. Get the current local time
+    const now = new Date();
+
+    // 2. Get components of local time
+    const year = now.getFullYear();
+    const month = String(now.getMonth() + 1).padStart(2, '0'); // months are 0-indexed
+    const day = String(now.getDate()).padStart(2, '0');
+    const hours = String(now.getHours()).padStart(2, '0');
+    const minutes = String(now.getMinutes()).padStart(2, '0');
+    const seconds = String(now.getSeconds()).padStart(2, '0');
+    const milliseconds = String(now.getMilliseconds()).padStart(3, '0');
+
+    // 3. Combine into ISO-like string (local time)
+    const localISOString = `${year}-${month}-${day}T${hours}:${minutes}:${seconds}.${milliseconds}`;
+
+    console.log(localISOString); // e.g. "2025-10-11T13:35:58.942"
+    return localISOString;
+  }
 }

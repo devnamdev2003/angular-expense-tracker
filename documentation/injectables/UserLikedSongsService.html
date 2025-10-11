@@ -177,9 +177,6 @@
                                 <a href="#getBySongId" >getBySongId</a>
                             </li>
                             <li>
-                                <a href="#getLocalISOString" >getLocalISOString</a>
-                            </li>
-                            <li>
                                     <span class="modifier">Private</span>
                                 <a href="#isBrowser" >isBrowser</a>
                             </li>
@@ -276,8 +273,8 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="56"
-                                    class="link-to-prism">src/app/service/localStorage/user-liked-song.service.ts:56</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="45"
+                                    class="link-to-prism">src/app/service/localStorage/user-liked-song.service.ts:45</a></div>
                         </td>
                     </tr>
 
@@ -350,8 +347,8 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="80"
-                                    class="link-to-prism">src/app/service/localStorage/user-liked-song.service.ts:80</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="69"
+                                    class="link-to-prism">src/app/service/localStorage/user-liked-song.service.ts:69</a></div>
                         </td>
                     </tr>
 
@@ -424,8 +421,8 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="46"
-                                    class="link-to-prism">src/app/service/localStorage/user-liked-song.service.ts:46</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="35"
+                                    class="link-to-prism">src/app/service/localStorage/user-liked-song.service.ts:35</a></div>
                         </td>
                     </tr>
 
@@ -467,8 +464,8 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="70"
-                                    class="link-to-prism">src/app/service/localStorage/user-liked-song.service.ts:70</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="59"
+                                    class="link-to-prism">src/app/service/localStorage/user-liked-song.service.ts:59</a></div>
                         </td>
                     </tr>
 
@@ -516,49 +513,6 @@
                         </div>
                             <div class="io-description">
                                 <p>The user liked songs object or null if not found.</p>
-
-                            </div>
-                </td>
-            </tr>
-        </tbody>
-    </table>
-    <table class="table table-sm table-bordered">
-        <tbody>
-            <tr>
-                <td class="col-md-4">
-                    <a name="getLocalISOString"></a>
-                    <span class="name">
-                        <span ><b>getLocalISOString</b></span>
-                        <a href="#getLocalISOString"><span class="icon ion-ios-link"></span></a>
-                    </span>
-                </td>
-            </tr>
-            <tr>
-                <td class="col-md-4">
-<code>getLocalISOString()</code>
-                </td>
-            </tr>
-
-
-                    <tr>
-                        <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="35"
-                                    class="link-to-prism">src/app/service/localStorage/user-liked-song.service.ts:35</a></div>
-                        </td>
-                    </tr>
-
-
-            <tr>
-                <td class="col-md-4">
-                        <div class="io-description"><p>Returns the current date and time in ISO format adjusted for local time.</p>
-</div>
-
-                        <div class="io-description">
-                            <b>Returns : </b>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
-
-                        </div>
-                            <div class="io-description">
-                                <p>Local ISO string (YYYY-MM-DDTHH:MM:SS)</p>
 
                             </div>
                 </td>
@@ -643,17 +597,6 @@ export class UserLikedSongsService {
      */
     private isBrowser(): boolean {
         return typeof window !&#x3D;&#x3D; &#x27;undefined&#x27; &amp;&amp; typeof window.localStorage !&#x3D;&#x3D; &#x27;undefined&#x27;;
-    }
-
-    /**
-     * Returns the current date and time in ISO format adjusted for local time.
-     *
-     * @returns Local ISO string (YYYY-MM-DDTHH:MM:SS)
-     */
-    getLocalISOString(): string {
-        const now &#x3D; new Date();
-        const pad &#x3D; (n: number) &#x3D;&gt; n.toString().padStart(2, &#x27;0&#x27;);
-        return &#x60;${now.getFullYear()}-${pad(now.getMonth() + 1)}-${pad(now.getDate())}T${pad(now.getHours())}:${pad(now.getMinutes())}:${pad(now.getSeconds())}&#x60;;
     }
 
     /**

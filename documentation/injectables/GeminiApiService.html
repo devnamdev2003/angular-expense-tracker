@@ -207,12 +207,12 @@ and retrieves AI-generated insights for the user.</p>
             <tbody>
                 <tr>
                     <td class="col-md-4">
-<code>constructor(http: HttpClient, globalLoaderService: <a href="../injectables/GlobalLoaderService.html" target="_self">GlobalLoaderService</a>, expenseService: <a href="../injectables/ExpenseService.html" target="_self">ExpenseService</a>)</code>
+<code>constructor(http: HttpClient, globalLoaderService: <a href="../injectables/GlobalLoaderService.html" target="_self">GlobalLoaderService</a>, expenseService: <a href="../injectables/ExpenseService.html" target="_self">ExpenseService</a>, configService: <a href="../injectables/ConfigService.html" target="_self">ConfigService</a>)</code>
                     </td>
                 </tr>
                         <tr>
                             <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="23" class="link-to-prism">src/app/service/gemini-api/gemini-api.service.ts:23</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="24" class="link-to-prism">src/app/service/gemini-api/gemini-api.service.ts:24</a></div>
                             </td>
                         </tr>
 
@@ -280,6 +280,22 @@ and retrieves AI-generated insights for the user.</p>
 
                                                         </td>
                                                 </tr>
+                                                <tr>
+                                                        <td>configService</td>
+                                                  
+                                                        <td>
+                                                                        <code><a href="../injectables/ConfigService.html" target="_self" >ConfigService</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                        <td>
+                                                                <p>Service to fetch configuration values</p>
+
+                                                        </td>
+                                                </tr>
                                         </tbody>
                                     </table>
                             </div>
@@ -314,8 +330,8 @@ and retrieves AI-generated insights for the user.</p>
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="103"
-                                    class="link-to-prism">src/app/service/gemini-api/gemini-api.service.ts:103</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="106"
+                                    class="link-to-prism">src/app/service/gemini-api/gemini-api.service.ts:106</a></div>
                         </td>
                     </tr>
 
@@ -406,8 +422,8 @@ Includes instructions for the model and the last 30 days of expenses.</p>
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="74"
-                                    class="link-to-prism">src/app/service/gemini-api/gemini-api.service.ts:74</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="77"
+                                    class="link-to-prism">src/app/service/gemini-api/gemini-api.service.ts:77</a></div>
                         </td>
                     </tr>
 
@@ -453,8 +469,8 @@ amount, note, location, date, category_name, payment_mode, isExtraSpending.</p>
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="45"
-                                    class="link-to-prism">src/app/service/gemini-api/gemini-api.service.ts:45</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="48"
+                                    class="link-to-prism">src/app/service/gemini-api/gemini-api.service.ts:48</a></div>
                         </td>
                     </tr>
 
@@ -534,7 +550,7 @@ Enhances the prompt with the user&#39;s last 30 days of expenses.</p>
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="23" class="link-to-prism">src/app/service/gemini-api/gemini-api.service.ts:23</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="24" class="link-to-prism">src/app/service/gemini-api/gemini-api.service.ts:24</a></div>
                         </td>
                     </tr>
 
@@ -559,6 +575,7 @@ import { environment } from &#x27;../../../environments/environments&#x27;;
 import { firstValueFrom } from &#x27;rxjs&#x27;;
 import { GlobalLoaderService } from &#x27;../global-loader/global-loader.service&#x27;;
 import { ExpenseService, Expense } from &#x27;../localStorage/expense.service&#x27;;
+import { ConfigService } from &#x27;../config/config.service&#x27;;
 
 /**
  * GeminiApiService
@@ -583,11 +600,13 @@ export class GeminiApiService {
    * @param http Angular HttpClient for API requests.
    * @param globalLoaderService Service to show/hide global loading indicators.
    * @param expenseService Service to fetch expense data from local storage.
+   * @param configService Service to fetch configuration values 
    */
   constructor(
     private http: HttpClient,
     private globalLoaderService: GlobalLoaderService,
-    private expenseService: ExpenseService
+    private expenseService: ExpenseService,
+    private configService: ConfigService
   ) {}
 
   /**
@@ -630,8 +649,8 @@ export class GeminiApiService {
     Expense,
     &#x27;amount&#x27; | &#x27;note&#x27; | &#x27;location&#x27; | &#x27;date&#x27; | &#x27;category_name&#x27; | &#x27;payment_mode&#x27; | &#x27;isExtraSpending&#x27;
   &gt;[] {
-    const toDate &#x3D; new Date();
-    const fromDate &#x3D; new Date();
+    const toDate &#x3D; new Date(this.configService.getLocalTime());
+    const fromDate &#x3D; new Date(this.configService.getLocalTime());
     fromDate.setDate(toDate.getDate() - 29);
 
     const results &#x3D; this.expenseService.searchByDateRange(fromDate.toISOString(), toDate.toISOString());

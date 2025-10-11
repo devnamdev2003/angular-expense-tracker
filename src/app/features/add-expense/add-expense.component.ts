@@ -4,6 +4,7 @@ import { ExpenseService } from '../../service/localStorage/expense.service';
 import { CategoryDropdownComponent } from '../../component/category-dropdown/category-dropdown.component';
 import { CommonModule } from '@angular/common';
 import { ToastService } from '../../service/toast/toast.service';
+import { ConfigService } from '../../service/config/config.service';
 
 /**
   * @component
@@ -52,11 +53,13 @@ export class AddExpenseComponent implements OnInit {
    * @param fb FormBuilder instance
    * @param expenseService LocalStorage-based expense service
    * @param toastService Toast notification service
+   * @param configService Service to fetch configuration values 
    */
   constructor(
     private fb: FormBuilder,
     private expenseService: ExpenseService,
-    private toastService: ToastService
+    private toastService: ToastService,
+    private configService: ConfigService
   ) {
     this.expenseForm = this.createForm();
   }
@@ -99,7 +102,7 @@ export class AddExpenseComponent implements OnInit {
 
   /** Resets the form with the current date and time */
   resetFormWithCurrentDateTime(): void {
-    const now = new Date();
+    const now = new Date(this.configService.getLocalTime());
 
     const dateStr = `${now.getFullYear()}-${(now.getMonth() + 1).toString().padStart(2, '0')}-${now.getDate().toString().padStart(2, '0')}`;
     const timeStr = `${now.getHours().toString().padStart(2, '0')}:${now.getMinutes().toString().padStart(2, '0')}:${now.getSeconds().toString().padStart(2, '0')}`;
