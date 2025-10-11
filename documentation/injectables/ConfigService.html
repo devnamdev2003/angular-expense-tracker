@@ -203,6 +203,9 @@
                                 <a href="#getAppName" >getAppName</a>
                             </li>
                             <li>
+                                <a href="#getLocalTime" >getLocalTime</a>
+                            </li>
+                            <li>
                                 <a href="#getVersion" >getVersion</a>
                             </li>
                         </ul>
@@ -337,6 +340,45 @@
                                 <p>The application name.</p>
 
                             </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="getLocalTime"></a>
+                    <span class="name">
+                        <span ><b>getLocalTime</b></span>
+                        <a href="#getLocalTime"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>getLocalTime()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="100"
+                                    class="link-to-prism">src/app/service/config/config.service.ts:100</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-description"><p>Returns the current local time as a string in HH:MM:SS format</p>
+</div>
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+
+                        </div>
                 </td>
             </tr>
         </tbody>
@@ -692,6 +734,29 @@ export class ConfigService {
    */
   getVersion(): string {
     return this.version;
+  }
+
+  /**
+  * Returns the current local time as a string in HH:MM:SS format
+  */
+  getLocalTime(): string {
+    // 1. Get the current local time
+    const now &#x3D; new Date();
+
+    // 2. Get components of local time
+    const year &#x3D; now.getFullYear();
+    const month &#x3D; String(now.getMonth() + 1).padStart(2, &#x27;0&#x27;); // months are 0-indexed
+    const day &#x3D; String(now.getDate()).padStart(2, &#x27;0&#x27;);
+    const hours &#x3D; String(now.getHours()).padStart(2, &#x27;0&#x27;);
+    const minutes &#x3D; String(now.getMinutes()).padStart(2, &#x27;0&#x27;);
+    const seconds &#x3D; String(now.getSeconds()).padStart(2, &#x27;0&#x27;);
+    const milliseconds &#x3D; String(now.getMilliseconds()).padStart(3, &#x27;0&#x27;);
+
+    // 3. Combine into ISO-like string (local time)
+    const localISOString &#x3D; &#x60;${year}-${month}-${day}T${hours}:${minutes}:${seconds}.${milliseconds}&#x60;;
+
+    console.log(localISOString); // e.g. &quot;2025-10-11T13:35:58.942&quot;
+    return localISOString;
   }
 }
 </code></pre>

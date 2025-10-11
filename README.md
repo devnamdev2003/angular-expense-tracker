@@ -95,7 +95,7 @@ All expenses are stored in the device's **LocalStorage** and reflected immediate
 Provides customization and utility options for better personalization:
 
 * 🎨 **Theme Mode Toggle** (Dark / Light)
-* ⬇️ **Download Data** (export expenses data in pdf, json, excel formats. between the selected date range)
+* ⬇️ **Download Data**: Export your expenses in **PDF**, **JSON**, or **Excel** formats between the selected date range. Users can also choose **All Data** to export all expense records.
 * 📤 **Import Data** (upload expense data)
 * ➕ **Add Category** (custom categories for better organization)
 * ❌ **Delete Category** (remove unused or incorrect categories)
@@ -150,10 +150,10 @@ For developers and contributors, detailed code-level documentation is available 
     justify-items: center;
     padding: 16px;
 ">
-    <img src="https://devnamdev2003.github.io/angular-expense-tracker/public/assets/appScreenshot/home.jpg" alt="home" style="width: 200px; border-radius: 8px;">
-    <img src="https://devnamdev2003.github.io/angular-expense-tracker/public/assets/appScreenshot/add.jpg" alt="add" style="width: 200px; border-radius: 8px;">
-    <img src="https://devnamdev2003.github.io/angular-expense-tracker/public/assets/appScreenshot/calendar.jpg" alt="calendar" style="width: 200px; border-radius: 8px;">
-    <img src="https://devnamdev2003.github.io/angular-expense-tracker/public/assets/appScreenshot/settings.jpg" alt="settings" style="width: 200px; border-radius: 8px;">
-    <img src="https://devnamdev2003.github.io/angular-expense-tracker/public/assets/appScreenshot/budget.jpg" alt="budget" style="width: 200px; border-radius: 8px;">
-    <img src="https://devnamdev2003.github.io/angular-expense-tracker/public/assets/appScreenshot/list.jpg" alt="list" style="width: 200px; border-radius: 8px;">
+    <img src="https://exwise.vercel.app/assets/appScreenshot/home.jpg" alt="home" style="width: 200px; border-radius: 8px;">
+    <img src="https://exwise.vercel.app/assets/appScreenshot/add.jpg" alt="add" style="width: 200px; border-radius: 8px;">
+    <img src="https://exwise.vercel.app/assets/appScreenshot/calendar.jpg" alt="calendar" style="width: 200px; border-radius: 8px;">
+    <img src="https://exwise.vercel.app/assets/appScreenshot/settings.jpg" alt="settings" style="width: 200px; border-radius: 8px;">
+    <img src="https://exwise.vercel.app/assets/appScreenshot/budget.jpg" alt="budget" style="width: 200px; border-radius: 8px;">
+    <img src="https://exwise.vercel.app/assets/appScreenshot/list.jpg" alt="list" style="width: 200px; border-radius: 8px;">
 </div>

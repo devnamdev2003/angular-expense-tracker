@@ -149,8 +149,8 @@
             </p>
             <p class="comment">
                 <p>Represents a single heatmap summary entry.
-This interface is used to describe the color intensity, total days,
-and total expense amount for a specific heat level in the calendar heatmap.</p>
+Describes the color intensity, total days, total expense amount,
+and label text for a specific heat level in the calendar heatmap.</p>
 
             </p>
 
@@ -183,6 +183,12 @@ and total expense amount for a specific heat level in the calendar heatmap.</p>
                                         <a href="#days" 
 >
                                             days
+                                        </a>
+                                </li>
+                                <li>
+                                        <a href="#text" 
+>
+                                            text
                                         </a>
                                 </li>
                             </ul>
@@ -316,6 +322,46 @@ Used to group days with similar spending intensity.</p>
                             </tr>
                         </tbody>
                     </table>
+                    <table class="table table-sm table-bordered">
+                        <tbody>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <a name="text"></a>
+                                        <span class="name "><b>text</b>
+                                            <a href="#text">
+                                                <span class="icon ion-ios-link"></span>
+                                            </a>
+                                        </span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <code>text:         <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+</code>
+                                    </td>
+                                </tr>
+
+
+                                    <tr>
+                                        <td class="col-md-4">
+                                            <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+
+                                        </td>
+                                    </tr>
+
+
+
+
+
+                            <tr>
+                                <td class="col-md-4">
+                                    <div class="io-description"><p>The label or descriptive text associated with this heat level.
+Can be used in UI legends or tooltips.</p>
+</div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
             </section>
     </div>
 
@@ -339,6 +385,12 @@ Used to group days with similar spending intensity.</p>
      * Helps calculate and display the spending range for the legend.
      */
     amount: number;
+
+    /**
+     * The label or descriptive text associated with this heat level.
+     * Can be used in UI legends or tooltips.
+     */
+    text: string;
 }
 </code></pre>
     </div>

@@ -192,6 +192,10 @@ and broadcast updates across the application in real time.</p>
                                 <a href="#getDeviceType" >getDeviceType</a>
                             </li>
                             <li>
+                                    <span class="modifier">Private</span>
+                                <a href="#isBrowser" >isBrowser</a>
+                            </li>
+                            <li>
                                 <a href="#isDesktop" >isDesktop</a>
                             </li>
                             <li>
@@ -294,8 +298,8 @@ runs when the resize event triggers.</p>
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="74"
-                                    class="link-to-prism">src/app/service/screen-type/screen-type.service.ts:74</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="84"
+                                    class="link-to-prism">src/app/service/screen-type/screen-type.service.ts:84</a></div>
                         </td>
                     </tr>
 
@@ -331,6 +335,45 @@ runs when the resize event triggers.</p>
         <tbody>
             <tr>
                 <td class="col-md-4">
+                    <a name="isBrowser"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                        <span ><b>isBrowser</b></span>
+                        <a href="#isBrowser"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                        <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>isBrowser()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="72"
+                                    class="link-to-prism">src/app/service/screen-type/screen-type.service.ts:72</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
                     <a name="isDesktop"></a>
                     <span class="name">
                         <span ><b>isDesktop</b></span>
@@ -347,8 +390,8 @@ runs when the resize event triggers.</p>
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="109"
-                                    class="link-to-prism">src/app/service/screen-type/screen-type.service.ts:109</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="115"
+                                    class="link-to-prism">src/app/service/screen-type/screen-type.service.ts:115</a></div>
                         </td>
                     </tr>
 
@@ -390,8 +433,8 @@ runs when the resize event triggers.</p>
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="91"
-                                    class="link-to-prism">src/app/service/screen-type/screen-type.service.ts:91</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="97"
+                                    class="link-to-prism">src/app/service/screen-type/screen-type.service.ts:97</a></div>
                         </td>
                     </tr>
 
@@ -433,8 +476,8 @@ runs when the resize event triggers.</p>
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="100"
-                                    class="link-to-prism">src/app/service/screen-type/screen-type.service.ts:100</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="106"
+                                    class="link-to-prism">src/app/service/screen-type/screen-type.service.ts:106</a></div>
                         </td>
                     </tr>
 
@@ -473,11 +516,6 @@ runs when the resize event triggers.</p>
                     </span>
                 </td>
             </tr>
-                <tr>
-                    <td class="col-md-4">
-                        <i>Default value : </i><code>this.deviceTypeSubject.asObservable()</code>
-                    </td>
-                </tr>
                     <tr>
                         <td class="col-md-4">
                                 <div class="io-line">Defined in <a href="" data-line="49" class="link-to-prism">src/app/service/screen-type/screen-type.service.ts:49</a></div>
@@ -509,7 +547,8 @@ the browser window is resized and the screen type changes.</p>
             </tr>
                 <tr>
                     <td class="col-md-4">
-                        <i>Default value : </i><code>new BehaviorSubject&lt;DeviceType&gt;(this.getDeviceType())</code>
+                        <i>Type : </i>        <code><a href="../miscellaneous/typealiases.html#DeviceType" target="_self" >BehaviorSubject&lt;DeviceType&gt;</a></code>
+
                     </td>
                 </tr>
                     <tr>
@@ -571,7 +610,7 @@ export class ScreenTypeService {
    * Internal BehaviorSubject that stores the latest detected {@link DeviceType}.
    * Initialized with the current screen type on service creation.
    */
-  private deviceTypeSubject &#x3D; new BehaviorSubject&lt;DeviceType&gt;(this.getDeviceType());
+  private deviceTypeSubject: BehaviorSubject&lt;DeviceType&gt;;
 
   /**
    * Observable stream that emits the latest {@link DeviceType} whenever
@@ -582,7 +621,7 @@ export class ScreenTypeService {
    * this.screenTypeService.deviceType$.subscribe(type &#x3D;&gt; { ... });
    * &#x60;&#x60;&#x60;
    */
-  deviceType$ &#x3D; this.deviceTypeSubject.asObservable();
+  deviceType$;
 
   /**
    * Creates an instance of ScreenTypeService.
@@ -592,11 +631,21 @@ export class ScreenTypeService {
    */
   constructor(private ngZone: NgZone) {
     // Listen to window resize events inside Angular zone
-    window.addEventListener(&#x27;resize&#x27;, () &#x3D;&gt; {
-      this.ngZone.run(() &#x3D;&gt; {
-        this.deviceTypeSubject.next(this.getDeviceType());
+    const initialType &#x3D; this.isBrowser() ? this.getDeviceType() : &#x27;desktop&#x27;;
+    this.deviceTypeSubject &#x3D; new BehaviorSubject&lt;DeviceType&gt;(initialType);
+    this.deviceType$ &#x3D; this.deviceTypeSubject.asObservable();
+
+    if (this.isBrowser()) {
+      window.addEventListener(&#x27;resize&#x27;, () &#x3D;&gt; {
+        this.ngZone.run(() &#x3D;&gt; {
+          this.deviceTypeSubject.next(this.getDeviceType());
+        });
       });
-    });
+    }
+  }
+
+  private isBrowser(): boolean {
+    return typeof window !&#x3D;&#x3D; &#x27;undefined&#x27;;
   }
 
   /**
@@ -608,15 +657,11 @@ export class ScreenTypeService {
    * - &#x60;&#x27;desktop&#x27;&#x60; if width &gt; 1024px
    */
   getDeviceType(): DeviceType {
+    if (!this.isBrowser()) return &#x27;desktop&#x27;;
     const width &#x3D; window.innerWidth;
-
-    if (width &lt;&#x3D; 768) {
-      return &#x27;mobile&#x27;;
-    } else if (width &lt;&#x3D; 1024) {
-      return &#x27;tablet&#x27;;
-    } else {
-      return &#x27;desktop&#x27;;
-    }
+    if (width &lt;&#x3D; 768) return &#x27;mobile&#x27;;
+    if (width &lt;&#x3D; 1024) return &#x27;tablet&#x27;;
+    return &#x27;desktop&#x27;;
   }
 
   /**

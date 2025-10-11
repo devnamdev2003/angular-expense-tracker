@@ -5,6 +5,7 @@ import { Budget, BudgetService } from '../../service/localStorage/budget.service
 import { CommonModule } from '@angular/common';
 import { ToastService } from '../../service/toast/toast.service';
 import { UserService } from '../../service/localStorage/user.service';
+import { ConfigService } from '../../service/config/config.service';
 
 /**
  * Component responsible for managing budget creation, editing, progress tracking,
@@ -123,6 +124,7 @@ export class BudgetComponent implements OnInit {
    * @param toastService Service for displaying success/error notifications.
    * @param fb Angular FormBuilder for constructing the reactive form.
    * @param userService Service for retrieving user-specific settings (currency, theme).
+   * @param configService Service to fetch configuration values 
    */
   constructor(
     private expenseService: ExpenseService,
@@ -130,6 +132,7 @@ export class BudgetComponent implements OnInit {
     private toastService: ToastService,
     private fb: FormBuilder,
     private userService: UserService,
+    private configService: ConfigService
   ) {
     // Load user currency preference
     this.currency = this.userService.getValue<string>('currency');
@@ -302,7 +305,7 @@ export class BudgetComponent implements OnInit {
 
     // Calculate average daily insights
     const totalDays = Math.ceil((toDate.getTime() - fromDate.getTime()) / (1000 * 60 * 60 * 24)) + 1;
-    const today = new Date();
+    const today = new Date(this.configService.getLocalTime());
     const elapsedDays = Math.max(Math.ceil((today.getTime() - fromDate.getTime()) / (1000 * 60 * 60 * 24)), 1);
     const remainingDays = Math.max(totalDays - elapsedDays, 1);
 

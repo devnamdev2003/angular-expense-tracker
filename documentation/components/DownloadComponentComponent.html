@@ -248,11 +248,18 @@ and triggers the download of filtered expense data.</p>
                                 <a href="#confirmAndDownload" >confirmAndDownload</a>
                             </li>
                             <li>
+                                <a href="#downloadAllData" >downloadAllData</a>
+                            </li>
+                            <li>
                                 <a href="#downloadData" >downloadData</a>
                             </li>
                             <li>
                                     <span class="modifier">Private</span>
                                 <a href="#exportToExcel" >exportToExcel</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Private</span>
+                                <a href="#exportToJSON" >exportToJSON</a>
                             </li>
                             <li>
                                     <span class="modifier">Private</span>
@@ -263,10 +270,6 @@ and triggers the download of filtered expense data.</p>
                             </li>
                             <li>
                                 <a href="#openDownloadDataModal" >openDownloadDataModal</a>
-                            </li>
-                            <li>
-                                    <span class="modifier">Private</span>
-                                <a href="#triggerDownload" >triggerDownload</a>
                             </li>
                         </ul>
                     </td>
@@ -286,12 +289,12 @@ and triggers the download of filtered expense data.</p>
             <tbody>
                 <tr>
                     <td class="col-md-4">
-<code>constructor(expenseService: <a href="../injectables/ExpenseService.html" target="_self">ExpenseService</a>, fb: FormBuilder, toastService: <a href="../injectables/ToastService.html" target="_self">ToastService</a>, categoryService: <a href="../injectables/CategoryService.html" target="_self">CategoryService</a>, userService: <a href="../injectables/UserService.html" target="_self">UserService</a>, budgetService: <a href="../injectables/BudgetService.html" target="_self">BudgetService</a>)</code>
+<code>constructor(expenseService: <a href="../injectables/ExpenseService.html" target="_self">ExpenseService</a>, fb: FormBuilder, toastService: <a href="../injectables/ToastService.html" target="_self">ToastService</a>, categoryService: <a href="../injectables/CategoryService.html" target="_self">CategoryService</a>, userService: <a href="../injectables/UserService.html" target="_self">UserService</a>, budgetService: <a href="../injectables/BudgetService.html" target="_self">BudgetService</a>, configService: <a href="../injectables/ConfigService.html" target="_self">ConfigService</a>)</code>
                     </td>
                 </tr>
                         <tr>
                             <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="67" class="link-to-prism">src/app/component/settings-components/download-component/download-component.component.ts:67</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="68" class="link-to-prism">src/app/component/settings-components/download-component/download-component.component.ts:68</a></div>
                             </td>
                         </tr>
 
@@ -407,6 +410,22 @@ and triggers the download of filtered expense data.</p>
 
                                                         </td>
                                                 </tr>
+                                                <tr>
+                                                        <td>configService</td>
+                                                  
+                                                        <td>
+                                                                        <code><a href="../injectables/ConfigService.html" target="_self" >ConfigService</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                        <td>
+                                                                <p>Service to fetch configuration values</p>
+
+                                                        </td>
+                                                </tr>
                                         </tbody>
                                     </table>
                             </div>
@@ -445,8 +464,8 @@ and triggers the download of filtered expense data.</p>
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="224"
-                                    class="link-to-prism">src/app/component/settings-components/download-component/download-component.component.ts:224</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="227"
+                                    class="link-to-prism">src/app/component/settings-components/download-component/download-component.component.ts:227</a></div>
                         </td>
                     </tr>
 
@@ -484,8 +503,8 @@ and triggers the download of filtered expense data.</p>
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="119"
-                                    class="link-to-prism">src/app/component/settings-components/download-component/download-component.component.ts:119</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="122"
+                                    class="link-to-prism">src/app/component/settings-components/download-component/download-component.component.ts:122</a></div>
                         </td>
                     </tr>
 
@@ -494,6 +513,48 @@ and triggers the download of filtered expense data.</p>
                 <td class="col-md-4">
                         <div class="io-description"><p>Validates date range and triggers the appropriate
 export function (JSON, PDF, Excel) based on user selection.</p>
+</div>
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="downloadAllData"></a>
+                    <span class="name">
+                        <span ><b>downloadAllData</b></span>
+                        <a href="#downloadAllData"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>downloadAllData()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="345"
+                                    class="link-to-prism">src/app/component/settings-components/download-component/download-component.component.ts:345</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-description"><p>Populates the date fields with the entire expense history range.</p>
+<p>Fetches all expenses, determines the earliest and latest expense dates,
+and sets the &#39;From Date&#39; and &#39;To Date&#39; fields in the form to cover
+the full date range of the user&#39;s data, defaulting the file type to JSON.</p>
 </div>
 
                         <div class="io-description">
@@ -524,8 +585,8 @@ export function (JSON, PDF, Excel) based on user selection.</p>
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="107"
-                                    class="link-to-prism">src/app/component/settings-components/download-component/download-component.component.ts:107</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="110"
+                                    class="link-to-prism">src/app/component/settings-components/download-component/download-component.component.ts:110</a></div>
                         </td>
                     </tr>
 
@@ -566,8 +627,8 @@ export function (JSON, PDF, Excel) based on user selection.</p>
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="302"
-                                    class="link-to-prism">src/app/component/settings-components/download-component/download-component.component.ts:302</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="305"
+                                    class="link-to-prism">src/app/component/settings-components/download-component/download-component.component.ts:305</a></div>
                         </td>
                     </tr>
 
@@ -624,6 +685,114 @@ export function (JSON, PDF, Excel) based on user selection.</p>
         <tbody>
             <tr>
                 <td class="col-md-4">
+                    <a name="exportToJSON"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                        <span ><b>exportToJSON</b></span>
+                        <a href="#exportToJSON"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                        <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>exportToJSON(content: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>, mimeType: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>, extension: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="194"
+                                    class="link-to-prism">src/app/component/settings-components/download-component/download-component.component.ts:194</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-description"><p>Creates a file blob and triggers the browser to download it.</p>
+</div>
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                                <td>Description</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>content</td>
+                                            <td>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                            <td>
+                                                    <p>File content to download.</p>
+
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                                <td>mimeType</td>
+                                            <td>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                            <td>
+                                                    <p>MIME type of the file.</p>
+
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                                <td>extension</td>
+                                            <td>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                            <td>
+                                                    <p>File extension (json, pdf, xlsx).</p>
+
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
                     <a name="exportToPDF"></a>
                     <span class="name">
                             <span class="modifier">Private</span>
@@ -642,8 +811,8 @@ export function (JSON, PDF, Excel) based on user selection.</p>
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="235"
-                                    class="link-to-prism">src/app/component/settings-components/download-component/download-component.component.ts:235</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="238"
+                                    class="link-to-prism">src/app/component/settings-components/download-component/download-component.component.ts:238</a></div>
                         </td>
                     </tr>
 
@@ -748,8 +917,8 @@ export function (JSON, PDF, Excel) based on user selection.</p>
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="94"
-                                    class="link-to-prism">src/app/component/settings-components/download-component/download-component.component.ts:94</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="97"
+                                    class="link-to-prism">src/app/component/settings-components/download-component/download-component.component.ts:97</a></div>
                         </td>
                     </tr>
 
@@ -788,8 +957,8 @@ with default controls and validators.</p>
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="210"
-                                    class="link-to-prism">src/app/component/settings-components/download-component/download-component.component.ts:210</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="213"
+                                    class="link-to-prism">src/app/component/settings-components/download-component/download-component.component.ts:213</a></div>
                         </td>
                     </tr>
 
@@ -804,114 +973,6 @@ to its initial state.</p>
                             <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
 
                         </div>
-                </td>
-            </tr>
-        </tbody>
-    </table>
-    <table class="table table-sm table-bordered">
-        <tbody>
-            <tr>
-                <td class="col-md-4">
-                    <a name="triggerDownload"></a>
-                    <span class="name">
-                            <span class="modifier">Private</span>
-                        <span ><b>triggerDownload</b></span>
-                        <a href="#triggerDownload"><span class="icon ion-ios-link"></span></a>
-                    </span>
-                </td>
-            </tr>
-            <tr>
-                <td class="col-md-4">
-                        <span class="modifier-icon icon ion-ios-reset"></span>
-                    <code>triggerDownload(content: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>, mimeType: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>, extension: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>)</code>
-                </td>
-            </tr>
-
-
-                    <tr>
-                        <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="191"
-                                    class="link-to-prism">src/app/component/settings-components/download-component/download-component.component.ts:191</a></div>
-                        </td>
-                    </tr>
-
-
-            <tr>
-                <td class="col-md-4">
-                        <div class="io-description"><p>Creates a file blob and triggers the browser to download it.</p>
-</div>
-
-                            <div class="io-description">
-                                <b>Parameters :</b>
-                                
-                                <table class="params">
-                                    <thead>
-                                        <tr>
-                                            <td>Name</td>
-                                                <td>Type</td>
-                                            <td>Optional</td>
-                                                <td>Description</td>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr>
-                                                <td>content</td>
-                                            <td>
-                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
-                                            </td>
-
-                                            <td>
-                                                    No
-                                            </td>
-
-
-                                            <td>
-                                                    <p>File content to download.</p>
-
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                                <td>mimeType</td>
-                                            <td>
-                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
-                                            </td>
-
-                                            <td>
-                                                    No
-                                            </td>
-
-
-                                            <td>
-                                                    <p>MIME type of the file.</p>
-
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                                <td>extension</td>
-                                            <td>
-                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
-                                            </td>
-
-                                            <td>
-                                                    No
-                                            </td>
-
-
-                                            <td>
-                                                    <p>File extension (json, pdf, xlsx).</p>
-
-                                            </td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                            </div>
-                        <div class="io-description">
-                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
-
-                        </div>
-                            <div class="io-description">
-                                
-                            </div>
                 </td>
             </tr>
         </tbody>
@@ -941,7 +1002,7 @@ to its initial state.</p>
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="56" class="link-to-prism">src/app/component/settings-components/download-component/download-component.component.ts:56</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="57" class="link-to-prism">src/app/component/settings-components/download-component/download-component.component.ts:57</a></div>
                         </td>
                     </tr>
 
@@ -972,7 +1033,7 @@ to its initial state.</p>
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="61" class="link-to-prism">src/app/component/settings-components/download-component/download-component.component.ts:61</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="62" class="link-to-prism">src/app/component/settings-components/download-component/download-component.component.ts:62</a></div>
                         </td>
                     </tr>
 
@@ -1004,7 +1065,7 @@ to its initial state.</p>
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="67" class="link-to-prism">src/app/component/settings-components/download-component/download-component.component.ts:67</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="68" class="link-to-prism">src/app/component/settings-components/download-component/download-component.component.ts:68</a></div>
                         </td>
                     </tr>
 
@@ -1037,6 +1098,7 @@ import { ExpenseService, Expense } from &#x27;../../../service/localStorage/expe
 import { Category, CategoryService } from &#x27;../../../service/localStorage/category.service&#x27;;
 import { UserService, User } from &#x27;../../../service/localStorage/user.service&#x27;;
 import { Budget, BudgetService } from &#x27;../../../service/localStorage/budget.service&#x27;;
+import { ConfigService } from &#x27;../../../service/config/config.service&#x27;;
 
 /**
  * Interface representing the structure of user data
@@ -1050,7 +1112,7 @@ export interface UserData {
 
   /** Category data */
   categoryData: Category[] | [],
-  
+
   /** Budget data */
   budgetData: Budget[] | []
 };
@@ -1100,7 +1162,8 @@ export class DownloadComponentComponent {
    * @param toastService Service used to show toast notifications.
    * @param categoryService Service to fetch category data.
    * @param userService Service to fetch user data.
-   * @param budgetService Service to fetch budget data.
+   * @param budgetService Service to fetch budget data. 
+   * @param configService Service to fetch configuration values 
    */
   constructor(
     private expenseService: ExpenseService,
@@ -1109,8 +1172,9 @@ export class DownloadComponentComponent {
     private categoryService: CategoryService,
     private userService: UserService,
     private budgetService: BudgetService,
+    private configService: ConfigService
   ) {
-    this.today &#x3D; new Date().toISOString().split(&#x27;T&#x27;)[0];
+    this.today &#x3D; this.configService.getLocalTime().split(&#x27;T&#x27;)[0];
   }
 
   /**
@@ -1121,7 +1185,7 @@ export class DownloadComponentComponent {
     this.downloadDataForm &#x3D; this.fb.group({
       fromDate: [&#x27;&#x27;, [Validators.required]],
       toDate: [&#x27;&#x27;, [Validators.required]],
-      fileType: [&#x27;JSON&#x27;, [Validators.required]],
+      fileType: [&#x27;PDF&#x27;, [Validators.required]],
     });
   }
 
@@ -1174,7 +1238,7 @@ export class DownloadComponentComponent {
       expense_id: expense.expense_id,
       isExtraSpending: expense.isExtraSpending
     }));
-    
+
     // Prepare final data object
     const finalData: UserData &#x3D; {
       userData: userData || {},
@@ -1186,7 +1250,7 @@ export class DownloadComponentComponent {
     try {
       if (fileType &#x3D;&#x3D;&#x3D; &#x27;JSON&#x27;) {
         const jsonData &#x3D; JSON.stringify(finalData, null, 2);
-        this.triggerDownload(jsonData, &#x27;application/json&#x27;, &#x27;json&#x27;);
+        this.exportToJSON(jsonData, &#x27;application/json&#x27;, &#x27;json&#x27;);
         this.closeDownloadDataModal();
         this.toastService.show(&#x27;JSON downloaded successfully!&#x27;, &#x27;success&#x27;, 3000);
         return;
@@ -1214,12 +1278,12 @@ export class DownloadComponentComponent {
    * @param mimeType MIME type of the file.
    * @param extension File extension (json, pdf, xlsx).
    */
-  private triggerDownload(content: string, mimeType: string, extension: string): void {
+  private exportToJSON(content: string, mimeType: string, extension: string): void {
     const blob &#x3D; new Blob([content], { type: mimeType });
     const url &#x3D; window.URL.createObjectURL(blob);
     const link &#x3D; document.createElement(&#x27;a&#x27;);
     link.href &#x3D; url;
-    const timestamp &#x3D; new Date().toISOString().replace(/[:.]/g, &#x27;-&#x27;);
+    const timestamp &#x3D; this.configService.getLocalTime().replace(/[:.]/g, &#x27;-&#x27;);
     link.download &#x3D; &#x60;expenses-${timestamp}.${extension}&#x60;;
 
     document.body.appendChild(link);
@@ -1237,7 +1301,7 @@ export class DownloadComponentComponent {
     this.downloadDataForm.reset({
       fromDate: &#x27;&#x27;,
       toDate: &#x27;&#x27;,
-      fileType: &#x27;JSON&#x27;
+      fileType: &#x27;PDF&#x27;
     });
     this.downloadDataForm.markAsPristine();
     this.downloadDataForm.markAsUntouched();
@@ -1316,7 +1380,7 @@ export class DownloadComponentComponent {
     });
 
     // file name
-    const timestamp &#x3D; new Date().toISOString().replace(/[:.]/g, &#x27;-&#x27;);
+    const timestamp &#x3D; this.configService.getLocalTime().replace(/[:.]/g, &#x27;-&#x27;);
     doc.save(&#x60;expenses-${timestamp}.pdf&#x60;);
   }
 
@@ -1353,11 +1417,34 @@ export class DownloadComponentComponent {
     const worksheet &#x3D; XLSX.utils.aoa_to_sheet(aoa);
     XLSX.utils.book_append_sheet(workbook, worksheet, &#x27;Expenses&#x27;);
 
-    const timestamp &#x3D; new Date().toISOString().replace(/[:.]/g, &#x27;-&#x27;);
+    const timestamp &#x3D; this.configService.getLocalTime().replace(/[:.]/g, &#x27;-&#x27;);
     const filename &#x3D; &#x60;expenses-${timestamp}.xlsx&#x60;;
     XLSX.writeFile(workbook, filename);
   }
 
+  /**
+   * Populates the date fields with the entire expense history range.
+   *
+   * Fetches all expenses, determines the earliest and latest expense dates,
+   * and sets the &#x27;From Date&#x27; and &#x27;To Date&#x27; fields in the form to cover
+   * the full date range of the user&#x27;s data, defaulting the file type to JSON.
+   */
+  downloadAllData(): void {
+    const expenseData: Expense[] &#x3D; this.expenseService.getAll();
+    if (expenseData.length &gt; 0) {
+      expenseData.sort((a, b) &#x3D;&gt; new Date(b.date).getTime() - new Date(a.date).getTime());
+      const fromDate &#x3D; expenseData[expenseData.length - 1].date;
+      const toDate &#x3D; expenseData[0].date;
+      this.downloadDataForm.reset({
+        fromDate: fromDate,
+        toDate: toDate,
+        fileType: this.downloadDataForm.get(&#x27;fileType&#x27;)?.value || &#x27;PDF&#x27;
+      });
+    }
+    else {
+      this.toastService.show(&#x27;No expenses found&#x27;, &#x27;info&#x27;, 3000);
+    }
+  }
 }
 </code></pre>
     </div>
@@ -1392,14 +1479,14 @@ export class DownloadComponentComponent {
         &lt;label class&#x3D;&quot;block mb-1 font-medium&quot;&gt;File Type&lt;/label&gt;
         &lt;select formControlName&#x3D;&quot;fileType&quot;
             class&#x3D;&quot;w-full p-2 rounded border text-[var(--input-text)] bg-[var(--input-bg)] border-[var(--input-border)] focus:outline-none focus:ring-2 focus:ring-[var(--theme-color)] transition-all duration-200&quot;&gt;
-            &lt;option value&#x3D;&quot;JSON&quot;&gt;JSON&lt;/option&gt;
             &lt;option value&#x3D;&quot;PDF&quot;&gt;PDF&lt;/option&gt;
             &lt;option value&#x3D;&quot;EXCEL&quot;&gt;EXCEL&lt;/option&gt;
+            &lt;option value&#x3D;&quot;JSON&quot;&gt;JSON&lt;/option&gt;
         &lt;/select&gt;
 
         &lt;div class&#x3D;&quot;flex justify-end mt-2&quot;&gt;
-            &lt;button type&#x3D;&quot;button&quot; (click)&#x3D;&quot;closeDownloadDataModal()&quot;
-                class&#x3D;&quot;mr-2 px-4 py-2 bg-[var(--color-gray-500)] text-white rounded&quot;&gt;Cancel&lt;/button&gt;
+            &lt;button type&#x3D;&quot;button&quot; (click)&#x3D;&quot;downloadAllData()&quot;
+                class&#x3D;&quot;mr-2 px-4 py-2 bg-[var(--color-gray-500)] text-white rounded&quot;&gt;All Data&lt;/button&gt;
             &lt;button type&#x3D;&quot;submit&quot; class&#x3D;&quot;px-4 py-2 bg-[var(--color-accent)] text-white rounded&quot;&gt;Download&lt;/button&gt;
         &lt;/div&gt;
     &lt;/form&gt;
@@ -1432,7 +1519,7 @@ export class DownloadComponentComponent {
 <script src="../js/libs/htmlparser.js"></script>
 <script src="../js/libs/deep-iterator.js"></script>
 <script>
-        var COMPONENT_TEMPLATE = '<div><button (click)="openDownloadDataModal()"    class="p-2 rounded-lg bg-[var(--color-accent)] hover:opacity-90 transition flex items-center justify-center">    <img src="assets/img/icon/icons8-download-48.png" alt="Download" class="w-5 h-5" style="filter: invert(100%);" /></button><app-form-model *ngIf="showDownloadDataModal" [label]="\'Download Data\'" (close)="closeDownloadDataModal()">    <form [formGroup]="downloadDataForm" (ngSubmit)="downloadData()">        <label class="block mb-1 font-medium">From Date</label>        <input formControlName="fromDate" type="date" autocomplete="off" [max]="today" placeholder="From Date"            class="w-full p-2 rounded border text-[var(--input-text)] bg-[var(--input-bg)] border-[var(--input-border)] focus:outline-none focus:ring-2 focus:ring-[var(--theme-color)] transition-all duration-200" />        <div class="error-message text-[var(--color-error)]"            *ngIf="downloadDataForm.get(\'fromDate\')?.touched && downloadDataForm.get(\'fromDate\')?.errors?.[\'required\']">            From Date is required        </div>        <label class="block mb-1 font-medium">To Date</label>        <input formControlName="toDate" type="date" autocomplete="off" [max]="today"            [min]="downloadDataForm.get(\'fromDate\')?.value" placeholder="To Date"            class="w-full p-2 rounded border text-[var(--input-text)] bg-[var(--input-bg)] border-[var(--input-border)] focus:outline-none focus:ring-2 focus:ring-[var(--theme-color)] transition-all duration-200" />        <div class="error-message text-[var(--color-error)]"            *ngIf="downloadDataForm.get(\'toDate\')?.touched && downloadDataForm.get(\'toDate\')?.errors?.[\'required\']">            To Date is required        </div>        <label class="block mb-1 font-medium">File Type</label>        <select formControlName="fileType"            class="w-full p-2 rounded border text-[var(--input-text)] bg-[var(--input-bg)] border-[var(--input-border)] focus:outline-none focus:ring-2 focus:ring-[var(--theme-color)] transition-all duration-200">            <option value="JSON">JSON</option>            <option value="PDF">PDF</option>            <option value="EXCEL">EXCEL</option>        </select>        <div class="flex justify-end mt-2">            <button type="button" (click)="closeDownloadDataModal()"                class="mr-2 px-4 py-2 bg-[var(--color-gray-500)] text-white rounded">Cancel</button>            <button type="submit" class="px-4 py-2 bg-[var(--color-accent)] text-white rounded">Download</button>        </div>    </form></app-form-model></div>'
+        var COMPONENT_TEMPLATE = '<div><button (click)="openDownloadDataModal()"    class="p-2 rounded-lg bg-[var(--color-accent)] hover:opacity-90 transition flex items-center justify-center">    <img src="assets/img/icon/icons8-download-48.png" alt="Download" class="w-5 h-5" style="filter: invert(100%);" /></button><app-form-model *ngIf="showDownloadDataModal" [label]="\'Download Data\'" (close)="closeDownloadDataModal()">    <form [formGroup]="downloadDataForm" (ngSubmit)="downloadData()">        <label class="block mb-1 font-medium">From Date</label>        <input formControlName="fromDate" type="date" autocomplete="off" [max]="today" placeholder="From Date"            class="w-full p-2 rounded border text-[var(--input-text)] bg-[var(--input-bg)] border-[var(--input-border)] focus:outline-none focus:ring-2 focus:ring-[var(--theme-color)] transition-all duration-200" />        <div class="error-message text-[var(--color-error)]"            *ngIf="downloadDataForm.get(\'fromDate\')?.touched && downloadDataForm.get(\'fromDate\')?.errors?.[\'required\']">            From Date is required        </div>        <label class="block mb-1 font-medium">To Date</label>        <input formControlName="toDate" type="date" autocomplete="off" [max]="today"            [min]="downloadDataForm.get(\'fromDate\')?.value" placeholder="To Date"            class="w-full p-2 rounded border text-[var(--input-text)] bg-[var(--input-bg)] border-[var(--input-border)] focus:outline-none focus:ring-2 focus:ring-[var(--theme-color)] transition-all duration-200" />        <div class="error-message text-[var(--color-error)]"            *ngIf="downloadDataForm.get(\'toDate\')?.touched && downloadDataForm.get(\'toDate\')?.errors?.[\'required\']">            To Date is required        </div>        <label class="block mb-1 font-medium">File Type</label>        <select formControlName="fileType"            class="w-full p-2 rounded border text-[var(--input-text)] bg-[var(--input-bg)] border-[var(--input-border)] focus:outline-none focus:ring-2 focus:ring-[var(--theme-color)] transition-all duration-200">            <option value="PDF">PDF</option>            <option value="EXCEL">EXCEL</option>            <option value="JSON">JSON</option>        </select>        <div class="flex justify-end mt-2">            <button type="button" (click)="downloadAllData()"                class="mr-2 px-4 py-2 bg-[var(--color-gray-500)] text-white rounded">All Data</button>            <button type="submit" class="px-4 py-2 bg-[var(--color-accent)] text-white rounded">Download</button>        </div>    </form></app-form-model></div>'
     var COMPONENTS = [{'name': 'AddExpenseComponent', 'selector': 'app-add-expense'},{'name': 'AiComponent', 'selector': 'app-ai'},{'name': 'AppComponent', 'selector': 'app-root'},{'name': 'BudgetComponent', 'selector': 'app-budget'},{'name': 'CalendarComponent', 'selector': 'app-calendar'},{'name': 'CategoryDropdownComponent', 'selector': 'app-category-dropdown'},{'name': 'DownloadComponentComponent', 'selector': 'app-download-component'},{'name': 'ExpenseDetailsModalComponent', 'selector': 'app-expense-details-modal'},{'name': 'ExpenseListComponent', 'selector': 'app-expense-list'},{'name': 'ExpenseWiseComponent', 'selector': 'app-expense-wise'},{'name': 'FooterComponent', 'selector': 'app-footer'},{'name': 'FormModelComponent', 'selector': 'app-form-model'},{'name': 'GlobalLoaderComponent', 'selector': 'app-global-loader'},{'name': 'GraphsComponent', 'selector': 'app-graphs'},{'name': 'HamburgerMenuComponent', 'selector': 'app-hamburger-menu'},{'name': 'HomeComponent', 'selector': 'app-home'},{'name': 'InstallAppPopupComponentComponent', 'selector': 'app-install-app-popup-component'},{'name': 'ListExpensesComponent', 'selector': 'app-list-expenses'},{'name': 'MusicComponent', 'selector': 'app-music'},{'name': 'NavbarComponent', 'selector': 'app-navbar'},{'name': 'PieChartComponent', 'selector': 'app-pie-chart'},{'name': 'PlaylistMusicComponent', 'selector': 'app-playlist-music'},{'name': 'SearchButtonComponent', 'selector': 'app-search-button'},{'name': 'SearchMusicComponent', 'selector': 'app-search-music'},{'name': 'SettingItemComponent', 'selector': 'app-setting-item'},{'name': 'SettingsComponent', 'selector': 'app-settings'},{'name': 'SidebarComponent', 'selector': 'app-sidebar'},{'name': 'TemplatePlaygroundComponent', 'selector': 'template-playground-root'},{'name': 'ToastComponent', 'selector': 'app-toast'}];
     var DIRECTIVES = [];
     var ACTUAL_COMPONENT = {'name': 'DownloadComponentComponent'};

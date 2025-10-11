@@ -324,7 +324,7 @@ the application name and emits an event when the user clicks install.</p>
                                                     </td>
                                                     
                                                         <td>
-                                                                <p>Service to fetch configuration values such as the app name.</p>
+                                                                <p>Service to fetch configuration values</p>
 
                                                         </td>
                                                 </tr>
@@ -582,7 +582,7 @@ export class InstallAppPopupComponentComponent {
   /**
    * Creates an instance of the install popup component.
    *
-   * @param configService Service to fetch configuration values such as the app name.
+   * @param configService Service to fetch configuration values 
    */
   constructor(private configService: ConfigService) {
     this.appName &#x3D; this.configService.getAppName();

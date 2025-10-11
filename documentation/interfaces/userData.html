@@ -374,6 +374,7 @@ import { ExpenseService, Expense } from &#x27;../../../service/localStorage/expe
 import { Category, CategoryService } from &#x27;../../../service/localStorage/category.service&#x27;;
 import { UserService, User } from &#x27;../../../service/localStorage/user.service&#x27;;
 import { Budget, BudgetService } from &#x27;../../../service/localStorage/budget.service&#x27;;
+import { ConfigService } from &#x27;../../../service/config/config.service&#x27;;
 
 /**
  * Interface representing the structure of user data
@@ -387,7 +388,7 @@ export interface UserData {
 
   /** Category data */
   categoryData: Category[] | [],
-  
+
   /** Budget data */
   budgetData: Budget[] | []
 };
@@ -437,7 +438,8 @@ export class DownloadComponentComponent {
    * @param toastService Service used to show toast notifications.
    * @param categoryService Service to fetch category data.
    * @param userService Service to fetch user data.
-   * @param budgetService Service to fetch budget data.
+   * @param budgetService Service to fetch budget data. 
+   * @param configService Service to fetch configuration values 
    */
   constructor(
     private expenseService: ExpenseService,
@@ -446,8 +448,9 @@ export class DownloadComponentComponent {
     private categoryService: CategoryService,
     private userService: UserService,
     private budgetService: BudgetService,
+    private configService: ConfigService
   ) {
-    this.today &#x3D; new Date().toISOString().split(&#x27;T&#x27;)[0];
+    this.today &#x3D; this.configService.getLocalTime().split(&#x27;T&#x27;)[0];
   }
 
   /**
@@ -458,7 +461,7 @@ export class DownloadComponentComponent {
     this.downloadDataForm &#x3D; this.fb.group({
       fromDate: [&#x27;&#x27;, [Validators.required]],
       toDate: [&#x27;&#x27;, [Validators.required]],
-      fileType: [&#x27;JSON&#x27;, [Validators.required]],
+      fileType: [&#x27;PDF&#x27;, [Validators.required]],
     });
   }
 
@@ -511,7 +514,7 @@ export class DownloadComponentComponent {
       expense_id: expense.expense_id,
       isExtraSpending: expense.isExtraSpending
     }));
-    
+
     // Prepare final data object
     const finalData: UserData &#x3D; {
       userData: userData || {},
@@ -523,7 +526,7 @@ export class DownloadComponentComponent {
     try {
       if (fileType &#x3D;&#x3D;&#x3D; &#x27;JSON&#x27;) {
         const jsonData &#x3D; JSON.stringify(finalData, null, 2);
-        this.triggerDownload(jsonData, &#x27;application/json&#x27;, &#x27;json&#x27;);
+        this.exportToJSON(jsonData, &#x27;application/json&#x27;, &#x27;json&#x27;);
         this.closeDownloadDataModal();
         this.toastService.show(&#x27;JSON downloaded successfully!&#x27;, &#x27;success&#x27;, 3000);
         return;
@@ -551,12 +554,12 @@ export class DownloadComponentComponent {
    * @param mimeType MIME type of the file.
    * @param extension File extension (json, pdf, xlsx).
    */
-  private triggerDownload(content: string, mimeType: string, extension: string): void {
+  private exportToJSON(content: string, mimeType: string, extension: string): void {
     const blob &#x3D; new Blob([content], { type: mimeType });
     const url &#x3D; window.URL.createObjectURL(blob);
     const link &#x3D; document.createElement(&#x27;a&#x27;);
     link.href &#x3D; url;
-    const timestamp &#x3D; new Date().toISOString().replace(/[:.]/g, &#x27;-&#x27;);
+    const timestamp &#x3D; this.configService.getLocalTime().replace(/[:.]/g, &#x27;-&#x27;);
     link.download &#x3D; &#x60;expenses-${timestamp}.${extension}&#x60;;
 
     document.body.appendChild(link);
@@ -574,7 +577,7 @@ export class DownloadComponentComponent {
     this.downloadDataForm.reset({
       fromDate: &#x27;&#x27;,
       toDate: &#x27;&#x27;,
-      fileType: &#x27;JSON&#x27;
+      fileType: &#x27;PDF&#x27;
     });
     this.downloadDataForm.markAsPristine();
     this.downloadDataForm.markAsUntouched();
@@ -653,7 +656,7 @@ export class DownloadComponentComponent {
     });
 
     // file name
-    const timestamp &#x3D; new Date().toISOString().replace(/[:.]/g, &#x27;-&#x27;);
+    const timestamp &#x3D; this.configService.getLocalTime().replace(/[:.]/g, &#x27;-&#x27;);
     doc.save(&#x60;expenses-${timestamp}.pdf&#x60;);
   }
 
@@ -690,11 +693,34 @@ export class DownloadComponentComponent {
     const worksheet &#x3D; XLSX.utils.aoa_to_sheet(aoa);
     XLSX.utils.book_append_sheet(workbook, worksheet, &#x27;Expenses&#x27;);
 
-    const timestamp &#x3D; new Date().toISOString().replace(/[:.]/g, &#x27;-&#x27;);
+    const timestamp &#x3D; this.configService.getLocalTime().replace(/[:.]/g, &#x27;-&#x27;);
     const filename &#x3D; &#x60;expenses-${timestamp}.xlsx&#x60;;
     XLSX.writeFile(workbook, filename);
   }
 
+  /**
+   * Populates the date fields with the entire expense history range.
+   *
+   * Fetches all expenses, determines the earliest and latest expense dates,
+   * and sets the &#x27;From Date&#x27; and &#x27;To Date&#x27; fields in the form to cover
+   * the full date range of the user&#x27;s data, defaulting the file type to JSON.
+   */
+  downloadAllData(): void {
+    const expenseData: Expense[] &#x3D; this.expenseService.getAll();
+    if (expenseData.length &gt; 0) {
+      expenseData.sort((a, b) &#x3D;&gt; new Date(b.date).getTime() - new Date(a.date).getTime());
+      const fromDate &#x3D; expenseData[expenseData.length - 1].date;
+      const toDate &#x3D; expenseData[0].date;
+      this.downloadDataForm.reset({
+        fromDate: fromDate,
+        toDate: toDate,
+        fileType: this.downloadDataForm.get(&#x27;fileType&#x27;)?.value || &#x27;PDF&#x27;
+      });
+    }
+    else {
+      this.toastService.show(&#x27;No expenses found&#x27;, &#x27;info&#x27;, 3000);
+    }
+  }
 }
 </code></pre>
     </div>

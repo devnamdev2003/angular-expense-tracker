@@ -28,17 +28,6 @@ export class UserLikedSongsService {
     }
 
     /**
-     * Returns the current date and time in ISO format adjusted for local time.
-     *
-     * @returns Local ISO string (YYYY-MM-DDTHH:MM:SS)
-     */
-    getLocalISOString(): string {
-        const now = new Date();
-        const pad = (n: number) => n.toString().padStart(2, '0');
-        return `${now.getFullYear()}-${pad(now.getMonth() + 1)}-${pad(now.getDate())}T${pad(now.getHours())}:${pad(now.getMinutes())}:${pad(now.getSeconds())}`;
-    }
-
-    /**
      * Retrieves all liked songs from localStorage.
      *
      * @returns Array of formatted {@link Song} sorted by date (newest first).

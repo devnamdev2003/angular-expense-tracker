@@ -159,9 +159,17 @@
 <li>Tap any date to open a <strong>popup modal</strong> displaying all expenses for that day.</li>
 <li>Navigate across <strong>months and years</strong> to view past or future expenses.</li>
 <li>Toggle the Show HeatMap switch to highlight each day based on spending intensity.<ul>
-<li>Days are color-coded (e.g. No expense, &lt; ₹300, ₹300–₹1000, &gt; ₹1000) for quick insights.</li>
-<li>A legend below the calendar explains each color category.</li>
-<li>A summary table displays color, days count, and total amount for each category.</li>
+<li>Days are color-coded based on spending thresholds (e.g. No expense, &lt; threshold, between thresholds, &gt; threshold) for quick insights.</li>
+<li>Users can now <strong>customize the threshold amounts</strong> for each heatmap color:<ul>
+<li><strong>Red (Rose)</strong> – default  &gt; ₹1000</li>
+<li><strong>Yellow (Amber)</strong> – default ₹500 - 1000</li>
+<li><strong>Green (Emerald)</strong> – default &lt; ₹500</li>
+</ul>
+</li>
+<li>A <strong>summary table</strong> displays each color, the number of days, the total expense, and an <strong>Edit button</strong> for updating the thresholds.<ul>
+<li>Editing allows users to set a new amount for the corresponding color, immediately updating the heatmap visualization.</li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>
@@ -205,7 +213,7 @@
 <p>Provides customization and utility options for better personalization:</p>
 <ul>
 <li>🎨 <strong>Theme Mode Toggle</strong> (Dark / Light)</li>
-<li>⬇️ <strong>Download Data</strong> (export expenses data in pdf, json, excel formats. between the selected date range)</li>
+<li>⬇️ <strong>Download Data</strong>: Export your expenses in <strong>PDF</strong>, <strong>JSON</strong>, or <strong>Excel</strong> formats between the selected date range. Users can also choose <strong>All Data</strong> to export all expense records.</li>
 <li>📤 <strong>Import Data</strong> (upload expense data)</li>
 <li>➕ <strong>Add Category</strong> (custom categories for better organization)</li>
 <li>❌ <strong>Delete Category</strong> (remove unused or incorrect categories)</li>
@@ -255,12 +263,12 @@
     justify-items: center;
     padding: 16px;
 ">
-    <img src="https://devnamdev2003.github.io/angular-expense-tracker/public/assets/appScreenshot/home.jpg" alt="home" style="width: 200px; border-radius: 8px;">
-    <img src="https://devnamdev2003.github.io/angular-expense-tracker/public/assets/appScreenshot/add.jpg" alt="add" style="width: 200px; border-radius: 8px;">
-    <img src="https://devnamdev2003.github.io/angular-expense-tracker/public/assets/appScreenshot/calendar.jpg" alt="calendar" style="width: 200px; border-radius: 8px;">
-    <img src="https://devnamdev2003.github.io/angular-expense-tracker/public/assets/appScreenshot/settings.jpg" alt="settings" style="width: 200px; border-radius: 8px;">
-    <img src="https://devnamdev2003.github.io/angular-expense-tracker/public/assets/appScreenshot/budget.jpg" alt="budget" style="width: 200px; border-radius: 8px;">
-    <img src="https://devnamdev2003.github.io/angular-expense-tracker/public/assets/appScreenshot/list.jpg" alt="list" style="width: 200px; border-radius: 8px;">
+    <img src="https://exwise.vercel.app/assets/appScreenshot/home.jpg" alt="home" style="width: 200px; border-radius: 8px;">
+    <img src="https://exwise.vercel.app/assets/appScreenshot/add.jpg" alt="add" style="width: 200px; border-radius: 8px;">
+    <img src="https://exwise.vercel.app/assets/appScreenshot/calendar.jpg" alt="calendar" style="width: 200px; border-radius: 8px;">
+    <img src="https://exwise.vercel.app/assets/appScreenshot/settings.jpg" alt="settings" style="width: 200px; border-radius: 8px;">
+    <img src="https://exwise.vercel.app/assets/appScreenshot/budget.jpg" alt="budget" style="width: 200px; border-radius: 8px;">
+    <img src="https://exwise.vercel.app/assets/appScreenshot/list.jpg" alt="list" style="width: 200px; border-radius: 8px;">
 </div>
 
 

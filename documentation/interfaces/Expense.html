@@ -812,17 +812,6 @@ export class ExpenseService {
   }
 
   /**
-   * Returns the current date and time in ISO format adjusted for local time.
-   *
-   * @returns Local ISO string (YYYY-MM-DDTHH:MM:SS)
-   */
-  getLocalISOString(): string {
-    const now &#x3D; new Date();
-    const pad &#x3D; (n: number) &#x3D;&gt; n.toString().padStart(2, &#x27;0&#x27;);
-    return &#x60;${now.getFullYear()}-${pad(now.getMonth() + 1)}-${pad(now.getDate())}T${pad(now.getHours())}:${pad(now.getMinutes())}:${pad(now.getSeconds())}&#x60;;
-  }
-
-  /**
    * Retrieves all expenses from localStorage with category metadata attached.
    *
    * @returns Array of formatted {@link Expense} sorted by date (newest first).

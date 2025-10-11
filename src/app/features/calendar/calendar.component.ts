@@ -5,6 +5,7 @@ import { UserService } from '../../service/localStorage/user.service';
 import { HeatmapSummary } from '../../models/heatMap-summary.service';
 import { FormModelComponent } from '../../component/form-model/form-model.component';
 import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
+import { ConfigService } from '../../service/config/config.service';
 
 /**
  * Component that renders a monthly calendar view with expense tracking.
@@ -64,7 +65,32 @@ export class CalendarComponent implements OnInit {
    * Each item contains the color category, total days, and total amount
    * used to render the heatmap legend and summary table.
    */
-  heatmapSummary: HeatmapSummary[] = [];
+  heatmapSummary: HeatmapSummary[] = [
+    {
+      color: 'bg-[var(--color-rose)]',
+      days: 0,
+      amount: 0,
+      text: ''
+    },
+    {
+      color: 'bg-[var(--color-amber)]',
+      days: 0,
+      amount: 0,
+      text: ''
+    },
+    {
+      color: 'bg-[var(--color-emerald)]',
+      days: 0,
+      amount: 0,
+      text: ''
+    },
+    {
+      color: 'bg-[var(--color-gray)]',
+      days: 0,
+      amount: 0,
+      text: ''
+    }
+  ];
 
   /** Controls the visibility of the Edit Heatmap modal */
   showEditHeatMapModel = false;
@@ -78,8 +104,11 @@ export class CalendarComponent implements OnInit {
   /** Tracks whether the Emerald color modal is currently open */
   isEmeraldModelOpen: boolean = false;
 
-  /** Tracks whether the Amber color modal is currently open */
-  isAmberModelOpen: boolean = false;
+  /** Defines the minimum allowed value for the heatmap amount input field in the edit modal, used for form validation. */
+  minHeatMapAmount = 0;
+
+  /** Defines the maximum allowed value for the heatmap amount input field in the edit modal, used for form validation. */
+  maxHeatMapAmount = 0;
 
   /**
    * Creates an instance of CalendarComponent.
@@ -87,11 +116,13 @@ export class CalendarComponent implements OnInit {
    * @param expenseService Service to retrieve expenses from local storage.
    * @param userService Service to retrieve user settings such as currency.
    * @param fb Angular `FormBuilder` to build the reactive form.
+   * @param configService Service to fetch configuration values 
    */
   constructor(
     private expenseService: ExpenseService,
     public userService: UserService,
     private fb: FormBuilder,
+    private configService: ConfigService
   ) {
     this.currency = this.userService.getValue<string>('currency');
     this.isShowHeatmap = this.userService.getValue<boolean>('is_show_heatmap') ?? false;
@@ -131,8 +162,8 @@ export class CalendarComponent implements OnInit {
    */
   renderCalendar(year: number, month: number): void {
     this.calendarDays = [];
-    this.heatmapSummary = [];
-    const today = new Date();
+    this.heatmapSummary = this.resetHeatmapSummary();
+    const today = new Date(this.configService.getLocalTime());
     const firstDay = new Date(year, month, 1).getDay();
     const daysInMonth = new Date(year, month + 1, 0).getDate();
     const prevMonthDays = new Date(year, month, 0).getDate();
@@ -229,7 +260,7 @@ export class CalendarComponent implements OnInit {
   private getHeatClass(amount: number): string {
     if (this.isShowHeatmap === false) return 'bg-[var(--color-surface)]';
     const rose_amount = this.userService.getValue<number>('rose_amount') ?? 1000;
-    const emerald_amount = this.userService.getValue<number>('emerald_amount') ?? 300;
+    const emerald_amount = this.userService.getValue<number>('emerald_amount') ?? 500;
     if (amount === 0) {
       this.addOrUpdateHeatMapSummary('bg-[var(--color-gray)]', amount, 'No expenses')
       return 'bg-[var(--color-gray)]';
@@ -279,6 +310,7 @@ export class CalendarComponent implements OnInit {
     if (existing) {
       existing.days += 1;
       existing.amount += amount;
+      existing.text = message;
     } else {
       this.heatmapSummary.push({
         color: color,
@@ -297,7 +329,6 @@ export class CalendarComponent implements OnInit {
     this.showEditHeatMapModel = false;
     this.isEmeraldModelOpen = false;
     this.isRoseModelOpen = false;
-    this.isAmberModelOpen = false;
   }
 
   /**
@@ -311,19 +342,17 @@ export class CalendarComponent implements OnInit {
       this.heatMapForm.reset({
         amount: this.userService.getValue<number>('rose_amount') ?? 1000,
       });
+      this.minHeatMapAmount = (this.userService.getValue<number>('emerald_amount') ?? 500) + 1;
+      this.maxHeatMapAmount = 100000000 - 1;
       this.isRoseModelOpen = true;
     }
     if (color === 'bg-[var(--color-emerald)]') {
       this.heatMapForm.reset({
-        amount: this.userService.getValue<number>('emerald_amount') ?? 300,
+        amount: this.userService.getValue<number>('emerald_amount') ?? 500,
       });
+      this.minHeatMapAmount = 1;
+      this.maxHeatMapAmount = (this.userService.getValue<number>('rose_amount') ?? 1000) - 1;
       this.isEmeraldModelOpen = true;
-    }
-    if (color === 'bg-[var(--color-amber)]') {
-      this.heatMapForm.reset({
-        amount: this.userService.getValue<number>('emerald_amount') ?? 300,
-      });
-      this.isAmberModelOpen = true;
     }
     this.showEditHeatMapModel = !this.showEditHeatMapModel;
   }
@@ -338,7 +367,7 @@ export class CalendarComponent implements OnInit {
       return;
     }
     const { amount } = this.heatMapForm.value;
-    if (this.isEmeraldModelOpen || this.isAmberModelOpen) {
+    if (this.isEmeraldModelOpen) {
       this.userService.update('emerald_amount', amount);
     }
     if (this.isRoseModelOpen) {
@@ -346,5 +375,34 @@ export class CalendarComponent implements OnInit {
     }
     this.renderCalendar(this.currentYear, this.currentMonth);
     this.closeEditHeatMapModel();
+  }
+
+  resetHeatmapSummary(): HeatmapSummary[] {
+    const rose_amount = this.userService.getValue<number>('rose_amount') ?? 1000;
+    const emerald_amount = this.userService.getValue<number>('emerald_amount') ?? 500;
+    this.heatmapSummary = this.heatmapSummary.map(item => {
+      if (item.color === 'bg-[var(--color-rose)]') {
+        item.days = 0;
+        item.amount = 0;
+        item.text = `> ${rose_amount}`;
+      }
+      if (item.color === 'bg-[var(--color-emerald)]') {
+        item.days = 0;
+        item.amount = 0;
+        item.text = `< ${emerald_amount}`;
+      }
+      if (item.color === 'bg-[var(--color-amber)]') {
+        item.days = 0;
+        item.amount = 0;
+        item.text = `${emerald_amount} - ${rose_amount}`;
+      }
+      if (item.color === 'bg-[var(--color-gray)]') {
+        item.days = 0;
+        item.amount = 0;
+        item.text = 'No expenses';
+      }
+      return item;
+    })
+    return this.heatmapSummary;
   }
 }
