@@ -59,6 +59,7 @@ export class PostApiService {
           this.userService.update('last_backup', this.configService.getLocalTime());
           this.userService.update('has_music_url_access', res.has_music_url_access);
           this.userService.update('has_ai_access', res.has_ai_access);
+          this.userService.update('ai_key', res.ai_key);
         },
         error: err => {
           console.error('Error posting user data', err);

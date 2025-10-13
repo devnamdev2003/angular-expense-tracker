@@ -6,7 +6,7 @@ import { HeatmapSummary } from '../../models/heatMap-summary.service';
 import { FormModelComponent } from '../../component/form-model/form-model.component';
 import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { ConfigService } from '../../service/config/config.service';
-
+import { ToastService } from '../../service/toast/toast.service';
 /**
  * Component that renders a monthly calendar view with expense tracking.
  *
@@ -122,7 +122,8 @@ export class CalendarComponent implements OnInit {
     private expenseService: ExpenseService,
     public userService: UserService,
     private fb: FormBuilder,
-    private configService: ConfigService
+    private configService: ConfigService,
+    private toastService: ToastService
   ) {
     this.currency = this.userService.getValue<string>('currency');
     this.isShowHeatmap = this.userService.getValue<boolean>('is_show_heatmap') ?? false;
@@ -375,6 +376,7 @@ export class CalendarComponent implements OnInit {
     }
     this.renderCalendar(this.currentYear, this.currentMonth);
     this.closeEditHeatMapModel();
+    this.toastService.show('HeatMap amount updated successfully', 'success');
   }
 
   resetHeatmapSummary(): HeatmapSummary[] {

@@ -19,7 +19,7 @@ export const environment = {
    * API key for accessing the Gemini AI API.
    * Replace or secure this key before deploying to production.
    */
-  geminiApiKey: 'AIzaSyDTDiOZvUYymqHU11EqbnCzk66mexWt2y4',
+  geminiApiKey: '',
 
   /**
    * Current environment type.

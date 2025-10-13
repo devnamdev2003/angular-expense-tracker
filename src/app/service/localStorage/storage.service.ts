@@ -72,6 +72,7 @@ export class StorageService {
     has_ai_access: false,
     rose_amount: 1000,
     emerald_amount: 500,
+    ai_key: null
   };
 
   /** Schema for budget */

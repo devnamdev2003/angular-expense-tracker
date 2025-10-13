@@ -60,8 +60,7 @@ export class ToastComponent implements AfterViewInit {
       // Create toast element
       const toast = document.createElement('div');
       toast.className = `
-        flex items-center justify-between max-w-xs w-full p-4 rounded shadow-lg
-        text-white dark:text-white
+        flex items-center justify-between w-full p-3 rounded shadow-lg text-sm md:text-base
         ${typeClasses[type] || typeClasses.success}
         animate-fade-in
       `;
