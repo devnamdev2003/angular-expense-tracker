@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { environment } from '../../../environments/environments';
+import { UserService } from '../localStorage/user.service';
 
 /**
  * Service responsible for providing configuration values across the application,
@@ -44,8 +45,9 @@ export class ConfigService {
 
   /**
    * Creates an instance of ConfigService.
+   * @param userService Service for managing user preferences
    */
-  constructor() { }
+  constructor(private userService: UserService) { }
 
   /**
    * Returns the appropriate API base URL depending on the environment.
@@ -115,5 +117,12 @@ export class ConfigService {
 
     console.log(localISOString); // e.g. "2025-10-11T13:35:58.942"
     return localISOString;
+  }
+
+  /**
+  * Returns the Gemini Api Key
+  */
+  getGeminiApiKey(): string | null {
+    return this.userService.getValue<string>('ai_key');
   }
 }

@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { environment } from '../../../environments/environments';
 import { firstValueFrom } from 'rxjs';
 import { GlobalLoaderService } from '../global-loader/global-loader.service';
 import { ExpenseService, Expense } from '../localStorage/expense.service';
@@ -18,10 +17,16 @@ import { ConfigService } from '../config/config.service';
   providedIn: 'root'
 })
 export class GeminiApiService {
+  
   /**
-   * API URL for the Gemini model including the environment API key.
+   * API URL for the Gemini model.
    */
-  private apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${environment.geminiApiKey}`;
+  private geminiApiUrl = '';
+
+  /**
+   * API key for accessing the Gemini AI API.
+   */
+  private geminiAPIKey: string | null = null;
 
   /**
    * Creates an instance of GeminiApiService.
@@ -36,7 +41,10 @@ export class GeminiApiService {
     private globalLoaderService: GlobalLoaderService,
     private expenseService: ExpenseService,
     private configService: ConfigService
-  ) {}
+  ) {
+    this.geminiAPIKey = this.configService.getGeminiApiKey() || '';
+    this.geminiApiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${this.geminiAPIKey}`;
+  }
 
   /**
    * Sends a prompt to the Gemini API and returns the generated response.
@@ -57,7 +65,7 @@ export class GeminiApiService {
     };
 
     try {
-      const res: any = await firstValueFrom(this.http.post(this.apiUrl, body, { headers }));
+      const res: any = await firstValueFrom(this.http.post(this.geminiApiUrl, body, { headers }));
       const parts = res?.candidates?.[0]?.content?.parts;
       this.globalLoaderService.hide();
       return parts?.map((p: any) => p.text).join('\n\n') || 'No response';

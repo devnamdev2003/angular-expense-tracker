@@ -2,8 +2,8 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { GlobalLoaderService } from '../../service/global-loader/global-loader.service';
 import { finalize } from 'rxjs/operators';
-import { environment } from '../../../environments/environments';
 import { firstValueFrom } from 'rxjs';
+import { ConfigService } from '../config/config.service';
 
 /**
  * ChatMessage interface
@@ -39,20 +39,30 @@ export class SaavnService {
   private savvanApiUrl = 'https://saavn.dev/api/search/songs';
 
   /**
-   * Gemini API URL with authentication key from environment.
+   * Gemini API URL.
    */
-  private geminiApiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${environment.geminiApiKey}`;
+  private geminiApiUrl = '';
+
+  /**
+   * API key for accessing the Gemini AI API.
+   */
+  private geminiAPIKey: string | null = null;
 
   /**
    * Creates an instance of SaavnService.
    *
    * @param http Angular HttpClient for API calls.
    * @param globalLoaderService Global loader service to show/hide loading UI.
+   * @param configService Service to fetch configuration values
    */
   constructor(
     private http: HttpClient,
-    private globalLoaderService: GlobalLoaderService
-  ) { }
+    private globalLoaderService: GlobalLoaderService,
+    private configService: ConfigService
+  ) {
+    this.geminiAPIKey = this.configService.getGeminiApiKey() || '';
+    this.geminiApiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${this.geminiAPIKey}`;
+  }
 
   /**
    * Searches for songs using the Saavn API.

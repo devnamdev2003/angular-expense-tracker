@@ -41,6 +41,9 @@ export interface User {
   /** Stores the amount associated with the Emerald heatmap color */
   emerald_amount: number;
 
+  /** AI key */
+  ai_key: string
+
 }
 
 /**
