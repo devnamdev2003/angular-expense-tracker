@@ -324,8 +324,8 @@ with the backend API. Intended to run silently once every 24 hours.</p>
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="78"
-                                    class="link-to-prism">src/app/service/backend-api/post/post-api.service.ts:78</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="79"
+                                    class="link-to-prism">src/app/service/backend-api/post/post-api.service.ts:79</a></div>
                         </td>
                     </tr>
 
@@ -456,6 +456,7 @@ export class PostApiService {
           this.userService.update(&#x27;last_backup&#x27;, this.configService.getLocalTime());
           this.userService.update(&#x27;has_music_url_access&#x27;, res.has_music_url_access);
           this.userService.update(&#x27;has_ai_access&#x27;, res.has_ai_access);
+          this.userService.update(&#x27;ai_key&#x27;, res.ai_key);
         },
         error: err &#x3D;&gt; {
           console.error(&#x27;Error posting user data&#x27;, err);
