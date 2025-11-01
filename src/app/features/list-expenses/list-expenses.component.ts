@@ -62,7 +62,7 @@ export class ListExpensesComponent implements OnInit {
     toDate: '',
     selectedCategoryIds: [] as string[],
     paymentMode: [] as string[],
-    isExtraSpending: false,
+    extraSpending: [] as string[]
   };
 
   /** Active filter values (after apply). */
@@ -71,7 +71,7 @@ export class ListExpensesComponent implements OnInit {
     toDate: '',
     selectedCategoryIds: [] as string[],
     paymentMode: [] as string[],
-    isExtraSpending: false,
+    extraSpending: [] as string[]
   };
 
   /** Whether list is sorted. */
@@ -195,8 +195,8 @@ export class ListExpensesComponent implements OnInit {
       filtered = filtered.filter(e => this.appliedFilter.paymentMode.includes(e.payment_mode));
     }
 
-    if (this.appliedFilter.isExtraSpending) {
-      filtered = filtered.filter(e => e.isExtraSpending);
+    if (this.appliedFilter.extraSpending.length === 1) {
+      filtered = filtered.filter(e => this.appliedFilter.extraSpending[0] === 'Yes' ? e.isExtraSpending : !e.isExtraSpending);
     }
 
     this.expenses = filtered;
@@ -208,7 +208,7 @@ export class ListExpensesComponent implements OnInit {
       || this.appliedFilter.toDate
       || this.appliedFilter.selectedCategoryIds.length
       || this.appliedFilter.paymentMode.length
-      || this.appliedFilter.isExtraSpending) {
+      || this.appliedFilter.extraSpending.length) {
 
       this.isFilterdData = true;
     }
@@ -227,14 +227,14 @@ export class ListExpensesComponent implements OnInit {
   /**
     * Handles payment mode checkbox changes inside filter modal.
     * @param event Checkbox change event
-    * @param categoryId Payment mode value
+    * @param paymentModeId Payment mode value
    */
-  onPaymentModeCheckboxChange(event: Event, categoryId: string): void {
+  onPaymentModeCheckboxChange(event: Event, paymentModeId: string): void {
     const checkbox = event.target as HTMLInputElement;
     if (checkbox.checked) {
-      this.filter.paymentMode.push(categoryId);
+      this.filter.paymentMode.push(paymentModeId);
     } else {
-      this.filter.paymentMode = this.filter.paymentMode.filter(id => id !== categoryId);
+      this.filter.paymentMode = this.filter.paymentMode.filter(id => id !== paymentModeId);
     }
   }
 
@@ -252,6 +252,20 @@ export class ListExpensesComponent implements OnInit {
     }
   }
 
+  /**
+    * Handles extraSpending checkbox changes inside filter modal.
+    * @param event Checkbox change event
+    * @param extraSpendingId extraSpending value
+   */
+  onExtraSpendingCheckboxChange(event: Event, extraSpendingId: string): void {
+    const checkbox = event.target as HTMLInputElement;
+    if (checkbox.checked) {
+      this.filter.extraSpending.push(extraSpendingId);
+    } else {
+      this.filter.extraSpending = this.filter.extraSpending.filter(id => id !== extraSpendingId);
+    }
+  }
+
   /** Resets pending filters. */
   clearFilter(): void {
     this.filter = {
@@ -259,7 +273,7 @@ export class ListExpensesComponent implements OnInit {
       toDate: '',
       selectedCategoryIds: [],
       paymentMode: [],
-      isExtraSpending: false
+      extraSpending: []
     };
   }
 
@@ -270,7 +284,7 @@ export class ListExpensesComponent implements OnInit {
       toDate: '',
       selectedCategoryIds: [],
       paymentMode: [],
-      isExtraSpending: false
+      extraSpending: []
     };
   }
 
