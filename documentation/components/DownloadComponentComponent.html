@@ -1216,8 +1216,8 @@ export class DownloadComponentComponent {
 
     // Fetch data
     const expenseData: Expense[] &#x3D; this.expenseService.searchByDateRange(fromDate, toDate);
-    const categoryData: Category[] &#x3D; this.categoryService.getAll();
-    const userData: User | {} &#x3D; this.userService.getUserData();
+    const categoryData: Category[] &#x3D; this.categoryService.getAll().filter(item &#x3D;&gt; item.user_id !&#x3D; &#x27;0&#x27;);
+    const userData: User | null &#x3D; this.userService.getUserData();
     const budgetData: Budget[] &#x3D; this.budgetService.getAll();
 
     if (!expenseData || expenseData.length &#x3D;&#x3D;&#x3D; 0) {

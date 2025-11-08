@@ -64,6 +64,21 @@ export class SettingsComponent {
   /** Form for adding a user name */
   addUserNameForm!: FormGroup;
 
+  /** Form for edit a category */
+  editCategoryForm!: FormGroup;
+
+  /** Category of the currently selected category */
+  selectedEditCategory: Category | null = null;
+
+  /** Modal visibility states */
+  showEditCategoryModal = false;
+
+  /** Flag to show edit category option based on user categories */
+  showEditCategoryOption: boolean = false;
+
+  /** Modal visibility states */
+  showSelectedEditCategoryModal: boolean = false;
+
   /**
     * Constructor to inject dependencies
     * @param userService User service for managing user preferences
@@ -101,6 +116,12 @@ export class SettingsComponent {
       color: ['#000000', [Validators.required, this.colorExistsValidator()]],
     });
 
+    this.editCategoryForm = this.fb.group({
+      name: ['', [Validators.required, this.nameExistsValidator()]],
+      icon: ['', [Validators.required, this.iconExistsValidator()]],
+      color: ['#000000', [Validators.required, this.colorExistsValidator()]],
+    });
+
     const allExpenses = this.expenseService.getAll();
     const usedCategoryIds = allExpenses.map(exp => exp.category_id);
     // const defaultCategoryIds = existingCategories.filter(item => item.user_id == '0').map(cat => cat.category_id);
@@ -110,7 +131,10 @@ export class SettingsComponent {
 
     // Check if user has any custom categories
     let userId = this.userService.getValue<string>('id') || '0';
-    this.showDeleteCategoryOption = existingCategories.some(cat => cat.user_id === userId);
+    if (existingCategories.some(cat => cat.user_id === userId)) {
+      this.showEditCategoryOption = true;
+      this.showDeleteCategoryOption = true;
+    }
 
     this.addUserNameForm = this.fb.group({
       name: ['', [Validators.required]],
@@ -151,6 +175,7 @@ export class SettingsComponent {
     this.closeCategoryModal();
     this.addCategoryForm.reset();
     this.showDeleteCategoryOption = true;
+    this.showEditCategoryOption = true;
   }
 
   /**
@@ -176,7 +201,10 @@ export class SettingsComponent {
     this.closeDeleteCategoryModal();
     const existingCategories: Category[] = this.categoryService.getAll();
     let userId = this.userService.getValue<string>('id') || '0';
-    this.showDeleteCategoryOption = existingCategories.some(cat => cat.user_id === userId);
+    if (existingCategories.some(cat => cat.user_id === userId)) {
+      this.showEditCategoryOption = true;
+      this.showDeleteCategoryOption = true;
+    }
   }
 
   /**
@@ -214,7 +242,11 @@ export class SettingsComponent {
       const existingNames = existingCategories.map(cat => cat.name);
       const value = control.value?.trim().toLowerCase();
       if (!value) return null;
-      const exists = existingNames.some(name => name.toLowerCase() === value);
+      if (this.selectedEditCategory) {
+        const exists = existingNames.some(name => name.trim().toLowerCase() === value && name.trim().toLowerCase() != this.selectedEditCategory?.name.trim().toLowerCase());
+        return exists ? { nameExists: true } : null;
+      }
+      const exists = existingNames.some(name => name.trim().toLowerCase() === value);
       return exists ? { nameExists: true } : null;
     };
   }
@@ -226,6 +258,10 @@ export class SettingsComponent {
       const existingIcons = existingCategories.map(cat => cat.icon);
       const value = control.value;
       if (!value) return null;
+      if (this.selectedEditCategory) {
+        const exists = existingIcons.some(icon => icon.trim() === value && icon.trim() != this.selectedEditCategory?.icon.trim());
+        return exists ? { iconExists: true } : null;
+      }
       const exists = existingIcons.includes(value);
       return exists ? { iconExists: true } : null;
     };
@@ -238,6 +274,10 @@ export class SettingsComponent {
       const existingColors = existingCategories.map(cat => cat.color);
       const value = control.value;
       if (!value) return null;
+      if (this.selectedEditCategory) {
+        const exists = existingColors.some(color => color === value && color != this.selectedEditCategory?.color);
+        return exists ? { colorExists: true } : null;
+      }
       const exists = existingColors.includes(value);
       return exists ? { colorExists: true } : null;
     };
@@ -410,5 +450,67 @@ export class SettingsComponent {
   openUserNameModal(): void {
     this.addUserNameForm.reset();
     this.showUserNameModal = true;
+  }
+
+  /**
+   * Opens the modal to edit a category.
+   */
+  openEditCategoryModal(): void {
+    this.editCategoryForm.reset();
+    this.editCategoryForm = this.fb.group({
+      name: [this.selectedEditCategory?.name, [Validators.required, this.nameExistsValidator()]],
+      icon: [this.selectedEditCategory?.icon, [Validators.required, this.iconExistsValidator()]],
+      color: [this.selectedEditCategory?.color, [Validators.required, this.colorExistsValidator()]],
+    });
+    this.showEditCategoryModal = true;
+    this.closeSelectedEditCategoryModal();
+  }
+
+  /**
+   * edit a category using the form data.
+   */
+  editCategory(): void {
+    if (this.editCategoryForm.invalid) {
+      this.editCategoryForm.markAllAsTouched();
+      return;
+    }
+    const { name, icon, color } = this.editCategoryForm.value;
+    if (this.selectedEditCategory?.category_id) {
+      this.categoryService.update(this.selectedEditCategory.category_id, { name, icon, color });
+    }
+    this.toastService.show('Category Edit successfully!', 'success');;
+    this.closeEditCategoryModal();
+    this.editCategoryForm.reset();
+  }
+
+  /** Closes the edit category modal */
+  closeEditCategoryModal(): void {
+    this.showEditCategoryModal = false;
+    this.selectedEditCategory = null;
+  }
+
+  /**
+   * Opens the modal to select a category to edit.
+   */
+  openSelectedEditCategoryModal(): void {
+    this.showSelectedEditCategoryModal = true;
+  }
+
+  /**
+   * Handles category selection from the dropdown.
+   * @param category The selected category
+   */
+  onCategorySelectedEdit(category: any) {
+    this.selectedEditCategory = category;
+    this.openEditCategoryModal();
+  }
+
+  /** Closes the select category modal for edit */
+  closeSelectedEditCategoryModal(): void {
+    this.selectedCategoryName = "Select Category";
+    this.showSelectedEditCategoryModal = false;
+    if (!this.showEditCategoryModal) {
+      this.selectedEditCategory = null;
+    }
   }
 }

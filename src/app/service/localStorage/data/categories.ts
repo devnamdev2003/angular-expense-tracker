@@ -5,7 +5,7 @@ export const Categories = [
     name: 'Food & Drinks',
     icon: '🍽️',
     color: '#FF6347', // Tomato Red
-    is_active: 'true',
+    is_active: "1",
     user_id: '0',
   },
   {
@@ -13,7 +13,7 @@ export const Categories = [
     name: 'Groceries',
     icon: '🛒',
     color: '#4CAF50', // Green
-    is_active: 'true',
+    is_active: "1",
     user_id: '0',
   },
   {
@@ -21,7 +21,7 @@ export const Categories = [
     name: 'Shopping',
     icon: '🛍️',
     color: '#FF9800', // Orange
-    is_active: 'true',
+    is_active: "1",
     user_id: '0',
   },
   {
@@ -29,7 +29,7 @@ export const Categories = [
     name: 'Bills & Utilities',
     icon: '💡',
     color: '#FFEB3B', // Yellow
-    is_active: 'true',
+    is_active: "1",
     user_id: '0',
   },
   {
@@ -37,7 +37,7 @@ export const Categories = [
     name: 'Entertainment',
     icon: '🎮',
     color: '#2196F3', // Blue
-    is_active: 'true',
+    is_active: "1",
     user_id: '0',
   },
   {
@@ -45,7 +45,7 @@ export const Categories = [
     name: 'Health',
     icon: '🩺',
     color: '#00BCD4', // Cyan
-    is_active: 'true',
+    is_active: "1",
     user_id: '0',
   },
   {
@@ -53,7 +53,7 @@ export const Categories = [
     name: 'Education',
     icon: '📚',
     color: '#9C27B0', // Purple
-    is_active: 'true',
+    is_active: "1",
     user_id: '0',
   },
   {
@@ -61,7 +61,7 @@ export const Categories = [
     name: 'Subscriptions',
     icon: '🔄',
     color: '#FF5722', // Deep Orange
-    is_active: 'true',
+    is_active: "1",
     user_id: '0',
   },
   {
@@ -69,7 +69,7 @@ export const Categories = [
     name: 'Travel',
     icon: '🌍',
     color: '#3F51B5', // Indigo
-    is_active: 'true',
+    is_active: "1",
     user_id: '0',
   },
   {
@@ -77,7 +77,7 @@ export const Categories = [
     name: 'Rent',
     icon: '🏠',
     color: '#607D8B', // Blue Grey
-    is_active: 'true',
+    is_active: "1",
     user_id: '0',
   },
   {
@@ -85,7 +85,7 @@ export const Categories = [
     name: 'Family & Friends',
     icon: '👨‍👩‍👧‍👦',
     color: '#8BC34A', // Light Green
-    is_active: 'true',
+    is_active: "1",
     user_id: '0',
   },
   {
@@ -93,7 +93,7 @@ export const Categories = [
     name: 'Miscellaneous',
     icon: '📦',
     color: '#9E9E9E', // Grey
-    is_active: 'true',
+    is_active: "1",
     user_id: '0',
   },
   {
@@ -101,7 +101,7 @@ export const Categories = [
     name: 'Gifts',
     icon: '🎁',
     color: '#F44336', // Red
-    is_active: 'true',
+    is_active: "1",
     user_id: '0',
   },
   {
@@ -109,7 +109,7 @@ export const Categories = [
     name: 'Party',
     icon: '🎉',
     color: '#FF4081', // Pink
-    is_active: 'true',
+    is_active: "1",
     user_id: '0',
   },
   {
@@ -117,7 +117,7 @@ export const Categories = [
     name: 'Personal Care',
     icon: '🧖‍♂️',
     color: '#673AB7', // Deep Purple
-    is_active: 'true',
+    is_active: "1",
     user_id: '0',
   },
   {
@@ -125,7 +125,7 @@ export const Categories = [
     name: 'Home & Hygiene',
     icon: '🧹',
     color: '#009688', // Teal
-    is_active: 'true',
+    is_active: "1",
     user_id: '0',
   },
   {
@@ -133,7 +133,7 @@ export const Categories = [
     name: 'Others',
     icon: '❓',
     color: '#FFC107', // Amber
-    is_active: 'true',
+    is_active: "1",
     user_id: '0',
   },
   {
@@ -141,7 +141,7 @@ export const Categories = [
     name: 'Recharge',
     icon: '🔋',
     color: '#8BC34A', // Light Green (for distinct differentiation)
-    is_active: 'true',
+    is_active: "1",
     user_id: '0',
   },
 ];

@@ -94,12 +94,13 @@ All expenses are stored in the device's **LocalStorage** and reflected immediate
 
 Provides customization and utility options for better personalization:
 
-* 🎨 **Theme Mode Toggle** (Dark / Light)
-* ⬇️ **Download Data**: Export your expenses in **PDF**, **JSON**, or **Excel** formats between the selected date range. Users can also choose **All Data** to export all expense records.
-* 📤 **Import Data** (upload expense data)
-* ➕ **Add Category** (custom categories for better organization)
-* ❌ **Delete Category** (remove unused or incorrect categories)
-* 🔄 **Update App** (Update the application to the latest release)
+* 🎨 **Theme Mode Toggle**  — Dark / Light
+* ⬇️ **Download Data**  —  Export your expenses in **PDF**, **JSON**, or **Excel** formats between the selected date range. Users can also choose **All Data** to export all expense records.
+* 📤 **Import Data** — Upload expense data.
+* 🔄 **Update App** — Update the application to the latest release.
+* ➕ **Add Category** — Create custom categories for better organization.
+* ✏️ **Edit Category** — Modify existing categories.
+* ❌ **Delete Category** — Remove unused or incorrect categories.
 
 ---
 
