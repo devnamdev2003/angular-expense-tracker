@@ -528,8 +528,8 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="391"
-                                    class="link-to-prism">src/app/features/list-expenses/list-expenses.component.ts:391</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="393"
+                                    class="link-to-prism">src/app/features/list-expenses/list-expenses.component.ts:393</a></div>
                         </td>
                     </tr>
 
@@ -714,8 +714,8 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="378"
-                                    class="link-to-prism">src/app/features/list-expenses/list-expenses.component.ts:378</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="380"
+                                    class="link-to-prism">src/app/features/list-expenses/list-expenses.component.ts:380</a></div>
                         </td>
                     </tr>
 
@@ -792,8 +792,8 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="332"
-                                    class="link-to-prism">src/app/features/list-expenses/list-expenses.component.ts:332</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="333"
+                                    class="link-to-prism">src/app/features/list-expenses/list-expenses.component.ts:333</a></div>
                         </td>
                     </tr>
 
@@ -1118,8 +1118,8 @@ Reapplies filters and sorting if active.</p>
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="391"
-                                    class="link-to-prism">src/app/features/list-expenses/list-expenses.component.ts:391</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="393"
+                                    class="link-to-prism">src/app/features/list-expenses/list-expenses.component.ts:393</a></div>
                         </td>
                     </tr>
 
@@ -1372,8 +1372,8 @@ Reapplies filters and sorting if active.</p>
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="361"
-                                    class="link-to-prism">src/app/features/list-expenses/list-expenses.component.ts:361</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="363"
+                                    class="link-to-prism">src/app/features/list-expenses/list-expenses.component.ts:363</a></div>
                         </td>
                     </tr>
 
@@ -1520,8 +1520,8 @@ Reapplies filters and sorting if active.</p>
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="345"
-                                    class="link-to-prism">src/app/features/list-expenses/list-expenses.component.ts:345</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="347"
+                                    class="link-to-prism">src/app/features/list-expenses/list-expenses.component.ts:347</a></div>
                         </td>
                     </tr>
 
@@ -1594,8 +1594,8 @@ Reapplies filters and sorting if active.</p>
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="402"
-                                    class="link-to-prism">src/app/features/list-expenses/list-expenses.component.ts:402</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="404"
+                                    class="link-to-prism">src/app/features/list-expenses/list-expenses.component.ts:404</a></div>
                         </td>
                     </tr>
 
@@ -2817,6 +2817,7 @@ export class ListExpensesComponent implements OnInit {
     if (this.isFilterdData) {
       this.applyFilter();
     }
+    this.setTotalAmount();
   }
 
   /**
@@ -2830,6 +2831,7 @@ export class ListExpensesComponent implements OnInit {
       this.closeModal();
       this.expenses &#x3D; this.expenses.filter(item &#x3D;&gt; item.expense_id !&#x3D;&#x3D; id);
     }
+    this.setTotalAmount();
   }
 
   /**
