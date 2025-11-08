@@ -110,9 +110,14 @@ export class UserService {
    *
    * @returns {User | {}} The user object, or empty object if not available.
    */
-  getUserData(): User | {} {
-    if (!this.isBrowser()) return {};
-    return this.storageService.getUser();
+  getUserData(): User | null {
+    if (!this.isBrowser()) return null;
+    const userData = this.storageService.getUser();
+    if (userData) {
+      const { ai_key, ...safeUser } = userData;
+      return safeUser;
+    }
+    return null;
   }
 
   /**

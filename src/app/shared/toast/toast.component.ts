@@ -51,9 +51,9 @@ export class ToastComponent implements AfterViewInit {
 
       // Define style classes for each toast type
       const typeClasses: any = {
-        success: 'bg-green-500',
-        error: 'bg-red-500',
-        info: 'bg-blue-500',
+        success: 'bg-green-500 text-white',
+        error: 'bg-red-500 text-white',
+        info: 'bg-blue-500 text-white',
         warning: 'bg-yellow-500 text-black',
       };
 
