@@ -7,6 +7,8 @@ import { FormModelComponent } from '../../component/form-model/form-model.compon
 import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { ConfigService } from '../../service/config/config.service';
 import { ToastService } from '../../service/toast/toast.service';
+import { Budget, BudgetService } from '../../service/localStorage/budget.service';
+
 /**
  * Component that renders a monthly calendar view with expense tracking.
  *
@@ -110,24 +112,40 @@ export class CalendarComponent implements OnInit {
   /** Defines the maximum allowed value for the heatmap amount input field in the edit modal, used for form validation. */
   maxHeatMapAmount = 0;
 
+  /** When true, the budget-related radio/checkbox option is displayed. */
+  showBudgetRadio: boolean = false;
+
+  /** If true, heatmap threshold values are automatically set based on the user's budget otherwise, the user can set them manually. */
+  isBudgetRadioClicked: boolean = false;
+
   /**
    * Creates an instance of CalendarComponent.
    *
    * @param expenseService Service to retrieve expenses from local storage.
    * @param userService Service to retrieve user settings such as currency.
    * @param fb Angular `FormBuilder` to build the reactive form.
-   * @param configService Service to fetch configuration values 
+   * @param configService Service to fetch configuration values
+   * @param budgetService Service to fetch budget data. 
+   * @param toastService Service for displaying toast notifications
    */
   constructor(
     private expenseService: ExpenseService,
     public userService: UserService,
     private fb: FormBuilder,
     private configService: ConfigService,
+    private budgetService: BudgetService,
     private toastService: ToastService
   ) {
     this.currency = this.userService.getValue<string>('currency');
     this.isShowHeatmap = this.userService.getValue<boolean>('is_show_heatmap') ?? false;
     this.has_music_url_access = this.userService.getValue<boolean>('has_music_url_access') ?? false;
+    const [emerald, rose] = this.calculateThresholdValues();
+    if (rose > emerald) {
+      this.showBudgetRadio = this.budgetService.getAll().length > 0 ? true : false;
+    }
+    else {
+      this.showBudgetRadio = false;
+    }
   }
 
   /** Angular lifecycle hook that initializes the calendar view */
@@ -260,8 +278,9 @@ export class CalendarComponent implements OnInit {
    */
   private getHeatClass(amount: number): string {
     if (this.isShowHeatmap === false) return 'bg-[var(--color-surface)]';
-    const rose_amount = this.userService.getValue<number>('rose_amount') ?? 1000;
-    const emerald_amount = this.userService.getValue<number>('emerald_amount') ?? 500;
+    const [emerald, rose] = this.calculateThresholdValues();
+    const rose_amount = this.isBudgetRadioClicked ? rose : this.userService.getValue<number>('rose_amount') ?? 1000;
+    const emerald_amount = this.isBudgetRadioClicked ? emerald : this.userService.getValue<number>('emerald_amount') ?? 500;
     if (amount === 0) {
       this.addOrUpdateHeatMapSummary('bg-[var(--color-gray)]', amount, 'No expenses')
       return 'bg-[var(--color-gray)]';
@@ -407,4 +426,67 @@ export class CalendarComponent implements OnInit {
     })
     return this.heatmapSummary;
   }
+
+  /**
+   * Toggles the "Set Budget" mode for heatmap threshold calculation.
+   * 
+   * When enabled (`isBudgetRadioClicked = true`), the calendar heatmap thresholds 
+   * are recalculated automatically based on the user's budget data.
+   * Otherwise, the user can manually set the threshold values.
+   * 
+   * @returns {void}
+ */
+  setHeatmapThresholdsByBudget(): void {
+    this.isBudgetRadioClicked = !this.isBudgetRadioClicked;
+    this.renderCalendar(this.currentYear, this.currentMonth);
+  }
+
+  /**
+   * Calculates the heatmap threshold values (`emerald_amount` and `rose_amount`)
+   * based on the user's current budget and expense data.
+   * 
+   * This method:
+   * - Retrieves the latest budget period from the BudgetService.
+   * - Filters all expenses that fall within that budget date range.
+   * - Computes the total spent, remaining amount, and daily averages.
+   * - Determines threshold values dynamically for the calendar heatmap.
+   * 
+   * @returns {[emerald_amount: number, rose_amount: number]} 
+   * Returns a tuple where:
+   * - `emerald_amount` represents the lower (better) daily spending threshold.
+   * - `rose_amount` represents the higher (warning) daily spending threshold.
+ */
+  calculateThresholdValues(): [emerald_amount: number, rose_amount: number] {
+    const budgets: Budget[] = this.budgetService.getAll();
+    if (budgets.length > 0) {
+      const latestBudget: Budget = budgets[budgets.length - 1];
+      const totalBudget = parseFloat(latestBudget.amount.toString());
+      const fromDate = new Date(latestBudget.fromDate);
+      const toDate = new Date(latestBudget.toDate);
+
+      // Filter expenses within the budget date range
+      const expenses: Expense[] = this.expenseService.getAll();
+      const expensesInRange = expenses.filter((exp: any) => {
+        const date = new Date(exp.date);
+        return date >= fromDate && date <= toDate;
+      });
+
+      // Calculate spent amount and percentage
+      const spent = expensesInRange.reduce((sum: number, exp: any) => sum + parseFloat(exp.amount), 0);
+      const remaining = Math.max(totalBudget - spent, 0);
+
+      // Calculate average daily insights
+      const totalDays = Math.ceil((toDate.getTime() - fromDate.getTime()) / (1000 * 60 * 60 * 24)) + 1;
+      const today = new Date(this.configService.getLocalTime());
+      const elapsedDays = Math.max(Math.ceil((today.getTime() - fromDate.getTime()) / (1000 * 60 * 60 * 24)), 1);
+      const remainingDays = Math.max(totalDays - elapsedDays, 1);
+
+      const avgSpentPerDay = Number((spent / elapsedDays).toFixed(0));
+      const suggestedPerDay = Number((remaining / remainingDays).toFixed(0));
+
+      return [suggestedPerDay, avgSpentPerDay];
+    }
+    return [0, 0];
+  }
+
 }

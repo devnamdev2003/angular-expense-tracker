@@ -60,6 +60,18 @@
                 </ng-container>
             </div>
         </div>
+        <div *ngIf="showBudgetRadio" class="flex items-center justify-start pt-4 ">
+            <label for="isBudgetRadioClicked" class="font-semibold pr-2">Auto-set threshold values</label>
+            <label class="relative inline-flex items-center cursor-pointer">
+                <input type="checkbox" id="isBudgetRadioClicked" [checked]="isBudgetRadioClicked"
+                    (change)="setHeatmapThresholdsByBudget()" class="sr-only peer">
+                <div
+                    class="w-10 h-6 bg-gray-600 rounded-full peer peer-checked:bg-[var(--color-accent)] transition-all">
+                </div>
+                <span
+                    class="absolute left-1 top-1 w-4 h-4 bg-white rounded-full transition-all peer-checked:translate-x-4"></span>
+            </label>
+        </div>
     </div>
 
     <!-- ░░ HEATMAP SUMMARY ░░ -->
@@ -68,17 +80,18 @@
             class="max-w-[300px] md:max-w-md mx-auto w-full border border-[var(--input-border)] rounded-lg overflow-hidden text-sm">
 
             <!-- Table Header -->
-            <div
-                class="grid grid-cols-[40%_15%_30%_15%] bg-[var(--color-gray)] text-[var(--color-text)] font-semibold py-2 text-left">
+            <div [class]="isBudgetRadioClicked ? 'grid-cols-[40%_20%_40%]' : 'grid-cols-[40%_15%_30%_15%]'"
+                class="grid  bg-[var(--color-gray)] text-[var(--color-text)] font-semibold py-2 text-left">
                 <span class="pl-3">Color</span>
                 <span class="text-center">Days</span>
                 <span class="text-center">Amount</span>
-                <span class="text-center">Edit</span>
+                <span *ngIf="!isBudgetRadioClicked" class="text-center">Edit</span>
             </div>
 
             <!-- Table Rows -->
             <div *ngFor="let item of heatmapSummary"
-                class="grid grid-cols-[40%_15%_30%_15%] items-center py-2 border-t border-[var(--input-border)] text-[var(--color-text)] text-[0.8rem]">
+                [class]="isBudgetRadioClicked ? 'grid-cols-[40%_20%_40%]' : 'grid-cols-[40%_15%_30%_15%]'"
+                class="grid items-center py-2 border-t border-[var(--input-border)] text-[var(--color-text)] text-[0.8rem]">
 
                 <!-- Color + Label -->
                 <div class="flex items-center justify-start gap-2 pl-2">
@@ -92,7 +105,7 @@
                 <!-- Amount -->
                 <div class="font-medium text-center">{{ currency }} {{ item.amount }}</div>
                 <!-- Edit button (perfectly centered) -->
-                <div class="flex items-center justify-center">
+                <div *ngIf="!isBudgetRadioClicked" class="flex items-center justify-center">
                     <button *ngIf="!(item.text === 'No expenses' || item.color === 'bg-[var(--color-amber)]')"
                         (click)="openEditHeapMapModel(item.color)"
                         class="w-[14px] h-[14px] flex items-center justify-center rounded-full transition-all duration-200 ease-in-out">
@@ -103,8 +116,8 @@
             </div>
 
             <!-- Total Row -->
-            <div
-                class="grid grid-cols-[40%_15%_30%_15%] items-center py-2 border-t border-[var(--input-border)] text-[var(--color-text)] font-semibold">
+            <div [class]="isBudgetRadioClicked ? 'grid-cols-[40%_20%_40%]' : 'grid-cols-[40%_15%_30%_15%]'"
+                class="grid items-center py-2 border-t border-[var(--input-border)] text-[var(--color-text)] font-semibold">
                 <span class="col-span-2 text-center">Total</span>
                 <span class="text-center text-green-500">{{ currency }} {{ totalExpenses }}</span>
             </div>
