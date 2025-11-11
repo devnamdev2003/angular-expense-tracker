@@ -142,7 +142,9 @@ export class CalendarComponent implements OnInit {
     this.has_music_url_access = this.userService.getValue<boolean>('has_music_url_access') ?? false;
     const [emerald, rose] = this.calculateThresholdValues();
     if (rose > emerald) {
-      this.showBudgetRadio = this.budgetService.getAll().length > 0 ? true : false;
+      if (this.isShowHeatmap) {
+        this.showBudgetRadio = this.budgetService.getAll().length > 0 ? true : false;
+      }
     }
     else {
       this.showBudgetRadio = false;
@@ -280,8 +282,8 @@ export class CalendarComponent implements OnInit {
   private getHeatClass(amount: number): string {
     if (this.isShowHeatmap === false) return 'bg-[var(--color-surface)]';
     const [emerald, rose] = this.calculateThresholdValues();
-    const rose_amount = this.isBudgetRadioClicked ? rose : this.userService.getValue<number>('rose_amount') ?? 1000;
-    const emerald_amount = this.isBudgetRadioClicked ? emerald : this.userService.getValue<number>('emerald_amount') ?? 500;
+    const rose_amount = (this.isBudgetRadioClicked && this.showBudgetRadio) ? rose : this.userService.getValue<number>('rose_amount') ?? 1000;
+    const emerald_amount = (this.isBudgetRadioClicked && this.showBudgetRadio) ? emerald : this.userService.getValue<number>('emerald_amount') ?? 500;
     if (amount === 0) {
       this.addOrUpdateHeatMapSummary('bg-[var(--color-gray)]', amount, 'No expenses')
       return 'bg-[var(--color-gray)]';
@@ -312,7 +314,14 @@ export class CalendarComponent implements OnInit {
    */
   toggleHeatmap(): void {
     this.isShowHeatmap = !this.isShowHeatmap;
-    this.showBudgetRadio = this.isShowHeatmap ? true : false;
+    const [emerald, rose] = this.calculateThresholdValues();
+    if (rose > emerald) {
+      this.showBudgetRadio = this.isShowHeatmap ? true : false;
+    }
+    else {
+      this.showBudgetRadio = false;
+    }
+
     this.userService.update('is_show_heatmap', this.isShowHeatmap);
     this.renderCalendar(this.currentYear, this.currentMonth);
   }
