@@ -26,13 +26,8 @@ compodoc -p tsconfig.json -w
 ## Serve Documentation
 compodoc -s
 
-
-
 # Build for production
 ng build --configuration production
-# or
-ng build --prod
-
 
 ## Create a Component
 
