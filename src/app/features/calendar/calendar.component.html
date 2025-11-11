@@ -60,7 +60,7 @@
                 </ng-container>
             </div>
         </div>
-        <div *ngIf="showBudgetRadio" class="flex items-center justify-start pt-4 ">
+        <div *ngIf="showBudgetRadio" class="flex items-center justify-center pt-4">
             <label for="isBudgetRadioClicked" class="font-semibold pr-2">Auto-set threshold values</label>
             <label class="relative inline-flex items-center cursor-pointer">
                 <input type="checkbox" id="isBudgetRadioClicked" [checked]="isBudgetRadioClicked"
@@ -75,7 +75,7 @@
     </div>
 
     <!-- ░░ HEATMAP SUMMARY ░░ -->
-    <div class="my-6 text-center" *ngIf="heatmapSummary.length > 0 && isShowHeatmap">
+    <div class="mt-3 mb-6 text-center" *ngIf="heatmapSummary.length > 0 && isShowHeatmap">
         <div
             class="max-w-[300px] md:max-w-md mx-auto w-full border border-[var(--input-border)] rounded-lg overflow-hidden text-sm">
 

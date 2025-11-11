@@ -203,7 +203,7 @@ Provides methods to read, update, and persist user settings.</p>
                 </tr>
                         <tr>
                             <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="54" class="link-to-prism">src/app/service/localStorage/user.service.ts:54</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="57" class="link-to-prism">src/app/service/localStorage/user.service.ts:57</a></div>
                             </td>
                         </tr>
 
@@ -273,8 +273,8 @@ Provides methods to read, update, and persist user settings.</p>
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="78"
-                                    class="link-to-prism">src/app/service/localStorage/user.service.ts:78</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="81"
+                                    class="link-to-prism">src/app/service/localStorage/user.service.ts:81</a></div>
                         </td>
                     </tr>
 
@@ -316,8 +316,8 @@ Provides methods to read, update, and persist user settings.</p>
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="113"
-                                    class="link-to-prism">src/app/service/localStorage/user.service.ts:113</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="116"
+                                    class="link-to-prism">src/app/service/localStorage/user.service.ts:116</a></div>
                         </td>
                     </tr>
 
@@ -359,8 +359,8 @@ Provides methods to read, update, and persist user settings.</p>
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="103"
-                                    class="link-to-prism">src/app/service/localStorage/user.service.ts:103</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="106"
+                                    class="link-to-prism">src/app/service/localStorage/user.service.ts:106</a></div>
                         </td>
                     </tr>
 
@@ -444,8 +444,8 @@ Provides methods to read, update, and persist user settings.</p>
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="69"
-                                    class="link-to-prism">src/app/service/localStorage/user.service.ts:69</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="72"
+                                    class="link-to-prism">src/app/service/localStorage/user.service.ts:72</a></div>
                         </td>
                     </tr>
 
@@ -488,8 +488,8 @@ with access to <code>localStorage</code>.</p>
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="89"
-                                    class="link-to-prism">src/app/service/localStorage/user.service.ts:89</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="92"
+                                    class="link-to-prism">src/app/service/localStorage/user.service.ts:92</a></div>
                         </td>
                     </tr>
 
@@ -578,8 +578,8 @@ with access to <code>localStorage</code>.</p>
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="128"
-                                    class="link-to-prism">src/app/service/localStorage/user.service.ts:128</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="131"
+                                    class="link-to-prism">src/app/service/localStorage/user.service.ts:131</a></div>
                         </td>
                     </tr>
 
@@ -682,7 +682,10 @@ export interface User {
   emerald_amount: number;
 
   /** AI key */
-  ai_key: string
+  ai_key: string;
+
+  /** If true, heatmap threshold values are automatically set based on the user&#x27;s budget otherwise, the user can set them manually. */
+  is_budget_radio_clicked: boolean;
 
 }
 

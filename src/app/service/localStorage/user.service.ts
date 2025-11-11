@@ -42,7 +42,10 @@ export interface User {
   emerald_amount: number;
 
   /** AI key */
-  ai_key: string
+  ai_key: string;
+
+  /** If true, heatmap threshold values are automatically set based on the user's budget otherwise, the user can set them manually. */
+  is_budget_radio_clicked: boolean;
 
 }
 

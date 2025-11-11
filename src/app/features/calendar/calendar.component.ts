@@ -138,6 +138,7 @@ export class CalendarComponent implements OnInit {
   ) {
     this.currency = this.userService.getValue<string>('currency');
     this.isShowHeatmap = this.userService.getValue<boolean>('is_show_heatmap') ?? false;
+    this.isBudgetRadioClicked = this.userService.getValue<boolean>('is_budget_radio_clicked') ?? false;
     this.has_music_url_access = this.userService.getValue<boolean>('has_music_url_access') ?? false;
     const [emerald, rose] = this.calculateThresholdValues();
     if (rose > emerald) {
@@ -311,6 +312,7 @@ export class CalendarComponent implements OnInit {
    */
   toggleHeatmap(): void {
     this.isShowHeatmap = !this.isShowHeatmap;
+    this.showBudgetRadio = this.isShowHeatmap ? true : false;
     this.userService.update('is_show_heatmap', this.isShowHeatmap);
     this.renderCalendar(this.currentYear, this.currentMonth);
   }
@@ -438,6 +440,7 @@ export class CalendarComponent implements OnInit {
  */
   setHeatmapThresholdsByBudget(): void {
     this.isBudgetRadioClicked = !this.isBudgetRadioClicked;
+    this.userService.update('is_budget_radio_clicked', this.isBudgetRadioClicked);
     this.renderCalendar(this.currentYear, this.currentMonth);
   }
 
