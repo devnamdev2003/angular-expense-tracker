@@ -4,6 +4,8 @@ npm install lucide-angular
 npm install marked
 npm install -g @compodoc/compodoc
 npm install jspdf jspdf-autotable xlsx
+npm install @capacitor/core @capacitor/cli
+npm install @capacitor/android
 
 commands:
 
