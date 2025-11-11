@@ -187,6 +187,9 @@ customElements.define('compodoc-menu', class extends HTMLElement {
                                 <a href="components/SidebarComponent.html" data-type="entity-link" >SidebarComponent</a>
                             </li>
                             <li class="link">
+                                <a href="components/SplashScreenComponent.html" data-type="entity-link" >SplashScreenComponent</a>
+                            </li>
+                            <li class="link">
                                 <a href="components/ToastComponent.html" data-type="entity-link" >ToastComponent</a>
                             </li>
                         </ul>

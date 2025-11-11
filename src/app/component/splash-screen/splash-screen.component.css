@@ -1,0 +1,197 @@
+.outer-logo {
+    position: fixed;
+    inset: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    z-index: 2147483647;
+}
+
+/* Logo Card */
+.logo-card {
+    font-family: "Arial", sans-serif;
+    width: 340px;
+    height: 360px;
+    background: #4057A7;
+    border-radius: 60px;
+    box-shadow: 0 18px 36px rgba(0, 0, 0, 0.18);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    box-sizing: border-box;
+    opacity: 0;
+    transform: scale(0.7);
+    animation: cardPop 0.6s ease-out forwards;
+}
+
+/* White box */
+.chart-wrap {
+    position: relative;
+    background: #ffffff;
+    width: 180px;
+    height: 180px;
+    border-radius: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    animation: fadeIn 0.4s ease-out forwards;
+    opacity: 0;
+}
+
+/* Dollar sign */
+.dollar {
+    font-size: 90px;
+    font-weight: 800;
+    color: #4057A7;
+    position: relative;
+    top: -5px;
+    opacity: 0;
+    animation: bounceIn 0.4s ease-out 0.3s forwards;
+}
+
+/* Wallet */
+.wallet-tab {
+    position: absolute;
+    right: -22px;
+    width: 65px;
+    height: 45px;
+    background: #2B3A68;
+    border-radius: 12px 5px 5px 12px;
+    display: flex;
+    align-items: center;
+    justify-content: start;
+    opacity: 0;
+    transform: translateX(80px) rotate(20deg);
+    animation: walletSlide 0.6s cubic-bezier(0.68, -0.55, 0.27, 1.55) 0.1s forwards;
+}
+
+.wallet-tab .dot {
+    width: 15px;
+    margin-left: 12px;
+    height: 15px;
+    background: #ffffff;
+    border-radius: 50%;
+}
+
+/* Text */
+.title {
+    margin-top: 20px;
+    color: #ffffff;
+    font-weight: 800;
+    font-size: 36px;
+    line-height: 0.95;
+    text-align: center;
+    letter-spacing: 1px;
+    opacity: 0;
+    transform: translateY(30px);
+    animation: titleFadeUp 0.4s ease-out 0.3s forwards;
+}
+
+/* Animations */
+@keyframes cardPop {
+    from {
+        opacity: 0;
+        transform: scale(0.7);
+    }
+
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: scale(0.7);
+    }
+
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+@keyframes bounceIn {
+    0% {
+        opacity: 0;
+        transform: translateY(-30px);
+    }
+
+    60% {
+        opacity: 1;
+        transform: translateY(10px);
+    }
+
+    100% {
+        opacity: 1;
+        transform: translateY(0px);
+    }
+}
+
+@keyframes walletSlide {
+    0% {
+        opacity: 0;
+        transform: translateX(80px) rotate(20deg);
+    }
+
+    70% {
+        opacity: 1;
+        transform: translateX(-8px) rotate(-8deg);
+    }
+
+    100% {
+        opacity: 1;
+        transform: translateX(0) rotate(0deg);
+    }
+}
+
+@keyframes titleFadeUp {
+    0% {
+        opacity: 0;
+        transform: translateY(30px);
+        letter-spacing: 12px;
+    }
+
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+        letter-spacing: 2px;
+    }
+}
+
+@media (max-width: 770px) {
+    .logo-card {
+        width: 289px;
+        height: 306px;
+        border-radius: 51px;
+    }
+
+    .chart-wrap {
+        width: 153px;
+        height: 153px;
+        border-radius: 25.5px;
+    }
+
+    .dollar {
+        font-size: 76.5px;
+        font-weight: 800;
+    }
+
+    .wallet-tab {
+        width: 55.25px;
+        height: 38.25px;
+    }
+
+    .wallet-tab .dot {
+        width: 12.75px;
+        height: 12.75px;
+    }
+
+    .title {
+        margin-top: 17.5px;
+        font-size: 30.6px;
+    }
+}
