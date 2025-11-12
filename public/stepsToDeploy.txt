@@ -1,0 +1,11 @@
+1. Test the application
+2. Increment the application version if needed
+3. Check on the site to verify that the version has increased
+4. Stop the running application
+5. Modify environments.ts by changing the developmentEnvironment variable from 'local' to 'live' for production
+6. Update the README.md file with your changes if needed
+7. Run the "compodoc -p tsconfig.json -s" command to generate and serve documentation using Compodoc, then verify if it is updated
+8. Proceed with the deployment process to push the updated application
+9. Merge the angular-dev branch into the main branch
+10. Than, modify environments.ts by changing the developmentEnvironment variable from 'live' back to 'local'
+11. update the app version in backend side.

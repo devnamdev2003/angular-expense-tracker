@@ -17,6 +17,7 @@ This application leverages **Angular** as the frontend framework and **Tailwind 
 | Angular              | Frontend application logic      |
 | Tailwind CSS         | Styling and responsive UI       |
 | LocalStorage         | Persistent data storage         |
+| Django               | Backend api logic               |
 
 ---
 
@@ -60,6 +61,9 @@ All expenses are stored in the device's **LocalStorage** and reflected immediate
     * **Green (Emerald)** – default < ₹500
   * A **summary table** displays each color, the number of days, the total expense, and an **Edit button** for updating the thresholds.
     * Editing allows users to set a new amount for the corresponding color, immediately updating the heatmap visualization.
+  * Additionally, users can enable a radio option to automatically set threshold values based on their budget, where
+    * Rose represents the average spent per day amount.
+    * Emerald represents the suggested spending per day amount.
 
 ---
 

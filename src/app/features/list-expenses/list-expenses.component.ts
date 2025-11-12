@@ -323,6 +323,7 @@ export class ListExpensesComponent implements OnInit {
     if (this.isFilterdData) {
       this.applyFilter();
     }
+    this.setTotalAmount();
   }
 
   /**
@@ -336,6 +337,7 @@ export class ListExpensesComponent implements OnInit {
       this.closeModal();
       this.expenses = this.expenses.filter(item => item.expense_id !== id);
     }
+    this.setTotalAmount();
   }
 
   /**

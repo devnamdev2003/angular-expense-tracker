@@ -10,6 +10,7 @@ import { UserService } from './service/localStorage/user.service';
 import { GlobalLoaderService } from './service/global-loader/global-loader.service';
 import { PostApiService } from './service/backend-api/post/post-api.service';
 import { ToastService } from './service/toast/toast.service';
+import { SplashScreenComponent } from './component/splash-screen/splash-screen.component';
 
 /**
  * Root component of the application.
@@ -20,7 +21,7 @@ import { ToastService } from './service/toast/toast.service';
   selector: 'app-root',
   standalone: true,
   imports: [
-    GlobalLoaderComponent, CommonModule, InstallAppPopupComponentComponent, RouterOutlet
+    GlobalLoaderComponent, CommonModule, InstallAppPopupComponentComponent, RouterOutlet, SplashScreenComponent
   ],
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
@@ -35,6 +36,11 @@ export class AppComponent {
    *  Flag to control the display of the installation prompt
    */
   showInstallButton = false;
+
+  /**
+   *  Flag to control the display of the Splash
+   */
+  showSplash = false;
 
   /**
    * Constructor for AppComponent.
@@ -64,10 +70,10 @@ export class AppComponent {
   ngOnInit() {
     if (isPlatformBrowser(this.platformId)) {
 
-      this.loader.show();
-      setTimeout(() => {
-        this.loader.hide();
-      }, 500);
+      // this.loader.show();
+      // setTimeout(() => {
+      //   this.loader.hide();
+      // }, 500);
 
       this.syncSchemaService.syncAllSchema();
 
@@ -101,6 +107,10 @@ export class AppComponent {
         this.deferredPrompt = event;
         this.showInstallButton = true;
       });
+      // this.showSplash = true;
+      // setTimeout(() => {
+      //   this.showSplash = false
+      // }, 1500);
     }
   }
 

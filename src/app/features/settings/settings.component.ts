@@ -205,6 +205,10 @@ export class SettingsComponent {
       this.showEditCategoryOption = true;
       this.showDeleteCategoryOption = true;
     }
+    else{
+      this.showEditCategoryOption = false;
+      this.showDeleteCategoryOption = false;
+    }
   }
 
   /**
