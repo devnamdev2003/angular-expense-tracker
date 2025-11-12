@@ -17,6 +17,7 @@ This application leverages **Angular** as the frontend framework and **Tailwind 
 | Angular              | Frontend application logic      |
 | Tailwind CSS         | Styling and responsive UI       |
 | LocalStorage         | Persistent data storage         |
+| Django               | Backend api logivc              |
 
 ---
 
