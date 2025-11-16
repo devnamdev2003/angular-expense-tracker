@@ -16,7 +16,7 @@ import { AiComponent } from '../../features/ai/ai.component';
 
 import { SectionService } from '../../service/section/section.service';
 import { ScreenTypeService } from '../../service/screen-type/screen-type.service';
-
+import { NativeAppServiceService } from '../../service/native-app/native-app-service.service';
 /**
  * Root component of the application.
  * Manages global state, mobile view detection, section tracking,
@@ -49,11 +49,13 @@ export class ExpenseWiseComponent {
    * 
    * @param sectionService Service to track current section changes
    * @param screenTypeService Service to track the screentype is mobile, tablet, and laptop
+   * @param nativeAppServiceService Provides functionality related to the native mobile app environment.
    * @param platformId Angular platform ID to check if running in browser
    */
   constructor(
     private sectionService: SectionService,
     private screenTypeService: ScreenTypeService,
+    public nativeAppServiceService: NativeAppServiceService,
     @Inject(PLATFORM_ID) private platformId: Object
 
   ) {

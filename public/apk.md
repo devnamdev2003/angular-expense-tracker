@@ -211,3 +211,63 @@ You can now install this on any device.
 | Future updates            | Just push to GitHub — app auto-updates |
 
 ---
+
+# ✅ **STEP 1 — Create Your Icon (1024×1024 PNG)**
+
+Make sure your icon is:
+
+* PNG format
+* Exactly **1024 × 1024 px**
+* No transparent background (recommended)
+* Name it: **icon.png**
+
+Put it here:
+
+```
+resources/icon.png
+```
+
+If `resources` folder doesn’t exist ➜ **create it**.
+
+---
+
+# ✅ **STEP 2 — Install Capacitor Assets Tool**
+
+Run in your Angular project root:
+
+```bash
+npm install @capacitor/assets
+```
+
+---
+
+# ✅ **STEP 3 — Generate All Android Icons**
+
+Run:
+
+```bash
+npx capacitor-assets generate
+```
+
+This will:
+
+✔️ Create all required mipmap icons
+✔️ Update Android Studio resources
+✔️ Generate splash screens (if splash.png exists)
+
+Output will appear here:
+
+```
+android/app/src/main/res/mipmap-*/ic_launcher.png
+```
+
+---
+
+# ✅ **STEP 4 — Sync Capacitor**
+
+```bash
+npx cap sync android
+```
+
+---
+

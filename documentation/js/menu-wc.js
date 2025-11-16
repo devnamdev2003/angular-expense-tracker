@@ -224,6 +224,9 @@ customElements.define('compodoc-menu', class extends HTMLElement {
                                     <a href="injectables/HbsRenderService.html" data-type="entity-link" >HbsRenderService</a>
                                 </li>
                                 <li class="link">
+                                    <a href="injectables/NativeAppServiceService.html" data-type="entity-link" >NativeAppServiceService</a>
+                                </li>
+                                <li class="link">
                                     <a href="injectables/PostApiService.html" data-type="entity-link" >PostApiService</a>
                                 </li>
                                 <li class="link">
