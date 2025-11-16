@@ -1,4 +1,6 @@
-<nav class="fixed top-0 left-0 w-full bg-[var(--color-accent)] text-[var(--color-text)] z-50 shadow">
+<nav class="fixed top-0 left-0 w-full bg-[var(--color-accent)] text-[var(--color-text)] z-50 shadow"
+     [ngClass]="{ 'pt-[32px]': nativeAppServiceService.isNativeApp() }"
+>
     <div class="flex items-center justify-start px-2 py-[10px] md:px-4 relative">
         <!-- Back Button -->
         <button *ngIf="showBackButton" (click)="navigateAndClose('home', $event)" class="relative top-[1px]">

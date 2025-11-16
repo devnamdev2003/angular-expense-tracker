@@ -2,6 +2,7 @@ import { Component, Input } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { SectionService } from '../../service/section/section.service';
 import { HamburgerMenuComponent } from '../hamburger-menu/hamburger-menu.component';
+import { NativeAppServiceService } from '../../service/native-app/native-app-service.service';
 
 /**
  * Navbar component that displays the top navigation bar.
@@ -52,8 +53,9 @@ export class NavbarComponent {
    *   using the {@link sectionLabels} map for display text.
    *
    * @param sectionService Service used to manage and broadcast the active section state.
+   * @param nativeAppServiceService Provides functionality related to the native mobile app environment.
    */
-  constructor(private sectionService: SectionService) {
+  constructor(private sectionService: SectionService, public nativeAppServiceService: NativeAppServiceService,) {
     this.sectionService.currentSection$.subscribe(section => {
       this.showBackButton = section !== 'home';
       this.navBarLable = this.sectionLabels[section];
