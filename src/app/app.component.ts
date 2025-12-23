@@ -10,7 +10,6 @@ import { UserService } from './service/localStorage/user.service';
 import { GlobalLoaderService } from './service/global-loader/global-loader.service';
 import { PostApiService } from './service/backend-api/post/post-api.service';
 import { ToastService } from './service/toast/toast.service';
-import { SplashScreenComponent } from './component/splash-screen/splash-screen.component';
 
 /**
  * Root component of the application.
@@ -21,7 +20,7 @@ import { SplashScreenComponent } from './component/splash-screen/splash-screen.c
   selector: 'app-root',
   standalone: true,
   imports: [
-    GlobalLoaderComponent, CommonModule, InstallAppPopupComponentComponent, RouterOutlet, SplashScreenComponent
+    GlobalLoaderComponent, CommonModule, InstallAppPopupComponentComponent, RouterOutlet
   ],
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']

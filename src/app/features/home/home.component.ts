@@ -21,6 +21,12 @@ import { ConfigService } from '../../service/config/config.service';
 export class HomeComponent {
 
   /**
+   * Determines how graph values are represented across all views (day, month, year).
+   * `1` → discrete values (non-cumulative) , `0` → Cumulative / progressive values
+   */
+  graphType: 1 | 0 = 1;
+
+  /**
    * The default view type to be loaded on component init.
    */
   defaultViewType: 'month' | 'day' | 'year' = 'month';
@@ -215,6 +221,18 @@ export class HomeComponent {
   navigateAndClose(section: string, event: Event): void {
     event.preventDefault();
     this.sectionService.setSection(section);
+  }
+
+  /**
+   * Updates the graph representation mode used across day, month, and year views.
+   *
+   * @param type Graph representation flag:
+   * `1` → discrete values (non-cumulative) , `0` → Cumulative / progressive values
+   *
+   * Changing this value immediately updates the rendered graph data.
+   */
+  setGraphType(type: 1 | 0) {
+    this.graphType = type;
   }
 
 }
