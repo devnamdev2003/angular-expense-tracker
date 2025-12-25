@@ -20,7 +20,8 @@
     </div>
 </div> -->
 
-<div *ngIf="has_ai_access" class="md:hidden fixed top-[0.1rem] right-3 z-50 hamburger-menu-container">
+<div *ngIf="has_ai_access" class="md:hidden fixed right-3 z-50 hamburger-menu-container"
+    [ngClass]="nativeAppServiceService.isNativeApp() ? 'top-[2rem]' : 'top-[0.1rem]'">
     <button *ngIf="showAIButton" (click)="navigateAndClose('ai', $event)"
         class="text-lg text-[var(--color-white)] py-[0.65rem]">
         <img src="assets/img/icon/icons8-ai-96.png" alt="Menu" class="w-[24px] h-[24px]"

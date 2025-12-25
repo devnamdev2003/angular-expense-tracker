@@ -47,6 +47,11 @@ export interface User {
   /** If true, heatmap threshold values are automatically set based on the user's budget otherwise, the user can set them manually. */
   is_budget_radio_clicked: boolean;
 
+  /** Determines whether to show monthly or daily or yearly view. */
+  graph_view_type: 'month' | 'day' | 'year';
+
+  /** Graph representation mode received from the parent component. */
+  graph_type: number;
 }
 
 /**

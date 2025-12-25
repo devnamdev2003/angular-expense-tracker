@@ -74,6 +74,8 @@ export class StorageService {
     emerald_amount: 500,
     ai_key: null,
     is_budget_radio_clicked: false,
+    graph_type: 1,
+    graph_view_type: "month"
   };
 
   /** Schema for budget */

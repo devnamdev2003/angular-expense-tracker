@@ -32,6 +32,13 @@ export class GraphsComponent implements OnInit, OnChanges {
   @Input() currentDate!: Date;
 
   /**
+   * Graph representation mode received from the parent component.
+   * `1` → discrete values (non-cumulative) , `0` → Cumulative / progressive values
+   * @type {number}
+   */
+  @Input() graphType: number = 1;
+
+  /**
    * Chart series data used by ApexCharts.
    */
   chartSeries: ApexAxisChartSeries = [
@@ -145,7 +152,7 @@ export class GraphsComponent implements OnInit, OnChanges {
    * @param changes Object containing changed input properties
    */
   ngOnChanges(changes: SimpleChanges): void {
-    if (changes['viewType'] || changes['currentDate']) {
+    if (changes['viewType'] || changes['currentDate'] || changes['graphType']) {
       this.loadData();
     }
   }
@@ -202,7 +209,20 @@ export class GraphsComponent implements OnInit, OnChanges {
     });
 
     const days = Array.from(dayAmountMap.keys()).sort((a, b) => a - b);
-    const amounts = days.map(day => dayAmountMap.get(day)!);
+    const amounts: number[] = [];
+    if (this.graphType == 1) {
+      for (const day of days) {
+        amounts.push(dayAmountMap.get(day)!);
+      }
+    }
+    else {
+      let sum = 0;
+      for (const day of days) {
+        sum += dayAmountMap.get(day) ?? 0;
+        amounts.push(sum);
+      }
+    }
+
 
     this.tooltip = {
       shared: true,
@@ -276,7 +296,19 @@ export class GraphsComponent implements OnInit, OnChanges {
     });
 
     const times = Array.from(timeAmountMap.keys());
-    const amounts = times.map(time => timeAmountMap.get(time)!);
+    const amounts: number[] = [];
+    if (this.graphType == 1) {
+      for (const time of times) {
+        amounts.push(timeAmountMap.get(time)!);
+      }
+    }
+    else {
+      let sum = 0;
+      for (const time of times) {
+        sum += timeAmountMap.get(time) ?? 0;
+        amounts.push(sum);
+      }
+    }
 
     this.tooltip = {
       shared: true,
@@ -340,7 +372,19 @@ export class GraphsComponent implements OnInit, OnChanges {
     });
 
     const months = Array.from(monthAmountMap.keys()).reverse();
-    const amounts = months.map(month => monthAmountMap.get(month)!);
+    const amounts: number[] = [];
+    if (this.graphType == 1) {
+      for (const month of months) {
+        amounts.push(monthAmountMap.get(month)!);
+      }
+    }
+    else {
+      let sum = 0;
+      for (const month of months) {
+        sum += monthAmountMap.get(month) ?? 0;
+        amounts.push(sum);
+      }
+    }
 
     this.tooltip = {
       shared: true,

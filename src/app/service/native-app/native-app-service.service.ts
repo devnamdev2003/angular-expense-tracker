@@ -1,6 +1,9 @@
 import { Injectable } from '@angular/core';
 import { Capacitor } from '@capacitor/core';
 
+/**
+ * Service to check whether the application is running as a native app
+ */
 @Injectable({
   providedIn: 'root'
 })

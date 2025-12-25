@@ -2,6 +2,7 @@ import { Component, HostListener } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { SectionService } from '../../service/section/section.service';
 import { UserService } from '../../service/localStorage/user.service';
+import { NativeAppServiceService } from '../../service/native-app/native-app-service.service';
 
 /**
  * Hamburger menu component for mobile or compact navigation.
@@ -42,8 +43,9 @@ export class HamburgerMenuComponent {
    *
    * @param sectionService Service for managing and broadcasting the active section.
    * @param userService Service for managing user preferences
+   * @param nativeAppServiceService Provides functionality related to the native mobile app environment.
    */
-  constructor(private sectionService: SectionService, private userService: UserService) {
+  constructor(private sectionService: SectionService, private userService: UserService, public nativeAppServiceService: NativeAppServiceService,) {
     this.sectionService.currentSection$.subscribe(section => {
       this.showAIButton = section !== 'ai';
     });
