@@ -34,9 +34,9 @@ export class GraphsComponent implements OnInit, OnChanges {
   /**
    * Graph representation mode received from the parent component.
    * `1` → discrete values (non-cumulative) , `0` → Cumulative / progressive values
-   * @type {1 | 0}
+   * @type {number}
    */
-  @Input() graphType: 1 | 0 = 1;
+  @Input() graphType: number = 1;
 
   /**
    * Chart series data used by ApexCharts.

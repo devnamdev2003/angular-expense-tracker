@@ -438,7 +438,7 @@
                 </tr>
                 <tr>
                     <td class="col-md-4">
-                        <i>Type : </i>    <code>&quot;1&quot; | &quot;0&quot;</code>
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
 
                     </td>
                 </tr>
@@ -1440,9 +1440,9 @@ export class GraphsComponent implements OnInit, OnChanges {
   /**
    * Graph representation mode received from the parent component.
    * &#x60;1&#x60; → discrete values (non-cumulative) , &#x60;0&#x60; → Cumulative / progressive values
-   * @type {1 | 0}
+   * @type {number}
    */
-  @Input() graphType: 1 | 0 &#x3D; 1;
+  @Input() graphType: number &#x3D; 1;
 
   /**
    * Chart series data used by ApexCharts.

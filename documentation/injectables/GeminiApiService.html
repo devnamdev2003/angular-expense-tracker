@@ -688,10 +688,10 @@ export class GeminiApiService {
       const parts &#x3D; res?.candidates?.[0]?.content?.parts;
       this.globalLoaderService.hide();
       return parts?.map((p: any) &#x3D;&gt; p.text).join(&#x27;\n\n&#x27;) || &#x27;No response&#x27;;
-    } catch (err) {
+    } catch (err: any) {
       this.globalLoaderService.hide();
       console.error(&#x27;Gemini API error:&#x27;, err);
-      return &#x27;Error fetching response&#x27; + err;
+      return &#x27;Error fetching response&#x27; + err.error.error.message;
     }
   }
 
