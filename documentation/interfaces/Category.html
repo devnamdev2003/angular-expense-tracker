@@ -663,21 +663,22 @@ export class CategoryService {
    *
    * @param data List of category objects without &#x60;category_id&#x60; and &#x60;user_id&#x60;
    */
-  addBulk(data: Omit&lt;Category, &#x27;category_id&#x27; | &#x27;user_id&#x27;&gt;[]): void {
+  addBulk(data: Category[]): void {
     if (!this.isBrowser()) return;
 
-    const all: Category[] &#x3D; this.getAll() ?? [];
-    const user_id &#x3D; this.userService.getValue&lt;string&gt;(&#x27;id&#x27;) || &#x27;0&#x27;;
+    const existing: Category[] &#x3D; this.getAll() ?? [];
 
-    const imported: Category[] &#x3D; data.map(cat &#x3D;&gt; ({
-      ...cat,
-      category_id: crypto.randomUUID(),
-      user_id
-    }));
+    // Remove categories that already exist (by ID)
+    const filteredExisting &#x3D; existing.filter(
+      oldCat &#x3D;&gt; !data.some(newCat &#x3D;&gt; newCat.category_id &#x3D;&#x3D;&#x3D; oldCat.category_id)
+    );
+
+    // Merge uploaded categories as-is (keep IDs)
+    const merged &#x3D; [...filteredExisting, ...data];
 
     localStorage.setItem(
       this.storageService.getCategoryKey(),
-      JSON.stringify([...all, ...imported])
+      JSON.stringify(merged)
     );
   }
 }

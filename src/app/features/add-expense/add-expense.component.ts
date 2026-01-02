@@ -128,7 +128,13 @@ export class AddExpenseComponent implements OnInit {
       return;
     }
 
-    const data = this.expenseForm.value;
+    const rawData = this.expenseForm.value;
+
+    const data = {
+      ...rawData,
+      location: rawData.location?.trim() || null,
+      note: rawData.note?.trim() || null,
+    };
     try {
       this.expenseService.add(data);
       this.toastService.show('Expense added successfully!', 'success');

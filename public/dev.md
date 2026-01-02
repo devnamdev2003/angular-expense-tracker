@@ -44,3 +44,5 @@ ng g s service-name
 - Use fix: → bug fix
 - Use perf: → performance improvements
 - Use refactor: → code cleanup
+- Use UI: → user interface changes
+- Use docs: → documentation changes

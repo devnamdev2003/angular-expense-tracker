@@ -54,7 +54,7 @@ export class ExpenseDetailsModalComponent implements OnInit {
   }
 
   /** Angular lifecycle hook called on component initialization */
-  ngOnInit(): void {}
+  ngOnInit(): void { }
 
   /**
    * Initializes the reactive edit form with default or selected expense values.
@@ -99,9 +99,15 @@ export class ExpenseDetailsModalComponent implements OnInit {
    */
   submitEdit(): void {
     if (this.editForm.valid) {
+      const rawData = this.editForm.value;
+      const data = {
+        ...rawData,
+        location: rawData.location?.trim() || null,
+        note: rawData.note?.trim() || null,
+      };
       const updatedExpense = {
         ...this.selectedExpense,
-        ...this.editForm.value,
+        ...data,
       };
       this.edit.emit(updatedExpense);
       this.toggleEdit();

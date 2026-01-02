@@ -485,8 +485,8 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="144"
-                                    class="link-to-prism">src/app/features/add-expense/add-expense.component.ts:144</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="150"
+                                    class="link-to-prism">src/app/features/add-expense/add-expense.component.ts:150</a></div>
                         </td>
                     </tr>
 
@@ -637,8 +637,8 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="165"
-                                    class="link-to-prism">src/app/features/add-expense/add-expense.component.ts:165</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="171"
+                                    class="link-to-prism">src/app/features/add-expense/add-expense.component.ts:171</a></div>
                         </td>
                     </tr>
 
@@ -754,8 +754,8 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="201"
-                                    class="link-to-prism">src/app/features/add-expense/add-expense.component.ts:201</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="207"
+                                    class="link-to-prism">src/app/features/add-expense/add-expense.component.ts:207</a></div>
                         </td>
                     </tr>
 
@@ -828,8 +828,8 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="210"
-                                    class="link-to-prism">src/app/features/add-expense/add-expense.component.ts:210</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="216"
+                                    class="link-to-prism">src/app/features/add-expense/add-expense.component.ts:216</a></div>
                         </td>
                     </tr>
 
@@ -1345,7 +1345,13 @@ export class AddExpenseComponent implements OnInit {
       return;
     }
 
-    const data &#x3D; this.expenseForm.value;
+    const rawData &#x3D; this.expenseForm.value;
+
+    const data &#x3D; {
+      ...rawData,
+      location: rawData.location?.trim() || null,
+      note: rawData.note?.trim() || null,
+    };
     try {
       this.expenseService.add(data);
       this.toastService.show(&#x27;Expense added successfully!&#x27;, &#x27;success&#x27;);

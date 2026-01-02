@@ -12,12 +12,17 @@
             </div>
 
             <div class="flex flex-col">
-                <span class="text-sm font-medium">
-                    {{ exp.category_name || 'Uncategorized' }}
+                <span class="text-sm font-medium truncate max-w-[180px]"
+                    [title]="exp.note || exp.location || exp.category_name || 'Expense'">
+                    {{
+                    exp.note
+                    || exp.location
+                    || exp.category_name
+                    || 'Expense'
+                    }}
                 </span>
                 <span class="text-xs text-gray-500 dark:text-gray-400">
                     {{ getFormattedDate(exp) }}
-
                 </span>
             </div>
         </div>

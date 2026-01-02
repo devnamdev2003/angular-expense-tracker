@@ -164,21 +164,22 @@ export class CategoryService {
    *
    * @param data List of category objects without `category_id` and `user_id`
    */
-  addBulk(data: Omit<Category, 'category_id' | 'user_id'>[]): void {
+  addBulk(data: Category[]): void {
     if (!this.isBrowser()) return;
 
-    const all: Category[] = this.getAll() ?? [];
-    const user_id = this.userService.getValue<string>('id') || '0';
+    const existing: Category[] = this.getAll() ?? [];
 
-    const imported: Category[] = data.map(cat => ({
-      ...cat,
-      category_id: crypto.randomUUID(),
-      user_id
-    }));
+    // Remove categories that already exist (by ID)
+    const filteredExisting = existing.filter(
+      oldCat => !data.some(newCat => newCat.category_id === oldCat.category_id)
+    );
+
+    // Merge uploaded categories as-is (keep IDs)
+    const merged = [...filteredExisting, ...data];
 
     localStorage.setItem(
       this.storageService.getCategoryKey(),
-      JSON.stringify([...all, ...imported])
+      JSON.stringify(merged)
     );
   }
 }
