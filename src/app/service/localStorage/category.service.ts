@@ -153,4 +153,32 @@ export class CategoryService {
     if (!this.isBrowser()) return;
     this.storageService.updateCategories(categories);
   }
+
+  /**
+   * Bulk-adds category records into localStorage.
+   *
+   * 🔹 Behavior:
+   * - Generates a new `category_id` for each category
+   * - Assigns the currently logged-in user ID
+   * - Appends imported categories to existing stored categories
+   *
+   * @param data List of category objects without `category_id` and `user_id`
+   */
+  addBulk(data: Omit<Category, 'category_id' | 'user_id'>[]): void {
+    if (!this.isBrowser()) return;
+
+    const all: Category[] = this.getAll() ?? [];
+    const user_id = this.userService.getValue<string>('id') || '0';
+
+    const imported: Category[] = data.map(cat => ({
+      ...cat,
+      category_id: crypto.randomUUID(),
+      user_id
+    }));
+
+    localStorage.setItem(
+      this.storageService.getCategoryKey(),
+      JSON.stringify([...all, ...imported])
+    );
+  }
 }

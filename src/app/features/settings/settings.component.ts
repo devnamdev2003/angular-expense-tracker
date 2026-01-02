@@ -13,7 +13,7 @@ import { ExpenseService } from '../../service/localStorage/expense.service';
 import { Category, CategoryService } from '../../service/localStorage/category.service';
 import { BudgetService } from '../../service/localStorage/budget.service';
 import { UserData } from '../../component/settings-components/download-component/download-component.component';
-
+import { GlobalLoaderService } from '../../service/global-loader/global-loader.service';
 /**
  * @component
  * @description
@@ -87,6 +87,7 @@ export class SettingsComponent {
     * @param budgetService Budget service for managing budgets
     * @param fb FormBuilder instance for creating reactive forms
     * @param toastService Toast service for showing notifications
+    * @param globalLoader Service to control the global loading indicator
     * @constructor
     * @memberof SettingsComponent
    */
@@ -97,6 +98,7 @@ export class SettingsComponent {
     private budgetService: BudgetService,
     private fb: FormBuilder,
     private toastService: ToastService,
+    private globalLoader: GlobalLoaderService
   ) { }
 
   /** 
@@ -205,7 +207,7 @@ export class SettingsComponent {
       this.showEditCategoryOption = true;
       this.showDeleteCategoryOption = true;
     }
-    else{
+    else {
       this.showEditCategoryOption = false;
       this.showDeleteCategoryOption = false;
     }
@@ -343,6 +345,8 @@ export class SettingsComponent {
 
     const reader = new FileReader();
 
+    this.globalLoader.show('Uploading Data...');
+    let isFileUploaded: boolean = false;
     reader.onload = () => {
       try {
         const content = reader.result as string;
@@ -370,34 +374,43 @@ export class SettingsComponent {
           this.toastService.show('No valid expenses found in the file.', 'warning');
           return;
         }
-
         // ✅ Confirm with user
         const confirmed = confirm(`Found ${validData.length} valid expenses. Do you want to import them?`);
-        if (!confirmed) return;
-
-        // ✅ Import data
-        for (const expense of validData) {
-          this.expenseService.add(expense);
+        if (!confirmed) {
+          this.toastService.show('Import cancelled.', 'info');
+          return;
         }
 
-        this.categoryService.updateAllCategories(json.categoryData);
         this.userService.updateUserData(json.userData);
+        const validCategories = json.categoryData.filter(cat => cat.user_id !== "0");
+        this.categoryService.addBulk(validCategories);
         this.budgetService.updateAllBudgets(json.budgetData);
+        this.expenseService.addBulk(validData);
+        isFileUploaded = true;
 
-        this.toastService.show('Data imported successfully!', 'success');
       } catch (e) {
         console.error('Error parsing file:', e);
+        isFileUploaded = false;
         const errorMessage = typeof e === 'object' && e !== null && 'message' in e ? (e as { message?: string }).message : undefined;
         this.toastService.show(errorMessage || 'Failed to parse JSON.', 'error');
       } finally {
-        // ✅ Reset input so same file can be uploaded again
+        this.globalLoader.hide();
+        if (isFileUploaded) {
+          this.toastService.show(
+            'Data imported successfully. Please restart the app to see the updated data.',
+            'success',
+            5000
+          );
+        }
         input.value = '';
       }
+
     };
 
     reader.onerror = () => {
       console.error('File reading error:', reader.error);
       this.toastService.show('Failed to read the file.', 'error');
+      this.globalLoader.hide();
       input.value = '';
     };
 

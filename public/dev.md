@@ -38,3 +38,9 @@ ng g c component-name
 ## Create a Service
 
 ng g s service-name
+
+### Commit Message Tips
+- Use feat: → new feature
+- Use fix: → bug fix
+- Use perf: → performance improvements
+- Use refactor: → code cleanup

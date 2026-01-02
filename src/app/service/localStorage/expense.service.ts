@@ -171,4 +171,31 @@ export class ExpenseService {
       return itemDate >= from && itemDate <= to;
     });
   }
+
+  /**
+   * Bulk-adds expense records into localStorage.
+   *
+   * 🔹 Behavior:
+   * - Generates a new unique `expense_id` for each expense
+   * - Rounds the amount to 2 decimal places
+   * - Appends imported expenses to existing stored expenses
+   *
+   * @param data List of expense objects without `expense_id`
+   */
+  addBulk(data: Omit<Expense, 'expense_id'>[]): void {
+    if (!this.isBrowser()) return;
+
+    const all: Expense[] = this.getAll() ?? [];
+
+    const imported: Expense[] = data.map(exp => ({
+      ...exp,
+      expense_id: crypto.randomUUID(),
+      amount: Math.round(exp.amount * 100) / 100,
+    }));
+
+    localStorage.setItem(
+      this.storageService.getExpenseKey(),
+      JSON.stringify([...all, ...imported])
+    );
+  }
 }
