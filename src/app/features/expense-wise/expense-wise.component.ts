@@ -17,6 +17,7 @@ import { AiComponent } from '../../features/ai/ai.component';
 import { SectionService } from '../../service/section/section.service';
 import { ScreenTypeService } from '../../service/screen-type/screen-type.service';
 import { NativeAppServiceService } from '../../service/native-app/native-app-service.service';
+import { HelpDashboard } from '../help-dashboard/help-dashboard';
 /**
  * Root component of the application.
  * Manages global state, mobile view detection, section tracking,
@@ -27,7 +28,7 @@ import { NativeAppServiceService } from '../../service/native-app/native-app-ser
   standalone: true,
   imports: [
     NavbarComponent, SidebarComponent, FooterComponent, ToastComponent, CommonModule, AddExpenseComponent,
-    SettingsComponent, ListExpensesComponent, HomeComponent, BudgetComponent, CalendarComponent, AiComponent
+    SettingsComponent, ListExpensesComponent, HomeComponent, BudgetComponent, CalendarComponent, AiComponent, HelpDashboard
   ],
   templateUrl: './expense-wise.component.html',
   styleUrl: './expense-wise.component.css'

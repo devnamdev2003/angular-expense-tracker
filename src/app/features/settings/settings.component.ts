@@ -15,6 +15,7 @@ import { BudgetService } from '../../service/localStorage/budget.service';
 import { UserData } from '../../component/settings-components/download-component/download-component.component';
 import { GlobalLoaderService } from '../../service/global-loader/global-loader.service';
 import { PostApiService } from '../../service/backend-api/post/post-api.service';
+import { SectionService } from '../../service/section/section.service';
 /**
  * @component
  * @description
@@ -102,6 +103,7 @@ export class SettingsComponent {
     private toastService: ToastService,
     private globalLoaderService: GlobalLoaderService,
     private postApiService: PostApiService,
+    private sectionService: SectionService
   ) { }
 
   /** 
@@ -200,19 +202,21 @@ export class SettingsComponent {
       this.deleteCategoryForm.markAllAsTouched();
       return;
     }
-    const category_id = this.deleteCategoryForm.value;
-    this.categoryService.delete(category_id.category_id);
-    this.toastService.show(`Category deleted succesfully.`, 'success');
-    this.closeDeleteCategoryModal();
-    const existingCategories: Category[] = this.categoryService.getAll();
-    let userId = this.userService.getValue<string>('id') || '0';
-    if (existingCategories.some(cat => cat.user_id === userId)) {
-      this.showEditCategoryOption = true;
-      this.showDeleteCategoryOption = true;
-    }
-    else {
-      this.showEditCategoryOption = false;
-      this.showDeleteCategoryOption = false;
+    if (confirm('Are you sure you want to delete this category?')) {
+      const category_id = this.deleteCategoryForm.value;
+      this.categoryService.delete(category_id.category_id);
+      this.toastService.show(`Category deleted succesfully.`, 'success');
+      this.closeDeleteCategoryModal();
+      const existingCategories: Category[] = this.categoryService.getAll();
+      let userId = this.userService.getValue<string>('id') || '0';
+      if (existingCategories.some(cat => cat.user_id === userId)) {
+        this.showEditCategoryOption = true;
+        this.showDeleteCategoryOption = true;
+      }
+      else {
+        this.showEditCategoryOption = false;
+        this.showDeleteCategoryOption = false;
+      }
     }
   }
 
@@ -536,5 +540,10 @@ export class SettingsComponent {
 
   backupData(): void {
     this.postApiService.postUserData(true);
+  }
+
+  openHelpCenter(section: string, event: Event): void {
+    event.preventDefault();
+    this.sectionService.setSection(section);
   }
 }
