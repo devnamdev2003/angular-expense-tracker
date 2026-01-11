@@ -14,6 +14,7 @@ import { Category, CategoryService } from '../../service/localStorage/category.s
 import { BudgetService } from '../../service/localStorage/budget.service';
 import { UserData } from '../../component/settings-components/download-component/download-component.component';
 import { GlobalLoaderService } from '../../service/global-loader/global-loader.service';
+import { PostApiService } from '../../service/backend-api/post/post-api.service';
 /**
  * @component
  * @description
@@ -87,7 +88,8 @@ export class SettingsComponent {
     * @param budgetService Budget service for managing budgets
     * @param fb FormBuilder instance for creating reactive forms
     * @param toastService Toast service for showing notifications
-    * @param globalLoader Service to control the global loading indicator
+    * @param globalLoaderService Service to control the global loading indicator
+    * @param postApiService Backend API post service
     * @constructor
     * @memberof SettingsComponent
    */
@@ -98,7 +100,8 @@ export class SettingsComponent {
     private budgetService: BudgetService,
     private fb: FormBuilder,
     private toastService: ToastService,
-    private globalLoader: GlobalLoaderService
+    private globalLoaderService: GlobalLoaderService,
+    private postApiService: PostApiService,
   ) { }
 
   /** 
@@ -345,7 +348,7 @@ export class SettingsComponent {
 
     const reader = new FileReader();
 
-    this.globalLoader.show('Uploading Data...');
+    this.globalLoaderService.show('Uploading Data...');
     let isFileUploaded: boolean = false;
     reader.onload = () => {
       try {
@@ -394,7 +397,7 @@ export class SettingsComponent {
         const errorMessage = typeof e === 'object' && e !== null && 'message' in e ? (e as { message?: string }).message : undefined;
         this.toastService.show(errorMessage || 'Failed to parse JSON.', 'error');
       } finally {
-        this.globalLoader.hide();
+        this.globalLoaderService.hide();
         if (isFileUploaded) {
           this.toastService.show(
             'Data imported successfully. Please restart the app to see the updated data.',
@@ -410,7 +413,7 @@ export class SettingsComponent {
     reader.onerror = () => {
       console.error('File reading error:', reader.error);
       this.toastService.show('Failed to read the file.', 'error');
-      this.globalLoader.hide();
+      this.globalLoaderService.hide();
       input.value = '';
     };
 
@@ -529,5 +532,9 @@ export class SettingsComponent {
     if (!this.showEditCategoryModal) {
       this.selectedEditCategory = null;
     }
+  }
+
+  backupData(): void {
+    this.postApiService.postUserData(true);
   }
 }

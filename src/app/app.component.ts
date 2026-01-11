@@ -7,7 +7,6 @@ import { InstallAppPopupComponentComponent } from './component/install-app-popup
 
 import { SyncSchemaService } from './service/localStorage/sync-schema.service';
 import { UserService } from './service/localStorage/user.service';
-import { GlobalLoaderService } from './service/global-loader/global-loader.service';
 import { PostApiService } from './service/backend-api/post/post-api.service';
 import { ToastService } from './service/toast/toast.service';
 
@@ -46,7 +45,6 @@ export class AppComponent {
    * Initializes route tracking, section updates, PWA update listener, and services.
    * 
    * @param userService Service for managing user preferences
-   * @param loader Global loader overlay service
    * @param storageService Local storage schema sync service
    * @param postApiService Backend API post service
    * @param toastService Service for displaying toast notifications
@@ -54,7 +52,6 @@ export class AppComponent {
    */
   constructor(
     public userService: UserService,
-    private loader: GlobalLoaderService,
     private postApiService: PostApiService,
     private toastService: ToastService,
     private syncSchemaService: SyncSchemaService,

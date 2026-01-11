@@ -41,10 +41,10 @@ export class SearchButtonComponent {
 
   /**
    * Creates an instance of SearchButtonComponent.
-   * @param globalLoader Service to control the global loading indicator
+   * @param globalLoaderService Service to control the global loading indicator
    */
   constructor(
-    private globalLoader: GlobalLoaderService
+    private globalLoaderService: GlobalLoaderService
   ) { }
 
   /**
@@ -71,9 +71,9 @@ export class SearchButtonComponent {
     console.log('Child emitting search query:', this.query);
     this.search.emit(this.query);
     this.searchInput?.nativeElement.blur();
-    this.globalLoader.show('Searching...');
+    this.globalLoaderService.show('Searching...');
     setTimeout(() => {
-      this.globalLoader.hide();
+      this.globalLoaderService.hide();
     }, 500);
   }
 

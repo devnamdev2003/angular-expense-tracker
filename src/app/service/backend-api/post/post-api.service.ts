@@ -1,10 +1,11 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { take } from 'rxjs/operators';
+import { finalize, take } from 'rxjs/operators';
 import { ConfigService } from '../../config/config.service';
 import { StorageService } from '../../localStorage/storage.service';
 import { UserService } from '../../localStorage/user.service';
 import { ToastService } from '../../toast/toast.service';
+import { GlobalLoaderService } from '../../global-loader/global-loader.service';
 /**
  * Service to handle background POST requests to sync user data (expenses, budget, categories, etc.)
  * with the backend API. Intended to run silently once every 24 hours.
@@ -27,26 +28,35 @@ export class PostApiService {
     private configService: ConfigService,
     private storageService: StorageService,
     private userService: UserService,
-    private toastService: ToastService
+    private toastService: ToastService,
+    private globalLoaderService: GlobalLoaderService,
   ) { }
 
   /**
    * Posts user data to the server in the background if more than 24 hours have passed
    * since the last successful backup. Uses `/api/post/` endpoint.
    */
-  postUserData(): void {
+  postUserData(forceBackup: boolean = false): void {
     const lastBackupStr = this.userService.getValue<string>('last_backup');
     const now = new Date(this.configService.getLocalTime());
     const lastBackup = lastBackupStr ? new Date(lastBackupStr) : null;
     const shouldBackup = !lastBackup || (now.getTime() - lastBackup.getTime()) > 4 * 60 * 60 * 1000;
 
-    if (shouldBackup) {
-      // console.log('Posting user data in the background...');
+    if (shouldBackup || forceBackup) {
+
+      if (forceBackup) this.globalLoaderService.show('☁️ Saving data to cloud...');
+
       const url = this.configService.getapiUrl() + '/api/post/';
       const userData = this.getUserDataFromLocalStorage();
 
-      this.http.post(url, userData).pipe(take(1)).subscribe({
+      this.http.post(url, userData).pipe(
+        take(1),
+        finalize(() => {
+          if (forceBackup) this.globalLoaderService.hide();
+        })
+      ).subscribe({
         next: (res: any) => {
+          if (forceBackup) this.toastService.show('Data saved to cloud successfully!', 'success', 4000);
           console.log('User data posted successfully. Response:', res);
           const api_response_app_version = res.app_version;
           const app_current_version = this.userService.getValue<string>('app_version');
@@ -62,11 +72,12 @@ export class PostApiService {
           this.userService.update('ai_key', res.ai_key);
         },
         error: err => {
+          if (forceBackup) this.toastService.show('Failed to save data. Please try again.', 'error', 5000);
           console.error('Error posting user data', err);
         }
       });
     } else {
-      //console.log('Backup skipped. Last backup was within 24 hours.');
+      console.log('Backup skipped. Last backup was within 4 hours.');
     }
   }
 
