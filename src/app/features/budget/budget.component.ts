@@ -295,7 +295,8 @@ export class BudgetComponent implements OnInit {
       this.totalSpent = spent.toFixed(2);
       this.totalBudget = totalBudget.toFixed(2);
       this.remainingBudgets = '0';
-      this.budgetMessage = `⚠️ You have exceeded your budget!`;
+      const overSpent = (spent - totalBudget).toFixed(2);
+      this.budgetMessage = `⚠️ You have exceeded your budget by ${overSpent}!`;
     } else {
       this.totalSpent = spent.toFixed(2);
       this.totalBudget = totalBudget.toFixed(2);
