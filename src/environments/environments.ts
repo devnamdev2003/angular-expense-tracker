@@ -39,9 +39,9 @@ export const environment = {
   /**
    * The production (live) API base URL.
    *
-   * Example: `https://exwiseapi.onrender.com`
+   * Example: `https://coders813-exwiseapi.hf.space`
    */
-  liveAPIUrl: "https://exwiseapi.onrender.com",
+  liveAPIUrl: "https://coders813-exwiseapi.hf.space",
 
   /**
    * The local development API base URL.
