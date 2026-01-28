@@ -52,12 +52,16 @@
             background: rgba(255, 255, 255, 0.02);
             backdrop-filter: blur(12px);
             border: 1px solid rgba(255, 255, 255, 0.08);
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
         }
 
         .hero-gradient {
-            background: radial-gradient(circle at 50% 20%, rgba(99, 102, 241, 0.18) 0%, rgba(0, 0, 0, 0) 60%);
+            background: radial-gradient(circle at 50% 20%, rgba(99, 102, 241, 0.05) 0%, rgba(0, 0, 0, 0) 60%);
         }
 
+        /* --- Animations --- */
+
+        /* Floating Phone */
         .floating {
             animation: floating 4s ease-in-out infinite;
         }
@@ -74,14 +78,32 @@
             }
         }
 
+        /* Entrance Animations */
         .fade-in-up {
-            animation: fadeInUp 0.8s ease-out forwards;
+            opacity: 0;
+            animation: fadeInUp 1s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+        }
+
+        .delay-100 {
+            animation-delay: 0.1s;
+        }
+
+        .delay-200 {
+            animation-delay: 0.2s;
+        }
+
+        .delay-300 {
+            animation-delay: 0.3s;
+        }
+
+        .delay-500 {
+            animation-delay: 0.5s;
         }
 
         @keyframes fadeInUp {
             from {
                 opacity: 0;
-                transform: translateY(30px);
+                transform: translateY(40px);
             }
 
             to {
@@ -90,64 +112,156 @@
             }
         }
 
+        /* Navbar Slide Down */
+        .slide-down {
+            animation: slideDown 1s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+        }
+
+        @keyframes slideDown {
+            from {
+                transform: translateY(-100%);
+            }
+
+            to {
+                transform: translateY(0);
+            }
+        }
+
+        /* Background Blobs */
+        .animate-blob {
+            animation: blob 10s infinite alternate;
+        }
+
+        .animation-delay-2000 {
+            animation-delay: 2s;
+        }
+
+        .animation-delay-4000 {
+            animation-delay: 4s;
+        }
+
+        @keyframes blob {
+            0% {
+                transform: translate(0px, 0px) scale(1);
+            }
+
+            33% {
+                transform: translate(30px, -50px) scale(1.1);
+            }
+
+            66% {
+                transform: translate(-20px, 20px) scale(0.9);
+            }
+
+            100% {
+                transform: translate(0px, 0px) scale(1);
+            }
+        }
+
+        /* Shimmer Text */
+        .text-shimmer {
+            background-size: 200% auto;
+            animation: shimmer 5s linear infinite;
+        }
+
+        @keyframes shimmer {
+            0% {
+                background-position: 0% 50%;
+            }
+
+            50% {
+                background-position: 100% 50%;
+            }
+
+            100% {
+                background-position: 0% 50%;
+            }
+        }
+
+        /* Scroll Reveal (On Scroll) */
+        .reveal {
+            opacity: 0;
+            transform: translateY(40px) scale(0.95);
+            transition: all 1s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0) scale(1);
+        }
+
+        /* Card Hover Effects */
+        .hover-card:hover {
+            transform: translateY(-8px) scale(1.02);
+            box-shadow: 0 20px 40px -15px rgba(99, 102, 241, 0.2);
+            border-color: rgba(99, 102, 241, 0.3);
+        }
+
         /* Custom scrollbar */
         ::-webkit-scrollbar {
-            width: 6px;
+            width: 8px;
         }
 
         ::-webkit-scrollbar-track {
-            background: #0a0a0c;
+            background: #050507;
         }
 
         ::-webkit-scrollbar-thumb {
-            background: #27272a;
-            border-radius: 10px;
+            background: #3f3f46;
+            border-radius: 4px;
+            border: 2px solid #050507;
         }
 
         ::-webkit-scrollbar-thumb:hover {
-            background: #3f3f46;
+            background: #6366f1;
         }
 
         .app-screenshot {
             width: 100%;
             height: 100%;
             object-fit: cover;
-            transition: transform 0.5s ease;
+            transition: transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
         }
 
         .phone-frame:hover .app-screenshot {
-            transform: scale(1.05);
-        }
-
-        .reveal {
-            opacity: 0;
-            transform: translateY(20px);
-            transition: all 0.8s ease-out;
-        }
-
-        .reveal.active {
-            opacity: 1;
-            transform: translateY(0);
+            transform: scale(1.1);
         }
     </style>
 </head>
 
-<body class="bg-[#050507] text-slate-300 antialiased overflow-x-hidden">
+<body
+    class="bg-[#050507] text-slate-300 antialiased overflow-x-hidden selection:bg-indigo-500/30 selection:text-indigo-200">
 
     <!-- Navbar -->
-    <nav class="fixed top-0 w-full z-50 glass border-b border-white/5 py-4">
+    <nav class="fixed top-0 w-full z-50 glass border-b border-white/5 py-4 slide-down">
         <div class="max-w-7xl mx-auto px-6 flex justify-between items-center">
             <div class="flex items-center gap-3">
                 <img src="https://exwise.vercel.app/icons/icon-512x512.png" alt="ExWise Logo"
-                    class="w-8 h-8 rounded-lg shadow-lg">
+                    class="w-8 h-8 rounded-lg shadow-lg hover:rotate-12 transition-transform duration-300">
                 <span class="text-xl font-bold tracking-tighter text-white">EXWISE</span>
             </div>
             <div class="hidden md:flex gap-8 text-sm font-medium text-slate-400">
-                <a href="#features" class="hover:text-indigo-400 transition-colors">Features</a>
-                <a href="#interface" class="hover:text-indigo-400 transition-colors">Interface</a>
-                <a href="#tech" class="hover:text-indigo-400 transition-colors">Tech Stack</a>
+                <a href="#features" class="hover:text-white transition-colors relative group">
+                    Features
+                    <span
+                        class="absolute -bottom-1 left-0 w-0 h-0.5 bg-indigo-500 transition-all group-hover:w-full"></span>
+                </a>
+                <a href="#interface" class="hover:text-white transition-colors relative group">
+                    Interface
+                    <span
+                        class="absolute -bottom-1 left-0 w-0 h-0.5 bg-indigo-500 transition-all group-hover:w-full"></span>
+                </a>
+                <a href="#tech" class="hover:text-white transition-colors relative group">
+                    Tech Stack
+                    <span
+                        class="absolute -bottom-1 left-0 w-0 h-0.5 bg-indigo-500 transition-all group-hover:w-full"></span>
+                </a>
                 <a href="https://exwisedoc.vercel.app/" target="_blank"
-                    class="hover:text-indigo-400 transition-colors">Docs</a>
+                    class="hover:text-white transition-colors relative group">
+                    Docs
+                    <span
+                        class="absolute -bottom-1 left-0 w-0 h-0.5 bg-indigo-500 transition-all group-hover:w-full"></span>
+                </a>
             </div>
             <div class="flex items-center gap-4">
                 <a href="https://exwise.vercel.app/" target="_blank"
@@ -155,7 +269,7 @@
                     Web App
                 </a>
                 <a href="https://github.com/devnamdev2003/angular-expense-tracker/raw/refs/heads/main/exwise.apk"
-                    class="bg-indigo-600 text-white px-5 py-2 rounded-full text-xs font-bold hover:bg-indigo-500 transition-all shadow-lg shadow-indigo-600/20">
+                    class="bg-indigo-600 text-white px-5 py-2 rounded-full text-xs font-bold hover:bg-indigo-500 transition-all hover:shadow-[0_0_20px_rgba(79,70,229,0.5)] transform hover:-translate-y-0.5">
                     Download APK
                 </a>
             </div>
@@ -163,32 +277,51 @@
     </nav>
 
     <!-- Hero Section -->
-    <header class="relative pt-40 pb-20 px-6 hero-gradient">
-        <div class="max-w-7xl mx-auto flex flex-col items-center text-center">
+    <header
+        class="relative min-h-screen flex items-center justify-center pt-20 pb-20 px-6 hero-gradient overflow-hidden">
+
+        <!-- Animated Background Blobs -->
+        <div class="absolute inset-0 overflow-hidden pointer-events-none">
             <div
-                class="fade-in-up inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-indigo-500/10 border border-indigo-500/20 text-indigo-400 text-[10px] font-bold mb-8 tracking-widest uppercase">
+                class="absolute top-[10%] left-[10%] w-[30rem] h-[30rem] bg-indigo-600/20 rounded-full blur-[100px] animate-blob mix-blend-screen">
+            </div>
+            <div
+                class="absolute top-[40%] right-[10%] w-[30rem] h-[30rem] bg-purple-600/10 rounded-full blur-[100px] animate-blob animation-delay-2000 mix-blend-screen">
+            </div>
+            <div
+                class="absolute -bottom-[10%] left-[30%] w-[35rem] h-[35rem] bg-indigo-900/20 rounded-full blur-[100px] animate-blob animation-delay-4000 mix-blend-screen">
+            </div>
+        </div>
+
+        <div class="max-w-7xl mx-auto flex flex-col items-center text-center relative z-10">
+            <div
+                class="fade-in-up inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-indigo-500/10 border border-indigo-500/20 text-indigo-400 text-[10px] font-bold mb-8 tracking-widest uppercase hover:bg-indigo-500/20 transition-colors cursor-default">
                 <span class="flex h-1.5 w-1.5 rounded-full bg-indigo-500 animate-pulse"></span>
                 Mobile-First Financial Management
             </div>
-            <h1 class="fade-in-up text-4xl md:text-7xl font-black text-white leading-[1.1] mb-8 tracking-tight">
-                Where your money stops <br> <span
-                    class="text-transparent bg-clip-text bg-gradient-to-r from-indigo-400 to-purple-500">playing hide
-                    and seek!</span>
+
+            <h1
+                class="fade-in-up delay-100 text-5xl md:text-8xl font-black text-white leading-[1.1] mb-8 tracking-tight">
+                Where your money stops <br>
+                <span
+                    class="text-transparent bg-clip-text bg-gradient-to-r from-indigo-400 via-purple-400 to-indigo-400 text-shimmer">
+                    playing hide and seek!
+                </span>
             </h1>
-            <p class="fade-in-up text-slate-400 text-lg md:text-xl max-w-3xl mx-auto mb-12 leading-relaxed"
-                style="animation-delay: 0.1s">
+
+            <p class="fade-in-up delay-200 text-slate-400 text-lg md:text-xl max-w-3xl mx-auto mb-12 leading-relaxed">
                 Expense Tracker is a mobile-first financial management application designed to help users easily track
                 their daily and monthly expenses. Tailored specifically for smartphones, allowing seamless personal
                 finance management on the go.
             </p>
 
-            <div class="fade-in-up flex flex-col sm:flex-row flex-wrap justify-center gap-4 w-full sm:w-auto z-10"
-                style="animation-delay: 0.2s">
+            <div
+                class="fade-in-up delay-300 flex flex-col sm:flex-row flex-wrap justify-center gap-4 w-full sm:w-auto z-10">
                 <a href="https://github.com/devnamdev2003/angular-expense-tracker/raw/refs/heads/main/exwise.apk"
-                    class="group flex items-center justify-center gap-3 bg-white text-black hover:bg-indigo-600 hover:text-white px-8 py-4 rounded-2xl font-bold transition-all transform hover:scale-105 active:scale-95 shadow-xl min-w-[200px]">
+                    class="group flex items-center justify-center gap-3 bg-white text-black hover:bg-indigo-600 hover:text-white px-8 py-4 rounded-2xl font-bold transition-all transform hover:scale-105 active:scale-95 shadow-[0_0_40px_-10px_rgba(255,255,255,0.3)] hover:shadow-[0_0_40px_-10px_rgba(99,102,241,0.5)] min-w-[200px]">
                     <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
                         stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"
-                        class="group-hover:rotate-12 transition-transform">
+                        class="group-hover:rotate-12 transition-transform duration-300">
                         <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
                         <polyline points="7 10 12 15 17 10" />
                         <line x1="12" x2="12" y1="15" y2="3" />
@@ -196,7 +329,7 @@
                     Download APK
                 </a>
                 <a href="https://exwise.vercel.app/" target="_blank"
-                    class="flex items-center justify-center gap-3 bg-white/5 hover:bg-white/10 text-white border border-white/10 px-8 py-4 rounded-2xl font-bold transition-all backdrop-blur-md min-w-[200px]">
+                    class="flex items-center justify-center gap-3 bg-white/5 hover:bg-white/10 text-white border border-white/10 px-8 py-4 rounded-2xl font-bold transition-all backdrop-blur-md min-w-[200px] hover:border-white/30">
                     <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
                         stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
                         <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6" />
@@ -222,32 +355,45 @@
     </header>
 
     <!-- Stats Section -->
-    <section class="py-12 border-y border-white/5 bg-white/[0.01]">
+    <section class="py-12 border-y border-white/5 bg-white/[0.01] relative z-20 backdrop-blur-sm">
         <div class="max-w-7xl mx-auto px-6 grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
-            <div class="reveal">
-                <p class="text-3xl md:text-4xl font-black text-white mb-2">100%</p>
-                <p class="text-xs text-slate-500 uppercase font-bold tracking-widest">Privacy Focused</p>
+            <div class="reveal hover:transform hover:scale-110 transition-transform duration-300">
+                <p
+                    class="text-3xl md:text-5xl font-black text-transparent bg-clip-text bg-gradient-to-b from-white to-slate-500 mb-2">
+                    100%</p>
+                <p class="text-xs text-indigo-400 uppercase font-bold tracking-widest">Privacy Focused</p>
             </div>
-            <div class="reveal">
-                <p class="text-3xl md:text-4xl font-black text-white mb-2">0ms</p>
-                <p class="text-xs text-slate-500 uppercase font-bold tracking-widest">Server Latency</p>
+            <div class="reveal delay-100 hover:transform hover:scale-110 transition-transform duration-300">
+                <p
+                    class="text-3xl md:text-5xl font-black text-transparent bg-clip-text bg-gradient-to-b from-white to-slate-500 mb-2">
+                    0ms</p>
+                <p class="text-xs text-indigo-400 uppercase font-bold tracking-widest">Server Latency</p>
             </div>
-            <div class="reveal">
-                <p class="text-3xl md:text-4xl font-black text-white mb-2">Offline</p>
-                <p class="text-xs text-slate-500 uppercase font-bold tracking-widest">Works Anywhere</p>
+            <div class="reveal delay-200 hover:transform hover:scale-110 transition-transform duration-300">
+                <p
+                    class="text-3xl md:text-5xl font-black text-transparent bg-clip-text bg-gradient-to-b from-white to-slate-500 mb-2">
+                    Offline</p>
+                <p class="text-xs text-indigo-400 uppercase font-bold tracking-widest">Works Anywhere</p>
             </div>
-            <div class="reveal">
-                <p class="text-3xl md:text-4xl font-black text-white mb-2">Free</p>
-                <p class="text-xs text-slate-500 uppercase font-bold tracking-widest">Open Source</p>
+            <div class="reveal delay-300 hover:transform hover:scale-110 transition-transform duration-300">
+                <p
+                    class="text-3xl md:text-5xl font-black text-transparent bg-clip-text bg-gradient-to-b from-white to-slate-500 mb-2">
+                    Free</p>
+                <p class="text-xs text-indigo-400 uppercase font-bold tracking-widest">Open Source</p>
             </div>
         </div>
     </section>
 
     <!-- Interface Grid (Selected Screens) -->
-    <section id="interface" class="py-12 md:py-24 px-6">
-        <div class="max-w-7xl mx-auto">
+    <section id="interface" class="py-12 md:py-32 px-6 relative">
+        <!-- Background light flare -->
+        <div
+            class="absolute right-0 top-1/4 w-[500px] h-[500px] bg-indigo-600/10 rounded-full blur-[120px] pointer-events-none">
+        </div>
+
+        <div class="max-w-7xl mx-auto relative z-10">
             <div class="text-center mb-24 reveal">
-                <h2 class="text-4xl font-extrabold text-white mb-6">Core Interface</h2>
+                <h2 class="text-4xl md:text-5xl font-black text-white mb-6">Core Interface</h2>
                 <p class="text-slate-400 max-w-2xl mx-auto text-lg leading-relaxed">
                     Designed for speed and clarity. View your health, list your transactions, and add new ones in
                     seconds.
@@ -256,49 +402,62 @@
 
             <div class="grid grid-cols-1 md:grid-cols-3 gap-y-20 gap-x-12">
                 <!-- Dashboard View -->
-                <div class="flex flex-col items-center reveal">
+                <div class="flex flex-col items-center reveal group cursor-pointer">
                     <div
-                        class="w-full max-w-[240px] glass rounded-[2.5rem] p-2 border border-white/10 mb-8 aspect-[9/18.5] relative bg-[#0f0f12] phone-frame shadow-xl">
+                        class="w-full max-w-[240px] glass rounded-[2.5rem] p-2 border border-white/10 mb-8 aspect-[9/18.5] relative bg-[#0f0f12] phone-frame shadow-2xl group-hover:-translate-y-4 transition-transform duration-500">
                         <img src="https://exwise.vercel.app/assets/appScreenshot/home.jpg" alt="Dashboard View"
                             class="app-screenshot rounded-[1.8rem]">
+                        <!-- Glow effect behind phone -->
+                        <div
+                            class="absolute inset-0 bg-indigo-500/20 blur-xl rounded-[2.5rem] -z-10 opacity-0 group-hover:opacity-100 transition-opacity duration-500">
+                        </div>
                     </div>
                     <div class="text-center px-4">
-                        <h3 class="font-bold text-2xl text-white mb-3">Dashboard View</h3>
-                        <p class="text-sm text-slate-400 leading-relaxed">
+                        <h3 class="font-bold text-2xl text-white mb-3 group-hover:text-indigo-400 transition-colors">
+                            Dashboard View</h3>
+                        <p class="text-sm text-slate-400 leading-relaxed group-hover:text-slate-300 transition-colors">
                             Two interactive graphs: Expense line graph with Daily, Monthly, Yearly views, and a
-                            Category-wise Pie Chart. Toggle between Discrete and Cumulative values.
+                            Category-wise Pie Chart.
                         </p>
                     </div>
                 </div>
 
                 <!-- Add Expense View -->
-                <div class="flex flex-col items-center reveal" style="transition-delay: 0.1s">
+                <div class="flex flex-col items-center reveal delay-100 group cursor-pointer">
                     <div
-                        class="w-full max-w-[240px] glass rounded-[2.5rem] p-2 border border-white/10 mb-8 aspect-[9/18.5] relative bg-[#0f0f12] phone-frame shadow-xl">
+                        class="w-full max-w-[240px] glass rounded-[2.5rem] p-2 border border-white/10 mb-8 aspect-[9/18.5] relative bg-[#0f0f12] phone-frame shadow-2xl group-hover:-translate-y-4 transition-transform duration-500">
                         <img src="https://exwise.vercel.app/assets/appScreenshot/add.jpg" alt="Add Expense View"
                             class="app-screenshot rounded-[1.8rem]">
+                        <div
+                            class="absolute inset-0 bg-purple-500/20 blur-xl rounded-[2.5rem] -z-10 opacity-0 group-hover:opacity-100 transition-opacity duration-500">
+                        </div>
                     </div>
                     <div class="text-center px-4">
-                        <h3 class="font-bold text-2xl text-white mb-3">Add Expense</h3>
-                        <p class="text-sm text-slate-400 leading-relaxed">
-                            Comprehensive form including Amount, Date & Time, Category, Payment Mode, Location, Notes,
-                            and an Extra Spending flag.
+                        <h3 class="font-bold text-2xl text-white mb-3 group-hover:text-purple-400 transition-colors">Add
+                            Expense</h3>
+                        <p class="text-sm text-slate-400 leading-relaxed group-hover:text-slate-300 transition-colors">
+                            Comprehensive form including Amount, Date & Time, Category, Payment Mode, Location, and
+                            Notes.
                         </p>
                     </div>
                 </div>
 
                 <!-- List View -->
-                <div class="flex flex-col items-center reveal" style="transition-delay: 0.2s">
+                <div class="flex flex-col items-center reveal delay-200 group cursor-pointer">
                     <div
-                        class="w-full max-w-[240px] glass rounded-[2.5rem] p-2 border border-white/10 mb-8 aspect-[9/18.5] relative bg-[#0f0f12] phone-frame shadow-xl">
+                        class="w-full max-w-[240px] glass rounded-[2.5rem] p-2 border border-white/10 mb-8 aspect-[9/18.5] relative bg-[#0f0f12] phone-frame shadow-2xl group-hover:-translate-y-4 transition-transform duration-500">
                         <img src="https://exwise.vercel.app/assets/appScreenshot/list.jpg" alt="List View"
                             class="app-screenshot rounded-[1.8rem]">
+                        <div
+                            class="absolute inset-0 bg-emerald-500/20 blur-xl rounded-[2.5rem] -z-10 opacity-0 group-hover:opacity-100 transition-opacity duration-500">
+                        </div>
                     </div>
                     <div class="text-center px-4">
-                        <h3 class="font-bold text-2xl text-white mb-3">List View</h3>
-                        <p class="text-sm text-slate-400 leading-relaxed">
+                        <h3 class="font-bold text-2xl text-white mb-3 group-hover:text-emerald-400 transition-colors">
+                            List View</h3>
+                        <p class="text-sm text-slate-400 leading-relaxed group-hover:text-slate-300 transition-colors">
                             Search, Sort, and Filter your history. Tap any entry to edit or delete. Scrollable and
-                            optimized for quick access to past records.
+                            optimized.
                         </p>
                     </div>
                 </div>
@@ -307,15 +466,20 @@
     </section>
 
     <!-- Workflow / How it works -->
-    <section class="py-12 md:py-24 px-6 bg-white/[0.01] border-y border-white/5">
-        <div class="max-w-7xl mx-auto">
+    <section class="py-12 md:py-32 px-6 bg-white/[0.01] border-y border-white/5 relative overflow-hidden">
+        <div class="max-w-7xl mx-auto relative z-10">
             <div class="flex flex-col lg:flex-row items-center gap-20">
                 <div class="flex-1 reveal">
-                    <h2 class="text-4xl font-extrabold text-white mb-8">How it works</h2>
-                    <div class="space-y-12">
-                        <div class="flex gap-6">
+                    <h2 class="text-4xl md:text-5xl font-black text-white mb-12">How it works</h2>
+                    <div class="space-y-12 relative">
+                        <!-- Connecting Line -->
+                        <div
+                            class="absolute left-6 top-6 bottom-6 w-0.5 bg-gradient-to-b from-indigo-600 via-purple-600 to-transparent opacity-30">
+                        </div>
+
+                        <div class="flex gap-8 relative">
                             <div
-                                class="w-12 h-12 rounded-full bg-indigo-600 text-white flex items-center justify-center font-bold text-lg flex-shrink-0 shadow-lg shadow-indigo-600/30">
+                                class="w-12 h-12 rounded-full bg-indigo-600 text-white flex items-center justify-center font-bold text-lg flex-shrink-0 shadow-[0_0_20px_rgba(79,70,229,0.5)] z-10 border-4 border-[#050507]">
                                 1</div>
                             <div>
                                 <h4 class="text-xl font-bold text-white mb-2">Set Your Budget</h4>
@@ -323,9 +487,9 @@
                                     calculate your daily safe-spend automatically.</p>
                             </div>
                         </div>
-                        <div class="flex gap-6">
+                        <div class="flex gap-8 relative">
                             <div
-                                class="w-12 h-12 rounded-full bg-indigo-600 text-white flex items-center justify-center font-bold text-lg flex-shrink-0 shadow-lg shadow-indigo-600/30">
+                                class="w-12 h-12 rounded-full bg-indigo-600 text-white flex items-center justify-center font-bold text-lg flex-shrink-0 shadow-[0_0_20px_rgba(79,70,229,0.5)] z-10 border-4 border-[#050507]">
                                 2</div>
                             <div>
                                 <h4 class="text-xl font-bold text-white mb-2">Log as You Go</h4>
@@ -333,9 +497,9 @@
                                     location tags for better context.</p>
                             </div>
                         </div>
-                        <div class="flex gap-6">
+                        <div class="flex gap-8 relative">
                             <div
-                                class="w-12 h-12 rounded-full bg-indigo-600 text-white flex items-center justify-center font-bold text-lg flex-shrink-0 shadow-lg shadow-indigo-600/30">
+                                class="w-12 h-12 rounded-full bg-indigo-600 text-white flex items-center justify-center font-bold text-lg flex-shrink-0 shadow-[0_0_20px_rgba(79,70,229,0.5)] z-10 border-4 border-[#050507]">
                                 3</div>
                             <div>
                                 <h4 class="text-xl font-bold text-white mb-2">Analyze & Adapt</h4>
@@ -346,27 +510,32 @@
                     </div>
                 </div>
                 <!-- Visual Decoration for Workflow -->
-                <div class="flex-1 w-full max-w-lg reveal" style="transition-delay: 0.2s">
-                    <div class="glass p-8 rounded-[3rem] border-white/10 relative overflow-hidden">
-                        <div class="absolute -top-24 -right-24 w-64 h-64 bg-indigo-600/20 rounded-full blur-3xl"></div>
+                <div class="flex-1 w-full max-w-lg reveal delay-200">
+                    <div
+                        class="glass p-8 rounded-[3rem] border-white/10 relative overflow-hidden group hover:border-indigo-500/30">
+                        <div
+                            class="absolute -top-24 -right-24 w-64 h-64 bg-indigo-600/20 rounded-full blur-3xl group-hover:bg-indigo-600/30 transition-colors duration-500">
+                        </div>
                         <div class="relative z-10">
                             <div class="flex items-center justify-between mb-8">
                                 <span
                                     class="text-xs font-bold uppercase tracking-widest text-indigo-400">Real-time</span>
-                                <span class="text-[10px] bg-emerald-500/20 text-emerald-400 px-2 py-1 rounded">On
+                                <span
+                                    class="text-[10px] bg-emerald-500/20 text-emerald-400 px-2 py-1 rounded shadow-[0_0_10px_rgba(16,185,129,0.2)]">On
                                     Track</span>
                             </div>
                             <div class="space-y-6">
-                                <div class="p-6 bg-white/5 rounded-3xl border border-white/5">
+                                <div class="p-6 bg-white/5 rounded-3xl border border-white/5 backdrop-blur-md">
                                     <p class="text-sm text-slate-500 mb-1">Total Spending</p>
                                     <p class="text-3xl font-black text-white">₹12,450.00</p>
                                 </div>
                                 <div class="grid grid-cols-2 gap-4">
-                                    <div class="p-4 bg-white/5 rounded-2xl">
+                                    <div class="p-4 bg-white/5 rounded-2xl backdrop-blur-md">
                                         <p class="text-[10px] text-slate-500 mb-1">Avg Allowed</p>
                                         <p class="text-md font-bold text-white">₹500.00</p>
                                     </div>
-                                    <div class="p-4 bg-emerald-500/10 rounded-2xl border border-emerald-500/20">
+                                    <div
+                                        class="p-4 bg-emerald-500/10 rounded-2xl border border-emerald-500/20 backdrop-blur-md">
                                         <p class="text-[10px] text-emerald-400 mb-1">Suggested</p>
                                         <p class="text-md font-bold text-emerald-400">₹420.00</p>
                                     </div>
@@ -380,16 +549,16 @@
     </section>
 
     <!-- Comprehensive Features Section -->
-    <section id="features" class="py-12 md:py-24 px-6">
+    <section id="features" class="py-12 md:py-32 px-6">
         <div class="max-w-7xl mx-auto">
             <div class="text-center mb-24 reveal">
-                <h2 class="text-4xl font-extrabold text-white mb-6">Full Feature Breakdown</h2>
-                <div class="w-20 h-1 bg-indigo-500 mx-auto"></div>
+                <h2 class="text-4xl md:text-5xl font-black text-white mb-6">Full Feature Breakdown</h2>
+                <div class="w-20 h-1 bg-indigo-500 mx-auto rounded-full"></div>
             </div>
 
             <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
                 <!-- Calendar Feature -->
-                <div class="glass p-8 rounded-3xl border border-white/5 reveal hover:bg-white/[0.04] transition-colors">
+                <div class="glass p-8 rounded-3xl border border-white/5 reveal hover-card cursor-default">
                     <div class="flex items-center gap-4 mb-4">
                         <div
                             class="w-12 h-12 bg-indigo-600/20 rounded-xl flex items-center justify-center text-indigo-400">
@@ -406,13 +575,11 @@
                     </div>
                     <p class="text-slate-400 text-sm leading-relaxed mb-4">
                         Visualize spending intensity. Customize thresholds for <strong>Red</strong> (> ₹1000),
-                        <strong>Yellow</strong> (₹500-1000), and <strong>Green</strong> (< ₹500). Auto-set thresholds
-                            based on your budget. </p>
+                        <strong>Yellow</strong> (₹500-1000), and <strong>Green</strong> (< ₹500). </p>
                 </div>
 
                 <!-- Budget Feature -->
-                <div class="glass p-8 rounded-3xl border border-white/5 reveal hover:bg-white/[0.04] transition-colors"
-                    style="transition-delay: 0.1s">
+                <div class="glass p-8 rounded-3xl border border-white/5 reveal delay-100 hover-card cursor-default">
                     <div class="flex items-center gap-4 mb-4">
                         <div
                             class="w-12 h-12 bg-emerald-600/20 rounded-xl flex items-center justify-center text-emerald-400">
@@ -427,13 +594,12 @@
                     </div>
                     <p class="text-slate-400 text-sm leading-relaxed mb-4">
                         Set a budget range and track progress. Get real-time stats on <strong>Avg Allowed/Day</strong>,
-                        <strong>Spent/Day</strong>, and <strong>Suggested/Day</strong> to stay on track.
+                        <strong>Spent/Day</strong>, and <strong>Suggested/Day</strong>.
                     </p>
                 </div>
 
                 <!-- Settings Feature -->
-                <div class="glass p-8 rounded-3xl border border-white/5 reveal hover:bg-white/[0.04] transition-colors"
-                    style="transition-delay: 0.2s">
+                <div class="glass p-8 rounded-3xl border border-white/5 reveal delay-200 hover-card cursor-default">
                     <div class="flex items-center gap-4 mb-4">
                         <div
                             class="w-12 h-12 bg-amber-600/20 rounded-xl flex items-center justify-center text-amber-400">
@@ -449,7 +615,7 @@
                     </div>
                     <p class="text-slate-400 text-sm leading-relaxed mb-4">
                         Toggle Dark/Light mode, manage Categories, and <strong>Export Data</strong> (PDF, JSON, Excel).
-                        Includes optional <strong>Cloud Backup</strong> powered by Spring Boot.
+                        Includes optional <strong>Cloud Backup</strong>.
                     </p>
                 </div>
             </div>
@@ -457,101 +623,88 @@
     </section>
 
     <!-- Tech Stack Section -->
-    <section id="tech" class="py-12 md:py-24 px-6 bg-white/[0.02] border-y border-white/5">
+    <section id="tech" class="py-12 md:py-32 px-6 bg-white/[0.02] border-y border-white/5">
         <div class="max-w-7xl mx-auto text-center reveal">
             <h2 class="text-3xl font-bold mb-16 text-white">Powered By</h2>
             <div
-                class="flex flex-wrap justify-center gap-12 md:gap-24 opacity-80 md:grayscale md:hover:grayscale-0 transition-all duration-500">
-                <div class="flex flex-col items-center gap-3">
+                class="flex flex-wrap justify-center gap-12 md:gap-24 opacity-60 hover:opacity-100 transition-opacity duration-500">
+                <div class="flex flex-col items-center gap-3 group">
                     <div
-                        class="w-20 h-20 rounded-2xl bg-[#0f0f12] flex items-center justify-center p-4 border border-white/10 shadow-lg">
+                        class="w-20 h-20 rounded-2xl bg-[#0f0f12] flex items-center justify-center p-4 border border-white/10 shadow-lg group-hover:scale-110 group-hover:border-red-500/30 transition-all duration-300">
                         <img src="https://angular.io/assets/images/logos/angular/angular.svg" alt="Angular"
-                            class="w-full h-full">
+                            class="w-full h-full filter grayscale group-hover:grayscale-0 transition-all">
                     </div>
                     <span class="text-sm font-bold text-white">Angular</span>
-                    <span class="text-xs text-slate-500">Frontend Logic</span>
                 </div>
-                <div class="flex flex-col items-center gap-3">
+                <div class="flex flex-col items-center gap-3 group">
                     <div
-                        class="w-20 h-20 rounded-2xl bg-[#0f0f12] flex items-center justify-center p-5 border border-white/10 shadow-lg">
+                        class="w-20 h-20 rounded-2xl bg-[#0f0f12] flex items-center justify-center p-5 border border-white/10 shadow-lg group-hover:scale-110 group-hover:border-cyan-500/30 transition-all duration-300">
                         <img src="https://upload.wikimedia.org/wikipedia/commons/d/d5/Tailwind_CSS_Logo.svg"
-                            alt="Tailwind" class="w-full h-full">
+                            alt="Tailwind"
+                            class="w-full h-full filter grayscale group-hover:grayscale-0 transition-all">
                     </div>
                     <span class="text-sm font-bold text-white">Tailwind CSS</span>
-                    <span class="text-xs text-slate-500">Responsive UI</span>
                 </div>
-                <div class="flex flex-col items-center gap-3">
+                <div class="flex flex-col items-center gap-3 group">
                     <div
-                        class="w-20 h-20 rounded-2xl bg-[#0f0f12] flex items-center justify-center p-5 border border-white/10 shadow-lg text-white">
-                        <!-- Replaced with a Database Icon for LocalStorage -->
+                        class="w-20 h-20 rounded-2xl bg-[#0f0f12] flex items-center justify-center p-5 border border-white/10 shadow-lg text-white group-hover:scale-110 group-hover:border-yellow-500/30 transition-all duration-300">
                         <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 24 24" fill="none"
-                            stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                            stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"
+                            class="group-hover:text-yellow-400 transition-colors">
                             <ellipse cx="12" cy="5" rx="9" ry="3" />
                             <path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3" />
                             <path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5" />
                         </svg>
                     </div>
                     <span class="text-sm font-bold text-white">LocalStorage</span>
-                    <span class="text-xs text-slate-500">Data Storage</span>
                 </div>
-                <div class="flex flex-col items-center gap-3">
+                <div class="flex flex-col items-center gap-3 group">
                     <div
-                        class="w-20 h-20 rounded-2xl bg-[#0f0f12] flex items-center justify-center p-4 border border-white/10 shadow-lg">
-                        <!-- Replaced with a reliable Spring Boot Logo -->
+                        class="w-20 h-20 rounded-2xl bg-[#0f0f12] flex items-center justify-center p-4 border border-white/10 shadow-lg group-hover:scale-110 group-hover:border-green-500/30 transition-all duration-300">
                         <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/spring/spring-original.svg"
-                            alt="Spring Boot" class="w-full h-full object-contain">
+                            alt="Spring Boot"
+                            class="w-full h-full object-contain filter grayscale group-hover:grayscale-0 transition-all">
                     </div>
                     <span class="text-sm font-bold text-white">Spring Boot</span>
-                    <span class="text-xs text-slate-500">Backend API</span>
                 </div>
             </div>
         </div>
     </section>
 
     <!-- FAQ Section -->
-    <section class="py-12 md:py-24 px-6">
+    <section class="py-12 md:py-32 px-6">
         <div class="max-w-3xl mx-auto reveal">
             <h2 class="text-3xl font-bold text-center mb-16 text-white">Frequently Asked Questions</h2>
             <div class="space-y-6">
-                <div class="glass p-6 rounded-3xl border border-white/5 hover:border-indigo-500/30 transition-colors">
+                <div
+                    class="glass p-6 rounded-3xl border border-white/5 hover:border-indigo-500/30 transition-colors group cursor-pointer">
                     <h4 class="font-bold text-white mb-2 flex items-center gap-3">
                         <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
                             stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-                            class="text-indigo-400">
+                            class="text-indigo-400 group-hover:text-indigo-300 transition-colors">
                             <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
                         </svg>
                         Is my data shared with anyone?
                     </h4>
-                    <p class="text-sm text-slate-400 ml-8">Never. ExWise stores all data locally on your device using
+                    <p class="text-sm text-slate-400 ml-8 group-hover:text-slate-300 transition-colors">Never. ExWise
+                        stores all data locally on your device using
                         LocalStorage. It never leaves your browser unless you enable the optional cloud backup.</p>
                 </div>
-                <div class="glass p-6 rounded-3xl border border-white/5 hover:border-indigo-500/30 transition-colors">
+                <div
+                    class="glass p-6 rounded-3xl border border-white/5 hover:border-indigo-500/30 transition-colors group cursor-pointer">
                     <h4 class="font-bold text-white mb-2 flex items-center gap-3">
                         <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
                             stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-                            class="text-indigo-400">
+                            class="text-indigo-400 group-hover:text-indigo-300 transition-colors">
                             <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
                             <polyline points="7 10 12 15 17 10" />
                             <line x1="12" x2="12" y1="15" y2="3" />
                         </svg>
                         Can I export my data?
                     </h4>
-                    <p class="text-sm text-slate-400 ml-8">Yes! You can export all your records in PDF, JSON, or Excel
+                    <p class="text-sm text-slate-400 ml-8 group-hover:text-slate-300 transition-colors">Yes! You can
+                        export all your records in PDF, JSON, or Excel
                         formats anytime via the Settings menu for safe keeping.</p>
-                </div>
-                <div class="glass p-6 rounded-3xl border border-white/5 hover:border-indigo-500/30 transition-colors">
-                    <h4 class="font-bold text-white mb-2 flex items-center gap-3">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
-                            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-                            class="text-indigo-400">
-                            <circle cx="12" cy="12" r="5" />
-                            <path
-                                d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42" />
-                        </svg>
-                        Is there a dark mode?
-                    </h4>
-                    <p class="text-sm text-slate-400 ml-8">ExWise supports both Light and Dark themes. The interface
-                        automatically adapts to be easy on your eyes in any environment.</p>
                 </div>
             </div>
         </div>
@@ -631,6 +784,19 @@
                                 <line x1="10" x2="8" y1="9" y2="9" />
                             </svg>
                         </a>
+                        <!-- Added Portfolio Link -->
+                        <a href="https://devnamdev2003.github.io/" target="_blank"
+                            class="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center hover:bg-white/10 hover:text-white text-slate-400 transition-colors">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"
+                                fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                stroke-linejoin="round">
+                                <circle cx="12" cy="12" r="10"></circle>
+                                <line x1="2" y1="12" x2="22" y2="12"></line>
+                                <path
+                                    d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z">
+                                </path>
+                            </svg>
+                        </a>
                     </div>
                 </div>
 
@@ -690,7 +856,8 @@
             <!-- Copyright -->
             <div
                 class="flex flex-col justify-between items-center gap-4 text-xs font-medium text-slate-600 tracking-widest">
-                <p>&copy; 2026 devnamdev. All rights reserved.</p>
+                <p>&copy; 2026 <a href="https://devnamdev2003.github.io/" target="_blank"
+                        class="hover:text-indigo-400 transition-colors">devnamdev</a>. All rights reserved.</p>
             </div>
         </div>
     </footer>
@@ -702,7 +869,7 @@
             for (var i = 0; i < reveals.length; i++) {
                 var windowHeight = window.innerHeight;
                 var elementTop = reveals[i].getBoundingClientRect().top;
-                var elementVisible = 150;
+                var elementVisible = 120; // Trigger slightly earlier for smoother effect
                 if (elementTop < windowHeight - elementVisible) {
                     reveals[i].classList.add("active");
                 }
