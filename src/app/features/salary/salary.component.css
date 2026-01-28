@@ -1,0 +1,19 @@
+:host {
+    display: block;
+}
+
+.animate-in {
+    animation: animateIn 0.4s cubic-bezier(0.2, 1, 0.2, 1) forwards;
+}
+
+@keyframes animateIn {
+    from {
+        opacity: 0;
+        transform: translateY(30px) scale(0.95);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}

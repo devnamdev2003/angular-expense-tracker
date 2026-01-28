@@ -13,6 +13,7 @@ import { HomeComponent } from '../../features/home/home.component';
 import { CalendarComponent } from '../../features/calendar/calendar.component';
 import { BudgetComponent } from '../../features/budget/budget.component';
 import { AiComponent } from '../../features/ai/ai.component';
+import { SalaryComponent } from '../salary/salary.component';
 
 import { SectionService } from '../../service/section/section.service';
 import { ScreenTypeService } from '../../service/screen-type/screen-type.service';
@@ -28,7 +29,7 @@ import { HelpDashboard } from '../help-dashboard/help-dashboard';
   standalone: true,
   imports: [
     NavbarComponent, SidebarComponent, FooterComponent, ToastComponent, CommonModule, AddExpenseComponent,
-    SettingsComponent, ListExpensesComponent, HomeComponent, BudgetComponent, CalendarComponent, AiComponent, HelpDashboard
+    SettingsComponent, ListExpensesComponent, HomeComponent, BudgetComponent, CalendarComponent, AiComponent, HelpDashboard, SalaryComponent
   ],
   templateUrl: './expense-wise.component.html',
   styleUrl: './expense-wise.component.css'

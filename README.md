@@ -21,7 +21,7 @@ This application leverages **Angular** as the frontend framework and **Tailwind 
 | Angular              | Frontend application logic      |
 | Tailwind CSS         | Styling and responsive UI       |
 | LocalStorage         | Persistent data storage         |
-| Django               | Backend api logic               |
+| Spring Boot          | Backend api logic               |
 
 ---
 
@@ -110,13 +110,14 @@ All expenses are stored in the device's **LocalStorage** and reflected immediate
 
 Provides customization and utility options for better personalization:
 
-* 🎨 **Theme Mode Toggle**  — Dark / Light
-* ⬇️ **Download Data**  —  Export your expenses in **PDF**, **JSON**, or **Excel** formats between the selected date range. Users can also choose **All Data** to export all expense records.
-* 📤 **Import Data** — Upload expense data.
-* 🔄 **Update App** — Update the application to the latest release.
-* ➕ **Add Category** — Create custom categories for better organization.
-* ✏️ **Edit Category** — Modify existing categories.
-* ❌ **Delete Category** — Remove unused or incorrect categories.
+* 🎨 **Theme Mode Toggle** — Switch between **Dark** and **Light** modes
+* ⬇️ **Download Data** — Export expenses in **PDF**, **JSON**, or **Excel** formats within a selected date range. Users can also choose **All Data** to export every expense record
+* 📤 **Import Data** — Upload and import expense data into the application
+* 🔄 **Update App** — Update the application to the latest available version
+* ☁️ **Data Backup** — Enable automatic or manual data backup for data safety. When enabled, a backend API runs automatically in the background to upload your data to the database.
+* ➕ **Add Category** — Create custom categories for better expense organization
+* ✏️ **Edit Category** — Update or rename existing categories
+* ❌ **Delete Category** — Remove unused or incorrect categories
 
 ---
 

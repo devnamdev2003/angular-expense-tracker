@@ -1,0 +1,717 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ExWise | Expense Tracker - Expense Wisely</title>
+
+    <!-- SEO Management -->
+    <meta name="description"
+        content="ExWise is a mobile-first, privacy-focused expense tracker app built with Angular and Tailwind. Track daily expenses, set budgets, and analyze spending habits locally without a server.">
+    <meta name="keywords"
+        content="expense tracker, finance app, budget planner, personal finance, angular app, mobile-first, localstorage, privacy focused, exwise, offline finance, pwa">
+    <meta name="author" content="devnamdev">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://exwise.vercel.app/">
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://exwise.vercel.app/">
+    <meta property="og:title" content="ExWise - Private Mobile Expense Tracker">
+    <meta property="og:description"
+        content="Stop playing hide and seek with your money. ExWise is a secure, offline-first expense tracker that keeps your financial data private on your device.">
+    <meta property="og:image" content="https://exwise.vercel.app/images/share.png">
+
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="https://exwise.vercel.app/">
+    <meta property="twitter:title" content="ExWise - Private Mobile Expense Tracker">
+    <meta property="twitter:description"
+        content="Stop playing hide and seek with your money. ExWise is a secure, offline-first expense tracker that keeps your financial data private.">
+    <meta property="twitter:image" content="https://exwise.vercel.app/images/share.png">
+
+    <!-- PWA / Mobile -->
+    <meta name="theme-color" content="#050507">
+    <link rel="apple-touch-icon" href="https://exwise.vercel.app/icons/icon-512x512.png">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="https://exwise.vercel.app/favicon.ico">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
+        rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            scroll-behavior: smooth;
+        }
+
+        .glass {
+            background: rgba(255, 255, 255, 0.02);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+        }
+
+        .hero-gradient {
+            background: radial-gradient(circle at 50% 20%, rgba(99, 102, 241, 0.18) 0%, rgba(0, 0, 0, 0) 60%);
+        }
+
+        .floating {
+            animation: floating 4s ease-in-out infinite;
+        }
+
+        @keyframes floating {
+
+            0%,
+            100% {
+                transform: translateY(0px) rotate(0deg);
+            }
+
+            50% {
+                transform: translateY(-15px) rotate(1deg);
+            }
+        }
+
+        .fade-in-up {
+            animation: fadeInUp 0.8s ease-out forwards;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Custom scrollbar */
+        ::-webkit-scrollbar {
+            width: 6px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: #0a0a0c;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: #27272a;
+            border-radius: 10px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: #3f3f46;
+        }
+
+        .app-screenshot {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+
+        .phone-frame:hover .app-screenshot {
+            transform: scale(1.05);
+        }
+
+        .reveal {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: all 0.8s ease-out;
+        }
+
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    </style>
+</head>
+
+<body class="bg-[#050507] text-slate-300 antialiased overflow-x-hidden">
+
+    <!-- Navbar -->
+    <nav class="fixed top-0 w-full z-50 glass border-b border-white/5 py-4">
+        <div class="max-w-7xl mx-auto px-6 flex justify-between items-center">
+            <div class="flex items-center gap-3">
+                <img src="https://exwise.vercel.app/icons/icon-512x512.png" alt="ExWise Logo"
+                    class="w-8 h-8 rounded-lg shadow-lg">
+                <span class="text-xl font-bold tracking-tighter text-white">EXWISE</span>
+            </div>
+            <div class="hidden md:flex gap-8 text-sm font-medium text-slate-400">
+                <a href="#features" class="hover:text-indigo-400 transition-colors">Features</a>
+                <a href="#interface" class="hover:text-indigo-400 transition-colors">Interface</a>
+                <a href="#tech" class="hover:text-indigo-400 transition-colors">Tech Stack</a>
+                <a href="https://exwisedoc.vercel.app/" target="_blank"
+                    class="hover:text-indigo-400 transition-colors">Docs</a>
+            </div>
+            <div class="flex items-center gap-4">
+                <a href="https://exwise.vercel.app/" target="_blank"
+                    class="hidden sm:block text-sm font-semibold text-indigo-400 hover:text-indigo-300 transition-colors">
+                    Web App
+                </a>
+                <a href="https://github.com/devnamdev2003/angular-expense-tracker/raw/refs/heads/main/exwise.apk"
+                    class="bg-indigo-600 text-white px-5 py-2 rounded-full text-xs font-bold hover:bg-indigo-500 transition-all shadow-lg shadow-indigo-600/20">
+                    Download APK
+                </a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <header class="relative pt-40 pb-20 px-6 hero-gradient">
+        <div class="max-w-7xl mx-auto flex flex-col items-center text-center">
+            <div
+                class="fade-in-up inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-indigo-500/10 border border-indigo-500/20 text-indigo-400 text-[10px] font-bold mb-8 tracking-widest uppercase">
+                <span class="flex h-1.5 w-1.5 rounded-full bg-indigo-500 animate-pulse"></span>
+                Mobile-First Financial Management
+            </div>
+            <h1 class="fade-in-up text-4xl md:text-7xl font-black text-white leading-[1.1] mb-8 tracking-tight">
+                Where your money stops <br> <span
+                    class="text-transparent bg-clip-text bg-gradient-to-r from-indigo-400 to-purple-500">playing hide
+                    and seek!</span>
+            </h1>
+            <p class="fade-in-up text-slate-400 text-lg md:text-xl max-w-3xl mx-auto mb-12 leading-relaxed"
+                style="animation-delay: 0.1s">
+                Expense Tracker is a mobile-first financial management application designed to help users easily track
+                their daily and monthly expenses. Tailored specifically for smartphones, allowing seamless personal
+                finance management on the go.
+            </p>
+
+            <div class="fade-in-up flex flex-col sm:flex-row flex-wrap justify-center gap-4 w-full sm:w-auto z-10"
+                style="animation-delay: 0.2s">
+                <a href="https://github.com/devnamdev2003/angular-expense-tracker/raw/refs/heads/main/exwise.apk"
+                    class="group flex items-center justify-center gap-3 bg-white text-black hover:bg-indigo-600 hover:text-white px-8 py-4 rounded-2xl font-bold transition-all transform hover:scale-105 active:scale-95 shadow-xl min-w-[200px]">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
+                        stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"
+                        class="group-hover:rotate-12 transition-transform">
+                        <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
+                        <polyline points="7 10 12 15 17 10" />
+                        <line x1="12" x2="12" y1="15" y2="3" />
+                    </svg>
+                    Download APK
+                </a>
+                <a href="https://exwise.vercel.app/" target="_blank"
+                    class="flex items-center justify-center gap-3 bg-white/5 hover:bg-white/10 text-white border border-white/10 px-8 py-4 rounded-2xl font-bold transition-all backdrop-blur-md min-w-[200px]">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
+                        stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6" />
+                        <polyline points="15 3 21 3 21 9" />
+                        <line x1="10" x2="21" y1="14" y2="3" />
+                    </svg>
+                    Live Preview
+                </a>
+            </div>
+
+            <!-- Main App Mockup -->
+            <div class="mt-24 hidden md:block max-w-[260px] mx-auto floating">
+                <div class="absolute -inset-20 bg-indigo-600/20 blur-[100px] rounded-full"></div>
+                <div class="relative glass rounded-[2.8rem] p-2.5 border border-white/10 shadow-2xl phone-frame">
+                    <div
+                        class="bg-[#0f0f12] rounded-[2.2rem] overflow-hidden border border-zinc-800 aspect-[9/19] relative">
+                        <img src="https://exwise.vercel.app/assets/appScreenshot/home.jpg" alt="ExWise Home"
+                            class="app-screenshot">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Stats Section -->
+    <section class="py-12 border-y border-white/5 bg-white/[0.01]">
+        <div class="max-w-7xl mx-auto px-6 grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
+            <div class="reveal">
+                <p class="text-3xl md:text-4xl font-black text-white mb-2">100%</p>
+                <p class="text-xs text-slate-500 uppercase font-bold tracking-widest">Privacy Focused</p>
+            </div>
+            <div class="reveal">
+                <p class="text-3xl md:text-4xl font-black text-white mb-2">0ms</p>
+                <p class="text-xs text-slate-500 uppercase font-bold tracking-widest">Server Latency</p>
+            </div>
+            <div class="reveal">
+                <p class="text-3xl md:text-4xl font-black text-white mb-2">Offline</p>
+                <p class="text-xs text-slate-500 uppercase font-bold tracking-widest">Works Anywhere</p>
+            </div>
+            <div class="reveal">
+                <p class="text-3xl md:text-4xl font-black text-white mb-2">Free</p>
+                <p class="text-xs text-slate-500 uppercase font-bold tracking-widest">Open Source</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Interface Grid (Selected Screens) -->
+    <section id="interface" class="py-12 md:py-24 px-6">
+        <div class="max-w-7xl mx-auto">
+            <div class="text-center mb-24 reveal">
+                <h2 class="text-4xl font-extrabold text-white mb-6">Core Interface</h2>
+                <p class="text-slate-400 max-w-2xl mx-auto text-lg leading-relaxed">
+                    Designed for speed and clarity. View your health, list your transactions, and add new ones in
+                    seconds.
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-y-20 gap-x-12">
+                <!-- Dashboard View -->
+                <div class="flex flex-col items-center reveal">
+                    <div
+                        class="w-full max-w-[240px] glass rounded-[2.5rem] p-2 border border-white/10 mb-8 aspect-[9/18.5] relative bg-[#0f0f12] phone-frame shadow-xl">
+                        <img src="https://exwise.vercel.app/assets/appScreenshot/home.jpg" alt="Dashboard View"
+                            class="app-screenshot rounded-[1.8rem]">
+                    </div>
+                    <div class="text-center px-4">
+                        <h3 class="font-bold text-2xl text-white mb-3">Dashboard View</h3>
+                        <p class="text-sm text-slate-400 leading-relaxed">
+                            Two interactive graphs: Expense line graph with Daily, Monthly, Yearly views, and a
+                            Category-wise Pie Chart. Toggle between Discrete and Cumulative values.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Add Expense View -->
+                <div class="flex flex-col items-center reveal" style="transition-delay: 0.1s">
+                    <div
+                        class="w-full max-w-[240px] glass rounded-[2.5rem] p-2 border border-white/10 mb-8 aspect-[9/18.5] relative bg-[#0f0f12] phone-frame shadow-xl">
+                        <img src="https://exwise.vercel.app/assets/appScreenshot/add.jpg" alt="Add Expense View"
+                            class="app-screenshot rounded-[1.8rem]">
+                    </div>
+                    <div class="text-center px-4">
+                        <h3 class="font-bold text-2xl text-white mb-3">Add Expense</h3>
+                        <p class="text-sm text-slate-400 leading-relaxed">
+                            Comprehensive form including Amount, Date & Time, Category, Payment Mode, Location, Notes,
+                            and an Extra Spending flag.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- List View -->
+                <div class="flex flex-col items-center reveal" style="transition-delay: 0.2s">
+                    <div
+                        class="w-full max-w-[240px] glass rounded-[2.5rem] p-2 border border-white/10 mb-8 aspect-[9/18.5] relative bg-[#0f0f12] phone-frame shadow-xl">
+                        <img src="https://exwise.vercel.app/assets/appScreenshot/list.jpg" alt="List View"
+                            class="app-screenshot rounded-[1.8rem]">
+                    </div>
+                    <div class="text-center px-4">
+                        <h3 class="font-bold text-2xl text-white mb-3">List View</h3>
+                        <p class="text-sm text-slate-400 leading-relaxed">
+                            Search, Sort, and Filter your history. Tap any entry to edit or delete. Scrollable and
+                            optimized for quick access to past records.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Workflow / How it works -->
+    <section class="py-12 md:py-24 px-6 bg-white/[0.01] border-y border-white/5">
+        <div class="max-w-7xl mx-auto">
+            <div class="flex flex-col lg:flex-row items-center gap-20">
+                <div class="flex-1 reveal">
+                    <h2 class="text-4xl font-extrabold text-white mb-8">How it works</h2>
+                    <div class="space-y-12">
+                        <div class="flex gap-6">
+                            <div
+                                class="w-12 h-12 rounded-full bg-indigo-600 text-white flex items-center justify-center font-bold text-lg flex-shrink-0 shadow-lg shadow-indigo-600/30">
+                                1</div>
+                            <div>
+                                <h4 class="text-xl font-bold text-white mb-2">Set Your Budget</h4>
+                                <p class="text-slate-400">Define your spending limit for any date range. ExWise will
+                                    calculate your daily safe-spend automatically.</p>
+                            </div>
+                        </div>
+                        <div class="flex gap-6">
+                            <div
+                                class="w-12 h-12 rounded-full bg-indigo-600 text-white flex items-center justify-center font-bold text-lg flex-shrink-0 shadow-lg shadow-indigo-600/30">
+                                2</div>
+                            <div>
+                                <h4 class="text-xl font-bold text-white mb-2">Log as You Go</h4>
+                                <p class="text-slate-400">Snap entries in seconds. Categorize with one tap and add
+                                    location tags for better context.</p>
+                            </div>
+                        </div>
+                        <div class="flex gap-6">
+                            <div
+                                class="w-12 h-12 rounded-full bg-indigo-600 text-white flex items-center justify-center font-bold text-lg flex-shrink-0 shadow-lg shadow-indigo-600/30">
+                                3</div>
+                            <div>
+                                <h4 class="text-xl font-bold text-white mb-2">Analyze & Adapt</h4>
+                                <p class="text-slate-400">Review the heatmap to find weak spots. Use the insights to
+                                    adjust your habits and reach your goals.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Visual Decoration for Workflow -->
+                <div class="flex-1 w-full max-w-lg reveal" style="transition-delay: 0.2s">
+                    <div class="glass p-8 rounded-[3rem] border-white/10 relative overflow-hidden">
+                        <div class="absolute -top-24 -right-24 w-64 h-64 bg-indigo-600/20 rounded-full blur-3xl"></div>
+                        <div class="relative z-10">
+                            <div class="flex items-center justify-between mb-8">
+                                <span
+                                    class="text-xs font-bold uppercase tracking-widest text-indigo-400">Real-time</span>
+                                <span class="text-[10px] bg-emerald-500/20 text-emerald-400 px-2 py-1 rounded">On
+                                    Track</span>
+                            </div>
+                            <div class="space-y-6">
+                                <div class="p-6 bg-white/5 rounded-3xl border border-white/5">
+                                    <p class="text-sm text-slate-500 mb-1">Total Spending</p>
+                                    <p class="text-3xl font-black text-white">₹12,450.00</p>
+                                </div>
+                                <div class="grid grid-cols-2 gap-4">
+                                    <div class="p-4 bg-white/5 rounded-2xl">
+                                        <p class="text-[10px] text-slate-500 mb-1">Avg Allowed</p>
+                                        <p class="text-md font-bold text-white">₹500.00</p>
+                                    </div>
+                                    <div class="p-4 bg-emerald-500/10 rounded-2xl border border-emerald-500/20">
+                                        <p class="text-[10px] text-emerald-400 mb-1">Suggested</p>
+                                        <p class="text-md font-bold text-emerald-400">₹420.00</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Comprehensive Features Section -->
+    <section id="features" class="py-12 md:py-24 px-6">
+        <div class="max-w-7xl mx-auto">
+            <div class="text-center mb-24 reveal">
+                <h2 class="text-4xl font-extrabold text-white mb-6">Full Feature Breakdown</h2>
+                <div class="w-20 h-1 bg-indigo-500 mx-auto"></div>
+            </div>
+
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Calendar Feature -->
+                <div class="glass p-8 rounded-3xl border border-white/5 reveal hover:bg-white/[0.04] transition-colors">
+                    <div class="flex items-center gap-4 mb-4">
+                        <div
+                            class="w-12 h-12 bg-indigo-600/20 rounded-xl flex items-center justify-center text-indigo-400">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                stroke-linejoin="round">
+                                <rect width="18" height="18" x="3" y="4" rx="2" ry="2" />
+                                <line x1="16" x2="16" y1="2" y2="6" />
+                                <line x1="8" x2="8" y1="2" y2="6" />
+                                <line x1="3" x2="21" y1="10" y2="10" />
+                            </svg>
+                        </div>
+                        <h3 class="text-xl font-bold text-white">Calendar Heatmap</h3>
+                    </div>
+                    <p class="text-slate-400 text-sm leading-relaxed mb-4">
+                        Visualize spending intensity. Customize thresholds for <strong>Red</strong> (> ₹1000),
+                        <strong>Yellow</strong> (₹500-1000), and <strong>Green</strong> (< ₹500). Auto-set thresholds
+                            based on your budget. </p>
+                </div>
+
+                <!-- Budget Feature -->
+                <div class="glass p-8 rounded-3xl border border-white/5 reveal hover:bg-white/[0.04] transition-colors"
+                    style="transition-delay: 0.1s">
+                    <div class="flex items-center gap-4 mb-4">
+                        <div
+                            class="w-12 h-12 bg-emerald-600/20 rounded-xl flex items-center justify-center text-emerald-400">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                stroke-linejoin="round">
+                                <path d="M12 2v20" />
+                                <path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6" />
+                            </svg>
+                        </div>
+                        <h3 class="text-xl font-bold text-white">Smart Budgeting</h3>
+                    </div>
+                    <p class="text-slate-400 text-sm leading-relaxed mb-4">
+                        Set a budget range and track progress. Get real-time stats on <strong>Avg Allowed/Day</strong>,
+                        <strong>Spent/Day</strong>, and <strong>Suggested/Day</strong> to stay on track.
+                    </p>
+                </div>
+
+                <!-- Settings Feature -->
+                <div class="glass p-8 rounded-3xl border border-white/5 reveal hover:bg-white/[0.04] transition-colors"
+                    style="transition-delay: 0.2s">
+                    <div class="flex items-center gap-4 mb-4">
+                        <div
+                            class="w-12 h-12 bg-amber-600/20 rounded-xl flex items-center justify-center text-amber-400">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                stroke-linejoin="round">
+                                <path
+                                    d="M12.22 2h-.44a2 2 0 0 0-2 2v.18a2 2 0 0 1-1 1.73l-.43.25a2 2 0 0 1-2 0l-.15-.08a2 2 0 0 0-2.73.73l-.22.38a2 2 0 0 0 .73 2.73l.15.1a2 2 0 0 1 1 1.72v.51a2 2 0 0 1-1 1.74l-.15.09a2 2 0 0 0-.73 2.73l.22.38a2 2 0 0 0 2.73.73l.15-.08a2 2 0 0 1 2 0l.43.25a2 2 0 0 1 1 1.73V20a2 2 0 0 0 2 2h.44a2 2 0 0 0 2-2v-.18a2 2 0 0 1 1-1.73l.43-.25a2 2 0 0 1 2 0l.15.08a2 2 0 0 0 2.73-.73l.22-.39a2 2 0 0 0-.73-2.73l-.15-.1a2 2 0 0 1-1-1.74v-.47a2 2 0 0 1 1-1.74l.15-.1a2 2 0 0 0 .73-2.73l-.22-.38a2 2 0 0 0-2.73-.73l-.15.08a2 2 0 0 1-2 0l-.43-.25a2 2 0 0 1-1-1.73V4a2 2 0 0 0-2-2z" />
+                                <circle cx="12" cy="12" r="3" />
+                            </svg>
+                        </div>
+                        <h3 class="text-xl font-bold text-white">Advanced Settings</h3>
+                    </div>
+                    <p class="text-slate-400 text-sm leading-relaxed mb-4">
+                        Toggle Dark/Light mode, manage Categories, and <strong>Export Data</strong> (PDF, JSON, Excel).
+                        Includes optional <strong>Cloud Backup</strong> powered by Spring Boot.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Tech Stack Section -->
+    <section id="tech" class="py-12 md:py-24 px-6 bg-white/[0.02] border-y border-white/5">
+        <div class="max-w-7xl mx-auto text-center reveal">
+            <h2 class="text-3xl font-bold mb-16 text-white">Powered By</h2>
+            <div
+                class="flex flex-wrap justify-center gap-12 md:gap-24 opacity-80 md:grayscale md:hover:grayscale-0 transition-all duration-500">
+                <div class="flex flex-col items-center gap-3">
+                    <div
+                        class="w-20 h-20 rounded-2xl bg-[#0f0f12] flex items-center justify-center p-4 border border-white/10 shadow-lg">
+                        <img src="https://angular.io/assets/images/logos/angular/angular.svg" alt="Angular"
+                            class="w-full h-full">
+                    </div>
+                    <span class="text-sm font-bold text-white">Angular</span>
+                    <span class="text-xs text-slate-500">Frontend Logic</span>
+                </div>
+                <div class="flex flex-col items-center gap-3">
+                    <div
+                        class="w-20 h-20 rounded-2xl bg-[#0f0f12] flex items-center justify-center p-5 border border-white/10 shadow-lg">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/d/d5/Tailwind_CSS_Logo.svg"
+                            alt="Tailwind" class="w-full h-full">
+                    </div>
+                    <span class="text-sm font-bold text-white">Tailwind CSS</span>
+                    <span class="text-xs text-slate-500">Responsive UI</span>
+                </div>
+                <div class="flex flex-col items-center gap-3">
+                    <div
+                        class="w-20 h-20 rounded-2xl bg-[#0f0f12] flex items-center justify-center p-5 border border-white/10 shadow-lg text-white">
+                        <!-- Replaced with a Database Icon for LocalStorage -->
+                        <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 24 24" fill="none"
+                            stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                            <ellipse cx="12" cy="5" rx="9" ry="3" />
+                            <path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3" />
+                            <path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5" />
+                        </svg>
+                    </div>
+                    <span class="text-sm font-bold text-white">LocalStorage</span>
+                    <span class="text-xs text-slate-500">Data Storage</span>
+                </div>
+                <div class="flex flex-col items-center gap-3">
+                    <div
+                        class="w-20 h-20 rounded-2xl bg-[#0f0f12] flex items-center justify-center p-4 border border-white/10 shadow-lg">
+                        <!-- Replaced with a reliable Spring Boot Logo -->
+                        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/spring/spring-original.svg"
+                            alt="Spring Boot" class="w-full h-full object-contain">
+                    </div>
+                    <span class="text-sm font-bold text-white">Spring Boot</span>
+                    <span class="text-xs text-slate-500">Backend API</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section class="py-12 md:py-24 px-6">
+        <div class="max-w-3xl mx-auto reveal">
+            <h2 class="text-3xl font-bold text-center mb-16 text-white">Frequently Asked Questions</h2>
+            <div class="space-y-6">
+                <div class="glass p-6 rounded-3xl border border-white/5 hover:border-indigo-500/30 transition-colors">
+                    <h4 class="font-bold text-white mb-2 flex items-center gap-3">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
+                            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                            class="text-indigo-400">
+                            <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
+                        </svg>
+                        Is my data shared with anyone?
+                    </h4>
+                    <p class="text-sm text-slate-400 ml-8">Never. ExWise stores all data locally on your device using
+                        LocalStorage. It never leaves your browser unless you enable the optional cloud backup.</p>
+                </div>
+                <div class="glass p-6 rounded-3xl border border-white/5 hover:border-indigo-500/30 transition-colors">
+                    <h4 class="font-bold text-white mb-2 flex items-center gap-3">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
+                            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                            class="text-indigo-400">
+                            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
+                            <polyline points="7 10 12 15 17 10" />
+                            <line x1="12" x2="12" y1="15" y2="3" />
+                        </svg>
+                        Can I export my data?
+                    </h4>
+                    <p class="text-sm text-slate-400 ml-8">Yes! You can export all your records in PDF, JSON, or Excel
+                        formats anytime via the Settings menu for safe keeping.</p>
+                </div>
+                <div class="glass p-6 rounded-3xl border border-white/5 hover:border-indigo-500/30 transition-colors">
+                    <h4 class="font-bold text-white mb-2 flex items-center gap-3">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
+                            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                            class="text-indigo-400">
+                            <circle cx="12" cy="12" r="5" />
+                            <path
+                                d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42" />
+                        </svg>
+                        Is there a dark mode?
+                    </h4>
+                    <p class="text-sm text-slate-400 ml-8">ExWise supports both Light and Dark themes. The interface
+                        automatically adapts to be easy on your eyes in any environment.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Redesigned Footer -->
+    <footer class="relative pt-10 md:pt-32 pb-12 px-6 bg-[#030305] overflow-hidden">
+        <!-- Background decorations -->
+        <div
+            class="absolute top-0 left-1/2 -translate-x-1/2 w-full max-w-3xl h-64 bg-indigo-600/10 blur-[100px] rounded-full pointer-events-none">
+        </div>
+
+        <div class="max-w-7xl mx-auto relative z-10">
+
+            <!-- Open Source / Collaboration Callout -->
+            <div
+                class="glass rounded-3xl p-8 md:p-12 mb-24 border border-white/10 text-center reveal group hover:border-indigo-500/30 transition-all duration-500">
+                <div
+                    class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 text-xs font-bold mb-6 uppercase tracking-wider">
+                    <span class="relative flex h-2 w-2">
+                        <span
+                            class="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+                        <span class="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
+                    </span>
+                    Open Source
+                </div>
+                <h2 class="text-3xl md:text-4xl font-black text-white mb-4">Help Build the Future of ExWise</h2>
+                <p class="text-slate-400 max-w-2xl mx-auto mb-8 text-lg">
+                    We believe in transparency and community collaboration. Found a bug? Have a feature request? Want to
+                    contribute code? Join us on GitHub.
+                </p>
+                <a href="https://github.com/devnamdev2003/angular-expense-tracker" target="_blank"
+                    class="inline-flex items-center gap-2 bg-white text-black px-8 py-3 rounded-xl font-bold hover:bg-indigo-500 hover:text-white transition-all transform hover:scale-105 shadow-lg">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
+                        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path
+                            d="M15 22v-4a4.8 4.8 0 0 0-1-3.5c3 0 6-2 6-5.5.08-1.25-.27-2.48-1-3.5.28-1.15.28-2.35 0-3.5 0 0-1 0-3 1.5-2.64-.5-5.36-.5-8 0C6 2 5 2 5 2c-.3 1.15-.3 2.35 0 3.5A5.403 5.403 0 0 0 4 9c0 3.5 3 5.5 6 5.5-.39.49-.68 1.05-.85 1.65-.17.6-.22 1.23-.15 1.85v4" />
+                        <path d="M9 18c-4.51 2-5-2-7-2" />
+                    </svg>
+                    Star & Contribute on GitHub
+                </a>
+            </div>
+
+            <!-- Main Footer Content -->
+            <div class="grid md:grid-cols-2 gap-16 mb-6 md:mb-20 border-b border-white/5 pb-16 reveal">
+                <!-- Brand & Tagline -->
+                <div>
+                    <div class="flex items-center gap-3 mb-6">
+                        <img src="https://exwise.vercel.app/icons/icon-512x512.png" alt="ExWise Logo"
+                            class="w-10 h-10 rounded-xl shadow-lg">
+                        <span class="text-2xl font-black text-white tracking-tighter">EXWISE</span>
+                    </div>
+                    <p class="text-slate-400 text-lg leading-relaxed mb-8">
+                        Your financial freedom starts here. Private, fast, and completely free. Stop hiding from your
+                        expenses and start tracking them wisely.
+                    </p>
+                    <div class="flex gap-4">
+                        <a href="https://github.com/devnamdev2003" target="_blank"
+                            class="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center hover:bg-white/10 hover:text-white text-slate-400 transition-colors">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"
+                                fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                stroke-linejoin="round">
+                                <path
+                                    d="M15 22v-4a4.8 4.8 0 0 0-1-3.5c3 0 6-2 6-5.5.08-1.25-.27-2.48-1-3.5.28-1.15.28-2.35 0-3.5 0 0-1 0-3 1.5-2.64-.5-5.36-.5-8 0C6 2 5 2 5 2c-.3 1.15-.3 2.35 0 3.5A5.403 5.403 0 0 0 4 9c0 3.5 3 5.5 6 5.5-.39.49-.68 1.05-.85 1.65-.17.6-.22 1.23-.15 1.85v4" />
+                                <path d="M9 18c-4.51 2-5-2-7-2" />
+                            </svg>
+                        </a>
+                        <a href="https://exwisedoc.vercel.app/" target="_blank"
+                            class="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center hover:bg-white/10 hover:text-white text-slate-400 transition-colors">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"
+                                fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                stroke-linejoin="round">
+                                <path d="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5L14.5 2z" />
+                                <polyline points="14 2 14 8 20 8" />
+                                <line x1="16" x2="8" y1="13" y2="13" />
+                                <line x1="16" x2="8" y1="17" y2="17" />
+                                <line x1="10" x2="8" y1="9" y2="9" />
+                            </svg>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Quick Links / Download Area -->
+                <div class="flex flex-col justify-center">
+                    <h4 class="text-white font-bold mb-6 uppercase tracking-wider text-sm">Get the App</h4>
+                    <div class="space-y-4">
+                        <a href="https://github.com/devnamdev2003/angular-expense-tracker/raw/refs/heads/main/exwise.apk"
+                            class="flex items-center justify-between p-4 rounded-xl bg-white/5 hover:bg-white/10 border border-white/5 hover:border-white/10 transition-all group">
+                            <div class="flex items-center gap-3">
+                                <div
+                                    class="bg-indigo-600/20 p-2 rounded-lg text-indigo-400 group-hover:text-white transition-colors">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"
+                                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                        stroke-linejoin="round">
+                                        <path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5" />
+                                    </svg>
+                                </div>
+                                <span class="font-bold text-white">Download APK</span>
+                            </div>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24"
+                                fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                stroke-linejoin="round"
+                                class="text-slate-500 group-hover:text-white transform group-hover:translate-x-1 transition-all">
+                                <path d="M5 12h14" />
+                                <path d="m12 5 7 7-7 7" />
+                            </svg>
+                        </a>
+
+                        <a href="https://exwise.vercel.app/" target="_blank"
+                            class="flex items-center justify-between p-4 rounded-xl bg-white/5 hover:bg-white/10 border border-white/5 hover:border-white/10 transition-all group">
+                            <div class="flex items-center gap-3">
+                                <div
+                                    class="bg-emerald-500/20 p-2 rounded-lg text-emerald-400 group-hover:text-white transition-colors">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"
+                                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                        stroke-linejoin="round">
+                                        <rect x="2" y="3" width="20" height="14" rx="2" ry="2" />
+                                        <line x1="8" y1="21" x2="16" y2="21" />
+                                        <line x1="12" y1="17" x2="12" y2="21" />
+                                    </svg>
+                                </div>
+                                <span class="font-bold text-white">Use Web App</span>
+                            </div>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24"
+                                fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                stroke-linejoin="round"
+                                class="text-slate-500 group-hover:text-white transform group-hover:translate-x-1 transition-all">
+                                <path d="M5 12h14" />
+                                <path d="m12 5 7 7-7 7" />
+                            </svg>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Copyright -->
+            <div
+                class="flex flex-col justify-between items-center gap-4 text-xs font-medium text-slate-600 tracking-widest">
+                <p>&copy; 2026 devnamdev. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Reveal animation on scroll
+        function reveal() {
+            var reveals = document.querySelectorAll(".reveal");
+            for (var i = 0; i < reveals.length; i++) {
+                var windowHeight = window.innerHeight;
+                var elementTop = reveals[i].getBoundingClientRect().top;
+                var elementVisible = 150;
+                if (elementTop < windowHeight - elementVisible) {
+                    reveals[i].classList.add("active");
+                }
+            }
+        }
+        window.addEventListener("scroll", reveal);
+        // Initial check
+        reveal();
+    </script>
+</body>
+
+</html>
