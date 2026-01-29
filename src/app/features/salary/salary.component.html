@@ -1,4 +1,4 @@
-<div class="min-h-screen font-sans transition-colors duration-300"
+<div class="font-sans transition-colors duration-300"
     style="background-color: var(--color-bg); color: var(--color-text);">
 
     <div class="relative h-full max-w-3xl p-4 mx-auto md:p-8">
@@ -139,7 +139,7 @@
             </div>
 
             <!-- Transactions List -->
-            <div class="pb-24 space-y-3 animate-slide-up" style="animation-delay: 0.3s;">
+            <div class="pb-16 space-y-3 animate-slide-up" style="animation-delay: 0.3s;">
                 @if (filteredTransactions.length === 0) {
                 <div class="py-10 text-center opacity-50 animate-fade-in">
                     <i class="mb-3 text-4xl fa-solid fa-filter"></i>
@@ -205,9 +205,9 @@
 
     <!-- Modal -->
     @if (showModal) {
-    <div class="fixed inset-0 z-50 flex items-end justify-center p-4 bg-black/50 backdrop-blur-sm md:items-center"
+    <div class="fixed inset-0 z-50 flex justify-center p-4 bg-black/50 backdrop-blur-sm items-center"
         (click)="closeModal()">
-        <div class="w-full md:w-[500px] rounded-3xl p-6 shadow-2xl animate-slide-up"
+        <div class="w-[90%] md:w-[500px] rounded-3xl p-6 shadow-2xl animate-slide-up"
             style="background-color: var(--color-bg-100);" (click)="$event.stopPropagation()">
             <div class="flex items-center justify-between mb-6">
                 <h3 class="text-xl font-bold">{{ editingId ? 'Edit Transaction' : 'New Transaction' }}</h3>
