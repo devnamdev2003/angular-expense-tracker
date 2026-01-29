@@ -98,55 +98,37 @@ The **Budget View** helps users manage their **monthly salary**, define optional
 **Key capabilities include:**
 
 * 💼 **Salary Management**
-
   * Users can add their **monthly salary**.
   * Optionally, they can define a **monthly budget** that is less than or equal to their salary.
   * The system intelligently switches between:
-
     * **Salary-based tracking** (if no budget is set)
     * **Budget-based tracking** (if a budget is defined)
-
 * 📊 **Financial Overview Card**
-
   * Displays:
-
     * **Remaining Balance** (salary – expenses)
     * or **Remaining Budget** (budget – expenses)
   * Clearly shows **Total Income**, **Total Expenses**, and the remaining amount.
-
 * 📅 **Month-wise Analysis**
-
   * Users can switch between months using a month selector.
   * All calculations, analytics, and transactions update dynamically based on the selected month.
-
 * 📈 **Daily Spending Analytics**
-
   * **Allowed/Day** – Average amount the user can spend per day.
   * **Spent/Day** – Actual average spending per day so far.
   * **Suggested/Day** – Recommended spending per remaining day to stay within limits.
-
 * 🟩 **Budget Usage Indicator**
-
   * A dynamic progress bar visually represents how much of the salary or budget has been used.
   * Color indicators provide quick feedback:
-
     * 🟢 Green – Healthy spending
     * 🟠 Orange – Caution zone
     * 🔴 Red – Overspending
-
 * 🧠 **Smart Spending Insights**
-
   * Displays contextual messages such as:
-
     * “Excellent! You’re saving more than half your salary.”
     * “Careful! You’re running low on funds.”
     * “You have exceeded your salary!”
   * Helps users quickly understand their financial status without manual calculations.
-
 * 🧾 **Transaction Management**
-
   * Users can:
-
     * Add salary entries
     * Edit existing salary or budget values
     * Attach optional notes for clarity
