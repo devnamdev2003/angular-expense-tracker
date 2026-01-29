@@ -2,47 +2,71 @@ import { Injectable } from '@angular/core';
 import { StorageService } from './storage.service';
 
 /**
- * Interface representing a salary entry.
+ * Salary
+ * ------
+ * Represents a single salary or income entry stored in local storage.
  */
 export interface Salary {
+
+    /** Unique identifier for the salary entry */
     salary_id: string;
+
+    /** Income amount */
     amount: number;
+
+    /** Month associated with the salary (YYYY-MM) */
     month: string;
+
+    /** Date when the salary was recorded (YYYY-MM-DD) */
     date: string;
+
+    /** Optional monthly budget linked to the salary */
     budget?: number;
+
+    /** Optional note or description */
     note?: string;
 }
 
 /**
- * Service responsible for managing salaries in local storage.
- * Provides methods to add, update, delete, and fetch salaries,
- * while ensuring data is only accessed in the browser environment.
+ * SalaryService
+ * -------------
+ * This service manages salary-related operations using browser local storage.
+ *
+ * Responsibilities:
+ * - Store salary data persistently
+ * - Add, update, delete salary entries
+ * - Retrieve salaries by month or as a list
+ *
+ * Safety:
+ * - Ensures all operations run only in browser environments
  */
 @Injectable({ providedIn: 'root' })
 export class SalaryService {
 
     /**
-     * Creates an instance of SalaryService.
+     * Creates an instance of SalaryService
      *
-     * @param storageService A service for interacting with local storage keys and data.
+     * @param storageService Utility service for local storage key management
      */
     constructor(
         private storageService: StorageService
     ) { }
 
     /**
-     * Checks if the code is running in a browser environment with `localStorage` available.
+     * Checks whether the code is running in a browser
+     * and `localStorage` is available.
      *
-     * @returns {boolean} True if running in the browser, false otherwise.
+     * @returns True if browser environment, otherwise false
      */
     private isBrowser(): boolean {
-        return typeof window !== 'undefined' && typeof window.localStorage !== 'undefined';
+        return typeof window !== 'undefined'
+            && typeof window.localStorage !== 'undefined';
     }
 
     /**
-     * Retrieves all salarys stored in local storage.
+     * Retrieves all salary entries from local storage.
      *
-     * @returns {Salary[]} A list of all saved salarys, or an empty array if not in the browser.
+     * @returns An array of Salary objects or an empty array
      */
     getAll(): Salary[] {
         if (!this.isBrowser()) return [];
@@ -51,72 +75,103 @@ export class SalaryService {
 
     /**
      * Adds a new salary entry to local storage.
-     * Automatically generates a unique `salary_id` and rounds the amount to 2 decimals.
      *
-     * @param data The salary data (without `salary_id`) to add.
+     * Behavior:
+     * - Generates a unique `salary_id`
+     * - Rounds amount to 2 decimal places
+     *
+     * @param data Salary data excluding the salary_id
      */
     add(data: Omit<Salary, 'salary_id'>): void {
         if (!this.isBrowser()) return;
+
         const all: Salary[] = this.getAll();
         const salary_id = crypto.randomUUID();
-        all.push({ ...data, salary_id, amount: Math.round(data.amount * 100) / 100 });
-        localStorage.setItem(this.storageService.getSalaryKey(), JSON.stringify(all));
+
+        all.push({
+            ...data,
+            salary_id,
+            amount: Math.round(data.amount * 100) / 100
+        });
+
+        localStorage.setItem(
+            this.storageService.getSalaryKey(),
+            JSON.stringify(all)
+        );
     }
 
     /**
-     * Updates an existing salary entry in local storage.
-     * Matches by `salary_id` and merges with the provided data.
-     * The amount is always rounded to 2 decimals.
+     * Updates an existing salary entry.
      *
-     * @param salary_id The ID of the salary to update.
-     * @param newData Partial salary fields to update.
+     * Behavior:
+     * - Matches salary by `salary_id`
+     * - Merges existing data with new values
+     * - Ensures amount is rounded to 2 decimals
+     *
+     * @param salary_id Unique ID of the salary to update
+     * @param newData Partial salary data to update
      */
     update(salary_id: string, newData: Partial<Salary>): void {
         if (!this.isBrowser()) return;
+
         let all: Salary[] = this.getAll();
+
         all = all.map(item =>
-            item.salary_id === salary_id ? { ...item, ...newData } : item
+            item.salary_id === salary_id
+                ? { ...item, ...newData }
+                : item
         );
-        all = all.map(item => (
-            { ...item, amount: Math.round(item.amount * 100) / 100 }
-        )
+
+        all = all.map(item => ({
+            ...item,
+            amount: Math.round(item.amount * 100) / 100
+        }));
+
+        localStorage.setItem(
+            this.storageService.getSalaryKey(),
+            JSON.stringify(all)
         );
-        localStorage.setItem(this.storageService.getSalaryKey(), JSON.stringify(all));
     }
 
     /**
      * Deletes a salary entry from local storage.
      *
-     * @param salary_id The ID of the salary to delete.
+     * @param salary_id ID of the salary to remove
      */
     delete(salary_id: string): void {
         if (!this.isBrowser()) return;
-        let all: Salary[] = this.getAll();
-        all = all.filter(item => item.salary_id !== salary_id);
-        localStorage.setItem(this.storageService.getSalaryKey(), JSON.stringify(all));
+
+        const all: Salary[] = this.getAll()
+            .filter(item => item.salary_id !== salary_id);
+
+        localStorage.setItem(
+            this.storageService.getSalaryKey(),
+            JSON.stringify(all)
+        );
     }
 
     /**
-     * Replaces all salarys in local storage with the provided list.
+     * Replaces all salary entries in local storage.
      *
-     * @param salarys The new list of salarys to save.
+     * @param salarys Complete list of salary entries
      */
     updateAllSalaries(salarys: Salary[]): void {
         if (!this.isBrowser()) return;
         this.storageService.updateSalarys(salarys);
     }
 
+    /**
+     * Retrieves the salary entry for a specific month.
+     *
+     * @param month Month in YYYY-MM format
+     * @returns Salary entry if found, otherwise null
+     */
     getSalaryByMonth(month: string): Salary | null {
         if (!this.isBrowser()) return null;
+
         const all: Salary[] = this.getAll();
         const salary = all.find(item => item.month === month);
-        return salary || null;
-    }
 
-    getCurrentMonthSalary(): Salary | null {
-        if (!this.isBrowser()) return null;
-        const now = new Date();
-        const monthStr = `${now.getFullYear()}-${String(now.getMonth() + 1).padStart(2, '0')}`;
-        return this.getSalaryByMonth(monthStr);
+        return salary || null;
     }
 }

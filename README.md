@@ -91,18 +91,78 @@ All expenses are stored in the device's **LocalStorage** and reflected immediate
 
 ---
 
-### 5. **Budget View**
+### 5. **Budget & Salary View**
 
-* Users can define a **budget range** by selecting a **start** and **end date**.
-* Once a budget is set:
+The **Budget View** helps users manage their **monthly salary**, define optional **budgets**, and gain deep insights into their spending behavior.
 
-  * A **progress bar** visually represents how much of the budget has been spent.
-  * Informative summary boxes display:
+**Key capabilities include:**
 
-    * **Avg Allowed/Day**
-    * **Spent/Day**
-    * **Suggested/Day** (based on remaining budget and days)
-  * Users have the ability to **edit** or **delete** the budget for better flexibility and control.
+* 💼 **Salary Management**
+
+  * Users can add their **monthly salary**.
+  * Optionally, they can define a **monthly budget** that is less than or equal to their salary.
+  * The system intelligently switches between:
+
+    * **Salary-based tracking** (if no budget is set)
+    * **Budget-based tracking** (if a budget is defined)
+
+* 📊 **Financial Overview Card**
+
+  * Displays:
+
+    * **Remaining Balance** (salary – expenses)
+    * or **Remaining Budget** (budget – expenses)
+  * Clearly shows **Total Income**, **Total Expenses**, and the remaining amount.
+
+* 📅 **Month-wise Analysis**
+
+  * Users can switch between months using a month selector.
+  * All calculations, analytics, and transactions update dynamically based on the selected month.
+
+* 📈 **Daily Spending Analytics**
+
+  * **Allowed/Day** – Average amount the user can spend per day.
+  * **Spent/Day** – Actual average spending per day so far.
+  * **Suggested/Day** – Recommended spending per remaining day to stay within limits.
+
+* 🟩 **Budget Usage Indicator**
+
+  * A dynamic progress bar visually represents how much of the salary or budget has been used.
+  * Color indicators provide quick feedback:
+
+    * 🟢 Green – Healthy spending
+    * 🟠 Orange – Caution zone
+    * 🔴 Red – Overspending
+
+* 🧠 **Smart Spending Insights**
+
+  * Displays contextual messages such as:
+
+    * “Excellent! You’re saving more than half your salary.”
+    * “Careful! You’re running low on funds.”
+    * “You have exceeded your salary!”
+  * Helps users quickly understand their financial status without manual calculations.
+
+* 🧾 **Transaction Management**
+
+  * Users can:
+
+    * Add salary entries
+    * Edit existing salary or budget values
+    * Attach optional notes for clarity
+    * Delete salary records when needed
+  * All changes reflect instantly across analytics and visualizations.
+
+---
+
+If you want, next I can:
+
+* Align **Dashboard** wording with graphs logic
+* Make README more **recruiter / interview friendly**
+* Shorten it for **GitHub featured project**
+
+Just tell me 👍
+
 
 ---
 

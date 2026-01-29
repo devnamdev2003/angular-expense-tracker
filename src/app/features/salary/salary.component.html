@@ -38,7 +38,9 @@
 
                 <div class="relative z-10">
                     <p class="mb-1 text-sm font-medium tracking-wider text-indigo-200 uppercase">{{ balanceLable }}</p>
-                    <h2 class="mb-6 text-4xl font-bold tracking-tight md:text-6xl">{{ totalBalance | number:'1.2-2'}} {{ userCurrancy }}
+                    <h2 class="mb-6 text-2xl font-bold tracking-tight md:text-4xl">{{ userCurrancy }}  {{ totalBalance |
+                        number:'1.1-2'}} / {{totalBudget > 0 ? (totalBudget | number:'1.1-2') : (totalIncome |
+                        number:'1.1-2')}}
                     </h2>
 
                     <div class="flex gap-8">
@@ -49,7 +51,8 @@
                                 </div>
                                 Income
                             </div>
-                            <p class="text-xl font-semibold md:text-2xl">{{ userCurrancy }}{{ totalIncome | number:'1.2-2'}}</p>
+                            <p class="text-xl font-semibold md:text-2xl">{{ userCurrancy }}{{ totalIncome |
+                                number:'1.2-2'}}</p>
                         </div>
                         <div>
                             <div class="flex items-center gap-2 mb-1 text-xs text-indigo-200 md:text-sm">
@@ -58,7 +61,8 @@
                                 </div>
                                 Expense
                             </div>
-                            <p class="text-xl font-semibold md:text-2xl text-white">{{ userCurrancy }}{{ totalExpense | number:'1.2-2'}}
+                            <p class="text-xl font-semibold md:text-2xl text-white">{{ userCurrancy }}{{ totalExpense |
+                                number:'1.2-2'}}
                             </p>
                         </div>
                     </div>
@@ -90,7 +94,8 @@
                     <i class="mb-2 text-lg text-orange-500 fa-solid fa-fire-flame-curved"></i>
                     <div>
                         <p class="text-[10px] opacity-60 uppercase tracking-wide">Spent/Day</p>
-                        <p class="text-sm font-bold md:text-base">{{ userCurrancy }}{{ dailySpent | number:'1.2-2' }}</p>
+                        <p class="text-sm font-bold md:text-base">{{ userCurrancy }}{{ dailySpent | number:'1.2-2' }}
+                        </p>
                     </div>
                 </div>
 
@@ -164,7 +169,8 @@
                                     <span>{{ t.date | date:'mediumDate' }}</span>
                                 </div>
                                 @if(t.budget) {
-                                <span class="text-[10px] text-indigo-400">Budget: {{ userCurrancy }}{{ t.budget | number:'1.2-2'}}</span>
+                                <span class="text-[10px] text-indigo-400">Budget: {{ userCurrancy }}{{ t.budget |
+                                    number:'1.2-2'}}</span>
                                 }
                             </div>
                         </div>
@@ -219,7 +225,8 @@
                 <div class="mb-4">
                     <label class="block mb-2 text-sm opacity-60">Amount / Salary</label>
                     <div class="relative">
-                        <span class="absolute left-4 top-3.5 opacity-40"><i class="fa-solid fa-money-bill-1-wave"></i></span>
+                        <span class="absolute left-4 top-3.5 opacity-40"><i
+                                class="fa-solid fa-money-bill-1-wave"></i></span>
                         <input #amountInput type="number" [(ngModel)]="newAmount" name="amount" placeholder="0.00"
                             min="0" max="100000000"
                             class="w-full py-3 pl-10 pr-4 transition-colors border rounded-xl focus:outline-none focus:border-indigo-500"

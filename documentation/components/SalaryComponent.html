@@ -142,6 +142,20 @@
 </p>
 
 
+    <p class="comment">
+        <h3>Description</h3>
+    </p>
+    <p class="comment">
+        <p>Component responsible for managing salary transactions and visualizing financial data.</p>
+<p>This component handles:</p>
+<ul>
+<li>Displaying a dashboard of financial metrics (Balance, Income, Expense).</li>
+<li>Calculating daily spending limits and suggestions based on the remaining budget.</li>
+<li>CRUD operations for Salary transactions.</li>
+<li>Visualizing budget usage via a progress bar.</li>
+</ul>
+
+    </p>
 
 
     <p class="comment">
@@ -419,12 +433,14 @@
                 </tr>
                         <tr>
                             <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="46" class="link-to-prism">src/app/features/salary/salary.component.ts:46</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="177" class="link-to-prism">src/app/features/salary/salary.component.ts:177</a></div>
                             </td>
                         </tr>
 
                 <tr>
                     <td class="col-md-4">
+                            <div class="io-description"><p>Constructor for SalaryComponent.</p>
+</div>
                             <div>
                                     <b>Parameters :</b>
                                     <table class="params">
@@ -433,6 +449,7 @@
                                                 <td>Name</td>
                                                     <td>Type</td>
                                                 <td>Optional</td>
+                                                    <td>Description</td>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -447,6 +464,10 @@
                                                             No
                                                     </td>
                                                     
+                                                        <td>
+                                                                <p>Service for managing salary data persistence.</p>
+
+                                                        </td>
                                                 </tr>
                                                 <tr>
                                                         <td>expenseService</td>
@@ -459,6 +480,10 @@
                                                             No
                                                     </td>
                                                     
+                                                        <td>
+                                                                <p>Service for retrieving expense data.</p>
+
+                                                        </td>
                                                 </tr>
                                                 <tr>
                                                         <td>userService</td>
@@ -471,6 +496,10 @@
                                                             No
                                                     </td>
                                                     
+                                                        <td>
+                                                                <p>Service for retrieving user preferences (e.g., currency).</p>
+
+                                                        </td>
                                                 </tr>
                                         </tbody>
                                     </table>
@@ -510,19 +539,25 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="232"
-                                    class="link-to-prism">src/app/features/salary/salary.component.ts:232</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="460"
+                                    class="link-to-prism">src/app/features/salary/salary.component.ts:460</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
+                        <div class="io-description"><p>Determines the CSS class for the analysis text based on severity.</p>
+</div>
 
                         <div class="io-description">
                             <b>Returns : </b>    <code>&quot;opacity-60&quot; | &quot;text-red-500 font-bold&quot; | &quot;text-orange-500 font-medium&quot; | &quot;text-green-500 font-medium&quot; | &quot;text-indigo-400&quot;</code>
 
                         </div>
+                            <div class="io-description">
+                                <p>A Tailwind CSS text color class string.</p>
+
+                            </div>
                 </td>
             </tr>
         </tbody>
@@ -547,19 +582,25 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="222"
-                                    class="link-to-prism">src/app/features/salary/salary.component.ts:222</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="445"
+                                    class="link-to-prism">src/app/features/salary/salary.component.ts:445</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
+                        <div class="io-description"><p>Generates a text analysis of the user&#39;s spending habits.</p>
+</div>
 
                         <div class="io-description">
                             <b>Returns : </b>    <code>&quot;Add salary to see analysis&quot; | &quot;⚠️ You have exceeded your salary!&quot; | &quot;⚠️ Careful! You&#x27;re running low on funds.&quot; | &quot;🎉 Excellent! You&#x27;re saving more than half your salary.&quot; | &quot;👍 On track. Keep monitoring your expenses.&quot;</code>
 
                         </div>
+                            <div class="io-description">
+                                <p>A descriptive string advising the user on their financial status.</p>
+
+                            </div>
                 </td>
             </tr>
         </tbody>
@@ -584,19 +625,25 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="211"
-                                    class="link-to-prism">src/app/features/salary/salary.component.ts:211</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="424"
+                                    class="link-to-prism">src/app/features/salary/salary.component.ts:424</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
+                        <div class="io-description"><p>Determines the color class of the progress bar based on financial health.</p>
+</div>
 
                         <div class="io-description">
                             <b>Returns : </b>    <code>&quot;from-red-500 to-red-600&quot; | &quot;from-orange-400 to-orange-500&quot; | &quot;from-green-400 to-indigo-500&quot;</code>
 
                         </div>
+                            <div class="io-description">
+                                <p>A Tailwind CSS gradient class string.</p>
+
+                            </div>
                 </td>
             </tr>
         </tbody>
@@ -621,19 +668,25 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="207"
-                                    class="link-to-prism">src/app/features/salary/salary.component.ts:207</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="415"
+                                    class="link-to-prism">src/app/features/salary/salary.component.ts:415</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
+                        <div class="io-description"><p>Determines the width of the progress bar based on the spent rate.</p>
+</div>
 
                         <div class="io-description">
                             <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
 
                         </div>
+                            <div class="io-description">
+                                <p>The width percentage (can exceed 100).</p>
+
+                            </div>
                 </td>
             </tr>
         </tbody>
@@ -658,19 +711,25 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="218"
-                                    class="link-to-prism">src/app/features/salary/salary.component.ts:218</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="436"
+                                    class="link-to-prism">src/app/features/salary/salary.component.ts:436</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
+                        <div class="io-description"><p>Determines the label for the budget section.</p>
+</div>
 
                         <div class="io-description">
                             <b>Returns : </b>        <code><a href="../interfaces/Salary.html" target="_self" >&quot;Salary Usage&quot; | &quot;Budget Usage&quot;</a></code>
 
                         </div>
+                            <div class="io-description">
+                                <p>&quot;Salary Usage&quot; if no specific budget is set, otherwise &quot;Budget Usage&quot;.</p>
+
+                            </div>
                 </td>
             </tr>
         </tbody>
@@ -695,19 +754,25 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="203"
-                                    class="link-to-prism">src/app/features/salary/salary.component.ts:203</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="406"
+                                    class="link-to-prism">src/app/features/salary/salary.component.ts:406</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
+                        <div class="io-description"><p>Formats the spent rate as a string, capped at 100%.</p>
+</div>
 
                         <div class="io-description">
                             <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
 
                         </div>
+                            <div class="io-description">
+                                <p>The percentage string.</p>
+
+                            </div>
                 </td>
             </tr>
         </tbody>
@@ -732,14 +797,16 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="268"
-                                    class="link-to-prism">src/app/features/salary/salary.component.ts:268</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="505"
+                                    class="link-to-prism">src/app/features/salary/salary.component.ts:505</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
+                        <div class="io-description"><p>Closes the modal and resets the form state.</p>
+</div>
 
                         <div class="io-description">
                             <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
@@ -769,19 +836,25 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="177"
-                                    class="link-to-prism">src/app/features/salary/salary.component.ts:177</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="364"
+                                    class="link-to-prism">src/app/features/salary/salary.component.ts:364</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
+                        <div class="io-description"><p>Calculates the allowed daily spending based on the total budget/income.</p>
+</div>
 
                         <div class="io-description">
                             <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
 
                         </div>
+                            <div class="io-description">
+                                <p>The allowed daily amount.</p>
+
+                            </div>
                 </td>
             </tr>
         </tbody>
@@ -806,19 +879,25 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="170"
-                                    class="link-to-prism">src/app/features/salary/salary.component.ts:170</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="352"
+                                    class="link-to-prism">src/app/features/salary/salary.component.ts:352</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
+                        <div class="io-description"><p>Calculates the average daily spending based on days passed.</p>
+</div>
 
                         <div class="io-description">
                             <b>Returns : </b>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
 
                         </div>
+                            <div class="io-description">
+                                <p>The average daily expense.</p>
+
+                            </div>
                 </td>
             </tr>
         </tbody>
@@ -843,19 +922,25 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="184"
-                                    class="link-to-prism">src/app/features/salary/salary.component.ts:184</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="376"
+                                    class="link-to-prism">src/app/features/salary/salary.component.ts:376</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
+                        <div class="io-description"><p>Calculates a suggested daily spending limit for the remaining days of the month.</p>
+</div>
 
                         <div class="io-description">
                             <b>Returns : </b>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
 
                         </div>
+                            <div class="io-description">
+                                <p>The suggested daily amount, or 0 if no budget remains or month is passed.</p>
+
+                            </div>
                 </td>
             </tr>
         </tbody>
@@ -880,19 +965,25 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="145"
-                                    class="link-to-prism">src/app/features/salary/salary.component.ts:145</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="322"
+                                    class="link-to-prism">src/app/features/salary/salary.component.ts:322</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
+                        <div class="io-description"><p>Calculates temporal metrics relative to the selected month and current date.</p>
+</div>
 
                         <div class="io-description">
                             <b>Returns : </b>    <code>{ daysPassed: number; daysRemaining: any; daysInMonth: any; isPastMonth: boolean; }</code>
 
                         </div>
+                            <div class="io-description">
+                                <p>An object containing days passed, days remaining, days in month, and past month status.</p>
+
+                            </div>
                 </td>
             </tr>
         </tbody>
@@ -917,19 +1008,25 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="116"
-                                    class="link-to-prism">src/app/features/salary/salary.component.ts:116</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="273"
+                                    class="link-to-prism">src/app/features/salary/salary.component.ts:273</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
+                        <div class="io-description"><p>Filters the master list of transactions to return only those for the selected month.</p>
+</div>
 
                         <div class="io-description">
                             <b>Returns : </b>        <code><a href="../interfaces/Salary.html" target="_self" >Salary[]</a></code>
 
                         </div>
+                            <div class="io-description">
+                                <p>An array of Salary objects for the current month.</p>
+
+                            </div>
                 </td>
             </tr>
         </tbody>
@@ -954,19 +1051,25 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="352"
-                                    class="link-to-prism">src/app/features/salary/salary.component.ts:352</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="604"
+                                    class="link-to-prism">src/app/features/salary/salary.component.ts:604</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
+                        <div class="io-description"><p>Utility to get the current date as a string in &#39;YYYY-MM-DD&#39; format.</p>
+</div>
 
                         <div class="io-description">
                             <b>Returns : </b>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
 
                         </div>
+                            <div class="io-description">
+                                <p>Date string.</p>
+
+                            </div>
                 </td>
             </tr>
         </tbody>
@@ -991,14 +1094,16 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="62"
-                                    class="link-to-prism">src/app/features/salary/salary.component.ts:62</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="206"
+                                    class="link-to-prism">src/app/features/salary/salary.component.ts:206</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
+                        <div class="io-description"><p>Dynamically injects FontAwesome and Google Fonts into the document head.</p>
+</div>
 
                         <div class="io-description">
                             <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
@@ -1028,14 +1133,17 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="74"
-                                    class="link-to-prism">src/app/features/salary/salary.component.ts:74</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="222"
+                                    class="link-to-prism">src/app/features/salary/salary.component.ts:222</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
+                        <div class="io-description"><p>Loads all transaction data and recalculates all financial metrics and UI states.
+This is the central update function called after any data change.</p>
+</div>
 
                         <div class="io-description">
                             <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
@@ -1065,14 +1173,17 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="57"
-                                    class="link-to-prism">src/app/features/salary/salary.component.ts:57</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="198"
+                                    class="link-to-prism">src/app/features/salary/salary.component.ts:198</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
+                        <div class="io-description"><p>Angular lifecycle hook called after component initialization.
+Injects external styles and loads the initial state.</p>
+</div>
 
                         <div class="io-description">
                             <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
@@ -1102,14 +1213,17 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="242"
-                                    class="link-to-prism">src/app/features/salary/salary.component.ts:242</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="476"
+                                    class="link-to-prism">src/app/features/salary/salary.component.ts:476</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
+                        <div class="io-description"><p>Opens the modal to add or edit a transaction.
+If a transaction is provided, it populates the form for editing.</p>
+</div>
 
                             <div class="io-description">
                                 <b>Parameters :</b>
@@ -1120,6 +1234,7 @@
                                             <td>Name</td>
                                                 <td>Type</td>
                                             <td>Optional</td>
+                                                <td>Description</td>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -1134,6 +1249,10 @@
                                             </td>
 
 
+                                            <td>
+                                                    <p>Optional transaction object to edit.</p>
+
+                                            </td>
                                         </tr>
                                     </tbody>
                                 </table>
@@ -1169,14 +1288,16 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="344"
-                                    class="link-to-prism">src/app/features/salary/salary.component.ts:344</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="591"
+                                    class="link-to-prism">src/app/features/salary/salary.component.ts:591</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
+                        <div class="io-description"><p>Deletes a transaction after user confirmation.</p>
+</div>
 
                             <div class="io-description">
                                 <b>Parameters :</b>
@@ -1187,6 +1308,7 @@
                                             <td>Name</td>
                                                 <td>Type</td>
                                             <td>Optional</td>
+                                                <td>Description</td>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -1201,6 +1323,10 @@
                                             </td>
 
 
+                                            <td>
+                                                    <p>The unique ID of the transaction to delete.</p>
+
+                                            </td>
                                         </tr>
                                         <tr>
                                                 <td>event</td>
@@ -1213,6 +1339,10 @@
                                             </td>
 
 
+                                            <td>
+                                                    <p>The mouse event to prevent bubbling.</p>
+
+                                            </td>
                                         </tr>
                                     </tbody>
                                 </table>
@@ -1248,14 +1378,17 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="277"
-                                    class="link-to-prism">src/app/features/salary/salary.component.ts:277</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="518"
+                                    class="link-to-prism">src/app/features/salary/salary.component.ts:518</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
+                        <div class="io-description"><p>Validates and saves the current transaction (create or update).
+Performs validation on amount, budget, and notes.</p>
+</div>
 
                         <div class="io-description">
                             <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
@@ -1285,19 +1418,25 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="195"
-                                    class="link-to-prism">src/app/features/salary/salary.component.ts:195</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="393"
+                                    class="link-to-prism">src/app/features/salary/salary.component.ts:393</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
+                        <div class="io-description"><p>Calculates the percentage of the budget that has been spent.</p>
+</div>
 
                         <div class="io-description">
                             <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
 
                         </div>
+                            <div class="io-description">
+                                <p>The spending rate percentage.</p>
+
+                            </div>
                 </td>
             </tr>
         </tbody>
@@ -1322,19 +1461,25 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="137"
-                                    class="link-to-prism">src/app/features/salary/salary.component.ts:137</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="304"
+                                    class="link-to-prism">src/app/features/salary/salary.component.ts:304</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
+                        <div class="io-description"><p>Calculates the total income (sum of salary amounts) for the selected month.</p>
+</div>
 
                         <div class="io-description">
                             <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
 
                         </div>
+                            <div class="io-description">
+                                <p>The total income amount.</p>
+
+                            </div>
                 </td>
             </tr>
         </tbody>
@@ -1359,19 +1504,25 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="141"
-                                    class="link-to-prism">src/app/features/salary/salary.component.ts:141</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="313"
+                                    class="link-to-prism">src/app/features/salary/salary.component.ts:313</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
+                        <div class="io-description"><p>Calculates the total budget set for the selected month.</p>
+</div>
 
                         <div class="io-description">
                             <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
 
                         </div>
+                            <div class="io-description">
+                                <p>The total budget amount.</p>
+
+                            </div>
                 </td>
             </tr>
         </tbody>
@@ -1396,19 +1547,25 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="120"
-                                    class="link-to-prism">src/app/features/salary/salary.component.ts:120</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="282"
+                                    class="link-to-prism">src/app/features/salary/salary.component.ts:282</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
+                        <div class="io-description"><p>Calculates the total expenses for the selected month by querying the ExpenseService.</p>
+</div>
 
                         <div class="io-description">
                             <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
 
                         </div>
+                            <div class="io-description">
+                                <p>The total expense amount.</p>
+
+                            </div>
                 </td>
             </tr>
         </tbody>
@@ -1433,14 +1590,16 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="106"
-                                    class="link-to-prism">src/app/features/salary/salary.component.ts:106</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="258"
+                                    class="link-to-prism">src/app/features/salary/salary.component.ts:258</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
+                        <div class="io-description"><p>Updates the selected month and reloads the state.</p>
+</div>
 
                             <div class="io-description">
                                 <b>Parameters :</b>
@@ -1451,6 +1610,7 @@
                                             <td>Name</td>
                                                 <td>Type</td>
                                             <td>Optional</td>
+                                                <td>Description</td>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -1465,6 +1625,10 @@
                                             </td>
 
 
+                                            <td>
+                                                    <p>The new month string in &#39;YYYY-MM&#39; format.</p>
+
+                                            </td>
                                         </tr>
                                     </tbody>
                                 </table>
@@ -1515,10 +1679,16 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="16" class="link-to-prism">src/app/features/salary/salary.component.ts:16</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="29" class="link-to-prism">src/app/features/salary/salary.component.ts:29</a></div>
                         </td>
                     </tr>
 
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Reference to the amount input field in the modal for auto-focusing.</p>
+</div>
+                </td>
+            </tr>
 
         </tbody>
     </table>
@@ -1546,10 +1716,16 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="35" class="link-to-prism">src/app/features/salary/salary.component.ts:35</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="122" class="link-to-prism">src/app/features/salary/salary.component.ts:122</a></div>
                         </td>
                     </tr>
 
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Analysis message displayed to the user based on their financial health.</p>
+</div>
+                </td>
+            </tr>
 
         </tbody>
     </table>
@@ -1577,10 +1753,16 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="36" class="link-to-prism">src/app/features/salary/salary.component.ts:36</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="127" class="link-to-prism">src/app/features/salary/salary.component.ts:127</a></div>
                         </td>
                     </tr>
 
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>CSS class string for styling the analysis text.</p>
+</div>
+                </td>
+            </tr>
 
         </tbody>
     </table>
@@ -1608,10 +1790,16 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="46" class="link-to-prism">src/app/features/salary/salary.component.ts:46</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="177" class="link-to-prism">src/app/features/salary/salary.component.ts:177</a></div>
                         </td>
                     </tr>
 
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Label for the main balance card (e.g., &quot;Remaining Budget&quot; or &quot;Total Balance&quot;).</p>
+</div>
+                </td>
+            </tr>
 
         </tbody>
     </table>
@@ -1639,10 +1827,16 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="33" class="link-to-prism">src/app/features/salary/salary.component.ts:33</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="112" class="link-to-prism">src/app/features/salary/salary.component.ts:112</a></div>
                         </td>
                     </tr>
 
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>CSS class string for the progress bar color based on spending rate (Green, Orange, Red).</p>
+</div>
+                </td>
+            </tr>
 
         </tbody>
     </table>
@@ -1670,10 +1864,16 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="32" class="link-to-prism">src/app/features/salary/salary.component.ts:32</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="107" class="link-to-prism">src/app/features/salary/salary.component.ts:107</a></div>
                         </td>
                     </tr>
 
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Width of the visual progress bar (in percent).</p>
+</div>
+                </td>
+            </tr>
 
         </tbody>
     </table>
@@ -1701,10 +1901,16 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="34" class="link-to-prism">src/app/features/salary/salary.component.ts:34</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="117" class="link-to-prism">src/app/features/salary/salary.component.ts:117</a></div>
                         </td>
                     </tr>
 
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Label text for the budget section (e.g., &quot;Salary Usage&quot; vs &quot;Budget Usage&quot;).</p>
+</div>
+                </td>
+            </tr>
 
         </tbody>
     </table>
@@ -1732,10 +1938,16 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="31" class="link-to-prism">src/app/features/salary/salary.component.ts:31</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="102" class="link-to-prism">src/app/features/salary/salary.component.ts:102</a></div>
                         </td>
                     </tr>
 
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Formatted string representation of the budget usage percentage (capped at 100% for some UI elements).</p>
+</div>
+                </td>
+            </tr>
 
         </tbody>
     </table>
@@ -1763,10 +1975,16 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="26" class="link-to-prism">src/app/features/salary/salary.component.ts:26</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="75" class="link-to-prism">src/app/features/salary/salary.component.ts:75</a></div>
                         </td>
                     </tr>
 
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Calculated daily allowance based on total budget/income and days in the month.</p>
+</div>
+                </td>
+            </tr>
 
         </tbody>
     </table>
@@ -1794,10 +2012,16 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="27" class="link-to-prism">src/app/features/salary/salary.component.ts:27</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="80" class="link-to-prism">src/app/features/salary/salary.component.ts:80</a></div>
                         </td>
                     </tr>
 
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Average amount spent per day so far in the current month.</p>
+</div>
+                </td>
+            </tr>
 
         </tbody>
     </table>
@@ -1825,10 +2049,17 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="28" class="link-to-prism">src/app/features/salary/salary.component.ts:28</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="86" class="link-to-prism">src/app/features/salary/salary.component.ts:86</a></div>
                         </td>
                     </tr>
 
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Suggested daily spending limit for the remaining days of the month.
+Null if the month has passed or no days remain.</p>
+</div>
+                </td>
+            </tr>
 
         </tbody>
     </table>
@@ -1856,10 +2087,17 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="29" class="link-to-prism">src/app/features/salary/salary.component.ts:29</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="92" class="link-to-prism">src/app/features/salary/salary.component.ts:92</a></div>
                         </td>
                     </tr>
 
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Object containing calculated date metrics for the selected month.
+Includes days passed, days remaining, total days in month, and whether it is a past month.</p>
+</div>
+                </td>
+            </tr>
 
         </tbody>
     </table>
@@ -1887,10 +2125,16 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="39" class="link-to-prism">src/app/features/salary/salary.component.ts:39</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="142" class="link-to-prism">src/app/features/salary/salary.component.ts:142</a></div>
                         </td>
                     </tr>
 
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>The ID of the transaction currently being edited. Null if creating a new transaction.</p>
+</div>
+                </td>
+            </tr>
 
         </tbody>
     </table>
@@ -1918,10 +2162,16 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="38" class="link-to-prism">src/app/features/salary/salary.component.ts:38</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="137" class="link-to-prism">src/app/features/salary/salary.component.ts:137</a></div>
                         </td>
                     </tr>
 
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Signal to hold validation error messages for the transaction form.</p>
+</div>
+                </td>
+            </tr>
 
         </tbody>
     </table>
@@ -1949,10 +2199,16 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="19" class="link-to-prism">src/app/features/salary/salary.component.ts:19</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="39" class="link-to-prism">src/app/features/salary/salary.component.ts:39</a></div>
                         </td>
                     </tr>
 
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>List of transactions filtered by the currently selected month.</p>
+</div>
+                </td>
+            </tr>
 
         </tbody>
     </table>
@@ -1980,10 +2236,16 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="37" class="link-to-prism">src/app/features/salary/salary.component.ts:37</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="132" class="link-to-prism">src/app/features/salary/salary.component.ts:132</a></div>
                         </td>
                     </tr>
 
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>The maximum selectable month allowed in the date picker, restricted to the current month.</p>
+</div>
+                </td>
+            </tr>
 
         </tbody>
     </table>
@@ -2011,10 +2273,16 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="40" class="link-to-prism">src/app/features/salary/salary.component.ts:40</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="147" class="link-to-prism">src/app/features/salary/salary.component.ts:147</a></div>
                         </td>
                     </tr>
 
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Model for the transaction amount input.</p>
+</div>
+                </td>
+            </tr>
 
         </tbody>
     </table>
@@ -2042,10 +2310,16 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="41" class="link-to-prism">src/app/features/salary/salary.component.ts:41</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="152" class="link-to-prism">src/app/features/salary/salary.component.ts:152</a></div>
                         </td>
                     </tr>
 
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Model for the transaction budget input.</p>
+</div>
+                </td>
+            </tr>
 
         </tbody>
     </table>
@@ -2073,10 +2347,16 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="44" class="link-to-prism">src/app/features/salary/salary.component.ts:44</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="167" class="link-to-prism">src/app/features/salary/salary.component.ts:167</a></div>
                         </td>
                     </tr>
 
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Model for the transaction date input.</p>
+</div>
+                </td>
+            </tr>
 
         </tbody>
     </table>
@@ -2104,10 +2384,16 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="43" class="link-to-prism">src/app/features/salary/salary.component.ts:43</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="162" class="link-to-prism">src/app/features/salary/salary.component.ts:162</a></div>
                         </td>
                     </tr>
 
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Model for the transaction month input.</p>
+</div>
+                </td>
+            </tr>
 
         </tbody>
     </table>
@@ -2135,10 +2421,16 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="42" class="link-to-prism">src/app/features/salary/salary.component.ts:42</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="157" class="link-to-prism">src/app/features/salary/salary.component.ts:157</a></div>
                         </td>
                     </tr>
 
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Model for the transaction note input.</p>
+</div>
+                </td>
+            </tr>
 
         </tbody>
     </table>
@@ -2166,10 +2458,17 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="20" class="link-to-prism">src/app/features/salary/salary.component.ts:20</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="45" class="link-to-prism">src/app/features/salary/salary.component.ts:45</a></div>
                         </td>
                     </tr>
 
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>The currently selected month in &#39;YYYY-MM&#39; format.
+Defaults to the current month.</p>
+</div>
+                </td>
+            </tr>
 
         </tbody>
     </table>
@@ -2197,10 +2496,16 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="21" class="link-to-prism">src/app/features/salary/salary.component.ts:21</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="50" class="link-to-prism">src/app/features/salary/salary.component.ts:50</a></div>
                         </td>
                     </tr>
 
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Controls the visibility of the Add/Edit transaction modal.</p>
+</div>
+                </td>
+            </tr>
 
         </tbody>
     </table>
@@ -2228,10 +2533,16 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="30" class="link-to-prism">src/app/features/salary/salary.component.ts:30</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="97" class="link-to-prism">src/app/features/salary/salary.component.ts:97</a></div>
                         </td>
                     </tr>
 
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>The percentage of the budget/income that has been spent.</p>
+</div>
+                </td>
+            </tr>
 
         </tbody>
     </table>
@@ -2259,10 +2570,16 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="24" class="link-to-prism">src/app/features/salary/salary.component.ts:24</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="65" class="link-to-prism">src/app/features/salary/salary.component.ts:65</a></div>
                         </td>
                     </tr>
 
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Net balance (Income/Budget - Expense) for the selected month.</p>
+</div>
+                </td>
+            </tr>
 
         </tbody>
     </table>
@@ -2290,10 +2607,16 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="25" class="link-to-prism">src/app/features/salary/salary.component.ts:25</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="70" class="link-to-prism">src/app/features/salary/salary.component.ts:70</a></div>
                         </td>
                     </tr>
 
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Total budget allocated for the selected month.</p>
+</div>
+                </td>
+            </tr>
 
         </tbody>
     </table>
@@ -2321,10 +2644,16 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="23" class="link-to-prism">src/app/features/salary/salary.component.ts:23</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="60" class="link-to-prism">src/app/features/salary/salary.component.ts:60</a></div>
                         </td>
                     </tr>
 
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Total calculated expenses for the selected month.</p>
+</div>
+                </td>
+            </tr>
 
         </tbody>
     </table>
@@ -2352,10 +2681,16 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="22" class="link-to-prism">src/app/features/salary/salary.component.ts:22</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="55" class="link-to-prism">src/app/features/salary/salary.component.ts:55</a></div>
                         </td>
                     </tr>
 
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Total calculated income for the selected month.</p>
+</div>
+                </td>
+            </tr>
 
         </tbody>
     </table>
@@ -2383,10 +2718,16 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="18" class="link-to-prism">src/app/features/salary/salary.component.ts:18</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="34" class="link-to-prism">src/app/features/salary/salary.component.ts:34</a></div>
                         </td>
                     </tr>
 
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>List of all salary transactions fetched from storage.</p>
+</div>
+                </td>
+            </tr>
 
         </tbody>
     </table>
@@ -2409,10 +2750,16 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="45" class="link-to-prism">src/app/features/salary/salary.component.ts:45</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="172" class="link-to-prism">src/app/features/salary/salary.component.ts:172</a></div>
                         </td>
                     </tr>
 
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>The user&#39;s preferred currency symbol.</p>
+</div>
+                </td>
+            </tr>
 
         </tbody>
     </table>
@@ -2429,6 +2776,15 @@ import { SalaryService, Salary } from &#x27;../../service/localStorage/salary.se
 import { ExpenseService, Expense } from &#x27;../../service/localStorage/expense.service&#x27;;
 import { UserService, User } from &#x27;../../service/localStorage/user.service&#x27;;
 
+/**
+ * Component responsible for managing salary transactions and visualizing financial data.
+ *
+ * This component handles:
+ * - Displaying a dashboard of financial metrics (Balance, Income, Expense).
+ * - Calculating daily spending limits and suggestions based on the remaining budget.
+ * - CRUD operations for Salary transactions.
+ * - Visualizing budget usage via a progress bar.
+ */
 @Component({
   selector: &#x27;app-salary&#x27;,
   standalone: true,
@@ -2437,52 +2793,187 @@ import { UserService, User } from &#x27;../../service/localStorage/user.service&
   styleUrls: [&#x27;./salary.component.css&#x27;]
 })
 export class SalaryComponent implements OnInit {
+
+  /**
+   * Reference to the amount input field in the modal for auto-focusing.
+   */
   @ViewChild(&#x27;amountInput&#x27;) amountInput!: ElementRef;
 
+  /**
+   * List of all salary transactions fetched from storage.
+   */
   transactions: Salary[] &#x3D; [];
+
+  /**
+   * List of transactions filtered by the currently selected month.
+   */
   filteredTransactions: Salary[] &#x3D; [];
+
+  /**
+   * The currently selected month in &#x27;YYYY-MM&#x27; format.
+   * Defaults to the current month.
+   */
   selectedMonth: string &#x3D; this.getLocalDateString().slice(0, 7);
+
+  /**
+   * Controls the visibility of the Add/Edit transaction modal.
+   */
   showModal: boolean &#x3D; false;
+
+  /**
+   * Total calculated income for the selected month.
+   */
   totalIncome: number &#x3D; 0;
+
+  /**
+   * Total calculated expenses for the selected month.
+   */
   totalExpense: number &#x3D; 0;
+
+  /**
+   * Net balance (Income/Budget - Expense) for the selected month.
+   */
   totalBalance: number &#x3D; 0;
+
+  /**
+   * Total budget allocated for the selected month.
+   */
   totalBudget: number &#x3D; 0;
+
+  /**
+   * Calculated daily allowance based on total budget/income and days in the month.
+   */
   dailyAllowed: number &#x3D; 0;
+
+  /**
+   * Average amount spent per day so far in the current month.
+   */
   dailySpent: number &#x3D; 0;
+
+  /**
+   * Suggested daily spending limit for the remaining days of the month.
+   * Null if the month has passed or no days remain.
+   */
   dailySuggested: number | null &#x3D; null;
+
+  /**
+   * Object containing calculated date metrics for the selected month.
+   * Includes days passed, days remaining, total days in month, and whether it is a past month.
+   */
   dateMetrics: { daysPassed: number; daysRemaining: number; daysInMonth: number; isPastMonth: boolean } &#x3D; { daysPassed: 0, daysRemaining: 0, daysInMonth: 0, isPastMonth: false };
+
+  /**
+   * The percentage of the budget/income that has been spent.
+   */
   spentRate: number &#x3D; 0;
+
+  /**
+   * Formatted string representation of the budget usage percentage (capped at 100% for some UI elements).
+   */
   budgetPercentage: string &#x3D; &#x27;0&#x27;;
+
+  /**
+   * Width of the visual progress bar (in percent).
+   */
   barWidth: number &#x3D; 0;
+
+  /**
+   * CSS class string for the progress bar color based on spending rate (Green, Orange, Red).
+   */
   barColorClass: string &#x3D; &#x27;&#x27;;
+
+  /**
+   * Label text for the budget section (e.g., &quot;Salary Usage&quot; vs &quot;Budget Usage&quot;).
+   */
   budgetLabel: string &#x3D; &#x27;&#x27;;
+
+  /**
+   * Analysis message displayed to the user based on their financial health.
+   */
   analysisText: string &#x3D; &#x27;&#x27;;
+
+  /**
+   * CSS class string for styling the analysis text.
+   */
   analysisTextClass: string &#x3D; &#x27;&#x27;;
+
+  /**
+   * The maximum selectable month allowed in the date picker, restricted to the current month.
+   */
   maxMonth: string &#x3D; this.getLocalDateString().slice(0, 7);
+
+  /**
+   * Signal to hold validation error messages for the transaction form.
+   */
   errors &#x3D; signal&lt;{ amount?: string, note?: string, budget?: string }&gt;({});
+
+  /**
+   * The ID of the transaction currently being edited. Null if creating a new transaction.
+   */
   editingId: string | null &#x3D; null;
+
+  /**
+   * Model for the transaction amount input.
+   */
   newAmount: number | null &#x3D; null;
+
+  /**
+   * Model for the transaction budget input.
+   */
   newBudget: number | null &#x3D; null;
+
+  /**
+   * Model for the transaction note input.
+   */
   newNote &#x3D; &#x27;&#x27;;
+
+  /**
+   * Model for the transaction month input.
+   */
   newMonth: string &#x3D; this.getLocalDateString().slice(0, 7);
+
+  /**
+   * Model for the transaction date input.
+   */
   newDate: string &#x3D; this.getLocalDateString().slice(0, 10);
+
+  /**
+   * The user&#x27;s preferred currency symbol.
+   */
   userCurrancy: string | null;
+
+  /**
+   * Label for the main balance card (e.g., &quot;Remaining Budget&quot; or &quot;Total Balance&quot;).
+   */
   balanceLable: string &#x3D; &#x27;Total Balance&#x27;;
 
+  /**
+   * Constructor for SalaryComponent.
+   *
+   * @param salaryService Service for managing salary data persistence.
+   * @param expenseService Service for retrieving expense data.
+   * @param userService Service for retrieving user preferences (e.g., currency).
+   */
   constructor(
     private salaryService: SalaryService,
     private expenseService: ExpenseService,
     private userService: UserService
   ) {
     this.userCurrancy &#x3D; this.userService.getValue&lt;string&gt;(&#x27;currency&#x27;) || &#x27;&#x27;;
-
   }
 
+  /**
+   * Angular lifecycle hook called after component initialization.
+   * Injects external styles and loads the initial state.
+   */
   ngOnInit() {
     this.injectFontAwesome();
     this.loadState();
   }
 
+  /**
+   * Dynamically injects FontAwesome and Google Fonts into the document head.
+   */
   injectFontAwesome() {
     const link &#x3D; document.createElement(&#x27;link&#x27;);
     link.rel &#x3D; &#x27;stylesheet&#x27;;
@@ -2495,6 +2986,10 @@ export class SalaryComponent implements OnInit {
     document.head.appendChild(font);
   }
 
+  /**
+   * Loads all transaction data and recalculates all financial metrics and UI states.
+   * This is the central update function called after any data change.
+   */
   loadState() {
     const saved: Salary[] &#x3D; this.salaryService.getAll();
 
@@ -2511,7 +3006,7 @@ export class SalaryComponent implements OnInit {
     this.totalIncome &#x3D; this.totalBalanceFunction();
     this.totalExpense &#x3D; this.totalExpenseFunction();
     this.totalBudget &#x3D; this.totalBudgetFunction();
-    this.totalBalance &#x3D; this.totalBudget &gt;&#x3D; 0 ? this.totalBudget - this.totalExpense : this.totalIncome - this.totalExpense;
+    this.totalBalance &#x3D; this.totalBudget &gt; 0 ? (this.totalBudget - this.totalExpense) &gt;&#x3D; 0 ? (this.totalBudget - this.totalExpense) : 0 : (this.totalIncome - this.totalExpense) &gt;&#x3D; 0 ? (this.totalIncome - this.totalExpense) : 0;
     this.dateMetrics &#x3D; this.dateMetricsFunction();
     this.dailyAllowed &#x3D; this.dailyAllowedFunction();
     this.dailySpent &#x3D; this.dailySpentFunction();
@@ -2523,10 +3018,14 @@ export class SalaryComponent implements OnInit {
     this.budgetLabel &#x3D; this.budgetLabelFunction();
     this.analysisText &#x3D; this.analysisTextFunction();
     this.analysisTextClass &#x3D; this.analysisTextClassFunction();
-    this.balanceLable &#x3D; this.totalBudget &gt;&#x3D; 0 ? &#x27;Remaining Budget&#x27; : &#x27;Remaining Balance&#x27;;
+    this.balanceLable &#x3D; this.totalBudget &gt; 0 ? &#x27;Remaining Budget&#x27; : &#x27;Remaining Balance&#x27;;
   }
 
-
+  /**
+   * Updates the selected month and reloads the state.
+   *
+   * @param value The new month string in &#x27;YYYY-MM&#x27; format.
+   */
   updateMonth(value: string) {
     if (!value) {
       const current &#x3D; this.getLocalDateString().slice(0, 7);
@@ -2537,10 +3036,20 @@ export class SalaryComponent implements OnInit {
     this.loadState();
   }
 
+  /**
+   * Filters the master list of transactions to return only those for the selected month.
+   *
+   * @returns An array of Salary objects for the current month.
+   */
   filteredTransactionsFunction(): Salary[] {
     return this.transactions.filter(t &#x3D;&gt; t.month &#x3D;&#x3D;&#x3D; this.selectedMonth);
   };
 
+  /**
+   * Calculates the total expenses for the selected month by querying the ExpenseService.
+   *
+   * @returns The total expense amount.
+   */
   totalExpenseFunction() {
     const [year, month] &#x3D; this.selectedMonth.split(&#x27;-&#x27;).map(Number);
 
@@ -2558,14 +3067,29 @@ export class SalaryComponent implements OnInit {
     return expense.reduce((acc, e) &#x3D;&gt; acc + Number(e.amount), 0);
   }
 
+  /**
+   * Calculates the total income (sum of salary amounts) for the selected month.
+   *
+   * @returns The total income amount.
+   */
   totalBalanceFunction() {
     return this.filteredTransactions.reduce((acc, t) &#x3D;&gt; acc + t.amount, 0);
   }
 
+  /**
+   * Calculates the total budget set for the selected month.
+   *
+   * @returns The total budget amount.
+   */
   totalBudgetFunction() {
     return this.filteredTransactions.reduce((acc, t) &#x3D;&gt; acc + (t.budget || 0), 0);
   }
 
+  /**
+   * Calculates temporal metrics relative to the selected month and current date.
+   *
+   * @returns An object containing days passed, days remaining, days in month, and past month status.
+   */
   dateMetricsFunction() {
     const now &#x3D; new Date();
     const [year, month] &#x3D; this.selectedMonth.split(&#x27;-&#x27;).map(Number);
@@ -2591,6 +3115,11 @@ export class SalaryComponent implements OnInit {
     return { daysPassed, daysRemaining, daysInMonth, isPastMonth };
   };
 
+  /**
+   * Calculates the average daily spending based on days passed.
+   *
+   * @returns The average daily expense.
+   */
   dailySpentFunction() {
     const expense &#x3D; this.totalExpense;
     const { daysPassed } &#x3D; this.dateMetrics;
@@ -2598,6 +3127,11 @@ export class SalaryComponent implements OnInit {
     return expense / daysPassed;
   };
 
+  /**
+   * Calculates the allowed daily spending based on the total budget/income.
+   *
+   * @returns The allowed daily amount.
+   */
   dailyAllowedFunction() {
     const amount &#x3D; this.totalBudget &#x3D;&#x3D;&#x3D; 0 ? this.totalIncome : this.totalBudget;
     if (amount &#x3D;&#x3D;&#x3D; 0) return 0;
@@ -2605,17 +3139,28 @@ export class SalaryComponent implements OnInit {
     return Math.max(0, amount / daysInMonth);
   };
 
+  /**
+   * Calculates a suggested daily spending limit for the remaining days of the month.
+   *
+   * @returns The suggested daily amount, or 0 if no budget remains or month is passed.
+   */
   dailySuggestedFunction() {
     const amount &#x3D; this.totalBudget &#x3D;&#x3D;&#x3D; 0 ? this.totalIncome : this.totalBudget;
     if (amount &#x3D;&#x3D;&#x3D; 0) return 0;
     const expense &#x3D; this.totalExpense;
-    const { daysRemaining, isPastMonth } &#x3D; this.dateMetrics;
+    let { daysRemaining, isPastMonth } &#x3D; this.dateMetrics;
+    daysRemaining &#x3D; daysRemaining - 1;
     if (isPastMonth || daysRemaining &lt;&#x3D; 0) return 0;
     const remainingBudget &#x3D; amount - expense;
     if (remainingBudget &lt;&#x3D; 0) return 0;
     return remainingBudget / daysRemaining;
   };
 
+  /**
+   * Calculates the percentage of the budget that has been spent.
+   *
+   * @returns The spending rate percentage.
+   */
   spentRateFunction() {
     const amount &#x3D; this.totalBudget &#x3D;&#x3D;&#x3D; 0 ? this.totalIncome : this.totalBudget;
     const expense &#x3D; this.totalExpense;
@@ -2624,14 +3169,29 @@ export class SalaryComponent implements OnInit {
     return parseFloat(rate.toFixed(1));
   };
 
+  /**
+   * Formats the spent rate as a string, capped at 100%.
+   *
+   * @returns The percentage string.
+   */
   budgetPercentageFunction() {
     return Math.min(this.spentRateFunction(), 100).toFixed(1);
   };
 
+  /**
+   * Determines the width of the progress bar based on the spent rate.
+   *
+   * @returns The width percentage (can exceed 100).
+   */
   barWidthFunction() {
     return this.spentRateFunction();
   };
 
+  /**
+   * Determines the color class of the progress bar based on financial health.
+   *
+   * @returns A Tailwind CSS gradient class string.
+   */
   barColorClassFunction() {
     const rate &#x3D; this.spentRateFunction();
     if (rate &gt; 90) return &#x27;from-red-500 to-red-600&#x27;;
@@ -2639,10 +3199,20 @@ export class SalaryComponent implements OnInit {
     return &#x27;from-green-400 to-indigo-500&#x27;;
   };
 
+  /**
+   * Determines the label for the budget section.
+   *
+   * @returns &quot;Salary Usage&quot; if no specific budget is set, otherwise &quot;Budget Usage&quot;.
+   */
   budgetLabelFunction() {
     return this.totalBudget &#x3D;&#x3D;&#x3D; 0 ? &quot;Salary Usage&quot; : &quot;Budget Usage&quot;;
   };
 
+  /**
+   * Generates a text analysis of the user&#x27;s spending habits.
+   *
+   * @returns A descriptive string advising the user on their financial status.
+   */
   analysisTextFunction() {
     const rate &#x3D; this.spentRateFunction();
     const income &#x3D; this.totalIncome;
@@ -2653,6 +3223,11 @@ export class SalaryComponent implements OnInit {
     return &quot;👍 On track. Keep monitoring your expenses.&quot;;
   };
 
+  /**
+   * Determines the CSS class for the analysis text based on severity.
+   *
+   * @returns A Tailwind CSS text color class string.
+   */
   analysisTextClassFunction() {
     const rate &#x3D; this.spentRateFunction();
     const income &#x3D; this.totalIncome;
@@ -2663,6 +3238,12 @@ export class SalaryComponent implements OnInit {
     return &quot;text-indigo-400&quot;;
   };
 
+  /**
+   * Opens the modal to add or edit a transaction.
+   * If a transaction is provided, it populates the form for editing.
+   *
+   * @param transaction Optional transaction object to edit.
+   */
   openModal(transaction?: Salary) {
     this.showModal &#x3D; true;
     this.errors.set({});
@@ -2689,6 +3270,9 @@ export class SalaryComponent implements OnInit {
     }, 100);
   }
 
+  /**
+   * Closes the modal and resets the form state.
+   */
   closeModal() {
     this.showModal &#x3D; false;
     this.editingId &#x3D; null;
@@ -2698,6 +3282,10 @@ export class SalaryComponent implements OnInit {
     this.errors.set({});
   }
 
+  /**
+   * Validates and saves the current transaction (create or update).
+   * Performs validation on amount, budget, and notes.
+   */
   saveTransaction() {
     if (!this.newMonth || !this.newDate) return;
     const errs: { amount?: string, note?: string, budget?: string } &#x3D; {};
@@ -2765,6 +3353,12 @@ export class SalaryComponent implements OnInit {
     this.closeModal();
   }
 
+  /**
+   * Deletes a transaction after user confirmation.
+   *
+   * @param salary_id The unique ID of the transaction to delete.
+   * @param event The mouse event to prevent bubbling.
+   */
   removeTransaction(salary_id: string, event: Event) {
     event.stopPropagation();
     if (confirm(&#x27;Delete this transaction?&#x27;)) {
@@ -2773,6 +3367,11 @@ export class SalaryComponent implements OnInit {
     }
   }
 
+  /**
+   * Utility to get the current date as a string in &#x27;YYYY-MM-DD&#x27; format.
+   *
+   * @returns Date string.
+   */
   getLocalDateString(): string {
     const now &#x3D; new Date();
     const year &#x3D; now.getFullYear();
@@ -2824,7 +3423,9 @@ export class SalaryComponent implements OnInit {
 
                 &lt;div class&#x3D;&quot;relative z-10&quot;&gt;
                     &lt;p class&#x3D;&quot;mb-1 text-sm font-medium tracking-wider text-indigo-200 uppercase&quot;&gt;{{ balanceLable }}&lt;/p&gt;
-                    &lt;h2 class&#x3D;&quot;mb-6 text-4xl font-bold tracking-tight md:text-6xl&quot;&gt;{{ totalBalance | number:&#x27;1.2-2&#x27;}} {{ userCurrancy }}
+                    &lt;h2 class&#x3D;&quot;mb-6 text-2xl font-bold tracking-tight md:text-4xl&quot;&gt;{{ userCurrancy }}  {{ totalBalance |
+                        number:&#x27;1.1-2&#x27;}} / {{totalBudget &gt; 0 ? (totalBudget | number:&#x27;1.1-2&#x27;) : (totalIncome |
+                        number:&#x27;1.1-2&#x27;)}}
                     &lt;/h2&gt;
 
                     &lt;div class&#x3D;&quot;flex gap-8&quot;&gt;
@@ -2835,7 +3436,8 @@ export class SalaryComponent implements OnInit {
                                 &lt;/div&gt;
                                 Income
                             &lt;/div&gt;
-                            &lt;p class&#x3D;&quot;text-xl font-semibold md:text-2xl&quot;&gt;{{ userCurrancy }}{{ totalIncome | number:&#x27;1.2-2&#x27;}}&lt;/p&gt;
+                            &lt;p class&#x3D;&quot;text-xl font-semibold md:text-2xl&quot;&gt;{{ userCurrancy }}{{ totalIncome |
+                                number:&#x27;1.2-2&#x27;}}&lt;/p&gt;
                         &lt;/div&gt;
                         &lt;div&gt;
                             &lt;div class&#x3D;&quot;flex items-center gap-2 mb-1 text-xs text-indigo-200 md:text-sm&quot;&gt;
@@ -2844,7 +3446,8 @@ export class SalaryComponent implements OnInit {
                                 &lt;/div&gt;
                                 Expense
                             &lt;/div&gt;
-                            &lt;p class&#x3D;&quot;text-xl font-semibold md:text-2xl text-white&quot;&gt;{{ userCurrancy }}{{ totalExpense | number:&#x27;1.2-2&#x27;}}
+                            &lt;p class&#x3D;&quot;text-xl font-semibold md:text-2xl text-white&quot;&gt;{{ userCurrancy }}{{ totalExpense |
+                                number:&#x27;1.2-2&#x27;}}
                             &lt;/p&gt;
                         &lt;/div&gt;
                     &lt;/div&gt;
@@ -2876,7 +3479,8 @@ export class SalaryComponent implements OnInit {
                     &lt;i class&#x3D;&quot;mb-2 text-lg text-orange-500 fa-solid fa-fire-flame-curved&quot;&gt;&lt;/i&gt;
                     &lt;div&gt;
                         &lt;p class&#x3D;&quot;text-[10px] opacity-60 uppercase tracking-wide&quot;&gt;Spent/Day&lt;/p&gt;
-                        &lt;p class&#x3D;&quot;text-sm font-bold md:text-base&quot;&gt;{{ userCurrancy }}{{ dailySpent | number:&#x27;1.2-2&#x27; }}&lt;/p&gt;
+                        &lt;p class&#x3D;&quot;text-sm font-bold md:text-base&quot;&gt;{{ userCurrancy }}{{ dailySpent | number:&#x27;1.2-2&#x27; }}
+                        &lt;/p&gt;
                     &lt;/div&gt;
                 &lt;/div&gt;
 
@@ -2950,7 +3554,8 @@ export class SalaryComponent implements OnInit {
                                     &lt;span&gt;{{ t.date | date:&#x27;mediumDate&#x27; }}&lt;/span&gt;
                                 &lt;/div&gt;
                                 @if(t.budget) {
-                                &lt;span class&#x3D;&quot;text-[10px] text-indigo-400&quot;&gt;Budget: {{ userCurrancy }}{{ t.budget | number:&#x27;1.2-2&#x27;}}&lt;/span&gt;
+                                &lt;span class&#x3D;&quot;text-[10px] text-indigo-400&quot;&gt;Budget: {{ userCurrancy }}{{ t.budget |
+                                    number:&#x27;1.2-2&#x27;}}&lt;/span&gt;
                                 }
                             &lt;/div&gt;
                         &lt;/div&gt;
@@ -3005,7 +3610,8 @@ export class SalaryComponent implements OnInit {
                 &lt;div class&#x3D;&quot;mb-4&quot;&gt;
                     &lt;label class&#x3D;&quot;block mb-2 text-sm opacity-60&quot;&gt;Amount / Salary&lt;/label&gt;
                     &lt;div class&#x3D;&quot;relative&quot;&gt;
-                        &lt;span class&#x3D;&quot;absolute left-4 top-3.5 opacity-40&quot;&gt;&lt;i class&#x3D;&quot;fa-solid fa-money-bill-1-wave&quot;&gt;&lt;/i&gt;&lt;/span&gt;
+                        &lt;span class&#x3D;&quot;absolute left-4 top-3.5 opacity-40&quot;&gt;&lt;i
+                                class&#x3D;&quot;fa-solid fa-money-bill-1-wave&quot;&gt;&lt;/i&gt;&lt;/span&gt;
                         &lt;input #amountInput type&#x3D;&quot;number&quot; [(ngModel)]&#x3D;&quot;newAmount&quot; name&#x3D;&quot;amount&quot; placeholder&#x3D;&quot;0.00&quot;
                             min&#x3D;&quot;0&quot; max&#x3D;&quot;100000000&quot;
                             class&#x3D;&quot;w-full py-3 pl-10 pr-4 transition-colors border rounded-xl focus:outline-none focus:border-indigo-500&quot;
@@ -3139,7 +3745,7 @@ export class SalaryComponent implements OnInit {
 <script src="../js/libs/htmlparser.js"></script>
 <script src="../js/libs/deep-iterator.js"></script>
 <script>
-        var COMPONENT_TEMPLATE = '<div><div class="min-h-screen font-sans transition-colors duration-300"    style="background-color: var(--color-bg); color: var(--color-text);">    <div class="relative h-full max-w-3xl p-4 mx-auto md:p-8">        <!-- HEADER -->        <header class="flex items-center justify-between mb-6 animate-fade-in">            <div class="flex items-center gap-3">                <div                    class="flex items-center justify-center w-8 h-8 shadow-lg rounded-xl bg-gradient-to-br from-indigo-500 to-purple-500 shadow-indigo-500/30">                    <i class="text-white fa-solid fa-wallet"></i>                </div>                <div>                    <p class="text-md font-bold">Financial Dashboard</p>                </div>            </div>            <div class="flex items-center gap-3">                <!-- Month Selector (Moved to Header) with Max Restriction -->                <div class="relative group">                    <input type="month" [ngModel]="selectedMonth" (ngModelChange)="updateMonth($event)" [max]="maxMonth"                        class="p-2 pl-3 text-sm font-medium transition-colors bg-transparent border rounded-lg focus:outline-none focus:border-indigo-500 cursor-pointer hover:bg-black/5 dark:hover:bg-white/5"                        style="border-color: var(--color-bg-600); color: inherit;">                </div>            </div>        </header>        <!-- MAIN CONTENT -->        <main class="space-y-6">            <!-- Main Balance Card -->            <section                class="relative p-6 overflow-hidden text-white transition duration-500 transform cursor-default rounded-3xl bg-gradient-to-br from-indigo-600 via-purple-600 to-indigo-800 md:p-10 shadow-2xl shadow-indigo-500/20 hover:scale-[1.01] group animate-slide-up">                <!-- Card Decoration -->                <div class="absolute top-0 right-0 p-4 transition duration-500 opacity-10 group-hover:opacity-20">                    <i class="transform rotate-12 translate-x-4 -translate-y-4 fa-solid fa-sack-dollar text-9xl"></i>                </div>                <div class="relative z-10">                    <p class="mb-1 text-sm font-medium tracking-wider text-indigo-200 uppercase">{{ balanceLable }}</p>                    <h2 class="mb-6 text-4xl font-bold tracking-tight md:text-6xl">{{ totalBalance | number:\'1.2-2\'}} {{ userCurrancy }}                    </h2>                    <div class="flex gap-8">                        <div>                            <div class="flex items-center gap-2 mb-1 text-xs text-indigo-200 md:text-sm">                                <div class="flex items-center justify-center w-5 h-5 rounded-full bg-white/20">                                    <i class="fa-solid fa-arrow-down text-[10px]"></i>                                </div>                                Income                            </div>                            <p class="text-xl font-semibold md:text-2xl">{{ userCurrancy }}{{ totalIncome | number:\'1.2-2\'}}</p>                        </div>                        <div>                            <div class="flex items-center gap-2 mb-1 text-xs text-indigo-200 md:text-sm">                                <div class="flex items-center justify-center w-5 h-5 rounded-full bg-white/20">                                    <i class="fa-solid fa-arrow-up text-[10px]"></i>                                </div>                                Expense                            </div>                            <p class="text-xl font-semibold md:text-2xl text-white">{{ userCurrancy }}{{ totalExpense | number:\'1.2-2\'}}                            </p>                        </div>                    </div>                </div>            </section>            <!-- Daily Analytics -->            <section class="grid grid-cols-3 gap-3 md:gap-4 animate-slide-up" style="animation-delay: 0.1s;">                <!-- Box 1: Avg Allowed -->                <div class="flex flex-col justify-between p-3 transition cursor-pointer rounded-2xl hover:opacity-90"                    style="background-color: var(--color-bg-100); box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);">                    <i class="mb-2 text-lg text-indigo-500 fa-solid fa-scale-balanced"></i>                    <div>                        <p class="text-[10px] opacity-60 uppercase tracking-wide">Allowed/Day</p>                        <p class="text-sm font-bold md:text-base">                            @if (dailyAllowed !== null) {                            {{ userCurrancy }}{{ dailyAllowed | number:\'1.2-2\' }}                            } @else {                            N/A                            }                        </p>                    </div>                </div>                <!-- Box 2: Spent / Day -->                <div class="flex flex-col justify-between p-3 transition cursor-pointer rounded-2xl hover:opacity-90"                    style="background-color: var(--color-bg-100); box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);">                    <i class="mb-2 text-lg text-orange-500 fa-solid fa-fire-flame-curved"></i>                    <div>                        <p class="text-[10px] opacity-60 uppercase tracking-wide">Spent/Day</p>                        <p class="text-sm font-bold md:text-base">{{ userCurrancy }}{{ dailySpent | number:\'1.2-2\' }}</p>                    </div>                </div>                <!-- Box 3: Suggested / Day -->                <div class="flex flex-col justify-between p-3 transition cursor-pointer rounded-2xl hover:opacity-90"                    style="background-color: var(--color-bg-100); box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);">                    <i class="mb-2 text-lg text-teal-500 fa-solid fa-bullseye"></i>                    <div>                        <p class="text-[10px] opacity-60 uppercase tracking-wide">Suggested/Day</p>                        <p class="text-sm font-bold md:text-base">                            @if (dailySuggested !== null) {                            {{ userCurrancy }}{{ dailySuggested | number:\'1.2-2\' }}                            } @else {                            N/A                            }                        </p>                    </div>                </div>            </section>            <!-- Visual Bar Chart -->            <section class="p-4 rounded-2xl animate-slide-up"                style="animation-delay: 0.15s; background-color: var(--color-bg-100); box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);">                <div class="flex justify-between mb-2 text-xs opacity-60">                    <span>{{ budgetLabel }}</span>                    <span>{{ budgetPercentage }}% used</span>                </div>                <div class="w-full h-3 mb-2 overflow-hidden rounded-full"                    style="background-color: var(--color-bg-600);">                    <div class="h-full transition-all duration-1000 ease-out bg-gradient-to-r" [ngClass]="barColorClass"                        [style.width.%]="barWidth">                    </div>                </div>                <p class="text-[10px] text-center italic" [ngClass]="analysisTextClass">{{ analysisText }}</p>            </section>            <!-- Transactions List Header (Reset button removed) -->            <div class="flex items-end justify-between animate-slide-up" style="animation-delay: 0.2s;">                <h3 class="text-xl font-semibold">Transactions</h3>            </div>            <!-- Transactions List -->            <div class="pb-24 space-y-3 animate-slide-up" style="animation-delay: 0.3s;">                @if (filteredTransactions.length === 0) {                <div class="py-10 text-center opacity-50 animate-fade-in">                    <i class="mb-3 text-4xl fa-solid fa-filter"></i>                    <p>No transactions for {{ selectedMonth | date:\'MMMM\' }}</p>                    <button (click)="openModal()" class="mt-4 text-indigo-500 underline">Add one now</button>                </div>                } @else {                @for (t of filteredTransactions; track t.salary_id) {                <div class="relative flex items-center justify-between p-4 overflow-hidden transition-all cursor-pointer rounded-xl group hover:scale-[1.01] border-green-500"                    (click)="openModal(t)"                    style="background-color: var(--color-bg-100); border-bottom: 1px solid var(--color-bg-600);"                    [class.border-l-4]="true">                    <div class="z-10 flex items-center gap-4">                        <div class="flex items-center justify-center w-10 h-10 rounded-full                            bg-green-500/10 text-green-500">                            <i class="fa-solid fa-arrow-down"></i>                        </div>                        <div>                            @if(t.note) {                            <p class="font-medium truncate max-w-[60px]">{{ t.note }}</p>                            } @else {                            <p class="font-medium truncate max-w-[60px]">Income</p>                            }                            <div class="flex flex-col text-xs opacity-60">                                <div class="flex gap-2">                                    <span>{{ t.date | date:\'mediumDate\' }}</span>                                </div>                                @if(t.budget) {                                <span class="text-[10px] text-indigo-400">Budget: {{ userCurrancy }}{{ t.budget | number:\'1.2-2\'}}</span>                                }                            </div>                        </div>                    </div>                    <div class="z-10 flex flex-col items-end">                        <p class="font-bold text-green-500">                            {{ userCurrancy }}{{ t.amount | number:\'1.2-2\' }}                        </p>                        <span class="text-[10px] opacity-40 group-hover:opacity-100 transition-opacity">Tap to                            edit</span>                    </div>                    <!-- Delete Button (Swipe/Hover) -->                    <button (click)="removeTransaction(t.salary_id, $event)"                        class="absolute top-0 bottom-0 right-0 z-20 flex items-center justify-center w-16 text-white transition-transform duration-200 translate-x-full bg-red-600/90 group-hover:translate-x-0">                        <i class="fa-solid fa-trash"></i>                    </button>                </div>                }                }            </div>        </main>    </div>    <!-- Floating Action Button -->    <button (click)="openModal()"        class="fixed z-40 flex items-center justify-center w-14 h-14 text-2xl text-white transition duration-200 rounded-full shadow-xl bottom-16 right-6 bg-indigo-500 shadow-indigo-500/40 hover:bg-indigo-600 active:scale-90 animate-bounce-subtle group">        <i class="transition-transform duration-300 fa-solid fa-plus group-hover:rotate-90"></i>    </button>    <!-- Modal -->    @if (showModal) {    <div class="fixed inset-0 z-50 flex items-end justify-center p-4 bg-black/50 backdrop-blur-sm md:items-center"        (click)="closeModal()">        <div class="w-full md:w-[500px] rounded-3xl p-6 shadow-2xl animate-slide-up"            style="background-color: var(--color-bg-100);" (click)="$event.stopPropagation()">            <div class="flex items-center justify-between mb-6">                <h3 class="text-xl font-bold">{{ editingId ? \'Edit Transaction\' : \'New Transaction\' }}</h3>                <button (click)="closeModal()"                    class="flex items-center justify-center w-8 h-8 transition rounded-full hover:opacity-70"                    style="background-color: var(--color-bg-500); color: var(--color-text);">                    <i class="fa-solid fa-xmark"></i>                </button>            </div>            <form (submit)="saveTransaction()">                <!-- Date Input Removed (Handled automatically) -->                <!-- Amount / Salary -->                <div class="mb-4">                    <label class="block mb-2 text-sm opacity-60">Amount / Salary</label>                    <div class="relative">                        <span class="absolute left-4 top-3.5 opacity-40"><i class="fa-solid fa-money-bill-1-wave"></i></span>                        <input #amountInput type="number" [(ngModel)]="newAmount" name="amount" placeholder="0.00"                            min="0" max="100000000"                            class="w-full py-3 pl-10 pr-4 transition-colors border rounded-xl focus:outline-none focus:border-indigo-500"                            [class.border-red-500]="errors().amount"                            style="background-color: var(--color-bg-500); border-color: var(--color-bg-600); color: inherit;">                    </div>                    @if (errors().amount) {                    <p class="text-xs text-red-500 mt-1 animate-fade-in">{{ errors().amount }}</p>                    }                </div>                <!-- Budget -->                <div class="mb-4 animate-fade-in">                    <label class="block mb-2 text-sm opacity-60">Budget for this month (Optional)</label>                    <div class="relative">                        <span class="absolute left-4 top-3.5 opacity-40"><i class="fa-solid fa-chart-line"></i></span>                        <input type="number" [(ngModel)]="newBudget" name="budget" placeholder="e.g. 5000"                            class="w-full py-3 pl-10 pr-4 transition-colors border rounded-xl focus:outline-none focus:border-indigo-500"                            [class.border-red-500]="errors().budget"                            style="background-color: var(--color-bg-500); border-color: var(--color-bg-600); color: inherit;">                    </div>                    @if (errors().budget) {                    <p class="text-xs text-red-500 mt-1 animate-fade-in">{{ errors().budget }}</p>                    }                </div>                <!-- Note (New) -->                <div class="mb-4">                    <label class="block mb-2 text-sm opacity-60">Note</label>                    <div class="relative">                        <span class="absolute left-4 top-3.5 opacity-40"><i class="fa-solid fa-pen"></i></span>                        <input type="text" [(ngModel)]="newNote" name="note" placeholder="Extra details..."                            maxlength="50"                            class="w-full py-3 pl-10 pr-4 transition-colors border rounded-xl focus:outline-none focus:border-indigo-500"                            [class.border-red-500]="errors().note"                            style="background-color: var(--color-bg-500); border-color: var(--color-bg-600); color: inherit;">                    </div>                    @if (errors().note) {                    <p class="text-xs text-red-500 mt-1 animate-fade-in">{{ errors().note }}</p>                    }                </div>                <button type="submit"                    class="w-full py-4 mt-4 font-bold text-white transition bg-indigo-500 rounded-xl shadow-lg shadow-indigo-500/25 active:scale-95 hover:bg-indigo-600">                    {{ editingId ? \'Update Transaction\' : \'Save Transaction\' }}                </button>            </form>        </div>    </div>    }</div></div>'
+        var COMPONENT_TEMPLATE = '<div><div class="min-h-screen font-sans transition-colors duration-300"    style="background-color: var(--color-bg); color: var(--color-text);">    <div class="relative h-full max-w-3xl p-4 mx-auto md:p-8">        <!-- HEADER -->        <header class="flex items-center justify-between mb-6 animate-fade-in">            <div class="flex items-center gap-3">                <div                    class="flex items-center justify-center w-8 h-8 shadow-lg rounded-xl bg-gradient-to-br from-indigo-500 to-purple-500 shadow-indigo-500/30">                    <i class="text-white fa-solid fa-wallet"></i>                </div>                <div>                    <p class="text-md font-bold">Financial Dashboard</p>                </div>            </div>            <div class="flex items-center gap-3">                <!-- Month Selector (Moved to Header) with Max Restriction -->                <div class="relative group">                    <input type="month" [ngModel]="selectedMonth" (ngModelChange)="updateMonth($event)" [max]="maxMonth"                        class="p-2 pl-3 text-sm font-medium transition-colors bg-transparent border rounded-lg focus:outline-none focus:border-indigo-500 cursor-pointer hover:bg-black/5 dark:hover:bg-white/5"                        style="border-color: var(--color-bg-600); color: inherit;">                </div>            </div>        </header>        <!-- MAIN CONTENT -->        <main class="space-y-6">            <!-- Main Balance Card -->            <section                class="relative p-6 overflow-hidden text-white transition duration-500 transform cursor-default rounded-3xl bg-gradient-to-br from-indigo-600 via-purple-600 to-indigo-800 md:p-10 shadow-2xl shadow-indigo-500/20 hover:scale-[1.01] group animate-slide-up">                <!-- Card Decoration -->                <div class="absolute top-0 right-0 p-4 transition duration-500 opacity-10 group-hover:opacity-20">                    <i class="transform rotate-12 translate-x-4 -translate-y-4 fa-solid fa-sack-dollar text-9xl"></i>                </div>                <div class="relative z-10">                    <p class="mb-1 text-sm font-medium tracking-wider text-indigo-200 uppercase">{{ balanceLable }}</p>                    <h2 class="mb-6 text-2xl font-bold tracking-tight md:text-4xl">{{ userCurrancy }}  {{ totalBalance |                        number:\'1.1-2\'}} / {{totalBudget > 0 ? (totalBudget | number:\'1.1-2\') : (totalIncome |                        number:\'1.1-2\')}}                    </h2>                    <div class="flex gap-8">                        <div>                            <div class="flex items-center gap-2 mb-1 text-xs text-indigo-200 md:text-sm">                                <div class="flex items-center justify-center w-5 h-5 rounded-full bg-white/20">                                    <i class="fa-solid fa-arrow-down text-[10px]"></i>                                </div>                                Income                            </div>                            <p class="text-xl font-semibold md:text-2xl">{{ userCurrancy }}{{ totalIncome |                                number:\'1.2-2\'}}</p>                        </div>                        <div>                            <div class="flex items-center gap-2 mb-1 text-xs text-indigo-200 md:text-sm">                                <div class="flex items-center justify-center w-5 h-5 rounded-full bg-white/20">                                    <i class="fa-solid fa-arrow-up text-[10px]"></i>                                </div>                                Expense                            </div>                            <p class="text-xl font-semibold md:text-2xl text-white">{{ userCurrancy }}{{ totalExpense |                                number:\'1.2-2\'}}                            </p>                        </div>                    </div>                </div>            </section>            <!-- Daily Analytics -->            <section class="grid grid-cols-3 gap-3 md:gap-4 animate-slide-up" style="animation-delay: 0.1s;">                <!-- Box 1: Avg Allowed -->                <div class="flex flex-col justify-between p-3 transition cursor-pointer rounded-2xl hover:opacity-90"                    style="background-color: var(--color-bg-100); box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);">                    <i class="mb-2 text-lg text-indigo-500 fa-solid fa-scale-balanced"></i>                    <div>                        <p class="text-[10px] opacity-60 uppercase tracking-wide">Allowed/Day</p>                        <p class="text-sm font-bold md:text-base">                            @if (dailyAllowed !== null) {                            {{ userCurrancy }}{{ dailyAllowed | number:\'1.2-2\' }}                            } @else {                            N/A                            }                        </p>                    </div>                </div>                <!-- Box 2: Spent / Day -->                <div class="flex flex-col justify-between p-3 transition cursor-pointer rounded-2xl hover:opacity-90"                    style="background-color: var(--color-bg-100); box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);">                    <i class="mb-2 text-lg text-orange-500 fa-solid fa-fire-flame-curved"></i>                    <div>                        <p class="text-[10px] opacity-60 uppercase tracking-wide">Spent/Day</p>                        <p class="text-sm font-bold md:text-base">{{ userCurrancy }}{{ dailySpent | number:\'1.2-2\' }}                        </p>                    </div>                </div>                <!-- Box 3: Suggested / Day -->                <div class="flex flex-col justify-between p-3 transition cursor-pointer rounded-2xl hover:opacity-90"                    style="background-color: var(--color-bg-100); box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);">                    <i class="mb-2 text-lg text-teal-500 fa-solid fa-bullseye"></i>                    <div>                        <p class="text-[10px] opacity-60 uppercase tracking-wide">Suggested/Day</p>                        <p class="text-sm font-bold md:text-base">                            @if (dailySuggested !== null) {                            {{ userCurrancy }}{{ dailySuggested | number:\'1.2-2\' }}                            } @else {                            N/A                            }                        </p>                    </div>                </div>            </section>            <!-- Visual Bar Chart -->            <section class="p-4 rounded-2xl animate-slide-up"                style="animation-delay: 0.15s; background-color: var(--color-bg-100); box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);">                <div class="flex justify-between mb-2 text-xs opacity-60">                    <span>{{ budgetLabel }}</span>                    <span>{{ budgetPercentage }}% used</span>                </div>                <div class="w-full h-3 mb-2 overflow-hidden rounded-full"                    style="background-color: var(--color-bg-600);">                    <div class="h-full transition-all duration-1000 ease-out bg-gradient-to-r" [ngClass]="barColorClass"                        [style.width.%]="barWidth">                    </div>                </div>                <p class="text-[10px] text-center italic" [ngClass]="analysisTextClass">{{ analysisText }}</p>            </section>            <!-- Transactions List Header (Reset button removed) -->            <div class="flex items-end justify-between animate-slide-up" style="animation-delay: 0.2s;">                <h3 class="text-xl font-semibold">Transactions</h3>            </div>            <!-- Transactions List -->            <div class="pb-24 space-y-3 animate-slide-up" style="animation-delay: 0.3s;">                @if (filteredTransactions.length === 0) {                <div class="py-10 text-center opacity-50 animate-fade-in">                    <i class="mb-3 text-4xl fa-solid fa-filter"></i>                    <p>No transactions for {{ selectedMonth | date:\'MMMM\' }}</p>                    <button (click)="openModal()" class="mt-4 text-indigo-500 underline">Add one now</button>                </div>                } @else {                @for (t of filteredTransactions; track t.salary_id) {                <div class="relative flex items-center justify-between p-4 overflow-hidden transition-all cursor-pointer rounded-xl group hover:scale-[1.01] border-green-500"                    (click)="openModal(t)"                    style="background-color: var(--color-bg-100); border-bottom: 1px solid var(--color-bg-600);"                    [class.border-l-4]="true">                    <div class="z-10 flex items-center gap-4">                        <div class="flex items-center justify-center w-10 h-10 rounded-full                            bg-green-500/10 text-green-500">                            <i class="fa-solid fa-arrow-down"></i>                        </div>                        <div>                            @if(t.note) {                            <p class="font-medium truncate max-w-[60px]">{{ t.note }}</p>                            } @else {                            <p class="font-medium truncate max-w-[60px]">Income</p>                            }                            <div class="flex flex-col text-xs opacity-60">                                <div class="flex gap-2">                                    <span>{{ t.date | date:\'mediumDate\' }}</span>                                </div>                                @if(t.budget) {                                <span class="text-[10px] text-indigo-400">Budget: {{ userCurrancy }}{{ t.budget |                                    number:\'1.2-2\'}}</span>                                }                            </div>                        </div>                    </div>                    <div class="z-10 flex flex-col items-end">                        <p class="font-bold text-green-500">                            {{ userCurrancy }}{{ t.amount | number:\'1.2-2\' }}                        </p>                        <span class="text-[10px] opacity-40 group-hover:opacity-100 transition-opacity">Tap to                            edit</span>                    </div>                    <!-- Delete Button (Swipe/Hover) -->                    <button (click)="removeTransaction(t.salary_id, $event)"                        class="absolute top-0 bottom-0 right-0 z-20 flex items-center justify-center w-16 text-white transition-transform duration-200 translate-x-full bg-red-600/90 group-hover:translate-x-0">                        <i class="fa-solid fa-trash"></i>                    </button>                </div>                }                }            </div>        </main>    </div>    <!-- Floating Action Button -->    <button (click)="openModal()"        class="fixed z-40 flex items-center justify-center w-14 h-14 text-2xl text-white transition duration-200 rounded-full shadow-xl bottom-16 right-6 bg-indigo-500 shadow-indigo-500/40 hover:bg-indigo-600 active:scale-90 animate-bounce-subtle group">        <i class="transition-transform duration-300 fa-solid fa-plus group-hover:rotate-90"></i>    </button>    <!-- Modal -->    @if (showModal) {    <div class="fixed inset-0 z-50 flex items-end justify-center p-4 bg-black/50 backdrop-blur-sm md:items-center"        (click)="closeModal()">        <div class="w-full md:w-[500px] rounded-3xl p-6 shadow-2xl animate-slide-up"            style="background-color: var(--color-bg-100);" (click)="$event.stopPropagation()">            <div class="flex items-center justify-between mb-6">                <h3 class="text-xl font-bold">{{ editingId ? \'Edit Transaction\' : \'New Transaction\' }}</h3>                <button (click)="closeModal()"                    class="flex items-center justify-center w-8 h-8 transition rounded-full hover:opacity-70"                    style="background-color: var(--color-bg-500); color: var(--color-text);">                    <i class="fa-solid fa-xmark"></i>                </button>            </div>            <form (submit)="saveTransaction()">                <!-- Date Input Removed (Handled automatically) -->                <!-- Amount / Salary -->                <div class="mb-4">                    <label class="block mb-2 text-sm opacity-60">Amount / Salary</label>                    <div class="relative">                        <span class="absolute left-4 top-3.5 opacity-40"><i                                class="fa-solid fa-money-bill-1-wave"></i></span>                        <input #amountInput type="number" [(ngModel)]="newAmount" name="amount" placeholder="0.00"                            min="0" max="100000000"                            class="w-full py-3 pl-10 pr-4 transition-colors border rounded-xl focus:outline-none focus:border-indigo-500"                            [class.border-red-500]="errors().amount"                            style="background-color: var(--color-bg-500); border-color: var(--color-bg-600); color: inherit;">                    </div>                    @if (errors().amount) {                    <p class="text-xs text-red-500 mt-1 animate-fade-in">{{ errors().amount }}</p>                    }                </div>                <!-- Budget -->                <div class="mb-4 animate-fade-in">                    <label class="block mb-2 text-sm opacity-60">Budget for this month (Optional)</label>                    <div class="relative">                        <span class="absolute left-4 top-3.5 opacity-40"><i class="fa-solid fa-chart-line"></i></span>                        <input type="number" [(ngModel)]="newBudget" name="budget" placeholder="e.g. 5000"                            class="w-full py-3 pl-10 pr-4 transition-colors border rounded-xl focus:outline-none focus:border-indigo-500"                            [class.border-red-500]="errors().budget"                            style="background-color: var(--color-bg-500); border-color: var(--color-bg-600); color: inherit;">                    </div>                    @if (errors().budget) {                    <p class="text-xs text-red-500 mt-1 animate-fade-in">{{ errors().budget }}</p>                    }                </div>                <!-- Note (New) -->                <div class="mb-4">                    <label class="block mb-2 text-sm opacity-60">Note</label>                    <div class="relative">                        <span class="absolute left-4 top-3.5 opacity-40"><i class="fa-solid fa-pen"></i></span>                        <input type="text" [(ngModel)]="newNote" name="note" placeholder="Extra details..."                            maxlength="50"                            class="w-full py-3 pl-10 pr-4 transition-colors border rounded-xl focus:outline-none focus:border-indigo-500"                            [class.border-red-500]="errors().note"                            style="background-color: var(--color-bg-500); border-color: var(--color-bg-600); color: inherit;">                    </div>                    @if (errors().note) {                    <p class="text-xs text-red-500 mt-1 animate-fade-in">{{ errors().note }}</p>                    }                </div>                <button type="submit"                    class="w-full py-4 mt-4 font-bold text-white transition bg-indigo-500 rounded-xl shadow-lg shadow-indigo-500/25 active:scale-95 hover:bg-indigo-600">                    {{ editingId ? \'Update Transaction\' : \'Save Transaction\' }}                </button>            </form>        </div>    </div>    }</div></div>'
     var COMPONENTS = [{'name': 'AddExpenseComponent', 'selector': 'app-add-expense'},{'name': 'AiComponent', 'selector': 'app-ai'},{'name': 'AppComponent', 'selector': 'app-root'},{'name': 'CalendarComponent', 'selector': 'app-calendar'},{'name': 'CategoryDropdownComponent', 'selector': 'app-category-dropdown'},{'name': 'DownloadComponentComponent', 'selector': 'app-download-component'},{'name': 'ExpenseDetailsModalComponent', 'selector': 'app-expense-details-modal'},{'name': 'ExpenseListComponent', 'selector': 'app-expense-list'},{'name': 'ExpenseWiseComponent', 'selector': 'app-expense-wise'},{'name': 'FooterComponent', 'selector': 'app-footer'},{'name': 'FormModelComponent', 'selector': 'app-form-model'},{'name': 'GlobalLoaderComponent', 'selector': 'app-global-loader'},{'name': 'GraphsComponent', 'selector': 'app-graphs'},{'name': 'HamburgerMenuComponent', 'selector': 'app-hamburger-menu'},{'name': 'HelpDashboard', 'selector': 'app-help-dashboard'},{'name': 'HomeComponent', 'selector': 'app-home'},{'name': 'InstallAppPopupComponentComponent', 'selector': 'app-install-app-popup-component'},{'name': 'ListExpensesComponent', 'selector': 'app-list-expenses'},{'name': 'MusicComponent', 'selector': 'app-music'},{'name': 'NavbarComponent', 'selector': 'app-navbar'},{'name': 'PieChartComponent', 'selector': 'app-pie-chart'},{'name': 'PlaylistMusicComponent', 'selector': 'app-playlist-music'},{'name': 'SalaryComponent', 'selector': 'app-salary'},{'name': 'SearchButtonComponent', 'selector': 'app-search-button'},{'name': 'SearchMusicComponent', 'selector': 'app-search-music'},{'name': 'SettingItemComponent', 'selector': 'app-setting-item'},{'name': 'SettingsComponent', 'selector': 'app-settings'},{'name': 'SidebarComponent', 'selector': 'app-sidebar'},{'name': 'SplashScreenComponent', 'selector': 'app-splash-screen'},{'name': 'TemplatePlaygroundComponent', 'selector': 'template-playground-root'},{'name': 'ToastComponent', 'selector': 'app-toast'}];
     var DIRECTIVES = [];
     var ACTUAL_COMPONENT = {'name': 'SalaryComponent'};

@@ -148,7 +148,8 @@
                 <h3>Description</h3>
             </p>
             <p class="comment">
-                <p>Interface representing a salary entry.</p>
+                <h2>Salary</h2>
+<p>Represents a single salary or income entry stored in local storage.</p>
 
             </p>
 
@@ -245,6 +246,12 @@
 
 
 
+                            <tr>
+                                <td class="col-md-4">
+                                    <div class="io-description"><p>Income amount</p>
+</div>
+                                </td>
+                            </tr>
                         </tbody>
                     </table>
                     <table class="table table-sm table-bordered">
@@ -283,6 +290,12 @@
 
 
 
+                            <tr>
+                                <td class="col-md-4">
+                                    <div class="io-description"><p>Optional monthly budget linked to the salary</p>
+</div>
+                                </td>
+                            </tr>
                         </tbody>
                     </table>
                     <table class="table table-sm table-bordered">
@@ -316,6 +329,12 @@
 
 
 
+                            <tr>
+                                <td class="col-md-4">
+                                    <div class="io-description"><p>Date when the salary was recorded (YYYY-MM-DD)</p>
+</div>
+                                </td>
+                            </tr>
                         </tbody>
                     </table>
                     <table class="table table-sm table-bordered">
@@ -349,6 +368,12 @@
 
 
 
+                            <tr>
+                                <td class="col-md-4">
+                                    <div class="io-description"><p>Month associated with the salary (YYYY-MM)</p>
+</div>
+                                </td>
+                            </tr>
                         </tbody>
                     </table>
                     <table class="table table-sm table-bordered">
@@ -387,6 +412,12 @@
 
 
 
+                            <tr>
+                                <td class="col-md-4">
+                                    <div class="io-description"><p>Optional note or description</p>
+</div>
+                                </td>
+                            </tr>
                         </tbody>
                     </table>
                     <table class="table table-sm table-bordered">
@@ -420,6 +451,12 @@
 
 
 
+                            <tr>
+                                <td class="col-md-4">
+                                    <div class="io-description"><p>Unique identifier for the salary entry</p>
+</div>
+                                </td>
+                            </tr>
                         </tbody>
                     </table>
             </section>
@@ -431,47 +468,71 @@
 import { StorageService } from &#x27;./storage.service&#x27;;
 
 /**
- * Interface representing a salary entry.
+ * Salary
+ * ------
+ * Represents a single salary or income entry stored in local storage.
  */
 export interface Salary {
+
+    /** Unique identifier for the salary entry */
     salary_id: string;
+
+    /** Income amount */
     amount: number;
+
+    /** Month associated with the salary (YYYY-MM) */
     month: string;
+
+    /** Date when the salary was recorded (YYYY-MM-DD) */
     date: string;
+
+    /** Optional monthly budget linked to the salary */
     budget?: number;
+
+    /** Optional note or description */
     note?: string;
 }
 
 /**
- * Service responsible for managing salaries in local storage.
- * Provides methods to add, update, delete, and fetch salaries,
- * while ensuring data is only accessed in the browser environment.
+ * SalaryService
+ * -------------
+ * This service manages salary-related operations using browser local storage.
+ *
+ * Responsibilities:
+ * - Store salary data persistently
+ * - Add, update, delete salary entries
+ * - Retrieve salaries by month or as a list
+ *
+ * Safety:
+ * - Ensures all operations run only in browser environments
  */
 @Injectable({ providedIn: &#x27;root&#x27; })
 export class SalaryService {
 
     /**
-     * Creates an instance of SalaryService.
+     * Creates an instance of SalaryService
      *
-     * @param storageService A service for interacting with local storage keys and data.
+     * @param storageService Utility service for local storage key management
      */
     constructor(
         private storageService: StorageService
     ) { }
 
     /**
-     * Checks if the code is running in a browser environment with &#x60;localStorage&#x60; available.
+     * Checks whether the code is running in a browser
+     * and &#x60;localStorage&#x60; is available.
      *
-     * @returns {boolean} True if running in the browser, false otherwise.
+     * @returns True if browser environment, otherwise false
      */
     private isBrowser(): boolean {
-        return typeof window !&#x3D;&#x3D; &#x27;undefined&#x27; &amp;&amp; typeof window.localStorage !&#x3D;&#x3D; &#x27;undefined&#x27;;
+        return typeof window !&#x3D;&#x3D; &#x27;undefined&#x27;
+            &amp;&amp; typeof window.localStorage !&#x3D;&#x3D; &#x27;undefined&#x27;;
     }
 
     /**
-     * Retrieves all salarys stored in local storage.
+     * Retrieves all salary entries from local storage.
      *
-     * @returns {Salary[]} A list of all saved salarys, or an empty array if not in the browser.
+     * @returns An array of Salary objects or an empty array
      */
     getAll(): Salary[] {
         if (!this.isBrowser()) return [];
@@ -480,73 +541,104 @@ export class SalaryService {
 
     /**
      * Adds a new salary entry to local storage.
-     * Automatically generates a unique &#x60;salary_id&#x60; and rounds the amount to 2 decimals.
      *
-     * @param data The salary data (without &#x60;salary_id&#x60;) to add.
+     * Behavior:
+     * - Generates a unique &#x60;salary_id&#x60;
+     * - Rounds amount to 2 decimal places
+     *
+     * @param data Salary data excluding the salary_id
      */
     add(data: Omit&lt;Salary, &#x27;salary_id&#x27;&gt;): void {
         if (!this.isBrowser()) return;
+
         const all: Salary[] &#x3D; this.getAll();
         const salary_id &#x3D; crypto.randomUUID();
-        all.push({ ...data, salary_id, amount: Math.round(data.amount * 100) / 100 });
-        localStorage.setItem(this.storageService.getSalaryKey(), JSON.stringify(all));
+
+        all.push({
+            ...data,
+            salary_id,
+            amount: Math.round(data.amount * 100) / 100
+        });
+
+        localStorage.setItem(
+            this.storageService.getSalaryKey(),
+            JSON.stringify(all)
+        );
     }
 
     /**
-     * Updates an existing salary entry in local storage.
-     * Matches by &#x60;salary_id&#x60; and merges with the provided data.
-     * The amount is always rounded to 2 decimals.
+     * Updates an existing salary entry.
      *
-     * @param salary_id The ID of the salary to update.
-     * @param newData Partial salary fields to update.
+     * Behavior:
+     * - Matches salary by &#x60;salary_id&#x60;
+     * - Merges existing data with new values
+     * - Ensures amount is rounded to 2 decimals
+     *
+     * @param salary_id Unique ID of the salary to update
+     * @param newData Partial salary data to update
      */
     update(salary_id: string, newData: Partial&lt;Salary&gt;): void {
         if (!this.isBrowser()) return;
+
         let all: Salary[] &#x3D; this.getAll();
+
         all &#x3D; all.map(item &#x3D;&gt;
-            item.salary_id &#x3D;&#x3D;&#x3D; salary_id ? { ...item, ...newData } : item
+            item.salary_id &#x3D;&#x3D;&#x3D; salary_id
+                ? { ...item, ...newData }
+                : item
         );
-        all &#x3D; all.map(item &#x3D;&gt; (
-            { ...item, amount: Math.round(item.amount * 100) / 100 }
-        )
+
+        all &#x3D; all.map(item &#x3D;&gt; ({
+            ...item,
+            amount: Math.round(item.amount * 100) / 100
+        }));
+
+        localStorage.setItem(
+            this.storageService.getSalaryKey(),
+            JSON.stringify(all)
         );
-        localStorage.setItem(this.storageService.getSalaryKey(), JSON.stringify(all));
     }
 
     /**
      * Deletes a salary entry from local storage.
      *
-     * @param salary_id The ID of the salary to delete.
+     * @param salary_id ID of the salary to remove
      */
     delete(salary_id: string): void {
         if (!this.isBrowser()) return;
-        let all: Salary[] &#x3D; this.getAll();
-        all &#x3D; all.filter(item &#x3D;&gt; item.salary_id !&#x3D;&#x3D; salary_id);
-        localStorage.setItem(this.storageService.getSalaryKey(), JSON.stringify(all));
+
+        const all: Salary[] &#x3D; this.getAll()
+            .filter(item &#x3D;&gt; item.salary_id !&#x3D;&#x3D; salary_id);
+
+        localStorage.setItem(
+            this.storageService.getSalaryKey(),
+            JSON.stringify(all)
+        );
     }
 
     /**
-     * Replaces all salarys in local storage with the provided list.
+     * Replaces all salary entries in local storage.
      *
-     * @param salarys The new list of salarys to save.
+     * @param salarys Complete list of salary entries
      */
     updateAllSalaries(salarys: Salary[]): void {
         if (!this.isBrowser()) return;
         this.storageService.updateSalarys(salarys);
     }
 
+    /**
+     * Retrieves the salary entry for a specific month.
+     *
+     * @param month Month in YYYY-MM format
+     * @returns Salary entry if found, otherwise null
+     */
     getSalaryByMonth(month: string): Salary | null {
         if (!this.isBrowser()) return null;
+
         const all: Salary[] &#x3D; this.getAll();
         const salary &#x3D; all.find(item &#x3D;&gt; item.month &#x3D;&#x3D;&#x3D; month);
-        return salary || null;
-    }
 
-    getCurrentMonthSalary(): Salary | null {
-        if (!this.isBrowser()) return null;
-        const now &#x3D; new Date();
-        const monthStr &#x3D; &#x60;${now.getFullYear()}-${String(now.getMonth() + 1).padStart(2, &#x27;0&#x27;)}&#x60;;
-        return this.getSalaryByMonth(monthStr);
+        return salary || null;
     }
 }
 </code></pre>
