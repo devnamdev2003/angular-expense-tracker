@@ -315,10 +315,10 @@
                         <div class="io-description"><p>Returns the appropriate API base URL depending on the environment.</p>
 <ul>
 <li><code>&quot;local&quot;</code> → <code>http://localhost:8000</code></li>
-<li><code>&quot;live&quot;</code> → <code>https://exwiseapi.onrender.com</code></li>
+<li><code>&quot;live&quot;</code> → <code>https://coders813-exwiseapi.hf.space</code></li>
 <li>Any other value → Determines based on current window location.</li>
 <li>If the URL contains <code>&quot;localhost&quot;</code>, returns <code>http://localhost:8000</code>.</li>
-<li>If the URL contains <code>&quot;exwise&quot;</code>, returns <code>https://exwiseapi.onrender.com</code>.</li>
+<li>If the URL contains <code>&quot;exwise&quot;</code>, returns <code>https://coders813-exwiseapi.hf.space</code>.</li>
 <li>Defaults to <code>http://localhost:8000</code> if none of the above conditions are met.</li>
 </ul>
 </div>
@@ -621,7 +621,7 @@
             <tr>
                 <td class="col-md-4">
                     <div class="io-description"><p>The production (live) API base URL.</p>
-<p>Example: <code>https://exwiseapi.onrender.com</code></p>
+<p>Example: <code>https://coders813-exwiseapi.hf.space</code></p>
 </div>
                 </td>
             </tr>
@@ -747,7 +747,7 @@ export class ConfigService {
   /**
    * The production (live) API base URL.
    *
-   * Example: &#x60;https://exwiseapi.onrender.com&#x60;
+   * Example: &#x60;https://coders813-exwiseapi.hf.space&#x60;
    */
   private readonly liveAPIUrl: string &#x3D; environment.liveAPIUrl;
 
@@ -768,10 +768,10 @@ export class ConfigService {
    * Returns the appropriate API base URL depending on the environment.
    *
    * - &#x60;&quot;local&quot;&#x60; → &#x60;http://localhost:8000&#x60;
-   * - &#x60;&quot;live&quot;&#x60; → &#x60;https://exwiseapi.onrender.com&#x60;
+   * - &#x60;&quot;live&quot;&#x60; → &#x60;https://coders813-exwiseapi.hf.space&#x60;
    * - Any other value → Determines based on current window location.
    * - If the URL contains &#x60;&quot;localhost&quot;&#x60;, returns &#x60;http://localhost:8000&#x60;.
-   * - If the URL contains &#x60;&quot;exwise&quot;&#x60;, returns &#x60;https://exwiseapi.onrender.com&#x60;.
+   * - If the URL contains &#x60;&quot;exwise&quot;&#x60;, returns &#x60;https://coders813-exwiseapi.hf.space&#x60;.
    * - Defaults to &#x60;http://localhost:8000&#x60; if none of the above conditions are met.
    * @returns {string} The API base URL for the current environment.
    */

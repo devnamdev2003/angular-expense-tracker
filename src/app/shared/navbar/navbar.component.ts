@@ -38,7 +38,7 @@ export class NavbarComponent {
     settings: 'Settings',
     expenses: 'Expenses',
     ai: 'AI Analysis',
-    budget: 'Budget',
+    salary: 'Salary',
     calendar: 'Calender',
     list: 'List',
     add: 'Add Expense'

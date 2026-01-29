@@ -109,7 +109,7 @@
 
 <ol class="breadcrumb">
   <li class="breadcrumb-item">Injectables</li>
-  <li class="breadcrumb-item" >TemplateEditorService</li>
+  <li class="breadcrumb-item" >SalaryService</li>
 </ol>
 
 <ul class="nav nav-tabs" role="tablist">
@@ -133,10 +133,19 @@
             <h3>File</h3>
         </p>
         <p class="comment">
-            <code>documentation/template-playground/template-editor.service.ts</code>
+            <code>src/app/service/localStorage/salary.service.ts</code>
         </p>
 
 
+            <p class="comment">
+                <h3>Description</h3>
+            </p>
+            <p class="comment">
+                <p>Service responsible for managing salaries in local storage.
+Provides methods to add, update, delete, and fetch salaries,
+while ensuring data is only accessed in the browser environment.</p>
+
+            </p>
 
 
 
@@ -144,25 +153,6 @@
     <h3 id="index">Index</h3>
     <table class="table table-sm table-bordered index-table">
         <tbody>
-                <tr>
-                    <td class="col-md-4">
-                        <h6><b>Properties</b></h6>
-                    </td>
-                </tr>
-                <tr>
-                    <td class="col-md-4">
-                        <ul class="index-list">
-                            <li>
-                                    <span class="modifier">Private</span>
-                                <a href="#editor" >editor</a>
-                            </li>
-                            <li>
-                                    <span class="modifier">Private</span>
-                                <a href="#onChangeCallback" >onChangeCallback</a>
-                            </li>
-                        </ul>
-                    </td>
-                </tr>
 
                 <tr>
                     <td class="col-md-4">
@@ -173,24 +163,29 @@
                     <td class="col-md-4">
                         <ul class="index-list">
                             <li>
-                                <a href="#destroy" >destroy</a>
+                                <a href="#add" >add</a>
+                            </li>
+                            <li>
+                                <a href="#delete" >delete</a>
+                            </li>
+                            <li>
+                                <a href="#getAll" >getAll</a>
+                            </li>
+                            <li>
+                                <a href="#getCurrentMonthSalary" >getCurrentMonthSalary</a>
+                            </li>
+                            <li>
+                                <a href="#getSalaryByMonth" >getSalaryByMonth</a>
                             </li>
                             <li>
                                     <span class="modifier">Private</span>
-                                <a href="#getLanguageFromFileType" >getLanguageFromFileType</a>
+                                <a href="#isBrowser" >isBrowser</a>
                             </li>
                             <li>
-                                <a href="#initializeEditor" >initializeEditor</a>
+                                <a href="#update" >update</a>
                             </li>
                             <li>
-                                    <span class="modifier">Private</span>
-                                <a href="#registerHandlebarsLanguage" >registerHandlebarsLanguage</a>
-                            </li>
-                            <li>
-                                <a href="#setEditorContent" >setEditorContent</a>
-                            </li>
-                            <li>
-                                <a href="#setOnChangeCallback" >setOnChangeCallback</a>
+                                <a href="#updateAllSalaries" >updateAllSalaries</a>
                             </li>
                         </ul>
                     </td>
@@ -204,6 +199,61 @@
     </table>
 </section>
 
+            <section data-compodoc="block-constructor">
+    <h3 id="constructor">Constructor</h3>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+<code>constructor(storageService: <a href="../injectables/StorageService.html" target="_self">StorageService</a>)</code>
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="22" class="link-to-prism">src/app/service/localStorage/salary.service.ts:22</a></div>
+                            </td>
+                        </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                            <div class="io-description"><p>Creates an instance of SalaryService.</p>
+</div>
+                            <div>
+                                    <b>Parameters :</b>
+                                    <table class="params">
+                                        <thead>
+                                            <tr>
+                                                <td>Name</td>
+                                                    <td>Type</td>
+                                                <td>Optional</td>
+                                                    <td>Description</td>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                                <tr>
+                                                        <td>storageService</td>
+                                                  
+                                                        <td>
+                                                                        <code><a href="../injectables/StorageService.html" target="_self" >StorageService</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                        <td>
+                                                                <p>A service for interacting with local storage keys and data.</p>
+
+                                                        </td>
+                                                </tr>
+                                        </tbody>
+                                    </table>
+                            </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+</section>
 
             <section data-compodoc="block-methods">
     
@@ -214,24 +264,216 @@
         <tbody>
             <tr>
                 <td class="col-md-4">
-                    <a name="destroy"></a>
+                    <a name="add"></a>
                     <span class="name">
-                        <span ><b>destroy</b></span>
-                        <a href="#destroy"><span class="icon ion-ios-link"></span></a>
+                        <span ><b>add</b></span>
+                        <a href="#add"><span class="icon ion-ios-link"></span></a>
                     </span>
                 </td>
             </tr>
             <tr>
                 <td class="col-md-4">
-<code>destroy()</code>
+<code>add(data: <a href="../interfaces/Salary.html" target="_self">Omit&lt;Salary | salary_id&gt;</a>)</code>
                 </td>
             </tr>
 
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="167"
-                                    class="link-to-prism">documentation/template-playground/template-editor.service.ts:167</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="58"
+                                    class="link-to-prism">src/app/service/localStorage/salary.service.ts:58</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-description"><p>Adds a new salary entry to local storage.
+Automatically generates a unique <code>salary_id</code> and rounds the amount to 2 decimals.</p>
+</div>
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                                <td>Description</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>data</td>
+                                            <td>
+                                                            <code><a href="../interfaces/Salary.html" target="_self" >Omit&lt;Salary | salary_id&gt;</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                            <td>
+                                                    <p>The salary data (without <code>salary_id</code>) to add.</p>
+
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="delete"></a>
+                    <span class="name">
+                        <span ><b>delete</b></span>
+                        <a href="#delete"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>delete(salary_id: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="92"
+                                    class="link-to-prism">src/app/service/localStorage/salary.service.ts:92</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-description"><p>Deletes a salary entry from local storage.</p>
+</div>
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                                <td>Description</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>salary_id</td>
+                                            <td>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                            <td>
+                                                    <p>The ID of the salary to delete.</p>
+
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="getAll"></a>
+                    <span class="name">
+                        <span ><b>getAll</b></span>
+                        <a href="#getAll"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>getAll()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="47"
+                                    class="link-to-prism">src/app/service/localStorage/salary.service.ts:47</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-description"><p>Retrieves all salarys stored in local storage.</p>
+</div>
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="../interfaces/Salary.html" target="_self" >Salary[]</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                <p>A list of all saved salarys, or an empty array if not in the browser.</p>
+
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="getCurrentMonthSalary"></a>
+                    <span class="name">
+                        <span ><b>getCurrentMonthSalary</b></span>
+                        <a href="#getCurrentMonthSalary"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>getCurrentMonthSalary()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="116"
+                                    class="link-to-prism">src/app/service/localStorage/salary.service.ts:116</a></div>
                         </td>
                     </tr>
 
@@ -240,7 +482,7 @@
                 <td class="col-md-4">
 
                         <div class="io-description">
-                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+                            <b>Returns : </b>        <code><a href="../interfaces/Salary.html" target="_self" >Salary | null</a></code>
 
                         </div>
                 </td>
@@ -251,32 +493,146 @@
         <tbody>
             <tr>
                 <td class="col-md-4">
-                    <a name="getLanguageFromFileType"></a>
+                    <a name="getSalaryByMonth"></a>
+                    <span class="name">
+                        <span ><b>getSalaryByMonth</b></span>
+                        <a href="#getSalaryByMonth"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>getSalaryByMonth(month: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="109"
+                                    class="link-to-prism">src/app/service/localStorage/salary.service.ts:109</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>month</td>
+                                            <td>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="../interfaces/Salary.html" target="_self" >Salary | null</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="isBrowser"></a>
                     <span class="name">
                             <span class="modifier">Private</span>
-                        <span ><b>getLanguageFromFileType</b></span>
-                        <a href="#getLanguageFromFileType"><span class="icon ion-ios-link"></span></a>
+                        <span ><b>isBrowser</b></span>
+                        <a href="#isBrowser"><span class="icon ion-ios-link"></span></a>
                     </span>
                 </td>
             </tr>
             <tr>
                 <td class="col-md-4">
                         <span class="modifier-icon icon ion-ios-reset"></span>
-                    <code>getLanguageFromFileType(fileType: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>)</code>
+                    <code>isBrowser()</code>
                 </td>
             </tr>
 
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="71"
-                                    class="link-to-prism">documentation/template-playground/template-editor.service.ts:71</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="38"
+                                    class="link-to-prism">src/app/service/localStorage/salary.service.ts:38</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
+                        <div class="io-description"><p>Checks if the code is running in a browser environment with <code>localStorage</code> available.</p>
+</div>
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                <p>True if running in the browser, false otherwise.</p>
+
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="update"></a>
+                    <span class="name">
+                        <span ><b>update</b></span>
+                        <a href="#update"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>update(salary_id: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>, newData: <a href="../interfaces/Salary.html" target="_self">Partial&lt;Salary&gt;</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="74"
+                                    class="link-to-prism">src/app/service/localStorage/salary.service.ts:74</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-description"><p>Updates an existing salary entry in local storage.
+Matches by <code>salary_id</code> and merges with the provided data.
+The amount is always rounded to 2 decimals.</p>
+</div>
 
                             <div class="io-description">
                                 <b>Parameters :</b>
@@ -287,11 +643,12 @@
                                             <td>Name</td>
                                                 <td>Type</td>
                                             <td>Optional</td>
+                                                <td>Description</td>
                                         </tr>
                                     </thead>
                                     <tbody>
                                         <tr>
-                                                <td>fileType</td>
+                                                <td>salary_id</td>
                                             <td>
                                                             <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
                                             </td>
@@ -301,12 +658,32 @@
                                             </td>
 
 
+                                            <td>
+                                                    <p>The ID of the salary to update.</p>
+
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                                <td>newData</td>
+                                            <td>
+                                                            <code><a href="../interfaces/Salary.html" target="_self" >Partial&lt;Salary&gt;</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                            <td>
+                                                    <p>Partial salary fields to update.</p>
+
+                                            </td>
                                         </tr>
                                     </tbody>
                                 </table>
                             </div>
                         <div class="io-description">
-                            <b>Returns : </b>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
 
                         </div>
                             <div class="io-description">
@@ -320,30 +697,32 @@
         <tbody>
             <tr>
                 <td class="col-md-4">
-                    <a name="initializeEditor"></a>
+                    <a name="updateAllSalaries"></a>
                     <span class="name">
-                        <span ><b>initializeEditor</b></span>
-                        <a href="#initializeEditor"><span class="icon ion-ios-link"></span></a>
+                        <span ><b>updateAllSalaries</b></span>
+                        <a href="#updateAllSalaries"><span class="icon ion-ios-link"></span></a>
                     </span>
                 </td>
             </tr>
             <tr>
                 <td class="col-md-4">
-<code>initializeEditor(container: HTMLElement)</code>
+<code>updateAllSalaries(salarys: <a href="../interfaces/Salary.html" target="_self">Salary[]</a>)</code>
                 </td>
             </tr>
 
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="12"
-                                    class="link-to-prism">documentation/template-playground/template-editor.service.ts:12</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="104"
+                                    class="link-to-prism">src/app/service/localStorage/salary.service.ts:104</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
+                        <div class="io-description"><p>Replaces all salarys in local storage with the provided list.</p>
+</div>
 
                             <div class="io-description">
                                 <b>Parameters :</b>
@@ -354,13 +733,14 @@
                                             <td>Name</td>
                                                 <td>Type</td>
                                             <td>Optional</td>
+                                                <td>Description</td>
                                         </tr>
                                     </thead>
                                     <tbody>
                                         <tr>
-                                                <td>container</td>
+                                                <td>salarys</td>
                                             <td>
-                                                        <code>HTMLElement</code>
+                                                            <code><a href="../interfaces/Salary.html" target="_self" >Salary[]</a></code>
                                             </td>
 
                                             <td>
@@ -368,6 +748,10 @@
                                             </td>
 
 
+                                            <td>
+                                                    <p>The new list of salarys to save.</p>
+
+                                            </td>
                                         </tr>
                                     </tbody>
                                 </table>
@@ -381,256 +765,6 @@
                             </div>
                 </td>
             </tr>
-        </tbody>
-    </table>
-    <table class="table table-sm table-bordered">
-        <tbody>
-            <tr>
-                <td class="col-md-4">
-                    <a name="registerHandlebarsLanguage"></a>
-                    <span class="name">
-                            <span class="modifier">Private</span>
-                        <span ><b>registerHandlebarsLanguage</b></span>
-                        <a href="#registerHandlebarsLanguage"><span class="icon ion-ios-link"></span></a>
-                    </span>
-                </td>
-            </tr>
-            <tr>
-                <td class="col-md-4">
-                        <span class="modifier-icon icon ion-ios-reset"></span>
-                    <code>registerHandlebarsLanguage()</code>
-                </td>
-            </tr>
-
-
-                    <tr>
-                        <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="87"
-                                    class="link-to-prism">documentation/template-playground/template-editor.service.ts:87</a></div>
-                        </td>
-                    </tr>
-
-
-            <tr>
-                <td class="col-md-4">
-
-                        <div class="io-description">
-                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
-
-                        </div>
-                </td>
-            </tr>
-        </tbody>
-    </table>
-    <table class="table table-sm table-bordered">
-        <tbody>
-            <tr>
-                <td class="col-md-4">
-                    <a name="setEditorContent"></a>
-                    <span class="name">
-                        <span ><b>setEditorContent</b></span>
-                        <a href="#setEditorContent"><span class="icon ion-ios-link"></span></a>
-                    </span>
-                </td>
-            </tr>
-            <tr>
-                <td class="col-md-4">
-<code>setEditorContent(content: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>, fileType: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>)</code>
-                </td>
-            </tr>
-
-
-                    <tr>
-                        <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="59"
-                                    class="link-to-prism">documentation/template-playground/template-editor.service.ts:59</a></div>
-                        </td>
-                    </tr>
-
-
-            <tr>
-                <td class="col-md-4">
-
-                            <div class="io-description">
-                                <b>Parameters :</b>
-                                
-                                <table class="params">
-                                    <thead>
-                                        <tr>
-                                            <td>Name</td>
-                                                <td>Type</td>
-                                            <td>Optional</td>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr>
-                                                <td>content</td>
-                                            <td>
-                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
-                                            </td>
-
-                                            <td>
-                                                    No
-                                            </td>
-
-
-                                        </tr>
-                                        <tr>
-                                                <td>fileType</td>
-                                            <td>
-                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
-                                            </td>
-
-                                            <td>
-                                                    No
-                                            </td>
-
-
-                                        </tr>
-                                    </tbody>
-                                </table>
-                            </div>
-                        <div class="io-description">
-                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
-
-                        </div>
-                            <div class="io-description">
-                                
-                            </div>
-                </td>
-            </tr>
-        </tbody>
-    </table>
-    <table class="table table-sm table-bordered">
-        <tbody>
-            <tr>
-                <td class="col-md-4">
-                    <a name="setOnChangeCallback"></a>
-                    <span class="name">
-                        <span ><b>setOnChangeCallback</b></span>
-                        <a href="#setOnChangeCallback"><span class="icon ion-ios-link"></span></a>
-                    </span>
-                </td>
-            </tr>
-            <tr>
-                <td class="col-md-4">
-<code>setOnChangeCallback(callback: (value: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>) => void)</code>
-                </td>
-            </tr>
-
-
-                    <tr>
-                        <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="67"
-                                    class="link-to-prism">documentation/template-playground/template-editor.service.ts:67</a></div>
-                        </td>
-                    </tr>
-
-
-            <tr>
-                <td class="col-md-4">
-
-                            <div class="io-description">
-                                <b>Parameters :</b>
-                                
-                                <table class="params">
-                                    <thead>
-                                        <tr>
-                                            <td>Name</td>
-                                                <td>Type</td>
-                                            <td>Optional</td>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr>
-                                                <td>callback</td>
-                                            <td>
-                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/function" target="_blank" >function</a></code>
-                                            </td>
-
-                                            <td>
-                                                    No
-                                            </td>
-
-
-                                        </tr>
-                                    </tbody>
-                                </table>
-                            </div>
-                        <div class="io-description">
-                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
-
-                        </div>
-                            <div class="io-description">
-                                
-                            </div>
-                </td>
-            </tr>
-        </tbody>
-    </table>
-</section>
-            <section data-compodoc="block-properties">
-    
-    <h3 id="inputs">
-        Properties
-    </h3>
-    <table class="table table-sm table-bordered">
-        <tbody>
-            <tr>
-                <td class="col-md-4">
-                    <a name="editor"></a>
-                    <span class="name">
-                            <span class="modifier">Private</span>
-                        <span ><b>editor</b></span>
-                        <a href="#editor"><span class="icon ion-ios-link"></span></a>
-                    </span>
-                </td>
-            </tr>
-                <tr>
-                    <td class="col-md-4">
-                        <i>Type : </i>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
-
-                    </td>
-                </tr>
-                    <tr>
-                        <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="9" class="link-to-prism">documentation/template-playground/template-editor.service.ts:9</a></div>
-                        </td>
-                    </tr>
-
-
-        </tbody>
-    </table>
-    <table class="table table-sm table-bordered">
-        <tbody>
-            <tr>
-                <td class="col-md-4">
-                    <a name="onChangeCallback"></a>
-                    <span class="name">
-                            <span class="modifier">Private</span>
-                        <span ><b>onChangeCallback</b></span>
-                        <a href="#onChangeCallback"><span class="icon ion-ios-link"></span></a>
-                    </span>
-                </td>
-            </tr>
-                <tr>
-                    <td class="col-md-4">
-                        <i>Type : </i>    <code>unknown | null</code>
-
-                    </td>
-                </tr>
-                <tr>
-                    <td class="col-md-4">
-                        <i>Default value : </i><code>null</code>
-                    </td>
-                </tr>
-                    <tr>
-                        <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="10" class="link-to-prism">documentation/template-playground/template-editor.service.ts:10</a></div>
-                        </td>
-                    </tr>
-
-
         </tbody>
     </table>
 </section>
@@ -640,177 +774,126 @@
 
     <div class="tab-pane fade  tab-source-code" id="source">
         <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Injectable } from &#x27;@angular/core&#x27;;
+import { StorageService } from &#x27;./storage.service&#x27;;
 
-declare const monaco: any;
+/**
+ * Interface representing a salary entry.
+ */
+export interface Salary {
+    salary_id: string;
+    amount: number;
+    month: string;
+    date: string;
+    budget?: number;
+    note?: string;
+}
 
-@Injectable({
-  providedIn: &#x27;root&#x27;
-})
-export class TemplateEditorService {
-  private editor: any;
-  private onChangeCallback: ((value: string) &#x3D;&gt; void) | null &#x3D; null;
+/**
+ * Service responsible for managing salaries in local storage.
+ * Provides methods to add, update, delete, and fetch salaries,
+ * while ensuring data is only accessed in the browser environment.
+ */
+@Injectable({ providedIn: &#x27;root&#x27; })
+export class SalaryService {
 
-  initializeEditor(container: HTMLElement) {
-    // Initialize Monaco Editor
-    this.editor &#x3D; monaco.editor.create(container, {
-      value: &#x27;&#x27;,
-      language: &#x27;html&#x27;,
-      theme: &#x27;vs-dark&#x27;,
-      automaticLayout: true,
-      minimap: {
-        enabled: true
-      },
-      scrollBeyondLastLine: false,
-      fontSize: 14,
-      wordWrap: &#x27;on&#x27;,
-      lineNumbers: &#x27;on&#x27;,
-      roundedSelection: false,
-      scrollbar: {
-        horizontal: &#x27;visible&#x27;,
-        vertical: &#x27;visible&#x27;
-      },
-      overviewRulerLanes: 2,
-      quickSuggestions: {
-        other: true,
-        comments: true,
-        strings: true
-      },
-      parameterHints: {
-        enabled: true
-      },
-      autoClosingBrackets: &#x27;always&#x27;,
-      autoClosingQuotes: &#x27;always&#x27;,
-      suggestOnTriggerCharacters: true,
-      acceptSuggestionOnEnter: &#x27;on&#x27;,
-      tabCompletion: &#x27;on&#x27;,
-      wordBasedSuggestions: false
-    });
+    /**
+     * Creates an instance of SalaryService.
+     *
+     * @param storageService A service for interacting with local storage keys and data.
+     */
+    constructor(
+        private storageService: StorageService
+    ) { }
 
-    // Set up change listener
-    this.editor.onDidChangeModelContent(() &#x3D;&gt; {
-      if (this.onChangeCallback) {
-        this.onChangeCallback(this.editor.getValue());
-      }
-    });
-
-    // Register custom language definitions
-    this.registerHandlebarsLanguage();
-  }
-
-  setEditorContent(content: string, fileType: string) {
-    if (this.editor) {
-      const language &#x3D; this.getLanguageFromFileType(fileType);
-      const model &#x3D; monaco.editor.createModel(content, language);
-      this.editor.setModel(model);
-    }
-  }
-
-  setOnChangeCallback(callback: (value: string) &#x3D;&gt; void) {
-    this.onChangeCallback &#x3D; callback;
-  }
-
-  private getLanguageFromFileType(fileType: string): string {
-    switch (fileType) {
-      case &#x27;hbs&#x27;:
-        return &#x27;handlebars&#x27;;
-      case &#x27;css&#x27;:
-      case &#x27;scss&#x27;:
-        return &#x27;css&#x27;;
-      case &#x27;js&#x27;:
-        return &#x27;javascript&#x27;;
-      case &#x27;ts&#x27;:
-        return &#x27;typescript&#x27;;
-      default:
-        return &#x27;html&#x27;;
-    }
-  }
-
-  private registerHandlebarsLanguage() {
-    // Register Handlebars language for Monaco Editor
-    if (monaco.languages.getLanguages().find((lang: any) &#x3D;&gt; lang.id &#x3D;&#x3D;&#x3D; &#x27;handlebars&#x27;)) {
-      return; // Already registered
+    /**
+     * Checks if the code is running in a browser environment with &#x60;localStorage&#x60; available.
+     *
+     * @returns {boolean} True if running in the browser, false otherwise.
+     */
+    private isBrowser(): boolean {
+        return typeof window !&#x3D;&#x3D; &#x27;undefined&#x27; &amp;&amp; typeof window.localStorage !&#x3D;&#x3D; &#x27;undefined&#x27;;
     }
 
-    monaco.languages.register({ id: &#x27;handlebars&#x27; });
-
-    monaco.languages.setMonarchTokensProvider(&#x27;handlebars&#x27;, {
-      tokenizer: {
-        root: [
-          [/\{\{\{/, { token: &#x27;keyword&#x27;, next: &#x27;@handlebars_unescaped&#x27; }],
-          [/\{\{/, { token: &#x27;keyword&#x27;, next: &#x27;@handlebars&#x27; }],
-          [/&lt;!DOCTYPE/, &#x27;metatag&#x27;, &#x27;@doctype&#x27;],
-          [/&lt;!--/, &#x27;comment&#x27;, &#x27;@comment&#x27;],
-          [/(&lt;)(\w+)/, [&#x27;delimiter&#x27;, { token: &#x27;tag&#x27;, next: &#x27;@tag&#x27; }]],
-          [/(&lt;\/)(\w+)/, [&#x27;delimiter&#x27;, { token: &#x27;tag&#x27;, next: &#x27;@tag&#x27; }]],
-          [/&lt;/, &#x27;delimiter&#x27;],
-          [/[^&lt;]+/]
-        ],
-
-        handlebars_unescaped: [
-          [/\}\}\}/, { token: &#x27;keyword&#x27;, next: &#x27;@pop&#x27; }],
-          [/[^}]+/, &#x27;variable&#x27;]
-        ],
-
-        handlebars: [
-          [/\}\}/, { token: &#x27;keyword&#x27;, next: &#x27;@pop&#x27; }],
-          [/#if|#unless|#each|#with|\/if|\/unless|\/each|\/with/, &#x27;keyword&#x27;],
-          [/[a-zA-Z_][\w]*/, &#x27;variable&#x27;],
-          [/[^}]+/, &#x27;variable&#x27;]
-        ],
-
-        comment: [
-          [/--&gt;/, &#x27;comment&#x27;, &#x27;@pop&#x27;],
-          [/[^-]+/, &#x27;comment&#x27;],
-          [/./, &#x27;comment&#x27;]
-        ],
-
-        doctype: [
-          [/[^&gt;]+/, &#x27;metatag.content&#x27;],
-          [/&gt;/, &#x27;metatag&#x27;, &#x27;@pop&#x27;]
-        ],
-
-        tag: [
-          [/[ \t\r\n]+/, &#x27;white&#x27;],
-          [/(\w+)(\s*&#x3D;\s*)(&quot;([^&quot;]*)&quot;)/, [&#x27;attribute.name&#x27;, &#x27;delimiter&#x27;, &#x27;attribute.value&#x27;, &#x27;attribute.value&#x27;]],
-          [/(\w+)(\s*&#x3D;\s*)(&#x27;([^&#x27;]*)&#x27;)/, [&#x27;attribute.name&#x27;, &#x27;delimiter&#x27;, &#x27;attribute.value&#x27;, &#x27;attribute.value&#x27;]],
-          [/\w+/, &#x27;attribute.name&#x27;],
-          [/&gt;/, &#x27;delimiter&#x27;, &#x27;@pop&#x27;]
-        ]
-      }
-    });
-
-    monaco.languages.setLanguageConfiguration(&#x27;handlebars&#x27;, {
-      comments: {
-        blockComment: [&#x27;&lt;!--&#x27;, &#x27;--&gt;&#x27;]
-      },
-      brackets: [
-        [&#x27;&lt;&#x27;, &#x27;&gt;&#x27;],
-        [&#x27;{{&#x27;, &#x27;}}&#x27;],
-        [&#x27;{{{&#x27;, &#x27;}}}&#x27;]
-      ],
-      autoClosingPairs: [
-        { open: &#x27;&lt;&#x27;, close: &#x27;&gt;&#x27; },
-        { open: &#x27;{{&#x27;, close: &#x27;}}&#x27; },
-        { open: &#x27;{{{&#x27;, close: &#x27;}}}&#x27; },
-        { open: &#x27;&quot;&#x27;, close: &#x27;&quot;&#x27; },
-        { open: &quot;&#x27;&quot;, close: &quot;&#x27;&quot; }
-      ],
-      surroundingPairs: [
-        { open: &#x27;&lt;&#x27;, close: &#x27;&gt;&#x27; },
-        { open: &#x27;{{&#x27;, close: &#x27;}}&#x27; },
-        { open: &#x27;{{{&#x27;, close: &#x27;}}}&#x27; },
-        { open: &#x27;&quot;&#x27;, close: &#x27;&quot;&#x27; },
-        { open: &quot;&#x27;&quot;, close: &quot;&#x27;&quot; }
-      ]
-    });
-  }
-
-  destroy() {
-    if (this.editor) {
-      this.editor.dispose();
-      this.editor &#x3D; null;
+    /**
+     * Retrieves all salarys stored in local storage.
+     *
+     * @returns {Salary[]} A list of all saved salarys, or an empty array if not in the browser.
+     */
+    getAll(): Salary[] {
+        if (!this.isBrowser()) return [];
+        return this.storageService.getAllSalaries();
     }
-  }
+
+    /**
+     * Adds a new salary entry to local storage.
+     * Automatically generates a unique &#x60;salary_id&#x60; and rounds the amount to 2 decimals.
+     *
+     * @param data The salary data (without &#x60;salary_id&#x60;) to add.
+     */
+    add(data: Omit&lt;Salary, &#x27;salary_id&#x27;&gt;): void {
+        if (!this.isBrowser()) return;
+        const all: Salary[] &#x3D; this.getAll();
+        const salary_id &#x3D; crypto.randomUUID();
+        all.push({ ...data, salary_id, amount: Math.round(data.amount * 100) / 100 });
+        localStorage.setItem(this.storageService.getSalaryKey(), JSON.stringify(all));
+    }
+
+    /**
+     * Updates an existing salary entry in local storage.
+     * Matches by &#x60;salary_id&#x60; and merges with the provided data.
+     * The amount is always rounded to 2 decimals.
+     *
+     * @param salary_id The ID of the salary to update.
+     * @param newData Partial salary fields to update.
+     */
+    update(salary_id: string, newData: Partial&lt;Salary&gt;): void {
+        if (!this.isBrowser()) return;
+        let all: Salary[] &#x3D; this.getAll();
+        all &#x3D; all.map(item &#x3D;&gt;
+            item.salary_id &#x3D;&#x3D;&#x3D; salary_id ? { ...item, ...newData } : item
+        );
+        all &#x3D; all.map(item &#x3D;&gt; (
+            { ...item, amount: Math.round(item.amount * 100) / 100 }
+        )
+        );
+        localStorage.setItem(this.storageService.getSalaryKey(), JSON.stringify(all));
+    }
+
+    /**
+     * Deletes a salary entry from local storage.
+     *
+     * @param salary_id The ID of the salary to delete.
+     */
+    delete(salary_id: string): void {
+        if (!this.isBrowser()) return;
+        let all: Salary[] &#x3D; this.getAll();
+        all &#x3D; all.filter(item &#x3D;&gt; item.salary_id !&#x3D;&#x3D; salary_id);
+        localStorage.setItem(this.storageService.getSalaryKey(), JSON.stringify(all));
+    }
+
+    /**
+     * Replaces all salarys in local storage with the provided list.
+     *
+     * @param salarys The new list of salarys to save.
+     */
+    updateAllSalaries(salarys: Salary[]): void {
+        if (!this.isBrowser()) return;
+        this.storageService.updateSalarys(salarys);
+    }
+
+    getSalaryByMonth(month: string): Salary | null {
+        if (!this.isBrowser()) return null;
+        const all: Salary[] &#x3D; this.getAll();
+        const salary &#x3D; all.find(item &#x3D;&gt; item.month &#x3D;&#x3D;&#x3D; month);
+        return salary || null;
+    }
+
+    getCurrentMonthSalary(): Salary | null {
+        if (!this.isBrowser()) return null;
+        const now &#x3D; new Date();
+        const monthStr &#x3D; &#x60;${now.getFullYear()}-${String(now.getMonth() + 1).padStart(2, &#x27;0&#x27;)}&#x60;;
+        return this.getSalaryByMonth(monthStr);
+    }
 }
 </code></pre>
     </div>
@@ -855,7 +938,7 @@ export class TemplateEditorService {
        <script>
             var COMPODOC_CURRENT_PAGE_DEPTH = 1;
             var COMPODOC_CURRENT_PAGE_CONTEXT = 'injectable';
-            var COMPODOC_CURRENT_PAGE_URL = 'TemplateEditorService.html';
+            var COMPODOC_CURRENT_PAGE_URL = 'SalaryService.html';
             var MAX_SEARCH_RESULTS = 15;
        </script>
 

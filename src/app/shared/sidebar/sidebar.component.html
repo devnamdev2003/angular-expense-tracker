@@ -17,8 +17,8 @@
         Calendar</a>
     </li>
     <li>
-      <a href="#" (click)="navigateAndClose('budget', $event)" class="block hover:text-[var(--color-accent)]">💰
-        Budget</a>
+      <a href="#" (click)="navigateAndClose('salary', $event)" class="block hover:text-[var(--color-accent)]">💰
+        Salary</a>
     </li>
     <li *ngIf="has_ai_access">
       <a href="#" (click)="navigateAndClose('ai', $event)" class="block hover:text-[var(--color-accent)]"> 💬 AI
@@ -28,10 +28,6 @@
       <a href="#" (click)="navigateAndClose('settings', $event)" class="block hover:text-[var(--color-accent)]">⚙️
         Settings</a>
     </li>
-    <!-- <li>
-      <a href="#" (click)="navigateAndClose('salary', $event)" class="block hover:text-[var(--color-accent)]">⚙️
-        salary</a>
-    </li> -->
   </ul>
 </aside>
 
@@ -60,10 +56,10 @@
       class="w-[25px] h-[25px] transition-all duration-300 ease-in-out" style="filter: var(--icon-color2);">
   </button>
 
-  <button (click)="navigateAndClose('budget', $event)"
-    [ngClass]="{'scale-110  rounded-[50%] bg-[--list-hover]': activePath === 'budget'}"
+  <button (click)="navigateAndClose('salary', $event)"
+    [ngClass]="{'scale-110  rounded-[50%] bg-[--list-hover]': activePath === 'salary'}"
     class="h-[40px] w-[40px] block  px-2 text-sm relative transition-all duration-300 ease-in-out">
-    <img src="assets/img/icon/icons8-budget-50.png" alt="budget"
+    <img src="assets/img/icon/icons8-budget-50.png" alt="salary"
       class="w-[25px] h-[25px] transition-all duration-300 ease-in-out" style="filter: var(--icon-color2);">
   </button>
 

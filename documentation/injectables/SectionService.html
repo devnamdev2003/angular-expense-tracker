@@ -185,6 +185,12 @@
                     <td class="col-md-4">
                         <ul class="index-list">
                             <li>
+                                <a href="#getFullUrl" >getFullUrl</a>
+                            </li>
+                            <li>
+                                <a href="#getPathOnly" >getPathOnly</a>
+                            </li>
+                            <li>
                                 <a href="#setSection" >setSection</a>
                             </li>
                         </ul>
@@ -205,6 +211,80 @@
     <h3 id="methods">
         Methods
     </h3>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="getFullUrl"></a>
+                    <span class="name">
+                        <span ><b>getFullUrl</b></span>
+                        <a href="#getFullUrl"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>getFullUrl()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="38"
+                                    class="link-to-prism">src/app/service/section/section.service.ts:38</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="getPathOnly"></a>
+                    <span class="name">
+                        <span ><b>getPathOnly</b></span>
+                        <a href="#getPathOnly"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>getPathOnly()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="42"
+                                    class="link-to-prism">src/app/service/section/section.service.ts:42</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
     <table class="table table-sm table-bordered">
         <tbody>
             <tr>
@@ -298,6 +378,12 @@
             </tr>
                 <tr>
                     <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
                         <i>Default value : </i><code>this.sectionSource.asObservable()</code>
                     </td>
                 </tr>
@@ -329,6 +415,12 @@ Components can subscribe to reactively track section changes.</p>
                     </span>
                 </td>
             </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
                 <tr>
                     <td class="col-md-4">
                         <i>Default value : </i><code>new BehaviorSubject&lt;string&gt;(&#x27;home&#x27;)</code>
@@ -392,6 +484,15 @@ export class SectionService {
   setSection(section: string): void {
     this.sectionSource.next(section);
   }
+
+  getFullUrl(): string {
+    return window.location.href;
+  }
+  
+  getPathOnly(): string {
+    return window.location.pathname;
+  }
+
 }
 </code></pre>
     </div>

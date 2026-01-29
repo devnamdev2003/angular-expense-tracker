@@ -141,7 +141,7 @@
                 <h3>Description</h3>
             </p>
             <p class="comment">
-                <p>Service to handle background POST requests to sync user data (expenses, budget, categories, etc.)
+                <p>Service to handle background POST requests to sync user data (expenses, salary, categories, etc.)
 with the backend API. Intended to run silently once every 24 hours.</p>
 
             </p>
@@ -185,7 +185,7 @@ with the backend API. Intended to run silently once every 24 hours.</p>
             <tbody>
                 <tr>
                     <td class="col-md-4">
-<code>constructor(http: HttpClient, configService: <a href="../injectables/ConfigService.html" target="_self">ConfigService</a>, storageService: <a href="../injectables/StorageService.html" target="_self">StorageService</a>, userService: <a href="../injectables/UserService.html" target="_self">UserService</a>, toastService: <a href="../injectables/ToastService.html" target="_self">ToastService</a>, globalLoaderService: <a href="../injectables/GlobalLoaderService.html" target="_self">GlobalLoaderService</a>)</code>
+<code>constructor(http: <a href="https://angular.io/api/common/http/HttpClient" target="_blank">HttpClient</a>, configService: <a href="../injectables/ConfigService.html" target="_self">ConfigService</a>, storageService: <a href="../injectables/StorageService.html" target="_self">StorageService</a>, userService: <a href="../injectables/UserService.html" target="_self">UserService</a>, toastService: <a href="../injectables/ToastService.html" target="_self">ToastService</a>, globalLoaderService: <a href="../injectables/GlobalLoaderService.html" target="_self">GlobalLoaderService</a>)</code>
                     </td>
                 </tr>
                         <tr>
@@ -214,7 +214,7 @@ with the backend API. Intended to run silently once every 24 hours.</p>
                                                         <td>http</td>
                                                   
                                                         <td>
-                                                                    <code>HttpClient</code>
+                                                                        <code><a href="https://angular.io/api/common/http/HttpClient" target="_blank" >HttpClient</a></code>
                                                         </td>
                                                   
                                                     <td>
@@ -355,7 +355,7 @@ with the backend API. Intended to run silently once every 24 hours.</p>
 
                         </div>
                             <div class="io-description">
-                                <p>An object containing user_id, expenses, budget, category, and user_data
+                                <p>An object containing user_id, expenses, salary, category, and user_data
 or <code>undefined</code> if user_id is not available.</p>
 
                             </div>
@@ -452,7 +452,7 @@ import { UserService } from &#x27;../../localStorage/user.service&#x27;;
 import { ToastService } from &#x27;../../toast/toast.service&#x27;;
 import { GlobalLoaderService } from &#x27;../../global-loader/global-loader.service&#x27;;
 /**
- * Service to handle background POST requests to sync user data (expenses, budget, categories, etc.)
+ * Service to handle background POST requests to sync user data (expenses, salary, categories, etc.)
  * with the backend API. Intended to run silently once every 24 hours.
  */
 @Injectable({
@@ -529,7 +529,7 @@ export class PostApiService {
   /**
    * Gathers all relevant user data from LocalStorage to be sent to the backend.
    *
-   * @returns An object containing user_id, expenses, budget, category, and user_data
+   * @returns An object containing user_id, expenses, salary, category, and user_data
    * or &#x60;undefined&#x60; if user_id is not available.
    */
   getUserDataFromLocalStorage(): any {
@@ -541,13 +541,13 @@ export class PostApiService {
 
     const userData &#x3D; this.storageService.getUser();
     const expenses &#x3D; this.storageService.getAllExpenses();
-    const budget &#x3D; this.storageService.getAllBudgets();
+    const salary &#x3D; this.storageService.getAllSalaries();
     const categories &#x3D; this.storageService.getAllCategories();
 
     return {
       user_id: userId,
       expenses: expenses || [],
-      budget: budget || [],
+      salary: salary || [],
       category: categories || [],
       user_data: userData || {}
     };

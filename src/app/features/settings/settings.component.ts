@@ -11,7 +11,7 @@ import { DownloadComponentComponent } from '../../component/settings-components/
 import { UserService } from '../../service/localStorage/user.service';
 import { ExpenseService } from '../../service/localStorage/expense.service';
 import { Category, CategoryService } from '../../service/localStorage/category.service';
-import { BudgetService } from '../../service/localStorage/budget.service';
+import { SalaryService } from '../../service/localStorage/salary.service';
 import { UserData } from '../../component/settings-components/download-component/download-component.component';
 import { GlobalLoaderService } from '../../service/global-loader/global-loader.service';
 import { PostApiService } from '../../service/backend-api/post/post-api.service';
@@ -86,7 +86,7 @@ export class SettingsComponent {
     * @param userService User service for managing user preferences
     * @param expenseService Expense service for managing expenses
     * @param categoryService Category service for managing categories
-    * @param budgetService Budget service for managing budgets
+    * @param salaryService Salary service for managing salarys
     * @param fb FormBuilder instance for creating reactive forms
     * @param toastService Toast service for showing notifications
     * @param globalLoaderService Service to control the global loading indicator
@@ -98,7 +98,7 @@ export class SettingsComponent {
     public userService: UserService,
     private expenseService: ExpenseService,
     private categoryService: CategoryService,
-    private budgetService: BudgetService,
+    private salaryService: SalaryService,
     private fb: FormBuilder,
     private toastService: ToastService,
     private globalLoaderService: GlobalLoaderService,
@@ -363,7 +363,7 @@ export class SettingsComponent {
         if (!Array.isArray(json.expenseData)) throw new Error('Invalid or missing expense data.');
         if (typeof json.userData !== 'object' || json.userData === null) throw new Error('Invalid or missing user data.');
         if (!Array.isArray(json.categoryData)) throw new Error('Invalid or missing category data.');
-        if (!Array.isArray(json.budgetData)) throw new Error('Invalid or missing budget data.');
+        if (!Array.isArray(json.salaryData)) throw new Error('Invalid or missing salary data.');
 
         // Validate each item
         const validData = json.expenseData.filter(item =>
@@ -391,7 +391,7 @@ export class SettingsComponent {
         this.userService.updateUserData(json.userData);
         const validCategories = json.categoryData.filter(cat => cat.user_id !== "0");
         this.categoryService.addBulk(validCategories);
-        this.budgetService.updateAllBudgets(json.budgetData);
+        this.salaryService.updateAllSalaries(json.salaryData);
         this.expenseService.addBulk(validData);
         isFileUploaded = true;
 

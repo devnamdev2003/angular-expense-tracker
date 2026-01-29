@@ -7,7 +7,7 @@ import { UserService } from '../../localStorage/user.service';
 import { ToastService } from '../../toast/toast.service';
 import { GlobalLoaderService } from '../../global-loader/global-loader.service';
 /**
- * Service to handle background POST requests to sync user data (expenses, budget, categories, etc.)
+ * Service to handle background POST requests to sync user data (expenses, salary, categories, etc.)
  * with the backend API. Intended to run silently once every 24 hours.
  */
 @Injectable({
@@ -84,7 +84,7 @@ export class PostApiService {
   /**
    * Gathers all relevant user data from LocalStorage to be sent to the backend.
    *
-   * @returns An object containing user_id, expenses, budget, category, and user_data
+   * @returns An object containing user_id, expenses, salary, category, and user_data
    * or `undefined` if user_id is not available.
    */
   getUserDataFromLocalStorage(): any {
@@ -96,13 +96,13 @@ export class PostApiService {
 
     const userData = this.storageService.getUser();
     const expenses = this.storageService.getAllExpenses();
-    const budget = this.storageService.getAllBudgets();
+    const salary = this.storageService.getAllSalaries();
     const categories = this.storageService.getAllCategories();
 
     return {
       user_id: userId,
       expenses: expenses || [],
-      budget: budget || [],
+      salary: salary || [],
       category: categories || [],
       user_data: userData || {}
     };

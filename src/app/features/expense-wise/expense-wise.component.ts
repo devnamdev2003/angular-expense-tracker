@@ -11,7 +11,6 @@ import { SettingsComponent } from '../../features/settings/settings.component';
 import { ListExpensesComponent } from '../../features/list-expenses/list-expenses.component';
 import { HomeComponent } from '../../features/home/home.component';
 import { CalendarComponent } from '../../features/calendar/calendar.component';
-import { BudgetComponent } from '../../features/budget/budget.component';
 import { AiComponent } from '../../features/ai/ai.component';
 import { SalaryComponent } from '../salary/salary.component';
 
@@ -29,7 +28,7 @@ import { HelpDashboard } from '../help-dashboard/help-dashboard';
   standalone: true,
   imports: [
     NavbarComponent, SidebarComponent, FooterComponent, ToastComponent, CommonModule, AddExpenseComponent,
-    SettingsComponent, ListExpensesComponent, HomeComponent, BudgetComponent, CalendarComponent, AiComponent, HelpDashboard, SalaryComponent
+    SettingsComponent, ListExpensesComponent, HomeComponent, CalendarComponent, AiComponent, HelpDashboard, SalaryComponent
   ],
   templateUrl: './expense-wise.component.html',
   styleUrl: './expense-wise.component.css'
