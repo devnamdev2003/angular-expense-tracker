@@ -15,14 +15,19 @@
                 </div>
             </div>
 
-            <div class="flex items-center gap-3">
-                <!-- Month Selector (Moved to Header) with Max Restriction -->
-                <div class="relative group">
-                    <input type="month" [ngModel]="selectedMonth" (ngModelChange)="updateMonth($event)" [max]="maxMonth"
-                        class="p-2 pl-3 text-sm font-medium transition-colors bg-transparent border rounded-lg focus:outline-none focus:border-indigo-500 cursor-pointer hover:bg-black/5 dark:hover:bg-white/5"
-                        style="border-color: var(--color-bg-600); color: inherit;">
+            <div class="flex items-center gap-3 relative right-6">
+                <!-- Text label that opens month picker -->
+                <div class="text-md font-semibold cursor-pointer select-none" (click)="hiddenMonthInput.showPicker()">
+                    {{ selectedMonth | date:'MMM yyyy' }}
+                </div>
+
+                <!-- Hidden Month Input -->
+                <div class="hiddeninputdiv absolute right-6">
+                    <input #hiddenMonthInput type="month" class="hiddeninput" [ngModel]="selectedMonth"
+                        (ngModelChange)="updateMonth($event)" [max]="maxMonth" />
                 </div>
             </div>
+
         </header>
 
         <!-- MAIN CONTENT -->
@@ -38,7 +43,7 @@
 
                 <div class="relative z-10">
                     <p class="mb-1 text-sm font-medium tracking-wider text-indigo-200 uppercase">{{ balanceLable }}</p>
-                    <h2 class="mb-6 text-2xl font-bold tracking-tight md:text-4xl">{{ userCurrancy }}  {{ totalBalance |
+                    <h2 class="mb-6 text-2xl font-bold tracking-tight md:text-4xl">{{ userCurrancy }} {{ totalBalance |
                         number:'1.1-2'}} / {{totalBudget > 0 ? (totalBudget | number:'1.1-2') : (totalIncome |
                         number:'1.1-2')}}
                     </h2>

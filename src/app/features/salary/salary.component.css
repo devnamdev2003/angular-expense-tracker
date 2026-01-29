@@ -48,3 +48,28 @@
         transform: translateY(0);
     }
 }
+
+
+input[type="date"]::-webkit-calendar-picker-indicator,
+input[type="month"]::-webkit-calendar-picker-indicator {
+    filter: var(--icon-color2);
+    cursor: pointer;
+}
+
+input[type="date"],
+input[type="month"] {
+    border: none;
+    outline: none;
+    cursor: pointer;
+}
+
+.hiddeninput {
+    z-index: 50;
+    background: none;
+    width: 100px;
+    color: transparent;
+}
+
+.hiddeninputdiv {
+    right: -23px;
+}
