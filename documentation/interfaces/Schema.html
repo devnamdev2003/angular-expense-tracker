@@ -213,8 +213,8 @@ export class StorageService {
   /** LocalStorage key for expenses */
   private readonly expenseKey &#x3D; &#x27;expenses&#x27;;
 
-  /** LocalStorage key for budgets */
-  private readonly budgetKey &#x3D; &#x27;budget&#x27;;
+  /** LocalStorage key for salary */
+  private readonly salaryKey &#x3D; &#x27;salary&#x27;;
 
   /** LocalStorage key for user settings */
   private readonly userKey &#x3D; &#x27;user&#x27;;
@@ -265,13 +265,16 @@ export class StorageService {
     graph_view_type: &quot;month&quot;
   };
 
-  /** Schema for budget */
-  private readonly budgetSchema: Schema &#x3D; {
-    budget_id: &quot;&quot;,
+  /** Schema for salary */
+  private readonly salarySchema: Schema &#x3D; {
+    salary_id: &quot;&quot;,
     amount: 0,
-    fromDate: &quot;&quot;,
-    toDate: &quot;&quot;
-  };
+    month: &quot;&quot;,
+    date: &quot;&quot;,
+    budget: 0,
+    note: &quot;&quot;,
+    viewMode: &quot;salary&quot;,
+  }
 
   /** Schema for Liked song */
   private readonly likedSongSchema: Schema &#x3D; {
@@ -298,12 +301,12 @@ export class StorageService {
   }
 
   /**
-   * Retrieves all budgets from localStorage.
+   * Retrieves all salaries from localStorage.
    *
-   * @returns Array of budget objects.
+   * @returns Array of salary objects.
    */
-  getAllBudgets(): any[] {
-    return JSON.parse(localStorage.getItem(this.budgetKey) || &#x27;[]&#x27;);
+  getAllSalaries(): any[] {
+    return JSON.parse(localStorage.getItem(this.salaryKey) || &#x27;[]&#x27;);
   }
 
   /**
@@ -339,8 +342,8 @@ export class StorageService {
   /** Returns the localStorage key used for expenses */
   getExpenseKey(): string { return this.expenseKey; }
 
-  /** Returns the localStorage key used for budgets */
-  getBudgetKey(): string { return this.budgetKey; }
+  /** Returns the localStorage key used for salaries */
+  getSalaryKey(): string { return this.salaryKey; }
 
   /** Returns the localStorage key used for user */
   getUserKey(): string { return this.userKey; }
@@ -358,12 +361,12 @@ export class StorageService {
   }
 
   /**
-   * Updates the budgets in localStorage.
+   * Updates the salaries in localStorage.
    *
-   * @param budgets Array of budgets to save.
+   * @param salaries Array of salaries to save.
    */
-  updateBudgets(budgets: any[]): void {
-    localStorage.setItem(this.budgetKey, JSON.stringify(budgets));
+  updateSalarys(salarys: any[]): void {
+    localStorage.setItem(this.salaryKey, JSON.stringify(salarys));
   }
 
   /**
@@ -399,12 +402,12 @@ export class StorageService {
     return this.userSchema;
   }
 
-  /** Returns the schema for budgets 
+  /** Returns the schema for salaries 
    * 
-   * @returns Schema object for  budgets
+   * @returns Schema object for  salaries
   */
-  getbudgetSchema(): Schema {
-    return this.budgetSchema;
+  getsalarySchema(): Schema {
+    return this.salarySchema;
   }
 
   /** Returns the schema for liked songs 

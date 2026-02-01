@@ -141,7 +141,7 @@
                 <h3>Description</h3>
             </p>
             <p class="comment">
-                <p>Service to handle background POST requests to sync user data (expenses, budget, categories, etc.)
+                <p>Service to handle background POST requests to sync user data (expenses, salary, categories, etc.)
 with the backend API. Intended to run silently once every 24 hours.</p>
 
             </p>
@@ -185,12 +185,12 @@ with the backend API. Intended to run silently once every 24 hours.</p>
             <tbody>
                 <tr>
                     <td class="col-md-4">
-<code>constructor(http: HttpClient, configService: <a href="../injectables/ConfigService.html" target="_self">ConfigService</a>, storageService: <a href="../injectables/StorageService.html" target="_self">StorageService</a>, userService: <a href="../injectables/UserService.html" target="_self">UserService</a>, toastService: <a href="../injectables/ToastService.html" target="_self">ToastService</a>)</code>
+<code>constructor(http: <a href="https://angular.io/api/common/http/HttpClient" target="_blank">HttpClient</a>, configService: <a href="../injectables/ConfigService.html" target="_self">ConfigService</a>, storageService: <a href="../injectables/StorageService.html" target="_self">StorageService</a>, userService: <a href="../injectables/UserService.html" target="_self">UserService</a>, toastService: <a href="../injectables/ToastService.html" target="_self">ToastService</a>, globalLoaderService: <a href="../injectables/GlobalLoaderService.html" target="_self">GlobalLoaderService</a>)</code>
                     </td>
                 </tr>
                         <tr>
                             <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="15" class="link-to-prism">src/app/service/backend-api/post/post-api.service.ts:15</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="16" class="link-to-prism">src/app/service/backend-api/post/post-api.service.ts:16</a></div>
                             </td>
                         </tr>
 
@@ -214,7 +214,7 @@ with the backend API. Intended to run silently once every 24 hours.</p>
                                                         <td>http</td>
                                                   
                                                         <td>
-                                                                    <code>HttpClient</code>
+                                                                        <code><a href="https://angular.io/api/common/http/HttpClient" target="_blank" >HttpClient</a></code>
                                                         </td>
                                                   
                                                     <td>
@@ -290,6 +290,20 @@ with the backend API. Intended to run silently once every 24 hours.</p>
 
                                                         </td>
                                                 </tr>
+                                                <tr>
+                                                        <td>globalLoaderService</td>
+                                                  
+                                                        <td>
+                                                                        <code><a href="../injectables/GlobalLoaderService.html" target="_self" >GlobalLoaderService</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                        <td>
+                                                        </td>
+                                                </tr>
                                         </tbody>
                                     </table>
                             </div>
@@ -324,8 +338,8 @@ with the backend API. Intended to run silently once every 24 hours.</p>
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="79"
-                                    class="link-to-prism">src/app/service/backend-api/post/post-api.service.ts:79</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="90"
+                                    class="link-to-prism">src/app/service/backend-api/post/post-api.service.ts:90</a></div>
                         </td>
                     </tr>
 
@@ -341,7 +355,7 @@ with the backend API. Intended to run silently once every 24 hours.</p>
 
                         </div>
                             <div class="io-description">
-                                <p>An object containing user_id, expenses, budget, category, and user_data
+                                <p>An object containing user_id, expenses, salary, category, and user_data
 or <code>undefined</code> if user_id is not available.</p>
 
                             </div>
@@ -362,15 +376,15 @@ or <code>undefined</code> if user_id is not available.</p>
             </tr>
             <tr>
                 <td class="col-md-4">
-<code>postUserData()</code>
+<code>postUserData(forceBackup: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank">boolean</a>)</code>
                 </td>
             </tr>
 
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="37"
-                                    class="link-to-prism">src/app/service/backend-api/post/post-api.service.ts:37</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="39"
+                                    class="link-to-prism">src/app/service/backend-api/post/post-api.service.ts:39</a></div>
                         </td>
                     </tr>
 
@@ -381,10 +395,44 @@ or <code>undefined</code> if user_id is not available.</p>
 since the last successful backup. Uses <code>/api/post/</code> endpoint.</p>
 </div>
 
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                                <td>Default value</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>forceBackup</td>
+                                            <td>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+                                            <td>
+                                                    <code>false</code>
+                                            </td>
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
                         <div class="io-description">
                             <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
 
                         </div>
+                            <div class="io-description">
+                                
+                            </div>
                 </td>
             </tr>
         </tbody>
@@ -397,13 +445,14 @@ since the last successful backup. Uses <code>/api/post/</code> endpoint.</p>
     <div class="tab-pane fade  tab-source-code" id="source">
         <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Injectable } from &#x27;@angular/core&#x27;;
 import { HttpClient } from &#x27;@angular/common/http&#x27;;
-import { take } from &#x27;rxjs/operators&#x27;;
+import { finalize, take } from &#x27;rxjs/operators&#x27;;
 import { ConfigService } from &#x27;../../config/config.service&#x27;;
 import { StorageService } from &#x27;../../localStorage/storage.service&#x27;;
 import { UserService } from &#x27;../../localStorage/user.service&#x27;;
 import { ToastService } from &#x27;../../toast/toast.service&#x27;;
+import { GlobalLoaderService } from &#x27;../../global-loader/global-loader.service&#x27;;
 /**
- * Service to handle background POST requests to sync user data (expenses, budget, categories, etc.)
+ * Service to handle background POST requests to sync user data (expenses, salary, categories, etc.)
  * with the backend API. Intended to run silently once every 24 hours.
  */
 @Injectable({
@@ -424,26 +473,35 @@ export class PostApiService {
     private configService: ConfigService,
     private storageService: StorageService,
     private userService: UserService,
-    private toastService: ToastService
+    private toastService: ToastService,
+    private globalLoaderService: GlobalLoaderService,
   ) { }
 
   /**
    * Posts user data to the server in the background if more than 24 hours have passed
    * since the last successful backup. Uses &#x60;/api/post/&#x60; endpoint.
    */
-  postUserData(): void {
+  postUserData(forceBackup: boolean &#x3D; false): void {
     const lastBackupStr &#x3D; this.userService.getValue&lt;string&gt;(&#x27;last_backup&#x27;);
     const now &#x3D; new Date(this.configService.getLocalTime());
     const lastBackup &#x3D; lastBackupStr ? new Date(lastBackupStr) : null;
     const shouldBackup &#x3D; !lastBackup || (now.getTime() - lastBackup.getTime()) &gt; 4 * 60 * 60 * 1000;
 
-    if (shouldBackup) {
-      // console.log(&#x27;Posting user data in the background...&#x27;);
+    if (shouldBackup || forceBackup) {
+
+      if (forceBackup) this.globalLoaderService.show(&#x27;☁️ Saving data to cloud...&#x27;);
+
       const url &#x3D; this.configService.getapiUrl() + &#x27;/api/post/&#x27;;
       const userData &#x3D; this.getUserDataFromLocalStorage();
 
-      this.http.post(url, userData).pipe(take(1)).subscribe({
+      this.http.post(url, userData).pipe(
+        take(1),
+        finalize(() &#x3D;&gt; {
+          if (forceBackup) this.globalLoaderService.hide();
+        })
+      ).subscribe({
         next: (res: any) &#x3D;&gt; {
+          if (forceBackup) this.toastService.show(&#x27;Data saved to cloud successfully!&#x27;, &#x27;success&#x27;, 4000);
           console.log(&#x27;User data posted successfully. Response:&#x27;, res);
           const api_response_app_version &#x3D; res.app_version;
           const app_current_version &#x3D; this.userService.getValue&lt;string&gt;(&#x27;app_version&#x27;);
@@ -459,18 +517,19 @@ export class PostApiService {
           this.userService.update(&#x27;ai_key&#x27;, res.ai_key);
         },
         error: err &#x3D;&gt; {
+          if (forceBackup) this.toastService.show(&#x27;Failed to save data. Please try again.&#x27;, &#x27;error&#x27;, 5000);
           console.error(&#x27;Error posting user data&#x27;, err);
         }
       });
     } else {
-      //console.log(&#x27;Backup skipped. Last backup was within 24 hours.&#x27;);
+      console.log(&#x27;Backup skipped. Last backup was within 4 hours.&#x27;);
     }
   }
 
   /**
    * Gathers all relevant user data from LocalStorage to be sent to the backend.
    *
-   * @returns An object containing user_id, expenses, budget, category, and user_data
+   * @returns An object containing user_id, expenses, salary, category, and user_data
    * or &#x60;undefined&#x60; if user_id is not available.
    */
   getUserDataFromLocalStorage(): any {
@@ -482,13 +541,13 @@ export class PostApiService {
 
     const userData &#x3D; this.storageService.getUser();
     const expenses &#x3D; this.storageService.getAllExpenses();
-    const budget &#x3D; this.storageService.getAllBudgets();
+    const salary &#x3D; this.storageService.getAllSalaries();
     const categories &#x3D; this.storageService.getAllCategories();
 
     return {
       user_id: userId,
       expenses: expenses || [],
-      budget: budget || [],
+      salary: salary || [],
       category: categories || [],
       user_data: userData || {}
     };

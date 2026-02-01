@@ -129,7 +129,7 @@
 <td>Persistent data storage</td>
 </tr>
 <tr>
-<td>Django</td>
+<td>Spring Boot</td>
 <td>Backend api logic</td>
 </tr>
 </tbody>
@@ -213,23 +213,45 @@
 </li>
 </ul>
 <hr>
-<h3>5. <strong>Budget View</strong></h3>
+<h3>5. <strong>Budget &amp; Salary Management</strong></h3>
+<p>The <strong>Budget &amp; Salary</strong> module provides a sophisticated financial dashboard that transitions between total income tracking and granular monthly budgeting.</p>
+<p><strong>Key capabilities include:</strong></p>
 <ul>
-<li><p>Users can define a <strong>budget range</strong> by selecting a <strong>start</strong> and <strong>end date</strong>.</p>
-</li>
-<li><p>Once a budget is set:</p>
+<li><p>💼 <strong>Dynamic Financial Modes</strong></p>
 <ul>
-<li><p>A <strong>progress bar</strong> visually represents how much of the budget has been spent.</p>
-</li>
-<li><p>Informative summary boxes display:</p>
-<ul>
-<li><strong>Avg Allowed/Day</strong></li>
-<li><strong>Spent/Day</strong></li>
-<li><strong>Suggested/Day</strong> (based on remaining budget and days)</li>
+<li><strong>Salary Tracking:</strong> Tracks total accumulated income and overall savings rates.</li>
+<li><strong>Budget Tracking:</strong> Focuses on a specific month&#39;s limits to prevent overspending.</li>
+<li>The system intelligently calculates metrics based on the active <code>viewMode</code>.</li>
 </ul>
 </li>
-<li><p>Users have the ability to <strong>edit</strong> or <strong>delete</strong> the budget for better flexibility and control.</p>
+<li><p>📊 <strong>Advanced Financial Analytics</strong></p>
+<ul>
+<li><strong>Salary Growth:</strong> Automatically calculates the percentage increase or decrease in income compared to the previous month.</li>
+<li><strong>Savings Rate:</strong> Real-time calculation of the percentage of income retained after expenses:</li>
+</ul>
 </li>
+<li><p><strong>Daily Spending Intelligence:</strong></p>
+<ul>
+<li><strong>Allowed/Day:</strong> Your theoretical daily limit based on the total budget and days in the month.</li>
+<li><strong>Spent/Day:</strong> Actual average spending calculated from the day of your first expense to today.</li>
+<li><strong>Suggested/Day:</strong> A dynamic &quot;correction&quot; metric that tells you exactly how much you can spend for the <em>remaining</em> days to stay on target.</li>
+</ul>
+</li>
+<li><p>🎨 <strong>Visual Feedback &amp; Progress</strong></p>
+<ul>
+<li><strong>Smart Progress Bar:</strong> A multi-state indicator that shifts colors based on your spending velocity:<ul>
+<li>🟢 <strong>Green to Indigo:</strong> (Below 50%) - Safe zone.</li>
+<li>🟠 <strong>Orange:</strong> (50% - 90%) - Warning zone.</li>
+<li>🔴 <strong>Red:</strong> (Above 90%) - Critical limit/Exceeded.</li>
+</ul>
+</li>
+<li><strong>Contextual Status:</strong> Text insights (e.g., <em>&quot;Excellent! Saving &gt; 50%&quot;</em> or <em>&quot;⚠️ You have exceeded your limit!&quot;</em>).</li>
+</ul>
+</li>
+<li><p>🛠️ <strong>Transaction Management</strong></p>
+<ul>
+<li><strong>Full CRUD Operations:</strong> Add, edit, and delete salary/budget records.</li>
+<li><strong>Validation Layer:</strong> Integrated error handling for amounts (max limit ), required notes, and month selection.</li>
 </ul>
 </li>
 </ul>
@@ -237,13 +259,14 @@
 <h3>6. <strong>Settings View</strong></h3>
 <p>Provides customization and utility options for better personalization:</p>
 <ul>
-<li>🎨 <strong>Theme Mode Toggle</strong>  — Dark / Light</li>
-<li>⬇️ <strong>Download Data</strong>  —  Export your expenses in <strong>PDF</strong>, <strong>JSON</strong>, or <strong>Excel</strong> formats between the selected date range. Users can also choose <strong>All Data</strong> to export all expense records.</li>
-<li>📤 <strong>Import Data</strong> — Upload expense data.</li>
-<li>🔄 <strong>Update App</strong> — Update the application to the latest release.</li>
-<li>➕ <strong>Add Category</strong> — Create custom categories for better organization.</li>
-<li>✏️ <strong>Edit Category</strong> — Modify existing categories.</li>
-<li>❌ <strong>Delete Category</strong> — Remove unused or incorrect categories.</li>
+<li>🎨 <strong>Theme Mode Toggle</strong> — Switch between <strong>Dark</strong> and <strong>Light</strong> modes</li>
+<li>⬇️ <strong>Download Data</strong> — Export expenses in <strong>PDF</strong>, <strong>JSON</strong>, or <strong>Excel</strong> formats within a selected date range. Users can also choose <strong>All Data</strong> to export every expense record</li>
+<li>📤 <strong>Import Data</strong> — Upload and import expense data into the application</li>
+<li>🔄 <strong>Update App</strong> — Update the application to the latest available version</li>
+<li>☁️ <strong>Data Backup</strong> — Enable automatic or manual data backup for data safety. When enabled, a backend API runs automatically in the background to upload your data to the database.</li>
+<li>➕ <strong>Add Category</strong> — Create custom categories for better expense organization</li>
+<li>✏️ <strong>Edit Category</strong> — Update or rename existing categories</li>
+<li>❌ <strong>Delete Category</strong> — Remove unused or incorrect categories</li>
 </ul>
 <hr>
 <h2>📱 Mobile-First Design</h2>

@@ -115,9 +115,6 @@ customElements.define('compodoc-menu', class extends HTMLElement {
                                 <a href="components/AppComponent.html" data-type="entity-link" >AppComponent</a>
                             </li>
                             <li class="link">
-                                <a href="components/BudgetComponent.html" data-type="entity-link" >BudgetComponent</a>
-                            </li>
-                            <li class="link">
                                 <a href="components/CalendarComponent.html" data-type="entity-link" >CalendarComponent</a>
                             </li>
                             <li class="link">
@@ -151,6 +148,9 @@ customElements.define('compodoc-menu', class extends HTMLElement {
                                 <a href="components/HamburgerMenuComponent.html" data-type="entity-link" >HamburgerMenuComponent</a>
                             </li>
                             <li class="link">
+                                <a href="components/HelpDashboard.html" data-type="entity-link" >HelpDashboard</a>
+                            </li>
+                            <li class="link">
                                 <a href="components/HomeComponent.html" data-type="entity-link" >HomeComponent</a>
                             </li>
                             <li class="link">
@@ -170,6 +170,9 @@ customElements.define('compodoc-menu', class extends HTMLElement {
                             </li>
                             <li class="link">
                                 <a href="components/PlaylistMusicComponent.html" data-type="entity-link" >PlaylistMusicComponent</a>
+                            </li>
+                            <li class="link">
+                                <a href="components/SalaryComponent.html" data-type="entity-link" >SalaryComponent</a>
                             </li>
                             <li class="link">
                                 <a href="components/SearchButtonComponent.html" data-type="entity-link" >SearchButtonComponent</a>
@@ -203,9 +206,6 @@ customElements.define('compodoc-menu', class extends HTMLElement {
                             </div>
                             <ul class="links collapse " ${ isNormalMode ? 'id="injectables-links"' : 'id="xs-injectables-links"' }>
                                 <li class="link">
-                                    <a href="injectables/BudgetService.html" data-type="entity-link" >BudgetService</a>
-                                </li>
-                                <li class="link">
                                     <a href="injectables/CategoryService.html" data-type="entity-link" >CategoryService</a>
                                 </li>
                                 <li class="link">
@@ -231,6 +231,9 @@ customElements.define('compodoc-menu', class extends HTMLElement {
                                 </li>
                                 <li class="link">
                                     <a href="injectables/SaavnService.html" data-type="entity-link" >SaavnService</a>
+                                </li>
+                                <li class="link">
+                                    <a href="injectables/SalaryService.html" data-type="entity-link" >SalaryService</a>
                                 </li>
                                 <li class="link">
                                     <a href="injectables/ScreenTypeService.html" data-type="entity-link" >ScreenTypeService</a>
@@ -270,9 +273,6 @@ customElements.define('compodoc-menu', class extends HTMLElement {
                         </div>
                         <ul class="links collapse " ${ isNormalMode ? ' id="interfaces-links"' : 'id="xs-interfaces-links"' }>
                             <li class="link">
-                                <a href="interfaces/Budget.html" data-type="entity-link" >Budget</a>
-                            </li>
-                            <li class="link">
                                 <a href="interfaces/Category.html" data-type="entity-link" >Category</a>
                             </li>
                             <li class="link">
@@ -286,6 +286,9 @@ customElements.define('compodoc-menu', class extends HTMLElement {
                             </li>
                             <li class="link">
                                 <a href="interfaces/HeatmapSummary.html" data-type="entity-link" >HeatmapSummary</a>
+                            </li>
+                            <li class="link">
+                                <a href="interfaces/Salary.html" data-type="entity-link" >Salary</a>
                             </li>
                             <li class="link">
                                 <a href="interfaces/Schema.html" data-type="entity-link" >Schema</a>

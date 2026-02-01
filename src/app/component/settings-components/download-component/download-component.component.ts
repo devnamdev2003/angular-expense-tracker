@@ -10,8 +10,8 @@ import * as XLSX from 'xlsx';
 import { ExpenseService, Expense } from '../../../service/localStorage/expense.service';
 import { Category, CategoryService } from '../../../service/localStorage/category.service';
 import { UserService, User } from '../../../service/localStorage/user.service';
-import { Budget, BudgetService } from '../../../service/localStorage/budget.service';
 import { ConfigService } from '../../../service/config/config.service';
+import { SalaryService, Salary } from '../../../service/localStorage/salary.service';
 
 /**
  * Interface representing the structure of user data
@@ -26,8 +26,8 @@ export interface UserData {
   /** Category data */
   categoryData: Category[] | [],
 
-  /** Budget data */
-  budgetData: Budget[] | []
+  /** Salary data */
+  salaryData: Salary[] | [];
 };
 
 /**
@@ -75,7 +75,7 @@ export class DownloadComponentComponent {
    * @param toastService Service used to show toast notifications.
    * @param categoryService Service to fetch category data.
    * @param userService Service to fetch user data.
-   * @param budgetService Service to fetch budget data. 
+   * @param salaryService Service to fetch salary data.
    * @param configService Service to fetch configuration values 
    */
   constructor(
@@ -84,7 +84,7 @@ export class DownloadComponentComponent {
     private toastService: ToastService,
     private categoryService: CategoryService,
     private userService: UserService,
-    private budgetService: BudgetService,
+    private salaryService: SalaryService,
     private configService: ConfigService
   ) {
     this.today = this.configService.getLocalTime().split('T')[0];
@@ -131,7 +131,7 @@ export class DownloadComponentComponent {
     const expenseData: Expense[] = this.expenseService.searchByDateRange(fromDate, toDate);
     const categoryData: Category[] = this.categoryService.getAll().filter(item => item.user_id != '0');
     const userData: User | null = this.userService.getUserData();
-    const budgetData: Budget[] = this.budgetService.getAll();
+    const salaryData: Salary[] = this.salaryService.getAll();
 
     if (!expenseData || expenseData.length === 0) {
       this.toastService.show('No expenses found in this date range', 'info', 3000);
@@ -157,7 +157,7 @@ export class DownloadComponentComponent {
       userData: userData || {},
       expenseData: filteredExpenseData || [],
       categoryData: categoryData || [],
-      budgetData: budgetData || []
+      salaryData: salaryData || []
     };
 
     try {

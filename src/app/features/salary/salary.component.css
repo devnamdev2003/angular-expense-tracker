@@ -1,0 +1,75 @@
+/* Animations */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes slideUp {
+    from {
+        transform: translateY(20px);
+        opacity: 0;
+    }
+
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+.animate-fade-in {
+    animation: fadeIn 0.5s ease-out;
+}
+
+.animate-slide-up {
+    animation: slideUp 0.4s ease-out;
+}
+
+.animate-pulse-slow {
+    animation: pulse 3s infinite;
+}
+
+.animate-bounce-subtle {
+    animation: bounce 2s infinite;
+}
+
+@keyframes bounce {
+
+    0%,
+    100% {
+        transform: translateY(-5%);
+    }
+
+    50% {
+        transform: translateY(0);
+    }
+}
+
+
+input[type="date"]::-webkit-calendar-picker-indicator,
+input[type="month"]::-webkit-calendar-picker-indicator {
+    filter: var(--icon-color2);
+    cursor: pointer;
+}
+
+input[type="date"],
+input[type="month"] {
+    border: none;
+    outline: none;
+    cursor: pointer;
+}
+
+.hiddeninput {
+    z-index: 50;
+    background: none;
+    width: 100px;
+    color: transparent;
+}
+
+.hiddeninputdiv {
+    right: -23px;
+}

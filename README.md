@@ -21,7 +21,7 @@ This application leverages **Angular** as the frontend framework and **Tailwind 
 | Angular              | Frontend application logic      |
 | Tailwind CSS         | Styling and responsive UI       |
 | LocalStorage         | Persistent data storage         |
-| Django               | Backend api logic               |
+| Spring Boot          | Backend api logic               |
 
 ---
 
@@ -91,32 +91,52 @@ All expenses are stored in the device's **LocalStorage** and reflected immediate
 
 ---
 
-### 5. **Budget View**
+### 5. **Budget & Salary Management**
 
-* Users can define a **budget range** by selecting a **start** and **end date**.
-* Once a budget is set:
+The **Budget & Salary** module provides a sophisticated financial dashboard that transitions between total income tracking and granular monthly budgeting.
 
-  * A **progress bar** visually represents how much of the budget has been spent.
-  * Informative summary boxes display:
+**Key capabilities include:**
 
-    * **Avg Allowed/Day**
-    * **Spent/Day**
-    * **Suggested/Day** (based on remaining budget and days)
-  * Users have the ability to **edit** or **delete** the budget for better flexibility and control.
+* 💼 **Dynamic Financial Modes**
+  * **Salary Tracking:** Tracks total accumulated income and overall savings rates.
+  * **Budget Tracking:** Focuses on a specific month's limits to prevent overspending.
+  * The system intelligently calculates metrics based on the active `viewMode`.
 
+
+* 📊 **Advanced Financial Analytics**
+  * **Salary Growth:** Automatically calculates the percentage increase or decrease in income compared to the previous month.
+  * **Savings Rate:** Real-time calculation of the percentage of income retained after expenses:
+
+
+* **Daily Spending Intelligence:**
+  * **Allowed/Day:** Your theoretical daily limit based on the total budget and days in the month.
+  * **Spent/Day:** Actual average spending calculated from the day of your first expense to today.
+  * **Suggested/Day:** A dynamic "correction" metric that tells you exactly how much you can spend for the *remaining* days to stay on target.
+
+* 🎨 **Visual Feedback & Progress**
+  * **Smart Progress Bar:** A multi-state indicator that shifts colors based on your spending velocity:
+    * 🟢 **Green to Indigo:** (Below 50%) - Safe zone.
+    * 🟠 **Orange:** (50% - 90%) - Warning zone.
+    * 🔴 **Red:** (Above 90%) - Critical limit/Exceeded.
+  * **Contextual Status:** Text insights (e.g., *"Excellent! Saving > 50%"* or *"⚠️ You have exceeded your limit!"*).
+
+* 🛠️ **Transaction Management**
+  * **Full CRUD Operations:** Add, edit, and delete salary/budget records.
+  * **Validation Layer:** Integrated error handling for amounts (max limit ), required notes, and month selection.
 ---
 
 ### 6. **Settings View**
 
 Provides customization and utility options for better personalization:
 
-* 🎨 **Theme Mode Toggle**  — Dark / Light
-* ⬇️ **Download Data**  —  Export your expenses in **PDF**, **JSON**, or **Excel** formats between the selected date range. Users can also choose **All Data** to export all expense records.
-* 📤 **Import Data** — Upload expense data.
-* 🔄 **Update App** — Update the application to the latest release.
-* ➕ **Add Category** — Create custom categories for better organization.
-* ✏️ **Edit Category** — Modify existing categories.
-* ❌ **Delete Category** — Remove unused or incorrect categories.
+* 🎨 **Theme Mode Toggle** — Switch between **Dark** and **Light** modes
+* ⬇️ **Download Data** — Export expenses in **PDF**, **JSON**, or **Excel** formats within a selected date range. Users can also choose **All Data** to export every expense record
+* 📤 **Import Data** — Upload and import expense data into the application
+* 🔄 **Update App** — Update the application to the latest available version
+* ☁️ **Data Backup** — Enable automatic or manual data backup for data safety. When enabled, a backend API runs automatically in the background to upload your data to the database.
+* ➕ **Add Category** — Create custom categories for better expense organization
+* ✏️ **Edit Category** — Update or rename existing categories
+* ❌ **Delete Category** — Remove unused or incorrect categories
 
 ---
 

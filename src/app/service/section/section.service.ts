@@ -34,4 +34,13 @@ export class SectionService {
   setSection(section: string): void {
     this.sectionSource.next(section);
   }
+
+  getFullUrl(): string {
+    return window.location.href;
+  }
+  
+  getPathOnly(): string {
+    return window.location.pathname;
+  }
+
 }

@@ -166,6 +166,9 @@ ensuring data consistency with associated expenses.</p>
                                 <a href="#add" >add</a>
                             </li>
                             <li>
+                                <a href="#addBulk" >addBulk</a>
+                            </li>
+                            <li>
                                 <a href="#delete" >delete</a>
                             </li>
                             <li>
@@ -331,6 +334,86 @@ Generates a unique <code>category_id</code> and associates it with the current u
 
                                             <td>
                                                     <p>Category data excluding <code>category_id</code> and <code>user_id</code>.</p>
+
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="addBulk"></a>
+                    <span class="name">
+                        <span ><b>addBulk</b></span>
+                        <a href="#addBulk"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>addBulk(data: <a href="../interfaces/Category.html" target="_self">Category[]</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="167"
+                                    class="link-to-prism">src/app/service/localStorage/category.service.ts:167</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-description"><p>Bulk-adds category records into localStorage.</p>
+<p>🔹 Behavior:</p>
+<ul>
+<li>Generates a new <code>category_id</code> for each category</li>
+<li>Assigns the currently logged-in user ID</li>
+<li>Appends imported categories to existing stored categories</li>
+</ul>
+</div>
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                                <td>Description</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>data</td>
+                                            <td>
+                                                            <code><a href="../interfaces/Category.html" target="_self" >Category[]</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                            <td>
+                                                    <p>List of category objects without <code>category_id</code> and <code>user_id</code></p>
 
                                             </td>
                                         </tr>
@@ -880,6 +963,35 @@ export class CategoryService {
   updateAllCategories(categories: Category[]): void {
     if (!this.isBrowser()) return;
     this.storageService.updateCategories(categories);
+  }
+
+  /**
+   * Bulk-adds category records into localStorage.
+   *
+   * 🔹 Behavior:
+   * - Generates a new &#x60;category_id&#x60; for each category
+   * - Assigns the currently logged-in user ID
+   * - Appends imported categories to existing stored categories
+   *
+   * @param data List of category objects without &#x60;category_id&#x60; and &#x60;user_id&#x60;
+   */
+  addBulk(data: Category[]): void {
+    if (!this.isBrowser()) return;
+
+    const existing: Category[] &#x3D; this.getAll() ?? [];
+
+    // Remove categories that already exist (by ID)
+    const filteredExisting &#x3D; existing.filter(
+      oldCat &#x3D;&gt; !data.some(newCat &#x3D;&gt; newCat.category_id &#x3D;&#x3D;&#x3D; oldCat.category_id)
+    );
+
+    // Merge uploaded categories as-is (keep IDs)
+    const merged &#x3D; [...filteredExisting, ...data];
+
+    localStorage.setItem(
+      this.storageService.getCategoryKey(),
+      JSON.stringify(merged)
+    );
   }
 }
 </code></pre>

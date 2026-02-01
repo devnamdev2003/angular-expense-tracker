@@ -170,6 +170,9 @@
                                 <a href="#add" >add</a>
                             </li>
                             <li>
+                                <a href="#addBulk" >addBulk</a>
+                            </li>
+                            <li>
                                 <a href="#delete" >delete</a>
                             </li>
                             <li>
@@ -318,6 +321,86 @@
 
                                             <td>
                                                     <p>Expense data excluding <code>expense_id</code>.</p>
+
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="addBulk"></a>
+                    <span class="name">
+                        <span ><b>addBulk</b></span>
+                        <a href="#addBulk"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>addBulk(data: <a href="../interfaces/Expense.html" target="_self">Omit&lt;Expense, expense_id&gt;[]</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="185"
+                                    class="link-to-prism">src/app/service/localStorage/expense.service.ts:185</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-description"><p>Bulk-adds expense records into localStorage.</p>
+<p>🔹 Behavior:</p>
+<ul>
+<li>Generates a new unique <code>expense_id</code> for each expense</li>
+<li>Rounds the amount to 2 decimal places</li>
+<li>Appends imported expenses to existing stored expenses</li>
+</ul>
+</div>
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                                <td>Description</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>data</td>
+                                            <td>
+                                                            <code><a href="../interfaces/Expense.html" target="_self" >Omit&lt;Expense, expense_id&gt;[]</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                            <td>
+                                                    <p>List of expense objects without <code>expense_id</code></p>
 
                                             </td>
                                         </tr>
@@ -931,6 +1014,33 @@ export class ExpenseService {
       to.setHours(23, 59, 59, 999);
       return itemDate &gt;&#x3D; from &amp;&amp; itemDate &lt;&#x3D; to;
     });
+  }
+
+  /**
+   * Bulk-adds expense records into localStorage.
+   *
+   * 🔹 Behavior:
+   * - Generates a new unique &#x60;expense_id&#x60; for each expense
+   * - Rounds the amount to 2 decimal places
+   * - Appends imported expenses to existing stored expenses
+   *
+   * @param data List of expense objects without &#x60;expense_id&#x60;
+   */
+  addBulk(data: Omit&lt;Expense, &#x27;expense_id&#x27;&gt;[]): void {
+    if (!this.isBrowser()) return;
+
+    const all: Expense[] &#x3D; this.getAll() ?? [];
+
+    const imported: Expense[] &#x3D; data.map(exp &#x3D;&gt; ({
+      ...exp,
+      expense_id: crypto.randomUUID(),
+      amount: Math.round(exp.amount * 100) / 100,
+    }));
+
+    localStorage.setItem(
+      this.storageService.getExpenseKey(),
+      JSON.stringify([...all, ...imported])
+    );
   }
 }
 </code></pre>

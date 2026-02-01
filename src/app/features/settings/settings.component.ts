@@ -11,9 +11,11 @@ import { DownloadComponentComponent } from '../../component/settings-components/
 import { UserService } from '../../service/localStorage/user.service';
 import { ExpenseService } from '../../service/localStorage/expense.service';
 import { Category, CategoryService } from '../../service/localStorage/category.service';
-import { BudgetService } from '../../service/localStorage/budget.service';
+import { SalaryService } from '../../service/localStorage/salary.service';
 import { UserData } from '../../component/settings-components/download-component/download-component.component';
-
+import { GlobalLoaderService } from '../../service/global-loader/global-loader.service';
+import { PostApiService } from '../../service/backend-api/post/post-api.service';
+import { SectionService } from '../../service/section/section.service';
 /**
  * @component
  * @description
@@ -84,9 +86,11 @@ export class SettingsComponent {
     * @param userService User service for managing user preferences
     * @param expenseService Expense service for managing expenses
     * @param categoryService Category service for managing categories
-    * @param budgetService Budget service for managing budgets
+    * @param salaryService Salary service for managing salarys
     * @param fb FormBuilder instance for creating reactive forms
     * @param toastService Toast service for showing notifications
+    * @param globalLoaderService Service to control the global loading indicator
+    * @param postApiService Backend API post service
     * @constructor
     * @memberof SettingsComponent
    */
@@ -94,9 +98,12 @@ export class SettingsComponent {
     public userService: UserService,
     private expenseService: ExpenseService,
     private categoryService: CategoryService,
-    private budgetService: BudgetService,
+    private salaryService: SalaryService,
     private fb: FormBuilder,
     private toastService: ToastService,
+    private globalLoaderService: GlobalLoaderService,
+    private postApiService: PostApiService,
+    private sectionService: SectionService
   ) { }
 
   /** 
@@ -195,19 +202,21 @@ export class SettingsComponent {
       this.deleteCategoryForm.markAllAsTouched();
       return;
     }
-    const category_id = this.deleteCategoryForm.value;
-    this.categoryService.delete(category_id.category_id);
-    this.toastService.show(`Category deleted succesfully.`, 'success');
-    this.closeDeleteCategoryModal();
-    const existingCategories: Category[] = this.categoryService.getAll();
-    let userId = this.userService.getValue<string>('id') || '0';
-    if (existingCategories.some(cat => cat.user_id === userId)) {
-      this.showEditCategoryOption = true;
-      this.showDeleteCategoryOption = true;
-    }
-    else{
-      this.showEditCategoryOption = false;
-      this.showDeleteCategoryOption = false;
+    if (confirm('Are you sure you want to delete this category?')) {
+      const category_id = this.deleteCategoryForm.value;
+      this.categoryService.delete(category_id.category_id);
+      this.toastService.show(`Category deleted succesfully.`, 'success');
+      this.closeDeleteCategoryModal();
+      const existingCategories: Category[] = this.categoryService.getAll();
+      let userId = this.userService.getValue<string>('id') || '0';
+      if (existingCategories.some(cat => cat.user_id === userId)) {
+        this.showEditCategoryOption = true;
+        this.showDeleteCategoryOption = true;
+      }
+      else {
+        this.showEditCategoryOption = false;
+        this.showDeleteCategoryOption = false;
+      }
     }
   }
 
@@ -343,6 +352,8 @@ export class SettingsComponent {
 
     const reader = new FileReader();
 
+    this.globalLoaderService.show('Uploading Data...');
+    let isFileUploaded: boolean = false;
     reader.onload = () => {
       try {
         const content = reader.result as string;
@@ -352,7 +363,7 @@ export class SettingsComponent {
         if (!Array.isArray(json.expenseData)) throw new Error('Invalid or missing expense data.');
         if (typeof json.userData !== 'object' || json.userData === null) throw new Error('Invalid or missing user data.');
         if (!Array.isArray(json.categoryData)) throw new Error('Invalid or missing category data.');
-        if (!Array.isArray(json.budgetData)) throw new Error('Invalid or missing budget data.');
+        if (!Array.isArray(json.salaryData)) throw new Error('Invalid or missing salary data.');
 
         // Validate each item
         const validData = json.expenseData.filter(item =>
@@ -370,34 +381,43 @@ export class SettingsComponent {
           this.toastService.show('No valid expenses found in the file.', 'warning');
           return;
         }
-
         // ✅ Confirm with user
         const confirmed = confirm(`Found ${validData.length} valid expenses. Do you want to import them?`);
-        if (!confirmed) return;
-
-        // ✅ Import data
-        for (const expense of validData) {
-          this.expenseService.add(expense);
+        if (!confirmed) {
+          this.toastService.show('Import cancelled.', 'info');
+          return;
         }
 
-        this.categoryService.updateAllCategories(json.categoryData);
         this.userService.updateUserData(json.userData);
-        this.budgetService.updateAllBudgets(json.budgetData);
+        const validCategories = json.categoryData.filter(cat => cat.user_id !== "0");
+        this.categoryService.addBulk(validCategories);
+        this.salaryService.updateAllSalaries(json.salaryData);
+        this.expenseService.addBulk(validData);
+        isFileUploaded = true;
 
-        this.toastService.show('Data imported successfully!', 'success');
       } catch (e) {
         console.error('Error parsing file:', e);
+        isFileUploaded = false;
         const errorMessage = typeof e === 'object' && e !== null && 'message' in e ? (e as { message?: string }).message : undefined;
         this.toastService.show(errorMessage || 'Failed to parse JSON.', 'error');
       } finally {
-        // ✅ Reset input so same file can be uploaded again
+        this.globalLoaderService.hide();
+        if (isFileUploaded) {
+          this.toastService.show(
+            'Data imported successfully. Please restart the app to see the updated data.',
+            'success',
+            5000
+          );
+        }
         input.value = '';
       }
+
     };
 
     reader.onerror = () => {
       console.error('File reading error:', reader.error);
       this.toastService.show('Failed to read the file.', 'error');
+      this.globalLoaderService.hide();
       input.value = '';
     };
 
@@ -516,5 +536,14 @@ export class SettingsComponent {
     if (!this.showEditCategoryModal) {
       this.selectedEditCategory = null;
     }
+  }
+
+  backupData(): void {
+    this.postApiService.postUserData(true);
+  }
+
+  openHelpCenter(section: string, event: Event): void {
+    event.preventDefault();
+    this.sectionService.setSection(section);
   }
 }

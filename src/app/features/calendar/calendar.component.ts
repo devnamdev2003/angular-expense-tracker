@@ -7,7 +7,7 @@ import { FormModelComponent } from '../../component/form-model/form-model.compon
 import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { ConfigService } from '../../service/config/config.service';
 import { ToastService } from '../../service/toast/toast.service';
-import { Budget, BudgetService } from '../../service/localStorage/budget.service';
+import { SalaryService, Salary } from '../../service/localStorage/salary.service';
 
 /**
  * Component that renders a monthly calendar view with expense tracking.
@@ -62,6 +62,9 @@ export class CalendarComponent implements OnInit {
   /** Flag to determine if the user can access music URLs for streaming and downloading. */
   has_music_url_access: boolean = false;
 
+  /** Stores the salary data for the current month, if available. */
+  currentMonthSalary: Salary | null = null;
+
   /** 
    * Stores the generated heatmap summary data for the current month.
    * Each item contains the color category, total days, and total amount
@@ -115,8 +118,11 @@ export class CalendarComponent implements OnInit {
   /** When true, the budget-related radio/checkbox option is displayed. */
   showBudgetRadio: boolean = false;
 
-  /** If true, heatmap threshold values are automatically set based on the user's budget otherwise, the user can set them manually. */
+  /** If true, heatmap threshold values are automatically set based on the user's salary otherwise, the user can set them manually. */
   isBudgetRadioClicked: boolean = false;
+
+  /** Stores the calculated threshold values for the heatmap when budget mode is enabled. */
+  thresholdValues: { rose_amount: number; emerald_amount: number } = { rose_amount: 0, emerald_amount: 0 };
 
   /**
    * Creates an instance of CalendarComponent.
@@ -125,7 +131,7 @@ export class CalendarComponent implements OnInit {
    * @param userService Service to retrieve user settings such as currency.
    * @param fb Angular `FormBuilder` to build the reactive form.
    * @param configService Service to fetch configuration values
-   * @param budgetService Service to fetch budget data. 
+   * @param salaryService Service to fetch salary data.
    * @param toastService Service for displaying toast notifications
    */
   constructor(
@@ -133,17 +139,19 @@ export class CalendarComponent implements OnInit {
     public userService: UserService,
     private fb: FormBuilder,
     private configService: ConfigService,
-    private budgetService: BudgetService,
+    private salaryService: SalaryService,
     private toastService: ToastService
   ) {
     this.currency = this.userService.getValue<string>('currency');
     this.isShowHeatmap = this.userService.getValue<boolean>('is_show_heatmap') ?? false;
     this.isBudgetRadioClicked = this.userService.getValue<boolean>('is_budget_radio_clicked') ?? false;
     this.has_music_url_access = this.userService.getValue<boolean>('has_music_url_access') ?? false;
-    const [emerald, rose] = this.calculateThresholdValues();
-    if (rose > emerald) {
+    const currentMonth = this.currentYear + '-' + (this.currentMonth + 1).toString().padStart(2, '0');
+    this.currentMonthSalary = this.salaryService.getSalaryByMonth(currentMonth);
+    this.thresholdValues = this.calculateThresholdValues();
+    if (this.thresholdValues.rose_amount > this.thresholdValues.emerald_amount) {
       if (this.isShowHeatmap) {
-        this.showBudgetRadio = this.budgetService.getAll().length > 0 ? true : false;
+        this.showBudgetRadio = this.currentMonthSalary ? true : false;
       }
     }
     else {
@@ -281,9 +289,8 @@ export class CalendarComponent implements OnInit {
    */
   private getHeatClass(amount: number): string {
     if (this.isShowHeatmap === false) return 'bg-[var(--color-surface)]';
-    const [emerald, rose] = this.calculateThresholdValues();
-    const rose_amount = (this.isBudgetRadioClicked && this.showBudgetRadio) ? rose : this.userService.getValue<number>('rose_amount') ?? 1000;
-    const emerald_amount = (this.isBudgetRadioClicked && this.showBudgetRadio) ? emerald : this.userService.getValue<number>('emerald_amount') ?? 500;
+    const rose_amount = (this.isBudgetRadioClicked && this.showBudgetRadio) ? this.thresholdValues.rose_amount : this.userService.getValue<number>('rose_amount') ?? 1000;
+    const emerald_amount = (this.isBudgetRadioClicked && this.showBudgetRadio) ? this.thresholdValues.emerald_amount : this.userService.getValue<number>('emerald_amount') ?? 500;
     if (amount === 0) {
       this.addOrUpdateHeatMapSummary('bg-[var(--color-gray)]', amount, 'No expenses')
       return 'bg-[var(--color-gray)]';
@@ -314,8 +321,7 @@ export class CalendarComponent implements OnInit {
    */
   toggleHeatmap(): void {
     this.isShowHeatmap = !this.isShowHeatmap;
-    const [emerald, rose] = this.calculateThresholdValues();
-    if (rose > emerald) {
+    if (this.thresholdValues.rose_amount > this.thresholdValues.emerald_amount) {
       this.showBudgetRadio = this.isShowHeatmap ? true : false;
     }
     else {
@@ -442,7 +448,7 @@ export class CalendarComponent implements OnInit {
    * Toggles the "Set Budget" mode for heatmap threshold calculation.
    * 
    * When enabled (`isBudgetRadioClicked = true`), the calendar heatmap thresholds 
-   * are recalculated automatically based on the user's budget data.
+   * are recalculated automatically based on the user's salary data.
    * Otherwise, the user can manually set the threshold values.
    * 
    * @returns {void}
@@ -455,50 +461,46 @@ export class CalendarComponent implements OnInit {
 
   /**
    * Calculates the heatmap threshold values (`emerald_amount` and `rose_amount`)
-   * based on the user's current budget and expense data.
+   * based on the user's current salary and expense data.
    * 
    * This method:
-   * - Retrieves the latest budget period from the BudgetService.
-   * - Filters all expenses that fall within that budget date range.
+   * - Retrieves the latest salary period from the salaryService.
+   * - Filters all expenses that fall within that salary date range.
    * - Computes the total spent, remaining amount, and daily averages.
    * - Determines threshold values dynamically for the calendar heatmap.
    * 
-   * @returns {[emerald_amount: number, rose_amount: number]} 
+   * @returns { rose_amount: number; emerald_amount: number } 
    * Returns a tuple where:
    * - `emerald_amount` represents the lower (better) daily spending threshold.
    * - `rose_amount` represents the higher (warning) daily spending threshold.
  */
-  calculateThresholdValues(): [emerald_amount: number, rose_amount: number] {
-    const budgets: Budget[] = this.budgetService.getAll();
-    if (budgets.length > 0) {
-      const latestBudget: Budget = budgets[budgets.length - 1];
-      const totalBudget = parseFloat(latestBudget.amount.toString());
-      const fromDate = new Date(latestBudget.fromDate);
-      const toDate = new Date(latestBudget.toDate);
+  calculateThresholdValues(): { rose_amount: number; emerald_amount: number } {
+    if (this.currentMonthSalary) {
+      const totalsalary = this.currentMonthSalary.budget === 0 ? this.currentMonthSalary.amount : this.currentMonthSalary.budget || 0;
 
-      // Filter expenses within the budget date range
-      const expenses: Expense[] = this.expenseService.getAll();
-      const expensesInRange = expenses.filter((exp: any) => {
-        const date = new Date(exp.date);
-        return date >= fromDate && date <= toDate;
-      });
+      const fromDate = `${this.currentYear}-${String(this.currentMonth + 1).padStart(2, '0')}-01`;
+      const lastDay = new Date(this.currentYear, this.currentMonth + 1, 0).getDate();
+      const toDate = `${this.currentYear}-${String(this.currentMonth + 1).padStart(2, '0')}-${String(lastDay).padStart(2, '0')}`;
+
+      // Filter expenses within the salary date range
+      const expensesInRange: Expense[] = this.expenseService.searchByDateRange(fromDate, toDate);
 
       // Calculate spent amount and percentage
       const spent = expensesInRange.reduce((sum: number, exp: any) => sum + parseFloat(exp.amount), 0);
-      const remaining = Math.max(totalBudget - spent, 0);
+      const remaining = Math.max(totalsalary - spent, 0);
 
       // Calculate average daily insights
-      const totalDays = Math.ceil((toDate.getTime() - fromDate.getTime()) / (1000 * 60 * 60 * 24)) + 1;
+      const totalDays = Math.ceil((new Date(toDate).getTime() - new Date(fromDate).getTime()) / (1000 * 60 * 60 * 24)) + 1;
       const today = new Date(this.configService.getLocalTime());
-      const elapsedDays = Math.max(Math.ceil((today.getTime() - fromDate.getTime()) / (1000 * 60 * 60 * 24)), 1);
+      const elapsedDays = Math.max(Math.ceil((today.getTime() - new Date(fromDate).getTime()) / (1000 * 60 * 60 * 24)), 1);
       const remainingDays = Math.max(totalDays - elapsedDays, 1);
 
       const avgSpentPerDay = Number((spent / elapsedDays).toFixed(0));
       const suggestedPerDay = Number((remaining / remainingDays).toFixed(0));
 
-      return [suggestedPerDay, avgSpentPerDay];
+      return { rose_amount: avgSpentPerDay, emerald_amount: suggestedPerDay };
     }
-    return [0, 0];
+    return { rose_amount: 0, emerald_amount: 0 };
   }
 
 }

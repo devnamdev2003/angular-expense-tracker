@@ -32,7 +32,7 @@ export class ConfigService {
   /**
    * The production (live) API base URL.
    *
-   * Example: `https://exwiseapi.onrender.com`
+   * Example: `https://coders813-exwiseapi.hf.space`
    */
   private readonly liveAPIUrl: string = environment.liveAPIUrl;
 
@@ -53,10 +53,10 @@ export class ConfigService {
    * Returns the appropriate API base URL depending on the environment.
    *
    * - `"local"` → `http://localhost:8000`
-   * - `"live"` → `https://exwiseapi.onrender.com`
+   * - `"live"` → `https://coders813-exwiseapi.hf.space`
    * - Any other value → Determines based on current window location.
    * - If the URL contains `"localhost"`, returns `http://localhost:8000`.
-   * - If the URL contains `"exwise"`, returns `https://exwiseapi.onrender.com`.
+   * - If the URL contains `"exwise"`, returns `https://coders813-exwiseapi.hf.space`.
    * - Defaults to `http://localhost:8000` if none of the above conditions are met.
    * @returns {string} The API base URL for the current environment.
    */
