@@ -213,80 +213,48 @@
 </li>
 </ul>
 <hr>
-<h3>5. <strong>Budget &amp; Salary View</strong></h3>
-<p>The <strong>Budget View</strong> helps users manage their <strong>monthly salary</strong>, define optional <strong>budgets</strong>, and gain deep insights into their spending behavior.</p>
+<h3>5. <strong>Budget &amp; Salary Management</strong></h3>
+<p>The <strong>Budget &amp; Salary</strong> module provides a sophisticated financial dashboard that transitions between total income tracking and granular monthly budgeting.</p>
 <p><strong>Key capabilities include:</strong></p>
 <ul>
-<li>💼 <strong>Salary Management</strong><ul>
-<li>Users can add their <strong>monthly salary</strong>.</li>
-<li>Optionally, they can define a <strong>monthly budget</strong> that is less than or equal to their salary.</li>
-<li>The system intelligently switches between:<ul>
-<li><strong>Salary-based tracking</strong> (if no budget is set)</li>
-<li><strong>Budget-based tracking</strong> (if a budget is defined)</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>📊 <strong>Financial Overview Card</strong><ul>
-<li>Displays:<ul>
-<li><strong>Remaining Balance</strong> (salary – expenses)</li>
-<li>or <strong>Remaining Budget</strong> (budget – expenses)</li>
-</ul>
-</li>
-<li>Clearly shows <strong>Total Income</strong>, <strong>Total Expenses</strong>, and the remaining amount.</li>
-</ul>
-</li>
-<li>📅 <strong>Month-wise Analysis</strong><ul>
-<li>Users can switch between months using a month selector.</li>
-<li>All calculations, analytics, and transactions update dynamically based on the selected month.</li>
-</ul>
-</li>
-<li>📈 <strong>Daily Spending Analytics</strong><ul>
-<li><strong>Allowed/Day</strong> – Average amount the user can spend per day.</li>
-<li><strong>Spent/Day</strong> – Actual average spending per day so far.</li>
-<li><strong>Suggested/Day</strong> – Recommended spending per remaining day to stay within limits.</li>
-</ul>
-</li>
-<li>🟩 <strong>Budget Usage Indicator</strong><ul>
-<li>A dynamic progress bar visually represents how much of the salary or budget has been used.</li>
-<li>Color indicators provide quick feedback:<ul>
-<li>🟢 Green – Healthy spending</li>
-<li>🟠 Orange – Caution zone</li>
-<li>🔴 Red – Overspending</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>🧠 <strong>Smart Spending Insights</strong><ul>
-<li>Displays contextual messages such as:<ul>
-<li>“Excellent! You’re saving more than half your salary.”</li>
-<li>“Careful! You’re running low on funds.”</li>
-<li>“You have exceeded your salary!”</li>
-</ul>
-</li>
-<li>Helps users quickly understand their financial status without manual calculations.</li>
-</ul>
-</li>
-<li>🧾 <strong>Transaction Management</strong><ul>
-<li>Users can:<ul>
-<li>Add salary entries</li>
-<li>Edit existing salary or budget values</li>
-<li>Attach optional notes for clarity</li>
-<li>Delete salary records when needed</li>
-</ul>
-</li>
-<li>All changes reflect instantly across analytics and visualizations.</li>
-</ul>
-</li>
-</ul>
-<hr>
-<p>If you want, next I can:</p>
+<li><p>💼 <strong>Dynamic Financial Modes</strong></p>
 <ul>
-<li>Align <strong>Dashboard</strong> wording with graphs logic</li>
-<li>Make README more <strong>recruiter / interview friendly</strong></li>
-<li>Shorten it for <strong>GitHub featured project</strong></li>
+<li><strong>Salary Tracking:</strong> Tracks total accumulated income and overall savings rates.</li>
+<li><strong>Budget Tracking:</strong> Focuses on a specific month&#39;s limits to prevent overspending.</li>
+<li>The system intelligently calculates metrics based on the active <code>viewMode</code>.</li>
 </ul>
-<p>Just tell me 👍</p>
+</li>
+<li><p>📊 <strong>Advanced Financial Analytics</strong></p>
+<ul>
+<li><strong>Salary Growth:</strong> Automatically calculates the percentage increase or decrease in income compared to the previous month.</li>
+<li><strong>Savings Rate:</strong> Real-time calculation of the percentage of income retained after expenses:</li>
+</ul>
+</li>
+<li><p><strong>Daily Spending Intelligence:</strong></p>
+<ul>
+<li><strong>Allowed/Day:</strong> Your theoretical daily limit based on the total budget and days in the month.</li>
+<li><strong>Spent/Day:</strong> Actual average spending calculated from the day of your first expense to today.</li>
+<li><strong>Suggested/Day:</strong> A dynamic &quot;correction&quot; metric that tells you exactly how much you can spend for the <em>remaining</em> days to stay on target.</li>
+</ul>
+</li>
+<li><p>🎨 <strong>Visual Feedback &amp; Progress</strong></p>
+<ul>
+<li><strong>Smart Progress Bar:</strong> A multi-state indicator that shifts colors based on your spending velocity:<ul>
+<li>🟢 <strong>Green to Indigo:</strong> (Below 50%) - Safe zone.</li>
+<li>🟠 <strong>Orange:</strong> (50% - 90%) - Warning zone.</li>
+<li>🔴 <strong>Red:</strong> (Above 90%) - Critical limit/Exceeded.</li>
+</ul>
+</li>
+<li><strong>Contextual Status:</strong> Text insights (e.g., <em>&quot;Excellent! Saving &gt; 50%&quot;</em> or <em>&quot;⚠️ You have exceeded your limit!&quot;</em>).</li>
+</ul>
+</li>
+<li><p>🛠️ <strong>Transaction Management</strong></p>
+<ul>
+<li><strong>Full CRUD Operations:</strong> Add, edit, and delete salary/budget records.</li>
+<li><strong>Validation Layer:</strong> Integrated error handling for amounts (max limit ), required notes, and month selection.</li>
+</ul>
+</li>
+</ul>
 <hr>
 <h3>6. <strong>Settings View</strong></h3>
 <p>Provides customization and utility options for better personalization:</p>

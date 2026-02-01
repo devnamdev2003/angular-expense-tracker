@@ -5,6 +5,10 @@ import { SalaryService, Salary } from '../../service/localStorage/salary.service
 import { ExpenseService, Expense } from '../../service/localStorage/expense.service';
 import { UserService } from '../../service/localStorage/user.service';
 
+/**
+ * Component for managing and visualizing user salary, budgets, and financial metrics.
+ * Provides views for tracking income and monthly budget planning.
+ */
 @Component({
   selector: 'app-salary',
   standalone: true,
@@ -14,35 +18,95 @@ import { UserService } from '../../service/localStorage/user.service';
 })
 export class SalaryComponent implements OnInit {
 
+  /** Current active view mode of the component */
   viewMode: 'salary' | 'budget' = 'salary';
+
+  /** Reference to the amount input field in the modal for auto-focusing */
   @ViewChild('amountInput') amountInput!: ElementRef;
+
+  /** List of transactions filtered by the current view mode and month */
   filteredTransactions: Salary[] = [];
+
+  /** The current month string in YYYY-MM format */
   currentMonth: string = this.getLocalDateString().slice(0, 7);
+
+  /** Flag to control the visibility of the add/edit modal */
   showModal: boolean = false;
+
+  /** Indicates if a budget entry exists for the currently selected month */
   hasBudgetForCurrentMonth: boolean = false;
+
+  /** Total income calculated from filtered transactions */
   totalIncome: number = 0;
+
+  /** Total expenses calculated based on the current view scope */
   totalExpense: number = 0;
+
+  /** Total budget allocated for the period */
   totalBudget: number = 0;
+
+  /** Theoretical daily allowance based on total budget/income */
   dailyAllowed: number = 0;
+
+  /** Actual daily spending average */
   dailySpent: number = 0;
+
+  /** Suggested daily spending to stay within budget for the remainder of the month */
   dailySuggested: number | null = null;
+
+  /** Calculated date-related metrics (days passed, remaining, etc.) */
   dateMetrics: any = {};
+
+  /** Percentage of budget or income spent */
   spentRate: number = 0;
+
+  /** String representation of the budget percentage for UI display */
   budgetPercentage: string = '0';
+
+  /** Calculated width for the progress bar UI */
   barWidth: number = 0;
+
+  /** CSS class names for the progress bar based on spending health */
   barColorClass: string = '';
+
+  /** Human-readable analysis message regarding financial status */
   analysisText: string = '';
+
+  /** CSS class for styling the analysis text */
   analysisTextClass: string = '';
+
+  /** Reactive signal containing validation errors for the transaction form */
   errors = signal<{ amount?: string, note?: string, budget?: string, month?: string }>({});
+
+  /** ID of the transaction currently being edited; null if creating new */
   editingId: string | null = null;
+
+  /** Buffer for the amount value in the entry form */
   newAmount: number | null = null;
+
+  /** Buffer for the note value in the entry form */
   newNote: string = '';
+
+  /** Buffer for the month selection in the entry form */
   newMonth: string = this.getLocalDateString().slice(0, 7);
+
+  /** The user's preferred currency symbol/code */
   userCurrancy: string | null;
+
+  /** Percentage of income saved */
   savingsPercentage: number = 0;
+
+  /** Percentage growth of salary compared to the previous entry */
   salaryGrowth: number = 0;
+
+  /** Count of days elapsed since the very first recorded expense */
   daysPassedFromLastExpense: number = 0;
 
+  /**
+   * @param salaryService Service to handle salary/budget data operations
+   * @param expenseService Service to handle expense data operations
+   * @param userService Service to retrieve user settings like currency
+   */
   constructor(
     private salaryService: SalaryService,
     private expenseService: ExpenseService,
@@ -52,11 +116,17 @@ export class SalaryComponent implements OnInit {
     this.getDaysPassedFromLastExpense();
   }
 
+  /**
+   * Initializes the component by loading necessary fonts and the initial financial state.
+   */
   ngOnInit() {
     this.injectFontAwesome();
     this.loadState();
   }
 
+  /**
+   * Injects external FontAwesome and Google Fonts stylesheets into the document head.
+   */
   injectFontAwesome() {
     const link = document.createElement('link');
     link.rel = 'stylesheet';
@@ -69,6 +139,9 @@ export class SalaryComponent implements OnInit {
     document.head.appendChild(font);
   }
 
+  /**
+   * Refreshes the local state by fetching data from services and recalculating all financial metrics.
+   */
   loadState() {
     const allTransactions: Salary[] = this.salaryService.getAll();
     allTransactions.sort((a, b) =>
@@ -103,7 +176,12 @@ export class SalaryComponent implements OnInit {
     this.savingsPercentage = this.savingsRateFunction();
   }
 
-  salaryGrowthFunction(allTransactions: Salary[]) {
+  /**
+   * Calculates the percentage growth of the salary compared to the previous month.
+   * @param allTransactions Array of all salary and budget transactions
+   * @returns Percentage growth value
+   */
+  salaryGrowthFunction(allTransactions: Salary[]): number {
     const grouped: any = {};
     allTransactions.forEach(item => {
       if (item.viewMode === 'salary') {
@@ -125,13 +203,21 @@ export class SalaryComponent implements OnInit {
     return 0;
   }
 
-  savingsRateFunction() {
+  /**
+   * Calculates the current savings rate percentage.
+   * @returns Savings rate as a percentage of total income
+   */
+  savingsRateFunction(): number {
     if (this.totalIncome === 0) return 0;
     const balance = this.totalIncome - this.totalExpense;
     return (balance / this.totalIncome) * 100;
   }
 
-  totalExpenseFunction() {
+  /**
+   * Aggregates total expenses based on whether the user is viewing all time or the current month's budget.
+   * @returns Total expense amount
+   */
+  totalExpenseFunction(): number {
     if (this.viewMode === 'salary') {
       const expense: Expense[] = this.expenseService.getAll();
       return expense.reduce((acc, e) => acc + Number(e.amount), 0);
@@ -146,6 +232,10 @@ export class SalaryComponent implements OnInit {
     }
   }
 
+  /**
+   * Computes time-based metrics for the current view (days passed, remaining, etc.).
+   * @returns Object containing month and day metrics
+   */
   dateMetricsFunction() {
     const now = new Date();
     const [year, month] = this.currentMonth.split('-').map(Number);
@@ -164,48 +254,74 @@ export class SalaryComponent implements OnInit {
     return { daysPassed, daysRemaining, daysInMonth, isPastMonth };
   };
 
-  dailySpentFunction() {
-    if (this.viewMode === 'salary') {
-      if (this.dateMetrics.daysPassed === 0) return 0;
-      return this.totalExpense / this.dateMetrics.daysPassed;
-    }
-    else {
-      if (this.dateMetrics.daysPassed === 0) return 0;
-      return this.totalExpense / this.dateMetrics.daysPassed;
-    }
+  /**
+   * Calculates the average daily spending.
+   * @returns Daily spend amount
+   */
+  dailySpentFunction(): number {
+    if (this.dateMetrics.daysPassed === 0) return 0;
+    return this.totalExpense / this.dateMetrics.daysPassed;
   };
 
-  dailyAllowedFunction() {
+  /**
+   * Calculates the maximum daily allowance to stay within the budget/income.
+   * @returns Daily allowance amount
+   */
+  dailyAllowedFunction(): number {
     const amount = this.totalBudget === 0 ? this.totalIncome : this.totalBudget;
     if (amount === 0) return 0;
     return Math.max(0, amount / this.dateMetrics.daysInMonth);
   };
 
-  dailySuggestedFunction() {
+  /**
+   * Calculates a suggested daily spending limit for the remaining days of the month.
+   * @returns Suggested daily amount or 0 if budget exceeded
+   */
+  dailySuggestedFunction(): number {
     const amount = this.totalBudget === 0 ? this.totalIncome : this.totalBudget;
     if (amount === 0) return 0;
     let { daysRemaining, isPastMonth } = this.dateMetrics;
-    daysRemaining = daysRemaining - 1;
     if (isPastMonth || daysRemaining <= 0) return 0;
     const remaining = amount - this.totalExpense;
     return remaining <= 0 ? 0 : remaining / daysRemaining;
   };
 
-  spentRateFunction() {
+  /**
+   * Calculates the ratio of expenses to budget/income.
+   * @returns Spent rate as a percentage
+   */
+  spentRateFunction(): number {
     const amount = this.totalBudget === 0 ? this.totalIncome : this.totalBudget;
     if (amount === 0) return 0;
     return parseFloat(((this.totalExpense / amount) * 100).toFixed(1));
   };
 
-  budgetPercentageFunction() { return Math.min(this.spentRateFunction(), 100).toFixed(1); };
-  barWidthFunction() { return this.spentRateFunction(); };
+  /**
+   * Formats the spent rate for display.
+   * @returns Percentage string
+   */
+  budgetPercentageFunction(): string { return Math.min(this.spentRateFunction(), 100).toFixed(1); };
 
-  barColorClassFunction() {
+  /**
+   * Determines the width of the progress bar.
+   * @returns Numeric percentage value
+   */
+  barWidthFunction(): number { return this.spentRateFunction(); };
+
+  /**
+   * Selects Tailwind CSS gradient classes based on the current spending rate.
+   * @returns CSS class string
+   */
+  barColorClassFunction(): string {
     const rate = this.spentRateFunction();
     return rate > 90 ? 'from-red-500 to-red-600' : rate > 50 ? 'from-orange-400 to-orange-500' : 'from-green-400 to-indigo-500';
   };
 
-  analysisTextFunction() {
+  /**
+   * Generates a feedback message for the user based on their spending.
+   * @returns Feedback string
+   */
+  analysisTextFunction(): string {
     const rate = this.spentRateFunction();
     if (this.totalIncome === 0 && this.totalBudget === 0) return "Add salary or budget to start";
     if (rate > 100) return "⚠️ You have exceeded your limit!";
@@ -214,12 +330,20 @@ export class SalaryComponent implements OnInit {
     return "👍 On track.";
   };
 
-  analysisTextClassFunction() {
+  /**
+   * Determines the styling for the analysis message.
+   * @returns CSS class string
+   */
+  analysisTextClassFunction(): string {
     const rate = this.spentRateFunction();
     if (this.totalIncome === 0 && this.totalBudget === 0) return "opacity-60";
     return rate > 100 ? "text-red-500 font-bold" : rate > 80 ? "text-orange-500 font-medium" : rate < 50 ? "text-green-500 font-medium" : "text-indigo-400";
   };
 
+  /**
+   * Opens the transaction modal for adding or editing an entry.
+   * @param transaction Optional transaction object for editing
+   */
   openModal(transaction?: Salary) {
     this.showModal = true;
     this.errors.set({});
@@ -230,16 +354,17 @@ export class SalaryComponent implements OnInit {
       this.newMonth = transaction.month;
       this.newNote = transaction.note || '';
     } else {
-
       this.editingId = null;
       this.newAmount = null;
       this.newNote = '';
       this.newMonth = this.currentMonth;
     }
-
     setTimeout(() => { this.amountInput?.nativeElement.focus(); }, 100);
   }
 
+  /**
+   * Closes the transaction modal and resets the form state.
+   */
   closeModal() {
     this.showModal = false;
     this.editingId = null;
@@ -248,6 +373,9 @@ export class SalaryComponent implements OnInit {
     this.errors.set({});
   }
 
+  /**
+   * Validates and saves the transaction (either update or create) via the SalaryService.
+   */
   saveTransaction() {
     const errs: any = {};
     let isValid = true;
@@ -289,7 +417,6 @@ export class SalaryComponent implements OnInit {
         budget: budgetVal,
         month: this.newMonth,
         note: noteVal
-
       });
     }
     else if (exists.length > 0 && this.viewMode === 'budget') {
@@ -299,7 +426,6 @@ export class SalaryComponent implements OnInit {
         month: this.newMonth,
         note: noteVal
       });
-
     } else {
       const t: Salary = {
         salary_id: '',
@@ -316,6 +442,11 @@ export class SalaryComponent implements OnInit {
     this.closeModal();
   }
 
+  /**
+   * Removes a transaction after user confirmation.
+   * @param salary_id The unique identifier of the transaction
+   * @param event The DOM event to prevent bubbling
+   */
   removeTransaction(salary_id: string, event: Event) {
     event.stopPropagation();
     if (confirm('Delete this entry?')) {
@@ -324,6 +455,10 @@ export class SalaryComponent implements OnInit {
     }
   }
 
+  /**
+   * Helper method to get the current system date in YYYY-MM-DD format.
+   * @returns Formatted date string
+   */
   getLocalDateString(): string {
     const now = new Date();
     const year = now.getFullYear();
@@ -332,11 +467,18 @@ export class SalaryComponent implements OnInit {
     return `${year}-${month}-${day}`;
   }
 
+  /**
+   * Switches the UI between 'salary' and 'budget' views.
+   * @param mode The view mode to switch to
+   */
   toggleView(mode: 'salary' | 'budget') {
     this.viewMode = mode;
     this.loadState();
   }
 
+  /**
+   * Calculates the number of days between today and the oldest recorded expense.
+   */
   getDaysPassedFromLastExpense() {
     const expenseData: Expense[] = this.expenseService.getAll();
     if (expenseData.length > 0) {

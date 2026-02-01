@@ -91,61 +91,38 @@ All expenses are stored in the device's **LocalStorage** and reflected immediate
 
 ---
 
-### 5. **Budget & Salary View**
+### 5. **Budget & Salary Management**
 
-The **Budget View** helps users manage their **monthly salary**, define optional **budgets**, and gain deep insights into their spending behavior.
+The **Budget & Salary** module provides a sophisticated financial dashboard that transitions between total income tracking and granular monthly budgeting.
 
 **Key capabilities include:**
 
-* 💼 **Salary Management**
-  * Users can add their **monthly salary**.
-  * Optionally, they can define a **monthly budget** that is less than or equal to their salary.
-  * The system intelligently switches between:
-    * **Salary-based tracking** (if no budget is set)
-    * **Budget-based tracking** (if a budget is defined)
-* 📊 **Financial Overview Card**
-  * Displays:
-    * **Remaining Balance** (salary – expenses)
-    * or **Remaining Budget** (budget – expenses)
-  * Clearly shows **Total Income**, **Total Expenses**, and the remaining amount.
-* 📅 **Month-wise Analysis**
-  * Users can switch between months using a month selector.
-  * All calculations, analytics, and transactions update dynamically based on the selected month.
-* 📈 **Daily Spending Analytics**
-  * **Allowed/Day** – Average amount the user can spend per day.
-  * **Spent/Day** – Actual average spending per day so far.
-  * **Suggested/Day** – Recommended spending per remaining day to stay within limits.
-* 🟩 **Budget Usage Indicator**
-  * A dynamic progress bar visually represents how much of the salary or budget has been used.
-  * Color indicators provide quick feedback:
-    * 🟢 Green – Healthy spending
-    * 🟠 Orange – Caution zone
-    * 🔴 Red – Overspending
-* 🧠 **Smart Spending Insights**
-  * Displays contextual messages such as:
-    * “Excellent! You’re saving more than half your salary.”
-    * “Careful! You’re running low on funds.”
-    * “You have exceeded your salary!”
-  * Helps users quickly understand their financial status without manual calculations.
-* 🧾 **Transaction Management**
-  * Users can:
-    * Add salary entries
-    * Edit existing salary or budget values
-    * Attach optional notes for clarity
-    * Delete salary records when needed
-  * All changes reflect instantly across analytics and visualizations.
-
----
-
-If you want, next I can:
-
-* Align **Dashboard** wording with graphs logic
-* Make README more **recruiter / interview friendly**
-* Shorten it for **GitHub featured project**
-
-Just tell me 👍
+* 💼 **Dynamic Financial Modes**
+  * **Salary Tracking:** Tracks total accumulated income and overall savings rates.
+  * **Budget Tracking:** Focuses on a specific month's limits to prevent overspending.
+  * The system intelligently calculates metrics based on the active `viewMode`.
 
 
+* 📊 **Advanced Financial Analytics**
+  * **Salary Growth:** Automatically calculates the percentage increase or decrease in income compared to the previous month.
+  * **Savings Rate:** Real-time calculation of the percentage of income retained after expenses:
+
+
+* **Daily Spending Intelligence:**
+  * **Allowed/Day:** Your theoretical daily limit based on the total budget and days in the month.
+  * **Spent/Day:** Actual average spending calculated from the day of your first expense to today.
+  * **Suggested/Day:** A dynamic "correction" metric that tells you exactly how much you can spend for the *remaining* days to stay on target.
+
+* 🎨 **Visual Feedback & Progress**
+  * **Smart Progress Bar:** A multi-state indicator that shifts colors based on your spending velocity:
+    * 🟢 **Green to Indigo:** (Below 50%) - Safe zone.
+    * 🟠 **Orange:** (50% - 90%) - Warning zone.
+    * 🔴 **Red:** (Above 90%) - Critical limit/Exceeded.
+  * **Contextual Status:** Text insights (e.g., *"Excellent! Saving > 50%"* or *"⚠️ You have exceeded your limit!"*).
+
+* 🛠️ **Transaction Management**
+  * **Full CRUD Operations:** Add, edit, and delete salary/budget records.
+  * **Validation Layer:** Integrated error handling for amounts (max limit ), required notes, and month selection.
 ---
 
 ### 6. **Settings View**
