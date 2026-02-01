@@ -52,6 +52,9 @@ export interface User {
 
   /** Graph representation mode received from the parent component. */
   graph_type: number;
+
+  /** User's preferred view mode for salary display. */
+  salary_view_mode: 'salary' | 'budget';
 }
 
 /**

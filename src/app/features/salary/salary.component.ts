@@ -113,6 +113,7 @@ export class SalaryComponent implements OnInit {
     private userService: UserService
   ) {
     this.userCurrancy = this.userService.getValue<string>('currency') || '';
+    this.viewMode = this.userService.getValue<'salary' | 'budget'>('salary_view_mode') || 'salary';
     this.getDaysPassedFromLastExpense();
   }
 
@@ -473,6 +474,7 @@ export class SalaryComponent implements OnInit {
    */
   toggleView(mode: 'salary' | 'budget') {
     this.viewMode = mode;
+    this.userService.update('salary_view_mode', mode);
     this.loadState();
   }
 

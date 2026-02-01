@@ -75,7 +75,8 @@ export class StorageService {
     ai_key: null,
     is_budget_radio_clicked: false,
     graph_type: 1,
-    graph_view_type: "month"
+    graph_view_type: "month",
+    salary_view_mode: "salary"
   };
 
   /** Schema for salary */
