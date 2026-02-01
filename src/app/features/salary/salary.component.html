@@ -8,24 +8,35 @@
             <div class="flex items-center gap-3">
                 <div
                     class="flex items-center justify-center w-8 h-8 shadow-lg rounded-xl bg-gradient-to-br from-indigo-500 to-purple-500 shadow-indigo-500/30">
-                    <i class="text-white fa-solid fa-wallet"></i>
+                    <i class="text-white fa-solid" [class]="viewMode === 'salary' ? 'fa-wallet' : 'fa-piggy-bank'"></i>
                 </div>
                 <div>
-                    <p class="text-md font-bold">Financial Dashboard</p>
+                    <p class="text-md font-bold">{{ viewMode === 'salary' ? 'Salary Dashboard' : 'Budget Planner' }}</p>
                 </div>
             </div>
+            <div class="relative flex w-32 h-8 bg-[var(--color-surface)] rounded-full shadow-md 
+            transition-all duration-300 ease-out select-none cursor-pointer">
 
-            <div class="flex items-center gap-3 relative right-6">
-                <!-- Text label that opens month picker -->
-                <div class="text-md font-semibold cursor-pointer select-none" (click)="hiddenMonthInput.showPicker()">
-                    {{ selectedMonth | date:'MMM yyyy' }}
+                <div class="absolute top-0 left-0 h-full w-1/2 bg-[var(--theme-color)] rounded-full transition-transform duration-300 ease-out shadow-sm"
+                    [ngClass]="{ 'translate-x-0': viewMode === 'salary', 'translate-x-full': viewMode === 'budget' }">
                 </div>
 
-                <!-- Hidden Month Input -->
-                <div class="hiddeninputdiv absolute right-6">
-                    <input #hiddenMonthInput type="month" class="hiddeninput" [ngModel]="selectedMonth"
-                        (ngModelChange)="updateMonth($event)" [max]="maxMonth" />
-                </div>
+                <button
+                    class="relative z-10 w-1/2 h-full flex items-center justify-center text-xs transition-colors duration-200 focus:outline-none"
+                    (click)="toggleView('salary')"
+                    [ngClass]="{ 'text-white': viewMode === 'salary', 'text-[var(--color-text)] opacity-70': viewMode !== 'salary' }"
+                    title="Salary View">
+                    Salary
+                </button>
+
+                <button
+                    class="relative z-10 w-1/2 h-full flex items-center justify-center text-xs transition-colors duration-200 focus:outline-none"
+                    (click)="toggleView('budget')"
+                    [ngClass]="{ 'text-white': viewMode === 'budget', 'text-[var(--color-text)] opacity-70': viewMode !== 'budget' }"
+                    title="Budget View">
+                    Budget
+                </button>
+
             </div>
 
         </header>
@@ -35,42 +46,101 @@
 
             <!-- Main Balance Card -->
             <section
-                class="relative p-6 overflow-hidden text-white transition duration-500 transform cursor-default rounded-3xl bg-gradient-to-br from-indigo-600 via-purple-600 to-indigo-800 md:p-10 shadow-2xl shadow-indigo-500/20 hover:scale-[1.01] group animate-slide-up">
-                <!-- Card Decoration -->
-                <div class="absolute top-0 right-0 p-4 transition duration-500 opacity-10 group-hover:opacity-20">
-                    <i class="transform rotate-12 translate-x-4 -translate-y-4 fa-solid fa-sack-dollar text-9xl"></i>
+                class="relative overflow-hidden text-white transition-all duration-500 rounded-3xl group animate-slide-up"
+                [ngClass]="viewMode === 'salary' ? 'shadow-2xl shadow-indigo-500/20' : 'shadow-2xl shadow-emerald-500/20'">
+
+                <div class="absolute inset-0 bg-gradient-to-br from-indigo-600 via-purple-600 to-indigo-800 transition-opacity duration-500 ease-in-out"
+                    [class.opacity-100]="viewMode === 'salary'" [class.opacity-0]="viewMode !== 'salary'">
                 </div>
 
-                <div class="relative z-10">
-                    <p class="mb-1 text-sm font-medium tracking-wider text-indigo-200 uppercase">{{ balanceLable }}</p>
-                    <h2 class="mb-6 text-2xl font-bold tracking-tight md:text-4xl">{{ userCurrancy }} {{ totalBalance |
-                        number:'1.1-2'}} / {{totalBudget > 0 ? (totalBudget | number:'1.1-2') : (totalIncome |
-                        number:'1.1-2')}}
-                    </h2>
+                <div class="absolute inset-0 bg-gradient-to-br from-emerald-600 via-teal-600 to-emerald-800 transition-opacity duration-500 ease-in-out"
+                    [class.opacity-100]="viewMode === 'budget'" [class.opacity-0]="viewMode !== 'budget'">
+                </div>
 
-                    <div class="flex gap-8">
-                        <div>
-                            <div class="flex items-center gap-2 mb-1 text-xs text-indigo-200 md:text-sm">
-                                <div class="flex items-center justify-center w-5 h-5 rounded-full bg-white/20">
-                                    <i class="fa-solid fa-arrow-down text-[10px]"></i>
+                <div class="absolute top-0 right-0 p-4 transition-all duration-500 transform"
+                    [ngClass]="viewMode === 'salary' ? 'opacity-20 translate-y-0 rotate-12' : 'opacity-0 translate-y-4 rotate-0'">
+                    <i class="fa-solid fa-sack-dollar text-9xl"></i>
+                </div>
+
+                <div class="absolute top-0 right-0 p-4 transition-all duration-500 transform"
+                    [ngClass]="viewMode === 'budget' ? 'opacity-20 translate-y-0 rotate-12' : 'opacity-0 translate-y-4 rotate-0'">
+                    <i class="fa-solid fa-chart-pie text-9xl"></i>
+                </div>
+
+
+                <div class="relative z-10 grid grid-cols-1 grid-rows-1">
+
+                    <div class="col-start-1 row-start-1 p-6 md:p-10 transition-all duration-500 ease-out transform"
+                        [ngClass]="viewMode === 'salary' ? 'opacity-100 scale-100 pointer-events-auto' : 'opacity-0 scale-95 pointer-events-none'">
+
+                        <p class="mb-1 text-xs font-medium tracking-wider uppercase opacity-80">Current Balance</p>
+
+                        <h2 class="mb-6 text-3xl font-bold tracking-tight md:text-5xl">
+                            {{ userCurrancy }} {{ (totalIncome - totalExpense) | number:'1.1-2' }}
+                        </h2>
+
+                        <div class="flex gap-8">
+                            <div>
+                                <div class="flex items-center gap-2 mb-1 text-xs opacity-80 md:text-sm">
+                                    <div class="flex items-center justify-center w-5 h-5 rounded-full bg-white/20">
+                                        <i class="fa-solid fa-arrow-down text-[10px]"></i>
+                                    </div>
+                                    Total Income
                                 </div>
-                                Income
+                                <p class="text-xl font-semibold md:text-2xl">
+                                    {{ userCurrancy }}{{ totalIncome | number:'1.2-2'}}
+                                </p>
                             </div>
-                            <p class="text-xl font-semibold md:text-2xl">{{ userCurrancy }}{{ totalIncome |
-                                number:'1.2-2'}}</p>
-                        </div>
-                        <div>
-                            <div class="flex items-center gap-2 mb-1 text-xs text-indigo-200 md:text-sm">
-                                <div class="flex items-center justify-center w-5 h-5 rounded-full bg-white/20">
-                                    <i class="fa-solid fa-arrow-up text-[10px]"></i>
+                            <div>
+                                <div class="flex items-center gap-2 mb-1 text-xs opacity-80 md:text-sm">
+                                    <div class="flex items-center justify-center w-5 h-5 rounded-full bg-white/20">
+                                        <i class="fa-solid fa-arrow-up text-[10px]"></i>
+                                    </div>
+                                    Total Spent
                                 </div>
-                                Expense
+                                <p class="text-xl font-semibold md:text-2xl text-white">
+                                    {{ userCurrancy }}{{ totalExpense | number:'1.2-2'}}
+                                </p>
                             </div>
-                            <p class="text-xl font-semibold md:text-2xl text-white">{{ userCurrancy }}{{ totalExpense |
-                                number:'1.2-2'}}
-                            </p>
                         </div>
                     </div>
+
+
+                    <div class="col-start-1 row-start-1 p-6 md:p-10 transition-all duration-500 ease-out transform"
+                        [ngClass]="viewMode === 'budget' ? 'opacity-100 scale-100 pointer-events-auto' : 'opacity-0 scale-95 pointer-events-none'">
+
+                        <p class="mb-1 text-xs font-medium tracking-wider uppercase opacity-80">Remaining Budget</p>
+
+                        <h2 class="mb-6 text-3xl font-bold tracking-tight md:text-5xl">
+                            {{ userCurrancy }} {{ (totalBudget - totalExpense) | number:'1.1-2' }}
+                        </h2>
+
+                        <div class="flex gap-8">
+                            <div>
+                                <div class="flex items-center gap-2 mb-1 text-xs opacity-80 md:text-sm">
+                                    <div class="flex items-center justify-center w-5 h-5 rounded-full bg-white/20">
+                                        <i class="fa-solid fa-bullseye text-[10px]"></i>
+                                    </div>
+                                    Total Budget
+                                </div>
+                                <p class="text-xl font-semibold md:text-2xl">
+                                    {{ userCurrancy }}{{ totalBudget | number:'1.2-2'}}
+                                </p>
+                            </div>
+                            <div>
+                                <div class="flex items-center gap-2 mb-1 text-xs opacity-80 md:text-sm">
+                                    <div class="flex items-center justify-center w-5 h-5 rounded-full bg-white/20">
+                                        <i class="fa-solid fa-arrow-up text-[10px]"></i>
+                                    </div>
+                                    Total Spent
+                                </div>
+                                <p class="text-xl font-semibold md:text-2xl text-white">
+                                    {{ userCurrancy }}{{ totalExpense | number:'1.2-2'}}
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+
                 </div>
             </section>
 
@@ -138,7 +208,7 @@
                 <p class="text-[10px] text-center italic" [ngClass]="analysisTextClass">{{ analysisText }}</p>
             </section>
 
-            <!-- Transactions List Header (Reset button removed) -->
+            <!-- Transactions List Header -->
             <div class="flex items-end justify-between animate-slide-up" style="animation-delay: 0.2s;">
                 <h3 class="text-xl font-semibold">Transactions</h3>
             </div>
@@ -148,7 +218,7 @@
                 @if (filteredTransactions.length === 0) {
                 <div class="py-10 text-center opacity-50 animate-fade-in">
                     <i class="mb-3 text-4xl fa-solid fa-filter"></i>
-                    <p>No transactions for {{ selectedMonth | date:'MMMM' }}</p>
+                    <p>No transactions found</p>
                     <button (click)="openModal()" class="mt-4 text-indigo-500 underline">Add one now</button>
                 </div>
                 } @else {
@@ -224,8 +294,6 @@
             </div>
 
             <form (submit)="saveTransaction()">
-                <!-- Date Input Removed (Handled automatically) -->
-
                 <!-- Amount / Salary -->
                 <div class="mb-4">
                     <label class="block mb-2 text-sm opacity-60">Amount / Salary</label>
@@ -240,21 +308,6 @@
                     </div>
                     @if (errors().amount) {
                     <p class="text-xs text-red-500 mt-1 animate-fade-in">{{ errors().amount }}</p>
-                    }
-                </div>
-
-                <!-- Budget -->
-                <div class="mb-4 animate-fade-in">
-                    <label class="block mb-2 text-sm opacity-60">Budget for this month (Optional)</label>
-                    <div class="relative">
-                        <span class="absolute left-4 top-3.5 opacity-40"><i class="fa-solid fa-chart-line"></i></span>
-                        <input type="number" [(ngModel)]="newBudget" name="budget" placeholder="e.g. 5000"
-                            class="w-full py-3 pl-10 pr-4 transition-colors border rounded-xl focus:outline-none focus:border-indigo-500"
-                            [class.border-red-500]="errors().budget"
-                            style="background-color: var(--color-bg-500); border-color: var(--color-bg-600); color: inherit;">
-                    </div>
-                    @if (errors().budget) {
-                    <p class="text-xs text-red-500 mt-1 animate-fade-in">{{ errors().budget }}</p>
                     }
                 </div>
 
