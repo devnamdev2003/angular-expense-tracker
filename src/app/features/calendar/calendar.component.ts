@@ -156,6 +156,7 @@ export class CalendarComponent implements OnInit {
     }
     else {
       this.showBudgetRadio = false;
+      this.isBudgetRadioClicked = false;
     }
   }
 
