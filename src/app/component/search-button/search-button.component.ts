@@ -68,7 +68,7 @@ export class SearchButtonComponent {
    * - Displays the global loader for a short duration.
    */
   onSearch(): void {
-    console.log('Child emitting search query:', this.query);
+    // console.log('Child emitting search query:', this.query);
     this.search.emit(this.query);
     this.searchInput?.nativeElement.blur();
     this.globalLoaderService.show('Searching...');
