@@ -78,9 +78,9 @@
                         <h2 class="mb-6 text-3xl font-bold tracking-tight md:text-5xl">
                             {{ userCurrancy }}
                             @if(viewMode === 'salary') {
-                            {{ (totalIncome - totalExpense) | number:'1.1-2' }}
+                            {{ (totalIncome - totalExpense) | number:'1.2-2' }}
                             } @else {
-                            {{ (totalBudget - totalExpense) | number:'1.1-2' }}
+                            {{ (totalBudget - totalExpense) | number:'1.2-2' }}
                             }
                         </h2>
 
