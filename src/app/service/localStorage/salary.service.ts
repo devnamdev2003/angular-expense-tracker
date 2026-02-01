@@ -25,6 +25,9 @@ export interface Salary {
 
     /** Optional note or description */
     note?: string;
+
+    /** View mode: 'salary' or 'budget' */
+    viewMode: string;
 }
 
 /**

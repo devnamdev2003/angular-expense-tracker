@@ -86,6 +86,7 @@ export class StorageService {
     date: "",
     budget: 0,
     note: "",
+    viewMode: "salary",
   }
 
   /** Schema for Liked song */
