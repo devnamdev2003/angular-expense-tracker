@@ -33,6 +33,18 @@ export class SalaryComponent implements OnInit {
   /** Flag to control the visibility of the add/edit modal */
   showModal: boolean = false;
 
+  /** Controls visibility of the salary filter modal dialog. */
+  showFilterModal: boolean = false;
+
+  /** Selected start month for filtering salary data (YYYY-MM format). */
+  filterStartDate: string = "";
+
+  /** Selected end month for filtering salary data (YYYY-MM-MM format). */
+  filterEndDate: string = "";
+
+  /** Indicates whether any date filter is currently active. */
+  isFilterActive: boolean = false;
+
   /** Indicates if a budget entry exists for the currently selected month */
   hasBudgetForCurrentMonth: boolean = false;
 
@@ -76,7 +88,7 @@ export class SalaryComponent implements OnInit {
   analysisTextClass: string = '';
 
   /** Reactive signal containing validation errors for the transaction form */
-  errors = signal<{ amount?: string, note?: string, budget?: string, month?: string }>({});
+  errors = signal<{ amount?: string, note?: string, budget?: string, month?: string, filter?: string }>({});
 
   /** ID of the transaction currently being edited; null if creating new */
   editingId: string | null = null;
@@ -144,7 +156,7 @@ export class SalaryComponent implements OnInit {
    * Refreshes the local state by fetching data from services and recalculating all financial metrics.
    */
   loadState() {
-    const allTransactions: Salary[] = this.salaryService.getAll();
+    const allTransactions: Salary[] = this.isFilterActive ? this.salaryService.searchByDateRange(this.filterStartDate, this.filterEndDate) : this.salaryService.getAll();
     allTransactions.sort((a, b) =>
       b.month.localeCompare(a.month) ||
       new Date(b.date).getTime() - new Date(a.date).getTime()
@@ -162,9 +174,7 @@ export class SalaryComponent implements OnInit {
     this.totalIncome = this.filteredTransactions.reduce((acc, t) => acc + (t.amount || 0), 0);
     this.totalBudget = this.filteredTransactions.reduce((acc, t) => acc + (t.budget || 0), 0);
     this.salaryGrowth = this.salaryGrowthFunction(allTransactions);
-
     this.dateMetrics = this.dateMetricsFunction();
-
     this.dailyAllowed = this.dailyAllowedFunction();
     this.dailySpent = this.dailySpentFunction();
     this.dailySuggested = this.dailySuggestedFunction();
@@ -220,8 +230,19 @@ export class SalaryComponent implements OnInit {
    */
   totalExpenseFunction(): number {
     if (this.viewMode === 'salary') {
-      const expense: Expense[] = this.expenseService.getAll();
-      return expense.reduce((acc, e) => acc + Number(e.amount), 0);
+      if (this.isFilterActive) {
+        const [fyear, fmonth] = this.filterStartDate.split('-').map(Number);
+        const [tyear, tmonth] = this.filterEndDate.split('-').map(Number);
+        const fromDate = `${fyear}-${String(fmonth).padStart(2, '0')}-01`;
+        const lastDay = new Date(tyear, tmonth, 0).getDate();
+        const toDate = `${tyear}-${String(tmonth).padStart(2, '0')}-${String(lastDay).padStart(2, '0')}`;
+        const expense: Expense[] = this.expenseService.searchByDateRange(fromDate, toDate);
+        return expense.reduce((acc, e) => acc + Number(e.amount), 0);
+      }
+      else {
+        const expense: Expense[] = this.expenseService.getAll();
+        return expense.reduce((acc, e) => acc + Number(e.amount), 0);
+      }
     }
     else {
       const [year, month] = this.currentMonth.split('-').map(Number);
@@ -254,6 +275,65 @@ export class SalaryComponent implements OnInit {
     daysRemaining = daysRemaining < 0 ? 0 : daysRemaining;
     return { daysPassed, daysRemaining, daysInMonth, isPastMonth };
   };
+
+  /**
+ * Opens the filter modal and clears previous validation errors.
+ *
+ * @returns void
+ */
+  openFilterModal(): void {
+    this.showFilterModal = true;
+    this.errors.set({});
+  }
+
+  /**
+   * Closes the filter modal dialog.
+   *
+   * @returns void
+   */
+  closeFilterModal(): void {
+    this.showFilterModal = false;
+  }
+
+  /**
+   * Applies the selected date range filter after validation.
+   * Ensures both months are selected and start month
+   * is not greater than end month.
+   *
+   * @returns void
+   */
+  applyFilter(): void {
+    this.errors.set({});
+
+    if (!this.filterStartDate || !this.filterEndDate) {
+      this.errors.set({ filter: 'Please select both a Start Month and an End Month.' });
+      return;
+    }
+
+    const start = new Date(this.filterStartDate);
+    const end = new Date(this.filterEndDate);
+
+    if (start > end) {
+      this.errors.set({ filter: 'Start Month cannot be after End Month.' });
+      return;
+    }
+
+    this.isFilterActive = true;
+    this.loadState();
+    this.closeFilterModal();
+  }
+
+  /**
+   * Clears the active filter and reloads salary data.
+   *
+   * @returns void
+   */
+  clearFilter(): void {
+    this.filterStartDate = "";
+    this.filterEndDate = "";
+    this.isFilterActive = false;
+    this.loadState();
+  }
 
   /**
    * Calculates the average daily spending.

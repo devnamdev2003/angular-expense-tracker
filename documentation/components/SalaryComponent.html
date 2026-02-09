@@ -276,7 +276,16 @@ Provides views for tracking income and monthly budget planning.</p>
                                 <a href="#filteredTransactions" >filteredTransactions</a>
                             </li>
                             <li>
+                                <a href="#filterEndDate" >filterEndDate</a>
+                            </li>
+                            <li>
+                                <a href="#filterStartDate" >filterStartDate</a>
+                            </li>
+                            <li>
                                 <a href="#hasBudgetForCurrentMonth" >hasBudgetForCurrentMonth</a>
+                            </li>
+                            <li>
+                                <a href="#isFilterActive" >isFilterActive</a>
                             </li>
                             <li>
                                 <a href="#newAmount" >newAmount</a>
@@ -292,6 +301,9 @@ Provides views for tracking income and monthly budget planning.</p>
                             </li>
                             <li>
                                 <a href="#savingsPercentage" >savingsPercentage</a>
+                            </li>
+                            <li>
+                                <a href="#showFilterModal" >showFilterModal</a>
                             </li>
                             <li>
                                 <a href="#showModal" >showModal</a>
@@ -333,6 +345,9 @@ Provides views for tracking income and monthly budget planning.</p>
                                 <a href="#analysisTextFunction" >analysisTextFunction</a>
                             </li>
                             <li>
+                                <a href="#applyFilter" >applyFilter</a>
+                            </li>
+                            <li>
                                 <a href="#barColorClassFunction" >barColorClassFunction</a>
                             </li>
                             <li>
@@ -340,6 +355,12 @@ Provides views for tracking income and monthly budget planning.</p>
                             </li>
                             <li>
                                 <a href="#budgetPercentageFunction" >budgetPercentageFunction</a>
+                            </li>
+                            <li>
+                                <a href="#clearFilter" >clearFilter</a>
+                            </li>
+                            <li>
+                                <a href="#closeFilterModal" >closeFilterModal</a>
                             </li>
                             <li>
                                 <a href="#closeModal" >closeModal</a>
@@ -370,6 +391,9 @@ Provides views for tracking income and monthly budget planning.</p>
                             </li>
                             <li>
                                 <a href="#ngOnInit" >ngOnInit</a>
+                            </li>
+                            <li>
+                                <a href="#openFilterModal" >openFilterModal</a>
                             </li>
                             <li>
                                 <a href="#openModal" >openModal</a>
@@ -418,7 +442,7 @@ Provides views for tracking income and monthly budget planning.</p>
                 </tr>
                         <tr>
                             <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="103" class="link-to-prism">src/app/features/salary/salary.component.ts:103</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="115" class="link-to-prism">src/app/features/salary/salary.component.ts:115</a></div>
                             </td>
                         </tr>
 
@@ -522,8 +546,8 @@ Provides views for tracking income and monthly budget planning.</p>
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="338"
-                                    class="link-to-prism">src/app/features/salary/salary.component.ts:338</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="418"
+                                    class="link-to-prism">src/app/features/salary/salary.component.ts:418</a></div>
                         </td>
                     </tr>
 
@@ -565,8 +589,8 @@ Provides views for tracking income and monthly budget planning.</p>
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="325"
-                                    class="link-to-prism">src/app/features/salary/salary.component.ts:325</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="405"
+                                    class="link-to-prism">src/app/features/salary/salary.component.ts:405</a></div>
                         </td>
                     </tr>
 
@@ -582,6 +606,51 @@ Provides views for tracking income and monthly budget planning.</p>
                         </div>
                             <div class="io-description">
                                 <p>Feedback string</p>
+
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="applyFilter"></a>
+                    <span class="name">
+                        <span ><b>applyFilter</b></span>
+                        <a href="#applyFilter"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>applyFilter()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="305"
+                                    class="link-to-prism">src/app/features/salary/salary.component.ts:305</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-description"><p>Applies the selected date range filter after validation.
+Ensures both months are selected and start month
+is not greater than end month.</p>
+</div>
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                <p>void</p>
 
                             </div>
                 </td>
@@ -608,8 +677,8 @@ Provides views for tracking income and monthly budget planning.</p>
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="316"
-                                    class="link-to-prism">src/app/features/salary/salary.component.ts:316</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="396"
+                                    class="link-to-prism">src/app/features/salary/salary.component.ts:396</a></div>
                         </td>
                     </tr>
 
@@ -651,8 +720,8 @@ Provides views for tracking income and monthly budget planning.</p>
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="310"
-                                    class="link-to-prism">src/app/features/salary/salary.component.ts:310</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="390"
+                                    class="link-to-prism">src/app/features/salary/salary.component.ts:390</a></div>
                         </td>
                     </tr>
 
@@ -694,8 +763,8 @@ Provides views for tracking income and monthly budget planning.</p>
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="304"
-                                    class="link-to-prism">src/app/features/salary/salary.component.ts:304</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="384"
+                                    class="link-to-prism">src/app/features/salary/salary.component.ts:384</a></div>
                         </td>
                     </tr>
 
@@ -711,6 +780,92 @@ Provides views for tracking income and monthly budget planning.</p>
                         </div>
                             <div class="io-description">
                                 <p>Percentage string</p>
+
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="clearFilter"></a>
+                    <span class="name">
+                        <span ><b>clearFilter</b></span>
+                        <a href="#clearFilter"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>clearFilter()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="331"
+                                    class="link-to-prism">src/app/features/salary/salary.component.ts:331</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-description"><p>Clears the active filter and reloads salary data.</p>
+</div>
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                <p>void</p>
+
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="closeFilterModal"></a>
+                    <span class="name">
+                        <span ><b>closeFilterModal</b></span>
+                        <a href="#closeFilterModal"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>closeFilterModal()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="294"
+                                    class="link-to-prism">src/app/features/salary/salary.component.ts:294</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-description"><p>Closes the filter modal dialog.</p>
+</div>
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                <p>void</p>
 
                             </div>
                 </td>
@@ -737,8 +892,8 @@ Provides views for tracking income and monthly budget planning.</p>
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="369"
-                                    class="link-to-prism">src/app/features/salary/salary.component.ts:369</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="449"
+                                    class="link-to-prism">src/app/features/salary/salary.component.ts:449</a></div>
                         </td>
                     </tr>
 
@@ -776,8 +931,8 @@ Provides views for tracking income and monthly budget planning.</p>
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="271"
-                                    class="link-to-prism">src/app/features/salary/salary.component.ts:271</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="351"
+                                    class="link-to-prism">src/app/features/salary/salary.component.ts:351</a></div>
                         </td>
                     </tr>
 
@@ -819,8 +974,8 @@ Provides views for tracking income and monthly budget planning.</p>
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="262"
-                                    class="link-to-prism">src/app/features/salary/salary.component.ts:262</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="342"
+                                    class="link-to-prism">src/app/features/salary/salary.component.ts:342</a></div>
                         </td>
                     </tr>
 
@@ -862,8 +1017,8 @@ Provides views for tracking income and monthly budget planning.</p>
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="281"
-                                    class="link-to-prism">src/app/features/salary/salary.component.ts:281</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="361"
+                                    class="link-to-prism">src/app/features/salary/salary.component.ts:361</a></div>
                         </td>
                     </tr>
 
@@ -905,8 +1060,8 @@ Provides views for tracking income and monthly budget planning.</p>
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="240"
-                                    class="link-to-prism">src/app/features/salary/salary.component.ts:240</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="261"
+                                    class="link-to-prism">src/app/features/salary/salary.component.ts:261</a></div>
                         </td>
                     </tr>
 
@@ -948,8 +1103,8 @@ Provides views for tracking income and monthly budget planning.</p>
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="484"
-                                    class="link-to-prism">src/app/features/salary/salary.component.ts:484</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="564"
+                                    class="link-to-prism">src/app/features/salary/salary.component.ts:564</a></div>
                         </td>
                     </tr>
 
@@ -987,8 +1142,8 @@ Provides views for tracking income and monthly budget planning.</p>
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="463"
-                                    class="link-to-prism">src/app/features/salary/salary.component.ts:463</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="543"
+                                    class="link-to-prism">src/app/features/salary/salary.component.ts:543</a></div>
                         </td>
                     </tr>
 
@@ -1030,8 +1185,8 @@ Provides views for tracking income and monthly budget planning.</p>
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="131"
-                                    class="link-to-prism">src/app/features/salary/salary.component.ts:131</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="143"
+                                    class="link-to-prism">src/app/features/salary/salary.component.ts:143</a></div>
                         </td>
                     </tr>
 
@@ -1069,8 +1224,8 @@ Provides views for tracking income and monthly budget planning.</p>
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="146"
-                                    class="link-to-prism">src/app/features/salary/salary.component.ts:146</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="158"
+                                    class="link-to-prism">src/app/features/salary/salary.component.ts:158</a></div>
                         </td>
                     </tr>
 
@@ -1108,8 +1263,8 @@ Provides views for tracking income and monthly budget planning.</p>
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="123"
-                                    class="link-to-prism">src/app/features/salary/salary.component.ts:123</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="135"
+                                    class="link-to-prism">src/app/features/salary/salary.component.ts:135</a></div>
                         </td>
                     </tr>
 
@@ -1123,6 +1278,49 @@ Provides views for tracking income and monthly budget planning.</p>
                             <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
 
                         </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="openFilterModal"></a>
+                    <span class="name">
+                        <span ><b>openFilterModal</b></span>
+                        <a href="#openFilterModal"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>openFilterModal()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="284"
+                                    class="link-to-prism">src/app/features/salary/salary.component.ts:284</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-description"><p>Opens the filter modal and clears previous validation errors.</p>
+</div>
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                <p>void</p>
+
+                            </div>
                 </td>
             </tr>
         </tbody>
@@ -1147,8 +1345,8 @@ Provides views for tracking income and monthly budget planning.</p>
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="348"
-                                    class="link-to-prism">src/app/features/salary/salary.component.ts:348</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="428"
+                                    class="link-to-prism">src/app/features/salary/salary.component.ts:428</a></div>
                         </td>
                     </tr>
 
@@ -1221,8 +1419,8 @@ Provides views for tracking income and monthly budget planning.</p>
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="451"
-                                    class="link-to-prism">src/app/features/salary/salary.component.ts:451</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="531"
+                                    class="link-to-prism">src/app/features/salary/salary.component.ts:531</a></div>
                         </td>
                     </tr>
 
@@ -1311,8 +1509,8 @@ Provides views for tracking income and monthly budget planning.</p>
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="185"
-                                    class="link-to-prism">src/app/features/salary/salary.component.ts:185</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="195"
+                                    class="link-to-prism">src/app/features/salary/salary.component.ts:195</a></div>
                         </td>
                     </tr>
 
@@ -1386,8 +1584,8 @@ Provides views for tracking income and monthly budget planning.</p>
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="380"
-                                    class="link-to-prism">src/app/features/salary/salary.component.ts:380</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="460"
+                                    class="link-to-prism">src/app/features/salary/salary.component.ts:460</a></div>
                         </td>
                     </tr>
 
@@ -1425,8 +1623,8 @@ Provides views for tracking income and monthly budget planning.</p>
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="211"
-                                    class="link-to-prism">src/app/features/salary/salary.component.ts:211</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="221"
+                                    class="link-to-prism">src/app/features/salary/salary.component.ts:221</a></div>
                         </td>
                     </tr>
 
@@ -1468,8 +1666,8 @@ Provides views for tracking income and monthly budget planning.</p>
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="294"
-                                    class="link-to-prism">src/app/features/salary/salary.component.ts:294</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="374"
+                                    class="link-to-prism">src/app/features/salary/salary.component.ts:374</a></div>
                         </td>
                     </tr>
 
@@ -1511,8 +1709,8 @@ Provides views for tracking income and monthly budget planning.</p>
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="475"
-                                    class="link-to-prism">src/app/features/salary/salary.component.ts:475</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="555"
+                                    class="link-to-prism">src/app/features/salary/salary.component.ts:555</a></div>
                         </td>
                     </tr>
 
@@ -1585,8 +1783,8 @@ Provides views for tracking income and monthly budget planning.</p>
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="221"
-                                    class="link-to-prism">src/app/features/salary/salary.component.ts:221</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="231"
+                                    class="link-to-prism">src/app/features/salary/salary.component.ts:231</a></div>
                         </td>
                     </tr>
 
@@ -1680,7 +1878,7 @@ Provides views for tracking income and monthly budget planning.</p>
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="73" class="link-to-prism">src/app/features/salary/salary.component.ts:73</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="85" class="link-to-prism">src/app/features/salary/salary.component.ts:85</a></div>
                         </td>
                     </tr>
 
@@ -1717,7 +1915,7 @@ Provides views for tracking income and monthly budget planning.</p>
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="76" class="link-to-prism">src/app/features/salary/salary.component.ts:76</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="88" class="link-to-prism">src/app/features/salary/salary.component.ts:88</a></div>
                         </td>
                     </tr>
 
@@ -1754,7 +1952,7 @@ Provides views for tracking income and monthly budget planning.</p>
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="70" class="link-to-prism">src/app/features/salary/salary.component.ts:70</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="82" class="link-to-prism">src/app/features/salary/salary.component.ts:82</a></div>
                         </td>
                     </tr>
 
@@ -1791,7 +1989,7 @@ Provides views for tracking income and monthly budget planning.</p>
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="67" class="link-to-prism">src/app/features/salary/salary.component.ts:67</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="79" class="link-to-prism">src/app/features/salary/salary.component.ts:79</a></div>
                         </td>
                     </tr>
 
@@ -1828,7 +2026,7 @@ Provides views for tracking income and monthly budget planning.</p>
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="64" class="link-to-prism">src/app/features/salary/salary.component.ts:64</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="76" class="link-to-prism">src/app/features/salary/salary.component.ts:76</a></div>
                         </td>
                     </tr>
 
@@ -1902,7 +2100,7 @@ Provides views for tracking income and monthly budget planning.</p>
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="49" class="link-to-prism">src/app/features/salary/salary.component.ts:49</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="61" class="link-to-prism">src/app/features/salary/salary.component.ts:61</a></div>
                         </td>
                     </tr>
 
@@ -1939,7 +2137,7 @@ Provides views for tracking income and monthly budget planning.</p>
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="52" class="link-to-prism">src/app/features/salary/salary.component.ts:52</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="64" class="link-to-prism">src/app/features/salary/salary.component.ts:64</a></div>
                         </td>
                     </tr>
 
@@ -1976,7 +2174,7 @@ Provides views for tracking income and monthly budget planning.</p>
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="55" class="link-to-prism">src/app/features/salary/salary.component.ts:55</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="67" class="link-to-prism">src/app/features/salary/salary.component.ts:67</a></div>
                         </td>
                     </tr>
 
@@ -2013,7 +2211,7 @@ Provides views for tracking income and monthly budget planning.</p>
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="58" class="link-to-prism">src/app/features/salary/salary.component.ts:58</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="70" class="link-to-prism">src/app/features/salary/salary.component.ts:70</a></div>
                         </td>
                     </tr>
 
@@ -2050,7 +2248,7 @@ Provides views for tracking income and monthly budget planning.</p>
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="103" class="link-to-prism">src/app/features/salary/salary.component.ts:103</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="115" class="link-to-prism">src/app/features/salary/salary.component.ts:115</a></div>
                         </td>
                     </tr>
 
@@ -2087,7 +2285,7 @@ Provides views for tracking income and monthly budget planning.</p>
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="82" class="link-to-prism">src/app/features/salary/salary.component.ts:82</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="94" class="link-to-prism">src/app/features/salary/salary.component.ts:94</a></div>
                         </td>
                     </tr>
 
@@ -2119,12 +2317,12 @@ Provides views for tracking income and monthly budget planning.</p>
                 </tr>
                 <tr>
                     <td class="col-md-4">
-                        <i>Default value : </i><code>signal&lt;{ amount?: string, note?: string, budget?: string, month?: string }&gt;({})</code>
+                        <i>Default value : </i><code>signal&lt;{ amount?: string, note?: string, budget?: string, month?: string, filter?: string }&gt;({})</code>
                     </td>
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="79" class="link-to-prism">src/app/features/salary/salary.component.ts:79</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="91" class="link-to-prism">src/app/features/salary/salary.component.ts:91</a></div>
                         </td>
                     </tr>
 
@@ -2178,6 +2376,80 @@ Provides views for tracking income and monthly budget planning.</p>
         <tbody>
             <tr>
                 <td class="col-md-4">
+                    <a name="filterEndDate"></a>
+                    <span class="name">
+                        <span ><b>filterEndDate</b></span>
+                        <a href="#filterEndDate"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>&quot;&quot;</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="43" class="link-to-prism">src/app/features/salary/salary.component.ts:43</a></div>
+                        </td>
+                    </tr>
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Selected end month for filtering salary data (YYYY-MM-MM format).</p>
+</div>
+                </td>
+            </tr>
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="filterStartDate"></a>
+                    <span class="name">
+                        <span ><b>filterStartDate</b></span>
+                        <a href="#filterStartDate"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>&quot;&quot;</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="40" class="link-to-prism">src/app/features/salary/salary.component.ts:40</a></div>
+                        </td>
+                    </tr>
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Selected start month for filtering salary data (YYYY-MM format).</p>
+</div>
+                </td>
+            </tr>
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
                     <a name="hasBudgetForCurrentMonth"></a>
                     <span class="name">
                         <span ><b>hasBudgetForCurrentMonth</b></span>
@@ -2198,13 +2470,50 @@ Provides views for tracking income and monthly budget planning.</p>
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="37" class="link-to-prism">src/app/features/salary/salary.component.ts:37</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="49" class="link-to-prism">src/app/features/salary/salary.component.ts:49</a></div>
                         </td>
                     </tr>
 
             <tr>
                 <td class="col-md-4">
                     <div class="io-description"><p>Indicates if a budget entry exists for the currently selected month</p>
+</div>
+                </td>
+            </tr>
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="isFilterActive"></a>
+                    <span class="name">
+                        <span ><b>isFilterActive</b></span>
+                        <a href="#isFilterActive"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>false</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="46" class="link-to-prism">src/app/features/salary/salary.component.ts:46</a></div>
+                        </td>
+                    </tr>
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Indicates whether any date filter is currently active.</p>
 </div>
                 </td>
             </tr>
@@ -2235,7 +2544,7 @@ Provides views for tracking income and monthly budget planning.</p>
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="85" class="link-to-prism">src/app/features/salary/salary.component.ts:85</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="97" class="link-to-prism">src/app/features/salary/salary.component.ts:97</a></div>
                         </td>
                     </tr>
 
@@ -2272,7 +2581,7 @@ Provides views for tracking income and monthly budget planning.</p>
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="91" class="link-to-prism">src/app/features/salary/salary.component.ts:91</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="103" class="link-to-prism">src/app/features/salary/salary.component.ts:103</a></div>
                         </td>
                     </tr>
 
@@ -2309,7 +2618,7 @@ Provides views for tracking income and monthly budget planning.</p>
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="88" class="link-to-prism">src/app/features/salary/salary.component.ts:88</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="100" class="link-to-prism">src/app/features/salary/salary.component.ts:100</a></div>
                         </td>
                     </tr>
 
@@ -2346,7 +2655,7 @@ Provides views for tracking income and monthly budget planning.</p>
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="100" class="link-to-prism">src/app/features/salary/salary.component.ts:100</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="112" class="link-to-prism">src/app/features/salary/salary.component.ts:112</a></div>
                         </td>
                     </tr>
 
@@ -2383,13 +2692,50 @@ Provides views for tracking income and monthly budget planning.</p>
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="97" class="link-to-prism">src/app/features/salary/salary.component.ts:97</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="109" class="link-to-prism">src/app/features/salary/salary.component.ts:109</a></div>
                         </td>
                     </tr>
 
             <tr>
                 <td class="col-md-4">
                     <div class="io-description"><p>Percentage of income saved</p>
+</div>
+                </td>
+            </tr>
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="showFilterModal"></a>
+                    <span class="name">
+                        <span ><b>showFilterModal</b></span>
+                        <a href="#showFilterModal"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>false</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="37" class="link-to-prism">src/app/features/salary/salary.component.ts:37</a></div>
+                        </td>
+                    </tr>
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Controls visibility of the salary filter modal dialog.</p>
 </div>
                 </td>
             </tr>
@@ -2457,7 +2803,7 @@ Provides views for tracking income and monthly budget planning.</p>
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="61" class="link-to-prism">src/app/features/salary/salary.component.ts:61</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="73" class="link-to-prism">src/app/features/salary/salary.component.ts:73</a></div>
                         </td>
                     </tr>
 
@@ -2494,7 +2840,7 @@ Provides views for tracking income and monthly budget planning.</p>
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="46" class="link-to-prism">src/app/features/salary/salary.component.ts:46</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="58" class="link-to-prism">src/app/features/salary/salary.component.ts:58</a></div>
                         </td>
                     </tr>
 
@@ -2531,7 +2877,7 @@ Provides views for tracking income and monthly budget planning.</p>
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="43" class="link-to-prism">src/app/features/salary/salary.component.ts:43</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="55" class="link-to-prism">src/app/features/salary/salary.component.ts:55</a></div>
                         </td>
                     </tr>
 
@@ -2568,7 +2914,7 @@ Provides views for tracking income and monthly budget planning.</p>
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="40" class="link-to-prism">src/app/features/salary/salary.component.ts:40</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="52" class="link-to-prism">src/app/features/salary/salary.component.ts:52</a></div>
                         </td>
                     </tr>
 
@@ -2600,7 +2946,7 @@ Provides views for tracking income and monthly budget planning.</p>
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="94" class="link-to-prism">src/app/features/salary/salary.component.ts:94</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="106" class="link-to-prism">src/app/features/salary/salary.component.ts:106</a></div>
                         </td>
                     </tr>
 
@@ -2691,6 +3037,18 @@ export class SalaryComponent implements OnInit {
   /** Flag to control the visibility of the add/edit modal */
   showModal: boolean &#x3D; false;
 
+  /** Controls visibility of the salary filter modal dialog. */
+  showFilterModal: boolean &#x3D; false;
+
+  /** Selected start month for filtering salary data (YYYY-MM format). */
+  filterStartDate: string &#x3D; &quot;&quot;;
+
+  /** Selected end month for filtering salary data (YYYY-MM-MM format). */
+  filterEndDate: string &#x3D; &quot;&quot;;
+
+  /** Indicates whether any date filter is currently active. */
+  isFilterActive: boolean &#x3D; false;
+
   /** Indicates if a budget entry exists for the currently selected month */
   hasBudgetForCurrentMonth: boolean &#x3D; false;
 
@@ -2734,7 +3092,7 @@ export class SalaryComponent implements OnInit {
   analysisTextClass: string &#x3D; &#x27;&#x27;;
 
   /** Reactive signal containing validation errors for the transaction form */
-  errors &#x3D; signal&lt;{ amount?: string, note?: string, budget?: string, month?: string }&gt;({});
+  errors &#x3D; signal&lt;{ amount?: string, note?: string, budget?: string, month?: string, filter?: string }&gt;({});
 
   /** ID of the transaction currently being edited; null if creating new */
   editingId: string | null &#x3D; null;
@@ -2802,7 +3160,7 @@ export class SalaryComponent implements OnInit {
    * Refreshes the local state by fetching data from services and recalculating all financial metrics.
    */
   loadState() {
-    const allTransactions: Salary[] &#x3D; this.salaryService.getAll();
+    const allTransactions: Salary[] &#x3D; this.isFilterActive ? this.salaryService.searchByDateRange(this.filterStartDate, this.filterEndDate) : this.salaryService.getAll();
     allTransactions.sort((a, b) &#x3D;&gt;
       b.month.localeCompare(a.month) ||
       new Date(b.date).getTime() - new Date(a.date).getTime()
@@ -2820,9 +3178,7 @@ export class SalaryComponent implements OnInit {
     this.totalIncome &#x3D; this.filteredTransactions.reduce((acc, t) &#x3D;&gt; acc + (t.amount || 0), 0);
     this.totalBudget &#x3D; this.filteredTransactions.reduce((acc, t) &#x3D;&gt; acc + (t.budget || 0), 0);
     this.salaryGrowth &#x3D; this.salaryGrowthFunction(allTransactions);
-
     this.dateMetrics &#x3D; this.dateMetricsFunction();
-
     this.dailyAllowed &#x3D; this.dailyAllowedFunction();
     this.dailySpent &#x3D; this.dailySpentFunction();
     this.dailySuggested &#x3D; this.dailySuggestedFunction();
@@ -2878,8 +3234,19 @@ export class SalaryComponent implements OnInit {
    */
   totalExpenseFunction(): number {
     if (this.viewMode &#x3D;&#x3D;&#x3D; &#x27;salary&#x27;) {
-      const expense: Expense[] &#x3D; this.expenseService.getAll();
-      return expense.reduce((acc, e) &#x3D;&gt; acc + Number(e.amount), 0);
+      if (this.isFilterActive) {
+        const [fyear, fmonth] &#x3D; this.filterStartDate.split(&#x27;-&#x27;).map(Number);
+        const [tyear, tmonth] &#x3D; this.filterEndDate.split(&#x27;-&#x27;).map(Number);
+        const fromDate &#x3D; &#x60;${fyear}-${String(fmonth).padStart(2, &#x27;0&#x27;)}-01&#x60;;
+        const lastDay &#x3D; new Date(tyear, tmonth, 0).getDate();
+        const toDate &#x3D; &#x60;${tyear}-${String(tmonth).padStart(2, &#x27;0&#x27;)}-${String(lastDay).padStart(2, &#x27;0&#x27;)}&#x60;;
+        const expense: Expense[] &#x3D; this.expenseService.searchByDateRange(fromDate, toDate);
+        return expense.reduce((acc, e) &#x3D;&gt; acc + Number(e.amount), 0);
+      }
+      else {
+        const expense: Expense[] &#x3D; this.expenseService.getAll();
+        return expense.reduce((acc, e) &#x3D;&gt; acc + Number(e.amount), 0);
+      }
     }
     else {
       const [year, month] &#x3D; this.currentMonth.split(&#x27;-&#x27;).map(Number);
@@ -2912,6 +3279,65 @@ export class SalaryComponent implements OnInit {
     daysRemaining &#x3D; daysRemaining &lt; 0 ? 0 : daysRemaining;
     return { daysPassed, daysRemaining, daysInMonth, isPastMonth };
   };
+
+  /**
+ * Opens the filter modal and clears previous validation errors.
+ *
+ * @returns void
+ */
+  openFilterModal(): void {
+    this.showFilterModal &#x3D; true;
+    this.errors.set({});
+  }
+
+  /**
+   * Closes the filter modal dialog.
+   *
+   * @returns void
+   */
+  closeFilterModal(): void {
+    this.showFilterModal &#x3D; false;
+  }
+
+  /**
+   * Applies the selected date range filter after validation.
+   * Ensures both months are selected and start month
+   * is not greater than end month.
+   *
+   * @returns void
+   */
+  applyFilter(): void {
+    this.errors.set({});
+
+    if (!this.filterStartDate || !this.filterEndDate) {
+      this.errors.set({ filter: &#x27;Please select both a Start Month and an End Month.&#x27; });
+      return;
+    }
+
+    const start &#x3D; new Date(this.filterStartDate);
+    const end &#x3D; new Date(this.filterEndDate);
+
+    if (start &gt; end) {
+      this.errors.set({ filter: &#x27;Start Month cannot be after End Month.&#x27; });
+      return;
+    }
+
+    this.isFilterActive &#x3D; true;
+    this.loadState();
+    this.closeFilterModal();
+  }
+
+  /**
+   * Clears the active filter and reloads salary data.
+   *
+   * @returns void
+   */
+  clearFilter(): void {
+    this.filterStartDate &#x3D; &quot;&quot;;
+    this.filterEndDate &#x3D; &quot;&quot;;
+    this.isFilterActive &#x3D; false;
+    this.loadState();
+  }
 
   /**
    * Calculates the average daily spending.
@@ -3169,7 +3595,7 @@ export class SalaryComponent implements OnInit {
                     &lt;i class&#x3D;&quot;text-white fa-solid&quot; [class]&#x3D;&quot;viewMode &#x3D;&#x3D;&#x3D; &#x27;salary&#x27; ? &#x27;fa-wallet&#x27; : &#x27;fa-piggy-bank&#x27;&quot;&gt;&lt;/i&gt;
                 &lt;/div&gt;
                 &lt;div&gt;
-                    &lt;p class&#x3D;&quot;text-md font-bold&quot;&gt;{{ viewMode &#x3D;&#x3D;&#x3D; &#x27;salary&#x27; ? &#x27;Salary Dashboard&#x27; : &#x27;Budget Planner&#x27; }}&lt;/p&gt;
+                    &lt;p class&#x3D;&quot;text-md font-bold&quot;&gt;{{ viewMode &#x3D;&#x3D;&#x3D; &#x27;salary&#x27; ? &#x27;Income Dashboard&#x27; : &#x27;Budget Planner&#x27; }}&lt;/p&gt;
                 &lt;/div&gt;
             &lt;/div&gt;
             &lt;div class&#x3D;&quot;relative flex w-32 h-8 bg-[var(--color-surface)] rounded-full shadow-md 
@@ -3184,7 +3610,7 @@ export class SalaryComponent implements OnInit {
                     (click)&#x3D;&quot;toggleView(&#x27;salary&#x27;)&quot;
                     [ngClass]&#x3D;&quot;{ &#x27;text-white&#x27;: viewMode &#x3D;&#x3D;&#x3D; &#x27;salary&#x27;, &#x27;text-[var(--color-text)] opacity-70&#x27;: viewMode !&#x3D;&#x3D; &#x27;salary&#x27; }&quot;
                     title&#x3D;&quot;Salary View&quot;&gt;
-                    Salary
+                    Income
                 &lt;/button&gt;
 
                 &lt;button
@@ -3353,7 +3779,7 @@ export class SalaryComponent implements OnInit {
             &lt;section class&#x3D;&quot;p-4 rounded-2xl animate-slide-up&quot;
                 style&#x3D;&quot;animation-delay: 0.15s; background-color: var(--color-bg-100); box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);&quot;&gt;
                 &lt;div class&#x3D;&quot;flex justify-between mb-2 text-xs opacity-60&quot;&gt;
-                    &lt;span&gt;{{ viewMode &#x3D;&#x3D;&#x3D; &#x27;salary&#x27; ? &#x27;Salary Usage&#x27; : &#x27;Budget Usage&#x27; }}&lt;/span&gt;
+                    &lt;span&gt;{{ viewMode &#x3D;&#x3D;&#x3D; &#x27;salary&#x27; ? &#x27;Income Usage&#x27; : &#x27;Budget Usage&#x27; }}&lt;/span&gt;
                     &lt;span&gt;{{ budgetPercentage }}% used&lt;/span&gt;
                 &lt;/div&gt;
                 &lt;div class&#x3D;&quot;w-full h-3 mb-2 overflow-hidden rounded-full&quot;
@@ -3370,7 +3796,29 @@ export class SalaryComponent implements OnInit {
                 &lt;h3 class&#x3D;&quot;text-xl font-semibold&quot;&gt;
                     {{ viewMode &#x3D;&#x3D;&#x3D; &#x27;salary&#x27; ? &#x27;Income Transactions&#x27; : &#x27;Budget History&#x27; }}
                 &lt;/h3&gt;
+
+                @if(viewMode &#x3D;&#x3D;&#x3D; &#x27;salary&#x27;){
+                &lt;button (click)&#x3D;&quot;openFilterModal()&quot;
+                    class&#x3D;&quot;flex items-center gap-2 px-3 py-1 text-xs font-medium transition-colors rounded-lg bg-[var(--color-bg-100)] hover:bg-[var(--color-bg-200)]&quot;
+                    [class.text-indigo-500]&#x3D;&quot;isFilterActive&quot;&gt;
+                    &lt;i class&#x3D;&quot;fa-solid fa-filter&quot;&gt;&lt;/i&gt;
+                    {{ isFilterActive ? &#x27;Filter On&#x27; : &#x27;Filter&#x27; }}
+                &lt;/button&gt;
+                }
             &lt;/div&gt;
+
+            @if(isFilterActive &amp;&amp; viewMode &#x3D;&#x3D;&#x3D; &#x27;salary&#x27;){
+            &lt;div
+                class&#x3D;&quot;flex items-center justify-between px-3 py-2 text-xs border border-indigo-500/30 bg-indigo-500/10 rounded-xl animate-fade-in text-indigo-400&quot;&gt;
+                &lt;span&gt;
+                    &lt;i class&#x3D;&quot;mr-1 fa-solid fa-calendar-day&quot;&gt;&lt;/i&gt;
+                    {{ filterStartDate | date:&#x27;MMMM y&#x27; }} - {{ filterEndDate | date:&#x27;MMMM y&#x27; }}
+                &lt;/span&gt;
+                &lt;button (click)&#x3D;&quot;clearFilter()&quot; class&#x3D;&quot;ml-2 hover:text-red-500 transition-colors&quot;&gt;
+                    &lt;i class&#x3D;&quot;fa-solid fa-xmark&quot;&gt;&lt;/i&gt;
+                &lt;/button&gt;
+            &lt;/div&gt;
+            }
 
             &lt;!-- Transactions List --&gt;
             &lt;div class&#x3D;&quot;pb-16 space-y-3 animate-slide-up&quot; style&#x3D;&quot;animation-delay: 0.3s;&quot;&gt;
@@ -3397,16 +3845,10 @@ export class SalaryComponent implements OnInit {
                         &lt;/div&gt;
                         &lt;div&gt;
                             &lt;p class&#x3D;&quot;font-medium truncate max-w-[120px]&quot;&gt;
-                                {{ viewMode &#x3D;&#x3D;&#x3D; &#x27;salary&#x27; ? &#x27;Income&#x27; : &#x27;Budget Limit&#x27; }}
+                                {{ (t.month + &#x27;-01&#x27;) | date:&#x27;MMMM yyyy&#x27; }}
                             &lt;/p&gt;
-                            &lt;div class&#x3D;&quot;flex flex-col text-xs opacity-60&quot;&gt;
-                                &lt;div class&#x3D;&quot;flex gap-2&quot;&gt;
-                                    &lt;span&gt;{{ (t.month + &#x27;-01&#x27;) | date:&#x27;MMMM yyyy&#x27; }}&lt;/span&gt;
-                                &lt;/div&gt;
-                            &lt;/div&gt;
                         &lt;/div&gt;
                     &lt;/div&gt;
-
                     &lt;div class&#x3D;&quot;z-10 flex flex-col items-end&quot;&gt;
                         &lt;p class&#x3D;&quot;font-bold text-green-500&quot;&gt;
                             {{ userCurrancy }}{{ (viewMode &#x3D;&#x3D;&#x3D; &#x27;salary&#x27; ? t.amount : t.budget) | number:&#x27;1.2-2&#x27; }}
@@ -3517,8 +3959,65 @@ export class SalaryComponent implements OnInit {
         &lt;/div&gt;
     &lt;/div&gt;
     }
-&lt;/div&gt;
-</code></pre>
+
+    @if (showFilterModal) {
+    &lt;div class&#x3D;&quot;fixed inset-0 z-50 flex justify-center p-4 bg-black/50 backdrop-blur-sm items-center&quot;
+        (click)&#x3D;&quot;closeFilterModal()&quot;&gt;
+        &lt;div class&#x3D;&quot;w-[90%] md:w-[450px] rounded-3xl p-6 shadow-2xl animate-slide-up&quot;
+            style&#x3D;&quot;background-color: var(--color-bg-100);&quot; (click)&#x3D;&quot;$event.stopPropagation()&quot;&gt;
+
+            &lt;div class&#x3D;&quot;flex items-center justify-between mb-6&quot;&gt;
+                &lt;h3 class&#x3D;&quot;text-xl font-bold&quot;&gt;Filter Range&lt;/h3&gt;
+                &lt;button (click)&#x3D;&quot;closeFilterModal()&quot;
+                    class&#x3D;&quot;flex items-center justify-center w-8 h-8 transition rounded-full hover:opacity-70&quot;
+                    style&#x3D;&quot;background-color: var(--color-bg-500); color: var(--color-text);&quot;&gt;
+                    &lt;i class&#x3D;&quot;fa-solid fa-xmark&quot;&gt;&lt;/i&gt;
+                &lt;/button&gt;
+            &lt;/div&gt;
+
+            &lt;form (submit)&#x3D;&quot;applyFilter()&quot;&gt;
+                &lt;div class&#x3D;&quot;flex flex-col gap-4 mb-4 md:flex-row&quot;&gt;
+
+                    &lt;div class&#x3D;&quot;w-full md:w-1/2&quot;&gt;
+                        &lt;label class&#x3D;&quot;block mb-2 text-sm opacity-60&quot;&gt;From Month&lt;/label&gt;
+                        &lt;input type&#x3D;&quot;month&quot; [(ngModel)]&#x3D;&quot;filterStartDate&quot; name&#x3D;&quot;start&quot; [max]&#x3D;&quot;filterEndDate&quot;
+                            class&#x3D;&quot;w-full py-3 px-4 transition-colors border rounded-xl focus:outline-none focus:border-indigo-500&quot;
+                            style&#x3D;&quot;background-color: var(--color-bg-500); border-color: var(--color-bg-600); color: inherit;&quot;&gt;
+                    &lt;/div&gt;
+
+                    &lt;div class&#x3D;&quot;w-full md:w-1/2&quot;&gt;
+                        &lt;label class&#x3D;&quot;block mb-2 text-sm opacity-60&quot;&gt;To Month&lt;/label&gt;
+                        &lt;input type&#x3D;&quot;month&quot; [(ngModel)]&#x3D;&quot;filterEndDate&quot; name&#x3D;&quot;end&quot; [min]&#x3D;&quot;filterStartDate&quot;
+                            class&#x3D;&quot;w-full py-3 px-4 transition-colors border rounded-xl focus:outline-none focus:border-indigo-500&quot;
+                            style&#x3D;&quot;background-color: var(--color-bg-500); border-color: var(--color-bg-600); color: inherit;&quot;&gt;
+                    &lt;/div&gt;
+                &lt;/div&gt;
+
+                @if (errors().filter) {
+                &lt;div
+                    class&#x3D;&quot;p-3 mb-4 text-xs text-center text-red-500 rounded-lg bg-red-500/10 animate-fade-in border border-red-500/20&quot;&gt;
+                    &lt;i class&#x3D;&quot;mr-1 fa-solid fa-circle-exclamation&quot;&gt;&lt;/i&gt;
+                    {{ errors().filter }}
+                &lt;/div&gt;
+                }
+
+                &lt;button type&#x3D;&quot;submit&quot;
+                    class&#x3D;&quot;w-full py-3 mt-2 font-bold text-white transition bg-indigo-500 rounded-xl shadow-lg shadow-indigo-500/25 active:scale-95 hover:bg-indigo-600 disabled:opacity-50 disabled:cursor-not-allowed&quot;
+                    [disabled]&#x3D;&quot;!filterStartDate || !filterEndDate&quot;&gt;
+                    Apply Filter
+                &lt;/button&gt;
+
+                @if(isFilterActive) {
+                &lt;button type&#x3D;&quot;button&quot; (click)&#x3D;&quot;clearFilter(); closeFilterModal()&quot;
+                    class&#x3D;&quot;w-full py-3 mt-3 text-sm font-medium transition opacity-60 hover:opacity-100 hover:text-red-500&quot;&gt;
+                    Clear Current Filter
+                &lt;/button&gt;
+                }
+            &lt;/form&gt;
+        &lt;/div&gt;
+    &lt;/div&gt;
+    }
+&lt;/div&gt;</code></pre>
     </div>
 
     <div class="tab-pane fade " id="styleData">
@@ -3627,7 +4126,7 @@ input[type&#x3D;&quot;month&quot;] {
 <script src="../js/libs/htmlparser.js"></script>
 <script src="../js/libs/deep-iterator.js"></script>
 <script>
-        var COMPONENT_TEMPLATE = '<div><div class="font-sans transition-colors duration-300"    style="background-color: var(--color-bg); color: var(--color-text);">    <div class="relative h-full max-w-3xl p-4 mx-auto md:p-8">        <!-- HEADER -->        <header class="flex items-center justify-between mb-6 animate-fade-in">            <div class="flex items-center gap-3">                <div                    class="flex items-center justify-center w-8 h-8 shadow-lg rounded-xl bg-gradient-to-br from-indigo-500 to-purple-500 shadow-indigo-500/30">                    <i class="text-white fa-solid" [class]="viewMode === \'salary\' ? \'fa-wallet\' : \'fa-piggy-bank\'"></i>                </div>                <div>                    <p class="text-md font-bold">{{ viewMode === \'salary\' ? \'Salary Dashboard\' : \'Budget Planner\' }}</p>                </div>            </div>            <div class="relative flex w-32 h-8 bg-[var(--color-surface)] rounded-full shadow-md             transition-all duration-300 ease-out select-none cursor-pointer">                <div class="absolute top-0 left-0 h-full w-1/2 bg-[var(--theme-color)] rounded-full transition-transform duration-300 ease-out shadow-sm"                    [ngClass]="{ \'translate-x-0\': viewMode === \'salary\', \'translate-x-full\': viewMode === \'budget\' }">                </div>                <button                    class="relative z-10 w-1/2 h-full flex items-center justify-center text-xs transition-colors duration-200 focus:outline-none"                    (click)="toggleView(\'salary\')"                    [ngClass]="{ \'text-white\': viewMode === \'salary\', \'text-[var(--color-text)] opacity-70\': viewMode !== \'salary\' }"                    title="Salary View">                    Salary                </button>                <button                    class="relative z-10 w-1/2 h-full flex items-center justify-center text-xs transition-colors duration-200 focus:outline-none"                    (click)="toggleView(\'budget\')"                    [ngClass]="{ \'text-white\': viewMode === \'budget\', \'text-[var(--color-text)] opacity-70\': viewMode !== \'budget\' }"                    title="Budget View">                    Budget                </button>            </div>        </header>        <!-- MAIN CONTENT -->        <main class="space-y-6">            <!-- Main Balance Card -->            <section                class="relative overflow-hidden text-white transition-all duration-500 rounded-3xl group animate-slide-up"                [ngClass]="viewMode === \'salary\' ? \'shadow-2xl shadow-indigo-500/20\' : \'shadow-2xl shadow-emerald-500/20\'">                <div class="absolute inset-0 bg-gradient-to-br from-indigo-600 via-purple-600 to-indigo-800 transition-opacity duration-1000 ease-in-out"                    [class.opacity-100]="viewMode === \'salary\'" [class.opacity-0]="viewMode !== \'salary\'">                </div>                <div class="absolute inset-0 bg-gradient-to-br from-emerald-600 via-teal-600 to-emerald-800 transition-opacity duration-1000 ease-in-out"                    [class.opacity-100]="viewMode === \'budget\'" [class.opacity-0]="viewMode !== \'budget\'">                </div>                <div class="absolute top-0 right-0 p-4 transition-all duration-1000 transform"                    [ngClass]="viewMode === \'salary\' ? \'opacity-20 translate-y-0 rotate-12\' : \'opacity-0 translate-y-4 rotate-0\'">                    <i class="fa-solid fa-sack-dollar text-9xl"></i>                </div>                <div class="absolute top-0 right-0 p-4 transition-all duration-1000 transform"                    [ngClass]="viewMode === \'budget\' ? \'opacity-20 translate-y-0 rotate-12\' : \'opacity-0 translate-y-4 rotate-0\'">                    <i class="fa-solid fa-chart-pie text-9xl"></i>                </div>                <div class="relative z-10 grid grid-cols-1 grid-rows-1">                    <div class="col-start-1 row-start-1 p-6 md:p-10 transition-all duration-500 ease-out transform">                        <p class="mb-1 text-xs font-medium tracking-wider uppercase opacity-80">                            {{ viewMode === \'salary\' ? \'Current Balance\' : \'Remaining Budget\' }}                        </p>                        <h2 class="mb-6 text-3xl font-bold tracking-tight md:text-5xl">                            {{ userCurrancy }}                            @if(viewMode === \'salary\') {                            {{ (totalIncome - totalExpense) | number:\'1.2-2\' }}                            } @else {                            {{ (totalBudget - totalExpense) | number:\'1.2-2\' }}                            }                        </h2>                        <div class="flex gap-8">                            <div>                                <div class="flex items-center gap-2 mb-1 text-xs opacity-80 md:text-sm">                                    <div class="flex items-center justify-center w-5 h-5 rounded-full bg-white/20">                                        <i class="fa-solid text-[10px]"                                            [class]="viewMode === \'salary\' ? \'fa-arrow-down\' : \'fa-bullseye\'"></i>                                    </div>                                    {{ viewMode === \'salary\' ? \'Total Income\' : \'Total Budget\' }}                                </div>                                <p class="text-xl font-semibold md:text-2xl">                                    {{ userCurrancy }}{{ (viewMode === \'salary\' ? totalIncome : totalBudget) |                                    number:\'1.2-2\'}}                                </p>                            </div>                            <div>                                <div class="flex items-center gap-2 mb-1 text-xs opacity-80 md:text-sm">                                    <div class="flex items-center justify-center w-5 h-5 rounded-full bg-white/20">                                        <i class="fa-solid fa-arrow-up text-[10px]"></i>                                    </div>                                    Total Spent                                </div>                                <p class="text-xl font-semibold md:text-2xl text-white">                                    {{ userCurrancy }}{{ totalExpense | number:\'1.2-2\'}}                                </p>                            </div>                        </div>                    </div>                </div>            </section>            <!-- Daily Analytics -->            <section class="grid grid-cols-3 gap-3 md:gap-4 animate-slide-up" style="animation-delay: 0.1s;">                <!-- Box 1: Avg Allowed -->                <div class="flex flex-col justify-between p-3 transition cursor-pointer rounded-2xl hover:opacity-90"                    style="background-color: var(--color-bg-100); box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);">                    @if (viewMode === \'salary\') {                    @if (salaryGrowth > 0) {                    <i class="mb-2 text-lg text-emerald-500 fa-solid fa-arrow-trend-up"></i>                    } @else if (salaryGrowth < 0) { <i class="mb-2 text-lg text-red-500 fa-solid fa-arrow-trend-down">                        </i>                        } @else {                        <i class="mb-2 text-lg fa-solid fa-minus opacity-50"></i>                        }                        <div>                            <p class="text-[10px] opacity-60 uppercase tracking-wide">Growth Rate</p>                            <div class="flex items-end gap-1">                                <p class="text-sm font-bold md:text-base"                                    [ngClass]="salaryGrowth >= 0 ? \'text-emerald-500\' : \'text-red-500\'">                                    {{ salaryGrowth > 0 ? \'+\' : \'\'}}{{ salaryGrowth | number:\'1.1-1\' }}%                                </p>                            </div>                        </div>                        } @else {                        <i class="mb-2 text-lg text-indigo-500 fa-solid fa-scale-balanced"></i>                        <div>                            <p class="text-[10px] opacity-60 uppercase tracking-wide">Allowed/Day</p>                            <p class="text-sm font-bold md:text-base">                                @if (dailyAllowed !== null) {                                {{ userCurrancy }}{{ dailyAllowed | number:\'1.2-2\' }}                                } @else { N/A }                            </p>                        </div>                        }                </div>                <!-- Box 2: Spent / Day -->                <div class="flex flex-col justify-between p-3 transition cursor-pointer rounded-2xl hover:opacity-90"                    style="background-color: var(--color-bg-100); box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);">                    <i class="mb-2 text-lg text-orange-500 fa-solid fa-fire-flame-curved"></i>                    <div>                        <p class="text-[10px] opacity-60 uppercase tracking-wide">Spent/Day</p>                        <p class="text-sm font-bold md:text-base">                            {{ userCurrancy }}{{ dailySpent | number:\'1.2-2\' }}                        </p>                    </div>                </div>                <!-- Box 3: Suggested / Day -->                <div class="flex flex-col justify-between p-3 transition cursor-pointer rounded-2xl hover:opacity-90"                    style="background-color: var(--color-bg-100); box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);">                    @if (viewMode === \'salary\') {                    <i class="mb-2 text-lg fa-solid fa-percent"                        [ngClass]="savingsPercentage >= 0 ? \'text-purple-500\' : \'text-red-500\'"></i>                    <div>                        <p class="text-[10px] opacity-60 uppercase tracking-wide">Savings Rate</p>                        <p class="text-sm font-bold md:text-base" [class.text-red-500]="savingsPercentage < 0">                            {{ savingsPercentage | number:\'1.1-1\' }}%                        </p>                    </div>                    } @else {                    <i class="mb-2 text-lg text-teal-500 fa-solid fa-bullseye"></i>                    <div>                        <p class="text-[10px] opacity-60 uppercase tracking-wide">Suggested/Day</p>                        <p class="text-sm font-bold md:text-base">                            @if (dailySuggested !== null) {                            {{ userCurrancy }}{{ dailySuggested | number:\'1.2-2\' }}                            } @else { N/A }                        </p>                    </div>                    }                </div>            </section>            <!-- Visual Bar Chart -->            <section class="p-4 rounded-2xl animate-slide-up"                style="animation-delay: 0.15s; background-color: var(--color-bg-100); box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);">                <div class="flex justify-between mb-2 text-xs opacity-60">                    <span>{{ viewMode === \'salary\' ? \'Salary Usage\' : \'Budget Usage\' }}</span>                    <span>{{ budgetPercentage }}% used</span>                </div>                <div class="w-full h-3 mb-2 overflow-hidden rounded-full"                    style="background-color: var(--color-bg-600);">                    <div class="h-full transition-all duration-1000 ease-out bg-gradient-to-r" [ngClass]="barColorClass"                        [style.width.%]="barWidth">                    </div>                </div>                <p class="text-[10px] text-center italic" [ngClass]="analysisTextClass">{{ analysisText }}</p>            </section>            <!-- Transactions List Header -->            <div class="flex items-end justify-between animate-slide-up" style="animation-delay: 0.2s;">                <h3 class="text-xl font-semibold">                    {{ viewMode === \'salary\' ? \'Income Transactions\' : \'Budget History\' }}                </h3>            </div>            <!-- Transactions List -->            <div class="pb-16 space-y-3 animate-slide-up" style="animation-delay: 0.3s;">                @if (filteredTransactions.length === 0) {                <div class="py-10 text-center opacity-50 animate-fade-in">                    <i class="mb-3 text-4xl fa-solid fa-filter"></i>                    <p>{{ viewMode === \'salary\' ? \'No Income found\' : \'No Budget found for this month\' }}</p>                    @if(viewMode === \'salary\' || (viewMode === \'budget\' && !hasBudgetForCurrentMonth)) {                    <button (click)="openModal()" class="mt-4 text-indigo-500 underline">Add one now</button>                    }                </div>                } @else {                @for (t of filteredTransactions; track t.salary_id) {                <div class="relative flex items-center justify-between p-4 overflow-hidden transition-all cursor-pointer rounded-xl group hover:scale-[1.01] border-green-500"                    (click)="openModal(t)"                    style="background-color: var(--color-bg-100); border-bottom: 1px solid var(--color-bg-600);"                    [class.border-l-4]="true">                    <div class="z-10 flex items-center gap-4">                        <div class="flex items-center justify-center w-10 h-10 rounded-full"                            [ngClass]="viewMode === \'salary\' ? \'bg-green-500/10 text-green-500\' : \'bg-teal-500/10 text-teal-500\'">                            <i class="fa-solid" [class]="viewMode === \'salary\' ? \'fa-arrow-down\' : \'fa-bullseye\'"></i>                        </div>                        <div>                            <p class="font-medium truncate max-w-[120px]">                                {{ viewMode === \'salary\' ? \'Income\' : \'Budget Limit\' }}                            </p>                            <div class="flex flex-col text-xs opacity-60">                                <div class="flex gap-2">                                    <span>{{ (t.month + \'-01\') | date:\'MMMM yyyy\' }}</span>                                </div>                            </div>                        </div>                    </div>                    <div class="z-10 flex flex-col items-end">                        <p class="font-bold text-green-500">                            {{ userCurrancy }}{{ (viewMode === \'salary\' ? t.amount : t.budget) | number:\'1.2-2\' }}                        </p>                        <span class="text-[10px] opacity-40 group-hover:opacity-100 transition-opacity">Tap to                            edit</span>                    </div>                    <!-- Delete Button (Swipe/Hover) -->                    <button (click)="removeTransaction(t.salary_id, $event)"                        class="absolute top-0 bottom-0 right-0 z-20 flex items-center justify-center w-16 text-white transition-transform duration-200 translate-x-full bg-red-600/90 group-hover:translate-x-0">                        <i class="fa-solid fa-trash"></i>                    </button>                </div>                }                }            </div>        </main>    </div>    @if (viewMode === \'salary\' || (viewMode === \'budget\' && !hasBudgetForCurrentMonth)) {    <button (click)="openModal()"        class="fixed z-40 flex items-center justify-center w-14 h-14 text-2xl text-white transition duration-200 rounded-full shadow-xl bottom-16 right-6 bg-indigo-500 shadow-indigo-500/40 hover:bg-indigo-600 active:scale-90 animate-bounce-subtle group">        <i class="transition-transform duration-300 fa-solid fa-plus group-hover:rotate-90"></i>    </button>    }    @if (showModal) {    <div class="fixed inset-0 z-50 flex justify-center p-4 bg-black/50 backdrop-blur-sm items-center"        (click)="closeModal()">        <div class="w-[90%] md:w-[500px] rounded-3xl p-6 shadow-2xl animate-slide-up"            style="background-color: var(--color-bg-100);" (click)="$event.stopPropagation()">            <div class="flex items-center justify-between mb-6">                <h3 class="text-xl font-bold">                    {{ editingId ? \'Edit\' : \'Add\' }}                    {{ viewMode === \'salary\' ? \'Salary\' : \'Budget\' }}                </h3>                <button (click)="closeModal()"                    class="flex items-center justify-center w-8 h-8 transition rounded-full hover:opacity-70"                    style="background-color: var(--color-bg-500); color: var(--color-text);">                    <i class="fa-solid fa-xmark"></i>                </button>            </div>            <form (submit)="saveTransaction()">                <!-- Amount / Salary -->                <div class="mb-4">                    <label class="block mb-2 text-sm opacity-60">                        {{ viewMode === \'salary\' ? \'Salary Amount\' : \'Budget Limit\' }}                    </label>                    <div class="relative">                        <span class="absolute left-4 top-3.5 opacity-40"><i                                class="fa-solid fa-money-bill-1-wave"></i></span>                        <input #amountInput type="number" [(ngModel)]="newAmount" name="amount" placeholder="0.00"                            min="0" max="100000000"                            class="w-full py-3 pl-10 pr-4 transition-colors border rounded-xl focus:outline-none focus:border-indigo-500"                            [class.border-red-500]="errors().amount"                            style="background-color: var(--color-bg-500); border-color: var(--color-bg-600); color: inherit;">                    </div>                    @if (errors().amount) {                    <p class="text-xs text-red-500 mt-1 animate-fade-in">{{ errors().amount }}</p>                    }                </div>                @if (viewMode === \'salary\') {                <div class="mb-4 animate-fade-in">                    <label class="block mb-2 text-sm opacity-60">For Month</label>                    <div class="relative">                        <span class="absolute left-4 top-3.5 opacity-40"><i class="fa-solid fa-calendar"></i></span>                        <input type="month" [(ngModel)]="newMonth" name="month"                            class="w-full py-3 pl-10 pr-4 transition-colors border rounded-xl focus:outline-none focus:border-indigo-500"                            [class.border-red-500]="errors().month"                            style="background-color: var(--color-bg-500); border-color: var(--color-bg-600); color: inherit;">                    </div>                    @if (errors().month) {                    <p class="text-xs text-red-500 mt-1 animate-fade-in">{{ errors().month }}</p>                    }                </div>                <div class="mb-4 animate-fade-in">                    <label class="block mb-2 text-sm opacity-60">Note (Optional)</label>                    <div class="relative">                        <span class="absolute left-4 top-3.5 opacity-40"><i class="fa-solid fa-pen"></i></span>                        <input type="text" [(ngModel)]="newNote" name="note" placeholder="Extra details..."                            maxlength="50"                            class="w-full py-3 pl-10 pr-4 transition-colors border rounded-xl focus:outline-none focus:border-indigo-500"                            [class.border-red-500]="errors().note"                            style="background-color: var(--color-bg-500); border-color: var(--color-bg-600); color: inherit;">                    </div>                    @if (errors().note) {                    <p class="text-xs text-red-500 mt-1 animate-fade-in">{{ errors().note }}</p>                    }                </div>                }                @if (viewMode === \'budget\') {                <p class="mb-4 text-xs italic opacity-60 text-center">                    Setting budget for {{ currentMonth | date:\'MMMM yyyy\' }}.                </p>                }                <button type="submit"                    class="w-full py-4 mt-4 font-bold text-white transition bg-indigo-500 rounded-xl shadow-lg shadow-indigo-500/25 active:scale-95 hover:bg-indigo-600">                    {{ editingId ? \'Update\' : \'Save\' }}                </button>            </form>        </div>    </div>    }</div></div>'
+        var COMPONENT_TEMPLATE = '<div><div class="font-sans transition-colors duration-300"    style="background-color: var(--color-bg); color: var(--color-text);">    <div class="relative h-full max-w-3xl p-4 mx-auto md:p-8">        <!-- HEADER -->        <header class="flex items-center justify-between mb-6 animate-fade-in">            <div class="flex items-center gap-3">                <div                    class="flex items-center justify-center w-8 h-8 shadow-lg rounded-xl bg-gradient-to-br from-indigo-500 to-purple-500 shadow-indigo-500/30">                    <i class="text-white fa-solid" [class]="viewMode === \'salary\' ? \'fa-wallet\' : \'fa-piggy-bank\'"></i>                </div>                <div>                    <p class="text-md font-bold">{{ viewMode === \'salary\' ? \'Income Dashboard\' : \'Budget Planner\' }}</p>                </div>            </div>            <div class="relative flex w-32 h-8 bg-[var(--color-surface)] rounded-full shadow-md             transition-all duration-300 ease-out select-none cursor-pointer">                <div class="absolute top-0 left-0 h-full w-1/2 bg-[var(--theme-color)] rounded-full transition-transform duration-300 ease-out shadow-sm"                    [ngClass]="{ \'translate-x-0\': viewMode === \'salary\', \'translate-x-full\': viewMode === \'budget\' }">                </div>                <button                    class="relative z-10 w-1/2 h-full flex items-center justify-center text-xs transition-colors duration-200 focus:outline-none"                    (click)="toggleView(\'salary\')"                    [ngClass]="{ \'text-white\': viewMode === \'salary\', \'text-[var(--color-text)] opacity-70\': viewMode !== \'salary\' }"                    title="Salary View">                    Income                </button>                <button                    class="relative z-10 w-1/2 h-full flex items-center justify-center text-xs transition-colors duration-200 focus:outline-none"                    (click)="toggleView(\'budget\')"                    [ngClass]="{ \'text-white\': viewMode === \'budget\', \'text-[var(--color-text)] opacity-70\': viewMode !== \'budget\' }"                    title="Budget View">                    Budget                </button>            </div>        </header>        <!-- MAIN CONTENT -->        <main class="space-y-6">            <!-- Main Balance Card -->            <section                class="relative overflow-hidden text-white transition-all duration-500 rounded-3xl group animate-slide-up"                [ngClass]="viewMode === \'salary\' ? \'shadow-2xl shadow-indigo-500/20\' : \'shadow-2xl shadow-emerald-500/20\'">                <div class="absolute inset-0 bg-gradient-to-br from-indigo-600 via-purple-600 to-indigo-800 transition-opacity duration-1000 ease-in-out"                    [class.opacity-100]="viewMode === \'salary\'" [class.opacity-0]="viewMode !== \'salary\'">                </div>                <div class="absolute inset-0 bg-gradient-to-br from-emerald-600 via-teal-600 to-emerald-800 transition-opacity duration-1000 ease-in-out"                    [class.opacity-100]="viewMode === \'budget\'" [class.opacity-0]="viewMode !== \'budget\'">                </div>                <div class="absolute top-0 right-0 p-4 transition-all duration-1000 transform"                    [ngClass]="viewMode === \'salary\' ? \'opacity-20 translate-y-0 rotate-12\' : \'opacity-0 translate-y-4 rotate-0\'">                    <i class="fa-solid fa-sack-dollar text-9xl"></i>                </div>                <div class="absolute top-0 right-0 p-4 transition-all duration-1000 transform"                    [ngClass]="viewMode === \'budget\' ? \'opacity-20 translate-y-0 rotate-12\' : \'opacity-0 translate-y-4 rotate-0\'">                    <i class="fa-solid fa-chart-pie text-9xl"></i>                </div>                <div class="relative z-10 grid grid-cols-1 grid-rows-1">                    <div class="col-start-1 row-start-1 p-6 md:p-10 transition-all duration-500 ease-out transform">                        <p class="mb-1 text-xs font-medium tracking-wider uppercase opacity-80">                            {{ viewMode === \'salary\' ? \'Current Balance\' : \'Remaining Budget\' }}                        </p>                        <h2 class="mb-6 text-3xl font-bold tracking-tight md:text-5xl">                            {{ userCurrancy }}                            @if(viewMode === \'salary\') {                            {{ (totalIncome - totalExpense) | number:\'1.2-2\' }}                            } @else {                            {{ (totalBudget - totalExpense) | number:\'1.2-2\' }}                            }                        </h2>                        <div class="flex gap-8">                            <div>                                <div class="flex items-center gap-2 mb-1 text-xs opacity-80 md:text-sm">                                    <div class="flex items-center justify-center w-5 h-5 rounded-full bg-white/20">                                        <i class="fa-solid text-[10px]"                                            [class]="viewMode === \'salary\' ? \'fa-arrow-down\' : \'fa-bullseye\'"></i>                                    </div>                                    {{ viewMode === \'salary\' ? \'Total Income\' : \'Total Budget\' }}                                </div>                                <p class="text-xl font-semibold md:text-2xl">                                    {{ userCurrancy }}{{ (viewMode === \'salary\' ? totalIncome : totalBudget) |                                    number:\'1.2-2\'}}                                </p>                            </div>                            <div>                                <div class="flex items-center gap-2 mb-1 text-xs opacity-80 md:text-sm">                                    <div class="flex items-center justify-center w-5 h-5 rounded-full bg-white/20">                                        <i class="fa-solid fa-arrow-up text-[10px]"></i>                                    </div>                                    Total Spent                                </div>                                <p class="text-xl font-semibold md:text-2xl text-white">                                    {{ userCurrancy }}{{ totalExpense | number:\'1.2-2\'}}                                </p>                            </div>                        </div>                    </div>                </div>            </section>            <!-- Daily Analytics -->            <section class="grid grid-cols-3 gap-3 md:gap-4 animate-slide-up" style="animation-delay: 0.1s;">                <!-- Box 1: Avg Allowed -->                <div class="flex flex-col justify-between p-3 transition cursor-pointer rounded-2xl hover:opacity-90"                    style="background-color: var(--color-bg-100); box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);">                    @if (viewMode === \'salary\') {                    @if (salaryGrowth > 0) {                    <i class="mb-2 text-lg text-emerald-500 fa-solid fa-arrow-trend-up"></i>                    } @else if (salaryGrowth < 0) { <i class="mb-2 text-lg text-red-500 fa-solid fa-arrow-trend-down">                        </i>                        } @else {                        <i class="mb-2 text-lg fa-solid fa-minus opacity-50"></i>                        }                        <div>                            <p class="text-[10px] opacity-60 uppercase tracking-wide">Growth Rate</p>                            <div class="flex items-end gap-1">                                <p class="text-sm font-bold md:text-base"                                    [ngClass]="salaryGrowth >= 0 ? \'text-emerald-500\' : \'text-red-500\'">                                    {{ salaryGrowth > 0 ? \'+\' : \'\'}}{{ salaryGrowth | number:\'1.1-1\' }}%                                </p>                            </div>                        </div>                        } @else {                        <i class="mb-2 text-lg text-indigo-500 fa-solid fa-scale-balanced"></i>                        <div>                            <p class="text-[10px] opacity-60 uppercase tracking-wide">Allowed/Day</p>                            <p class="text-sm font-bold md:text-base">                                @if (dailyAllowed !== null) {                                {{ userCurrancy }}{{ dailyAllowed | number:\'1.2-2\' }}                                } @else { N/A }                            </p>                        </div>                        }                </div>                <!-- Box 2: Spent / Day -->                <div class="flex flex-col justify-between p-3 transition cursor-pointer rounded-2xl hover:opacity-90"                    style="background-color: var(--color-bg-100); box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);">                    <i class="mb-2 text-lg text-orange-500 fa-solid fa-fire-flame-curved"></i>                    <div>                        <p class="text-[10px] opacity-60 uppercase tracking-wide">Spent/Day</p>                        <p class="text-sm font-bold md:text-base">                            {{ userCurrancy }}{{ dailySpent | number:\'1.2-2\' }}                        </p>                    </div>                </div>                <!-- Box 3: Suggested / Day -->                <div class="flex flex-col justify-between p-3 transition cursor-pointer rounded-2xl hover:opacity-90"                    style="background-color: var(--color-bg-100); box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);">                    @if (viewMode === \'salary\') {                    <i class="mb-2 text-lg fa-solid fa-percent"                        [ngClass]="savingsPercentage >= 0 ? \'text-purple-500\' : \'text-red-500\'"></i>                    <div>                        <p class="text-[10px] opacity-60 uppercase tracking-wide">Savings Rate</p>                        <p class="text-sm font-bold md:text-base" [class.text-red-500]="savingsPercentage < 0">                            {{ savingsPercentage | number:\'1.1-1\' }}%                        </p>                    </div>                    } @else {                    <i class="mb-2 text-lg text-teal-500 fa-solid fa-bullseye"></i>                    <div>                        <p class="text-[10px] opacity-60 uppercase tracking-wide">Suggested/Day</p>                        <p class="text-sm font-bold md:text-base">                            @if (dailySuggested !== null) {                            {{ userCurrancy }}{{ dailySuggested | number:\'1.2-2\' }}                            } @else { N/A }                        </p>                    </div>                    }                </div>            </section>            <!-- Visual Bar Chart -->            <section class="p-4 rounded-2xl animate-slide-up"                style="animation-delay: 0.15s; background-color: var(--color-bg-100); box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);">                <div class="flex justify-between mb-2 text-xs opacity-60">                    <span>{{ viewMode === \'salary\' ? \'Income Usage\' : \'Budget Usage\' }}</span>                    <span>{{ budgetPercentage }}% used</span>                </div>                <div class="w-full h-3 mb-2 overflow-hidden rounded-full"                    style="background-color: var(--color-bg-600);">                    <div class="h-full transition-all duration-1000 ease-out bg-gradient-to-r" [ngClass]="barColorClass"                        [style.width.%]="barWidth">                    </div>                </div>                <p class="text-[10px] text-center italic" [ngClass]="analysisTextClass">{{ analysisText }}</p>            </section>            <!-- Transactions List Header -->            <div class="flex items-end justify-between animate-slide-up" style="animation-delay: 0.2s;">                <h3 class="text-xl font-semibold">                    {{ viewMode === \'salary\' ? \'Income Transactions\' : \'Budget History\' }}                </h3>                @if(viewMode === \'salary\'){                <button (click)="openFilterModal()"                    class="flex items-center gap-2 px-3 py-1 text-xs font-medium transition-colors rounded-lg bg-[var(--color-bg-100)] hover:bg-[var(--color-bg-200)]"                    [class.text-indigo-500]="isFilterActive">                    <i class="fa-solid fa-filter"></i>                    {{ isFilterActive ? \'Filter On\' : \'Filter\' }}                </button>                }            </div>            @if(isFilterActive && viewMode === \'salary\'){            <div                class="flex items-center justify-between px-3 py-2 text-xs border border-indigo-500/30 bg-indigo-500/10 rounded-xl animate-fade-in text-indigo-400">                <span>                    <i class="mr-1 fa-solid fa-calendar-day"></i>                    {{ filterStartDate | date:\'MMMM y\' }} - {{ filterEndDate | date:\'MMMM y\' }}                </span>                <button (click)="clearFilter()" class="ml-2 hover:text-red-500 transition-colors">                    <i class="fa-solid fa-xmark"></i>                </button>            </div>            }            <!-- Transactions List -->            <div class="pb-16 space-y-3 animate-slide-up" style="animation-delay: 0.3s;">                @if (filteredTransactions.length === 0) {                <div class="py-10 text-center opacity-50 animate-fade-in">                    <i class="mb-3 text-4xl fa-solid fa-filter"></i>                    <p>{{ viewMode === \'salary\' ? \'No Income found\' : \'No Budget found for this month\' }}</p>                    @if(viewMode === \'salary\' || (viewMode === \'budget\' && !hasBudgetForCurrentMonth)) {                    <button (click)="openModal()" class="mt-4 text-indigo-500 underline">Add one now</button>                    }                </div>                } @else {                @for (t of filteredTransactions; track t.salary_id) {                <div class="relative flex items-center justify-between p-4 overflow-hidden transition-all cursor-pointer rounded-xl group hover:scale-[1.01] border-green-500"                    (click)="openModal(t)"                    style="background-color: var(--color-bg-100); border-bottom: 1px solid var(--color-bg-600);"                    [class.border-l-4]="true">                    <div class="z-10 flex items-center gap-4">                        <div class="flex items-center justify-center w-10 h-10 rounded-full"                            [ngClass]="viewMode === \'salary\' ? \'bg-green-500/10 text-green-500\' : \'bg-teal-500/10 text-teal-500\'">                            <i class="fa-solid" [class]="viewMode === \'salary\' ? \'fa-arrow-down\' : \'fa-bullseye\'"></i>                        </div>                        <div>                            <p class="font-medium truncate max-w-[120px]">                                {{ (t.month + \'-01\') | date:\'MMMM yyyy\' }}                            </p>                        </div>                    </div>                    <div class="z-10 flex flex-col items-end">                        <p class="font-bold text-green-500">                            {{ userCurrancy }}{{ (viewMode === \'salary\' ? t.amount : t.budget) | number:\'1.2-2\' }}                        </p>                        <span class="text-[10px] opacity-40 group-hover:opacity-100 transition-opacity">Tap to                            edit</span>                    </div>                    <!-- Delete Button (Swipe/Hover) -->                    <button (click)="removeTransaction(t.salary_id, $event)"                        class="absolute top-0 bottom-0 right-0 z-20 flex items-center justify-center w-16 text-white transition-transform duration-200 translate-x-full bg-red-600/90 group-hover:translate-x-0">                        <i class="fa-solid fa-trash"></i>                    </button>                </div>                }                }            </div>        </main>    </div>    @if (viewMode === \'salary\' || (viewMode === \'budget\' && !hasBudgetForCurrentMonth)) {    <button (click)="openModal()"        class="fixed z-40 flex items-center justify-center w-14 h-14 text-2xl text-white transition duration-200 rounded-full shadow-xl bottom-16 right-6 bg-indigo-500 shadow-indigo-500/40 hover:bg-indigo-600 active:scale-90 animate-bounce-subtle group">        <i class="transition-transform duration-300 fa-solid fa-plus group-hover:rotate-90"></i>    </button>    }    @if (showModal) {    <div class="fixed inset-0 z-50 flex justify-center p-4 bg-black/50 backdrop-blur-sm items-center"        (click)="closeModal()">        <div class="w-[90%] md:w-[500px] rounded-3xl p-6 shadow-2xl animate-slide-up"            style="background-color: var(--color-bg-100);" (click)="$event.stopPropagation()">            <div class="flex items-center justify-between mb-6">                <h3 class="text-xl font-bold">                    {{ editingId ? \'Edit\' : \'Add\' }}                    {{ viewMode === \'salary\' ? \'Salary\' : \'Budget\' }}                </h3>                <button (click)="closeModal()"                    class="flex items-center justify-center w-8 h-8 transition rounded-full hover:opacity-70"                    style="background-color: var(--color-bg-500); color: var(--color-text);">                    <i class="fa-solid fa-xmark"></i>                </button>            </div>            <form (submit)="saveTransaction()">                <!-- Amount / Salary -->                <div class="mb-4">                    <label class="block mb-2 text-sm opacity-60">                        {{ viewMode === \'salary\' ? \'Salary Amount\' : \'Budget Limit\' }}                    </label>                    <div class="relative">                        <span class="absolute left-4 top-3.5 opacity-40"><i                                class="fa-solid fa-money-bill-1-wave"></i></span>                        <input #amountInput type="number" [(ngModel)]="newAmount" name="amount" placeholder="0.00"                            min="0" max="100000000"                            class="w-full py-3 pl-10 pr-4 transition-colors border rounded-xl focus:outline-none focus:border-indigo-500"                            [class.border-red-500]="errors().amount"                            style="background-color: var(--color-bg-500); border-color: var(--color-bg-600); color: inherit;">                    </div>                    @if (errors().amount) {                    <p class="text-xs text-red-500 mt-1 animate-fade-in">{{ errors().amount }}</p>                    }                </div>                @if (viewMode === \'salary\') {                <div class="mb-4 animate-fade-in">                    <label class="block mb-2 text-sm opacity-60">For Month</label>                    <div class="relative">                        <span class="absolute left-4 top-3.5 opacity-40"><i class="fa-solid fa-calendar"></i></span>                        <input type="month" [(ngModel)]="newMonth" name="month"                            class="w-full py-3 pl-10 pr-4 transition-colors border rounded-xl focus:outline-none focus:border-indigo-500"                            [class.border-red-500]="errors().month"                            style="background-color: var(--color-bg-500); border-color: var(--color-bg-600); color: inherit;">                    </div>                    @if (errors().month) {                    <p class="text-xs text-red-500 mt-1 animate-fade-in">{{ errors().month }}</p>                    }                </div>                <div class="mb-4 animate-fade-in">                    <label class="block mb-2 text-sm opacity-60">Note (Optional)</label>                    <div class="relative">                        <span class="absolute left-4 top-3.5 opacity-40"><i class="fa-solid fa-pen"></i></span>                        <input type="text" [(ngModel)]="newNote" name="note" placeholder="Extra details..."                            maxlength="50"                            class="w-full py-3 pl-10 pr-4 transition-colors border rounded-xl focus:outline-none focus:border-indigo-500"                            [class.border-red-500]="errors().note"                            style="background-color: var(--color-bg-500); border-color: var(--color-bg-600); color: inherit;">                    </div>                    @if (errors().note) {                    <p class="text-xs text-red-500 mt-1 animate-fade-in">{{ errors().note }}</p>                    }                </div>                }                @if (viewMode === \'budget\') {                <p class="mb-4 text-xs italic opacity-60 text-center">                    Setting budget for {{ currentMonth | date:\'MMMM yyyy\' }}.                </p>                }                <button type="submit"                    class="w-full py-4 mt-4 font-bold text-white transition bg-indigo-500 rounded-xl shadow-lg shadow-indigo-500/25 active:scale-95 hover:bg-indigo-600">                    {{ editingId ? \'Update\' : \'Save\' }}                </button>            </form>        </div>    </div>    }    @if (showFilterModal) {    <div class="fixed inset-0 z-50 flex justify-center p-4 bg-black/50 backdrop-blur-sm items-center"        (click)="closeFilterModal()">        <div class="w-[90%] md:w-[450px] rounded-3xl p-6 shadow-2xl animate-slide-up"            style="background-color: var(--color-bg-100);" (click)="$event.stopPropagation()">            <div class="flex items-center justify-between mb-6">                <h3 class="text-xl font-bold">Filter Range</h3>                <button (click)="closeFilterModal()"                    class="flex items-center justify-center w-8 h-8 transition rounded-full hover:opacity-70"                    style="background-color: var(--color-bg-500); color: var(--color-text);">                    <i class="fa-solid fa-xmark"></i>                </button>            </div>            <form (submit)="applyFilter()">                <div class="flex flex-col gap-4 mb-4 md:flex-row">                    <div class="w-full md:w-1/2">                        <label class="block mb-2 text-sm opacity-60">From Month</label>                        <input type="month" [(ngModel)]="filterStartDate" name="start" [max]="filterEndDate"                            class="w-full py-3 px-4 transition-colors border rounded-xl focus:outline-none focus:border-indigo-500"                            style="background-color: var(--color-bg-500); border-color: var(--color-bg-600); color: inherit;">                    </div>                    <div class="w-full md:w-1/2">                        <label class="block mb-2 text-sm opacity-60">To Month</label>                        <input type="month" [(ngModel)]="filterEndDate" name="end" [min]="filterStartDate"                            class="w-full py-3 px-4 transition-colors border rounded-xl focus:outline-none focus:border-indigo-500"                            style="background-color: var(--color-bg-500); border-color: var(--color-bg-600); color: inherit;">                    </div>                </div>                @if (errors().filter) {                <div                    class="p-3 mb-4 text-xs text-center text-red-500 rounded-lg bg-red-500/10 animate-fade-in border border-red-500/20">                    <i class="mr-1 fa-solid fa-circle-exclamation"></i>                    {{ errors().filter }}                </div>                }                <button type="submit"                    class="w-full py-3 mt-2 font-bold text-white transition bg-indigo-500 rounded-xl shadow-lg shadow-indigo-500/25 active:scale-95 hover:bg-indigo-600 disabled:opacity-50 disabled:cursor-not-allowed"                    [disabled]="!filterStartDate || !filterEndDate">                    Apply Filter                </button>                @if(isFilterActive) {                <button type="button" (click)="clearFilter(); closeFilterModal()"                    class="w-full py-3 mt-3 text-sm font-medium transition opacity-60 hover:opacity-100 hover:text-red-500">                    Clear Current Filter                </button>                }            </form>        </div>    </div>    }</div></div>'
     var COMPONENTS = [{'name': 'AddExpenseComponent', 'selector': 'app-add-expense'},{'name': 'AiComponent', 'selector': 'app-ai'},{'name': 'AppComponent', 'selector': 'app-root'},{'name': 'CalendarComponent', 'selector': 'app-calendar'},{'name': 'CategoryDropdownComponent', 'selector': 'app-category-dropdown'},{'name': 'DownloadComponentComponent', 'selector': 'app-download-component'},{'name': 'ExpenseDetailsModalComponent', 'selector': 'app-expense-details-modal'},{'name': 'ExpenseListComponent', 'selector': 'app-expense-list'},{'name': 'ExpenseWiseComponent', 'selector': 'app-expense-wise'},{'name': 'FooterComponent', 'selector': 'app-footer'},{'name': 'FormModelComponent', 'selector': 'app-form-model'},{'name': 'GlobalLoaderComponent', 'selector': 'app-global-loader'},{'name': 'GraphsComponent', 'selector': 'app-graphs'},{'name': 'HamburgerMenuComponent', 'selector': 'app-hamburger-menu'},{'name': 'HelpDashboard', 'selector': 'app-help-dashboard'},{'name': 'HomeComponent', 'selector': 'app-home'},{'name': 'InstallAppPopupComponentComponent', 'selector': 'app-install-app-popup-component'},{'name': 'ListExpensesComponent', 'selector': 'app-list-expenses'},{'name': 'MusicComponent', 'selector': 'app-music'},{'name': 'NavbarComponent', 'selector': 'app-navbar'},{'name': 'PieChartComponent', 'selector': 'app-pie-chart'},{'name': 'PlaylistMusicComponent', 'selector': 'app-playlist-music'},{'name': 'SalaryComponent', 'selector': 'app-salary'},{'name': 'SearchButtonComponent', 'selector': 'app-search-button'},{'name': 'SearchMusicComponent', 'selector': 'app-search-music'},{'name': 'SettingItemComponent', 'selector': 'app-setting-item'},{'name': 'SettingsComponent', 'selector': 'app-settings'},{'name': 'SidebarComponent', 'selector': 'app-sidebar'},{'name': 'SplashScreenComponent', 'selector': 'app-splash-screen'},{'name': 'TemplatePlaygroundComponent', 'selector': 'template-playground-root'},{'name': 'ToastComponent', 'selector': 'app-toast'}];
     var DIRECTIVES = [];
     var ACTUAL_COMPONENT = {'name': 'SalaryComponent'};

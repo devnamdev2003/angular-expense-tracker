@@ -91,38 +91,49 @@ All expenses are stored in the device's **LocalStorage** and reflected immediate
 
 ---
 
-### 5. **Budget & Salary Management**
+### 5. **Budget & Income Management**
 
-The **Budget & Salary** module provides a sophisticated financial dashboard that transitions between total income tracking and granular monthly budgeting.
+The **Budget & Income** module provides a sophisticated financial dashboard that transitions between total income tracking and granular monthly budgeting, along with advanced filtering capabilities for deeper financial insights.
 
 **Key capabilities include:**
 
 * 💼 **Dynamic Financial Modes**
-  * **Salary Tracking:** Tracks total accumulated income and overall savings rates.
+  * **Income Tracking:** Tracks total accumulated income and overall savings rates.
   * **Budget Tracking:** Focuses on a specific month's limits to prevent overspending.
   * The system intelligently calculates metrics based on the active `viewMode`.
 
+* 🔎 **Income Date Range Filtering**
+  * Users can filter income records between a selected **start month and end month**.
+  * Displays income analytics based only on the selected period.
+  * Allows better financial analysis such as:
+
+    * Tracking income trends over time.
+    * Reviewing earnings for specific periods.
+    * Simplifying historical income comparisons.
 
 * 📊 **Advanced Financial Analytics**
-  * **Salary Growth:** Automatically calculates the percentage increase or decrease in income compared to the previous month.
-  * **Savings Rate:** Real-time calculation of the percentage of income retained after expenses:
+  * **Income Growth:** Automatically calculates the percentage increase or decrease in income compared to the previous month.
+  * **Savings Rate:** Real-time calculation of the percentage of income retained after expenses.
 
 
-* **Daily Spending Intelligence:**
+* 📅 **Daily Spending Intelligence**
   * **Allowed/Day:** Your theoretical daily limit based on the total budget and days in the month.
   * **Spent/Day:** Actual average spending calculated from the day of your first expense to today.
-  * **Suggested/Day:** A dynamic "correction" metric that tells you exactly how much you can spend for the *remaining* days to stay on target.
+  * **Suggested/Day:** A dynamic "correction" metric that tells you exactly how much you can spend for the remaining days to stay on target.
 
 * 🎨 **Visual Feedback & Progress**
   * **Smart Progress Bar:** A multi-state indicator that shifts colors based on your spending velocity:
-    * 🟢 **Green to Indigo:** (Below 50%) - Safe zone.
-    * 🟠 **Orange:** (50% - 90%) - Warning zone.
-    * 🔴 **Red:** (Above 90%) - Critical limit/Exceeded.
+    * 🟢 **Green to Indigo:** (Below 50%) – Safe zone.
+    * 🟠 **Orange:** (50%–90%) – Warning zone.
+    * 🔴 **Red:** (Above 90%) – Critical limit / Exceeded.
   * **Contextual Status:** Text insights (e.g., *"Excellent! Saving > 50%"* or *"⚠️ You have exceeded your limit!"*).
 
 * 🛠️ **Transaction Management**
-  * **Full CRUD Operations:** Add, edit, and delete salary/budget records.
-  * **Validation Layer:** Integrated error handling for amounts (max limit ), required notes, and month selection.
+  * **Full CRUD Operations:** Add, edit, and delete income/budget records.
+  * **Validation Layer:** Integrated error handling for:
+    * Maximum amount limits
+    * Required notes
+    * Month selection validation
 ---
 
 ### 6. **Settings View**
