@@ -126,7 +126,6 @@ export class SalaryComponent implements OnInit {
   ) {
     this.userCurrancy = this.userService.getValue<string>('currency') || '';
     this.viewMode = this.userService.getValue<'salary' | 'budget'>('salary_view_mode') || 'salary';
-    this.getDaysPassedFromLastExpense();
   }
 
   /**
@@ -169,7 +168,7 @@ export class SalaryComponent implements OnInit {
     } else {
       this.filteredTransactions = allTransactions.filter(t => (t.viewMode === 'budget') && (t.month === this.currentMonth));
     }
-
+    this.getDaysPassedFromLastExpense();
     this.totalExpense = this.totalExpenseFunction();
     this.totalIncome = this.filteredTransactions.reduce((acc, t) => acc + (t.amount || 0), 0);
     this.totalBudget = this.filteredTransactions.reduce((acc, t) => acc + (t.budget || 0), 0);
@@ -292,6 +291,10 @@ export class SalaryComponent implements OnInit {
    * @returns void
    */
   closeFilterModal(): void {
+    if (!this.isFilterActive) {
+      this.filterStartDate = "";
+      this.filterEndDate = "";
+    }
     this.showFilterModal = false;
   }
 
@@ -304,6 +307,21 @@ export class SalaryComponent implements OnInit {
    */
   applyFilter(): void {
     this.errors.set({});
+    if (this.filterStartDate) {
+      if (!this.filterEndDate) {
+        this.filterEndDate = this.currentMonth;
+      }
+    }
+    else {
+      if (this.filterEndDate) {
+        const allIncome: Salary[] = this.salaryService.getAll();
+        const oldestMonth = allIncome
+          .filter(item => item.viewMode === 'salary')
+          .map(item => item.month)
+          .sort()[0];
+        this.filterStartDate = oldestMonth;
+      }
+    }
 
     if (!this.filterStartDate || !this.filterEndDate) {
       this.errors.set({ filter: 'Please select both a Start Month and an End Month.' });
@@ -553,6 +571,9 @@ export class SalaryComponent implements OnInit {
    * @param mode The view mode to switch to
    */
   toggleView(mode: 'salary' | 'budget') {
+    if (this.isFilterActive) {
+      this.clearFilter();
+    }
     this.viewMode = mode;
     this.userService.update('salary_view_mode', mode);
     this.loadState();
@@ -562,16 +583,30 @@ export class SalaryComponent implements OnInit {
    * Calculates the number of days between today and the oldest recorded expense.
    */
   getDaysPassedFromLastExpense() {
-    const expenseData: Expense[] = this.expenseService.getAll();
+    let expenseData: Expense[] = [];
+    if (this.isFilterActive) {
+      const [fyear, fmonth] = this.filterStartDate.split('-').map(Number);
+      const [tyear, tmonth] = this.filterEndDate.split('-').map(Number);
+      const fromDate = `${fyear}-${String(fmonth).padStart(2, '0')}-01`;
+      const lastDay = new Date(tyear, tmonth, 0).getDate();
+      const toDate = `${tyear}-${String(tmonth).padStart(2, '0')}-${String(lastDay).padStart(2, '0')}`;
+      expenseData = this.expenseService.searchByDateRange(fromDate, toDate);
+    }
+    else {
+      expenseData = this.expenseService.getAll();
+    }
     if (expenseData.length > 0) {
       expenseData.sort((a, b) => new Date(a.date).getTime() - new Date(b.date).getTime());
       const lastExpenseDate = new Date(expenseData[0].date);
-      const today = new Date();
+      const today = this.isFilterActive ? new Date(expenseData[expenseData.length - 1].date) : new Date();
       today.setHours(0, 0, 0, 0);
       const diffMs = today.getTime() - lastExpenseDate.getTime();
       this.daysPassedFromLastExpense = Math.floor(
         diffMs / (1000 * 60 * 60 * 24)
-      );
+      ) + 2;
+    }
+    else {
+      this.daysPassedFromLastExpense = 0;
     }
   }
 }
