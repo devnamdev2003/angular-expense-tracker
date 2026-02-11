@@ -29,10 +29,6 @@
     animation: slideUp 0.4s ease-out;
 }
 
-.animate-pulse-slow {
-    animation: pulse 3s infinite;
-}
-
 .animate-bounce-subtle {
     animation: bounce 2s infinite;
 }

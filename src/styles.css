@@ -1,5 +1,5 @@
 :root {
-    --theme-color: #8f91ea;
+    --theme-color: #6366f1;
 
     --color-bg: #ffffff;
     --color-bg-100: #ffffff;
@@ -68,7 +68,7 @@
 }
 
 .dark {
-    --theme-color: #8f91ea;
+    --theme-color: #6366f1;
 
     --color-bg: #000000;
     --color-bg-100: #111827;
