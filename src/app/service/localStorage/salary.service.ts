@@ -177,4 +177,35 @@ export class SalaryService {
 
         return salary || null;
     }
+
+    /**
+     * Filters salary records based on a given date range.
+     *
+     * @param fromMonth Optional start month (YYYY-MM).
+     * @param toMonth Optional end month (YYYY-MM).
+     * @returns Filtered array of Salary objects.
+     */
+    searchByDateRange(fromMonth?: string | null, toMonth?: string | null): Salary[] {
+        if (!this.isBrowser()) return [];
+
+        const all: Salary[] = this.getAll();
+
+        return all.filter(item => {
+            if (item.viewMode !== 'salary') return false;
+
+            if (fromMonth && toMonth) {
+                return item.month >= fromMonth && item.month <= toMonth;
+            }
+
+            if (fromMonth) {
+                return item.month >= fromMonth;
+            }
+
+            if (toMonth) {
+                return item.month <= toMonth;
+            }
+
+            return true;
+        });
+    }
 }

@@ -188,6 +188,9 @@
                                 <a href="#isBrowser" >isBrowser</a>
                             </li>
                             <li>
+                                <a href="#searchByDateRange" >searchByDateRange</a>
+                            </li>
+                            <li>
                                 <a href="#update" >update</a>
                             </li>
                             <li>
@@ -587,6 +590,97 @@ and <code>localStorage</code> is available.</p>
         <tbody>
             <tr>
                 <td class="col-md-4">
+                    <a name="searchByDateRange"></a>
+                    <span class="name">
+                        <span ><b>searchByDateRange</b></span>
+                        <a href="#searchByDateRange"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>searchByDateRange(fromMonth?: string | null, toMonth?: string | null)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="188"
+                                    class="link-to-prism">src/app/service/localStorage/salary.service.ts:188</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-description"><p>Filters salary records based on a given date range.</p>
+</div>
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                                <td>Description</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>fromMonth</td>
+                                            <td>
+                                                        <code>string | null</code>
+                                            </td>
+
+                                            <td>
+                                                    Yes
+                                            </td>
+
+
+                                            <td>
+                                                    <p>Optional start month (YYYY-MM).</p>
+
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                                <td>toMonth</td>
+                                            <td>
+                                                        <code>string | null</code>
+                                            </td>
+
+                                            <td>
+                                                    Yes
+                                            </td>
+
+
+                                            <td>
+                                                    <p>Optional end month (YYYY-MM).</p>
+
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="../interfaces/Salary.html" target="_self" >Salary[]</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                <p>Filtered array of Salary objects.</p>
+
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
                     <a name="update"></a>
                     <span class="name">
                         <span ><b>update</b></span>
@@ -937,6 +1031,37 @@ export class SalaryService {
         const salary &#x3D; all.find(item &#x3D;&gt; item.month &#x3D;&#x3D;&#x3D; month);
 
         return salary || null;
+    }
+
+    /**
+     * Filters salary records based on a given date range.
+     *
+     * @param fromMonth Optional start month (YYYY-MM).
+     * @param toMonth Optional end month (YYYY-MM).
+     * @returns Filtered array of Salary objects.
+     */
+    searchByDateRange(fromMonth?: string | null, toMonth?: string | null): Salary[] {
+        if (!this.isBrowser()) return [];
+
+        const all: Salary[] &#x3D; this.getAll();
+
+        return all.filter(item &#x3D;&gt; {
+            if (item.viewMode !&#x3D;&#x3D; &#x27;salary&#x27;) return false;
+
+            if (fromMonth &amp;&amp; toMonth) {
+                return item.month &gt;&#x3D; fromMonth &amp;&amp; item.month &lt;&#x3D; toMonth;
+            }
+
+            if (fromMonth) {
+                return item.month &gt;&#x3D; fromMonth;
+            }
+
+            if (toMonth) {
+                return item.month &lt;&#x3D; toMonth;
+            }
+
+            return true;
+        });
     }
 }
 </code></pre>

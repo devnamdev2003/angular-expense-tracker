@@ -11,7 +11,7 @@
                     <i class="text-white fa-solid" [class]="viewMode === 'salary' ? 'fa-wallet' : 'fa-piggy-bank'"></i>
                 </div>
                 <div>
-                    <p class="text-md font-bold">{{ viewMode === 'salary' ? 'Salary Dashboard' : 'Budget Planner' }}</p>
+                    <p class="text-md font-bold">{{ viewMode === 'salary' ? 'Income Dashboard' : 'Budget Planner' }}</p>
                 </div>
             </div>
             <div class="relative flex w-32 h-8 bg-[var(--color-surface)] rounded-full shadow-md 
@@ -26,7 +26,7 @@
                     (click)="toggleView('salary')"
                     [ngClass]="{ 'text-white': viewMode === 'salary', 'text-[var(--color-text)] opacity-70': viewMode !== 'salary' }"
                     title="Salary View">
-                    Salary
+                    Income
                 </button>
 
                 <button
@@ -78,9 +78,9 @@
                         <h2 class="mb-6 text-3xl font-bold tracking-tight md:text-5xl">
                             {{ userCurrancy }}
                             @if(viewMode === 'salary') {
-                            {{ (totalIncome - totalExpense) | number:'1.1-2' }}
+                            {{ (totalIncome - totalExpense) | number:'1.2-2' }}
                             } @else {
-                            {{ (totalBudget - totalExpense) | number:'1.1-2' }}
+                            {{ (totalBudget - totalExpense) | number:'1.2-2' }}
                             }
                         </h2>
 
@@ -190,11 +190,12 @@
                     }
                 </div>
             </section>
+
             <!-- Visual Bar Chart -->
             <section class="p-4 rounded-2xl animate-slide-up"
                 style="animation-delay: 0.15s; background-color: var(--color-bg-100); box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);">
                 <div class="flex justify-between mb-2 text-xs opacity-60">
-                    <span>{{ viewMode === 'salary' ? 'Salary Usage' : 'Budget Usage' }}</span>
+                    <span>{{ viewMode === 'salary' ? 'Income Usage' : 'Budget Usage' }}</span>
                     <span>{{ budgetPercentage }}% used</span>
                 </div>
                 <div class="w-full h-3 mb-2 overflow-hidden rounded-full"
@@ -211,7 +212,29 @@
                 <h3 class="text-xl font-semibold">
                     {{ viewMode === 'salary' ? 'Income Transactions' : 'Budget History' }}
                 </h3>
+
+                @if(viewMode === 'salary'){
+                <button (click)="openFilterModal()"
+                    class="flex items-center gap-2 px-3 py-1 text-xs font-medium transition-colors rounded-lg bg-[var(--color-bg-100)] hover:bg-[var(--color-bg-200)]"
+                    [class.text-indigo-500]="isFilterActive">
+                    <i class="fa-solid fa-filter"></i>
+                    {{ isFilterActive ? 'Filter On' : 'Filter' }}
+                </button>
+                }
             </div>
+
+            @if(isFilterActive && viewMode === 'salary'){
+            <div
+                class="flex items-center justify-between px-3 py-2 text-xs border border-indigo-500/30 bg-indigo-500/10 rounded-xl animate-fade-in text-indigo-400">
+                <span>
+                    <i class="mr-1 fa-solid fa-calendar-day"></i>
+                    {{ filterStartDate | date:'MMMM y' }} - {{ filterEndDate | date:'MMMM y' }}
+                </span>
+                <button (click)="clearFilter()" class="ml-2 hover:text-red-500 transition-colors">
+                    <i class="fa-solid fa-xmark"></i>
+                </button>
+            </div>
+            }
 
             <!-- Transactions List -->
             <div class="pb-16 space-y-3 animate-slide-up" style="animation-delay: 0.3s;">
@@ -238,16 +261,10 @@
                         </div>
                         <div>
                             <p class="font-medium truncate max-w-[120px]">
-                                {{ viewMode === 'salary' ? 'Income' : 'Budget Limit' }}
+                                {{ (t.month + '-01') | date:'MMMM yyyy' }}
                             </p>
-                            <div class="flex flex-col text-xs opacity-60">
-                                <div class="flex gap-2">
-                                    <span>{{ (t.month + '-01') | date:'MMMM yyyy' }}</span>
-                                </div>
-                            </div>
                         </div>
                     </div>
-
                     <div class="z-10 flex flex-col items-end">
                         <p class="font-bold text-green-500">
                             {{ userCurrancy }}{{ (viewMode === 'salary' ? t.amount : t.budget) | number:'1.2-2' }}
@@ -354,6 +371,64 @@
                     class="w-full py-4 mt-4 font-bold text-white transition bg-indigo-500 rounded-xl shadow-lg shadow-indigo-500/25 active:scale-95 hover:bg-indigo-600">
                     {{ editingId ? 'Update' : 'Save' }}
                 </button>
+            </form>
+        </div>
+    </div>
+    }
+
+    @if (showFilterModal) {
+    <div class="fixed inset-0 z-50 flex justify-center p-4 bg-black/50 backdrop-blur-sm items-center"
+        (click)="closeFilterModal()">
+        <div class="w-[90%] md:w-[450px] rounded-3xl p-6 shadow-2xl animate-slide-up"
+            style="background-color: var(--color-bg-100);" (click)="$event.stopPropagation()">
+
+            <div class="flex items-center justify-between mb-6">
+                <h3 class="text-xl font-bold">Filter Range</h3>
+                <button (click)="closeFilterModal()"
+                    class="flex items-center justify-center w-8 h-8 transition rounded-full hover:opacity-70"
+                    style="background-color: var(--color-bg-500); color: var(--color-text);">
+                    <i class="fa-solid fa-xmark"></i>
+                </button>
+            </div>
+
+            <form (submit)="applyFilter()">
+                <div class="flex flex-col gap-4 mb-4 md:flex-row">
+
+                    <div class="w-full md:w-1/2">
+                        <label class="block mb-2 text-sm opacity-60">From Month</label>
+                        <input type="month" [(ngModel)]="filterStartDate" name="start" [max]="filterEndDate"
+                            class="w-full py-3 px-4 transition-colors border rounded-xl focus:outline-none focus:border-indigo-500"
+                            style="background-color: var(--color-bg-500); border-color: var(--color-bg-600); color: inherit;">
+                    </div>
+
+                    <div class="w-full md:w-1/2">
+                        <label class="block mb-2 text-sm opacity-60">To Month</label>
+                        <input type="month" [(ngModel)]="filterEndDate" name="end" [min]="filterStartDate"
+                            class="w-full py-3 px-4 transition-colors border rounded-xl focus:outline-none focus:border-indigo-500"
+                            style="background-color: var(--color-bg-500); border-color: var(--color-bg-600); color: inherit;">
+                    </div>
+                </div>
+
+                @if (errors().filter) {
+                <div
+                    class="p-3 mb-4 text-xs text-center text-red-500 rounded-lg bg-red-500/10 animate-fade-in border border-red-500/20">
+                    <i class="mr-1 fa-solid fa-circle-exclamation"></i>
+                    {{ errors().filter }}
+                </div>
+                }
+
+                <button type="submit"
+                    class="w-full py-3 mt-2 font-bold text-white transition bg-indigo-500 rounded-xl shadow-lg shadow-indigo-500/25 active:scale-95 hover:bg-indigo-600 disabled:opacity-50 disabled:cursor-not-allowed"
+                    [disabled]="!filterStartDate && !filterEndDate">
+                    Apply Filter
+                </button>
+
+                @if(isFilterActive) {
+                <button type="button" (click)="clearFilter(); closeFilterModal()"
+                    class="w-full py-3 mt-3 text-sm font-medium transition opacity-60 hover:opacity-100 hover:text-red-500">
+                    Clear Current Filter
+                </button>
+                }
             </form>
         </div>
     </div>

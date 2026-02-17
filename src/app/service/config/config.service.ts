@@ -114,8 +114,6 @@ export class ConfigService {
 
     // 3. Combine into ISO-like string (local time)
     const localISOString = `${year}-${month}-${day}T${hours}:${minutes}:${seconds}.${milliseconds}`;
-
-    console.log(localISOString); // e.g. "2025-10-11T13:35:58.942"
     return localISOString;
   }
 
