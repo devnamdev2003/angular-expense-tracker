@@ -145,6 +145,7 @@ Provides customization and utility options for better personalization:
 * 📤 **Import Data** — Upload and import expense data into the application
 * 🔄 **Update App** — Update the application to the latest available version
 * ☁️ **Data Backup** — Enable automatic or manual data backup for data safety. When enabled, a backend API runs automatically in the background to upload your data to the database.
+* ❓ **[Help & Support](https://devnamdev2003.github.io/angular-expense-tracker/public/help.html)** — Redirects to the external help center for FAQs, guides, and customer support
 * ➕ **Add Category** — Create custom categories for better expense organization
 * ✏️ **Edit Category** — Update or rename existing categories
 * ❌ **Delete Category** — Remove unused or incorrect categories
