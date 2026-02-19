@@ -88,7 +88,10 @@ export class HelpDashboard implements OnInit, AfterViewChecked {
   });
 
   ngOnInit() {
-    // Only access 'document' if we are in the browser
+    this.injectFontAwesome();
+  }
+
+  injectFontAwesome() {
     if (isPlatformBrowser(this.platformId)) {
       // Inject Lucide script for icons
       if (!document.getElementById('lucide-script')) {
@@ -101,6 +104,11 @@ export class HelpDashboard implements OnInit, AfterViewChecked {
         document.body.appendChild(script);
       }
     }
+
+    const font = document.createElement('link');
+    font.href = "https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap";
+    font.rel = "stylesheet";
+    document.head.appendChild(font);
   }
 
   ngAfterViewChecked() {
