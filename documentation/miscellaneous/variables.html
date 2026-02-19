@@ -166,6 +166,9 @@
                             <a href="#JSZip" title="documentation/template-playground/zip-export.service.ts" ><b>JSZip</b>&nbsp;&nbsp;&nbsp;(documentation/.../zip-export.service.ts)</a>
                         </li>
                         <li>
+                            <a href="#lucide" title="src/app/features/help-dashboard/help-dashboard.ts" ><b>lucide</b>&nbsp;&nbsp;&nbsp;(src/.../help-dashboard.ts)</a>
+                        </li>
+                        <li>
                             <a href="#monaco" title="documentation/template-playground/template-editor.service.ts" ><b>monaco</b>&nbsp;&nbsp;&nbsp;(documentation/.../template-editor.service.ts)</a>
                         </li>
                         <li>
@@ -897,6 +900,30 @@ Use this file during development. It will be replaced by <code>environment.prod.
         </tbody>
     </table>
 </section>
+    <h3>src/app/features/help-dashboard/help-dashboard.ts</h3>
+    <section data-compodoc="block-properties">
+    <h3></h3>    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="lucide"></a>
+                    <span class="name">
+                        <span ><b>lucide</b></span>
+                        <a href="#lucide"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
+
+                    </td>
+                </tr>
+
+
+        </tbody>
+    </table>
+</section>
     <h3>documentation/template-playground/template-editor.service.ts</h3>
     <section data-compodoc="block-properties">
     <h3></h3>    <table class="table table-sm table-bordered">
@@ -1030,6 +1057,12 @@ to the home page (<code>&#39;/&#39;</code>) and prevents access to the protected
         loadComponent: () &#x3D;&gt;
             &quot;import(&#x27;./features/music/music-component/playlist-music/playlist-music.component&#x27;)\r\n\
                 .then(m &#x3D;&gt; m.PlaylistMusicComponent)&quot;
+    },
+    {
+        path: &#x27;help&#x27;,
+        loadComponent: () &#x3D;&gt;
+            &quot;import(&#x27;./features/help-dashboard/help-dashboard&#x27;)\r\n\
+                .then(m &#x3D;&gt; m.HelpDashboard)&quot;,
     },
     { path: &#x27;**&#x27;, redirectTo: &#x27;&#x27; }
 ]</code>

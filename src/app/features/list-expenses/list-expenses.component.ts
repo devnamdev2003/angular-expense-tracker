@@ -246,10 +246,26 @@ export class ListExpensesComponent implements OnInit {
   onCategoryCheckboxChange(event: Event, categoryId: string): void {
     const checkbox = event.target as HTMLInputElement;
     if (checkbox.checked) {
-      this.filter.selectedCategoryIds.push(categoryId);
+      if (!this.filter.selectedCategoryIds.includes(categoryId)) {
+        this.filter.selectedCategoryIds.push(categoryId);
+      }
     } else {
       this.filter.selectedCategoryIds = this.filter.selectedCategoryIds.filter(id => id !== categoryId);
     }
+  }
+
+  /** Returns true when all available categories are selected in filter. */
+  areAllCategoriesSelected(): boolean {
+    return this.categories.length > 0
+      && this.filter.selectedCategoryIds.length === this.categories.length;
+  }
+
+  /** Selects or clears all categories in filter panel. */
+  onAllCategoriesCheckboxChange(event: Event): void {
+    const checkbox = event.target as HTMLInputElement;
+    this.filter.selectedCategoryIds = checkbox.checked
+      ? this.categories.map(cat => cat.category_id)
+      : [];
   }
 
   /**

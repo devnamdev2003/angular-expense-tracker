@@ -35,5 +35,11 @@ export const routes: Routes = [
             import('./features/music/music-component/playlist-music/playlist-music.component')
                 .then(m => m.PlaylistMusicComponent)
     },
+    {
+        path: 'help',
+        loadComponent: () =>
+            import('./features/help-dashboard/help-dashboard')
+                .then(m => m.HelpDashboard),
+    },
     { path: '**', redirectTo: '' }
 ];

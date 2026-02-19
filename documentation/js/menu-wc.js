@@ -285,6 +285,9 @@ customElements.define('compodoc-menu', class extends HTMLElement {
                                 <a href="interfaces/Expense.html" data-type="entity-link" >Expense</a>
                             </li>
                             <li class="link">
+                                <a href="interfaces/FAQ.html" data-type="entity-link" >FAQ</a>
+                            </li>
+                            <li class="link">
                                 <a href="interfaces/HeatmapSummary.html" data-type="entity-link" >HeatmapSummary</a>
                             </li>
                             <li class="link">

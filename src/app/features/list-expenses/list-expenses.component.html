@@ -105,6 +105,12 @@
             <div class="pt-2">
                 <label class="block text-sm font-semibold mb-1">Categories:</label>
                 <div class="grid grid-cols-2 gap-2 max-h-40 overflow-y-auto pr-1">
+                    <label class="text-sm flex items-center space-x-1 col-span-2 ">
+                        <input type="checkbox" [checked]="areAllCategoriesSelected()"
+                            (change)="onAllCategoriesCheckboxChange($event)"
+                            class="form-checkbox accent-[var(--color-accent)]" name="all-categories" />
+                        <span>All Categories</span>
+                    </label>
                     <ng-container *ngFor="let cat of categories">
                         <label class="text-sm flex items-center space-x-1 col-span-2"
                             [class.col-span-1]="cat.name.length <= 15">
