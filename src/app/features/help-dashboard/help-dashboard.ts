@@ -4,7 +4,9 @@ import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
 import { HelpData } from '../../service/localStorage/data/help-data';
 
-// External icon library global declaration (Lucide icons)
+/**
+ * External icon library global declaration (Lucide icons).
+ */
 declare var lucide: any;
 
 /**
@@ -12,12 +14,22 @@ declare var lucide: any;
  * Defines the structure of FAQ objects used in Help Dashboard.
  */
 interface FAQ {
+  /** * Unique identifier for the FAQ 
+   */
   id: number;
+
+  /** * The category this FAQ belongs to (e.g., 'General', 'Billing') 
+   */
   category: string;
+
+  /** * The actual question text 
+   */
   question: string;
+
+  /** * The answer text to the question 
+   */
   answer: string;
 }
-
 
 /**
  * Help Dashboard Component
@@ -43,45 +55,65 @@ interface FAQ {
 })
 export class HelpDashboard implements OnInit, AfterViewChecked {
 
-  // Dependency injection using Angular inject() function
+  /** * Dependency injection for Angular FormBuilder 
+   */
   private fb = inject(FormBuilder);
+
+  /** * Dependency injection for DOM Sanitizer to safely inject HTML 
+   */
   private sanitizer = inject(DomSanitizer);
+
+  /** * Dependency injection for Platform ID to check execution context (Browser/Server) 
+   */
   private platformId = inject(PLATFORM_ID);
+
+  /** * Dependency injection for ChangeDetectorRef to manually trigger change detection 
+   */
   private cdr = inject(ChangeDetectorRef);
 
-  // FAQ static data source
+  /** * FAQ static data source containing all help articles 
+   */
   private readonly helpData: FAQ[] = HelpData;
 
   /* ------------------------------------------------------------------
      SIGNAL STATES (Reactive state management)
      ------------------------------------------------------------------ */
 
-  // Stores user search query
+  /** * Stores the current user search query string 
+   */
   searchQuery = signal<string>('');
 
-  // Stores currently opened accordion IDs
+  /** * Stores a Set of currently opened accordion IDs 
+   */
   openAccordions = signal<Set<number>>(new Set());
 
-  // Form UI state signals
+  /** * Tracks if the contact form is currently submitting 
+   */
   isSubmitting = signal<boolean>(false);
+
+  /** * Tracks if the contact form submitted successfully 
+   */
   submitSuccess = signal<boolean>(false);
+
+  /** * Tracks if an error occurred during contact form submission 
+   */
   submitError = signal<boolean>(false);
 
-  // Tracks fields needing shake animation on validation error
+  /** * Tracks form field names that need a shake animation on validation error 
+   */
   shakeFields = signal<Set<string>>(new Set());
-
 
   /* ------------------------------------------------------------------
      CONTACT FORM SETUP
      ------------------------------------------------------------------ */
 
-  // Reactive form configuration with validation rules
+  /** * Reactive form configuration with validation rules for the contact form 
+   */
   contactForm = this.fb.group({
     name: ['', Validators.required],
     email: ['', [Validators.required, Validators.email]],
     query: ['', [Validators.required, Validators.minLength(10)]]
   });
-
 
   /* ------------------------------------------------------------------
      COMPUTED SIGNALS (Derived UI State)
@@ -90,6 +122,7 @@ export class HelpDashboard implements OnInit, AfterViewChecked {
   /**
    * Filters FAQs based on search query.
    * Matches question, answer, or category text.
+   * * @returns {FAQ[]} Array of filtered FAQ items based on the current search query
    */
   filteredFAQs = computed(() => {
     const query = this.searchQuery().toLowerCase().trim();
@@ -102,10 +135,10 @@ export class HelpDashboard implements OnInit, AfterViewChecked {
     );
   });
 
-
   /**
    * Groups filtered FAQs by category.
    * Useful for categorized display in UI.
+   * * @returns {Array<{category: string, items: FAQ[]}>} An array of objects grouping FAQs by their category
    */
   groupedFAQs = computed(() => {
     const items = this.filteredFAQs();
@@ -117,25 +150,25 @@ export class HelpDashboard implements OnInit, AfterViewChecked {
     }));
   });
 
-
   /* ------------------------------------------------------------------
      LIFECYCLE HOOKS
      ------------------------------------------------------------------ */
 
   /**
    * OnInit lifecycle hook.
-   * Injects fonts and icon libraries.
+   * Injects fonts and icon libraries into the document.
+   * * @returns {void}
    */
-  ngOnInit() {
+  ngOnInit(): void {
     this.injectFontAwesome();
   }
 
-
   /**
    * AfterViewChecked lifecycle hook.
-   * Ensures icons are re-rendered after DOM updates.
+   * Ensures Lucide icons are re-rendered after DOM updates are completed.
+   * * @returns {void}
    */
-  ngAfterViewChecked() {
+  ngAfterViewChecked(): void {
     if (isPlatformBrowser(this.platformId)) {
       if (typeof lucide !== 'undefined') {
         lucide.createIcons();
@@ -143,23 +176,18 @@ export class HelpDashboard implements OnInit, AfterViewChecked {
     }
   }
 
-
   /* ------------------------------------------------------------------
      EXTERNAL SCRIPT & FONT INJECTION
      ------------------------------------------------------------------ */
 
   /**
-   * Dynamically injects:
-   * - Lucide icon script
-   * - Google font (Outfit)
-   *
-   * Only runs in browser environment.
+   * Dynamically injects the Lucide icon script and Google Font (Outfit).
+   * Ensures execution only occurs in a browser environment to prevent SSR errors.
+   * * @returns {void}
    */
-  injectFontAwesome() {
-    // Only run in browser (prevents SSR error)
+  injectFontAwesome(): void {
     if (!isPlatformBrowser(this.platformId)) return;
 
-    // Inject Lucide icon script
     if (!document.getElementById('lucide-script')) {
       const script = document.createElement('script');
       script.id = 'lucide-script';
@@ -172,7 +200,6 @@ export class HelpDashboard implements OnInit, AfterViewChecked {
       document.body.appendChild(script);
     }
 
-    // Inject Google font safely
     if (!document.getElementById('outfit-font')) {
       const font = document.createElement('link');
       font.id = 'outfit-font';
@@ -184,31 +211,34 @@ export class HelpDashboard implements OnInit, AfterViewChecked {
     }
   }
 
-
-
   /* ------------------------------------------------------------------
      SEARCH & FILTER LOGIC
      ------------------------------------------------------------------ */
 
   /**
-   * Updates search query signal when user types.
+   * Updates the search query signal when the user types in the search input.
+   * * @param {Event} event - The DOM input event triggered by user typing
+   * @returns {void}
    */
-  onSearchInput(event: Event) {
+  onSearchInput(event: Event): void {
     const value = (event.target as HTMLInputElement).value;
     this.searchQuery.set(value);
   }
 
   /**
-   * Clears search input.
+   * Clears the current search input.
+   * * @returns {void}
    */
-  resetSearch() {
+  resetSearch(): void {
     this.searchQuery.set('');
   }
 
   /**
-   * Sets category filter and scrolls FAQ container into view.
+   * Sets the category filter and smoothly scrolls the FAQ container into view.
+   * * @param {string} category - The category string to set as the active filter
+   * @returns {void}
    */
-  setCategory(category: string) {
+  setCategory(category: string): void {
     this.searchQuery.set(category);
 
     if (isPlatformBrowser(this.platformId)) {
@@ -219,15 +249,16 @@ export class HelpDashboard implements OnInit, AfterViewChecked {
     }
   }
 
-
   /* ------------------------------------------------------------------
      ACCORDION CONTROL
      ------------------------------------------------------------------ */
 
   /**
-   * Toggle FAQ accordion open/close.
+   * Toggles the open/close state of an FAQ accordion item.
+   * * @param {number} id - The unique ID of the FAQ accordion to toggle
+   * @returns {void}
    */
-  toggleAccordion(id: number) {
+  toggleAccordion(id: number): void {
     const current = new Set(this.openAccordions());
 
     if (current.has(id)) current.delete(id);
@@ -237,20 +268,24 @@ export class HelpDashboard implements OnInit, AfterViewChecked {
   }
 
   /**
-   * Checks if accordion is open.
+   * Checks if a specific accordion item is currently open.
+   * * @param {number} id - The unique ID of the FAQ accordion
+   * @returns {boolean} True if the accordion is open, false otherwise
    */
   isAccordionOpen(id: number): boolean {
     return this.openAccordions().has(id);
   }
-
 
   /* ------------------------------------------------------------------
      SEARCH TEXT HIGHLIGHTING
      ------------------------------------------------------------------ */
 
   /**
-   * Highlights matched search text in FAQs.
-   * Uses sanitizer to safely inject HTML.
+   * Highlights matched search text within the FAQs by wrapping it in an HTML span.
+   * Uses Angular's DomSanitizer to safely inject the formatted HTML.
+   * * @param {string} text - The full text to search within
+   * @param {string} query - The search query to highlight
+   * @returns {SafeHtml} The sanitized HTML string containing highlight spans
    */
   highlightText(text: string, query: string): SafeHtml {
     if (!query)
@@ -267,15 +302,15 @@ export class HelpDashboard implements OnInit, AfterViewChecked {
     return this.sanitizer.bypassSecurityTrustHtml(replaced);
   }
 
-
   /* ------------------------------------------------------------------
      FORM UX HELPERS
      ------------------------------------------------------------------ */
 
   /**
-   * Scrolls page to contact form section.
+   * Smoothly scrolls the page to the contact form section.
+   * * @returns {void}
    */
-  scrollToForm() {
+  scrollToForm(): void {
     if (isPlatformBrowser(this.platformId)) {
       document.getElementById('contactFormSection')
         ?.scrollIntoView({ behavior: 'smooth' });
@@ -283,7 +318,9 @@ export class HelpDashboard implements OnInit, AfterViewChecked {
   }
 
   /**
-   * Checks if form control is invalid.
+   * Checks if a specific form control is invalid and has been touched or dirtied.
+   * * @param {string} controlName - The form control name mapped in the FormGroup
+   * @returns {boolean} True if the form control is invalid and user interacted with it
    */
   isInvalid(controlName: string): boolean {
     const control = this.contactForm.get(controlName);
@@ -291,29 +328,28 @@ export class HelpDashboard implements OnInit, AfterViewChecked {
   }
 
   /**
-   * Determines if field should show shake animation.
+   * Determines if a specific form field should display a validation shake animation.
+   * * @param {string} controlName - The form control name to check
+   * @returns {boolean} True if the control requires a shake animation
    */
   shouldShake(controlName: string): boolean {
     return this.shakeFields().has(controlName);
   }
-
 
   /* ------------------------------------------------------------------
      FORM SUBMISSION LOGIC
      ------------------------------------------------------------------ */
 
   /**
-   * Handles contact form submission.
-   * - Validates form
-   * - Shows animation for invalid fields
-   * - Sends POST request to backend API
-   * - Displays success/error state
+   * Handles the contact form submission process.
+   * Validates the form, triggers animations for invalid fields, sends a POST request 
+   * to the backend API, and updates the UI state based on the response.
+   * * @returns {Promise<void>} A promise that resolves when the submission process is complete
    */
-  async onSubmit() {
+  async onSubmit(): Promise<void> {
     this.submitSuccess.set(false);
     this.submitError.set(false);
 
-    // Validation handling
     if (this.contactForm.invalid) {
       this.contactForm.markAllAsTouched();
 
@@ -325,7 +361,6 @@ export class HelpDashboard implements OnInit, AfterViewChecked {
 
       this.shakeFields.set(invalidFields);
 
-      // Remove shake animation after 500ms
       setTimeout(() => this.shakeFields.set(new Set()), 500);
       return;
     }
@@ -339,7 +374,6 @@ export class HelpDashboard implements OnInit, AfterViewChecked {
     };
 
     try {
-      // API submission
       const response = await fetch(
         'https://coders813-exwiseapi.hf.space/api/contact/',
         {
@@ -363,10 +397,8 @@ export class HelpDashboard implements OnInit, AfterViewChecked {
     } finally {
       this.isSubmitting.set(false);
 
-      // Required for OnPush detection
       this.cdr.markForCheck();
 
-      // Re-render icons if new DOM elements added
       if (isPlatformBrowser(this.platformId)) {
         setTimeout(() => {
           if (typeof lucide !== 'undefined')

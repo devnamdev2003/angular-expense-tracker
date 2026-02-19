@@ -442,8 +442,8 @@ Initializes route tracking, section updates, PWA update listener, and services.<
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="118"
-                                    class="link-to-prism">src/app/app.component.ts:118</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="122"
+                                    class="link-to-prism">src/app/app.component.ts:122</a></div>
                         </td>
                     </tr>
 
@@ -513,8 +513,8 @@ Initializes route tracking, section updates, PWA update listener, and services.<
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="126"
-                                    class="link-to-prism">src/app/app.component.ts:126</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="130"
+                                    class="link-to-prism">src/app/app.component.ts:130</a></div>
                         </td>
                     </tr>
 
@@ -556,8 +556,8 @@ Initializes route tracking, section updates, PWA update listener, and services.<
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="143"
-                                    class="link-to-prism">src/app/app.component.ts:143</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="147"
+                                    class="link-to-prism">src/app/app.component.ts:147</a></div>
                         </td>
                     </tr>
 
@@ -595,8 +595,8 @@ Initializes route tracking, section updates, PWA update listener, and services.<
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="136"
-                                    class="link-to-prism">src/app/app.component.ts:136</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="140"
+                                    class="link-to-prism">src/app/app.component.ts:140</a></div>
                         </td>
                     </tr>
 
@@ -687,8 +687,8 @@ Applies theme, syncs schema, sets user ID, and shows loader.</p>
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="118"
-                                    class="link-to-prism">src/app/app.component.ts:118</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="122"
+                                    class="link-to-prism">src/app/app.component.ts:122</a></div>
                         </td>
                     </tr>
 
@@ -994,7 +994,11 @@ export class AppComponent {
       window.addEventListener(&#x27;beforeinstallprompt&#x27;, (event: any) &#x3D;&gt; {
         event.preventDefault();
         this.deferredPrompt &#x3D; event;
-        this.showInstallButton &#x3D; true;
+        if (window.location.pathname &#x3D;&#x3D;&#x3D; &#x27;/&#x27; || window.location.pathname &#x3D;&#x3D;&#x3D; &#x27;&#x27;) {
+          this.showInstallButton &#x3D; true;
+        } else {
+          this.showInstallButton &#x3D; false;
+        }
       });
       // this.showSplash &#x3D; true;
       // setTimeout(() &#x3D;&gt; {

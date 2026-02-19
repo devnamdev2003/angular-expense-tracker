@@ -383,16 +383,19 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="255"
-                                    class="link-to-prism">src/app/features/help-dashboard/help-dashboard.ts:255</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="290"
+                                    class="link-to-prism">src/app/features/help-dashboard/help-dashboard.ts:290</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
-                        <div class="io-description"><p>Highlights matched search text in FAQs.
-Uses sanitizer to safely inject HTML.</p>
+                        <div class="io-description"><p>Highlights matched search text within the FAQs by wrapping it in an HTML span.
+Uses Angular&#39;s DomSanitizer to safely inject the formatted HTML.</p>
+<ul>
+<li>@param {string} text - The full text to search within</li>
+</ul>
 </div>
 
                             <div class="io-description">
@@ -404,6 +407,7 @@ Uses sanitizer to safely inject HTML.</p>
                                             <td>Name</td>
                                                 <td>Type</td>
                                             <td>Optional</td>
+                                                <td>Description</td>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -418,6 +422,12 @@ Uses sanitizer to safely inject HTML.</p>
                                             </td>
 
 
+                                            <td>
+                                                    <ul>
+<li>The full text to search within</li>
+</ul>
+
+                                            </td>
                                         </tr>
                                         <tr>
                                                 <td>query</td>
@@ -430,6 +440,12 @@ Uses sanitizer to safely inject HTML.</p>
                                             </td>
 
 
+                                            <td>
+                                                    <ul>
+<li>The search query to highlight</li>
+</ul>
+
+                                            </td>
                                         </tr>
                                     </tbody>
                                 </table>
@@ -439,7 +455,8 @@ Uses sanitizer to safely inject HTML.</p>
 
                         </div>
                             <div class="io-description">
-                                
+                                <p>The sanitized HTML string containing highlight spans</p>
+
                             </div>
                 </td>
             </tr>
@@ -465,26 +482,28 @@ Uses sanitizer to safely inject HTML.</p>
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="158"
-                                    class="link-to-prism">src/app/features/help-dashboard/help-dashboard.ts:158</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="188"
+                                    class="link-to-prism">src/app/features/help-dashboard/help-dashboard.ts:188</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
-                        <div class="io-description"><p>Dynamically injects:</p>
+                        <div class="io-description"><p>Dynamically injects the Lucide icon script and Google Font (Outfit).
+Ensures execution only occurs in a browser environment to prevent SSR errors.</p>
 <ul>
-<li>Lucide icon script</li>
-<li>Google font (Outfit)</li>
+<li>@returns {void}</li>
 </ul>
-<p>Only runs in browser environment.</p>
 </div>
 
                         <div class="io-description">
                             <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
 
                         </div>
+                            <div class="io-description">
+                                
+                            </div>
                 </td>
             </tr>
         </tbody>
@@ -509,15 +528,18 @@ Uses sanitizer to safely inject HTML.</p>
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="242"
-                                    class="link-to-prism">src/app/features/help-dashboard/help-dashboard.ts:242</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="275"
+                                    class="link-to-prism">src/app/features/help-dashboard/help-dashboard.ts:275</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
-                        <div class="io-description"><p>Checks if accordion is open.</p>
+                        <div class="io-description"><p>Checks if a specific accordion item is currently open.</p>
+<ul>
+<li>@param {number} id - The unique ID of the FAQ accordion</li>
+</ul>
 </div>
 
                             <div class="io-description">
@@ -529,6 +551,7 @@ Uses sanitizer to safely inject HTML.</p>
                                             <td>Name</td>
                                                 <td>Type</td>
                                             <td>Optional</td>
+                                                <td>Description</td>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -543,6 +566,12 @@ Uses sanitizer to safely inject HTML.</p>
                                             </td>
 
 
+                                            <td>
+                                                    <ul>
+<li>The unique ID of the FAQ accordion</li>
+</ul>
+
+                                            </td>
                                         </tr>
                                     </tbody>
                                 </table>
@@ -552,7 +581,8 @@ Uses sanitizer to safely inject HTML.</p>
 
                         </div>
                             <div class="io-description">
-                                
+                                <p>True if the accordion is open, false otherwise</p>
+
                             </div>
                 </td>
             </tr>
@@ -578,15 +608,18 @@ Uses sanitizer to safely inject HTML.</p>
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="288"
-                                    class="link-to-prism">src/app/features/help-dashboard/help-dashboard.ts:288</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="325"
+                                    class="link-to-prism">src/app/features/help-dashboard/help-dashboard.ts:325</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
-                        <div class="io-description"><p>Checks if form control is invalid.</p>
+                        <div class="io-description"><p>Checks if a specific form control is invalid and has been touched or dirtied.</p>
+<ul>
+<li>@param {string} controlName - The form control name mapped in the FormGroup</li>
+</ul>
 </div>
 
                             <div class="io-description">
@@ -598,6 +631,7 @@ Uses sanitizer to safely inject HTML.</p>
                                             <td>Name</td>
                                                 <td>Type</td>
                                             <td>Optional</td>
+                                                <td>Description</td>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -612,6 +646,12 @@ Uses sanitizer to safely inject HTML.</p>
                                             </td>
 
 
+                                            <td>
+                                                    <ul>
+<li>The form control name mapped in the FormGroup</li>
+</ul>
+
+                                            </td>
                                         </tr>
                                     </tbody>
                                 </table>
@@ -621,7 +661,8 @@ Uses sanitizer to safely inject HTML.</p>
 
                         </div>
                             <div class="io-description">
-                                
+                                <p>True if the form control is invalid and user interacted with it</p>
+
                             </div>
                 </td>
             </tr>
@@ -647,8 +688,8 @@ Uses sanitizer to safely inject HTML.</p>
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="138"
-                                    class="link-to-prism">src/app/features/help-dashboard/help-dashboard.ts:138</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="171"
+                                    class="link-to-prism">src/app/features/help-dashboard/help-dashboard.ts:171</a></div>
                         </td>
                     </tr>
 
@@ -656,13 +697,19 @@ Uses sanitizer to safely inject HTML.</p>
             <tr>
                 <td class="col-md-4">
                         <div class="io-description"><p>AfterViewChecked lifecycle hook.
-Ensures icons are re-rendered after DOM updates.</p>
+Ensures Lucide icons are re-rendered after DOM updates are completed.</p>
+<ul>
+<li>@returns {void}</li>
+</ul>
 </div>
 
                         <div class="io-description">
                             <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
 
                         </div>
+                            <div class="io-description">
+                                
+                            </div>
                 </td>
             </tr>
         </tbody>
@@ -687,8 +734,8 @@ Ensures icons are re-rendered after DOM updates.</p>
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="129"
-                                    class="link-to-prism">src/app/features/help-dashboard/help-dashboard.ts:129</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="162"
+                                    class="link-to-prism">src/app/features/help-dashboard/help-dashboard.ts:162</a></div>
                         </td>
                     </tr>
 
@@ -696,13 +743,19 @@ Ensures icons are re-rendered after DOM updates.</p>
             <tr>
                 <td class="col-md-4">
                         <div class="io-description"><p>OnInit lifecycle hook.
-Injects fonts and icon libraries.</p>
+Injects fonts and icon libraries into the document.</p>
+<ul>
+<li>@returns {void}</li>
+</ul>
 </div>
 
                         <div class="io-description">
                             <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
 
                         </div>
+                            <div class="io-description">
+                                
+                            </div>
                 </td>
             </tr>
         </tbody>
@@ -727,15 +780,18 @@ Injects fonts and icon libraries.</p>
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="196"
-                                    class="link-to-prism">src/app/features/help-dashboard/help-dashboard.ts:196</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="223"
+                                    class="link-to-prism">src/app/features/help-dashboard/help-dashboard.ts:223</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
-                        <div class="io-description"><p>Updates search query signal when user types.</p>
+                        <div class="io-description"><p>Updates the search query signal when the user types in the search input.</p>
+<ul>
+<li>@param {Event} event - The DOM input event triggered by user typing</li>
+</ul>
 </div>
 
                             <div class="io-description">
@@ -747,6 +803,7 @@ Injects fonts and icon libraries.</p>
                                             <td>Name</td>
                                                 <td>Type</td>
                                             <td>Optional</td>
+                                                <td>Description</td>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -761,6 +818,12 @@ Injects fonts and icon libraries.</p>
                                             </td>
 
 
+                                            <td>
+                                                    <ul>
+<li>The DOM input event triggered by user typing</li>
+</ul>
+
+                                            </td>
                                         </tr>
                                     </tbody>
                                 </table>
@@ -798,27 +861,30 @@ Injects fonts and icon libraries.</p>
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="312"
-                                    class="link-to-prism">src/app/features/help-dashboard/help-dashboard.ts:312</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="349"
+                                    class="link-to-prism">src/app/features/help-dashboard/help-dashboard.ts:349</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
-                        <div class="io-description"><p>Handles contact form submission.</p>
+                        <div class="io-description"><p>Handles the contact form submission process.
+Validates the form, triggers animations for invalid fields, sends a POST request
+to the backend API, and updates the UI state based on the response.</p>
 <ul>
-<li>Validates form</li>
-<li>Shows animation for invalid fields</li>
-<li>Sends POST request to backend API</li>
-<li>Displays success/error state</li>
+<li>@returns {Promise<void>} A promise that resolves when the submission process is complete</li>
 </ul>
 </div>
 
                         <div class="io-description">
-                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
+                            <b>Returns : </b>    <code>Promise&lt;void&gt;</code>
 
                         </div>
+                            <div class="io-description">
+                                <p>A promise that resolves when the submission process is complete</p>
+
+                            </div>
                 </td>
             </tr>
         </tbody>
@@ -843,21 +909,27 @@ Injects fonts and icon libraries.</p>
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="204"
-                                    class="link-to-prism">src/app/features/help-dashboard/help-dashboard.ts:204</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="232"
+                                    class="link-to-prism">src/app/features/help-dashboard/help-dashboard.ts:232</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
-                        <div class="io-description"><p>Clears search input.</p>
+                        <div class="io-description"><p>Clears the current search input.</p>
+<ul>
+<li>@returns {void}</li>
+</ul>
 </div>
 
                         <div class="io-description">
                             <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
 
                         </div>
+                            <div class="io-description">
+                                
+                            </div>
                 </td>
             </tr>
         </tbody>
@@ -882,21 +954,27 @@ Injects fonts and icon libraries.</p>
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="278"
-                                    class="link-to-prism">src/app/features/help-dashboard/help-dashboard.ts:278</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="313"
+                                    class="link-to-prism">src/app/features/help-dashboard/help-dashboard.ts:313</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
-                        <div class="io-description"><p>Scrolls page to contact form section.</p>
+                        <div class="io-description"><p>Smoothly scrolls the page to the contact form section.</p>
+<ul>
+<li>@returns {void}</li>
+</ul>
 </div>
 
                         <div class="io-description">
                             <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
 
                         </div>
+                            <div class="io-description">
+                                
+                            </div>
                 </td>
             </tr>
         </tbody>
@@ -921,15 +999,18 @@ Injects fonts and icon libraries.</p>
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="211"
-                                    class="link-to-prism">src/app/features/help-dashboard/help-dashboard.ts:211</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="241"
+                                    class="link-to-prism">src/app/features/help-dashboard/help-dashboard.ts:241</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
-                        <div class="io-description"><p>Sets category filter and scrolls FAQ container into view.</p>
+                        <div class="io-description"><p>Sets the category filter and smoothly scrolls the FAQ container into view.</p>
+<ul>
+<li>@param {string} category - The category string to set as the active filter</li>
+</ul>
 </div>
 
                             <div class="io-description">
@@ -941,6 +1022,7 @@ Injects fonts and icon libraries.</p>
                                             <td>Name</td>
                                                 <td>Type</td>
                                             <td>Optional</td>
+                                                <td>Description</td>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -955,6 +1037,12 @@ Injects fonts and icon libraries.</p>
                                             </td>
 
 
+                                            <td>
+                                                    <ul>
+<li>The category string to set as the active filter</li>
+</ul>
+
+                                            </td>
                                         </tr>
                                     </tbody>
                                 </table>
@@ -990,15 +1078,18 @@ Injects fonts and icon libraries.</p>
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="296"
-                                    class="link-to-prism">src/app/features/help-dashboard/help-dashboard.ts:296</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="335"
+                                    class="link-to-prism">src/app/features/help-dashboard/help-dashboard.ts:335</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
-                        <div class="io-description"><p>Determines if field should show shake animation.</p>
+                        <div class="io-description"><p>Determines if a specific form field should display a validation shake animation.</p>
+<ul>
+<li>@param {string} controlName - The form control name to check</li>
+</ul>
 </div>
 
                             <div class="io-description">
@@ -1010,6 +1101,7 @@ Injects fonts and icon libraries.</p>
                                             <td>Name</td>
                                                 <td>Type</td>
                                             <td>Optional</td>
+                                                <td>Description</td>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -1024,6 +1116,12 @@ Injects fonts and icon libraries.</p>
                                             </td>
 
 
+                                            <td>
+                                                    <ul>
+<li>The form control name to check</li>
+</ul>
+
+                                            </td>
                                         </tr>
                                     </tbody>
                                 </table>
@@ -1033,7 +1131,8 @@ Injects fonts and icon libraries.</p>
 
                         </div>
                             <div class="io-description">
-                                
+                                <p>True if the control requires a shake animation</p>
+
                             </div>
                 </td>
             </tr>
@@ -1059,15 +1158,18 @@ Injects fonts and icon libraries.</p>
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="230"
-                                    class="link-to-prism">src/app/features/help-dashboard/help-dashboard.ts:230</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="261"
+                                    class="link-to-prism">src/app/features/help-dashboard/help-dashboard.ts:261</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
-                        <div class="io-description"><p>Toggle FAQ accordion open/close.</p>
+                        <div class="io-description"><p>Toggles the open/close state of an FAQ accordion item.</p>
+<ul>
+<li>@param {number} id - The unique ID of the FAQ accordion to toggle</li>
+</ul>
 </div>
 
                             <div class="io-description">
@@ -1079,6 +1181,7 @@ Injects fonts and icon libraries.</p>
                                             <td>Name</td>
                                                 <td>Type</td>
                                             <td>Optional</td>
+                                                <td>Description</td>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -1093,6 +1196,12 @@ Injects fonts and icon libraries.</p>
                                             </td>
 
 
+                                            <td>
+                                                    <ul>
+<li>The unique ID of the FAQ accordion to toggle</li>
+</ul>
+
+                                            </td>
                                         </tr>
                                     </tbody>
                                 </table>
@@ -1139,10 +1248,16 @@ Injects fonts and icon libraries.</p>
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="50" class="link-to-prism">src/app/features/help-dashboard/help-dashboard.ts:50</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="72" class="link-to-prism">src/app/features/help-dashboard/help-dashboard.ts:72</a></div>
                         </td>
                     </tr>
 
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Dependency injection for ChangeDetectorRef to manually trigger change detection</p>
+</div>
+                </td>
+            </tr>
 
         </tbody>
     </table>
@@ -1174,10 +1289,16 @@ Injects fonts and icon libraries.</p>
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="79" class="link-to-prism">src/app/features/help-dashboard/help-dashboard.ts:79</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="112" class="link-to-prism">src/app/features/help-dashboard/help-dashboard.ts:112</a></div>
                         </td>
                     </tr>
 
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Reactive form configuration with validation rules for the contact form</p>
+</div>
+                </td>
+            </tr>
 
         </tbody>
     </table>
@@ -1206,10 +1327,16 @@ Injects fonts and icon libraries.</p>
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="47" class="link-to-prism">src/app/features/help-dashboard/help-dashboard.ts:47</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="60" class="link-to-prism">src/app/features/help-dashboard/help-dashboard.ts:60</a></div>
                         </td>
                     </tr>
 
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Dependency injection for Angular FormBuilder</p>
+</div>
+                </td>
+            </tr>
 
         </tbody>
     </table>
@@ -1246,7 +1373,7 @@ Injects fonts and icon libraries.</p>
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="94" class="link-to-prism">src/app/features/help-dashboard/help-dashboard.ts:94</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="127" class="link-to-prism">src/app/features/help-dashboard/help-dashboard.ts:127</a></div>
                         </td>
                     </tr>
 
@@ -1254,6 +1381,9 @@ Injects fonts and icon libraries.</p>
                 <td class="col-md-4">
                     <div class="io-description"><p>Filters FAQs based on search query.
 Matches question, answer, or category text.</p>
+<ul>
+<li>@returns {FAQ[]} Array of filtered FAQ items based on the current search query</li>
+</ul>
 </div>
                 </td>
             </tr>
@@ -1292,7 +1422,7 @@ Matches question, answer, or category text.</p>
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="110" class="link-to-prism">src/app/features/help-dashboard/help-dashboard.ts:110</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="143" class="link-to-prism">src/app/features/help-dashboard/help-dashboard.ts:143</a></div>
                         </td>
                     </tr>
 
@@ -1300,6 +1430,9 @@ Matches question, answer, or category text.</p>
                 <td class="col-md-4">
                     <div class="io-description"><p>Groups filtered FAQs by category.
 Useful for categorized display in UI.</p>
+<ul>
+<li>@returns {Array&lt;{category: string, items: FAQ[]}&gt;} An array of objects grouping FAQs by their category</li>
+</ul>
 </div>
                 </td>
             </tr>
@@ -1332,10 +1465,16 @@ Useful for categorized display in UI.</p>
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="53" class="link-to-prism">src/app/features/help-dashboard/help-dashboard.ts:53</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="76" class="link-to-prism">src/app/features/help-dashboard/help-dashboard.ts:76</a></div>
                         </td>
                     </tr>
 
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>FAQ static data source containing all help articles</p>
+</div>
+                </td>
+            </tr>
 
         </tbody>
     </table>
@@ -1363,10 +1502,16 @@ Useful for categorized display in UI.</p>
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="66" class="link-to-prism">src/app/features/help-dashboard/help-dashboard.ts:66</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="92" class="link-to-prism">src/app/features/help-dashboard/help-dashboard.ts:92</a></div>
                         </td>
                     </tr>
 
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Tracks if the contact form is currently submitting</p>
+</div>
+                </td>
+            </tr>
 
         </tbody>
     </table>
@@ -1394,10 +1539,16 @@ Useful for categorized display in UI.</p>
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="63" class="link-to-prism">src/app/features/help-dashboard/help-dashboard.ts:63</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="88" class="link-to-prism">src/app/features/help-dashboard/help-dashboard.ts:88</a></div>
                         </td>
                     </tr>
 
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Stores a Set of currently opened accordion IDs</p>
+</div>
+                </td>
+            </tr>
 
         </tbody>
     </table>
@@ -1426,10 +1577,16 @@ Useful for categorized display in UI.</p>
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="49" class="link-to-prism">src/app/features/help-dashboard/help-dashboard.ts:49</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="68" class="link-to-prism">src/app/features/help-dashboard/help-dashboard.ts:68</a></div>
                         </td>
                     </tr>
 
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Dependency injection for Platform ID to check execution context (Browser/Server)</p>
+</div>
+                </td>
+            </tr>
 
         </tbody>
     </table>
@@ -1458,10 +1615,16 @@ Useful for categorized display in UI.</p>
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="48" class="link-to-prism">src/app/features/help-dashboard/help-dashboard.ts:48</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="64" class="link-to-prism">src/app/features/help-dashboard/help-dashboard.ts:64</a></div>
                         </td>
                     </tr>
 
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Dependency injection for DOM Sanitizer to safely inject HTML</p>
+</div>
+                </td>
+            </tr>
 
         </tbody>
     </table>
@@ -1489,10 +1652,16 @@ Useful for categorized display in UI.</p>
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="60" class="link-to-prism">src/app/features/help-dashboard/help-dashboard.ts:60</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="84" class="link-to-prism">src/app/features/help-dashboard/help-dashboard.ts:84</a></div>
                         </td>
                     </tr>
 
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Stores the current user search query string</p>
+</div>
+                </td>
+            </tr>
 
         </tbody>
     </table>
@@ -1520,10 +1689,16 @@ Useful for categorized display in UI.</p>
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="71" class="link-to-prism">src/app/features/help-dashboard/help-dashboard.ts:71</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="104" class="link-to-prism">src/app/features/help-dashboard/help-dashboard.ts:104</a></div>
                         </td>
                     </tr>
 
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Tracks form field names that need a shake animation on validation error</p>
+</div>
+                </td>
+            </tr>
 
         </tbody>
     </table>
@@ -1551,10 +1726,16 @@ Useful for categorized display in UI.</p>
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="68" class="link-to-prism">src/app/features/help-dashboard/help-dashboard.ts:68</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="100" class="link-to-prism">src/app/features/help-dashboard/help-dashboard.ts:100</a></div>
                         </td>
                     </tr>
 
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Tracks if an error occurred during contact form submission</p>
+</div>
+                </td>
+            </tr>
 
         </tbody>
     </table>
@@ -1582,10 +1763,16 @@ Useful for categorized display in UI.</p>
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="67" class="link-to-prism">src/app/features/help-dashboard/help-dashboard.ts:67</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="96" class="link-to-prism">src/app/features/help-dashboard/help-dashboard.ts:96</a></div>
                         </td>
                     </tr>
 
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Tracks if the contact form submitted successfully</p>
+</div>
+                </td>
+            </tr>
 
         </tbody>
     </table>
@@ -1601,7 +1788,9 @@ import { FormBuilder, ReactiveFormsModule, Validators } from &#x27;@angular/form
 import { DomSanitizer, SafeHtml } from &#x27;@angular/platform-browser&#x27;;
 import { HelpData } from &#x27;../../service/localStorage/data/help-data&#x27;;
 
-// External icon library global declaration (Lucide icons)
+/**
+ * External icon library global declaration (Lucide icons).
+ */
 declare var lucide: any;
 
 /**
@@ -1609,12 +1798,22 @@ declare var lucide: any;
  * Defines the structure of FAQ objects used in Help Dashboard.
  */
 interface FAQ {
+  /** * Unique identifier for the FAQ 
+   */
   id: number;
+
+  /** * The category this FAQ belongs to (e.g., &#x27;General&#x27;, &#x27;Billing&#x27;) 
+   */
   category: string;
+
+  /** * The actual question text 
+   */
   question: string;
+
+  /** * The answer text to the question 
+   */
   answer: string;
 }
-
 
 /**
  * Help Dashboard Component
@@ -1640,45 +1839,65 @@ interface FAQ {
 })
 export class HelpDashboard implements OnInit, AfterViewChecked {
 
-  // Dependency injection using Angular inject() function
+  /** * Dependency injection for Angular FormBuilder 
+   */
   private fb &#x3D; inject(FormBuilder);
+
+  /** * Dependency injection for DOM Sanitizer to safely inject HTML 
+   */
   private sanitizer &#x3D; inject(DomSanitizer);
+
+  /** * Dependency injection for Platform ID to check execution context (Browser/Server) 
+   */
   private platformId &#x3D; inject(PLATFORM_ID);
+
+  /** * Dependency injection for ChangeDetectorRef to manually trigger change detection 
+   */
   private cdr &#x3D; inject(ChangeDetectorRef);
 
-  // FAQ static data source
+  /** * FAQ static data source containing all help articles 
+   */
   private readonly helpData: FAQ[] &#x3D; HelpData;
 
   /* ------------------------------------------------------------------
      SIGNAL STATES (Reactive state management)
      ------------------------------------------------------------------ */
 
-  // Stores user search query
+  /** * Stores the current user search query string 
+   */
   searchQuery &#x3D; signal&lt;string&gt;(&#x27;&#x27;);
 
-  // Stores currently opened accordion IDs
+  /** * Stores a Set of currently opened accordion IDs 
+   */
   openAccordions &#x3D; signal&lt;Set&lt;number&gt;&gt;(new Set());
 
-  // Form UI state signals
+  /** * Tracks if the contact form is currently submitting 
+   */
   isSubmitting &#x3D; signal&lt;boolean&gt;(false);
+
+  /** * Tracks if the contact form submitted successfully 
+   */
   submitSuccess &#x3D; signal&lt;boolean&gt;(false);
+
+  /** * Tracks if an error occurred during contact form submission 
+   */
   submitError &#x3D; signal&lt;boolean&gt;(false);
 
-  // Tracks fields needing shake animation on validation error
+  /** * Tracks form field names that need a shake animation on validation error 
+   */
   shakeFields &#x3D; signal&lt;Set&lt;string&gt;&gt;(new Set());
-
 
   /* ------------------------------------------------------------------
      CONTACT FORM SETUP
      ------------------------------------------------------------------ */
 
-  // Reactive form configuration with validation rules
+  /** * Reactive form configuration with validation rules for the contact form 
+   */
   contactForm &#x3D; this.fb.group({
     name: [&#x27;&#x27;, Validators.required],
     email: [&#x27;&#x27;, [Validators.required, Validators.email]],
     query: [&#x27;&#x27;, [Validators.required, Validators.minLength(10)]]
   });
-
 
   /* ------------------------------------------------------------------
      COMPUTED SIGNALS (Derived UI State)
@@ -1687,6 +1906,7 @@ export class HelpDashboard implements OnInit, AfterViewChecked {
   /**
    * Filters FAQs based on search query.
    * Matches question, answer, or category text.
+   * * @returns {FAQ[]} Array of filtered FAQ items based on the current search query
    */
   filteredFAQs &#x3D; computed(() &#x3D;&gt; {
     const query &#x3D; this.searchQuery().toLowerCase().trim();
@@ -1699,10 +1919,10 @@ export class HelpDashboard implements OnInit, AfterViewChecked {
     );
   });
 
-
   /**
    * Groups filtered FAQs by category.
    * Useful for categorized display in UI.
+   * * @returns {Array&lt;{category: string, items: FAQ[]}&gt;} An array of objects grouping FAQs by their category
    */
   groupedFAQs &#x3D; computed(() &#x3D;&gt; {
     const items &#x3D; this.filteredFAQs();
@@ -1714,25 +1934,25 @@ export class HelpDashboard implements OnInit, AfterViewChecked {
     }));
   });
 
-
   /* ------------------------------------------------------------------
      LIFECYCLE HOOKS
      ------------------------------------------------------------------ */
 
   /**
    * OnInit lifecycle hook.
-   * Injects fonts and icon libraries.
+   * Injects fonts and icon libraries into the document.
+   * * @returns {void}
    */
-  ngOnInit() {
+  ngOnInit(): void {
     this.injectFontAwesome();
   }
 
-
   /**
    * AfterViewChecked lifecycle hook.
-   * Ensures icons are re-rendered after DOM updates.
+   * Ensures Lucide icons are re-rendered after DOM updates are completed.
+   * * @returns {void}
    */
-  ngAfterViewChecked() {
+  ngAfterViewChecked(): void {
     if (isPlatformBrowser(this.platformId)) {
       if (typeof lucide !&#x3D;&#x3D; &#x27;undefined&#x27;) {
         lucide.createIcons();
@@ -1740,23 +1960,18 @@ export class HelpDashboard implements OnInit, AfterViewChecked {
     }
   }
 
-
   /* ------------------------------------------------------------------
      EXTERNAL SCRIPT &amp; FONT INJECTION
      ------------------------------------------------------------------ */
 
   /**
-   * Dynamically injects:
-   * - Lucide icon script
-   * - Google font (Outfit)
-   *
-   * Only runs in browser environment.
+   * Dynamically injects the Lucide icon script and Google Font (Outfit).
+   * Ensures execution only occurs in a browser environment to prevent SSR errors.
+   * * @returns {void}
    */
-  injectFontAwesome() {
-    // Only run in browser (prevents SSR error)
+  injectFontAwesome(): void {
     if (!isPlatformBrowser(this.platformId)) return;
 
-    // Inject Lucide icon script
     if (!document.getElementById(&#x27;lucide-script&#x27;)) {
       const script &#x3D; document.createElement(&#x27;script&#x27;);
       script.id &#x3D; &#x27;lucide-script&#x27;;
@@ -1769,7 +1984,6 @@ export class HelpDashboard implements OnInit, AfterViewChecked {
       document.body.appendChild(script);
     }
 
-    // Inject Google font safely
     if (!document.getElementById(&#x27;outfit-font&#x27;)) {
       const font &#x3D; document.createElement(&#x27;link&#x27;);
       font.id &#x3D; &#x27;outfit-font&#x27;;
@@ -1781,31 +1995,34 @@ export class HelpDashboard implements OnInit, AfterViewChecked {
     }
   }
 
-
-
   /* ------------------------------------------------------------------
      SEARCH &amp; FILTER LOGIC
      ------------------------------------------------------------------ */
 
   /**
-   * Updates search query signal when user types.
+   * Updates the search query signal when the user types in the search input.
+   * * @param {Event} event - The DOM input event triggered by user typing
+   * @returns {void}
    */
-  onSearchInput(event: Event) {
+  onSearchInput(event: Event): void {
     const value &#x3D; (event.target as HTMLInputElement).value;
     this.searchQuery.set(value);
   }
 
   /**
-   * Clears search input.
+   * Clears the current search input.
+   * * @returns {void}
    */
-  resetSearch() {
+  resetSearch(): void {
     this.searchQuery.set(&#x27;&#x27;);
   }
 
   /**
-   * Sets category filter and scrolls FAQ container into view.
+   * Sets the category filter and smoothly scrolls the FAQ container into view.
+   * * @param {string} category - The category string to set as the active filter
+   * @returns {void}
    */
-  setCategory(category: string) {
+  setCategory(category: string): void {
     this.searchQuery.set(category);
 
     if (isPlatformBrowser(this.platformId)) {
@@ -1816,15 +2033,16 @@ export class HelpDashboard implements OnInit, AfterViewChecked {
     }
   }
 
-
   /* ------------------------------------------------------------------
      ACCORDION CONTROL
      ------------------------------------------------------------------ */
 
   /**
-   * Toggle FAQ accordion open/close.
+   * Toggles the open/close state of an FAQ accordion item.
+   * * @param {number} id - The unique ID of the FAQ accordion to toggle
+   * @returns {void}
    */
-  toggleAccordion(id: number) {
+  toggleAccordion(id: number): void {
     const current &#x3D; new Set(this.openAccordions());
 
     if (current.has(id)) current.delete(id);
@@ -1834,20 +2052,24 @@ export class HelpDashboard implements OnInit, AfterViewChecked {
   }
 
   /**
-   * Checks if accordion is open.
+   * Checks if a specific accordion item is currently open.
+   * * @param {number} id - The unique ID of the FAQ accordion
+   * @returns {boolean} True if the accordion is open, false otherwise
    */
   isAccordionOpen(id: number): boolean {
     return this.openAccordions().has(id);
   }
-
 
   /* ------------------------------------------------------------------
      SEARCH TEXT HIGHLIGHTING
      ------------------------------------------------------------------ */
 
   /**
-   * Highlights matched search text in FAQs.
-   * Uses sanitizer to safely inject HTML.
+   * Highlights matched search text within the FAQs by wrapping it in an HTML span.
+   * Uses Angular&#x27;s DomSanitizer to safely inject the formatted HTML.
+   * * @param {string} text - The full text to search within
+   * @param {string} query - The search query to highlight
+   * @returns {SafeHtml} The sanitized HTML string containing highlight spans
    */
   highlightText(text: string, query: string): SafeHtml {
     if (!query)
@@ -1864,15 +2086,15 @@ export class HelpDashboard implements OnInit, AfterViewChecked {
     return this.sanitizer.bypassSecurityTrustHtml(replaced);
   }
 
-
   /* ------------------------------------------------------------------
      FORM UX HELPERS
      ------------------------------------------------------------------ */
 
   /**
-   * Scrolls page to contact form section.
+   * Smoothly scrolls the page to the contact form section.
+   * * @returns {void}
    */
-  scrollToForm() {
+  scrollToForm(): void {
     if (isPlatformBrowser(this.platformId)) {
       document.getElementById(&#x27;contactFormSection&#x27;)
         ?.scrollIntoView({ behavior: &#x27;smooth&#x27; });
@@ -1880,7 +2102,9 @@ export class HelpDashboard implements OnInit, AfterViewChecked {
   }
 
   /**
-   * Checks if form control is invalid.
+   * Checks if a specific form control is invalid and has been touched or dirtied.
+   * * @param {string} controlName - The form control name mapped in the FormGroup
+   * @returns {boolean} True if the form control is invalid and user interacted with it
    */
   isInvalid(controlName: string): boolean {
     const control &#x3D; this.contactForm.get(controlName);
@@ -1888,29 +2112,28 @@ export class HelpDashboard implements OnInit, AfterViewChecked {
   }
 
   /**
-   * Determines if field should show shake animation.
+   * Determines if a specific form field should display a validation shake animation.
+   * * @param {string} controlName - The form control name to check
+   * @returns {boolean} True if the control requires a shake animation
    */
   shouldShake(controlName: string): boolean {
     return this.shakeFields().has(controlName);
   }
-
 
   /* ------------------------------------------------------------------
      FORM SUBMISSION LOGIC
      ------------------------------------------------------------------ */
 
   /**
-   * Handles contact form submission.
-   * - Validates form
-   * - Shows animation for invalid fields
-   * - Sends POST request to backend API
-   * - Displays success/error state
+   * Handles the contact form submission process.
+   * Validates the form, triggers animations for invalid fields, sends a POST request 
+   * to the backend API, and updates the UI state based on the response.
+   * * @returns {Promise&lt;void&gt;} A promise that resolves when the submission process is complete
    */
-  async onSubmit() {
+  async onSubmit(): Promise&lt;void&gt; {
     this.submitSuccess.set(false);
     this.submitError.set(false);
 
-    // Validation handling
     if (this.contactForm.invalid) {
       this.contactForm.markAllAsTouched();
 
@@ -1922,7 +2145,6 @@ export class HelpDashboard implements OnInit, AfterViewChecked {
 
       this.shakeFields.set(invalidFields);
 
-      // Remove shake animation after 500ms
       setTimeout(() &#x3D;&gt; this.shakeFields.set(new Set()), 500);
       return;
     }
@@ -1936,7 +2158,6 @@ export class HelpDashboard implements OnInit, AfterViewChecked {
     };
 
     try {
-      // API submission
       const response &#x3D; await fetch(
         &#x27;https://coders813-exwiseapi.hf.space/api/contact/&#x27;,
         {
@@ -1960,10 +2181,8 @@ export class HelpDashboard implements OnInit, AfterViewChecked {
     } finally {
       this.isSubmitting.set(false);
 
-      // Required for OnPush detection
       this.cdr.markForCheck();
 
-      // Re-render icons if new DOM elements added
       if (isPlatformBrowser(this.platformId)) {
         setTimeout(() &#x3D;&gt; {
           if (typeof lucide !&#x3D;&#x3D; &#x27;undefined&#x27;)
@@ -1972,8 +2191,7 @@ export class HelpDashboard implements OnInit, AfterViewChecked {
       }
     }
   }
-}
-</code></pre>
+}</code></pre>
     </div>
 
     <div class="tab-pane fade " id="templateData">
