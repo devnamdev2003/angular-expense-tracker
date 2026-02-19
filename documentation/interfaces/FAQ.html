@@ -144,6 +144,14 @@
         </p>
 
 
+            <p class="comment">
+                <h3>Description</h3>
+            </p>
+            <p class="comment">
+                <p>FAQ Interface
+Defines the structure of FAQ objects used in Help Dashboard.</p>
+
+            </p>
 
 
         <section data-compodoc="block-index">
@@ -334,9 +342,15 @@
 import { isPlatformBrowser } from &#x27;@angular/common&#x27;;
 import { FormBuilder, ReactiveFormsModule, Validators } from &#x27;@angular/forms&#x27;;
 import { DomSanitizer, SafeHtml } from &#x27;@angular/platform-browser&#x27;;
+import { HelpData } from &#x27;../../service/localStorage/data/help-data&#x27;;
 
+// External icon library global declaration (Lucide icons)
 declare var lucide: any;
 
+/**
+ * FAQ Interface
+ * Defines the structure of FAQ objects used in Help Dashboard.
+ */
 interface FAQ {
   id: number;
   category: string;
@@ -344,6 +358,21 @@ interface FAQ {
   answer: string;
 }
 
+
+/**
+ * Help Dashboard Component
+ *
+ * Responsibilities:
+ * - Display FAQ list with search and category filtering
+ * - Accordion-style question expansion
+ * - Highlight search results dynamically
+ * - Contact form submission with validation
+ * - Icon rendering using Lucide library
+ *
+ * Performance Optimization:
+ * - Uses OnPush change detection
+ * - Uses Angular Signals for reactive state
+ */
 @Component({
   selector: &#x27;app-help-dashboard&#x27;,
   standalone: true,
@@ -354,50 +383,54 @@ interface FAQ {
 })
 export class HelpDashboard implements OnInit, AfterViewChecked {
 
+  // Dependency injection using Angular inject() function
   private fb &#x3D; inject(FormBuilder);
   private sanitizer &#x3D; inject(DomSanitizer);
   private platformId &#x3D; inject(PLATFORM_ID);
   private cdr &#x3D; inject(ChangeDetectorRef);
 
-  // Data Source
-  private readonly helpData: FAQ[] &#x3D; [
-    { id: 101, category: &quot;Getting Started&quot;, question: &quot;What is Expense Wise?&quot;, answer: &quot;Expense Wise is a mobile-first financial management app designed to help you track daily and monthly expenses. It uses Angular and Tailwind CSS for a fast, responsive experience.&quot; },
-    { id: 102, category: &quot;Getting Started&quot;, question: &quot;Is my data private?&quot;, answer: &quot;Yes. All data is stored in your device&#x27;s &lt;strong&gt;LocalStorage&lt;/strong&gt; by default. This means we don&#x27;t see your financial data unless you explicitly enable cloud backup.&quot; },
-    { id: 103, category: &quot;Getting Started&quot;, question: &quot;Can I use it on Desktop?&quot;, answer: &quot;The app is designed &#x27;Mobile-First&#x27; for optimal use on smartphones. However, it works on laptops as a Progressive Web App (PWA), though the layout remains narrow.&quot; },
-    { id: 104, category: &quot;Getting Started&quot;, question: &quot;How do I install the app?&quot;, answer: &quot;You can &lt;a href&#x3D;&#x27;https://github.com/devnamdev2003/angular-expense-tracker/raw/refs/heads/main/exwise.apk&#x27; class&#x3D;&#x27;text-indigo-600 hover:underline&#x27;&gt;download the APK&lt;/a&gt; from our website or use the &#x27;Add to Home Screen&#x27; feature in your browser to install it as a PWA.&quot; },
-    { id: 201, category: &quot;Features&quot;, question: &quot;Discrete vs. Cumulative Graphs&quot;, answer: &quot;&lt;strong&gt;Discrete&lt;/strong&gt; shows spending for individual periods (e.g., just Monday&#x27;s cost). &lt;strong&gt;Cumulative&lt;/strong&gt; adds them up over time (e.g., Monday + Tuesday), showing your total spending trend.&quot; },
-    { id: 202, category: &quot;Features&quot;, question: &quot;What does the Pie Chart show?&quot;, answer: &quot;The Pie Chart visualizes your expenses split by Category (e.g., Food, Travel). It helps you identify where most of your money goes.&quot; },
-    { id: 301, category: &quot;Features&quot;, question: &quot;How do I add an expense?&quot;, answer: &quot;Tap the &lt;strong&gt;+ (Plus)&lt;/strong&gt; button. Enter Amount, Date, Category, and Payment Mode. You can also add a location or mark it as &#x27;Extra Spending&#x27; to separate it from regular bills.&quot; },
-    { id: 302, category: &quot;Features&quot;, question: &quot;What is &#x27;Extra Spending&#x27;?&quot;, answer: &quot;This is a checkbox to mark non-essential or one-time large expenses. You can later filter these out in the List View to see your core living costs.&quot; },
-    { id: 401, category: &quot;Features&quot;, question: &quot;How does the Calendar Heatmap work?&quot;, answer: &quot;The heatmap colors days based on spending: &lt;br&gt;• &lt;span class&#x3D;&#x27;text-emerald-600 font-bold&#x27;&gt;Green&lt;/span&gt;: Low spending&lt;br&gt;• &lt;span class&#x3D;&#x27;text-amber-600 font-bold&#x27;&gt;Yellow&lt;/span&gt;: Moderate&lt;br&gt;• &lt;span class&#x3D;&#x27;text-rose-600 font-bold&#x27;&gt;Red&lt;/span&gt;: High spending.&quot; },
-    { id: 402, category: &quot;Features&quot;, question: &quot;Can I change Heatmap thresholds?&quot;, answer: &quot;Yes. In Calendar view, click the summary table&#x27;s &lt;strong&gt;Edit&lt;/strong&gt; button. You can manually set the rupee limits for Red/Yellow/Green or use &#x27;Auto&#x27; to base it on your daily budget.&quot; },
-    { id: 501, category: &quot;Budgeting&quot;, question: &quot;How is &#x27;Suggested/Day&#x27; calculated?&quot;, answer: &quot;This is a smart metric. It takes your remaining budget and divides it by the days left in the month. If you overspend today, your suggested daily amount for tomorrow drops.&quot; },
-    { id: 502, category: &quot;Budgeting&quot;, question: &quot;What do the progress bar colors mean?&quot;, answer: &quot;• &lt;strong&gt;Green/Indigo:&lt;/strong&gt; You have spent less than 50% of your budget.&lt;br&gt;• &lt;strong&gt;Orange:&lt;/strong&gt; You are between 50% and 90%.&lt;br&gt;• &lt;strong&gt;Red:&lt;/strong&gt; You have exceeded 90% or the total limit.&quot; },
-    { id: 503, category: &quot;Budgeting&quot;, question: &quot;Income Tracking vs Budget Tracking&quot;, answer: &quot;&lt;strong&gt;Income Tracking&lt;/strong&gt; focuses on total earnings and savings rate. &lt;strong&gt;Budget Tracking&lt;/strong&gt; is stricter, focusing on limiting expenses within a set monthly cap.&quot; },
-    { id: 601, category: &quot;Data &amp; Settings&quot;, question: &quot;How do I backup my data?&quot;, answer: &quot;Go to Settings &gt; Data Backup. You can enable automatic cloud sync or manually trigger a backup to our secure database.&quot; },
-    { id: 602, category: &quot;Data &amp; Settings&quot;, question: &quot;Can I export my expenses?&quot;, answer: &quot;Yes! In Settings, click &lt;strong&gt;Download Data&lt;/strong&gt;. You can export as PDF, Excel (XLSX), or JSON. You can filter the export by date range.&quot; },
-    { id: 603, category: &quot;Data &amp; Settings&quot;, question: &quot;How do I create a custom category?&quot;, answer: &quot;Go to Settings &gt; Add Category. Enter the name (e.g., &#x27;Gym&#x27;, &#x27;Pet&#x27;) and save. It will immediately appear in your dropdowns.&quot; },
-    { id: 604, category: &quot;Data &amp; Settings&quot;, question: &quot;I deleted the app. Is my data gone?&quot;, answer: &quot;If you did not enable Cloud Backup or Export your data, it is likely lost because LocalStorage is cleared when the app is uninstalled.&quot; }
-  ];
+  // FAQ static data source
+  private readonly helpData: FAQ[] &#x3D; HelpData;
 
-  // State Signals
+  /* ------------------------------------------------------------------
+     SIGNAL STATES (Reactive state management)
+     ------------------------------------------------------------------ */
+
+  // Stores user search query
   searchQuery &#x3D; signal&lt;string&gt;(&#x27;&#x27;);
+
+  // Stores currently opened accordion IDs
   openAccordions &#x3D; signal&lt;Set&lt;number&gt;&gt;(new Set());
 
-  // Form State
+  // Form UI state signals
   isSubmitting &#x3D; signal&lt;boolean&gt;(false);
   submitSuccess &#x3D; signal&lt;boolean&gt;(false);
   submitError &#x3D; signal&lt;boolean&gt;(false);
+
+  // Tracks fields needing shake animation on validation error
   shakeFields &#x3D; signal&lt;Set&lt;string&gt;&gt;(new Set());
 
-  // Form Setup
+
+  /* ------------------------------------------------------------------
+     CONTACT FORM SETUP
+     ------------------------------------------------------------------ */
+
+  // Reactive form configuration with validation rules
   contactForm &#x3D; this.fb.group({
     name: [&#x27;&#x27;, Validators.required],
     email: [&#x27;&#x27;, [Validators.required, Validators.email]],
     query: [&#x27;&#x27;, [Validators.required, Validators.minLength(10)]]
   });
 
-  // Computed state for UI rendering
+
+  /* ------------------------------------------------------------------
+     COMPUTED SIGNALS (Derived UI State)
+     ------------------------------------------------------------------ */
+
+  /**
+   * Filters FAQs based on search query.
+   * Matches question, answer, or category text.
+   */
   filteredFAQs &#x3D; computed(() &#x3D;&gt; {
     const query &#x3D; this.searchQuery().toLowerCase().trim();
     if (!query) return this.helpData;
@@ -409,6 +442,11 @@ export class HelpDashboard implements OnInit, AfterViewChecked {
     );
   });
 
+
+  /**
+   * Groups filtered FAQs by category.
+   * Useful for categorized display in UI.
+   */
   groupedFAQs &#x3D; computed(() &#x3D;&gt; {
     const items &#x3D; this.filteredFAQs();
     const categories &#x3D; [...new Set(items.map(i &#x3D;&gt; i.category))];
@@ -419,110 +457,221 @@ export class HelpDashboard implements OnInit, AfterViewChecked {
     }));
   });
 
+
+  /* ------------------------------------------------------------------
+     LIFECYCLE HOOKS
+     ------------------------------------------------------------------ */
+
+  /**
+   * OnInit lifecycle hook.
+   * Injects fonts and icon libraries.
+   */
   ngOnInit() {
-    // Only access &#x27;document&#x27; if we are in the browser
-    if (isPlatformBrowser(this.platformId)) {
-      // Inject Lucide script for icons
-      if (!document.getElementById(&#x27;lucide-script&#x27;)) {
-        const script &#x3D; document.createElement(&#x27;script&#x27;);
-        script.id &#x3D; &#x27;lucide-script&#x27;;
-        script.src &#x3D; &#x27;https://unpkg.com/lucide@latest&#x27;;
-        script.onload &#x3D; () &#x3D;&gt; {
-          if (typeof lucide !&#x3D;&#x3D; &#x27;undefined&#x27;) lucide.createIcons();
-        };
-        document.body.appendChild(script);
-      }
-    }
+    this.injectFontAwesome();
   }
 
+
+  /**
+   * AfterViewChecked lifecycle hook.
+   * Ensures icons are re-rendered after DOM updates.
+   */
   ngAfterViewChecked() {
-    // Only execute icon creation if we are in the browser
     if (isPlatformBrowser(this.platformId)) {
-      // Re-render icons after dynamic content changes
       if (typeof lucide !&#x3D;&#x3D; &#x27;undefined&#x27;) {
         lucide.createIcons();
       }
     }
   }
 
-  // --- Search &amp; Filter Logic ---
+
+  /* ------------------------------------------------------------------
+     EXTERNAL SCRIPT &amp; FONT INJECTION
+     ------------------------------------------------------------------ */
+
+  /**
+   * Dynamically injects:
+   * - Lucide icon script
+   * - Google font (Outfit)
+   *
+   * Only runs in browser environment.
+   */
+  injectFontAwesome() {
+    // Only run in browser (prevents SSR error)
+    if (!isPlatformBrowser(this.platformId)) return;
+
+    // Inject Lucide icon script
+    if (!document.getElementById(&#x27;lucide-script&#x27;)) {
+      const script &#x3D; document.createElement(&#x27;script&#x27;);
+      script.id &#x3D; &#x27;lucide-script&#x27;;
+      script.src &#x3D; &#x27;https://unpkg.com/lucide@latest&#x27;;
+
+      script.onload &#x3D; () &#x3D;&gt; {
+        if (typeof lucide !&#x3D;&#x3D; &#x27;undefined&#x27;) lucide.createIcons();
+      };
+
+      document.body.appendChild(script);
+    }
+
+    // Inject Google font safely
+    if (!document.getElementById(&#x27;outfit-font&#x27;)) {
+      const font &#x3D; document.createElement(&#x27;link&#x27;);
+      font.id &#x3D; &#x27;outfit-font&#x27;;
+      font.href &#x3D;
+        &quot;https://fonts.googleapis.com/css2?family&#x3D;Outfit:wght@300;400;500;600;700&amp;display&#x3D;swap&quot;;
+      font.rel &#x3D; &quot;stylesheet&quot;;
+
+      document.head.appendChild(font);
+    }
+  }
+
+
+
+  /* ------------------------------------------------------------------
+     SEARCH &amp; FILTER LOGIC
+     ------------------------------------------------------------------ */
+
+  /**
+   * Updates search query signal when user types.
+   */
   onSearchInput(event: Event) {
     const value &#x3D; (event.target as HTMLInputElement).value;
     this.searchQuery.set(value);
   }
 
+  /**
+   * Clears search input.
+   */
   resetSearch() {
     this.searchQuery.set(&#x27;&#x27;);
   }
 
+  /**
+   * Sets category filter and scrolls FAQ container into view.
+   */
   setCategory(category: string) {
     this.searchQuery.set(category);
+
     if (isPlatformBrowser(this.platformId)) {
       setTimeout(() &#x3D;&gt; {
-        document.getElementById(&#x27;faqContainer&#x27;)?.scrollIntoView({ behavior: &#x27;smooth&#x27;, block: &#x27;start&#x27; });
+        document.getElementById(&#x27;faqContainer&#x27;)
+          ?.scrollIntoView({ behavior: &#x27;smooth&#x27;, block: &#x27;start&#x27; });
       }, 100);
     }
   }
 
-  // --- Accordion Logic ---
+
+  /* ------------------------------------------------------------------
+     ACCORDION CONTROL
+     ------------------------------------------------------------------ */
+
+  /**
+   * Toggle FAQ accordion open/close.
+   */
   toggleAccordion(id: number) {
     const current &#x3D; new Set(this.openAccordions());
-    if (current.has(id)) {
-      current.delete(id);
-    } else {
-      current.add(id);
-    }
+
+    if (current.has(id)) current.delete(id);
+    else current.add(id);
+
     this.openAccordions.set(current);
   }
 
+  /**
+   * Checks if accordion is open.
+   */
   isAccordionOpen(id: number): boolean {
     return this.openAccordions().has(id);
   }
 
+
+  /* ------------------------------------------------------------------
+     SEARCH TEXT HIGHLIGHTING
+     ------------------------------------------------------------------ */
+
+  /**
+   * Highlights matched search text in FAQs.
+   * Uses sanitizer to safely inject HTML.
+   */
   highlightText(text: string, query: string): SafeHtml {
-    if (!query) return this.sanitizer.bypassSecurityTrustHtml(text);
+    if (!query)
+      return this.sanitizer.bypassSecurityTrustHtml(text);
+
     const safeQuery &#x3D; query.replace(/[.*+?^${}()|[\]\\]/g, &#x27;\\$&amp;&#x27;);
     const regex &#x3D; new RegExp(&#x60;(${safeQuery})&#x60;, &#x27;gi&#x27;);
-    const replaced &#x3D; text.replace(regex, &#x27;&lt;span class&#x3D;&quot;bg-amber-200/50 text-slate-900 px-0.5 rounded shadow-sm font-medium&quot;&gt;$1&lt;/span&gt;&#x27;);
+
+    const replaced &#x3D; text.replace(
+      regex,
+      &#x27;&lt;span class&#x3D;&quot;bg-amber-200/50 text-slate-900 px-0.5 rounded shadow-sm font-medium&quot;&gt;$1&lt;/span&gt;&#x27;
+    );
+
     return this.sanitizer.bypassSecurityTrustHtml(replaced);
   }
 
-  // --- Form Logic ---
+
+  /* ------------------------------------------------------------------
+     FORM UX HELPERS
+     ------------------------------------------------------------------ */
+
+  /**
+   * Scrolls page to contact form section.
+   */
   scrollToForm() {
     if (isPlatformBrowser(this.platformId)) {
-      document.getElementById(&#x27;contactFormSection&#x27;)?.scrollIntoView({ behavior: &#x27;smooth&#x27; });
+      document.getElementById(&#x27;contactFormSection&#x27;)
+        ?.scrollIntoView({ behavior: &#x27;smooth&#x27; });
     }
   }
 
+  /**
+   * Checks if form control is invalid.
+   */
   isInvalid(controlName: string): boolean {
     const control &#x3D; this.contactForm.get(controlName);
     return !!control &amp;&amp; control.invalid &amp;&amp; (control.dirty || control.touched);
   }
 
+  /**
+   * Determines if field should show shake animation.
+   */
   shouldShake(controlName: string): boolean {
     return this.shakeFields().has(controlName);
   }
 
+
+  /* ------------------------------------------------------------------
+     FORM SUBMISSION LOGIC
+     ------------------------------------------------------------------ */
+
+  /**
+   * Handles contact form submission.
+   * - Validates form
+   * - Shows animation for invalid fields
+   * - Sends POST request to backend API
+   * - Displays success/error state
+   */
   async onSubmit() {
     this.submitSuccess.set(false);
     this.submitError.set(false);
 
+    // Validation handling
     if (this.contactForm.invalid) {
       this.contactForm.markAllAsTouched();
 
-      // Trigger shake animation for invalid fields
       const invalidFields &#x3D; new Set&lt;string&gt;();
       Object.keys(this.contactForm.controls).forEach(key &#x3D;&gt; {
-        if (this.contactForm.get(key)?.invalid) invalidFields.add(key);
+        if (this.contactForm.get(key)?.invalid)
+          invalidFields.add(key);
       });
+
       this.shakeFields.set(invalidFields);
 
-      // Clear shake after animation completes
+      // Remove shake animation after 500ms
       setTimeout(() &#x3D;&gt; this.shakeFields.set(new Set()), 500);
       return;
     }
 
     this.isSubmitting.set(true);
+
     const payload &#x3D; {
       name: this.contactForm.value.name,
       email: this.contactForm.value.email,
@@ -530,11 +679,15 @@ export class HelpDashboard implements OnInit, AfterViewChecked {
     };
 
     try {
-      const response &#x3D; await fetch(&#x27;https://coders813-exwiseapi.hf.space/api/contact/&#x27;, {
-        method: &#x27;POST&#x27;,
-        headers: { &#x27;Content-Type&#x27;: &#x27;application/json&#x27; },
-        body: JSON.stringify(payload)
-      });
+      // API submission
+      const response &#x3D; await fetch(
+        &#x27;https://coders813-exwiseapi.hf.space/api/contact/&#x27;,
+        {
+          method: &#x27;POST&#x27;,
+          headers: { &#x27;Content-Type&#x27;: &#x27;application/json&#x27; },
+          body: JSON.stringify(payload)
+        }
+      );
 
       if (response.ok) {
         this.submitSuccess.set(true);
@@ -542,22 +695,28 @@ export class HelpDashboard implements OnInit, AfterViewChecked {
       } else {
         throw new Error(&#x27;Server error&#x27;);
       }
+
     } catch (error) {
       console.error(&quot;Submission Error:&quot;, error);
       this.submitError.set(true);
+
     } finally {
       this.isSubmitting.set(false);
-      this.cdr.markForCheck(); // Ensure change detection runs immediately
 
-      // Re-trigger lucide icons since new DOM elements might have appeared
+      // Required for OnPush detection
+      this.cdr.markForCheck();
+
+      // Re-render icons if new DOM elements added
       if (isPlatformBrowser(this.platformId)) {
         setTimeout(() &#x3D;&gt; {
-          if (typeof lucide !&#x3D;&#x3D; &#x27;undefined&#x27;) lucide.createIcons();
+          if (typeof lucide !&#x3D;&#x3D; &#x27;undefined&#x27;)
+            lucide.createIcons();
         });
       }
     }
   }
-}</code></pre>
+}
+</code></pre>
     </div>
 </div>
 
