@@ -93,7 +93,7 @@
                    <compodoc-menu mode="normal"></compodoc-menu>
                </div>
                <!-- START CONTENT -->
-               <div class="content component">
+               <div class="content injectable">
                    <div class="content-data">
 
 
@@ -103,117 +103,58 @@
 
 
 
+
+
+
+
 <ol class="breadcrumb">
-  <li class="breadcrumb-item">Components</li>
-  <li class="breadcrumb-item"
-  >
-  FooterComponent</li>
+  <li class="breadcrumb-item">Injectables</li>
+  <li class="breadcrumb-item" >RestoreDataService</li>
 </ol>
 
 <ul class="nav nav-tabs" role="tablist">
         <li class="nav-item">
-            <a href="#info" class="nav-link active"
+            <a href="#info" 
+                class="nav-link"
+                class="nav-link active"
                 role="tab" id="info-tab" data-bs-toggle="tab" data-link="info">Info</a>
         </li>
         <li class="nav-item">
-            <a href="#source" class="nav-link"
+            <a href="#source" 
+                class="nav-link"
+                
                 role="tab" id="source-tab" data-bs-toggle="tab" data-link="source">Source</a>
-        </li>
-        <li class="nav-item">
-            <a href="#templateData" class="nav-link"
-                role="tab" id="templateData-tab" data-bs-toggle="tab" data-link="template">Template</a>
-        </li>
-        <li class="nav-item">
-            <a href="#tree" class="nav-link"
-                role="tab" id="tree-tab" data-bs-toggle="tab" data-link="dom-tree">DOM Tree</a>
         </li>
 </ul>
 
 <div class="tab-content">
-    <div class="tab-pane fade active in" id="info"><p class="comment">
-    <h3>File</h3>
-</p>
-<p class="comment">
-    <code>src/app/shared/footer/footer.component.ts</code>
-</p>
-
-
-    <p class="comment">
-        <h3>Description</h3>
-    </p>
-    <p class="comment">
-        <p>Footer component that displays application information such as version.</p>
-<p>Features:</p>
-<ul>
-<li>Retrieves the app version from <a href="../injectables/ConfigService.html">ConfigService</a>.</li>
-<li>Displays static footer content alongside dynamic version info.</li>
-</ul>
-
-    </p>
-
-
-
-
-<section data-compodoc="block-metadata">
-    <h3>Metadata</h3>
-    <table class="table table-sm table-hover metadata">
-        <tbody>
+    <div class="tab-pane fade active in" id="info">
+        <p class="comment">
+            <h3>File</h3>
+        </p>
+        <p class="comment">
+            <code>src/app/service/backend-api/get/restore-data.service.ts</code>
+        </p>
 
 
 
 
 
-
-
-
-
-
-
-
-            <tr>
-                <td class="col-md-3">selector</td>
-                <td class="col-md-9"><code>app-footer</code></td>
-            </tr>
-
-
-
-
-
-
-            <tr>
-                <td class="col-md-3">templateUrl</td>
-                <td class="col-md-9"><code>./footer.component.html</code></td>
-            </tr>
-
-
-
-            <tr>
-                <td class="col-md-3">styleUrl</td>
-                <td class="col-md-9"><code>./footer.component.css</code></td>
-            </tr>
-
-
-
-
-
-        </tbody>
-    </table>
-</section>
-
-    <section data-compodoc="block-index">
+            <section data-compodoc="block-index">
     <h3 id="index">Index</h3>
     <table class="table table-sm table-bordered index-table">
         <tbody>
+
                 <tr>
                     <td class="col-md-4">
-                        <h6><b>Properties</b></h6>
+                        <h6><b>Methods</b></h6>
                     </td>
                 </tr>
                 <tr>
                     <td class="col-md-4">
                         <ul class="index-list">
                             <li>
-                                <a href="#appVersion" >appVersion</a>
+                                <a href="#getBackupData" >getBackupData</a>
                             </li>
                         </ul>
                     </td>
@@ -223,32 +164,27 @@
 
 
 
-
         </tbody>
     </table>
 </section>
 
-    <section data-compodoc="block-constructor">
+            <section data-compodoc="block-constructor">
     <h3 id="constructor">Constructor</h3>
         <table class="table table-sm table-bordered">
             <tbody>
                 <tr>
                     <td class="col-md-4">
-<code>constructor(configService: <a href="../injectables/ConfigService.html" target="_self">ConfigService</a>)</code>
+<code>constructor(http: <a href="https://angular.io/api/common/http/HttpClient" target="_blank">HttpClient</a>, configService: <a href="../injectables/ConfigService.html" target="_self">ConfigService</a>, userService: <a href="../injectables/UserService.html" target="_self">UserService</a>, globalLoaderService: <a href="../injectables/GlobalLoaderService.html" target="_self">GlobalLoaderService</a>)</code>
                     </td>
                 </tr>
                         <tr>
                             <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="22" class="link-to-prism">src/app/shared/footer/footer.component.ts:22</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="11" class="link-to-prism">src/app/service/backend-api/get/restore-data.service.ts:11</a></div>
                             </td>
                         </tr>
 
                 <tr>
                     <td class="col-md-4">
-                            <div class="io-description"><p>Creates an instance of FooterComponent.</p>
-<p>Retrieves the current app version from <a href="../injectables/ConfigService.html">ConfigService</a> and
-stores it in <a href="appVersion">appVersion</a> for display in the template.</p>
-</div>
                             <div>
                                     <b>Parameters :</b>
                                     <table class="params">
@@ -257,10 +193,21 @@ stores it in <a href="appVersion">appVersion</a> for display in the template.</p
                                                 <td>Name</td>
                                                     <td>Type</td>
                                                 <td>Optional</td>
-                                                    <td>Description</td>
                                             </tr>
                                         </thead>
                                         <tbody>
+                                                <tr>
+                                                        <td>http</td>
+                                                  
+                                                        <td>
+                                                                        <code><a href="https://angular.io/api/common/http/HttpClient" target="_blank" >HttpClient</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
                                                 <tr>
                                                         <td>configService</td>
                                                   
@@ -272,10 +219,30 @@ stores it in <a href="appVersion">appVersion</a> for display in the template.</p
                                                             No
                                                     </td>
                                                     
+                                                </tr>
+                                                <tr>
+                                                        <td>userService</td>
+                                                  
                                                         <td>
-                                                                <p>Service providing configuration and version info.</p>
-
+                                                                        <code><a href="../injectables/UserService.html" target="_self" >UserService</a></code>
                                                         </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                                <tr>
+                                                        <td>globalLoaderService</td>
+                                                  
+                                                        <td>
+                                                                        <code><a href="../injectables/GlobalLoaderService.html" target="_self" >GlobalLoaderService</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
                                                 </tr>
                                         </tbody>
                                     </table>
@@ -286,140 +253,140 @@ stores it in <a href="appVersion">appVersion</a> for display in the template.</p
         </table>
 </section>
 
-
-
-
-
-
-    <section data-compodoc="block-properties">
+            <section data-compodoc="block-methods">
     
-    <h3 id="inputs">
-        Properties
+    <h3 id="methods">
+        Methods
     </h3>
     <table class="table table-sm table-bordered">
         <tbody>
             <tr>
                 <td class="col-md-4">
-                    <a name="appVersion"></a>
+                    <a name="getBackupData"></a>
                     <span class="name">
-                        <span ><b>appVersion</b></span>
-                        <a href="#appVersion"><span class="icon ion-ios-link"></span></a>
+                        <span ><b>getBackupData</b></span>
+                        <a href="#getBackupData"><span class="icon ion-ios-link"></span></a>
                     </span>
                 </td>
             </tr>
-                <tr>
-                    <td class="col-md-4">
-                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
-
-                    </td>
-                </tr>
-                <tr>
-                    <td class="col-md-4">
-                        <i>Default value : </i><code>&#x27;&#x27;</code>
-                    </td>
-                </tr>
-                    <tr>
-                        <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="22" class="link-to-prism">src/app/shared/footer/footer.component.ts:22</a></div>
-                        </td>
-                    </tr>
-
             <tr>
                 <td class="col-md-4">
-                    <div class="io-description"><p>Stores the current application version retrieved from <a href="../injectables/ConfigService.html">ConfigService</a>.</p>
-</div>
+<code>getBackupData(key: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>)</code>
                 </td>
             </tr>
 
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="20"
+                                    class="link-to-prism">src/app/service/backend-api/get/restore-data.service.ts:20</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>key</td>
+                                            <td>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>    <code>Observable&lt;any&gt;</code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
         </tbody>
     </table>
 </section>
 
-</div>
+    </div>
 
 
     <div class="tab-pane fade  tab-source-code" id="source">
-        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Component } from &#x27;@angular/core&#x27;;
-import { ConfigService } from &#x27;../../service/config/config.service&#x27;;
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Injectable } from &#x27;@angular/core&#x27;;
+import { HttpClient, HttpErrorResponse } from &#x27;@angular/common/http&#x27;;
+import { catchError, finalize, Observable, take, throwError } from &#x27;rxjs&#x27;;
+import { GlobalLoaderService } from &#x27;../../global-loader/global-loader.service&#x27;;
+import { ConfigService } from &#x27;../../config/config.service&#x27;;
+import { UserService } from &#x27;../../localStorage/user.service&#x27;;
 
-/**
- * Footer component that displays application information such as version.
- *
- * Features:
- * - Retrieves the app version from {@link ConfigService}.
- * - Displays static footer content alongside dynamic version info.
- */
-@Component({
-  selector: &#x27;app-footer&#x27;,
-  imports: [],
-  templateUrl: &#x27;./footer.component.html&#x27;,
-  styleUrl: &#x27;./footer.component.css&#x27;
+@Injectable({
+  providedIn: &#x27;root&#x27;
 })
-export class FooterComponent {
+export class RestoreDataService {
 
-  /**
-   * Stores the current application version retrieved from {@link ConfigService}.
-   */
-  appVersion: string &#x3D; &#x27;&#x27;;
+  constructor(
+    private http: HttpClient,
+    private configService: ConfigService,
+    private userService: UserService,
+    private globalLoaderService: GlobalLoaderService
+  ) { }
 
-  /**
-   * Creates an instance of FooterComponent.
-   *
-   * Retrieves the current app version from {@link ConfigService} and
-   * stores it in {@link appVersion} for display in the template.
-   *
-   * @param configService Service providing configuration and version info.
-   */
-  constructor(private configService: ConfigService) {
-    this.appVersion &#x3D; this.configService.getVersion();
+  getBackupData(key: string): Observable&lt;any&gt; {
+    const userId &#x3D; this.userService.getValue&lt;string&gt;(&#x27;id&#x27;);
+
+    if (!userId) {
+      return throwError(() &#x3D;&gt; new Error(&#x27;User ID not found&#x27;));
+    }
+    const url &#x3D;
+      this.configService.getapiUrl() +
+      &#x60;/api/all/${key}/&#x60;;
+
+    this.globalLoaderService.show(&#x27;☁️ Restoring backup data...&#x27;);
+
+    return this.http.get(url).pipe(
+      take(1),
+      catchError((error: HttpErrorResponse) &#x3D;&gt; {
+
+        if (error.status &#x3D;&#x3D;&#x3D; 0) {
+          return throwError(() &#x3D;&gt; new Error(&#x27;Network error. Please check internet.&#x27;));
+        }
+
+        if (error.status &#x3D;&#x3D;&#x3D; 404) {
+          return throwError(() &#x3D;&gt; new Error(&#x27;Invalid backup key.&#x27;));
+        }
+
+        if (error.status &gt;&#x3D; 500) {
+          return throwError(() &#x3D;&gt; new Error(&#x27;Server error. Try again later.&#x27;));
+        }
+
+        return throwError(() &#x3D;&gt; new Error(&#x27;Something went wrong.&#x27;));
+      }),
+      finalize(() &#x3D;&gt; this.globalLoaderService.hide())
+    );
   }
-}
-</code></pre>
+}</code></pre>
     </div>
 
-    <div class="tab-pane fade " id="templateData">
-        <pre class="line-numbers"><code class="language-html">&lt;footer
-    class&#x3D;&quot;hidden md:block fixed bottom-0 left-0 w-full bg-[var(--color-surface)] text-center text-sm py-2 z-50 text-muted&quot;&gt;
-    © 2026 exwise. All rights reserved. v{{appVersion}}
-&lt;/footer&gt;</code></pre>
-    </div>
-
-
-    <div class="tab-pane fade " id="tree">
-        <div id="tree-container"></div>
-        <div class="tree-legend">
-            <div class="title">
-                <b>Legend</b>
-            </div>
-            <div>
-                <div class="color htmlelement"></div><span>Html element</span>
-            </div>
-            <div>
-                <div class="color component"></div><span>Component</span>
-            </div>
-            <div>
-                <div class="color directive"></div><span>Html element with directive</span>
-            </div>
-        </div>
-    </div>
-
-    
 </div>
-
-<script src="../js/libs/vis-network.min.js"></script>
-<script src="../js/libs/htmlparser.js"></script>
-<script src="../js/libs/deep-iterator.js"></script>
-<script>
-        var COMPONENT_TEMPLATE = '<div><footer    class="hidden md:block fixed bottom-0 left-0 w-full bg-[var(--color-surface)] text-center text-sm py-2 z-50 text-muted">    © 2026 exwise. All rights reserved. v{{appVersion}}</footer></div>'
-    var COMPONENTS = [{'name': 'AddExpenseComponent', 'selector': 'app-add-expense'},{'name': 'AiComponent', 'selector': 'app-ai'},{'name': 'AppComponent', 'selector': 'app-root'},{'name': 'CalendarComponent', 'selector': 'app-calendar'},{'name': 'CategoryDropdownComponent', 'selector': 'app-category-dropdown'},{'name': 'CloudBackupComponent', 'selector': 'app-cloud-backup'},{'name': 'DownloadComponentComponent', 'selector': 'app-download-component'},{'name': 'ExpenseDetailsModalComponent', 'selector': 'app-expense-details-modal'},{'name': 'ExpenseListComponent', 'selector': 'app-expense-list'},{'name': 'ExpenseWiseComponent', 'selector': 'app-expense-wise'},{'name': 'FooterComponent', 'selector': 'app-footer'},{'name': 'FormModelComponent', 'selector': 'app-form-model'},{'name': 'GlobalLoaderComponent', 'selector': 'app-global-loader'},{'name': 'GraphsComponent', 'selector': 'app-graphs'},{'name': 'HamburgerMenuComponent', 'selector': 'app-hamburger-menu'},{'name': 'HelpDashboard', 'selector': 'app-help-dashboard'},{'name': 'HomeComponent', 'selector': 'app-home'},{'name': 'InstallAppPopupComponentComponent', 'selector': 'app-install-app-popup-component'},{'name': 'ListExpensesComponent', 'selector': 'app-list-expenses'},{'name': 'MusicComponent', 'selector': 'app-music'},{'name': 'NavbarComponent', 'selector': 'app-navbar'},{'name': 'PieChartComponent', 'selector': 'app-pie-chart'},{'name': 'PlaylistMusicComponent', 'selector': 'app-playlist-music'},{'name': 'SalaryComponent', 'selector': 'app-salary'},{'name': 'SearchButtonComponent', 'selector': 'app-search-button'},{'name': 'SearchMusicComponent', 'selector': 'app-search-music'},{'name': 'SettingItemComponent', 'selector': 'app-setting-item'},{'name': 'SettingsComponent', 'selector': 'app-settings'},{'name': 'SidebarComponent', 'selector': 'app-sidebar'},{'name': 'SplashScreenComponent', 'selector': 'app-splash-screen'},{'name': 'TemplatePlaygroundComponent', 'selector': 'template-playground-root'},{'name': 'ToastComponent', 'selector': 'app-toast'}];
-    var DIRECTIVES = [];
-    var ACTUAL_COMPONENT = {'name': 'FooterComponent'};
-</script>
-<script src="../js/tree.js"></script>
-
-
-
-
 
 
 
@@ -458,8 +425,8 @@ export class FooterComponent {
 
        <script>
             var COMPODOC_CURRENT_PAGE_DEPTH = 1;
-            var COMPODOC_CURRENT_PAGE_CONTEXT = 'component';
-            var COMPODOC_CURRENT_PAGE_URL = 'FooterComponent.html';
+            var COMPODOC_CURRENT_PAGE_CONTEXT = 'injectable';
+            var COMPODOC_CURRENT_PAGE_URL = 'RestoreDataService.html';
             var MAX_SEARCH_RESULTS = 15;
        </script>
 

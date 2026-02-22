@@ -55,14 +55,16 @@
             </div>
 
             <!-- Section: Generate Backup Key Button -->
-            <div class="flex items-center justify-between bg-[var(--color-surface)] p-4 rounded-xl border border-[var(--color-surface-500)]">
+            <div
+                class="flex items-center justify-between bg-[var(--color-surface)] p-4 rounded-xl border border-[var(--color-surface-500)]">
                 <div class="pr-2">
-                    <h2 class="text-lg font-semibold text-[var(--color-text)]">Generate Backup Key</h2>
-                    <p class="text-xs sm:text-sm text-[var(--color-text-600)] mt-1">Create a secure key to
-                        manually export and save your data.</p>
+                    <h2 class="text-lg font-semibold text-[var(--color-text)]">Get Backup Key</h2>
+                    <p class="text-xs sm:text-sm text-[var(--color-text-600)] mt-1">
+                        Retrieve your existing secure backup key from cloud.
+                    </p>
                 </div>
                 <button (click)="openBackupModal()"
-                    class="flex items-center gap-2 px-4 py-2 bg-[var(--theme-color)] hover:bg-[var(--color-accent-600)] text-white font-medium rounded-xl transition-colors shadow-sm shrink-0 whitespace-nowrap">
+                    class="w-[50px] h-[50px] md:w-[112px] md:h-[40px] flex items-center gap-2 px-4 py-2 bg-[var(--theme-color)] hover:bg-[var(--color-accent-600)] text-white font-medium rounded-full md:rounded-xl transition-colors shadow-sm shrink-0 whitespace-nowrap">
                     <svg xmlns="[http://www.w3.org/2000/svg](http://www.w3.org/2000/svg)" width="18" height="18"
                         viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
                         stroke-linejoin="round">
@@ -74,14 +76,15 @@
             </div>
 
             <!-- Section: Restore Data Button -->
-            <div class="flex items-center justify-between bg-[var(--color-surface)] p-4 rounded-xl border border-[var(--color-surface-500)]">
+            <div
+                class="flex items-center justify-between bg-[var(--color-surface)] p-4 rounded-xl border border-[var(--color-surface-500)]">
                 <div class="pr-2">
-                    <h2 class="text-lg font-semibold text-[var(--color-text)]">Restore from Key</h2>
+                    <h2 class="text-lg font-semibold text-[var(--color-text)]">Restore from Backup Key</h2>
                     <p class="text-xs sm:text-sm text-[var(--color-text-600)] mt-1">Restore your data from a
                         previously saved state using a key.</p>
                 </div>
                 <button (click)="openRestoreModal()"
-                    class="flex items-center gap-2 px-4 py-2 bg-[var(--color-surface-500)] hover:bg-[var(--color-surface-600)] border border-[var(--color-surface-600)] text-[var(--color-text)] font-medium rounded-xl transition-colors shrink-0 whitespace-nowrap">
+                    class="w-[50px] h-[50px] md:w-[112px] md:h-[40px] flex items-center gap-2 px-4 py-2 bg-[var(--color-surface-500)] hover:bg-[var(--color-surface-600)] border border-[var(--color-surface-600)] text-[var(--color-text)] font-medium rounded-full md:rounded-xl transition-colors shrink-0 whitespace-nowrap">
                     <svg xmlns="[http://www.w3.org/2000/svg](http://www.w3.org/2000/svg)" width="18" height="18"
                         viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
                         stroke-linejoin="round">
@@ -104,7 +107,7 @@
             class="bg-[var(--color-surface-100)] border border-[var(--color-surface-500)] rounded-2xl shadow-2xl w-full max-w-md overflow-hidden transform scale-100 opacity-100 transition-all">
             <div
                 class="p-5 border-b border-[var(--color-surface-500)] bg-[var(--color-surface)] flex justify-between items-center">
-                <h3 class="text-lg font-bold text-[var(--color-text)]">Your Backup Key</h3>
+                <h3 class="text-lg font-bold text-[var(--color-text)]">Your Cloud Backup Key</h3>
                 <button (click)="closeBackupModal()"
                     class="text-[var(--color-text-600)] hover:text-[var(--color-text)] transition-colors p-1 rounded-full hover:bg-[var(--color-surface-500)]">
                     <svg xmlns="[http://www.w3.org/2000/svg](http://www.w3.org/2000/svg)" width="20" height="20"
@@ -116,8 +119,8 @@
                 </button>
             </div>
             <div class="p-6">
-                <p class="text-sm text-[var(--color-text-600)] mb-4">Copy this key and save it securely. You will
-                    need it to restore your data.</p>
+                <p class="text-sm text-[var(--color-text-600)] mb-4">This is your secure backup key stored in cloud. 
+Copy and keep it safe — you’ll need it to restore your data.</p>
                 <div class="flex items-center gap-2">
                     <div
                         class="flex-1 bg-[var(--input-bg)] border border-[var(--input-border)] text-[var(--input-text)] p-3 rounded-xl font-mono text-sm break-all shadow-inner">
@@ -151,7 +154,7 @@
             class="bg-[var(--color-surface-100)] border border-[var(--color-surface-500)] rounded-2xl shadow-2xl w-full max-w-md overflow-hidden transform scale-100 opacity-100 transition-all">
             <div
                 class="p-5 border-b border-[var(--color-surface-500)] bg-[var(--color-surface)] flex justify-between items-center">
-                <h3 class="text-lg font-bold text-[var(--color-text)]">Restore Data</h3>
+                <h3 class="text-lg font-bold text-[var(--color-text)]">Paste your backup key</h3>
                 <button (click)="closeRestoreModal()"
                     class="text-[var(--color-text-600)] hover:text-[var(--color-text)] transition-colors p-1 rounded-full hover:bg-[var(--color-surface-500)]"
                     [disabled]="isRestoring()">
@@ -164,8 +167,7 @@
                 </button>
             </div>
             <div class="p-6">
-                <p class="text-sm text-[var(--color-text-600)] mb-4">Paste your generated backup key below to
-                    restore your data.</p>
+                <p class="text-sm text-[var(--color-text-600)] mb-4">Paste your backup key below to restore your cloud data.</p>
                 <div class="space-y-4">
                     <input type="text" [value]="restoreInput()" (input)="onRestoreInput($event)"
                         placeholder="Paste backup key here..."

@@ -338,8 +338,8 @@ with the backend API. Intended to run silently once every 24 hours.</p>
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="90"
-                                    class="link-to-prism">src/app/service/backend-api/post/post-api.service.ts:90</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="92"
+                                    class="link-to-prism">src/app/service/backend-api/post/post-api.service.ts:92</a></div>
                         </td>
                     </tr>
 
@@ -486,8 +486,10 @@ export class PostApiService {
     const now &#x3D; new Date(this.configService.getLocalTime());
     const lastBackup &#x3D; lastBackupStr ? new Date(lastBackupStr) : null;
     const shouldBackup &#x3D; !lastBackup || (now.getTime() - lastBackup.getTime()) &gt; 4 * 60 * 60 * 1000;
+    const is_backup_enable &#x3D; this.userService.getValue&lt;boolean&gt;(&#x27;is_backup_enable&#x27;);
 
-    if (shouldBackup || forceBackup) {
+
+    if ((is_backup_enable &amp;&amp; shouldBackup) || forceBackup) {
 
       if (forceBackup) this.globalLoaderService.show(&#x27;☁️ Saving data to cloud...&#x27;);
 
@@ -501,7 +503,7 @@ export class PostApiService {
         })
       ).subscribe({
         next: (res: any) &#x3D;&gt; {
-          if (forceBackup) this.toastService.show(&#x27;Data saved to cloud successfully!&#x27;, &#x27;success&#x27;, 4000);
+          if (forceBackup) this.toastService.show(&#x27;Data successfully synced to cloud!&#x27;, &#x27;success&#x27;, 4000);
           console.log(&#x27;User data posted successfully. Response:&#x27;, res);
           const api_response_app_version &#x3D; res.app_version;
           const app_current_version &#x3D; this.userService.getValue&lt;string&gt;(&#x27;app_version&#x27;);

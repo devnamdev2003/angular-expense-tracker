@@ -232,4 +232,16 @@ export class StorageService {
   getlikedSongSchema(): Schema {
     return this.likedSongSchema;
   }
+
+  resetAllData(): void {
+    const categories = this.getAllCategories();
+    const defaultCategories = categories.filter(
+      (cat: any) => cat.user_id === "0"
+    );
+    localStorage.setItem(this.categoryKey, JSON.stringify(defaultCategories));
+    localStorage.setItem(this.expenseKey, JSON.stringify([]));
+    localStorage.setItem(this.salaryKey, JSON.stringify([]));
+    localStorage.setItem(this.userKey, JSON.stringify(this.userSchema));
+    localStorage.setItem(this.userLikedSongsKey, JSON.stringify([]));
+  }
 }

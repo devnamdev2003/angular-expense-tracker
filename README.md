@@ -152,6 +152,70 @@ Provides customization and utility options for better personalization:
 
 ---
 
+## ☁️ 7. Cloud Backup View
+
+The **Cloud Backup** page provides secure cloud synchronization and backup management for your financial data.
+This page can be accessed from **Settings → Cloud Backup** and helps users protect their data against device loss, app reinstall, or accidental deletion.
+
+### 🔐 Key Features
+
+#### ✅ Auto Backup
+
+* Enables **automatic periodic backup** of user data to the cloud.
+* Once enabled, the app automatically uploads updated data in the background.
+* Users can toggle this option anytime.
+
+#### ☁️ Cloud Synchronization
+
+* Allows users to **manually sync current local data to the cloud**.
+* Useful when:
+
+  * You want an instant backup.
+  * You updated important data recently.
+* Includes a loading indicator during sync.
+
+#### 🔑 Get Backup Key
+
+* Retrieves a **secure cloud backup key** linked to the user’s stored data.
+* This key is required to restore data later.
+* Users can:
+
+  * View the key securely in a modal.
+  * Copy it to clipboard for safekeeping.
+
+> ⚠️ Important: Keep this key safe. Without it, data restoration may not be possible.
+
+#### 🔄 Restore From Backup Key
+
+* Allows users to **restore data from the cloud** using their backup key.
+* Process includes:
+
+  * Entering the backup key.
+  * Confirming restoration.
+  * Automatic replacement of current local data with cloud data.
+* Includes:
+
+  * Data validation before restore.
+  * Automatic rollback if restoration fails.
+
+---
+
+### 🔒 Data Safety Measures
+
+* Backup key–based authentication ensures secure data access.
+* Local data is backed up before restore to prevent accidental loss.
+* Invalid or corrupted backup data is rejected automatically.
+
+---
+
+### 📌 Typical Usage Flow
+
+1. Enable **Auto Backup** for continuous protection.
+2. Use **Sync to Cloud** before switching devices.
+3. Save your **Backup Key** securely.
+4. Use **Restore from Backup Key** when reinstalling or changing devices.
+
+
 ## 📱 Mobile-First Design
 
 * The application is specifically designed for **mobile devices**.

@@ -121,6 +121,9 @@ customElements.define('compodoc-menu', class extends HTMLElement {
                                 <a href="components/CategoryDropdownComponent.html" data-type="entity-link" >CategoryDropdownComponent</a>
                             </li>
                             <li class="link">
+                                <a href="components/CloudBackupComponent.html" data-type="entity-link" >CloudBackupComponent</a>
+                            </li>
+                            <li class="link">
                                 <a href="components/DownloadComponentComponent.html" data-type="entity-link" >DownloadComponentComponent</a>
                             </li>
                             <li class="link">
@@ -206,6 +209,9 @@ customElements.define('compodoc-menu', class extends HTMLElement {
                             </div>
                             <ul class="links collapse " ${ isNormalMode ? 'id="injectables-links"' : 'id="xs-injectables-links"' }>
                                 <li class="link">
+                                    <a href="injectables/BackupKeyService.html" data-type="entity-link" >BackupKeyService</a>
+                                </li>
+                                <li class="link">
                                     <a href="injectables/CategoryService.html" data-type="entity-link" >CategoryService</a>
                                 </li>
                                 <li class="link">
@@ -228,6 +234,9 @@ customElements.define('compodoc-menu', class extends HTMLElement {
                                 </li>
                                 <li class="link">
                                     <a href="injectables/PostApiService.html" data-type="entity-link" >PostApiService</a>
+                                </li>
+                                <li class="link">
+                                    <a href="injectables/RestoreDataService.html" data-type="entity-link" >RestoreDataService</a>
                                 </li>
                                 <li class="link">
                                     <a href="injectables/SaavnService.html" data-type="entity-link" >SaavnService</a>

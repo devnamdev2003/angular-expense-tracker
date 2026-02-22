@@ -2,6 +2,12 @@ import { Component, ChangeDetectionStrategy, signal } from '@angular/core';
 import { ToastService } from '../../../service/toast/toast.service';
 import { PostApiService } from '../../../service/backend-api/post/post-api.service';
 import { UserService } from '../../../service/localStorage/user.service';
+import { BackupKeyService } from '../../../service/backend-api/get/backup-key.service';
+import { CategoryService } from '../../../service/localStorage/category.service';
+import { SalaryService } from '../../../service/localStorage/salary.service';
+import { ExpenseService } from '../../../service/localStorage/expense.service';
+import { RestoreDataService } from '../../../service/backend-api/get/restore-data.service';
+import { StorageService } from '../../../service/localStorage/storage.service';
 
 @Component({
   selector: 'app-cloud-backup',
@@ -13,7 +19,17 @@ import { UserService } from '../../../service/localStorage/user.service';
 })
 export class CloudBackupComponent {
 
-  constructor(private toastService: ToastService, private postApiService: PostApiService, private userService: UserService) {
+  constructor(
+    private toastService: ToastService,
+    private postApiService: PostApiService,
+    private userService: UserService,
+    private backupKeyService: BackupKeyService,
+    private categoryService: CategoryService,
+    private salaryService: SalaryService,
+    private expenseService: ExpenseService,
+    private restoreDataService: RestoreDataService,
+    private storageService: StorageService
+  ) {
     this.autoBackupEnabled.set(this.userService.getValue<boolean>('is_backup_enable') || false);
   }
 
@@ -52,19 +68,30 @@ export class CloudBackupComponent {
 
   // Modal Controls for Backup Key
   openBackupModal() {
-    this.postApiService.postUserData();
-    this.isBackupModalOpen.set(true);
+
+    this.backupKey.set(null);
+
+    this.backupKeyService.getBackupKey().subscribe({
+      next: (res: any) => {
+
+        if (!res || !res.data_backup_key) {
+          this.toastService.show('Invalid response from server.', 'error');
+          return;
+        }
+        this.isBackupModalOpen.set(true);
+        this.backupKey.set(res.data_backup_key);
+      },
+
+      error: (err: Error) => {
+        this.toastService.show(err.message, 'error');
+        this.isBackupModalOpen.set(false);
+      },
+    });
   }
 
   closeBackupModal() {
     this.isBackupModalOpen.set(false);
-  }
-
-  // Generate Backup Key
-  generateBackupKey() {
-    // Generate a random UUID-like string for the key
-    const newKey = crypto.randomUUID ? crypto.randomUUID() : 'bkp-8f2a-4c91-b3d5-e7f620a1';
-    this.backupKey.set(newKey);
+    this.backupKey.set(null);
   }
 
   // Copy Key to Clipboard
@@ -108,24 +135,82 @@ export class CloudBackupComponent {
     this.restoreInput.set(target.value);
   }
 
-  // Restore Data Simulation
-  async restoreData() {
+  restoreData() {
     const key = this.restoreInput().trim();
     if (!key) return;
 
+    const confirmRestore = confirm(
+      'Restoring will delete your current data and replace it with backup data.\n\nDo you want to continue?'
+    );
+
+    if (!confirmRestore) return;
+
     this.isRestoring.set(true);
 
-    // Simulate API Network Request delay
-    await new Promise(resolve => setTimeout(resolve, 2500));
+    // STEP 1: Backup current data (rollback safety)
+    const backup = {
+      user: this.userService.getUserData() || {},
+      categories: this.categoryService.getAll(),
+      salaries: this.salaryService.getAll(),
+      expenses: this.expenseService.getAll()
+    };
 
-    this.isRestoring.set(false);
+    this.restoreDataService.getBackupData(key).subscribe({
+      next: (json: any) => {
 
-    // Validate dummy key (simulate an error logic)
-    if (key.length < 10) {
-      this.toastService.show('Invalid backup key provided.', 'error');
-    } else {
-      this.toastService.show('Data successfully restored from backup!', 'success');
-      this.closeRestoreModal(); // Automatically close the modal on success
-    }
+        try {
+          // STEP 2: Validate response BEFORE deleting old data
+          if (!json?.userData) {
+            throw new Error('Invalid backup data');
+          }
+
+          // STEP 3: Clear old data ONLY AFTER validation
+          this.storageService.resetAllData();
+
+          // STEP 4: Save restored data
+          this.userService.updateUserData(json.userData);
+
+          const validCategories = json.categoryData.filter(
+            (cat: any) => cat.user_id !== "0"
+          );
+          this.categoryService.addBulk(validCategories);
+
+          this.salaryService.updateAllSalaries(json.salaryData);
+
+          const validData = json.expenseData.filter((item: any) =>
+            typeof item.amount === 'number' &&
+            typeof item.date === 'string'
+          );
+
+          this.expenseService.addBulk(validData);
+
+          this.toastService.show(
+            'Data successfully restored from cloud!',
+            'success'
+          );
+
+          this.closeRestoreModal();
+        } catch (err) {
+
+          // STEP 5: ROLLBACK if restore fails
+          this.userService.updateUserData(backup.user);
+          this.categoryService.addBulk(backup.categories);
+          this.salaryService.updateAllSalaries(backup.salaries);
+          this.expenseService.addBulk(backup.expenses);
+
+          this.toastService.show(
+            'Restore failed. Previous data restored.',
+            'error'
+          );
+        }
+
+        this.isRestoring.set(false);
+      },
+
+      error: (err: any) => {
+        this.toastService.show(err?.message || 'Restore failed.', 'error');
+        this.isRestoring.set(false);
+      }
+    });
   }
 }
