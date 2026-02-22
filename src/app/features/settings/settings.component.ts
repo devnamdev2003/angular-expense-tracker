@@ -372,8 +372,8 @@ export class SettingsComponent {
           typeof item.time === 'string' &&
           typeof item.category_id === 'string' &&
           typeof item.payment_mode === 'string' &&
-          typeof item.note === 'string' &&
-          typeof item.location === 'string' &&
+          (typeof item.note === 'string' || item.note === null) &&
+          (typeof item.location === 'string' || item.location === null) &&
           typeof item.isExtraSpending === 'boolean'
         );
 
