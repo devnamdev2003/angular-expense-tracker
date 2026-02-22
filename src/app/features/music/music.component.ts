@@ -28,6 +28,7 @@ export class MusicComponent implements OnDestroy {
   showPlayerModal = false;
   likedPlaylist: any[] = [];
   currentLikedIndex = -1;
+  repeatCurrentSong = false;
 
   @ViewChild('searchSongInput') searchSongInput!: ElementRef;
 
@@ -95,7 +96,10 @@ export class MusicComponent implements OnDestroy {
 
   onSongFinished(): void {
     if (!this.isBrowser) return;
-
+    if (this.repeatCurrentSong && this.currentSong?.url) {
+      this.playSong(this.currentSong.url, this.currentSong);
+      return;
+    }
     this.likedPlaylist = this.userLikedSongsService.getAll() || [];
 
     if (!this.likedPlaylist.length) return;
