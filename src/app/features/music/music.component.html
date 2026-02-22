@@ -3,7 +3,7 @@
 
   <!-- Sticky Search Input with Glassmorphism -->
   <header
-    class="sticky top-0 z-20 backdrop-blur-xl bg-[var(--color-bg)]/80 border-b border-gray-200/10 shadow-sm px-4 py-4 transition-all duration-300">
+    class="sticky top-0 z-20 backdrop-blur-xl bg-[var(--color-bg)]/80 border-b border-gray-200/10 shadow-sm px-2 py-4 transition-all duration-300">
     <div class="max-w-xl mx-auto flex items-center gap-3 relative group">
 
       <div class="relative w-full flex-1">
@@ -19,9 +19,14 @@
           (selectstart)="$event.preventDefault()" />
       </div>
 
-      <button (click)="searchSong()"
+      <button (click)="searchSong()" title="Search songs"
         class="bg-gradient-to-r from-[var(--theme-color)] to-blue-500 text-white px-6 py-3 rounded-full shadow-lg hover:shadow-[var(--theme-color)]/30 hover:-translate-y-0.5 active:scale-95 transition-all duration-300 font-medium">
         Search
+      </button>
+
+      <button (click)="showLikedSongs()" title="View liked songs"
+        class="bg-[var(--color-surface)] px-4 py-3 rounded-full border border-white/10 hover:bg-[var(--list-hover)] transition">
+        ❤️
       </button>
     </div>
   </header>
@@ -36,7 +41,7 @@
       <p class="text-lg">Search for a track to get started</p>
     </div>
 
-    <div *ngFor="let song of songs()"
+    <div *ngFor="let song of songs()" title="Play {{ song.name }}"
       class="group flex items-center gap-4 p-3 rounded-2xl bg-transparent hover:bg-[var(--list-hover)] border border-transparent hover:border-white/5 transition-all duration-300 cursor-pointer transform hover:-translate-y-1"
       (click)="playSong(getSongUrl(song), song)">
 
@@ -115,7 +120,8 @@
 
         <!-- Quick Controls -->
         <div class="flex items-center gap-1 shrink-0" (click)="$event.stopPropagation()">
-          <button (click)="toggleLike()" class="p-2.5 rounded-full hover:bg-white/5 active:scale-90 transition-all">
+          <button (click)="toggleLike()" title="Like / Unlike"
+            class="p-2.5 rounded-full hover:bg-white/5 active:scale-90 transition-all">
             <svg class="w-5 h-5 transition-colors"
               [ngClass]="isSongLiked() ? 'text-red-500 fill-current' : 'text-gray-400'" viewBox="0 0 24 24" fill="none"
               stroke="currentColor" stroke-width="2">
@@ -124,7 +130,7 @@
             </svg>
           </button>
 
-          <button (click)="playSong(currentSong.url, currentSong, true)"
+          <button (click)="playSong(currentSong.url, currentSong, true)" title="Play / Pause"
             class="w-10 h-10 flex items-center justify-center rounded-full bg-[var(--theme-color)] text-white shadow hover:scale-105 active:scale-95 transition-all">
             <svg *ngIf="audio?.paused; else playingIconMini" class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
               <path d="M8 5v14l11-7z" />
@@ -136,7 +142,7 @@
             </ng-template>
           </button>
 
-          <button (click)="nextSong()"
+          <button (click)="nextSong()" title="Next song"
             class="p-2.5 rounded-full hover:bg-white/5 active:scale-90 transition-all text-gray-400 hover:text-[var(--color-text)]">
             <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
               <path d="M6 18l8.5-6L6 6v12zM16 6v12h2V6h-2z" />
@@ -167,7 +173,8 @@
 
       <!-- Modal Header -->
       <div class="flex justify-between items-center py-4">
-        <button (click)="closePlayerModal()" class="p-3 rounded-full hover:bg-white/10 active:scale-90 transition-all">
+        <button (click)="closePlayerModal()" title="Close player"
+          class="p-3 rounded-full hover:bg-white/10 active:scale-90 transition-all">
           <svg class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
           </svg>
@@ -225,8 +232,8 @@
 
         <!-- Media Controls -->
         <div class="flex items-center justify-between px-2">
-          <button (click)="downloadSong(currentSong)"
-            class="p-3 text-gray-400 hover:text-white transition-colors active:scale-90">
+          <button (click)="downloadSong(currentSong)" title="Download song"
+            class="p-3 text-gray-400 transition-colors active:scale-90">
             <svg class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
               <path stroke-linecap="round" stroke-linejoin="round"
                 d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
@@ -234,7 +241,7 @@
           </button>
 
           <div class="flex items-center gap-6">
-            <button (click)="restartSong()"
+            <button (click)="restartSong()" title="Restart song"
               class="p-4 rounded-full hover:bg-white/10 active:scale-90 transition-all text-[var(--color-text)]">
               <svg class="w-8 h-8" fill="currentColor" viewBox="0 0 24 24">
                 <path d="M6 6h2v12H6zm3.5 6l8.5 6V6z" />
@@ -253,7 +260,7 @@
               </ng-template>
             </button>
 
-            <button (click)="nextSong()"
+            <button (click)="nextSong()" title="Next song"
               class="p-4 rounded-full hover:bg-white/10 active:scale-90 transition-all text-[var(--color-text)]">
               <svg class="w-8 h-8" fill="currentColor" viewBox="0 0 24 24">
                 <path d="M6 18l8.5-6L6 6v12zM16 6v12h2V6h-2z" />
@@ -261,7 +268,8 @@
             </button>
           </div>
 
-          <button (click)="toggleLike()" class="p-3 hover:bg-white/10 rounded-full transition-all active:scale-90">
+          <button (click)="toggleLike()" title="Like / Unlike"
+            class="p-3 hover:bg-white/10 rounded-full transition-all active:scale-90">
             <svg class="w-6 h-6 transition-colors"
               [ngClass]="isSongLiked() ? 'text-red-500 fill-current drop-shadow-md' : 'text-gray-400'"
               viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">

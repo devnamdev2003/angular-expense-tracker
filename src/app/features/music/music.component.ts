@@ -209,11 +209,14 @@ export class MusicComponent implements OnDestroy {
     this.removeFocus();
     if (this.isCurrentSongLiked) {
       this.userLikedSongsService.delete(this.currentSong.id);
+      this
       this.isCurrentSongLiked = false;
     } else {
       this.userLikedSongsService.add(this.transformSongDataForAPI(this.currentSong));
       this.isCurrentSongLiked = true;
     }
+    this.updateLikedSongList();
+
   }
 
   transformSongDataForAPI(data: any): any {
@@ -286,5 +289,24 @@ export class MusicComponent implements OnDestroy {
 
   removeFocus() {
     this.searchSongInput?.nativeElement?.blur();
+  }
+
+  showLikedSongs() {
+    this.removeFocus();
+    this.updateLikedSongList();
+  }
+
+  updateLikedSongList() {
+    const liked = this.userLikedSongsService.getAll() || [];
+    const mappedSongs = liked.map(song => ({
+      id: song.song_id,
+      name: song.song_name,
+      duration: song.duration,
+      image: [{}, {}, { url: song.image }],
+      artists: { primary: [{ name: song.artistName }] },
+      downloadUrl: [{ quality: '320kbps', url: song.downloadUrl }]
+    }));
+
+    this.songs.set(mappedSongs);
   }
 }

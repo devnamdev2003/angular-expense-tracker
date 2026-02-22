@@ -1,26 +1,3 @@
-/* CSS Variables for Theming (Adapts to Light/Dark mode gracefully) */
-:root {
-  --color-bg: #0f172a;
-  --color-surface: #1e293b;
-  --color-text: #f8fafc;
-  --theme-color: #3b82f6;
-  --theme-color-rgb: 59, 130, 246;
-  --list-hover: rgba(255, 255, 255, 0.05);
-  --input-bg: rgba(255, 255, 255, 0.05);
-  --input-text: #f8fafc;
-}
-
-@media (prefers-color-scheme: light) {
-  :root {
-    --color-bg: #f8fafc;
-    --color-surface: #ffffff;
-    --color-text: #0f172a;
-    --list-hover: rgba(0, 0, 0, 0.03);
-    --input-bg: #e2e8f0;
-    --input-text: #0f172a;
-  }
-}
-
 /* Custom Slider Styling */
 .custom-slider {
   -webkit-appearance: none;
