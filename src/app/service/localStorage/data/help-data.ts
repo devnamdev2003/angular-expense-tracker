@@ -26,5 +26,47 @@ export const HelpData = [
     { id: 604, category: "Data & Settings", question: "I deleted the app. Is my data gone?", answer: "If you did not enable Cloud Backup or Export your data, it is likely lost because LocalStorage is cleared when the app is uninstalled." },
     // { id: 605, category: "Data & Settings", question: "How can I reset all app data?", answer: "In Settings, use the reset/clear data option carefully. This removes local expenses, custom categories, and budget values. Export a backup first if you may need recovery." },
     { id: 606, category: "Data & Settings", question: "Why are my changes not visible across devices?", answer: "LocalStorage data stays on one device/browser profile. To sync between devices, enable cloud backup and restore the same account data on the second device." },
-    { id: 607, category: "Data & Settings", question: "How do I contact support from inside the app?", answer: "Open this Help page and scroll to the contact form. Submit your name, email, and issue details. Our team uses that message to help you troubleshoot quickly." }
+    { id: 607, category: "Data & Settings", question: "How do I contact support from inside the app?", answer: "Open this Help page and scroll to the contact form. Submit your name, email, and issue details. Our team uses that message to help you troubleshoot quickly." },
+  { 
+  id: 608, 
+  category: "Data & Settings", 
+  question: "What is Cloud Backup?", 
+  answer: "Cloud Backup allows you to securely store your expense data online. This protects your data if you change devices, reinstall the app, or accidentally clear local storage." 
+},
+{ 
+  id: 609, 
+  category: "Data & Settings", 
+  question: "How do I enable Auto Backup?", 
+  answer: "Go to <strong>Settings → Cloud Backup</strong> and enable the <strong>Auto Backup</strong> toggle. Once enabled, your data will automatically sync to the cloud periodically." 
+},
+{ 
+  id: 610, 
+  category: "Data & Settings", 
+  question: "What does Cloud Synchronization do?", 
+  answer: "Cloud Synchronization manually uploads your current local data to the cloud instantly. Use it when you want an immediate backup before switching devices or reinstalling the app." 
+},
+{ 
+  id: 611, 
+  category: "Data & Settings", 
+  question: "What is a Backup Key?", 
+  answer: "The Backup Key is a secure unique key linked to your cloud data. You must keep it safe because it is required to restore your data later." 
+},
+{ 
+  id: 612, 
+  category: "Data & Settings", 
+  question: "How do I restore my data from the cloud?", 
+  answer: "Go to <strong>Settings → Cloud Backup → Restore from Backup Key</strong>, paste your backup key, and confirm. Your current local data will be replaced with the backed-up cloud data." 
+},
+{ 
+  id: 613, 
+  category: "Data & Settings", 
+  question: "Will restoring data delete my current data?", 
+  answer: "Yes. Restoring replaces your current local data with cloud backup data. The app performs validation and keeps a temporary rollback copy for safety in case restoration fails." 
+},
+{ 
+  id: 614, 
+  category: "Data & Settings", 
+  question: "Is Cloud Backup secure?", 
+  answer: "Yes. Your data is linked with a secure backup key. Only someone with this key can restore the data, so keep it private and safe." 
+}
 ];
