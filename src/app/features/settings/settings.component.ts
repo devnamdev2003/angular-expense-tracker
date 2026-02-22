@@ -14,8 +14,8 @@ import { Category, CategoryService } from '../../service/localStorage/category.s
 import { SalaryService } from '../../service/localStorage/salary.service';
 import { UserData } from '../../component/settings-components/download-component/download-component.component';
 import { GlobalLoaderService } from '../../service/global-loader/global-loader.service';
-import { PostApiService } from '../../service/backend-api/post/post-api.service';
 import { SectionService } from '../../service/section/section.service';
+
 /**
  * @component
  * @description
@@ -90,7 +90,6 @@ export class SettingsComponent {
     * @param fb FormBuilder instance for creating reactive forms
     * @param toastService Toast service for showing notifications
     * @param globalLoaderService Service to control the global loading indicator
-    * @param postApiService Backend API post service
     * @constructor
     * @memberof SettingsComponent
    */
@@ -102,7 +101,6 @@ export class SettingsComponent {
     private fb: FormBuilder,
     private toastService: ToastService,
     private globalLoaderService: GlobalLoaderService,
-    private postApiService: PostApiService,
     private sectionService: SectionService
   ) { }
 
@@ -538,8 +536,8 @@ export class SettingsComponent {
     }
   }
 
-  backupData(): void {
-    this.postApiService.postUserData(true);
+  openBackupView(): void {
+    this.sectionService.setSection("cloudBackup");
   }
 
   openHelpCenter(section: string, event: Event): void {

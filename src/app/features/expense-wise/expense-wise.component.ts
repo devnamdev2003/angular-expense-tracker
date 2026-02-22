@@ -13,11 +13,12 @@ import { HomeComponent } from '../../features/home/home.component';
 import { CalendarComponent } from '../../features/calendar/calendar.component';
 import { AiComponent } from '../../features/ai/ai.component';
 import { SalaryComponent } from '../salary/salary.component';
-
+import { CloudBackupComponent } from '../../component/settings-components/cloud-backup/cloud-backup.component';
 import { SectionService } from '../../service/section/section.service';
 import { ScreenTypeService } from '../../service/screen-type/screen-type.service';
 import { NativeAppServiceService } from '../../service/native-app/native-app-service.service';
 import { HelpDashboard } from '../help-dashboard/help-dashboard';
+
 /**
  * Root component of the application.
  * Manages global state, mobile view detection, section tracking,
@@ -28,7 +29,7 @@ import { HelpDashboard } from '../help-dashboard/help-dashboard';
   standalone: true,
   imports: [
     NavbarComponent, SidebarComponent, FooterComponent, ToastComponent, CommonModule, AddExpenseComponent,
-    SettingsComponent, ListExpensesComponent, HomeComponent, CalendarComponent, AiComponent, HelpDashboard, SalaryComponent
+    SettingsComponent, ListExpensesComponent, HomeComponent, CalendarComponent, AiComponent, HelpDashboard, SalaryComponent, CloudBackupComponent
   ],
   templateUrl: './expense-wise.component.html',
   styleUrl: './expense-wise.component.css'

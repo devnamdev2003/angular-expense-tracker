@@ -55,6 +55,9 @@ export interface User {
 
   /** User's preferred view mode for salary display. */
   salary_view_mode: 'salary' | 'budget';
+
+  /** */
+  is_backup_enable: boolean;
 }
 
 /**
