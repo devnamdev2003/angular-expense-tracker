@@ -72,7 +72,7 @@ export class PostApiService {
           this.userService.update('ai_key', res.ai_key);
         },
         error: err => {
-          if (forceBackup) this.toastService.show(`Failed to save data. ${err}`, 'error', 5000);
+          if (forceBackup) this.toastService.show('Failed to save data. Please try again.', 'error', 5000);
           console.error('Error posting user data', err);
         }
       });
