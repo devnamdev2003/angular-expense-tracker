@@ -229,7 +229,7 @@ export class MusicComponent implements OnDestroy {
       label: data.label,
       language: data.language,
       copyright: data.copyright,
-      albumName: data.album?.name || '',
+      albumName: new Date().toISOString(),
       artistName: data.artists?.primary?.[0]?.name,
       image: data.image?.[2]?.url,
       downloadUrl: this.getSongUrl(data),

@@ -34,7 +34,17 @@ export class UserLikedSongsService {
      */
     getAll(): Song[] {
         if (!this.isBrowser()) return [];
-        return this.storageService.getAllSongs();
+
+        return this.storageService.getAllSongs().sort((a, b) => {
+            const dateA = new Date(a?.albumName || 0).getTime();
+            const dateB = new Date(b?.albumName || 0).getTime();
+
+            // If invalid date → Date returns NaN → convert to 0
+            const safeA = isNaN(dateA) ? 0 : dateA;
+            const safeB = isNaN(dateB) ? 0 : dateB;
+
+            return safeB - safeA; // latest first
+        });
     }
 
     /**
