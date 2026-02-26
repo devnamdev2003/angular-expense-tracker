@@ -201,19 +201,22 @@
                 <i class="fa-solid fa-xmark"></i>
             </button>
         </div>
+
         <div class="space-y-4 mb-6">
             <div>
                 <label class="block mb-2 text-sm opacity-60 font-medium">Amount (₹)</label>
                 <div class="relative">
                     <span class="absolute left-4 top-3.5 opacity-40"><i class="fa-solid fa-money-bill-wave"></i></span>
-                    <input type="number" [(ngModel)]="savingForm.amount" placeholder="0.00" autofocus
+                    <input type="number" [(ngModel)]="savingForm.amount" placeholder="0.00" autofocus min="1"
+                        max="100000000"
                         class="w-full py-3 pl-10 pr-4 transition-colors border rounded-xl focus:outline-none focus:border-indigo-500 text-lg font-medium"
+                        [class.border-red-500]="savingFormSubmitted && savingAmountError"
                         style="background-color: var(--color-bg-500); border-color: var(--color-bg-600); color: inherit;">
                 </div>
-                @if (savingForm.amount !== null && savingForm.amount !== undefined && savingForm.amount <= 0) { <p
-                    class="text-xs text-red-500 mt-1.5 animate-fade-in"><i
-                        class="fa-solid fa-circle-exclamation mr-1"></i>Amount must be greater than zero.</p>
-                    }
+                @if (savingFormSubmitted && savingAmountError) {
+                <p class="text-xs text-red-500 mt-1.5 animate-fade-in"><i
+                        class="fa-solid fa-circle-exclamation mr-1"></i>{{ savingAmountError }}</p>
+                }
             </div>
 
             <div>
@@ -222,9 +225,10 @@
                     <span class="absolute left-4 top-3.5 opacity-40"><i class="fa-solid fa-calendar-day"></i></span>
                     <input type="date" [(ngModel)]="savingForm.date" [max]="todayDateStr"
                         class="w-full py-3 pl-10 pr-4 transition-colors border rounded-xl focus:outline-none focus:border-indigo-500 font-medium color-scheme-dynamic"
+                        [class.border-red-500]="savingFormSubmitted && savingDateError"
                         style="background-color: var(--color-bg-500); border-color: var(--color-bg-600); color: inherit;">
                 </div>
-                @if (savingDateError) {
+                @if (savingFormSubmitted && savingDateError) {
                 <p class="text-xs text-red-500 mt-1.5 animate-fade-in"><i
                         class="fa-solid fa-circle-exclamation mr-1"></i>{{ savingDateError }}</p>
                 }
@@ -235,16 +239,23 @@
                 <div class="relative">
                     <span class="absolute left-4 top-3.5 opacity-40"><i class="fa-solid fa-pen"></i></span>
                     <input type="text" [(ngModel)]="savingForm.note" placeholder="e.g. Salary, Bonus, Extra cash"
+                        maxlength="100"
                         class="w-full py-3 pl-10 pr-4 transition-colors border rounded-xl focus:outline-none focus:border-indigo-500"
+                        [class.border-red-500]="savingFormSubmitted && savingNoteError"
                         style="background-color: var(--color-bg-500); border-color: var(--color-bg-600); color: inherit;">
                 </div>
+                @if (savingFormSubmitted && savingNoteError) {
+                <p class="text-xs text-red-500 mt-1.5 animate-fade-in"><i
+                        class="fa-solid fa-circle-exclamation mr-1"></i>{{ savingNoteError }}</p>
+                }
             </div>
         </div>
 
         <div class="flex gap-3">
-            <button (click)="closeModals()" class="flex-1 py-4 font-medium transition rounded-xl hover:opacity-80"
-                style="background-color: var(--color-bg-500); color: inherit;">Cancel</button>
-            <button (click)="saveSavingsData()" [disabled]="!isSavingFormValid" [class.opacity-50]="!isSavingFormValid"
+            <button (click)="closeModals()"
+                class="flex-1 py-4 font-medium transition rounded-xl hover:opacity-80 border"
+                style="background-color: var(--color-bg-500); border-color: var(--color-bg-600); color: inherit;">Cancel</button>
+            <button (click)="saveSavingsData()"
                 class="flex-1 py-4 font-medium text-white transition bg-indigo-500 rounded-xl shadow-lg active:scale-95">
                 {{ editingSavingId ? 'Update' : 'Save' }}
             </button>
@@ -337,25 +348,37 @@
                 <i class="fa-solid fa-xmark"></i>
             </button>
         </div>
+
         <div class="space-y-4 mb-6">
             <div>
                 <label class="block mb-2 text-sm opacity-60 font-medium">Goal Name</label>
                 <div class="relative">
                     <span class="absolute left-4 top-3.5 opacity-40"><i class="fa-solid fa-flag-checkered"></i></span>
                     <input type="text" [(ngModel)]="goalForm.goal_name" placeholder="e.g. Dream Car, Vacation"
+                        maxlength="50"
                         class="w-full py-3 pl-10 pr-4 transition-colors border rounded-xl focus:outline-none focus:border-indigo-500 font-medium"
+                        [class.border-red-500]="goalFormSubmitted && goalNameError"
                         style="background-color: var(--color-bg-500); border-color: var(--color-bg-600); color: inherit;">
                 </div>
+                @if (goalFormSubmitted && goalNameError) {
+                <p class="text-xs text-red-500 mt-1.5 animate-fade-in"><i
+                        class="fa-solid fa-circle-exclamation mr-1"></i>{{ goalNameError }}</p>
+                }
             </div>
 
             <div>
                 <label class="block mb-2 text-sm opacity-60 font-medium">Target Amount (₹)</label>
                 <div class="relative">
                     <span class="absolute left-4 top-3.5 opacity-40"><i class="fa-solid fa-bullseye"></i></span>
-                    <input type="number" [(ngModel)]="goalForm.target_amount" placeholder="0.00"
+                    <input type="number" [(ngModel)]="goalForm.target_amount" placeholder="0.00" min="1" max="100000000"
                         class="w-full py-3 pl-10 pr-4 transition-colors border rounded-xl focus:outline-none focus:border-indigo-500 text-lg font-medium"
+                        [class.border-red-500]="goalFormSubmitted && goalAmountError"
                         style="background-color: var(--color-bg-500); border-color: var(--color-bg-600); color: inherit;">
                 </div>
+                @if (goalFormSubmitted && goalAmountError) {
+                <p class="text-xs text-red-500 mt-1.5 animate-fade-in"><i
+                        class="fa-solid fa-circle-exclamation mr-1"></i>{{ goalAmountError }}</p>
+                }
             </div>
 
             <div class="grid grid-cols-2 gap-3">
@@ -363,40 +386,51 @@
                     <label class="block mb-2 text-sm opacity-60 font-medium">Start Date</label>
                     <input type="date" [(ngModel)]="goalForm.start_date" [max]="goalForm.target_date" required
                         class="w-full py-3 px-3 transition-colors border rounded-xl focus:outline-none focus:border-indigo-500 font-medium text-sm color-scheme-dynamic"
+                        [class.border-red-500]="goalFormSubmitted && goalStartDateError"
                         style="background-color: var(--color-bg-500); border-color: var(--color-bg-600); color: inherit;">
+
+                    @if (goalFormSubmitted && goalStartDateError) {
+                    <p class="text-xs text-red-500 mt-1.5 animate-fade-in"><i
+                            class="fa-solid fa-circle-exclamation mr-1"></i>{{ goalStartDateError }}</p>
+                    }
                 </div>
 
                 <div>
                     <label class="block mb-2 text-sm opacity-60 font-medium">Target Date</label>
                     <input type="date" [(ngModel)]="goalForm.target_date" [min]="goalForm.start_date" required
                         class="w-full py-3 px-3 transition-colors border rounded-xl focus:outline-none focus:border-indigo-500 font-medium text-sm color-scheme-dynamic"
+                        [class.border-red-500]="goalFormSubmitted && goalTargetDateError"
                         style="background-color: var(--color-bg-500); border-color: var(--color-bg-600); color: inherit;">
+
+                    @if (goalFormSubmitted && goalTargetDateError) {
+                    <p class="text-xs text-red-500 mt-1.5 animate-fade-in"><i
+                            class="fa-solid fa-circle-exclamation mr-1"></i>{{ goalTargetDateError }}</p>
+                    }
                 </div>
             </div>
-
-            @if (goalDateError) {
-            <div
-                class="p-3 text-xs text-red-500 rounded-lg bg-red-500/10 animate-fade-in border border-red-500/20 flex items-center gap-2">
-                <i class="fa-solid fa-circle-exclamation"></i>
-                {{ goalDateError }}
-            </div>
-            }
 
             <div>
                 <label class="block mb-2 text-sm opacity-60 font-medium">Note</label>
                 <div class="relative">
                     <span class="absolute left-4 top-3.5 opacity-40"><i class="fa-solid fa-pen"></i></span>
                     <input type="text" [(ngModel)]="goalForm.note" placeholder="Any additional details..."
+                        maxlength="100"
                         class="w-full py-3 pl-10 pr-4 transition-colors border rounded-xl focus:outline-none focus:border-indigo-500"
+                        [class.border-red-500]="goalFormSubmitted && goalNoteError"
                         style="background-color: var(--color-bg-500); border-color: var(--color-bg-600); color: inherit;">
                 </div>
+                @if (goalFormSubmitted && goalNoteError) {
+                <p class="text-xs text-red-500 mt-1.5 animate-fade-in"><i
+                        class="fa-solid fa-circle-exclamation mr-1"></i>{{ goalNoteError }}</p>
+                }
             </div>
         </div>
 
         <div class="flex gap-3">
-            <button (click)="closeModals()" class="flex-1 py-4 font-medium transition rounded-xl hover:opacity-80 border"
+            <button (click)="closeModals()"
+                class="flex-1 py-4 font-medium transition rounded-xl hover:opacity-80 border"
                 style="background-color: var(--color-bg-500); border-color: var(--color-bg-600); color: inherit;">Cancel</button>
-            <button (click)="saveGoalData()" [disabled]="!isGoalFormValid" [class.opacity-50]="!isGoalFormValid"
+            <button (click)="saveGoalData()"
                 class="flex-1 py-4 font-medium text-white transition bg-indigo-500 rounded-xl shadow-lg active:scale-95">
                 Save Goal
             </button>

@@ -21,6 +21,10 @@ export class SavingComponent implements OnInit {
   showGoalDetailsModal = false;
   editingSavingId: string | null = null;
 
+  // Submission flags to trigger error messages only when trying to save
+  savingFormSubmitted = false;
+  goalFormSubmitted = false;
+
   todayDateStr = '';
   savingForm: Partial<Saving> = {};
   goalForm: Partial<Goal> = {};
@@ -72,7 +76,13 @@ export class SavingComponent implements OnInit {
     }
   }
 
-  /* ---------- Validation Getters ---------- */
+  /* ---------- Saving Form Validation Getters ---------- */
+
+  get savingAmountError(): string | null {
+    if (!this.savingForm.amount || this.savingForm.amount <= 0) return "Amount must be greater than zero.";
+    if (this.savingForm.amount > 100000000) return "Amount cannot exceed ₹100,000,000.";
+    return null;
+  }
 
   get savingDateError(): string | null {
     if (!this.savingForm.date) return "Date is required.";
@@ -80,37 +90,56 @@ export class SavingComponent implements OnInit {
     return null;
   }
 
-  get isSavingFormValid(): boolean {
-    return !!this.savingForm.amount && this.savingForm.amount > 0 && !this.savingDateError;
+  get savingNoteError(): string | null {
+    if (this.savingForm.note && this.savingForm.note.length > 100) return "Note cannot exceed 100 characters.";
+    return null;
   }
 
-  get goalDateError(): string | null {
-    const { start_date, target_date } = this.goalForm;
+  get isSavingFormValid(): boolean {
+    return !this.savingAmountError && !this.savingDateError && !this.savingNoteError;
+  }
 
-    if (!start_date || !target_date) {
-      return "Both Start Date and Target Date are required.";
+  /* ---------- Goal Form Validation Getters ---------- */
+
+  get goalNameError(): string | null {
+    if (!this.goalForm.goal_name || this.goalForm.goal_name.trim() === '') return "Goal Name is required.";
+    if (this.goalForm.goal_name.length > 50) return "Goal Name cannot exceed 50 characters.";
+    return null;
+  }
+
+  get goalAmountError(): string | null {
+    if (!this.goalForm.target_amount || this.goalForm.target_amount <= 0) return "Target Amount must be greater than zero.";
+    if (this.goalForm.target_amount > 100000000) return "Target Amount cannot exceed ₹100,000,000.";
+    return null;
+  }
+
+  get goalStartDateError(): string | null {
+    if (!this.goalForm.start_date) return "Start Date is required.";
+    if (this.goalForm.start_date && this.goalForm.target_date && new Date(this.goalForm.start_date) > new Date(this.goalForm.target_date)) {
+      return "Start Date cannot be after the Target Date.";
     }
+    return null;
+  }
 
-    if (new Date(start_date) > new Date(target_date)) {
-      return "Start date cannot be after target date.";
-    }
+  get goalTargetDateError(): string | null {
+    if (!this.goalForm.target_date) return "Target Date is required.";
+    return null;
+  }
 
+  get goalNoteError(): string | null {
+    if (this.goalForm.note && this.goalForm.note.length > 100) return "Note cannot exceed 100 characters.";
     return null;
   }
 
   get isGoalFormValid(): boolean {
-    return (
-      !!this.goalForm.goal_name &&
-      !!this.goalForm.target_amount &&
-      this.goalForm.target_amount > 0 &&
-      !!this.goalForm.start_date && // Ensure start date exists
-      !!this.goalForm.target_date && // Ensure target date exists
-      !this.goalDateError
-    );
+    return !this.goalNameError && !this.goalAmountError && !this.goalStartDateError && !this.goalTargetDateError && !this.goalNoteError;
   }
+
   /* ---------- Actions ---------- */
 
   saveSavingsData() {
+    this.savingFormSubmitted = true;
+
     if (!this.isSavingFormValid) return;
 
     const savingData: Saving = {
@@ -131,6 +160,8 @@ export class SavingComponent implements OnInit {
   }
 
   saveGoalData() {
+    this.goalFormSubmitted = true;
+
     if (!this.isGoalFormValid) return;
 
     const goalData: Goal = {
@@ -172,18 +203,21 @@ export class SavingComponent implements OnInit {
 
   // --- Modal Control ---
   openAddModal() {
+    this.savingFormSubmitted = false;
     this.editingSavingId = null;
     this.savingForm = { amount: undefined, date: this.todayDateStr, note: '' };
     this.showSavingModal = true;
   }
 
   editSaving(saving: Saving) {
+    this.savingFormSubmitted = false;
     this.editingSavingId = saving.saving_id;
     this.savingForm = { ...saving };
     this.showSavingModal = true;
   }
 
   openGoalModal() {
+    this.goalFormSubmitted = false;
     this.showGoalDetailsModal = false;
     this.goalForm = this.currentGoal ? { ...this.currentGoal } : {
       goal_name: '', target_amount: undefined, start_date: this.todayDateStr, target_date: '', note: ''
@@ -199,5 +233,7 @@ export class SavingComponent implements OnInit {
     this.showSavingModal = false;
     this.showGoalModal = false;
     this.showGoalDetailsModal = false;
+    this.savingFormSubmitted = false;
+    this.goalFormSubmitted = false;
   }
 }
