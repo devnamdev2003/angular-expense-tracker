@@ -1,0 +1,406 @@
+<main class="space-y-6">
+    <section
+        class="relative overflow-hidden text-white transition-all duration-500 shadow-2xl rounded-3xl group animate-slide-up shadow-indigo-500/20">
+
+        <div
+            class="absolute inset-0 opacity-100 bg-gradient-to-br from-cyan-600 via-sky-600 to-blue-800 transition-opacity duration-500 ease-in-out">
+        </div>
+
+        <div
+            class="absolute top-0 right-0 p-4 transition-all duration-500 transform opacity-20 translate-y-0 rotate-12">
+            <i class="fa-solid fa-coins text-9xl"></i>
+        </div>
+
+        <div class="relative z-10 grid grid-cols-1 grid-rows-1">
+            <div class="col-start-1 row-start-1 p-6 md:p-10 transition-all duration-500 ease-out transform">
+                <p class="mb-1 text-xs font-medium tracking-wider uppercase opacity-80">
+                    Total Saved
+                </p>
+
+                <h2 class="mb-6 text-3xl font-bold tracking-tight md:text-5xl flex items-baseline gap-1">
+                    <span class="text-2xl font-medium md:text-3xl">₹</span>
+                    {{ totalSavedAmount | number:'1.2-2' }}
+                </h2>
+
+                <div class="flex gap-8">
+                    <div>
+                        <div class="flex items-center gap-2 mb-1 text-xs opacity-80 md:text-sm">
+                            <div class="flex items-center justify-center w-5 h-5 rounded-full bg-white/20">
+                                <i class="fa-solid fa-bullseye text-[10px]"></i>
+                            </div>
+                            Goal Target
+                        </div>
+                        <p class="text-xl font-semibold md:text-2xl text-white">
+                            ₹{{ goalTarget | number:'1.2-2' }}
+                        </p>
+                    </div>
+                    <div>
+                        <div class="flex items-center gap-2 mb-1 text-xs opacity-80 md:text-sm">
+                            <div class="flex items-center justify-center w-5 h-5 rounded-full bg-white/20">
+                                <i class="fa-solid fa-arrow-up text-[10px]"></i>
+                            </div>
+                            Goal Remaining
+                        </div>
+                        <p class="text-xl font-semibold md:text-2xl">
+                            ₹{{ currentMonthAdded | number:'1.2-2' }}
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="grid grid-cols-3 gap-3 md:gap-4 animate-slide-up" style="animation-delay: 0.1s;">
+        <div class="flex flex-col justify-between p-3 transition cursor-pointer rounded-2xl hover:opacity-90"
+            style="background-color: var(--color-bg-100); box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);">
+            <i class="mb-2 text-lg text-indigo-500 fa-solid fa-flag-checkered"></i>
+            <div>
+                <p class="text-[10px] opacity-60 uppercase tracking-wide">Goal Name</p>
+                <p class="text-sm font-bold md:text-base truncate" [title]="currentGoal?.goal_name || 'No Goal'">
+                    {{ currentGoal?.goal_name || 'No Goal' }}
+                </p>
+            </div>
+        </div>
+
+        <div class="flex flex-col justify-between p-3 transition cursor-pointer rounded-2xl hover:opacity-90"
+            style="background-color: var(--color-bg-100); box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);">
+            <i class="mb-2 text-lg text-emerald-500 fa-solid fa-chart-line"></i>
+            <div>
+                <p class="text-[10px] opacity-60 uppercase tracking-wide">Saved/Day</p>
+                <p class="text-sm font-bold md:text-base">
+                    ₹{{ averageSavedPerDay | number:'1.0-0' }}
+                </p>
+            </div>
+        </div>
+
+        <div class="flex flex-col justify-between p-3 transition cursor-pointer rounded-2xl hover:opacity-90"
+            style="background-color: var(--color-bg-100); box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);">
+            <i class="mb-2 text-lg text-purple-500 fa-solid fa-hourglass-half"></i>
+            <div>
+                <p class="text-[10px] opacity-60 uppercase tracking-wide">Remaining</p>
+                <p class="text-sm font-bold md:text-base">
+                    {{ remainingPercentage | number:'1.0-1' }}%
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <section (click)="handleGoalCardClick()"
+        class="p-4 rounded-2xl animate-slide-up cursor-pointer hover:opacity-90 transition-all border border-transparent hover:border-indigo-500/30 group"
+        style="animation-delay: 0.15s; background-color: var(--color-bg-100); box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);">
+        @if (currentGoal) {
+        <div class="flex justify-between mb-2 text-xs font-semibold">
+            <span class="opacity-60 flex items-center gap-1.5">
+                <i class="fa-solid fa-bullseye text-indigo-500"></i>
+                Goal Progress ({{currentGoal.goal_name}})
+            </span>
+            <span>{{ progressPercentage | number:'1.1-1' }}%</span>
+        </div>
+        <div class="w-full h-3 mb-2 overflow-hidden rounded-full shadow-inner"
+            style="background-color: var(--color-bg-600);">
+            <div class="h-full transition-all duration-1000 ease-out bg-gradient-to-r from-emerald-400 to-emerald-500 relative"
+                [style.width.%]="progressPercentage">
+                <div
+                    class="absolute top-0 left-0 right-0 bottom-0 bg-white/20 overflow-hidden after:content-[''] after:absolute after:top-0 after:-left-full after:w-1/2 after:h-full after:bg-gradient-to-r after:from-transparent after:via-white/40 after:to-transparent after:-skew-x-12 animate-[shimmer_2s_infinite]">
+                </div>
+            </div>
+        </div>
+        <div class="flex items-center gap-1.5 mt-2">
+            @if (progressPercentage >= 100 && goalTarget > 0) {
+            <span class="text-emerald-500 font-medium italic text-xs"><i class="fa-solid fa-party-horn mr-1"></i>Goal
+                achieved! Amazing job!</span>
+            } @else {
+            <p class="text-[11px] opacity-60 font-medium group-hover:text-indigo-500 transition-colors">Tap to
+                view goal details <i class="fa-solid fa-chevron-right text-[9px] ml-1"></i></p>
+            }
+        </div>
+        } @else {
+        <div class="text-center py-3">
+            <div class="w-12 h-12 mx-auto rounded-full flex items-center justify-center text-indigo-500 mb-2"
+                style="background-color: var(--color-bg-200);">
+                <i class="fa-solid fa-plus text-xl"></i>
+            </div>
+            <h4 class="font-bold mb-1">Set a Savings Goal</h4>
+            <p class="text-xs opacity-60">Tap here to configure your target and start tracking.</p>
+        </div>
+        }
+    </section>
+
+    <div class="flex items-end justify-between animate-slide-up" style="animation-delay: 0.2s;">
+        <h3 class="text-xl font-semibold">Recent Savings</h3>
+    </div>
+
+    <div class="pb-16  space-y-3 animate-slide-up" style="animation-delay: 0.3s;">
+        @if (savings.length === 0) {
+        <div class="py-10 text-center opacity-50 animate-fade-in">
+            <i class="mb-3 text-4xl fa-solid fa-receipt"></i>
+            <p class="text-sm font-medium">No savings recorded yet.</p>
+            <button (click)="openAddModal()" class="mt-4 text-indigo-500 underline text-sm font-bold">Add your
+                first saving</button>
+        </div>
+        } @else {
+        @for (s of savings; track s.saving_id) {
+        <div class="relative flex items-center justify-between p-4 overflow-hidden transition-all cursor-pointer rounded-xl group hover:scale-[1.01] border-green-500 border-l-4"
+            (click)="editSaving(s)"
+            style="background-color: var(--color-bg-100); border-bottom: 1px solid var(--color-bg-600);">
+
+            <div class="z-10 flex items-center gap-4 pl-1">
+                <div
+                    class="flex items-center justify-center w-10 h-10 rounded-full bg-green-500/10 text-green-500 shrink-0">
+                    <i class="fa-solid fa-arrow-down"></i>
+                </div>
+                <div>
+                    <p class="font-bold text-sm md:text-base truncate max-w-[140px] md:max-w-[250px]">
+                        {{ s.note || 'Savings Addition' }}
+                    </p>
+                    <p class="text-[10px] md:text-xs opacity-60 font-medium mt-0.5">
+                        {{ s.date | date:'MMMM yyyy' }}
+                    </p>
+                </div>
+            </div>
+
+            <div class="z-10 flex flex-col items-end pr-2">
+                <p class="font-bold text-green-500 text-sm md:text-base">
+                    ₹{{ s.amount | number:'1.2-2' }}
+                </p>
+                <span
+                    class="text-[10px] opacity-40 group-hover:text-indigo-500 group-hover:opacity-100 transition-colors mt-1 font-medium">Tap
+                    to edit</span>
+            </div>
+
+            <button (click)="$event.stopPropagation(); deleteSaving(s.saving_id)"
+                class="absolute top-0 bottom-0 right-0 z-20 flex items-center justify-center w-16 text-white transition-transform duration-200 translate-x-full bg-red-600/90 group-hover:translate-x-0"
+                title="Delete Saving">
+                <i class="fa-solid fa-trash"></i>
+            </button>
+        </div>
+        }
+        }
+    </div>
+</main>
+
+
+<button (click)="openAddModal()"
+    class="fixed z-40 flex items-center justify-center w-14 h-14 text-2xl text-white transition duration-200 rounded-full shadow-xl bottom-16 right-6 bg-indigo-500 shadow-indigo-500/40 hover:bg-indigo-600 active:scale-90 animate-bounce-subtle group">
+    <i class="transition-transform duration-300 fa-solid fa-plus group-hover:rotate-90"></i>
+</button>
+
+@if (showSavingModal) {
+<div class="fixed inset-0 z-50 flex justify-center p-4 bg-black/50 backdrop-blur-sm items-center"
+    (click)="closeModals()">
+    <div class="w-[90%] md:w-[500px] rounded-3xl p-6 shadow-2xl animate-slide-up max-h-[90vh] overflow-y-auto"
+        style="background-color: var(--color-bg-100);" (click)="$event.stopPropagation()">
+
+        <div class="flex items-center justify-between mb-6">
+            <h3 class="text-xl font-bold">
+                {{ editingSavingId ? 'Edit Saving' : 'Add to Savings' }}
+            </h3>
+            <button (click)="closeModals()"
+                class="flex items-center justify-center w-8 h-8 transition rounded-full hover:opacity-70"
+                style="background-color: var(--color-bg-500); color: var(--color-text);">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+        </div>
+        <div class="space-y-4 mb-6">
+            <div>
+                <label class="block mb-2 text-sm opacity-60 font-medium">Amount (₹)</label>
+                <div class="relative">
+                    <span class="absolute left-4 top-3.5 opacity-40"><i class="fa-solid fa-money-bill-wave"></i></span>
+                    <input type="number" [(ngModel)]="savingForm.amount" placeholder="0.00" autofocus
+                        class="w-full py-3 pl-10 pr-4 transition-colors border rounded-xl focus:outline-none focus:border-indigo-500 text-lg font-medium"
+                        style="background-color: var(--color-bg-500); border-color: var(--color-bg-600); color: inherit;">
+                </div>
+                @if (savingForm.amount !== null && savingForm.amount !== undefined && savingForm.amount <= 0) { <p
+                    class="text-xs text-red-500 mt-1.5 animate-fade-in"><i
+                        class="fa-solid fa-circle-exclamation mr-1"></i>Amount must be greater than zero.</p>
+                    }
+            </div>
+
+            <div>
+                <label class="block mb-2 text-sm opacity-60 font-medium">Date</label>
+                <div class="relative">
+                    <span class="absolute left-4 top-3.5 opacity-40"><i class="fa-solid fa-calendar-day"></i></span>
+                    <input type="date" [(ngModel)]="savingForm.date" [max]="todayDateStr"
+                        class="w-full py-3 pl-10 pr-4 transition-colors border rounded-xl focus:outline-none focus:border-indigo-500 font-medium color-scheme-dynamic"
+                        style="background-color: var(--color-bg-500); border-color: var(--color-bg-600); color: inherit;">
+                </div>
+                @if (savingDateError) {
+                <p class="text-xs text-red-500 mt-1.5 animate-fade-in"><i
+                        class="fa-solid fa-circle-exclamation mr-1"></i>{{ savingDateError }}</p>
+                }
+            </div>
+
+            <div>
+                <label class="block mb-2 text-sm opacity-60 font-medium">Note / Title</label>
+                <div class="relative">
+                    <span class="absolute left-4 top-3.5 opacity-40"><i class="fa-solid fa-pen"></i></span>
+                    <input type="text" [(ngModel)]="savingForm.note" placeholder="e.g. Salary, Bonus, Extra cash"
+                        class="w-full py-3 pl-10 pr-4 transition-colors border rounded-xl focus:outline-none focus:border-indigo-500"
+                        style="background-color: var(--color-bg-500); border-color: var(--color-bg-600); color: inherit;">
+                </div>
+            </div>
+        </div>
+
+        <div class="flex gap-3">
+            <button (click)="closeModals()" class="flex-1 py-4 font-medium transition rounded-xl hover:opacity-80"
+                style="background-color: var(--color-bg-500); color: inherit;">Cancel</button>
+            <button (click)="saveSavingsData()" [disabled]="!isSavingFormValid" [class.opacity-50]="!isSavingFormValid"
+                class="flex-1 py-4 font-medium text-white transition bg-indigo-500 rounded-xl shadow-lg active:scale-95">
+                {{ editingSavingId ? 'Update' : 'Save' }}
+            </button>
+        </div>
+    </div>
+</div>
+}
+
+@if (showGoalDetailsModal && currentGoal) {
+<div class="fixed inset-0 z-50 flex justify-center p-4 bg-black/50 backdrop-blur-sm items-center transition-all"
+    (click)="closeModals()">
+    <div class="w-[90%] md:w-[500px] rounded-3xl p-6 shadow-2xl animate-slide-up"
+        style="background-color: var(--color-bg-100);" (click)="$event.stopPropagation()">
+
+        <div class="flex items-start justify-between mb-6">
+            <div>
+                <h3 class="text-xl font-bold mb-1">Goal Details</h3>
+                <p class="text-sm opacity-60 font-medium">{{ currentGoal.goal_name }}</p>
+            </div>
+            <button (click)="closeModals()"
+                class="flex items-center justify-center w-8 h-8 transition rounded-full hover:opacity-70"
+                style="background-color: var(--color-bg-500); color: var(--color-text);">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+        </div>
+
+        <div class="rounded-2xl p-5 mb-6 border"
+            style="background-color: var(--color-bg-200); border-color: var(--color-bg-600);">
+            <div class="flex justify-between items-start mb-4">
+                <div>
+                    <p class="text-xs font-medium opacity-60 uppercase tracking-wider mb-1">Target Amount</p>
+                    <p class="text-2xl font-medium text-indigo-500">₹{{ currentGoal.target_amount |
+                        number:'1.2-2' }}</p>
+                </div>
+                <div class="w-12 h-12 rounded-full flex items-center justify-center bg-indigo-500/10 text-indigo-500">
+                    <i class="fa-solid fa-bullseye text-xl"></i>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-2 gap-4 border-t pt-4" style="border-color: var(--color-bg-600);">
+                <div>
+                    <p class="text-xs font-medium opacity-60 uppercase mb-1">Start Date</p>
+                    <p class="text-sm font-medium">{{ currentGoal.start_date | date:'mediumDate' }}</p>
+                </div>
+                <div>
+                    <p class="text-xs font-medium opacity-60 uppercase mb-1">Target Date</p>
+                    <p class="text-sm font-medium">{{ currentGoal.target_date ? (currentGoal.target_date |
+                        date:'mediumDate') : 'No date set' }}</p>
+                </div>
+            </div>
+        </div>
+
+        @if (currentGoal.note) {
+        <div class="mb-6">
+            <p class="text-xs font-medium opacity-60 uppercase tracking-wider mb-2 pl-1">Notes</p>
+            <div class="rounded-xl p-4 text-sm leading-relaxed border"
+                style="background-color: var(--color-bg-500); border-color: var(--color-bg-600);">
+                {{ currentGoal.note }}
+            </div>
+        </div>
+        }
+
+        <div class="flex gap-3">
+            <button (click)="openGoalModal()"
+                class="flex-1 py-4 font-medium transition rounded-xl text-white bg-indigo-500 hover:bg-indigo-600 shadow-lg shadow-indigo-500/25 active:scale-95">
+                <i class="fa-solid fa-pen mr-2"></i> Edit Goal
+            </button>
+            <button (click)="deleteGoal()"
+                class="flex-1 py-4 font-medium transition rounded-xl text-white bg-red-500 hover:bg-red-600 shadow-lg shadow-red-500/25 active:scale-95">
+                <i class="fa-solid fa-trash mr-2"></i> Delete
+            </button>
+        </div>
+    </div>
+</div>
+}
+
+@if (showGoalModal) {
+<div class="fixed inset-0 z-50 flex justify-center p-4 bg-black/50 backdrop-blur-sm items-center"
+    (click)="closeModals()">
+    <div class="w-[90%] md:w-[500px] rounded-3xl p-6 shadow-2xl animate-slide-up max-h-[90vh] overflow-y-auto"
+        style="background-color: var(--color-bg-100);" (click)="$event.stopPropagation()">
+
+        <div class="flex items-center justify-between mb-6">
+            <h3 class="text-xl font-medium">
+                {{ currentGoal ? 'Update Goal' : 'Set New Goal' }}
+            </h3>
+            <button (click)="closeModals()"
+                class="flex items-center justify-center w-8 h-8 transition rounded-full hover:opacity-70"
+                style="background-color: var(--color-bg-500); color: var(--color-text);">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+        </div>
+        <div class="space-y-4 mb-6">
+            <div>
+                <label class="block mb-2 text-sm opacity-60 font-medium">Goal Name</label>
+                <div class="relative">
+                    <span class="absolute left-4 top-3.5 opacity-40"><i class="fa-solid fa-flag-checkered"></i></span>
+                    <input type="text" [(ngModel)]="goalForm.goal_name" placeholder="e.g. Dream Car, Vacation"
+                        class="w-full py-3 pl-10 pr-4 transition-colors border rounded-xl focus:outline-none focus:border-indigo-500 font-medium"
+                        style="background-color: var(--color-bg-500); border-color: var(--color-bg-600); color: inherit;">
+                </div>
+            </div>
+
+            <div>
+                <label class="block mb-2 text-sm opacity-60 font-medium">Target Amount (₹)</label>
+                <div class="relative">
+                    <span class="absolute left-4 top-3.5 opacity-40"><i class="fa-solid fa-bullseye"></i></span>
+                    <input type="number" [(ngModel)]="goalForm.target_amount" placeholder="0.00"
+                        class="w-full py-3 pl-10 pr-4 transition-colors border rounded-xl focus:outline-none focus:border-indigo-500 text-lg font-medium"
+                        style="background-color: var(--color-bg-500); border-color: var(--color-bg-600); color: inherit;">
+                </div>
+            </div>
+
+            <div class="grid grid-cols-2 gap-3">
+                <div>
+                    <label class="block mb-2 text-sm opacity-60 font-medium">Start Date</label>
+                    <input type="date" [(ngModel)]="goalForm.start_date" [max]="goalForm.target_date" required
+                        class="w-full py-3 px-3 transition-colors border rounded-xl focus:outline-none focus:border-indigo-500 font-medium text-sm color-scheme-dynamic"
+                        style="background-color: var(--color-bg-500); border-color: var(--color-bg-600); color: inherit;">
+                </div>
+
+                <div>
+                    <label class="block mb-2 text-sm opacity-60 font-medium">Target Date</label>
+                    <input type="date" [(ngModel)]="goalForm.target_date" [min]="goalForm.start_date" required
+                        class="w-full py-3 px-3 transition-colors border rounded-xl focus:outline-none focus:border-indigo-500 font-medium text-sm color-scheme-dynamic"
+                        style="background-color: var(--color-bg-500); border-color: var(--color-bg-600); color: inherit;">
+                </div>
+            </div>
+
+            @if (goalDateError) {
+            <div
+                class="p-3 text-xs text-red-500 rounded-lg bg-red-500/10 animate-fade-in border border-red-500/20 flex items-center gap-2">
+                <i class="fa-solid fa-circle-exclamation"></i>
+                {{ goalDateError }}
+            </div>
+            }
+
+            <div>
+                <label class="block mb-2 text-sm opacity-60 font-medium">Note</label>
+                <div class="relative">
+                    <span class="absolute left-4 top-3.5 opacity-40"><i class="fa-solid fa-pen"></i></span>
+                    <input type="text" [(ngModel)]="goalForm.note" placeholder="Any additional details..."
+                        class="w-full py-3 pl-10 pr-4 transition-colors border rounded-xl focus:outline-none focus:border-indigo-500"
+                        style="background-color: var(--color-bg-500); border-color: var(--color-bg-600); color: inherit;">
+                </div>
+            </div>
+        </div>
+
+        <div class="flex gap-3">
+            <button (click)="closeModals()" class="flex-1 py-4 font-medium transition rounded-xl hover:opacity-80 border"
+                style="background-color: var(--color-bg-500); border-color: var(--color-bg-600); color: inherit;">Cancel</button>
+            <button (click)="saveGoalData()" [disabled]="!isGoalFormValid" [class.opacity-50]="!isGoalFormValid"
+                class="flex-1 py-4 font-medium text-white transition bg-indigo-500 rounded-xl shadow-lg active:scale-95">
+                Save Goal
+            </button>
+        </div>
+    </div>
+</div>
+}

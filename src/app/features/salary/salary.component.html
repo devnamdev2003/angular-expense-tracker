@@ -3,26 +3,37 @@
 
     <div class="relative h-full max-w-3xl p-4 mx-auto md:p-8">
 
-        <!-- HEADER -->
         <header class="flex items-center justify-between mb-6 animate-fade-in">
             <div class="flex items-center gap-3">
                 <div
                     class="flex items-center justify-center w-8 h-8 shadow-lg rounded-xl bg-gradient-to-br from-indigo-500 to-purple-500 shadow-indigo-500/30">
-                    <i class="text-white fa-solid" [class]="viewMode === 'salary' ? 'fa-wallet' : 'fa-piggy-bank'"></i>
+                    <i class="text-white fa-solid" [ngClass]="{
+                           'fa-wallet': viewMode === 'salary',
+                           'fa-chart-pie': viewMode === 'budget',
+                           'fa-piggy-bank': viewMode === 'saving'
+                       }"></i>
                 </div>
                 <div>
-                    <p class="text-md font-bold">{{ viewMode === 'salary' ? 'Income Dashboard' : 'Budget Planner' }}</p>
+                    <p class="text-md font-bold">
+                        {{ viewMode === 'salary' ? 'Income' : (viewMode === 'budget' ? 'Budget' :
+                        'Savings') }}
+                    </p>
                 </div>
             </div>
-            <div class="relative flex w-32 h-8 bg-[var(--color-surface)] rounded-full shadow-md 
-            transition-all duration-300 ease-out select-none cursor-pointer">
 
-                <div class="absolute top-0 left-0 h-full w-1/2 bg-[var(--theme-color)] rounded-full transition-transform duration-300 ease-out shadow-sm"
-                    [ngClass]="{ 'translate-x-0': viewMode === 'salary', 'translate-x-full': viewMode === 'budget' }">
+            <div
+                class="relative flex w-48 h-8 bg-[var(--color-surface)] rounded-full shadow-md transition-all duration-300 ease-out select-none cursor-pointer">
+
+                <div class="absolute top-0 left-0 h-full w-1/3 bg-[var(--theme-color)] rounded-full transition-transform duration-300 ease-out shadow-sm"
+                    [ngClass]="{ 
+                        'translate-x-0': viewMode === 'salary', 
+                        'translate-x-full': viewMode === 'budget',
+                        'translate-x-[200%]': viewMode === 'saving'
+                    }">
                 </div>
 
                 <button
-                    class="relative z-10 w-1/2 h-full flex items-center justify-center text-xs transition-colors duration-200 focus:outline-none"
+                    class="relative z-10 w-1/3 h-full flex items-center justify-center text-xs transition-colors duration-200 focus:outline-none"
                     (click)="toggleView('salary')"
                     [ngClass]="{ 'text-white': viewMode === 'salary', 'text-[var(--color-text)] opacity-70': viewMode !== 'salary' }"
                     title="Salary View">
@@ -30,21 +41,34 @@
                 </button>
 
                 <button
-                    class="relative z-10 w-1/2 h-full flex items-center justify-center text-xs transition-colors duration-200 focus:outline-none"
+                    class="relative z-10 w-1/3 h-full flex items-center justify-center text-xs transition-colors duration-200 focus:outline-none"
                     (click)="toggleView('budget')"
                     [ngClass]="{ 'text-white': viewMode === 'budget', 'text-[var(--color-text)] opacity-70': viewMode !== 'budget' }"
                     title="Budget View">
                     Budget
                 </button>
 
-            </div>
+                <button
+                    class="relative z-10 w-1/3 h-full flex items-center justify-center text-xs transition-colors duration-200 focus:outline-none"
+                    (click)="toggleView('saving')"
+                    [ngClass]="{ 'text-white': viewMode === 'saving', 'text-[var(--color-text)] opacity-70': viewMode !== 'saving' }"
+                    title="Savings View">
+                    Savings
+                </button>
 
+            </div>
         </header>
 
-        <!-- MAIN CONTENT -->
+        @if (viewMode === 'saving') {
+
+        <div class="animate-fade-in">
+            <app-saving></app-saving>
+        </div>
+
+        } @else {
+
         <main class="space-y-6">
 
-            <!-- Main Balance Card -->
             <section
                 class="relative overflow-hidden text-white transition-all duration-500 rounded-3xl group animate-slide-up"
                 [ngClass]="viewMode === 'salary' ? 'shadow-2xl shadow-indigo-500/20' : 'shadow-2xl shadow-emerald-500/20'">
@@ -67,7 +91,6 @@
                     <i class="fa-solid fa-chart-pie text-9xl"></i>
                 </div>
 
-
                 <div class="relative z-10 grid grid-cols-1 grid-rows-1">
                     <div class="col-start-1 row-start-1 p-6 md:p-10 transition-all duration-500 ease-out transform">
 
@@ -78,7 +101,7 @@
                         <h2 class="mb-6 text-3xl font-bold tracking-tight md:text-5xl">
                             {{ userCurrancy }}
                             @if(viewMode === 'salary') {
-                            {{ (totalIncome - totalExpense) | number:'1.2-2' }}
+                            {{ (totalIncome - totalExpense) - totalSavings | number:'1.2-2' }}
                             } @else {
                             {{ (totalBudget - totalExpense) | number:'1.2-2' }}
                             }
@@ -115,9 +138,7 @@
                 </div>
             </section>
 
-            <!-- Daily Analytics -->
             <section class="grid grid-cols-3 gap-3 md:gap-4 animate-slide-up" style="animation-delay: 0.1s;">
-                <!-- Box 1: Avg Allowed -->
                 <div class="flex flex-col justify-between p-3 transition cursor-pointer rounded-2xl hover:opacity-90"
                     style="background-color: var(--color-bg-100); box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);">
 
@@ -152,7 +173,6 @@
                         }
                 </div>
 
-                <!-- Box 2: Spent / Day -->
                 <div class="flex flex-col justify-between p-3 transition cursor-pointer rounded-2xl hover:opacity-90"
                     style="background-color: var(--color-bg-100); box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);">
                     <i class="mb-2 text-lg text-orange-500 fa-solid fa-fire-flame-curved"></i>
@@ -164,7 +184,6 @@
                     </div>
                 </div>
 
-                <!-- Box 3: Suggested / Day -->
                 <div class="flex flex-col justify-between p-3 transition cursor-pointer rounded-2xl hover:opacity-90"
                     style="background-color: var(--color-bg-100); box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);">
 
@@ -191,7 +210,6 @@
                 </div>
             </section>
 
-            <!-- Visual Bar Chart -->
             <section class="p-4 rounded-2xl animate-slide-up"
                 style="animation-delay: 0.15s; background-color: var(--color-bg-100); box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);">
                 <div class="flex justify-between mb-2 text-xs opacity-60">
@@ -207,7 +225,6 @@
                 <p class="text-[10px] text-center italic" [ngClass]="analysisTextClass">{{ analysisText }}</p>
             </section>
 
-            <!-- Transactions List Header -->
             <div class="flex items-end justify-between animate-slide-up" style="animation-delay: 0.2s;">
                 <h3 class="text-xl font-semibold">
                     {{ viewMode === 'salary' ? 'Income Transactions' : 'Budget History' }}
@@ -236,7 +253,6 @@
             </div>
             }
 
-            <!-- Transactions List -->
             <div class="pb-16 space-y-3 animate-slide-up" style="animation-delay: 0.3s;">
                 @if (filteredTransactions.length === 0) {
                 <div class="py-10 text-center opacity-50 animate-fade-in">
@@ -273,7 +289,6 @@
                             edit</span>
                     </div>
 
-                    <!-- Delete Button (Swipe/Hover) -->
                     <button (click)="removeTransaction(t.salary_id, $event)"
                         class="absolute top-0 bottom-0 right-0 z-20 flex items-center justify-center w-16 text-white transition-transform duration-200 translate-x-full bg-red-600/90 group-hover:translate-x-0">
                         <i class="fa-solid fa-trash"></i>
@@ -284,153 +299,154 @@
             </div>
 
         </main>
-    </div>
 
-    @if (viewMode === 'salary' || (viewMode === 'budget' && !hasBudgetForCurrentMonth)) {
-    <button (click)="openModal()"
-        class="fixed z-40 flex items-center justify-center w-14 h-14 text-2xl text-white transition duration-200 rounded-full shadow-xl bottom-16 right-6 bg-indigo-500 shadow-indigo-500/40 hover:bg-indigo-600 active:scale-90 animate-bounce-subtle group">
-        <i class="transition-transform duration-300 fa-solid fa-plus group-hover:rotate-90"></i>
-    </button>
-    }
+        @if (viewMode === 'salary' || (viewMode === 'budget' && !hasBudgetForCurrentMonth)) {
+        <button (click)="openModal()"
+            class="fixed z-40 flex items-center justify-center w-14 h-14 text-2xl text-white transition duration-200 rounded-full shadow-xl bottom-16 right-6 bg-indigo-500 shadow-indigo-500/40 hover:bg-indigo-600 active:scale-90 animate-bounce-subtle group">
+            <i class="transition-transform duration-300 fa-solid fa-plus group-hover:rotate-90"></i>
+        </button>
+        }
 
-    @if (showModal) {
-    <div class="fixed inset-0 z-50 flex justify-center p-4 bg-black/50 backdrop-blur-sm items-center"
-        (click)="closeModal()">
-        <div class="w-[90%] md:w-[500px] rounded-3xl p-6 shadow-2xl animate-slide-up"
-            style="background-color: var(--color-bg-100);" (click)="$event.stopPropagation()">
-            <div class="flex items-center justify-between mb-6">
-                <h3 class="text-xl font-bold">
-                    {{ editingId ? 'Edit' : 'Add' }}
-                    {{ viewMode === 'salary' ? 'Salary' : 'Budget' }}
-                </h3>
-                <button (click)="closeModal()"
-                    class="flex items-center justify-center w-8 h-8 transition rounded-full hover:opacity-70"
-                    style="background-color: var(--color-bg-500); color: var(--color-text);">
-                    <i class="fa-solid fa-xmark"></i>
-                </button>
+        @if (showModal) {
+        <div class="fixed inset-0 z-50 flex justify-center p-4 bg-black/50 backdrop-blur-sm items-center"
+            (click)="closeModal()">
+            <div class="w-[90%] md:w-[500px] rounded-3xl p-6 shadow-2xl animate-slide-up"
+                style="background-color: var(--color-bg-100);" (click)="$event.stopPropagation()">
+                <div class="flex items-center justify-between mb-6">
+                    <h3 class="text-xl font-bold">
+                        {{ editingId ? 'Edit' : 'Add' }}
+                        {{ viewMode === 'salary' ? 'Salary' : 'Budget' }}
+                    </h3>
+                    <button (click)="closeModal()"
+                        class="flex items-center justify-center w-8 h-8 transition rounded-full hover:opacity-70"
+                        style="background-color: var(--color-bg-500); color: var(--color-text);">
+                        <i class="fa-solid fa-xmark"></i>
+                    </button>
+                </div>
+
+                <form (submit)="saveTransaction()">
+                    <div class="mb-4">
+                        <label class="block mb-2 text-sm opacity-60">
+                            {{ viewMode === 'salary' ? 'Salary Amount' : 'Budget Limit' }}
+                        </label>
+                        <div class="relative">
+                            <span class="absolute left-4 top-3.5 opacity-40"><i
+                                    class="fa-solid fa-money-bill-1-wave"></i></span>
+                            <input #amountInput type="number" [(ngModel)]="newAmount" name="amount" placeholder="0.00"
+                                min="0" max="100000000"
+                                class="w-full py-3 pl-10 pr-4 transition-colors border rounded-xl focus:outline-none focus:border-indigo-500"
+                                [class.border-red-500]="errors().amount"
+                                style="background-color: var(--color-bg-500); border-color: var(--color-bg-600); color: inherit;">
+                        </div>
+                        @if (errors().amount) {
+                        <p class="text-xs text-red-500 mt-1 animate-fade-in">{{ errors().amount }}</p>
+                        }
+                    </div>
+
+                    @if (viewMode === 'salary') {
+                    <div class="mb-4 animate-fade-in">
+                        <label class="block mb-2 text-sm opacity-60">For Month</label>
+                        <div class="relative">
+                            <span class="absolute left-4 top-3.5 opacity-40"><i class="fa-solid fa-calendar"></i></span>
+                            <input type="month" [(ngModel)]="newMonth" name="month"
+                                class="w-full py-3 pl-10 pr-4 transition-colors border rounded-xl focus:outline-none focus:border-indigo-500"
+                                [class.border-red-500]="errors().month"
+                                style="background-color: var(--color-bg-500); border-color: var(--color-bg-600); color: inherit;">
+                        </div>
+                        @if (errors().month) {
+                        <p class="text-xs text-red-500 mt-1 animate-fade-in">{{ errors().month }}</p>
+                        }
+                    </div>
+
+                    <div class="mb-4 animate-fade-in">
+                        <label class="block mb-2 text-sm opacity-60">Note (Optional)</label>
+                        <div class="relative">
+                            <span class="absolute left-4 top-3.5 opacity-40"><i class="fa-solid fa-pen"></i></span>
+                            <input type="text" [(ngModel)]="newNote" name="note" placeholder="Extra details..."
+                                maxlength="50"
+                                class="w-full py-3 pl-10 pr-4 transition-colors border rounded-xl focus:outline-none focus:border-indigo-500"
+                                [class.border-red-500]="errors().note"
+                                style="background-color: var(--color-bg-500); border-color: var(--color-bg-600); color: inherit;">
+                        </div>
+                        @if (errors().note) {
+                        <p class="text-xs text-red-500 mt-1 animate-fade-in">{{ errors().note }}</p>
+                        }
+                    </div>
+                    }
+
+                    @if (viewMode === 'budget') {
+                    <p class="mb-4 text-xs italic opacity-60 text-center">
+                        Setting budget for {{ currentMonth | date:'MMMM yyyy' }}.
+                    </p>
+                    }
+
+                    <button type="submit"
+                        class="w-full py-4 mt-4 font-bold text-white transition bg-indigo-500 rounded-xl shadow-lg shadow-indigo-500/25 active:scale-95 hover:bg-indigo-600">
+                        {{ editingId ? 'Update' : 'Save' }}
+                    </button>
+                </form>
             </div>
-
-            <form (submit)="saveTransaction()">
-                <!-- Amount / Salary -->
-                <div class="mb-4">
-                    <label class="block mb-2 text-sm opacity-60">
-                        {{ viewMode === 'salary' ? 'Salary Amount' : 'Budget Limit' }}
-                    </label>
-                    <div class="relative">
-                        <span class="absolute left-4 top-3.5 opacity-40"><i
-                                class="fa-solid fa-money-bill-1-wave"></i></span>
-                        <input #amountInput type="number" [(ngModel)]="newAmount" name="amount" placeholder="0.00"
-                            min="0" max="100000000"
-                            class="w-full py-3 pl-10 pr-4 transition-colors border rounded-xl focus:outline-none focus:border-indigo-500"
-                            [class.border-red-500]="errors().amount"
-                            style="background-color: var(--color-bg-500); border-color: var(--color-bg-600); color: inherit;">
-                    </div>
-                    @if (errors().amount) {
-                    <p class="text-xs text-red-500 mt-1 animate-fade-in">{{ errors().amount }}</p>
-                    }
-                </div>
-
-                @if (viewMode === 'salary') {
-                <div class="mb-4 animate-fade-in">
-                    <label class="block mb-2 text-sm opacity-60">For Month</label>
-                    <div class="relative">
-                        <span class="absolute left-4 top-3.5 opacity-40"><i class="fa-solid fa-calendar"></i></span>
-                        <input type="month" [(ngModel)]="newMonth" name="month"
-                            class="w-full py-3 pl-10 pr-4 transition-colors border rounded-xl focus:outline-none focus:border-indigo-500"
-                            [class.border-red-500]="errors().month"
-                            style="background-color: var(--color-bg-500); border-color: var(--color-bg-600); color: inherit;">
-                    </div>
-                    @if (errors().month) {
-                    <p class="text-xs text-red-500 mt-1 animate-fade-in">{{ errors().month }}</p>
-                    }
-                </div>
-
-                <div class="mb-4 animate-fade-in">
-                    <label class="block mb-2 text-sm opacity-60">Note (Optional)</label>
-                    <div class="relative">
-                        <span class="absolute left-4 top-3.5 opacity-40"><i class="fa-solid fa-pen"></i></span>
-                        <input type="text" [(ngModel)]="newNote" name="note" placeholder="Extra details..."
-                            maxlength="50"
-                            class="w-full py-3 pl-10 pr-4 transition-colors border rounded-xl focus:outline-none focus:border-indigo-500"
-                            [class.border-red-500]="errors().note"
-                            style="background-color: var(--color-bg-500); border-color: var(--color-bg-600); color: inherit;">
-                    </div>
-                    @if (errors().note) {
-                    <p class="text-xs text-red-500 mt-1 animate-fade-in">{{ errors().note }}</p>
-                    }
-                </div>
-                }
-
-                @if (viewMode === 'budget') {
-                <p class="mb-4 text-xs italic opacity-60 text-center">
-                    Setting budget for {{ currentMonth | date:'MMMM yyyy' }}.
-                </p>
-                }
-
-                <button type="submit"
-                    class="w-full py-4 mt-4 font-bold text-white transition bg-indigo-500 rounded-xl shadow-lg shadow-indigo-500/25 active:scale-95 hover:bg-indigo-600">
-                    {{ editingId ? 'Update' : 'Save' }}
-                </button>
-            </form>
         </div>
-    </div>
-    }
+        }
 
-    @if (showFilterModal) {
-    <div class="fixed inset-0 z-50 flex justify-center p-4 bg-black/50 backdrop-blur-sm items-center"
-        (click)="closeFilterModal()">
-        <div class="w-[90%] md:w-[450px] rounded-3xl p-6 shadow-2xl animate-slide-up"
-            style="background-color: var(--color-bg-100);" (click)="$event.stopPropagation()">
+        @if (showFilterModal) {
+        <div class="fixed inset-0 z-50 flex justify-center p-4 bg-black/50 backdrop-blur-sm items-center"
+            (click)="closeFilterModal()">
+            <div class="w-[90%] md:w-[450px] rounded-3xl p-6 shadow-2xl animate-slide-up"
+                style="background-color: var(--color-bg-100);" (click)="$event.stopPropagation()">
 
-            <div class="flex items-center justify-between mb-6">
-                <h3 class="text-xl font-bold">Filter Range</h3>
-                <button (click)="closeFilterModal()"
-                    class="flex items-center justify-center w-8 h-8 transition rounded-full hover:opacity-70"
-                    style="background-color: var(--color-bg-500); color: var(--color-text);">
-                    <i class="fa-solid fa-xmark"></i>
-                </button>
+                <div class="flex items-center justify-between mb-6">
+                    <h3 class="text-xl font-bold">Filter Range</h3>
+                    <button (click)="closeFilterModal()"
+                        class="flex items-center justify-center w-8 h-8 transition rounded-full hover:opacity-70"
+                        style="background-color: var(--color-bg-500); color: var(--color-text);">
+                        <i class="fa-solid fa-xmark"></i>
+                    </button>
+                </div>
+
+                <form (submit)="applyFilter()">
+                    <div class="flex flex-col gap-4 mb-4 md:flex-row">
+
+                        <div class="w-full md:w-1/2">
+                            <label class="block mb-2 text-sm opacity-60">From Month</label>
+                            <input type="month" [(ngModel)]="filterStartDate" name="start" [max]="filterEndDate"
+                                class="w-full py-3 px-4 transition-colors border rounded-xl focus:outline-none focus:border-indigo-500"
+                                style="background-color: var(--color-bg-500); border-color: var(--color-bg-600); color: inherit;">
+                        </div>
+
+                        <div class="w-full md:w-1/2">
+                            <label class="block mb-2 text-sm opacity-60">To Month</label>
+                            <input type="month" [(ngModel)]="filterEndDate" name="end" [min]="filterStartDate"
+                                class="w-full py-3 px-4 transition-colors border rounded-xl focus:outline-none focus:border-indigo-500"
+                                style="background-color: var(--color-bg-500); border-color: var(--color-bg-600); color: inherit;">
+                        </div>
+                    </div>
+
+                    @if (errors().filter) {
+                    <div
+                        class="p-3 mb-4 text-xs text-center text-red-500 rounded-lg bg-red-500/10 animate-fade-in border border-red-500/20">
+                        <i class="mr-1 fa-solid fa-circle-exclamation"></i>
+                        {{ errors().filter }}
+                    </div>
+                    }
+
+                    <button type="submit"
+                        class="w-full py-3 mt-2 font-bold text-white transition bg-indigo-500 rounded-xl shadow-lg shadow-indigo-500/25 active:scale-95 hover:bg-indigo-600 disabled:opacity-50 disabled:cursor-not-allowed"
+                        [disabled]="!filterStartDate && !filterEndDate">
+                        Apply Filter
+                    </button>
+
+                    @if(isFilterActive) {
+                    <button type="button" (click)="clearFilter(); closeFilterModal()"
+                        class="w-full py-3 mt-3 text-sm font-medium transition opacity-60 hover:opacity-100 hover:text-red-500">
+                        Clear Current Filter
+                    </button>
+                    }
+                </form>
             </div>
-
-            <form (submit)="applyFilter()">
-                <div class="flex flex-col gap-4 mb-4 md:flex-row">
-
-                    <div class="w-full md:w-1/2">
-                        <label class="block mb-2 text-sm opacity-60">From Month</label>
-                        <input type="month" [(ngModel)]="filterStartDate" name="start" [max]="filterEndDate"
-                            class="w-full py-3 px-4 transition-colors border rounded-xl focus:outline-none focus:border-indigo-500"
-                            style="background-color: var(--color-bg-500); border-color: var(--color-bg-600); color: inherit;">
-                    </div>
-
-                    <div class="w-full md:w-1/2">
-                        <label class="block mb-2 text-sm opacity-60">To Month</label>
-                        <input type="month" [(ngModel)]="filterEndDate" name="end" [min]="filterStartDate"
-                            class="w-full py-3 px-4 transition-colors border rounded-xl focus:outline-none focus:border-indigo-500"
-                            style="background-color: var(--color-bg-500); border-color: var(--color-bg-600); color: inherit;">
-                    </div>
-                </div>
-
-                @if (errors().filter) {
-                <div
-                    class="p-3 mb-4 text-xs text-center text-red-500 rounded-lg bg-red-500/10 animate-fade-in border border-red-500/20">
-                    <i class="mr-1 fa-solid fa-circle-exclamation"></i>
-                    {{ errors().filter }}
-                </div>
-                }
-
-                <button type="submit"
-                    class="w-full py-3 mt-2 font-bold text-white transition bg-indigo-500 rounded-xl shadow-lg shadow-indigo-500/25 active:scale-95 hover:bg-indigo-600 disabled:opacity-50 disabled:cursor-not-allowed"
-                    [disabled]="!filterStartDate && !filterEndDate">
-                    Apply Filter
-                </button>
-
-                @if(isFilterActive) {
-                <button type="button" (click)="clearFilter(); closeFilterModal()"
-                    class="w-full py-3 mt-3 text-sm font-medium transition opacity-60 hover:opacity-100 hover:text-red-500">
-                    Clear Current Filter
-                </button>
-                }
-            </form>
         </div>
+        }
+
+        }
     </div>
-    }
 </div>

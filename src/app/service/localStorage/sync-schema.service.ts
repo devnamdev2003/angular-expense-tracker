@@ -38,6 +38,8 @@ export class SyncSchemaService {
             this.syncWithSchema(this.storageService.getExpenseKey(), this.storageService.getexpenseSchema());
             this.syncWithSchema(this.storageService.getSalaryKey(), this.storageService.getsalarySchema());
             this.syncWithSchema(this.storageService.getUserLikedSongsKey(), this.storageService.getlikedSongSchema());
+            this.syncWithSchema(this.storageService.getGoalKey(), this.storageService.getGoalSchema());
+            this.syncWithSchema(this.storageService.getSavingsKey(), this.storageService.getSavingsSchema());
         }
     }
 

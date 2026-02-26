@@ -35,6 +35,12 @@ export class StorageService {
   /** LocalStorage key for user Liked songs */
   private readonly userLikedSongsKey = 'user_liked_songs';
 
+  /** LocalStorage key for goals */
+  private readonly goalKey = 'goals';
+
+  /** LocalStorage key for savings */
+  private readonly savingsKey = 'savings';
+
   /** Schema for categories */
   private readonly categorySchema: Schema = {
     category_id: "",
@@ -106,6 +112,24 @@ export class StorageService {
     isLiked: false,
   };
 
+  /** Schema for goals */
+  private readonly goalSchema: Schema = {
+    goal_id: "",
+    goal_name: "",
+    target_amount: 0,
+    start_date: "",
+    target_date: "",
+    note: ""
+  };
+
+  /** Schema for savings */
+  private readonly savingsSchema: Schema = {
+    saving_id: "",
+    amount: 0,
+    date: "",
+    note: "",
+  };
+
   /**
    * Retrieves all categories from localStorage.
    *
@@ -151,6 +175,14 @@ export class StorageService {
     return JSON.parse(localStorage.getItem(this.userLikedSongsKey) || '[]');
   }
 
+  getAllGoals(): any[] {
+    return JSON.parse(localStorage.getItem(this.goalKey) || '[]');
+  }
+
+  getAllSavings(): any[] {
+    return JSON.parse(localStorage.getItem(this.savingsKey) || '[]');
+  }
+
   /** Returns the localStorage key used for categories */
   getCategoryKey(): string { return this.categoryKey; }
 
@@ -165,6 +197,9 @@ export class StorageService {
 
   /** Returns the localStorage key used for user liked songs */
   getUserLikedSongsKey(): string { return this.userLikedSongsKey; }
+
+  getGoalKey(): string { return this.goalKey; }
+  getSavingsKey(): string { return this.savingsKey; }
 
   /**
    * Updates the categories in localStorage.
@@ -191,6 +226,14 @@ export class StorageService {
    */
   updateUser(user: any): void {
     localStorage.setItem(this.userKey, JSON.stringify(user));
+  }
+
+  updateGoals(goals: any[]): void {
+    localStorage.setItem(this.goalKey, JSON.stringify(goals));
+  }
+
+  updateSavings(savings: any[]): void {
+    localStorage.setItem(this.savingsKey, JSON.stringify(savings));
   }
 
   /** Returns the schema for categories
@@ -233,6 +276,14 @@ export class StorageService {
     return this.likedSongSchema;
   }
 
+  getGoalSchema(): Schema {
+    return this.goalSchema;
+  }
+
+  getSavingsSchema(): Schema {
+    return this.savingsSchema;
+  }
+
   resetAllData(): void {
     const categories = this.getAllCategories();
     const defaultCategories = categories.filter(
@@ -243,5 +294,7 @@ export class StorageService {
     localStorage.setItem(this.salaryKey, JSON.stringify([]));
     localStorage.setItem(this.userKey, JSON.stringify(this.userSchema));
     localStorage.setItem(this.userLikedSongsKey, JSON.stringify([]));
+    localStorage.setItem(this.goalKey, JSON.stringify([]));
+    localStorage.setItem(this.savingsKey, JSON.stringify([]));
   }
 }
