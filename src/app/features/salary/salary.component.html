@@ -61,7 +61,7 @@
 
         @if (viewMode === 'saving') {
 
-        <div class="animate-fade-in">
+        <div>
             <app-saving></app-saving>
         </div>
 
@@ -69,25 +69,22 @@
 
         <main class="space-y-6">
 
-            <section
-                class="relative overflow-hidden text-white transition-all duration-500 rounded-3xl group animate-slide-up"
+            <section class="relative overflow-hidden text-white transition-all duration-500 rounded-3xl group"
                 [ngClass]="viewMode === 'salary' ? 'shadow-2xl shadow-indigo-500/20' : 'shadow-2xl shadow-emerald-500/20'">
 
-                <div class="absolute inset-0 bg-gradient-to-br from-indigo-600 via-purple-600 to-indigo-800 transition-opacity duration-500 ease-in-out"
+                <div class="absolute inset-0 bg-gradient-to-br from-indigo-600 via-purple-600 to-indigo-800"
                     [class.opacity-100]="viewMode === 'salary'" [class.opacity-0]="viewMode !== 'salary'">
                 </div>
 
-                <div class="absolute inset-0 bg-gradient-to-br from-emerald-600 via-teal-600 to-emerald-800 transition-opacity duration-500 ease-in-out"
+                <div class="absolute inset-0 bg-gradient-to-br from-emerald-600 via-teal-600 to-emerald-800"
                     [class.opacity-100]="viewMode === 'budget'" [class.opacity-0]="viewMode !== 'budget'">
                 </div>
 
-                <div class="absolute top-0 right-0 p-4 transition-all duration-500 transform"
-                    [ngClass]="viewMode === 'salary' ? 'opacity-20 translate-y-0 rotate-12' : 'opacity-0 translate-y-4 rotate-0'">
+                <div class="absolute top-0 right-0 p-4" [ngClass]="viewMode === 'salary' ? 'opacity-20' : 'opacity-0'">
                     <i class="fa-solid fa-sack-dollar text-9xl"></i>
                 </div>
 
-                <div class="absolute top-0 right-0 p-4 transition-all duration-500 transform"
-                    [ngClass]="viewMode === 'budget' ? 'opacity-20 translate-y-0 rotate-12' : 'opacity-0 translate-y-4 rotate-0'">
+                <div class="absolute top-0 right-0 p-4" [ngClass]="viewMode === 'budget' ? 'opacity-20' : 'opacity-0'">
                     <i class="fa-solid fa-chart-pie text-9xl"></i>
                 </div>
 
@@ -138,7 +135,7 @@
                 </div>
             </section>
 
-            <section class="grid grid-cols-3 gap-3 md:gap-4 animate-slide-up" style="animation-delay: 0.1s;">
+            <section class="grid grid-cols-3 gap-3 md:gap-4  " style="animation-delay: 0.1s;">
                 <div class="flex flex-col justify-between p-3 transition cursor-pointer rounded-2xl hover:opacity-90"
                     style="background-color: var(--color-bg-100); box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);">
 
@@ -210,7 +207,7 @@
                 </div>
             </section>
 
-            <section class="p-4 rounded-2xl animate-slide-up"
+            <section class="p-4 rounded-2xl  "
                 style="animation-delay: 0.15s; background-color: var(--color-bg-100); box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);">
                 <div class="flex justify-between mb-2 text-xs opacity-60">
                     <span>{{ viewMode === 'salary' ? 'Income Usage' : 'Budget Usage' }}</span>
@@ -225,7 +222,7 @@
                 <p class="text-[10px] text-center italic" [ngClass]="analysisTextClass">{{ analysisText }}</p>
             </section>
 
-            <div class="flex items-end justify-between animate-slide-up" style="animation-delay: 0.2s;">
+            <div class="flex items-end justify-between  " style="animation-delay: 0.2s;">
                 <h3 class="text-xl font-semibold">
                     {{ viewMode === 'salary' ? 'Income Transactions' : 'Budget History' }}
                 </h3>
@@ -253,7 +250,7 @@
             </div>
             }
 
-            <div class="pb-16 space-y-3 animate-slide-up" style="animation-delay: 0.3s;">
+            <div class="pb-16 space-y-3  " style="animation-delay: 0.3s;">
                 @if (filteredTransactions.length === 0) {
                 <div class="py-10 text-center opacity-50 animate-fade-in">
                     <i class="mb-3 text-4xl fa-solid fa-filter"></i>
@@ -310,7 +307,7 @@
         @if (showModal) {
         <div class="fixed inset-0 z-50 flex justify-center p-4 bg-black/50 backdrop-blur-sm items-center"
             (click)="closeModal()">
-            <div class="w-[90%] md:w-[500px] rounded-3xl p-6 shadow-2xl animate-slide-up"
+            <div class="w-[90%] md:w-[500px] rounded-3xl p-6 shadow-2xl  "
                 style="background-color: var(--color-bg-100);" (click)="$event.stopPropagation()">
                 <div class="flex items-center justify-between mb-6">
                     <h3 class="text-xl font-bold">
@@ -392,7 +389,7 @@
         @if (showFilterModal) {
         <div class="fixed inset-0 z-50 flex justify-center p-4 bg-black/50 backdrop-blur-sm items-center"
             (click)="closeFilterModal()">
-            <div class="w-[90%] md:w-[450px] rounded-3xl p-6 shadow-2xl animate-slide-up"
+            <div class="w-[90%] md:w-[450px] rounded-3xl p-6 shadow-2xl  "
                 style="background-color: var(--color-bg-100);" (click)="$event.stopPropagation()">
 
                 <div class="flex items-center justify-between mb-6">

@@ -1,6 +1,6 @@
 <main class="space-y-6">
     <section
-        class="relative overflow-hidden text-white transition-all duration-500 shadow-2xl rounded-3xl group animate-slide-up shadow-indigo-500/20">
+        class="relative overflow-hidden text-white transition-all duration-500 shadow-2xl rounded-3xl group shadow-indigo-500/20">
 
         <div
             class="absolute inset-0 opacity-100 bg-gradient-to-br from-cyan-600 via-sky-600 to-blue-800 transition-opacity duration-500 ease-in-out">
@@ -50,7 +50,7 @@
         </div>
     </section>
 
-    <section class="grid grid-cols-3 gap-3 md:gap-4 animate-slide-up" style="animation-delay: 0.1s;">
+    <section class="grid grid-cols-3 gap-3 md:gap-4  " style="animation-delay: 0.1s;">
         <div class="flex flex-col justify-between p-3 transition cursor-pointer rounded-2xl hover:opacity-90"
             style="background-color: var(--color-bg-100); box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);">
             <i class="mb-2 text-lg text-indigo-500 fa-solid fa-flag-checkered"></i>
@@ -86,7 +86,7 @@
     </section>
 
     <section (click)="handleGoalCardClick()"
-        class="p-4 rounded-2xl animate-slide-up cursor-pointer hover:opacity-90 transition-all border border-transparent hover:border-indigo-500/30 group"
+        class="p-4 rounded-2xl   cursor-pointer hover:opacity-90 transition-all border border-transparent hover:border-indigo-500/30 group"
         style="animation-delay: 0.15s; background-color: var(--color-bg-100); box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);">
         @if (currentGoal) {
         <div class="flex justify-between mb-2 text-xs font-semibold">
@@ -126,11 +126,11 @@
         }
     </section>
 
-    <div class="flex items-end justify-between animate-slide-up" style="animation-delay: 0.2s;">
+    <div class="flex items-end justify-between  " style="animation-delay: 0.2s;">
         <h3 class="text-xl font-semibold">Recent Savings</h3>
     </div>
 
-    <div class="pb-16  space-y-3 animate-slide-up" style="animation-delay: 0.3s;">
+    <div class="pb-16  space-y-3  " style="animation-delay: 0.3s;">
         @if (savings.length === 0) {
         <div class="py-10 text-center opacity-50 animate-fade-in">
             <i class="mb-3 text-4xl fa-solid fa-receipt"></i>
@@ -197,7 +197,7 @@
 @if (showSavingModal) {
 <div class="fixed inset-0 z-50 flex justify-center p-4 bg-black/50 backdrop-blur-sm items-center"
     (click)="closeModals()">
-    <div class="w-[90%] md:w-[500px] rounded-3xl p-6 shadow-2xl animate-slide-up max-h-[90vh] overflow-y-auto"
+    <div class="w-[90%] md:w-[500px] rounded-3xl p-6 shadow-2xl   max-h-[90vh] overflow-y-auto"
         style="background-color: var(--color-bg-100);" (click)="$event.stopPropagation()">
 
         <div class="flex items-center justify-between mb-6">
@@ -296,8 +296,8 @@
 @if (showGoalDetailsModal && currentGoal) {
 <div class="fixed inset-0 z-50 flex justify-center p-4 bg-black/50 backdrop-blur-sm items-center transition-all"
     (click)="closeModals()">
-    <div class="w-[90%] md:w-[500px] rounded-3xl p-6 shadow-2xl animate-slide-up"
-        style="background-color: var(--color-bg-100);" (click)="$event.stopPropagation()">
+    <div class="w-[90%] md:w-[500px] rounded-3xl p-6 shadow-2xl  " style="background-color: var(--color-bg-100);"
+        (click)="$event.stopPropagation()">
 
         <div class="flex items-start justify-between mb-6">
             <div>
@@ -364,7 +364,7 @@
 @if (showGoalModal) {
 <div class="fixed inset-0 z-50 flex justify-center p-4 bg-black/50 backdrop-blur-sm items-center"
     (click)="closeModals()">
-    <div class="w-[90%] md:w-[500px] rounded-3xl p-6 shadow-2xl animate-slide-up max-h-[90vh] overflow-y-auto"
+    <div class="w-[90%] md:w-[500px] rounded-3xl p-6 shadow-2xl   max-h-[90vh] overflow-y-auto"
         style="background-color: var(--color-bg-100);" (click)="$event.stopPropagation()">
 
         <div class="flex items-center justify-between mb-6">
