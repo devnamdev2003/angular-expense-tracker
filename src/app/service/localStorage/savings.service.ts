@@ -117,4 +117,21 @@ export class SavingsService {
         const all: Saving[] = this.getAll();
         return all.filter(item => item.is_from_income).reduce((acc, item) => acc + item.amount, 0);
     }
+
+    gettotalSavingsBetweenDates(from: string | null, to: string | null): number {
+        if (!this.isBrowser()) return 0;
+        if (from && to) {
+            const all: Saving[] = this.getAll();
+            return all.filter(item => {
+                const itemDate = new Date(item.date);
+                itemDate.setHours(0, 0, 0, 0);
+                const fromDate = new Date(from);
+                const toDate = new Date(to);
+                fromDate.setHours(0, 0, 0, 0);
+                toDate.setHours(23, 59, 59, 999);
+                return itemDate >= fromDate && itemDate <= toDate;
+            }).reduce((acc, item) => acc + item.amount, 0);
+        }
+        return 0;
+    }
 }

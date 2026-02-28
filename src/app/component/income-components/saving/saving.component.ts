@@ -62,19 +62,20 @@ export class SavingComponent implements OnInit {
 
   calculateStats() {
     this.totalSavedAmount = this.savings.reduce((sum, s) => sum + Number(s.amount || 0), 0);
-    this.goalTarget = Number(this.currentGoal?.target_amount || 0);
+    this.goalTarget = this.goalTargetFunction();
 
-    const progress = this.goalTarget > 0 ? (this.totalSavedAmount / this.goalTarget) * 100 : 0;
+    const totalSavedBetweenGoalRange = this.savingsService.gettotalSavingsBetweenDates(this.currentGoal?.start_date || null, this.currentGoal?.target_date || null);
+
+    const progress = this.goalTarget > 0 ? (totalSavedBetweenGoalRange / this.goalTarget) * 100 : 0;
     this.progressPercentage = Math.min(Math.max(progress, 0), 100);
     this.remainingPercentage = Math.max(100 - this.progressPercentage, 0);
+    this.goalRemaining = (this.goalTarget - totalSavedBetweenGoalRange) > 0 ? this.goalTarget - totalSavedBetweenGoalRange : 0;
 
-    this.goalRemaining = (this.goalTarget - this.totalSavedAmount) > 0 ? this.goalTarget - this.totalSavedAmount : 0;
-
-    if (this.currentGoal?.start_date && this.totalSavedAmount > 0) {
+    if (this.currentGoal?.start_date && totalSavedBetweenGoalRange > 0) {
       const start = new Date(this.currentGoal.start_date).getTime();
       const today = new Date().getTime();
       let days = Math.ceil((today - start) / (1000 * 3600 * 24));
-      this.averageSavedPerDay = this.totalSavedAmount / (days <= 0 ? 1 : days);
+      this.averageSavedPerDay = totalSavedBetweenGoalRange / (days <= 0 ? 1 : days);
     } else {
       this.averageSavedPerDay = 0;
     }
@@ -82,6 +83,13 @@ export class SavingComponent implements OnInit {
     this.suggestedPerDay = this.suggestedPerDayFunction();
   }
 
+
+  goalTargetFunction(): number {
+    if (this.currentGoal) {
+      return Number(this.currentGoal.target_amount);
+    }
+    return 0;
+  }
   allowedPerDayFunction(): number {
     if (this.currentGoal) {
       const days = this.utilService.calculateDaysBetween(this.currentGoal.start_date, this.currentGoal.target_date);
