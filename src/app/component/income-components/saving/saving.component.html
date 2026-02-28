@@ -42,7 +42,7 @@
                             Goal Remaining
                         </div>
                         <p class="text-xl font-semibold md:text-2xl">
-                            ₹{{ currentMonthAdded | number:'1.2-2' }}
+                            ₹{{ goalRemaining | number:'1.2-2' }}
                         </p>
                     </div>
                 </div>
@@ -53,18 +53,18 @@
     <section class="grid grid-cols-3 gap-3 md:gap-4  " style="animation-delay: 0.1s;">
         <div class="flex flex-col justify-between p-3 transition cursor-pointer rounded-2xl hover:opacity-90"
             style="background-color: var(--color-bg-100); box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);">
-            <i class="mb-2 text-lg text-indigo-500 fa-solid fa-flag-checkered"></i>
+            <i class="mb-2 text-lg text-indigo-500 fa-solid fa-scale-balanced"></i>
             <div>
-                <p class="text-[10px] opacity-60 uppercase tracking-wide">Goal Name</p>
+                <p class="text-[10px] opacity-60 uppercase tracking-wide">Allowed/Day</p>
                 <p class="text-sm font-bold md:text-base truncate" [title]="currentGoal?.goal_name || 'No Goal'">
-                    {{ currentGoal?.goal_name || 'No Goal' }}
+                    ₹{{ allowedPerDay | number:'1.0-1' }}
                 </p>
             </div>
         </div>
 
         <div class="flex flex-col justify-between p-3 transition cursor-pointer rounded-2xl hover:opacity-90"
             style="background-color: var(--color-bg-100); box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);">
-            <i class="mb-2 text-lg text-emerald-500 fa-solid fa-chart-line"></i>
+            <i class="mb-2 text-lg text-emerald-500 fa-solid fa-fire-flame-curved"></i>
             <div>
                 <p class="text-[10px] opacity-60 uppercase tracking-wide">Saved/Day</p>
                 <p class="text-sm font-bold md:text-base">
@@ -75,11 +75,11 @@
 
         <div class="flex flex-col justify-between p-3 transition cursor-pointer rounded-2xl hover:opacity-90"
             style="background-color: var(--color-bg-100); box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);">
-            <i class="mb-2 text-lg text-purple-500 fa-solid fa-hourglass-half"></i>
+            <i class="mb-2 text-lg text-purple-500 fa-solid fa-bullseye"></i>
             <div>
-                <p class="text-[10px] opacity-60 uppercase tracking-wide">Remaining</p>
+                <p class="text-[10px] opacity-60 uppercase tracking-wide">Suggested/Day</p>
                 <p class="text-sm font-bold md:text-base">
-                    {{ remainingPercentage | number:'1.0-1' }}%
+                    ₹{{ suggestedPerDay | number:'1.0-1' }}
                 </p>
             </div>
         </div>

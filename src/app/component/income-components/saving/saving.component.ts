@@ -4,6 +4,7 @@ import { FormsModule } from '@angular/forms';
 import { GoalService, Goal } from '../../../service/localStorage/goal.service';
 import { SavingsService, Saving } from '../../../service/localStorage/savings.service';
 import { ConfigService } from '../../../service/config/config.service';
+import { UtilService } from '../../../service/utils/util.service';
 
 @Component({
   selector: 'app-saving',
@@ -34,13 +35,17 @@ export class SavingComponent implements OnInit {
   goalTarget = 0;
   progressPercentage = 0;
   remainingPercentage = 0;
-  currentMonthAdded = 0;
+  goalRemaining = 0;
   averageSavedPerDay = 0;
+  suggestedPerDay = 0;
+  allowedPerDay = 0;
+
 
   constructor(
     private goalService: GoalService,
     private savingsService: SavingsService,
-    private configService: ConfigService
+    private configService: ConfigService,
+    private utilService: UtilService
   ) {
     this.todayDateStr = this.configService.getLocalTime().split('T')[0];
   }
@@ -63,8 +68,7 @@ export class SavingComponent implements OnInit {
     this.progressPercentage = Math.min(Math.max(progress, 0), 100);
     this.remainingPercentage = Math.max(100 - this.progressPercentage, 0);
 
-    const now = new Date();
-    this.currentMonthAdded = (this.goalTarget - this.totalSavedAmount) > 0 ? this.goalTarget - this.totalSavedAmount : 0;
+    this.goalRemaining = (this.goalTarget - this.totalSavedAmount) > 0 ? this.goalTarget - this.totalSavedAmount : 0;
 
     if (this.currentGoal?.start_date && this.totalSavedAmount > 0) {
       const start = new Date(this.currentGoal.start_date).getTime();
@@ -74,6 +78,28 @@ export class SavingComponent implements OnInit {
     } else {
       this.averageSavedPerDay = 0;
     }
+    this.allowedPerDay = this.allowedPerDayFunction();
+    this.suggestedPerDay = this.suggestedPerDayFunction();
+  }
+
+  allowedPerDayFunction(): number {
+    if (this.currentGoal) {
+      const days = this.utilService.calculateDaysBetween(this.currentGoal.start_date, this.currentGoal.target_date);
+      if (days <= 0) return 0;
+      this.allowedPerDay = this.goalTarget / days;
+      return this.allowedPerDay;
+    }
+    return 0;
+  }
+
+  suggestedPerDayFunction(): number {
+    if (this.currentGoal) {
+      const days = this.utilService.calculateDaysBetween(this.todayDateStr, this.currentGoal.target_date);
+      if (days <= 0) return 0;
+      this.suggestedPerDay = this.goalRemaining / days;
+      return this.suggestedPerDay;
+    }
+    return 0;
   }
 
   /* ---------- Saving Form Validation Getters ---------- */
