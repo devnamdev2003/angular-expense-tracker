@@ -111,4 +111,10 @@ export class SavingsService {
         const all: Saving[] = this.getAll();
         return all.reduce((acc, item) => acc + item.amount, 0);
     }
+
+    getTotalSavingsFromIncome(): number {
+        if (!this.isBrowser()) return 0;
+        const all: Saving[] = this.getAll();
+        return all.filter(item => item.is_from_income).reduce((acc, item) => acc + item.amount, 0);
+    }
 }

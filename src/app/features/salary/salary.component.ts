@@ -177,7 +177,7 @@ export class SalaryComponent implements OnInit {
     this.totalExpense = this.totalExpenseFunction();
     this.totalIncome = this.filteredTransactions.reduce((acc, t) => acc + (t.amount || 0), 0);
     this.totalBudget = this.filteredTransactions.reduce((acc, t) => acc + (t.budget || 0), 0);
-    this.totalSavings = this.savingsService.getTotalSavings() > 0 ? this.savingsService.getTotalSavings() : 0;
+    this.totalSavings = this.savingsService.getTotalSavingsFromIncome() > 0 ? this.savingsService.getTotalSavingsFromIncome() : 0;
     this.salaryGrowth = this.salaryGrowthFunction(allTransactions);
     this.dateMetrics = this.dateMetricsFunction();
     this.dailyAllowed = this.dailyAllowedFunction();
