@@ -29,6 +29,8 @@ export class MusicComponent implements OnDestroy {
   likedPlaylist: any[] = [];
   currentLikedIndex = -1;
   repeatCurrentSong = false;
+  year: number = new Date().getFullYear();
+
 
   @ViewChild('searchSongInput') searchSongInput!: ElementRef;
 
