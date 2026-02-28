@@ -146,7 +146,8 @@ export class SavingComponent implements OnInit {
       saving_id: this.editingSavingId || 'sav_' + Date.now(),
       amount: Number(this.savingForm.amount),
       date: this.savingForm.date!,
-      note: this.savingForm.note || ''
+      note: this.savingForm.note || '',
+      is_from_income: this.savingForm.is_from_income || false
     };
 
     if (this.editingSavingId) {

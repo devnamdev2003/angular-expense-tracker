@@ -9,6 +9,7 @@ export interface Saving {
     amount: number;
     date: string;
     note: string;
+    is_from_income?: boolean;
 }
 
 /**

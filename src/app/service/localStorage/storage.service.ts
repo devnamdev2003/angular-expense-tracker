@@ -128,6 +128,7 @@ export class StorageService {
     amount: 0,
     date: "",
     note: "",
+    is_from_income: false
   };
 
   /**

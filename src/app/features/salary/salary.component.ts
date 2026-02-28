@@ -130,7 +130,7 @@ export class SalaryComponent implements OnInit {
   ) {
     this.userCurrancy = this.userService.getValue<string>('currency') || '';
     this.viewMode = this.userService.getValue<'salary' | 'budget' | 'saving'>('salary_view_mode') || 'salary';
-    this.totalSavings = this.savingsService.getTotalSavings() > 0 ? this.savingsService.getTotalSavings() : 0; 
+
   }
 
   /**
@@ -177,6 +177,7 @@ export class SalaryComponent implements OnInit {
     this.totalExpense = this.totalExpenseFunction();
     this.totalIncome = this.filteredTransactions.reduce((acc, t) => acc + (t.amount || 0), 0);
     this.totalBudget = this.filteredTransactions.reduce((acc, t) => acc + (t.budget || 0), 0);
+    this.totalSavings = this.savingsService.getTotalSavings() > 0 ? this.savingsService.getTotalSavings() : 0;
     this.salaryGrowth = this.salaryGrowthFunction(allTransactions);
     this.dateMetrics = this.dateMetricsFunction();
     this.dailyAllowed = this.dailyAllowedFunction();
@@ -227,6 +228,12 @@ export class SalaryComponent implements OnInit {
     const balance = this.totalIncome - this.totalExpense;
     return (balance / this.totalIncome) * 100;
   }
+
+  totalSavingsFunction(): number {
+    const savingsAmount = this.savingsService.getTotalSavings();
+    return savingsAmount > 0 ? savingsAmount : 0;;
+  }
+
 
   /**
    * Aggregates total expenses based on whether the user is viewing all time or the current month's budget.
