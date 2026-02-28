@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Links</title>
+    <meta name="description"
+        content="ExWise is a mobile-first, privacy-focused expense tracker app built with Angular and Tailwind. Track daily expenses, set budgets, and analyze spending habits locally without a server.">
+    <meta name="keywords"
+        content="expense tracker, finance app, budget planner, personal finance, angular app, mobile-first, localstorage, privacy focused, exwise, offline finance, pwa">
+    <meta name="author" content="devnamdev">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://exwise.vercel.app/">
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://exwise.vercel.app/">
+    <meta property="og:title" content="ExWise - Private Mobile Expense Tracker">
+    <meta property="og:description"
+        content="Stop playing hide and seek with your money. ExWise is a secure, offline-first expense tracker that keeps your financial data private on your device.">
+    <meta property="og:image" content="https://exwise.vercel.app/images/share.png">
+
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="https://exwise.vercel.app/">
+    <meta property="twitter:title" content="ExWise - Private Mobile Expense Tracker">
+    <meta property="twitter:description"
+        content="Stop playing hide and seek with your money. ExWise is a secure, offline-first expense tracker that keeps your financial data private.">
+    <meta property="twitter:image" content="https://exwise.vercel.app/images/share.png">
+
+    <!-- PWA / Mobile -->
+    <meta name="theme-color" content="#050507">
+    <link rel="apple-touch-icon" href="https://exwise.vercel.app/icons/icon-512x512.png">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="https://exwise.vercel.app/favicon.ico">
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Phosphor Icons for modern, clean icons -->
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+
+    <!-- Google Fonts: Inter -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <!-- Tailwind Configuration -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    },
+                    animation: {
+                        'fade-in-up': 'fadeInUp 0.8s ease-out forwards',
+                    },
+                    keyframes: {
+                        fadeInUp: {
+                            '0%': { opacity: '0', transform: 'translateY(20px)' },
+                            '100%': { opacity: '1', transform: 'translateY(0)' },
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        /* Custom subtle scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: #020617;
+        }
+
+        /* slate-950 */
+        ::-webkit-scrollbar-thumb {
+            background: #1e293b;
+            border-radius: 4px;
+        }
+
+        /* slate-800 */
+        ::-webkit-scrollbar-thumb:hover {
+            background: #334155;
+        }
+
+        /* slate-700 */
+
+        /* Remove tap highlight on mobile for cleaner feel */
+        body {
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        /* Staggered animation delays for the list items */
+        .delay-100 {
+            animation-delay: 100ms;
+        }
+
+        .delay-200 {
+            animation-delay: 200ms;
+        }
+
+        .delay-300 {
+            animation-delay: 300ms;
+        }
+
+        .delay-400 {
+            animation-delay: 400ms;
+        }
+
+        .delay-500 {
+            animation-delay: 500ms;
+        }
+    </style>
+</head>
+
+<body
+    class="bg-slate-950 text-slate-300 font-sans antialiased min-h-screen relative overflow-x-hidden selection:bg-indigo-500/30 selection:text-white">
+
+    <!-- Ambient Background Glow Effects -->
+    <div
+        class="fixed top-[-10%] left-1/2 -translate-x-1/2 w-[800px] h-[400px] bg-indigo-600/20 blur-[120px] rounded-full pointer-events-none z-0">
+    </div>
+    <div
+        class="fixed bottom-[-10%] right-[-10%] w-[600px] h-[600px] bg-purple-600/10 blur-[150px] rounded-full pointer-events-none z-0">
+    </div>
+
+    <!-- Main Container -->
+    <main class="relative z-10 w-full max-w-2xl mx-auto px-6 py-16 sm:py-24 flex flex-col items-center min-h-screen">
+
+        <!-- Profile Header Section -->
+        <header class="flex flex-col items-center text-center mb-12 opacity-0 animate-fade-in-up">
+            <!-- Profile Image / Avatar -->
+            <div class="relative group cursor-pointer mb-5">
+                <div
+                    class="absolute -inset-0.5 bg-gradient-to-r from-indigo-500 to-purple-500 rounded-full blur opacity-40 group-hover:opacity-75 transition duration-500">
+                </div>
+                <img src="https://api.dicebear.com/7.x/notionists/svg?seed=Felix&backgroundColor=e2e8f0"
+                    alt="Profile avatar"
+                    class="relative w-24 h-24 rounded-full border-2 border-slate-800 object-cover bg-slate-200">
+            </div>
+
+            <h1 class="text-3xl font-bold text-white tracking-tight mb-2">Dev Developer</h1>
+            <p class="text-slate-400 font-medium max-w-md">
+                Full-Stack Engineer & UI/UX Enthusiast. Exploring the intersection of design and code.
+            </p>
+
+            <!-- Quick Social Icons -->
+            <!-- <div class="flex gap-4 mt-6">
+                <a href="#" class="text-slate-400 hover:text-white transition-colors p-2 hover:bg-white/5 rounded-full"
+                    aria-label="GitHub">
+                    <i class="ph ph-github-logo text-2xl"></i>
+                </a>
+                <a href="#"
+                    class="text-slate-400 hover:text-[#0a66c2] transition-colors p-2 hover:bg-white/5 rounded-full"
+                    aria-label="LinkedIn">
+                    <i class="ph ph-linkedin-logo text-2xl"></i>
+                </a>
+                <a href="#"
+                    class="text-slate-400 hover:text-[#1da1f2] transition-colors p-2 hover:bg-white/5 rounded-full"
+                    aria-label="Twitter">
+                    <i class="ph ph-twitter-logo text-2xl"></i>
+                </a>
+                <a href="mailto:hello@example.com"
+                    class="text-slate-400 hover:text-rose-400 transition-colors p-2 hover:bg-white/5 rounded-full"
+                    aria-label="Email">
+                    <i class="ph ph-envelope-simple text-2xl"></i>
+                </a>
+            </div> -->
+        </header>
+
+        <!-- Links Section -->
+        <div class="w-full flex flex-col gap-4">
+
+            <!-- Section Title -->
+            <h2
+                class="text-sm font-semibold uppercase tracking-wider text-slate-500 mb-2 pl-2 opacity-0 animate-fade-in-up delay-100">
+                Featured Projects</h2>
+
+            <!-- Project Link Card 1 -->
+            <a href="/public/rd-fd.html"
+                class="group relative flex items-center gap-5 p-4 bg-white/[0.03] hover:bg-white/[0.08] border border-white/[0.05] hover:border-indigo-500/30 rounded-2xl transition-all duration-300 backdrop-blur-sm opacity-0 animate-fade-in-up delay-200 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 focus:ring-offset-slate-950">
+                <div
+                    class="flex items-center justify-center w-12 h-12 rounded-xl bg-indigo-500/10 text-indigo-400 group-hover:scale-110 group-hover:bg-indigo-500 group-hover:text-white transition-all duration-300 shadow-[0_0_15px_rgba(99,102,241,0)] group-hover:shadow-[0_0_20px_rgba(99,102,241,0.4)]">
+                    <i class="ph ph-bank text-2xl"></i>
+                </div>
+                <div class="flex-1">
+                    <div class="flex items-center gap-3 mb-1">
+                        <h3 class="text-lg font-semibold text-slate-100 group-hover:text-indigo-300 transition-colors">
+                            RD → FD Rolling Calculator</h3>
+                        <span
+                            class="px-2 py-0.5 text-[10px] font-bold uppercase tracking-wide bg-indigo-500/20 text-indigo-300 rounded-full border border-indigo-500/20">Live</span>
+                    </div>
+                    <p class="text-sm text-slate-400 line-clamp-1">Plan your rolling deposits and fixed deposit
+                        compounding seamlessly.</p>
+                </div>
+                <div
+                    class="text-slate-500 group-hover:text-white transform group-hover:translate-x-1 transition-all duration-300">
+                    <i class="ph ph-arrow-right text-xl"></i>
+                </div>
+            </a>
+
+            <!-- Project Link Card 2
+            <a href="#project-2"
+                class="group relative flex items-center gap-5 p-4 bg-white/[0.03] hover:bg-white/[0.08] border border-white/[0.05] hover:border-emerald-500/30 rounded-2xl transition-all duration-300 backdrop-blur-sm opacity-0 animate-fade-in-up delay-300 focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:ring-offset-2 focus:ring-offset-slate-950">
+                <div
+                    class="flex items-center justify-center w-12 h-12 rounded-xl bg-emerald-500/10 text-emerald-400 group-hover:scale-110 group-hover:bg-emerald-500 group-hover:text-white transition-all duration-300 shadow-[0_0_15px_rgba(16,185,129,0)] group-hover:shadow-[0_0_20px_rgba(16,185,129,0.4)]">
+                    <i class="ph ph-chart-line-up text-2xl"></i>
+                </div>
+                <div class="flex-1">
+                    <h3
+                        class="text-lg font-semibold text-slate-100 group-hover:text-emerald-300 transition-colors mb-1">
+                        FinTrack Dashboard</h3>
+                    <p class="text-sm text-slate-400 line-clamp-1">Personal finance visualization tool using React and
+                        D3.js.</p>
+                </div>
+                <div
+                    class="text-slate-500 group-hover:text-white transform group-hover:translate-x-1 transition-all duration-300">
+                    <i class="ph ph-arrow-right text-xl"></i>
+                </div>
+            </a>
+
+
+            <a href="#project-3"
+                class="group relative flex items-center gap-5 p-4 bg-white/[0.03] hover:bg-white/[0.08] border border-white/[0.05] hover:border-purple-500/30 rounded-2xl transition-all duration-300 backdrop-blur-sm opacity-0 animate-fade-in-up delay-400 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:ring-offset-2 focus:ring-offset-slate-950">
+                <div
+                    class="flex items-center justify-center w-12 h-12 rounded-xl bg-purple-500/10 text-purple-400 group-hover:scale-110 group-hover:bg-purple-500 group-hover:text-white transition-all duration-300 shadow-[0_0_15px_rgba(168,85,247,0)] group-hover:shadow-[0_0_20px_rgba(168,85,247,0.4)]">
+                    <i class="ph ph-cloud-sun text-2xl"></i>
+                </div>
+                <div class="flex-1">
+                    <h3 class="text-lg font-semibold text-slate-100 group-hover:text-purple-300 transition-colors mb-1">
+                        SkyCast Weather</h3>
+                    <p class="text-sm text-slate-400 line-clamp-1">Real-time weather application consuming OpenWeather
+                        API.</p>
+                </div>
+                <div
+                    class="text-slate-500 group-hover:text-white transform group-hover:translate-x-1 transition-all duration-300">
+                    <i class="ph ph-arrow-right text-xl"></i>
+                </div>
+            </a> -->
+
+            <!-- Divider / Secondary Section -->
+            <!-- <h2
+                class="text-sm font-semibold uppercase tracking-wider text-slate-500 mt-6 mb-2 pl-2 opacity-0 animate-fade-in-up delay-500">
+                Resources & Content</h2>
+
+
+            <a href="#blog"
+                class="group relative flex items-center gap-4 p-4 bg-white/[0.02] hover:bg-white/[0.05] border border-transparent hover:border-white/10 rounded-2xl transition-all duration-300 opacity-0 animate-fade-in-up delay-500 focus:outline-none focus:ring-2 focus:ring-slate-500 focus:ring-offset-2 focus:ring-offset-slate-950">
+                <i class="ph ph-article text-2xl text-slate-400 group-hover:text-white transition-colors"></i>
+                <span class="flex-1 text-base font-medium text-slate-300 group-hover:text-white transition-colors">Read
+                    my technical blog</span>
+                <i class="ph ph-arrow-up-right text-slate-500 group-hover:text-white transition-colors"></i>
+            </a>
+
+
+            <a href="#resume"
+                class="group relative flex items-center gap-4 p-4 bg-white/[0.02] hover:bg-white/[0.05] border border-transparent hover:border-white/10 rounded-2xl transition-all duration-300 opacity-0 animate-fade-in-up delay-500 focus:outline-none focus:ring-2 focus:ring-slate-500 focus:ring-offset-2 focus:ring-offset-slate-950">
+                <i class="ph ph-file-pdf text-2xl text-slate-400 group-hover:text-white transition-colors"></i>
+                <span class="flex-1 text-base font-medium text-slate-300 group-hover:text-white transition-colors">View
+                    my Resume</span>
+                <i class="ph ph-arrow-up-right text-slate-500 group-hover:text-white transition-colors"></i>
+            </a> -->
+
+        </div>
+
+        <!-- Footer -->
+        <footer class="mt-auto pt-16 pb-4 w-full text-center opacity-0 animate-fade-in-up delay-500">
+            <p class="text-sm text-slate-500">
+                © <span id="year"></span> Dev Developer. All rights reserved.
+            </p>
+        </footer>
+
+    </main>
+
+    <!-- Script to automatically update the copyright year -->
+    <script>
+        document.getElementById('year').textContent = new Date().getFullYear();
+    </script>
+</body>
+
+</html>
