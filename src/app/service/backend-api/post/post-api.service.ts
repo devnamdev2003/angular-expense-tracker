@@ -41,8 +41,10 @@ export class PostApiService {
     const now = new Date(this.configService.getLocalTime());
     const lastBackup = lastBackupStr ? new Date(lastBackupStr) : null;
     const shouldBackup = !lastBackup || (now.getTime() - lastBackup.getTime()) > 4 * 60 * 60 * 1000;
+    const is_backup_enable = this.userService.getValue<boolean>('is_backup_enable');
 
-    if (shouldBackup || forceBackup) {
+
+    if ((is_backup_enable && shouldBackup) || forceBackup) {
 
       if (forceBackup) this.globalLoaderService.show('☁️ Saving data to cloud...');
 
@@ -56,7 +58,7 @@ export class PostApiService {
         })
       ).subscribe({
         next: (res: any) => {
-          if (forceBackup) this.toastService.show('Data saved to cloud successfully!', 'success', 4000);
+          if (forceBackup) this.toastService.show('Data successfully synced to cloud!', 'success', 4000);
           console.log('User data posted successfully. Response:', res);
           const api_response_app_version = res.app_version;
           const app_current_version = this.userService.getValue<string>('app_version');

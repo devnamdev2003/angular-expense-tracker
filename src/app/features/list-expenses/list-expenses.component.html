@@ -2,31 +2,36 @@
     <!-- Sort and Filter buttons -->
     <div class="sticky top-0 z-30 bg-[var(--color-bg)] py-2 px-1">
         <div class="flex justify-between space-x-2">
+
+            <!-- CHANGED: Combined Amount and Count into one pill -->
             <div>
                 <p
-                    class="flex items-center gap-1 px-3 py-2 rounded-full text-sm font-medium bg-[var(--color-surface)] hover:bg-[var(--list-hover)] text-[var(--input-text)] shadow-sm transition">
-                    <img src="assets/img/icon/icons8-expense-48.png" alt="amount"
-                        class="w-[25px] h-[25px] transition-all duration-300 ease-in-out">
-                    <span class="text-[var(--color-green)]">{{currency}}{{totalAmount}}</span>
+                    class="flex items-center gap-1 px-3 py-2 rounded-full  text-xs font-medium bg-[var(--color-surface)] hover:bg-[var(--list-hover)] text-[var(--input-text)] shadow-sm transition whitespace-nowrap">
+                    <span class="text-[var(--color-green)] font-bold">{{currency}}{{totalAmount}}</span>
+
+                    <!-- Divider line -->
+                    <span class="border-l border-gray-400 h-4 mx-1 opacity-50"></span>
+
+                    <!-- Count -->
+                    <span class="text-[var(--color-accent)] font-bold">{{expenses.length}}</span>
+                    <span class="text-xs opacity-80 ml-1">items</span>
                 </p>
             </div>
 
-            <!-- Sort and Filter Buttons -->
-            <div class="flex gap-2">
+            <!-- Sort and Filter Buttons (Kept as is) -->
+            <div class="flex gap-1">
                 <button (click)="toggleSortByDropdown()"
-                    class="flex items-center gap-1 px-4 py-2 rounded-full text-sm font-medium bg-[var(--color-surface)] text-[var(--input-text)] hover:bg-[var(--list-hover)] shadow-sm transition">
-                    <img src="assets/img/icon/icons8-sort-50.png" alt="sort"
-                        class="w-[25px] h-[25px] transition-all duration-300 ease-in-out"
-                        style="filter: var(--icon-color2);">
-                    <span>Sort</span>
+                    class="flex items-center gap-2 px-3 py-1 text-xs font-medium transition-colors rounded-full bg-[var(--color-bg-100)] hover:bg-[var(--list-hover)]"
+                    [class.text-indigo-500]="isSorted">
+                    <i class="fa-solid fa-sort"></i>
+                    {{ isSorted ? 'Sort On' : 'Sort' }}
                 </button>
 
                 <button (click)="toggleFilterDropdown()"
-                    class="flex items-center gap-1 px-4 py-2 rounded-full text-sm font-medium bg-[var(--color-surface)] text-[var(--input-text)] hover:bg-[var(--list-hover)] shadow-sm transition">
-                    <img src="assets/img/icon/icons8-filter-50.png" alt="filter"
-                        class="w-[25px] h-[25px] transition-all duration-300 ease-in-out"
-                        style="filter: var(--icon-color2);">
-                    <span>Filter</span>
+                    class="flex items-center gap-2 px-3 py-1 text-xs font-medium transition-colors rounded-full bg-[var(--color-bg-100)] hover:bg-[var(--list-hover)]"
+                    [class.text-indigo-500]="isFilterdData">
+                    <i class="fa-solid fa-filter"></i>
+                    {{ isFilterdData ? 'Filter On' : 'Filter' }}
                 </button>
             </div>
         </div>
@@ -105,6 +110,12 @@
             <div class="pt-2">
                 <label class="block text-sm font-semibold mb-1">Categories:</label>
                 <div class="grid grid-cols-2 gap-2 max-h-40 overflow-y-auto pr-1">
+                    <label class="text-sm flex items-center space-x-1 col-span-2 ">
+                        <input type="checkbox" [checked]="areAllCategoriesSelected()"
+                            (change)="onAllCategoriesCheckboxChange($event)"
+                            class="form-checkbox accent-[var(--color-accent)]" name="all-categories" />
+                        <span>All Categories</span>
+                    </label>
                     <ng-container *ngFor="let cat of categories">
                         <label class="text-sm flex items-center space-x-1 col-span-2"
                             [class.col-span-1]="cat.name.length <= 15">

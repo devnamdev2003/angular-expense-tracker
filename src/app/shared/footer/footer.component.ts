@@ -21,6 +21,8 @@ export class FooterComponent {
    */
   appVersion: string = '';
 
+  year: number = new Date().getFullYear();
+
   /**
    * Creates an instance of FooterComponent.
    *

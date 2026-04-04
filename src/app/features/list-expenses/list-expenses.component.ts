@@ -77,7 +77,7 @@ export class ListExpensesComponent implements OnInit {
   /** Whether list is sorted. */
   isSorted: boolean = false;
 
-  /** Whether list is sorted. */
+  /** Whether list is filterd. */
   isFilterdData: boolean = false;
 
   /** Whether edit modal is open. */
@@ -114,6 +114,22 @@ export class ListExpensesComponent implements OnInit {
   /** Angular lifecycle hook: initializes expense list. */
   ngOnInit(): void {
     this.listExpenses();
+    this.injectFontAwesome();
+  }
+  
+  /**
+   * Injects external FontAwesome and Google Fonts stylesheets into the document head.
+   */
+  injectFontAwesome() {
+    const link = document.createElement('link');
+    link.rel = 'stylesheet';
+    link.href = 'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css';
+    document.head.appendChild(link);
+
+    const font = document.createElement('link');
+    font.href = "https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap";
+    font.rel = "stylesheet";
+    document.head.appendChild(font);
   }
 
   /**
@@ -246,10 +262,26 @@ export class ListExpensesComponent implements OnInit {
   onCategoryCheckboxChange(event: Event, categoryId: string): void {
     const checkbox = event.target as HTMLInputElement;
     if (checkbox.checked) {
-      this.filter.selectedCategoryIds.push(categoryId);
+      if (!this.filter.selectedCategoryIds.includes(categoryId)) {
+        this.filter.selectedCategoryIds.push(categoryId);
+      }
     } else {
       this.filter.selectedCategoryIds = this.filter.selectedCategoryIds.filter(id => id !== categoryId);
     }
+  }
+
+  /** Returns true when all available categories are selected in filter. */
+  areAllCategoriesSelected(): boolean {
+    return this.categories.length > 0
+      && this.filter.selectedCategoryIds.length === this.categories.length;
+  }
+
+  /** Selects or clears all categories in filter panel. */
+  onAllCategoriesCheckboxChange(event: Event): void {
+    const checkbox = event.target as HTMLInputElement;
+    this.filter.selectedCategoryIds = checkbox.checked
+      ? this.categories.map(cat => cat.category_id)
+      : [];
   }
 
   /**

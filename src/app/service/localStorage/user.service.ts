@@ -54,7 +54,10 @@ export interface User {
   graph_type: number;
 
   /** User's preferred view mode for salary display. */
-  salary_view_mode: 'salary' | 'budget';
+  salary_view_mode: 'salary' | 'budget' | 'saving';
+
+  /** */
+  is_backup_enable: boolean;
 }
 
 /**

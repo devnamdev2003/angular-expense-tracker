@@ -101,7 +101,11 @@ export class AppComponent {
       window.addEventListener('beforeinstallprompt', (event: any) => {
         event.preventDefault();
         this.deferredPrompt = event;
-        this.showInstallButton = true;
+        if (window.location.pathname === '/' || window.location.pathname === '') {
+          this.showInstallButton = true;
+        } else {
+          this.showInstallButton = false;
+        }
       });
       // this.showSplash = true;
       // setTimeout(() => {

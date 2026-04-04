@@ -263,7 +263,8 @@ export class StorageService {
     is_budget_radio_clicked: false,
     graph_type: 1,
     graph_view_type: &quot;month&quot;,
-    salary_view_mode: &quot;salary&quot;
+    salary_view_mode: &quot;salary&quot;,
+    is_backup_enable: false,
   };
 
   /** Schema for salary */
@@ -417,6 +418,18 @@ export class StorageService {
   */
   getlikedSongSchema(): Schema {
     return this.likedSongSchema;
+  }
+
+  resetAllData(): void {
+    const categories &#x3D; this.getAllCategories();
+    const defaultCategories &#x3D; categories.filter(
+      (cat: any) &#x3D;&gt; cat.user_id &#x3D;&#x3D;&#x3D; &quot;0&quot;
+    );
+    localStorage.setItem(this.categoryKey, JSON.stringify(defaultCategories));
+    localStorage.setItem(this.expenseKey, JSON.stringify([]));
+    localStorage.setItem(this.salaryKey, JSON.stringify([]));
+    localStorage.setItem(this.userKey, JSON.stringify(this.userSchema));
+    localStorage.setItem(this.userLikedSongsKey, JSON.stringify([]));
   }
 }
 </code></pre>

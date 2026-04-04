@@ -1,1 +1,329 @@
-<p>help-dashboard.component works!</p>
+<div class="bg-slate-50 text-slate-800 min-h-screen flex flex-col selection:bg-indigo-100 selection:text-indigo-700">
+
+    <!-- Navbar -->
+    <nav class="glass-nav border-b border-white/50 sticky top-0 z-50 transition-all duration-300">
+        <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-16 items-center">
+                <div class="flex items-center gap-2.5">
+                    <img src="https://exwise.vercel.app/icons/icon-512x512.png" alt="ExWise Logo"
+                        class="w-8 h-8 rounded-lg shadow-lg hover:rotate-12 transition-transform duration-300">
+                    <span class="font-bold text-xl tracking-tight text-slate-900">Expense Wise</span>
+                </div>
+                <div class="flex items-center gap-4">
+                    <a href="https://exwisedoc.vercel.app"
+                        class="hidden sm:block text-sm font-medium text-slate-500 hover:text-indigo-600 transition-colors">Documentation</a>
+                    <a href="https://exwise.vercel.app"
+                        class="bg-slate-900 text-white px-5 py-2.5 rounded-xl text-sm font-semibold hover:bg-slate-800 transition-all shadow-md hover:shadow-xl active:scale-95">Open
+                        App</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <div class="bg-gradient-to-br from-indigo-600 via-indigo-700 to-indigo-800 text-white relative overflow-hidden">
+        <!-- Abstract Background Shapes -->
+        <div class="absolute top-0 left-0 w-full h-full overflow-hidden z-0 pointer-events-none">
+            <div
+                class="absolute top-[-10%] left-[-10%] w-96 h-96 bg-indigo-400/30 rounded-full mix-blend-overlay filter blur-3xl animate-pulse-slow">
+            </div>
+            <div class="absolute bottom-[10%] right-[-5%] w-[30rem] h-[30rem] bg-indigo-400/20 rounded-full mix-blend-overlay filter blur-[100px]"
+                style="animation-delay: 1.5s;"></div>
+        </div>
+
+        <div class="max-w-4xl mx-auto text-center relative z-10 pt-16 pb-32 px-4">
+            <div
+                class="inline-flex items-center gap-2 py-1.5 px-4 rounded-full bg-white/10 border border-white/20 backdrop-blur-md text-sm font-medium mb-8 text-indigo-50 shadow-sm">
+                <span class="relative flex h-2 w-2">
+                    <span
+                        class="animate-ping absolute inline-flex h-full w-full rounded-full bg-indigo-300 opacity-75"></span>
+                    <span class="relative inline-flex rounded-full h-2 w-2 bg-emerald-400"></span>
+                </span>
+                Help Center & Support
+            </div>
+
+            <h1
+                class="text-4xl sm:text-5xl md:text-6xl font-extrabold mb-6 tracking-tight leading-tight bg-clip-text text-transparent bg-gradient-to-b from-white to-indigo-100">
+                How can we help you?
+            </h1>
+            <p class="text-indigo-100 mb-10 text-lg sm:text-xl max-w-2xl mx-auto leading-relaxed font-light">
+                Find answers about budgeting algorithms, heatmap customization, data security, and more.
+            </p>
+
+            <!-- Search Bar -->
+            <div class="relative max-w-xl mx-auto group">
+                <div class="absolute inset-y-0 left-0 pl-5 flex items-center pointer-events-none z-10">
+                    <i data-lucide="search"
+                        class="w-5 h-5 text-slate-400 group-focus-within:text-indigo-500 transition-colors"></i>
+                </div>
+                <input type="text" [value]="searchQuery()" (input)="onSearchInput($event)"
+                    class="block w-full pl-12 pr-12 py-5 rounded-2xl text-slate-900 placeholder-slate-400 bg-white/95 backdrop-blur-xl shadow-2xl shadow-indigo-900/30 focus:outline-none focus:ring-4 focus:ring-indigo-500/30 focus:bg-white transition-all border border-white/10 text-lg font-medium"
+                    placeholder="Search 'backup', 'heatmap', 'budget'..." aria-label="Search help topics"
+                    autocomplete="off">
+                @if (searchQuery().length > 0) {
+                <button (click)="resetSearch()" aria-label="Clear search"
+                    class="absolute inset-y-0 right-0 pr-5 flex items-center cursor-pointer z-10 hover:scale-110 transition-transform">
+                    <i data-lucide="x-circle" class="w-5 h-5 text-slate-400 hover:text-red-500 transition-colors"></i>
+                </button>
+                }
+            </div>
+        </div>
+
+        <!-- Curve SVG -->
+        <div class="custom-shape-divider-bottom">
+            <svg data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 120"
+                preserveAspectRatio="none">
+                <path
+                    d="M321.39,56.44c58-10.79,114.16-30.13,172-41.86,82.39-16.72,168.19-17.73,250.45-.39C823.78,31,906.67,72,985.66,92.83c70.05,18.48,146.53,26.09,214.34,3V0H0V27.35A600.21,600.21,0,0,0,321.39,56.44Z"
+                    class="shape-fill"></path>
+            </svg>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <main class="flex-grow max-w-5xl mx-auto w-full px-4 sm:px-6 pb-20 relative z-20 -mt-20">
+
+        <!-- Quick Categories (Floating) -->
+        @if (!searchQuery()) {
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-16">
+            <button (click)="setCategory('Getting Started')"
+                class="quick-filter group bg-white p-6 rounded-2xl shadow-soft hover:shadow-glow border border-white flex flex-col items-center text-center gap-4 hover:-translate-y-1.5 transition-all duration-300">
+                <div
+                    class="bg-blue-50 text-blue-600 p-3.5 rounded-xl group-hover:bg-blue-600 group-hover:text-white transition-colors shadow-sm">
+                    <i data-lucide="rocket" class="w-6 h-6"></i>
+                </div>
+                <span class="text-sm font-bold text-slate-700">Getting Started</span>
+            </button>
+            <button (click)="setCategory('Features')"
+                class="quick-filter group bg-white p-6 rounded-2xl shadow-soft hover:shadow-glow border border-white flex flex-col items-center text-center gap-4 hover:-translate-y-1.5 transition-all duration-300">
+                <div
+                    class="bg-emerald-50 text-emerald-600 p-3.5 rounded-xl group-hover:bg-emerald-600 group-hover:text-white transition-colors shadow-sm">
+                    <i data-lucide="zap" class="w-6 h-6"></i>
+                </div>
+                <span class="text-sm font-bold text-slate-700">App Features</span>
+            </button>
+            <button (click)="setCategory('Budgeting')"
+                class="quick-filter group bg-white p-6 rounded-2xl shadow-soft hover:shadow-glow border border-white flex flex-col items-center text-center gap-4 hover:-translate-y-1.5 transition-all duration-300">
+                <div
+                    class="bg-amber-50 text-amber-600 p-3.5 rounded-xl group-hover:bg-amber-600 group-hover:text-white transition-colors shadow-sm">
+                    <i data-lucide="pie-chart" class="w-6 h-6"></i>
+                </div>
+                <span class="text-sm font-bold text-slate-700">Budget & Income</span>
+            </button>
+            <button (click)="setCategory('Data & Settings')"
+                class="quick-filter group bg-white p-6 rounded-2xl shadow-soft hover:shadow-glow border border-white flex flex-col items-center text-center gap-4 hover:-translate-y-1.5 transition-all duration-300">
+                <div
+                    class="bg-violet-50 text-violet-600 p-3.5 rounded-xl group-hover:bg-violet-600 group-hover:text-white transition-colors shadow-sm">
+                    <i data-lucide="settings" class="w-6 h-6"></i>
+                </div>
+                <span class="text-sm font-bold text-slate-700">Data & Settings</span>
+            </button>
+        </div>
+        }
+
+        <!-- Results Header -->
+        @if (searchQuery()) {
+        <div class="mb-8 mt-32 flex justify-between items-center animate-fade-in-up">
+            <div>
+                <h2 class="text-2xl font-bold text-slate-900 tracking-tight">Search Results</h2>
+                <p class="text-slate-500 text-sm mt-1">Found answers matching your query</p>
+            </div>
+            <button (click)="resetSearch()"
+                class="text-sm text-indigo-600 hover:text-indigo-700 font-semibold bg-indigo-50 px-4 py-2 rounded-lg hover:bg-indigo-100 transition-colors flex items-center gap-2">
+                <i data-lucide="rotate-ccw" class="w-3.5 h-3.5"></i> Clear Filter
+            </button>
+        </div>
+        }
+
+        <!-- FAQ List -->
+        @if (groupedFAQs().length > 0) {
+        <div class="space-y-10">
+            @for (group of groupedFAQs(); track group.category; let i = $index) {
+            <div class="animate-fade-in-up" [style.animationDelay]="(i * 100) + 'ms'">
+                <div class="flex items-center gap-4 mb-5">
+                    <h3
+                        class="text-xs font-bold text-indigo-600 uppercase tracking-widest bg-indigo-50 px-3 py-1.5 rounded-lg border border-indigo-100/50">
+                        {{ group.category }}</h3>
+                    <div class="h-px bg-slate-100 flex-grow"></div>
+                </div>
+
+                <div class="grid gap-4">
+                    @for (item of group.items; track item.id) {
+                    <div class="accordion-item group bg-white border border-slate-200/60 rounded-xl overflow-hidden hover:border-indigo-300 hover:shadow-soft transition-all duration-300"
+                        [class.ring-2]="isAccordionOpen(item.id)" [class.ring-indigo-100]="isAccordionOpen(item.id)"
+                        [class.border-indigo-300]="isAccordionOpen(item.id)">
+                        <button (click)="toggleAccordion(item.id)"
+                            class="accordion-trigger w-full text-left px-6 py-5 flex justify-between items-center focus:outline-none select-none">
+                            <span
+                                class="font-semibold text-slate-700 group-hover:text-indigo-700 transition-colors pr-4"
+                                [innerHTML]="highlightText(item.question, searchQuery())"></span>
+                            <div
+                                class="bg-slate-50 p-2 rounded-full group-hover:bg-indigo-50 transition-colors shrink-0">
+                                <i data-lucide="chevron-down"
+                                    class="accordion-icon w-4 h-4 text-slate-400 group-hover:text-indigo-500 transform transition-transform duration-300"
+                                    [class.rotate-180]="isAccordionOpen(item.id)"></i>
+                            </div>
+                        </button>
+
+                        @if (isAccordionOpen(item.id)) {
+                        <div
+                            class="accordion-content px-6 pb-6 text-slate-600 text-sm leading-relaxed border-t border-slate-50 animate-slide-down origin-top">
+                            <div class="pt-2" [innerHTML]="highlightText(item.answer, searchQuery())"></div>
+                        </div>
+                        }
+                    </div>
+                    }
+                </div>
+            </div>
+            }
+        </div>
+        } @else {
+        <!-- No Results -->
+        <div
+            class="text-center py-16 animate-fade-in-up bg-white rounded-3xl border border-slate-100 shadow-sm mt-8 mx-auto max-w-2xl">
+            <div class="bg-indigo-50 w-20 h-20 rounded-full flex items-center justify-center mx-auto mb-6">
+                <i data-lucide="search-x" class="w-10 h-10 text-indigo-500"></i>
+            </div>
+            <h3 class="text-xl font-bold text-slate-900 mb-2">We couldn't find an answer for that</h3>
+            <p class="text-slate-500 mb-8 max-w-md mx-auto">Don't worry! You can ask us directly. Fill out the form
+                below and we'll help you out.</p>
+
+            <button (click)="scrollToForm()"
+                class="inline-flex items-center gap-2 bg-indigo-600 text-white px-6 py-3 rounded-xl font-semibold hover:bg-indigo-700 transition-colors shadow-lg shadow-indigo-500/25 active:scale-95 transform">
+                <span>Use Contact Form</span>
+                <i data-lucide="arrow-down" class="w-4 h-4"></i>
+            </button>
+        </div>
+        }
+
+        <!-- Contact Form Section -->
+        <div id="contactFormSection" class="mt-24 pt-16 border-t border-slate-200">
+            <div class="grid md:grid-cols-2 gap-12 lg:gap-20 items-start">
+                <div class="md:sticky md:top-24">
+                    <div class="inline-block p-2 bg-indigo-50 rounded-lg mb-4">
+                        <i data-lucide="life-buoy" class="w-6 h-6 text-indigo-600"></i>
+                    </div>
+                    <h2 class="text-3xl font-bold text-slate-900 mb-4 tracking-tight">Still need help?</h2>
+                    <p class="text-slate-600 mb-8 leading-relaxed text-lg">If you couldn't find the answer in our
+                        documentation, fill out the form below. Our support team usually responds within 24 hours.</p>
+                </div>
+
+                <div
+                    class="bg-white p-6 sm:p-8 rounded-3xl shadow-xl shadow-slate-200/50 border border-slate-100 relative overflow-hidden">
+                    <div
+                        class="absolute top-0 right-0 w-32 h-32 bg-indigo-100 rounded-bl-full -mr-16 -mt-16 opacity-50 pointer-events-none">
+                    </div>
+
+                    <form [formGroup]="contactForm" (ngSubmit)="onSubmit()" class="space-y-5 relative z-10" novalidate>
+                        <div>
+                            <label class="block text-sm font-semibold text-slate-700 mb-2">Your Name</label>
+                            <input type="text" formControlName="name"
+                                class="w-full px-5 py-3.5 rounded-xl border border-slate-200 bg-slate-50 focus:bg-white focus:border-indigo-500 focus:ring-4 focus:ring-indigo-500/10 outline-none transition-all text-sm font-medium"
+                                [class.input-error]="isInvalid('name')" [class.animate-shake]="shouldShake('name')"
+                                placeholder="John Doe">
+                            @if (isInvalid('name')) {
+                            <p
+                                class="text-rose-500 text-xs mt-2 font-medium flex items-center gap-1.5 animate-fade-in-up">
+                                <span class="inline-flex"><i data-lucide="alert-circle" class="w-3.5 h-3.5"></i></span>
+                                <span>Name is required</span>
+                            </p>
+                            }
+                        </div>
+                        <div>
+                            <label class="block text-sm font-semibold text-slate-700 mb-2">Email Address</label>
+                            <input type="email" formControlName="email"
+                                class="w-full px-5 py-3.5 rounded-xl border border-slate-200 bg-slate-50 focus:bg-white focus:border-indigo-500 focus:ring-4 focus:ring-indigo-500/10 outline-none transition-all text-sm font-medium"
+                                [class.input-error]="isInvalid('email')" [class.animate-shake]="shouldShake('email')"
+                                placeholder="john@example.com">
+                            @if (isInvalid('email')) {
+                            <p
+                                class="text-rose-500 text-xs mt-2 font-medium flex items-center gap-1.5 animate-fade-in-up">
+                                <span class="inline-flex"><i data-lucide="alert-circle" class="w-3.5 h-3.5"></i></span>
+                                <span>Please enter a valid email</span>
+                            </p>
+                            }
+                        </div>
+                        <div>
+                            <label class="block text-sm font-semibold text-slate-700 mb-2">How can we help?</label>
+                            <textarea formControlName="query" rows="4"
+                                class="w-full px-5 py-3.5 rounded-xl border border-slate-200 bg-slate-50 focus:bg-white focus:border-indigo-500 focus:ring-4 focus:ring-indigo-500/10 outline-none transition-all text-sm font-medium resize-none"
+                                [class.input-error]="isInvalid('query')" [class.animate-shake]="shouldShake('query')"
+                                placeholder="Describe your issue..."></textarea>
+                            @if (isInvalid('query')) {
+                            <p
+                                class="text-rose-500 text-xs mt-2 font-medium flex items-center gap-1.5 animate-fade-in-up">
+                                <span class="inline-flex"><i data-lucide="alert-circle" class="w-3.5 h-3.5"></i></span>
+                                <span>Message must be at least 10 characters</span>
+                            </p>
+                            }
+                        </div>
+
+                        <button type="submit" [disabled]="isSubmitting()"
+                            class="w-full bg-indigo-600 text-white font-bold py-4 rounded-xl hover:bg-indigo-700 active:scale-[0.98] transition-all flex items-center justify-center gap-2 shadow-lg shadow-indigo-500/25 mt-2 disabled:opacity-70 disabled:cursor-not-allowed">
+                            @if (isSubmitting()) {
+                            <span class="inline-flex"><i data-lucide="loader-2" class="w-5 h-5 animate-spin"></i></span>
+                            <span>Sending...</span>
+                            } @else {
+                            <span>Send Message</span>
+                            <span class="inline-flex"><i data-lucide="send" class="w-4 h-4"></i></span>
+                            }
+                        </button>
+                    </form>
+
+                    <!-- Status Messages -->
+                    @if (submitSuccess()) {
+                    <div
+                        class="mt-4 p-4 bg-emerald-50 border border-emerald-100 text-emerald-700 rounded-xl text-sm flex items-start gap-3 animate-fade-in-up">
+                        <span class="inline-flex"><i data-lucide="check-circle"
+                                class="w-5 h-5 shrink-0 mt-0.5"></i></span>
+                        <div>
+                            <p class="font-bold">Message sent!</p>
+                            <p>We'll get back to you soon.</p>
+                        </div>
+                    </div>
+                    }
+                    @if (submitError()) {
+                    <div
+                        class="mt-4 p-4 bg-red-50 border border-red-100 text-red-700 rounded-xl text-sm flex items-start gap-3 animate-fade-in-up">
+                        <span class="inline-flex"><i data-lucide="alert-circle"
+                                class="w-5 h-5 shrink-0 mt-0.5"></i></span>
+                        <div>
+                            <p class="font-bold">Error sending</p>
+                            <p>Please try again later.</p>
+                        </div>
+                    </div>
+                    }
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-white border-t border-slate-200 py-12">
+        <div
+            class="max-w-6xl mx-auto px-4 flex flex-col md:flex-row justify-between items-center gap-6 text-center md:text-left">
+            <div>
+                <div class="flex items-center justify-center md:justify-start gap-2 mb-2">
+                    <img src="https://exwise.vercel.app/icons/icon-512x512.png" alt="ExWise Logo"
+                        class="w-8 h-8 rounded-lg shadow-lg hover:rotate-12 transition-transform duration-300">
+                    <span class="font-bold text-lg text-slate-900 tracking-tight">Expense Wise</span>
+                </div>
+                <p class="text-slate-500 text-sm">Empowering your financial journey since 2024.</p>
+            </div>
+            <div class="flex flex-wrap justify-center md:justify-end gap-6 text-sm font-semibold text-slate-600">
+                <a href="https://github.com/devnamdev2003"
+                    class="hover:text-indigo-600 transition-colors flex items-center gap-1">
+                    <i data-lucide="github" class="w-4 h-4"></i> GitHub
+                </a>
+                <a href="https://devnamdev2003.github.io"
+                    class="hover:text-indigo-600 transition-colors flex items-center gap-1">
+                    <i data-lucide="code" class="w-4 h-4"></i> Developer
+                </a>
+                <a href="https://github.com/devnamdev2003/angular-expense-tracker/raw/refs/heads/main/exwise.apk"
+                    class="hover:text-indigo-600 transition-colors flex items-center gap-1 text-indigo-600 bg-indigo-50 px-3 py-1 rounded-full hover:bg-indigo-100">
+                    <i data-lucide="download" class="w-4 h-4"></i> Download APK
+                </a>
+            </div>
+        </div>
+    </footer>
+</div>

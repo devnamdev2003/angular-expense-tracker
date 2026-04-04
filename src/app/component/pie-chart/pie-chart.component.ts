@@ -18,6 +18,9 @@ declare const Chart: any;
 })
 export class PieChartComponent implements OnInit, OnChanges, AfterViewInit {
 
+  /** Prevents repeated logs when chart library is unavailable */
+  private hasLoggedChartUnavailable = false;
+
   /** Dark mode flag from user settings */
   isDarkMode: boolean = false;
 
@@ -99,16 +102,25 @@ export class PieChartComponent implements OnInit, OnChanges, AfterViewInit {
 
   /** Loads chart data based on the selected view type */
   loadData(): void {
-    if (typeof window !== 'undefined' && (window as any).Chart) {
-      if (this.viewType === 'month') {
-        this.loadMonthData();
-      } else if (this.viewType === 'year') {
-        this.loadYearData();
-      } else if (this.viewType === 'day') {
-        this.loadDayData();
+    // Skip chart rendering during SSR/prerender where `window` is unavailable.
+    if (typeof window === 'undefined') {
+      return;
+    }
+
+    if (!(window as any).Chart) {
+      if (!this.hasLoggedChartUnavailable) {
+        console.warn('Chart.js is not loaded properly.');
+        this.hasLoggedChartUnavailable = true;
       }
-    } else {
-      console.error("Chart.js is not loaded properly.");
+      return;
+    }
+
+    if (this.viewType === 'month') {
+      this.loadMonthData();
+    } else if (this.viewType === 'year') {
+      this.loadYearData();
+    } else if (this.viewType === 'day') {
+      this.loadDayData();
     }
   }
 

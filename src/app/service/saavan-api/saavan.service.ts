@@ -36,7 +36,7 @@ export class SaavnService {
   /**
    * Base URL for Saavn song search API.
    */
-  private savvanApiUrl = 'https://saavn.dev/api/search/songs';
+  private savvanApiUrl = 'https://saavn.sumit.co/api/search/songs';
 
   /**
    * Gemini API URL.
@@ -90,33 +90,24 @@ export class SaavnService {
   async suggestNextSong(currentSong: any): Promise<string> {
     this.globalLoaderService.show("Suggesting next song...");
 
-    /**
-     * Helper function to format metadata fields safely.
-     *
-     * @param fieldName The name of the metadata field.
-     * @param value The field value to format.
-     * @returns Formatted string or empty string if invalid.
-     */
-    const formatField = (fieldName: string, value: any) => {
-      if (value === null || value === undefined || value === '') {
-        return '';
-      }
-      if (fieldName === 'Duration') {
-        return `${fieldName}: ${value} seconds\n`;
-      }
-      return `${fieldName}: ${value}\n`;
-    };
+    try {
+      const formatField = (fieldName: string, value: any) => {
+        if (value === null || value === undefined || value === '') {
+          return '';
+        }
+        if (fieldName === 'Duration') {
+          return `${fieldName}: ${value} seconds\n`;
+        }
+        return `${fieldName}: ${value}\n`;
+      };
 
-    // Extract album name safely
-    const albumName = currentSong.album?.name || '';
+      const albumName = currentSong.album?.name || '';
+      const artistsName = (currentSong.artists?.all && currentSong.artists.all.length > 0)
+        ? currentSong.artists.all.map((artist: any) => artist.name).join(', ')
+        : '';
 
-    // Extract artists as a comma-separated string
-    const artistsName = (currentSong.artists?.all && currentSong.artists.all.length > 0)
-      ? currentSong.artists.all.map((artist: any) => artist.name).join(', ')
-      : '';
-
-    // Prompt for Gemini API
-    const prompt = `
+      // Prompt for Gemini API
+      const prompt = `
 You are a smart music recommendation assistant. Your job is to analyze the mood and style of the current song the user is listening to and suggest the most accurate next song that fits or enhances the user's mood and listening experience.
 
 Given the current song details:
@@ -138,22 +129,29 @@ Provide only the JSON object and no extra text, no formatting:
 
 `;
 
-    this.history.push({ role: 'user', parts: [{ text: prompt }] });
-    const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
-    const body = { contents: this.history };
+      this.history.push({ role: 'user', parts: [{ text: prompt }] });
 
-    try {
-      const res: any = await firstValueFrom(this.http.post(this.geminiApiUrl, body, { headers }));
+      const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
+      const body = { contents: this.history };
+
+      const res: any = await firstValueFrom(
+        this.http.post(this.geminiApiUrl, body, { headers })
+      );
+
       const parts = res?.candidates?.[0]?.content?.parts;
-      const modelReply = parts?.map((p: any) => p.text).join('\n\n') || 'No response';
+      const modelReply =
+        parts?.map((p: any) => p.text).join('\n\n') || 'No response';
 
       this.history.push({ role: 'model', parts: [{ text: modelReply }] });
-      this.globalLoaderService.hide();
+
       return modelReply;
+
     } catch (err) {
       console.error('Error:', err);
+      return 'error';
+    } finally {
+      // ✅ ALWAYS hides loader
       this.globalLoaderService.hide();
-      return 'Error fetching response';
     }
   }
 
@@ -164,5 +162,9 @@ Provide only the JSON object and no extra text, no formatting:
    */
   getHistory(): ChatMessage[] {
     return this.history;
+  }
+
+  forceHideLoader(): void {
+    this.globalLoaderService.hide();
   }
 }

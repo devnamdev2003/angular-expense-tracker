@@ -1,0 +1,592 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RD → FD Rolling Calculator</title>
+
+    <meta name="description"
+        content="ExWise is a mobile-first, privacy-focused expense tracker app built with Angular and Tailwind. Track daily expenses, set budgets, and analyze spending habits locally without a server.">
+    <meta name="keywords"
+        content="expense tracker, finance app, budget planner, personal finance, angular app, mobile-first, localstorage, privacy focused, exwise, offline finance, pwa">
+    <meta name="author" content="devnamdev">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://exwise.vercel.app/">
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://exwise.vercel.app/">
+    <meta property="og:title" content="ExWise - Private Mobile Expense Tracker">
+    <meta property="og:description"
+        content="Stop playing hide and seek with your money. ExWise is a secure, offline-first expense tracker that keeps your financial data private on your device.">
+    <meta property="og:image" content="https://exwise.vercel.app/images/share.png">
+
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="https://exwise.vercel.app/">
+    <meta property="twitter:title" content="ExWise - Private Mobile Expense Tracker">
+    <meta property="twitter:description"
+        content="Stop playing hide and seek with your money. ExWise is a secure, offline-first expense tracker that keeps your financial data private.">
+    <meta property="twitter:image" content="https://exwise.vercel.app/images/share.png">
+
+    <!-- PWA / Mobile -->
+    <meta name="theme-color" content="#050507">
+    <link rel="apple-touch-icon" href="https://exwise.vercel.app/icons/icon-512x512.png">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="https://exwise.vercel.app/favicon.ico">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
+        rel="stylesheet">
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        /* Custom scrollbar for a cleaner look */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: #f1f5f9;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: #cbd5e1;
+            border-radius: 4px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: #94a3b8;
+        }
+
+        /* Smooth transitions */
+        .fade-in {
+            animation: fadeIn 0.4s ease-in-out;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+    </style>
+</head>
+
+<body class="bg-slate-50 min-h-screen p-4 md:p-8 font-sans text-slate-800 overflow-x-hidden">
+
+    <div class="max-w-6xl mx-auto">
+        <!-- Header -->
+        <div class="text-center mb-8 md:mb-10">
+            <h1
+                class="text-3xl md:text-4xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-indigo-600 mb-3">
+                RD → FD Wealth Builder
+            </h1>
+            <p class="text-sm md:text-base text-slate-500">Plan your rolling deposits and fixed deposit compounding
+                seamlessly.</p>
+        </div>
+
+        <div class="grid lg:grid-cols-12 gap-6 lg:gap-8">
+
+            <!-- Left Column: Inputs -->
+            <div class="lg:col-span-7 space-y-6">
+
+                <!-- Global Settings Card -->
+                <div class="bg-white rounded-3xl shadow-xl shadow-slate-200/50 p-5 md:p-8 border border-slate-100">
+                    <div class="flex items-center space-x-3 mb-6">
+                        <div class="bg-indigo-100 p-2 rounded-lg text-indigo-600">
+                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z">
+                                </path>
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
+                            </svg>
+                        </div>
+                        <h2 class="text-xl font-bold">Global Parameters</h2>
+                    </div>
+
+                    <div class="grid grid-cols-1 sm:grid-cols-3 gap-5">
+                        <div>
+                            <label class="block text-sm font-semibold text-slate-700 mb-2">FD Rate (%)</label>
+                            <div class="relative">
+                                <input id="fdRate" type="number" step="0.01" min="0"
+                                    oninput="if(this.value<0)this.value=''" placeholder="e.g. 7.10"
+                                    class="w-full bg-slate-50 border border-slate-200 rounded-xl py-3 pl-4 pr-10 focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-all outline-none">
+                                <span class="absolute right-4 top-3.5 text-slate-400 font-bold">%</span>
+                            </div>
+                        </div>
+
+                        <div>
+                            <label class="block text-sm font-semibold text-slate-700 mb-2">RD Rate (%)</label>
+                            <div class="relative">
+                                <input id="rdRate" type="number" step="0.01" min="0"
+                                    oninput="if(this.value<0)this.value=''" placeholder="e.g. 6.80"
+                                    class="w-full bg-slate-50 border border-slate-200 rounded-xl py-3 pl-4 pr-10 focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-all outline-none">
+                                <span class="absolute right-4 top-3.5 text-slate-400 font-bold">%</span>
+                            </div>
+                        </div>
+
+                        <div>
+                            <label class="block text-sm font-semibold text-slate-700 mb-2">Tax Rate <span
+                                    class="text-xs font-normal text-slate-500">(Optional)</span></label>
+                            <div class="relative">
+                                <input id="taxRate" type="number" step="0.01" min="0"
+                                    oninput="if(this.value<0)this.value=''" placeholder="e.g. 10.00"
+                                    class="w-full bg-slate-50 border border-slate-200 rounded-xl py-3 pl-4 pr-10 focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-all outline-none">
+                                <span class="absolute right-4 top-3.5 text-slate-400 font-bold">%</span>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Inline Error Message -->
+                    <p id="globalError" class="text-red-500 text-sm mt-3 hidden">Please enter valid non-negative values
+                        for all fields.</p>
+                </div>
+
+                <!-- Dynamic Year Inputs Card -->
+                <div class="bg-white rounded-3xl shadow-xl shadow-slate-200/50 p-5 md:p-8 border border-slate-100">
+                    <div
+                        class="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-6 space-y-3 sm:space-y-0">
+                        <div class="flex items-center space-x-3">
+                            <div class="bg-emerald-100 p-2 rounded-lg text-emerald-600">
+                                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z">
+                                    </path>
+                                </svg>
+                            </div>
+                            <h2 class="text-xl font-bold">Yearly Deposits</h2>
+                        </div>
+                    </div>
+
+                    <div id="yearInputs" class="space-y-5">
+                        <!-- Initial Empty State -->
+                        <div id="noYearsPrompt"
+                            class="text-center py-8 text-slate-400 text-sm border-2 border-dashed border-slate-200 rounded-2xl">
+                            Click <span class="font-bold text-slate-500">+ Add Another Year</span> to start building
+                            your timeline.
+                        </div>
+                    </div>
+
+                    <!-- Dynamic Controls -->
+                    <div class="flex space-x-3 mt-5">
+                        <button onclick="addYear()"
+                            class="flex-1 flex items-center justify-center py-3 border-2 border-dashed border-slate-300 rounded-xl text-slate-500 hover:text-indigo-600 hover:border-indigo-400 hover:bg-indigo-50 transition-all font-semibold focus:outline-none">
+                            <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M12 4v16m8-8H4"></path>
+                            </svg>
+                            Add Another Year
+                        </button>
+                        <button onclick="removeLastYear()" id="removeYearBtn"
+                            class="hidden px-4 flex items-center justify-center py-3 border-2 border-dashed border-red-200 rounded-xl text-red-400 hover:text-red-600 hover:border-red-400 hover:bg-red-50 transition-all font-semibold focus:outline-none"
+                            title="Remove last year">
+                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 12H4">
+                                </path>
+                            </svg>
+                        </button>
+                    </div>
+
+                    <button onclick="calculate()"
+                        class="w-full mt-8 bg-gradient-to-r from-indigo-600 to-blue-600 text-white font-bold text-lg py-4 rounded-xl shadow-lg hover:shadow-xl hover:from-indigo-700 hover:to-blue-700 transform hover:-translate-y-0.5 transition-all focus:outline-none focus:ring-4 focus:ring-indigo-300">
+                        Calculate Returns
+                    </button>
+                </div>
+            </div>
+
+            <!-- Right Column: Results -->
+            <div class="lg:col-span-5 relative mt-6 lg:mt-0">
+                <!-- Using lg:sticky so it only sticks on large desktop screens where scrolling won't break mobile layout -->
+                <div class="lg:sticky lg:top-8 space-y-6" id="resultsContainer">
+
+                    <!-- Welcome/Empty State -->
+                    <div id="emptyState"
+                        class="bg-white rounded-3xl shadow-xl shadow-slate-200/50 p-8 md:p-10 border border-slate-100 text-center flex flex-col items-center justify-center h-full min-h-[350px]">
+                        <div class="bg-blue-50 p-4 rounded-full mb-4">
+                            <svg class="w-12 h-12 text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+                                    d="M9 17v-2m3 2v-4m3 4v-6m2 10H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z">
+                                </path>
+                            </svg>
+                        </div>
+                        <h3 class="text-xl font-bold text-slate-700 mb-2">Ready to Calculate</h3>
+                        <p class="text-slate-500 text-sm">Enter your yearly RD and Extra FD amounts, then click
+                            calculate to see your wealth grow.</p>
+                    </div>
+
+                    <!-- Populated Results State (Hidden initially) -->
+                    <div id="populatedState" class="hidden space-y-6 fade-in">
+                        <!-- Summary Cards -->
+                        <div
+                            class="bg-white rounded-3xl shadow-xl shadow-slate-200/50 p-6 md:p-8 border border-slate-100 relative overflow-hidden">
+                            <!-- Decorative background blob -->
+                            <div
+                                class="absolute top-0 right-0 -mr-8 -mt-8 w-32 h-32 rounded-full bg-indigo-50 opacity-60 blur-2xl">
+                            </div>
+
+                            <p class="text-slate-500 text-sm font-semibold uppercase tracking-wider mb-1">Final Total
+                                Corpus Amount</p>
+                            <h3 class="text-4xl md:text-5xl font-extrabold text-slate-800 mb-8 tracking-tight"
+                                id="resFinalAmount">₹0</h3>
+
+                            <div
+                                class="flex flex-col sm:flex-row flex-wrap gap-y-6 gap-x-8 pt-6 border-t border-slate-100">
+                                <div class="flex-1 min-w-[140px]">
+                                    <p class="text-slate-400 text-xs font-semibold uppercase tracking-wider mb-1.5">
+                                        Total Invested</p>
+                                    <p class="text-2xl md:text-3xl font-bold text-slate-700 break-words"
+                                        id="resTotalInvested">₹0</p>
+                                </div>
+                                <div class="flex-1 min-w-[140px]">
+                                    <div class="flex items-center space-x-2 mb-1.5">
+                                        <p class="text-emerald-500 text-xs font-semibold uppercase tracking-wider">Total
+                                            Profit</p>
+                                        <span
+                                            class="inline-flex items-center px-2 py-0.5 rounded text-[10px] font-bold bg-emerald-100 text-emerald-700"
+                                            id="resProfitRate">+0%</span>
+                                    </div>
+                                    <p class="text-2xl md:text-3xl font-bold text-emerald-600 break-words"
+                                        id="resTotalProfit">₹0</p>
+                                </div>
+                                <div id="taxSummaryContainer" class="hidden flex-1 min-w-[140px]">
+                                    <p class="text-rose-400 text-xs font-semibold uppercase tracking-wider mb-1.5">Tax
+                                        Deducted</p>
+                                    <p class="text-2xl md:text-3xl font-bold text-rose-500 break-words"
+                                        id="resTotalTax">₹0</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Year Breakdown -->
+                        <div
+                            class="bg-white rounded-3xl shadow-xl shadow-slate-200/50 p-5 md:p-6 border border-slate-100">
+                            <h3 class="font-bold text-lg mb-4 text-slate-800">Detailed Year-wise Growth</h3>
+                            <!-- Adjustable max height for mobile vs desktop -->
+                            <div id="yearBreakdown"
+                                class="space-y-4 max-h-[50vh] lg:max-h-[500px] overflow-y-auto pr-2">
+                                <!-- Breakdown injected via JS -->
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <script>
+        // Utility to format numbers as Indian Rupees for final display
+        const formatINR = (amount) => {
+            return new Intl.NumberFormat('en-IN', {
+                style: 'currency',
+                currency: 'INR',
+                maximumFractionDigits: 0
+            }).format(amount);
+        };
+
+        // Utility to parse formatted strings back into a raw number for math
+        const parseINR = (str) => {
+            if (!str) return 0;
+            return parseFloat(str.toString().replace(/[^\d.]/g, '')) || 0;
+        };
+
+        // Auto-formats inputs with commas as the user types
+        function formatNumberInput(input) {
+            let raw = input.value.replace(/[^\d.]/g, '');
+            if (!raw) {
+                input.value = '';
+                return;
+            }
+
+            let parts = raw.split('.');
+            // Prevent multiple decimal points
+            if (parts.length > 2) {
+                parts[1] = parts.slice(1).join('');
+                parts.length = 2;
+            }
+
+            let intPart = parts[0];
+            let decPart = parts.length > 1 ? '.' + parts[1] : '';
+
+            if (intPart) {
+                intPart = parseInt(intPart, 10).toLocaleString('en-IN');
+            }
+
+            input.value = intPart + decPart;
+        }
+
+        function addYear() {
+            const container = document.getElementById("yearInputs");
+            const noYearsPrompt = document.getElementById("noYearsPrompt");
+            if (noYearsPrompt) noYearsPrompt.remove();
+
+            const currentCount = container.querySelectorAll('.year-block').length;
+            const i = currentCount + 1;
+
+            let prevRD = "";
+            let prevExtra = "";
+            let prevCustom = "";
+
+            // If there's a preceding year, copy its formatted values for convenience
+            if (i > 1) {
+                const prevRdEl = document.getElementById(`rd${i - 1}`);
+                const prevExtraEl = document.getElementById(`extra${i - 1}`);
+                const prevCustomEl = document.getElementById(`customMaturity${i - 1}`);
+
+                if (prevRdEl) prevRD = prevRdEl.value;
+                if (prevExtraEl) prevExtra = prevExtraEl.value;
+                if (prevCustomEl) prevCustom = prevCustomEl.value;
+            }
+
+            const newHTML = `
+            <div id="yearBlock${i}" class="year-block bg-slate-50 border border-slate-100 p-5 rounded-2xl transition-all hover:border-indigo-200 shadow-sm fade-in">
+                <div class="flex items-center justify-between mb-4">
+                    <div class="font-bold text-slate-800 bg-white px-4 py-1.5 rounded-full shadow-sm text-sm border border-slate-100">Year ${i}</div>
+                </div>
+                
+                <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 sm:gap-5">
+                    <div class="relative flex flex-col h-full">
+                        <label class="block text-[11px] font-bold text-slate-500 mb-2 uppercase tracking-wider">Monthly RD</label>
+                        <div class="flex items-center mt-auto relative">
+                            <span class="absolute left-3 text-slate-400 font-bold">₹</span>
+                            <input type="text" inputmode="numeric" id="rd${i}" value="${prevRD}" oninput="formatNumberInput(this)" placeholder="e.g. 10,000" class="w-full bg-white border border-slate-200 p-2.5 pl-8 rounded-xl focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 outline-none transition-all">
+                        </div>
+                    </div>
+                    <div class="relative flex flex-col h-full">
+                        <label class="block text-[11px] font-bold text-slate-500 mb-2 uppercase tracking-wider">Extra FD</label>
+                        <div class="flex items-center mt-auto relative">
+                            <span class="absolute left-3 text-slate-400 font-bold">₹</span>
+                            <input type="text" inputmode="numeric" id="extra${i}" value="${prevExtra}" oninput="formatNumberInput(this)" placeholder="e.g. 50,000" class="w-full bg-white border border-slate-200 p-2.5 pl-8 rounded-xl focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 outline-none transition-all">
+                        </div>
+                    </div>
+                    <div class="relative flex flex-col h-full">
+                        <label class="block text-[11px] font-bold text-slate-500 mb-2 uppercase tracking-wider" title="Leave blank or 0 to auto-calculate">Custom Maturity <span class="text-[9px] font-medium normal-case block sm:inline">(Optional)</span></label>
+                        <div class="flex items-center mt-auto relative">
+                            <span class="absolute left-3 text-slate-400 font-bold">₹</span>
+                            <input type="text" inputmode="numeric" id="customMaturity${i}" value="${prevCustom}" oninput="formatNumberInput(this)" placeholder="Auto" class="w-full bg-white border border-slate-200 p-2.5 pl-8 rounded-xl focus:ring-2 focus:ring-amber-500 focus:border-amber-500 outline-none transition-all">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        `;
+            container.insertAdjacentHTML('beforeend', newHTML);
+            updateRemoveBtn();
+        }
+
+        function removeLastYear() {
+            const container = document.getElementById("yearInputs");
+            const blocks = container.querySelectorAll('.year-block');
+            if (blocks.length > 0) {
+                blocks[blocks.length - 1].remove();
+            }
+
+            // If we removed the last block, show the prompt again
+            if (container.querySelectorAll('.year-block').length === 0) {
+                container.innerHTML = `
+                <div id="noYearsPrompt" class="text-center py-8 text-slate-400 text-sm border-2 border-dashed border-slate-200 rounded-2xl">
+                    Click <span class="font-bold text-slate-500">+ Add Another Year</span> to start building your timeline.
+                </div>
+            `;
+            }
+            updateRemoveBtn();
+        }
+
+        function updateRemoveBtn() {
+            const container = document.getElementById("yearInputs");
+            const blocks = container.querySelectorAll('.year-block');
+            const btn = document.getElementById("removeYearBtn");
+
+            if (blocks.length > 0) {
+                btn.classList.remove('hidden');
+            } else {
+                btn.classList.add('hidden');
+            }
+        }
+
+        function calculate() {
+            const fdRateStr = document.getElementById("fdRate").value;
+            const rdRateStr = document.getElementById("rdRate").value;
+            const taxRateStr = document.getElementById("taxRate").value;
+            const errorMsg = document.getElementById("globalError");
+            const years = document.querySelectorAll('.year-block').length;
+
+            if (years === 0) {
+                errorMsg.classList.remove("hidden");
+                errorMsg.innerText = "Please add at least one year to calculate.";
+                return;
+            }
+
+            const fdRateRaw = parseFloat(fdRateStr);
+            const rdRateRaw = parseFloat(rdRateStr);
+
+            // Additional JS Validation
+            if (!fdRateStr || !rdRateStr || isNaN(fdRateRaw) || isNaN(rdRateRaw)) {
+                errorMsg.classList.remove("hidden");
+                errorMsg.innerText = "Please ensure all Rates are filled correctly.";
+                return;
+            }
+
+            if (fdRateRaw < 0 || rdRateRaw < 0) {
+                errorMsg.classList.remove("hidden");
+                errorMsg.innerText = "Rates cannot be negative.";
+                return;
+            }
+
+            const taxRateRaw = parseFloat(taxRateStr);
+            const taxRate = (!isNaN(taxRateRaw) && taxRateRaw >= 0) ? (taxRateRaw / 100) : 0;
+
+            errorMsg.classList.add("hidden");
+
+            const fdRate = fdRateRaw / 100;
+            const rdRate = rdRateRaw / 100;
+
+            let currentFDBalance = 0;
+            let totalInvested = 0;
+            let cumulativeInterest = 0;
+            let totalTaxPaid = 0;
+            let breakdownHTML = "";
+
+            for (let i = 1; i <= years; i++) {
+                // Read inputs
+                const rdEl = document.getElementById(`rd${i}`);
+                const extraEl = document.getElementById(`extra${i}`);
+                const customEl = document.getElementById(`customMaturity${i}`);
+
+                // If the element doesn't exist yet, skip
+                if (!rdEl) continue;
+
+                let rdInputStr = rdEl.value;
+                let extraInputStr = extraEl.value;
+                let customMaturityInputStr = customEl.value;
+
+                let rdInput = parseINR(rdInputStr);
+                let extraInput = parseINR(extraInputStr);
+                let customMaturityRaw = parseINR(customMaturityInputStr);
+
+                // Check if maturity is manual AND strictly greater than 0
+                let isManualMaturity = customMaturityInputStr.trim() !== "" && customMaturityRaw > 0;
+
+                let monthlyRD = rdInput;
+                let extra = extraInput;
+                let yearlyRD = monthlyRD * 12;
+
+                // 1. Calculate RD Maturity generated during THIS year
+                let rdMaturity = 0;
+                let rdInterestThisYear = 0;
+                if (isManualMaturity) {
+                    // Exact manual override provided by user
+                    rdMaturity = customMaturityRaw;
+                    rdInterestThisYear = Math.max(0, rdMaturity - yearlyRD);
+                } else {
+                    // Auto calculate Standard Simple Interest RD for 12 months
+                    let standardRDInterest = monthlyRD * 78 * (rdRate / 12);
+                    rdMaturity = yearlyRD + standardRDInterest;
+                    rdInterestThisYear = standardRDInterest;
+                }
+
+                // Keep track of total out-of-pocket investment
+                totalInvested += yearlyRD + extra;
+
+                // 2. Calculate FD Interest earned by PREVIOUS balance during THIS year
+                let startingBalance = currentFDBalance;
+                let fdInterestEarnedThisYear = startingBalance * fdRate;
+
+                // Calculate Tax
+                let taxThisYear = (fdInterestEarnedThisYear + rdInterestThisYear) * taxRate;
+                totalTaxPaid += taxThisYear;
+
+                // 3. Calculate new total balance at the END of THIS year
+                // The new money (RD Maturity + Extra FD) is added at the end, so it doesn't earn FD interest this year.
+                currentFDBalance = startingBalance + fdInterestEarnedThisYear + rdMaturity + extra - taxThisYear;
+
+                // Interest gained total till this point (Net of tax)
+                cumulativeInterest = currentFDBalance - totalInvested;
+
+                // Absolute Return % till this year
+                let profitPercentage = totalInvested > 0 ? ((cumulativeInterest / totalInvested) * 100).toFixed(2) : "0.00";
+
+                let taxHTMLRow = taxRate > 0 ? `
+                <div class="text-slate-500 break-words">Tax Deducted (${taxRateStr}%):</div>
+                <div class="font-medium text-rose-500 text-right">- ${formatINR(taxThisYear)}</div>
+            ` : '';
+
+                breakdownHTML += `
+                <div class="p-4 rounded-xl bg-slate-50 border border-slate-100 hover:border-indigo-200 transition-all text-sm md:text-base">
+                    <div class="flex items-center space-x-3 mb-3 border-b border-slate-200 pb-2">
+                        <div class="w-8 h-8 rounded-full bg-indigo-100 text-indigo-600 flex items-center justify-center font-bold text-sm shrink-0">
+                            ${i}
+                        </div>
+                        <span class="font-bold text-slate-700">End of Year ${i} Summary</span>
+                    </div>
+                    
+                    <div class="grid grid-cols-[1fr_auto] gap-x-2 gap-y-2 text-xs sm:text-sm">
+                        <div class="text-slate-500 break-words">Starting FD Balance:</div>
+                        <div class="font-medium text-slate-800 text-right">${formatINR(startingBalance)}</div>
+
+                        <div class="text-slate-500 break-words">FD Interest Earned (${fdRateStr}%):</div>
+                        <div class="font-medium text-emerald-600 text-right">+ ${formatINR(fdInterestEarnedThisYear)}</div>
+
+                        <div class="text-slate-500 break-words">RD Maturity added (${isManualMaturity ? '<span class="text-amber-600 font-bold text-[10px] uppercase">Manual</span>' : '<span class="text-indigo-500 font-bold text-[10px] uppercase">Auto</span>'}):</div>
+                        <div class="font-medium text-blue-600 text-right">+ ${formatINR(rdMaturity)}</div>
+                        
+                        <div class="text-slate-500 break-words">Extra FD added:</div>
+                        <div class="font-medium text-blue-600 text-right">+ ${formatINR(extra)}</div>
+                        
+                        ${taxHTMLRow}
+
+                        <div class="col-span-2 border-t border-slate-200 my-1"></div>
+                        
+                        <div class="text-slate-500 break-words">Cumulative Profit Till Now:</div>
+                        <div class="font-medium text-emerald-600 text-right">+ ${formatINR(cumulativeInterest)} <span class="text-[10px] bg-emerald-100 text-emerald-700 px-1 py-0.5 rounded ml-1">${profitPercentage}%</span></div>
+
+                        <div class="font-bold text-slate-700 mt-1">Total FD to roll over:</div>
+                        <div class="font-bold text-indigo-700 text-right text-sm sm:text-base mt-1">${formatINR(currentFDBalance)}</div>
+                    </div>
+                </div>
+            `;
+            }
+
+            // Final Rate Calculation
+            let finalProfitPercentage = totalInvested > 0 ? ((cumulativeInterest / totalInvested) * 100).toFixed(2) : "0.00";
+
+            // Update UI
+            document.getElementById('emptyState').classList.add('hidden');
+            document.getElementById('populatedState').classList.remove('hidden');
+
+            // Update Numbers
+            document.getElementById('resFinalAmount').innerText = formatINR(currentFDBalance);
+            document.getElementById('resTotalInvested').innerText = formatINR(totalInvested);
+            document.getElementById('resTotalProfit').innerText = formatINR(cumulativeInterest);
+            document.getElementById('resProfitRate').innerText = `+${finalProfitPercentage}%`;
+
+            const taxContainer = document.getElementById('taxSummaryContainer');
+            if (taxRate > 0) {
+                taxContainer.classList.remove('hidden');
+                document.getElementById('resTotalTax').innerText = formatINR(totalTaxPaid);
+            } else {
+                taxContainer.classList.add('hidden');
+            }
+
+            document.getElementById('yearBreakdown').innerHTML = breakdownHTML;
+        }
+
+        // Initialize UI Empty states on load 
+        window.onload = () => {
+            document.getElementById('emptyState').classList.remove('hidden');
+            document.getElementById('populatedState').classList.add('hidden');
+        };
+    </script>
+
+</body>
+
+</html>

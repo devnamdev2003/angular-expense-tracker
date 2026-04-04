@@ -34,7 +34,7 @@ export const environment = {
    * This should be updated with each release to track application versions.
    * format: y.m.d
    */
-  applicationVersion: '26.02.18', // Current application version
+  applicationVersion: '26.02.28', // Current application version
 
   /**
    * The production (live) API base URL.

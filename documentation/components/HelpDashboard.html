@@ -138,8 +138,35 @@
 </p>
 
 
+    <p class="comment">
+        <h3>Description</h3>
+    </p>
+    <p class="comment">
+        <p>Help Dashboard Component</p>
+<p>Responsibilities:</p>
+<ul>
+<li>Display FAQ list with search and category filtering</li>
+<li>Accordion-style question expansion</li>
+<li>Highlight search results dynamically</li>
+<li>Contact form submission with validation</li>
+<li>Icon rendering using Lucide library</li>
+</ul>
+<p>Performance Optimization:</p>
+<ul>
+<li>Uses OnPush change detection</li>
+<li>Uses Angular Signals for reactive state</li>
+</ul>
+
+    </p>
 
 
+    <p class="comment">
+        <h3>Implements</h3>
+    </p>
+    <p class="comment">
+                    <code><a href="https://angular.io/api/core/OnInit" target="_blank" >OnInit</a></code>
+                    <code><a href="https://angular.io/api/core/AfterViewChecked" target="_blank" >AfterViewChecked</a></code>
+    </p>
 
 
 <section data-compodoc="block-metadata">
@@ -147,6 +174,10 @@
     <table class="table table-sm table-hover metadata">
         <tbody>
 
+            <tr>
+                <td class="col-md-3">changeDetection</td>
+                <td class="col-md-9"><code>ChangeDetectionStrategy.OnPush</code></td>
+            </tr>
 
 
 
@@ -163,7 +194,17 @@
                 <td class="col-md-9"><code>app-help-dashboard</code></td>
             </tr>
 
+            <tr>
+                <td class="col-md-3">standalone</td>
+                <td class="col-md-9"><code>true</code></td>
+            </tr>
 
+            <tr>
+                <td class="col-md-3">imports</td>
+                <td class="col-md-9">
+                                <code><a href="https://angular.io/api/forms/ReactiveFormsModule" target="_blank" >ReactiveFormsModule</a></code>
+                </td>
+            </tr>
 
 
 
@@ -188,34 +229,2301 @@
     </table>
 </section>
 
+    <section data-compodoc="block-index">
+    <h3 id="index">Index</h3>
+    <table class="table table-sm table-bordered index-table">
+        <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Properties</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                    <span class="modifier">Private</span>
+                                <a href="#cdr" >cdr</a>
+                            </li>
+                            <li>
+                                <a href="#contactForm" >contactForm</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Private</span>
+                                <a href="#fb" >fb</a>
+                            </li>
+                            <li>
+                                <a href="#filteredFAQs" >filteredFAQs</a>
+                            </li>
+                            <li>
+                                <a href="#groupedFAQs" >groupedFAQs</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Private</span>
+                                    <span class="modifier">Readonly</span>
+                                <a href="#helpData" >helpData</a>
+                            </li>
+                            <li>
+                                <a href="#isSubmitting" >isSubmitting</a>
+                            </li>
+                            <li>
+                                <a href="#openAccordions" >openAccordions</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Private</span>
+                                <a href="#platformId" >platformId</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Private</span>
+                                <a href="#sanitizer" >sanitizer</a>
+                            </li>
+                            <li>
+                                <a href="#searchQuery" >searchQuery</a>
+                            </li>
+                            <li>
+                                <a href="#shakeFields" >shakeFields</a>
+                            </li>
+                            <li>
+                                <a href="#submitError" >submitError</a>
+                            </li>
+                            <li>
+                                <a href="#submitSuccess" >submitSuccess</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Methods</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                <a href="#highlightText" >highlightText</a>
+                            </li>
+                            <li>
+                                <a href="#injectFontAwesome" >injectFontAwesome</a>
+                            </li>
+                            <li>
+                                <a href="#isAccordionOpen" >isAccordionOpen</a>
+                            </li>
+                            <li>
+                                <a href="#isInvalid" >isInvalid</a>
+                            </li>
+                            <li>
+                                <a href="#ngAfterViewChecked" >ngAfterViewChecked</a>
+                            </li>
+                            <li>
+                                <a href="#ngOnInit" >ngOnInit</a>
+                            </li>
+                            <li>
+                                <a href="#onSearchInput" >onSearchInput</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Async</span>
+                                <a href="#onSubmit" >onSubmit</a>
+                            </li>
+                            <li>
+                                <a href="#resetSearch" >resetSearch</a>
+                            </li>
+                            <li>
+                                <a href="#scrollToForm" >scrollToForm</a>
+                            </li>
+                            <li>
+                                <a href="#setCategory" >setCategory</a>
+                            </li>
+                            <li>
+                                <a href="#shouldShake" >shouldShake</a>
+                            </li>
+                            <li>
+                                <a href="#toggleAccordion" >toggleAccordion</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+
+
+
+
+
+        </tbody>
+    </table>
+</section>
 
 
 
 
 
 
+    <section data-compodoc="block-methods">
+    
+    <h3 id="methods">
+        Methods
+    </h3>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="highlightText"></a>
+                    <span class="name">
+                        <span ><b>highlightText</b></span>
+                        <a href="#highlightText"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>highlightText(text: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>, query: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>)</code>
+                </td>
+            </tr>
 
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="290"
+                                    class="link-to-prism">src/app/features/help-dashboard/help-dashboard.ts:290</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-description"><p>Highlights matched search text within the FAQs by wrapping it in an HTML span.
+Uses Angular&#39;s DomSanitizer to safely inject the formatted HTML.</p>
+<ul>
+<li>@param {string} text - The full text to search within</li>
+</ul>
+</div>
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                                <td>Description</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>text</td>
+                                            <td>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                            <td>
+                                                    <ul>
+<li>The full text to search within</li>
+</ul>
+
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                                <td>query</td>
+                                            <td>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                            <td>
+                                                    <ul>
+<li>The search query to highlight</li>
+</ul>
+
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://angular.io/api/platform-browser/SafeHtml" target="_blank" >SafeHtml</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                <p>The sanitized HTML string containing highlight spans</p>
+
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="injectFontAwesome"></a>
+                    <span class="name">
+                        <span ><b>injectFontAwesome</b></span>
+                        <a href="#injectFontAwesome"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>injectFontAwesome()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="188"
+                                    class="link-to-prism">src/app/features/help-dashboard/help-dashboard.ts:188</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-description"><p>Dynamically injects the Lucide icon script and Google Font (Outfit).
+Ensures execution only occurs in a browser environment to prevent SSR errors.</p>
+<ul>
+<li>@returns {void}</li>
+</ul>
+</div>
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="isAccordionOpen"></a>
+                    <span class="name">
+                        <span ><b>isAccordionOpen</b></span>
+                        <a href="#isAccordionOpen"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>isAccordionOpen(id: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank">number</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="275"
+                                    class="link-to-prism">src/app/features/help-dashboard/help-dashboard.ts:275</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-description"><p>Checks if a specific accordion item is currently open.</p>
+<ul>
+<li>@param {number} id - The unique ID of the FAQ accordion</li>
+</ul>
+</div>
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                                <td>Description</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>id</td>
+                                            <td>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                            <td>
+                                                    <ul>
+<li>The unique ID of the FAQ accordion</li>
+</ul>
+
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                <p>True if the accordion is open, false otherwise</p>
+
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="isInvalid"></a>
+                    <span class="name">
+                        <span ><b>isInvalid</b></span>
+                        <a href="#isInvalid"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>isInvalid(controlName: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="325"
+                                    class="link-to-prism">src/app/features/help-dashboard/help-dashboard.ts:325</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-description"><p>Checks if a specific form control is invalid and has been touched or dirtied.</p>
+<ul>
+<li>@param {string} controlName - The form control name mapped in the FormGroup</li>
+</ul>
+</div>
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                                <td>Description</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>controlName</td>
+                                            <td>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                            <td>
+                                                    <ul>
+<li>The form control name mapped in the FormGroup</li>
+</ul>
+
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                <p>True if the form control is invalid and user interacted with it</p>
+
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="ngAfterViewChecked"></a>
+                    <span class="name">
+                        <span ><b>ngAfterViewChecked</b></span>
+                        <a href="#ngAfterViewChecked"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>ngAfterViewChecked()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="171"
+                                    class="link-to-prism">src/app/features/help-dashboard/help-dashboard.ts:171</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-description"><p>AfterViewChecked lifecycle hook.
+Ensures Lucide icons are re-rendered after DOM updates are completed.</p>
+<ul>
+<li>@returns {void}</li>
+</ul>
+</div>
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="ngOnInit"></a>
+                    <span class="name">
+                        <span ><b>ngOnInit</b></span>
+                        <a href="#ngOnInit"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>ngOnInit()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="162"
+                                    class="link-to-prism">src/app/features/help-dashboard/help-dashboard.ts:162</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-description"><p>OnInit lifecycle hook.
+Injects fonts and icon libraries into the document.</p>
+<ul>
+<li>@returns {void}</li>
+</ul>
+</div>
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="onSearchInput"></a>
+                    <span class="name">
+                        <span ><b>onSearchInput</b></span>
+                        <a href="#onSearchInput"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>onSearchInput(event: <a href="https://angular.io/api/router/Event" target="_blank">Event</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="223"
+                                    class="link-to-prism">src/app/features/help-dashboard/help-dashboard.ts:223</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-description"><p>Updates the search query signal when the user types in the search input.</p>
+<ul>
+<li>@param {Event} event - The DOM input event triggered by user typing</li>
+</ul>
+</div>
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                                <td>Description</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>event</td>
+                                            <td>
+                                                            <code><a href="https://angular.io/api/router/Event" target="_blank" >Event</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                            <td>
+                                                    <ul>
+<li>The DOM input event triggered by user typing</li>
+</ul>
+
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="onSubmit"></a>
+                    <span class="name">
+                            <span class="modifier">Async</span>
+                        <span ><b>onSubmit</b></span>
+                        <a href="#onSubmit"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                        <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>onSubmit()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="349"
+                                    class="link-to-prism">src/app/features/help-dashboard/help-dashboard.ts:349</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-description"><p>Handles the contact form submission process.
+Validates the form, triggers animations for invalid fields, sends a POST request
+to the backend API, and updates the UI state based on the response.</p>
+<ul>
+<li>@returns {Promise<void>} A promise that resolves when the submission process is complete</li>
+</ul>
+</div>
+
+                        <div class="io-description">
+                            <b>Returns : </b>    <code>Promise&lt;void&gt;</code>
+
+                        </div>
+                            <div class="io-description">
+                                <p>A promise that resolves when the submission process is complete</p>
+
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="resetSearch"></a>
+                    <span class="name">
+                        <span ><b>resetSearch</b></span>
+                        <a href="#resetSearch"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>resetSearch()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="232"
+                                    class="link-to-prism">src/app/features/help-dashboard/help-dashboard.ts:232</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-description"><p>Clears the current search input.</p>
+<ul>
+<li>@returns {void}</li>
+</ul>
+</div>
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="scrollToForm"></a>
+                    <span class="name">
+                        <span ><b>scrollToForm</b></span>
+                        <a href="#scrollToForm"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>scrollToForm()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="313"
+                                    class="link-to-prism">src/app/features/help-dashboard/help-dashboard.ts:313</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-description"><p>Smoothly scrolls the page to the contact form section.</p>
+<ul>
+<li>@returns {void}</li>
+</ul>
+</div>
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="setCategory"></a>
+                    <span class="name">
+                        <span ><b>setCategory</b></span>
+                        <a href="#setCategory"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>setCategory(category: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="241"
+                                    class="link-to-prism">src/app/features/help-dashboard/help-dashboard.ts:241</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-description"><p>Sets the category filter and smoothly scrolls the FAQ container into view.</p>
+<ul>
+<li>@param {string} category - The category string to set as the active filter</li>
+</ul>
+</div>
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                                <td>Description</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>category</td>
+                                            <td>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                            <td>
+                                                    <ul>
+<li>The category string to set as the active filter</li>
+</ul>
+
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="shouldShake"></a>
+                    <span class="name">
+                        <span ><b>shouldShake</b></span>
+                        <a href="#shouldShake"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>shouldShake(controlName: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="335"
+                                    class="link-to-prism">src/app/features/help-dashboard/help-dashboard.ts:335</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-description"><p>Determines if a specific form field should display a validation shake animation.</p>
+<ul>
+<li>@param {string} controlName - The form control name to check</li>
+</ul>
+</div>
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                                <td>Description</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>controlName</td>
+                                            <td>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                            <td>
+                                                    <ul>
+<li>The form control name to check</li>
+</ul>
+
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                <p>True if the control requires a shake animation</p>
+
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="toggleAccordion"></a>
+                    <span class="name">
+                        <span ><b>toggleAccordion</b></span>
+                        <a href="#toggleAccordion"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>toggleAccordion(id: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank">number</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="261"
+                                    class="link-to-prism">src/app/features/help-dashboard/help-dashboard.ts:261</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-description"><p>Toggles the open/close state of an FAQ accordion item.</p>
+<ul>
+<li>@param {number} id - The unique ID of the FAQ accordion to toggle</li>
+</ul>
+</div>
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                                <td>Description</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>id</td>
+                                            <td>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                            <td>
+                                                    <ul>
+<li>The unique ID of the FAQ accordion to toggle</li>
+</ul>
+
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</section>
+    <section data-compodoc="block-properties">
+    
+    <h3 id="inputs">
+        Properties
+    </h3>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="cdr"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                        <span ><b>cdr</b></span>
+                        <a href="#cdr"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>inject(ChangeDetectorRef)</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="72" class="link-to-prism">src/app/features/help-dashboard/help-dashboard.ts:72</a></div>
+                        </td>
+                    </tr>
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Dependency injection for ChangeDetectorRef to manually trigger change detection</p>
+</div>
+                </td>
+            </tr>
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="contactForm"></a>
+                    <span class="name">
+                        <span ><b>contactForm</b></span>
+                        <a href="#contactForm"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>this.fb.group({
+    name: [&#x27;&#x27;, Validators.required],
+    email: [&#x27;&#x27;, [Validators.required, Validators.email]],
+    query: [&#x27;&#x27;, [Validators.required, Validators.minLength(10)]]
+  })</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="112" class="link-to-prism">src/app/features/help-dashboard/help-dashboard.ts:112</a></div>
+                        </td>
+                    </tr>
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Reactive form configuration with validation rules for the contact form</p>
+</div>
+                </td>
+            </tr>
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="fb"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                        <span ><b>fb</b></span>
+                        <a href="#fb"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>inject(FormBuilder)</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="60" class="link-to-prism">src/app/features/help-dashboard/help-dashboard.ts:60</a></div>
+                        </td>
+                    </tr>
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Dependency injection for Angular FormBuilder</p>
+</div>
+                </td>
+            </tr>
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="filteredFAQs"></a>
+                    <span class="name">
+                        <span ><b>filteredFAQs</b></span>
+                        <a href="#filteredFAQs"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>computed(() &#x3D;&gt; {
+    const query &#x3D; this.searchQuery().toLowerCase().trim();
+    if (!query) return this.helpData;
+
+    return this.helpData.filter(item &#x3D;&gt;
+      item.question.toLowerCase().includes(query) ||
+      item.answer.toLowerCase().includes(query) ||
+      item.category.toLowerCase().includes(query)
+    );
+  })</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="127" class="link-to-prism">src/app/features/help-dashboard/help-dashboard.ts:127</a></div>
+                        </td>
+                    </tr>
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Filters FAQs based on search query.
+Matches question, answer, or category text.</p>
+<ul>
+<li>@returns {FAQ[]} Array of filtered FAQ items based on the current search query</li>
+</ul>
+</div>
+                </td>
+            </tr>
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="groupedFAQs"></a>
+                    <span class="name">
+                        <span ><b>groupedFAQs</b></span>
+                        <a href="#groupedFAQs"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>computed(() &#x3D;&gt; {
+    const items &#x3D; this.filteredFAQs();
+    const categories &#x3D; [...new Set(items.map(i &#x3D;&gt; i.category))];
+
+    return categories.map(cat &#x3D;&gt; ({
+      category: cat,
+      items: items.filter(i &#x3D;&gt; i.category &#x3D;&#x3D;&#x3D; cat)
+    }));
+  })</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="143" class="link-to-prism">src/app/features/help-dashboard/help-dashboard.ts:143</a></div>
+                        </td>
+                    </tr>
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Groups filtered FAQs by category.
+Useful for categorized display in UI.</p>
+<ul>
+<li>@returns {Array&lt;{category: string, items: FAQ[]}&gt;} An array of objects grouping FAQs by their category</li>
+</ul>
+</div>
+                </td>
+            </tr>
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="helpData"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                            <span class="modifier">Readonly</span>
+                        <span ><b>helpData</b></span>
+                        <a href="#helpData"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="../interfaces/FAQ.html" target="_self" >FAQ[]</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>HelpData</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="76" class="link-to-prism">src/app/features/help-dashboard/help-dashboard.ts:76</a></div>
+                        </td>
+                    </tr>
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>FAQ static data source containing all help articles</p>
+</div>
+                </td>
+            </tr>
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="isSubmitting"></a>
+                    <span class="name">
+                        <span ><b>isSubmitting</b></span>
+                        <a href="#isSubmitting"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>signal&lt;boolean&gt;(false)</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="92" class="link-to-prism">src/app/features/help-dashboard/help-dashboard.ts:92</a></div>
+                        </td>
+                    </tr>
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Tracks if the contact form is currently submitting</p>
+</div>
+                </td>
+            </tr>
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="openAccordions"></a>
+                    <span class="name">
+                        <span ><b>openAccordions</b></span>
+                        <a href="#openAccordions"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>signal&lt;Set&lt;number&gt;&gt;(new Set())</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="88" class="link-to-prism">src/app/features/help-dashboard/help-dashboard.ts:88</a></div>
+                        </td>
+                    </tr>
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Stores a Set of currently opened accordion IDs</p>
+</div>
+                </td>
+            </tr>
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="platformId"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                        <span ><b>platformId</b></span>
+                        <a href="#platformId"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>inject(PLATFORM_ID)</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="68" class="link-to-prism">src/app/features/help-dashboard/help-dashboard.ts:68</a></div>
+                        </td>
+                    </tr>
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Dependency injection for Platform ID to check execution context (Browser/Server)</p>
+</div>
+                </td>
+            </tr>
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="sanitizer"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                        <span ><b>sanitizer</b></span>
+                        <a href="#sanitizer"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>inject(DomSanitizer)</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="64" class="link-to-prism">src/app/features/help-dashboard/help-dashboard.ts:64</a></div>
+                        </td>
+                    </tr>
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Dependency injection for DOM Sanitizer to safely inject HTML</p>
+</div>
+                </td>
+            </tr>
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="searchQuery"></a>
+                    <span class="name">
+                        <span ><b>searchQuery</b></span>
+                        <a href="#searchQuery"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>signal&lt;string&gt;(&#x27;&#x27;)</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="84" class="link-to-prism">src/app/features/help-dashboard/help-dashboard.ts:84</a></div>
+                        </td>
+                    </tr>
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Stores the current user search query string</p>
+</div>
+                </td>
+            </tr>
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="shakeFields"></a>
+                    <span class="name">
+                        <span ><b>shakeFields</b></span>
+                        <a href="#shakeFields"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>signal&lt;Set&lt;string&gt;&gt;(new Set())</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="104" class="link-to-prism">src/app/features/help-dashboard/help-dashboard.ts:104</a></div>
+                        </td>
+                    </tr>
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Tracks form field names that need a shake animation on validation error</p>
+</div>
+                </td>
+            </tr>
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="submitError"></a>
+                    <span class="name">
+                        <span ><b>submitError</b></span>
+                        <a href="#submitError"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>signal&lt;boolean&gt;(false)</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="100" class="link-to-prism">src/app/features/help-dashboard/help-dashboard.ts:100</a></div>
+                        </td>
+                    </tr>
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Tracks if an error occurred during contact form submission</p>
+</div>
+                </td>
+            </tr>
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="submitSuccess"></a>
+                    <span class="name">
+                        <span ><b>submitSuccess</b></span>
+                        <a href="#submitSuccess"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>signal&lt;boolean&gt;(false)</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="96" class="link-to-prism">src/app/features/help-dashboard/help-dashboard.ts:96</a></div>
+                        </td>
+                    </tr>
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Tracks if the contact form submitted successfully</p>
+</div>
+                </td>
+            </tr>
+
+        </tbody>
+    </table>
+</section>
 
 </div>
 
 
     <div class="tab-pane fade  tab-source-code" id="source">
-        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Component } from &#x27;@angular/core&#x27;;
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Component, OnInit, AfterViewChecked, ChangeDetectionStrategy, signal, computed, inject, PLATFORM_ID, ChangeDetectorRef } from &#x27;@angular/core&#x27;;
+import { isPlatformBrowser } from &#x27;@angular/common&#x27;;
+import { FormBuilder, ReactiveFormsModule, Validators } from &#x27;@angular/forms&#x27;;
+import { DomSanitizer, SafeHtml } from &#x27;@angular/platform-browser&#x27;;
+import { HelpData } from &#x27;../../service/localStorage/data/help-data&#x27;;
 
+/**
+ * External icon library global declaration (Lucide icons).
+ */
+declare var lucide: any;
+
+/**
+ * FAQ Interface
+ * Defines the structure of FAQ objects used in Help Dashboard.
+ */
+interface FAQ {
+  /** * Unique identifier for the FAQ 
+   */
+  id: number;
+
+  /** * The category this FAQ belongs to (e.g., &#x27;General&#x27;, &#x27;Billing&#x27;) 
+   */
+  category: string;
+
+  /** * The actual question text 
+   */
+  question: string;
+
+  /** * The answer text to the question 
+   */
+  answer: string;
+}
+
+/**
+ * Help Dashboard Component
+ *
+ * Responsibilities:
+ * - Display FAQ list with search and category filtering
+ * - Accordion-style question expansion
+ * - Highlight search results dynamically
+ * - Contact form submission with validation
+ * - Icon rendering using Lucide library
+ *
+ * Performance Optimization:
+ * - Uses OnPush change detection
+ * - Uses Angular Signals for reactive state
+ */
 @Component({
   selector: &#x27;app-help-dashboard&#x27;,
-  imports: [],
+  standalone: true,
+  imports: [ReactiveFormsModule],
+  changeDetection: ChangeDetectionStrategy.OnPush,
   templateUrl: &#x27;./help-dashboard.html&#x27;,
   styleUrl: &#x27;./help-dashboard.css&#x27;
 })
-export class HelpDashboard {
+export class HelpDashboard implements OnInit, AfterViewChecked {
 
-}
-</code></pre>
+  /** * Dependency injection for Angular FormBuilder 
+   */
+  private fb &#x3D; inject(FormBuilder);
+
+  /** * Dependency injection for DOM Sanitizer to safely inject HTML 
+   */
+  private sanitizer &#x3D; inject(DomSanitizer);
+
+  /** * Dependency injection for Platform ID to check execution context (Browser/Server) 
+   */
+  private platformId &#x3D; inject(PLATFORM_ID);
+
+  /** * Dependency injection for ChangeDetectorRef to manually trigger change detection 
+   */
+  private cdr &#x3D; inject(ChangeDetectorRef);
+
+  /** * FAQ static data source containing all help articles 
+   */
+  private readonly helpData: FAQ[] &#x3D; HelpData;
+
+  /* ------------------------------------------------------------------
+     SIGNAL STATES (Reactive state management)
+     ------------------------------------------------------------------ */
+
+  /** * Stores the current user search query string 
+   */
+  searchQuery &#x3D; signal&lt;string&gt;(&#x27;&#x27;);
+
+  /** * Stores a Set of currently opened accordion IDs 
+   */
+  openAccordions &#x3D; signal&lt;Set&lt;number&gt;&gt;(new Set());
+
+  /** * Tracks if the contact form is currently submitting 
+   */
+  isSubmitting &#x3D; signal&lt;boolean&gt;(false);
+
+  /** * Tracks if the contact form submitted successfully 
+   */
+  submitSuccess &#x3D; signal&lt;boolean&gt;(false);
+
+  /** * Tracks if an error occurred during contact form submission 
+   */
+  submitError &#x3D; signal&lt;boolean&gt;(false);
+
+  /** * Tracks form field names that need a shake animation on validation error 
+   */
+  shakeFields &#x3D; signal&lt;Set&lt;string&gt;&gt;(new Set());
+
+  /* ------------------------------------------------------------------
+     CONTACT FORM SETUP
+     ------------------------------------------------------------------ */
+
+  /** * Reactive form configuration with validation rules for the contact form 
+   */
+  contactForm &#x3D; this.fb.group({
+    name: [&#x27;&#x27;, Validators.required],
+    email: [&#x27;&#x27;, [Validators.required, Validators.email]],
+    query: [&#x27;&#x27;, [Validators.required, Validators.minLength(10)]]
+  });
+
+  /* ------------------------------------------------------------------
+     COMPUTED SIGNALS (Derived UI State)
+     ------------------------------------------------------------------ */
+
+  /**
+   * Filters FAQs based on search query.
+   * Matches question, answer, or category text.
+   * * @returns {FAQ[]} Array of filtered FAQ items based on the current search query
+   */
+  filteredFAQs &#x3D; computed(() &#x3D;&gt; {
+    const query &#x3D; this.searchQuery().toLowerCase().trim();
+    if (!query) return this.helpData;
+
+    return this.helpData.filter(item &#x3D;&gt;
+      item.question.toLowerCase().includes(query) ||
+      item.answer.toLowerCase().includes(query) ||
+      item.category.toLowerCase().includes(query)
+    );
+  });
+
+  /**
+   * Groups filtered FAQs by category.
+   * Useful for categorized display in UI.
+   * * @returns {Array&lt;{category: string, items: FAQ[]}&gt;} An array of objects grouping FAQs by their category
+   */
+  groupedFAQs &#x3D; computed(() &#x3D;&gt; {
+    const items &#x3D; this.filteredFAQs();
+    const categories &#x3D; [...new Set(items.map(i &#x3D;&gt; i.category))];
+
+    return categories.map(cat &#x3D;&gt; ({
+      category: cat,
+      items: items.filter(i &#x3D;&gt; i.category &#x3D;&#x3D;&#x3D; cat)
+    }));
+  });
+
+  /* ------------------------------------------------------------------
+     LIFECYCLE HOOKS
+     ------------------------------------------------------------------ */
+
+  /**
+   * OnInit lifecycle hook.
+   * Injects fonts and icon libraries into the document.
+   * * @returns {void}
+   */
+  ngOnInit(): void {
+    this.injectFontAwesome();
+  }
+
+  /**
+   * AfterViewChecked lifecycle hook.
+   * Ensures Lucide icons are re-rendered after DOM updates are completed.
+   * * @returns {void}
+   */
+  ngAfterViewChecked(): void {
+    if (isPlatformBrowser(this.platformId)) {
+      if (typeof lucide !&#x3D;&#x3D; &#x27;undefined&#x27;) {
+        lucide.createIcons();
+      }
+    }
+  }
+
+  /* ------------------------------------------------------------------
+     EXTERNAL SCRIPT &amp; FONT INJECTION
+     ------------------------------------------------------------------ */
+
+  /**
+   * Dynamically injects the Lucide icon script and Google Font (Outfit).
+   * Ensures execution only occurs in a browser environment to prevent SSR errors.
+   * * @returns {void}
+   */
+  injectFontAwesome(): void {
+    if (!isPlatformBrowser(this.platformId)) return;
+
+    if (!document.getElementById(&#x27;lucide-script&#x27;)) {
+      const script &#x3D; document.createElement(&#x27;script&#x27;);
+      script.id &#x3D; &#x27;lucide-script&#x27;;
+      script.src &#x3D; &#x27;https://unpkg.com/lucide@latest&#x27;;
+
+      script.onload &#x3D; () &#x3D;&gt; {
+        if (typeof lucide !&#x3D;&#x3D; &#x27;undefined&#x27;) lucide.createIcons();
+      };
+
+      document.body.appendChild(script);
+    }
+
+    if (!document.getElementById(&#x27;outfit-font&#x27;)) {
+      const font &#x3D; document.createElement(&#x27;link&#x27;);
+      font.id &#x3D; &#x27;outfit-font&#x27;;
+      font.href &#x3D;
+        &quot;https://fonts.googleapis.com/css2?family&#x3D;Outfit:wght@300;400;500;600;700&amp;display&#x3D;swap&quot;;
+      font.rel &#x3D; &quot;stylesheet&quot;;
+
+      document.head.appendChild(font);
+    }
+  }
+
+  /* ------------------------------------------------------------------
+     SEARCH &amp; FILTER LOGIC
+     ------------------------------------------------------------------ */
+
+  /**
+   * Updates the search query signal when the user types in the search input.
+   * * @param {Event} event - The DOM input event triggered by user typing
+   * @returns {void}
+   */
+  onSearchInput(event: Event): void {
+    const value &#x3D; (event.target as HTMLInputElement).value;
+    this.searchQuery.set(value);
+  }
+
+  /**
+   * Clears the current search input.
+   * * @returns {void}
+   */
+  resetSearch(): void {
+    this.searchQuery.set(&#x27;&#x27;);
+  }
+
+  /**
+   * Sets the category filter and smoothly scrolls the FAQ container into view.
+   * * @param {string} category - The category string to set as the active filter
+   * @returns {void}
+   */
+  setCategory(category: string): void {
+    this.searchQuery.set(category);
+
+    if (isPlatformBrowser(this.platformId)) {
+      setTimeout(() &#x3D;&gt; {
+        document.getElementById(&#x27;faqContainer&#x27;)
+          ?.scrollIntoView({ behavior: &#x27;smooth&#x27;, block: &#x27;start&#x27; });
+      }, 100);
+    }
+  }
+
+  /* ------------------------------------------------------------------
+     ACCORDION CONTROL
+     ------------------------------------------------------------------ */
+
+  /**
+   * Toggles the open/close state of an FAQ accordion item.
+   * * @param {number} id - The unique ID of the FAQ accordion to toggle
+   * @returns {void}
+   */
+  toggleAccordion(id: number): void {
+    const current &#x3D; new Set(this.openAccordions());
+
+    if (current.has(id)) current.delete(id);
+    else current.add(id);
+
+    this.openAccordions.set(current);
+  }
+
+  /**
+   * Checks if a specific accordion item is currently open.
+   * * @param {number} id - The unique ID of the FAQ accordion
+   * @returns {boolean} True if the accordion is open, false otherwise
+   */
+  isAccordionOpen(id: number): boolean {
+    return this.openAccordions().has(id);
+  }
+
+  /* ------------------------------------------------------------------
+     SEARCH TEXT HIGHLIGHTING
+     ------------------------------------------------------------------ */
+
+  /**
+   * Highlights matched search text within the FAQs by wrapping it in an HTML span.
+   * Uses Angular&#x27;s DomSanitizer to safely inject the formatted HTML.
+   * * @param {string} text - The full text to search within
+   * @param {string} query - The search query to highlight
+   * @returns {SafeHtml} The sanitized HTML string containing highlight spans
+   */
+  highlightText(text: string, query: string): SafeHtml {
+    if (!query)
+      return this.sanitizer.bypassSecurityTrustHtml(text);
+
+    const safeQuery &#x3D; query.replace(/[.*+?^${}()|[\]\\]/g, &#x27;\\$&amp;&#x27;);
+    const regex &#x3D; new RegExp(&#x60;(${safeQuery})&#x60;, &#x27;gi&#x27;);
+
+    const replaced &#x3D; text.replace(
+      regex,
+      &#x27;&lt;span class&#x3D;&quot;bg-amber-200/50 text-slate-900 px-0.5 rounded shadow-sm font-medium&quot;&gt;$1&lt;/span&gt;&#x27;
+    );
+
+    return this.sanitizer.bypassSecurityTrustHtml(replaced);
+  }
+
+  /* ------------------------------------------------------------------
+     FORM UX HELPERS
+     ------------------------------------------------------------------ */
+
+  /**
+   * Smoothly scrolls the page to the contact form section.
+   * * @returns {void}
+   */
+  scrollToForm(): void {
+    if (isPlatformBrowser(this.platformId)) {
+      document.getElementById(&#x27;contactFormSection&#x27;)
+        ?.scrollIntoView({ behavior: &#x27;smooth&#x27; });
+    }
+  }
+
+  /**
+   * Checks if a specific form control is invalid and has been touched or dirtied.
+   * * @param {string} controlName - The form control name mapped in the FormGroup
+   * @returns {boolean} True if the form control is invalid and user interacted with it
+   */
+  isInvalid(controlName: string): boolean {
+    const control &#x3D; this.contactForm.get(controlName);
+    return !!control &amp;&amp; control.invalid &amp;&amp; (control.dirty || control.touched);
+  }
+
+  /**
+   * Determines if a specific form field should display a validation shake animation.
+   * * @param {string} controlName - The form control name to check
+   * @returns {boolean} True if the control requires a shake animation
+   */
+  shouldShake(controlName: string): boolean {
+    return this.shakeFields().has(controlName);
+  }
+
+  /* ------------------------------------------------------------------
+     FORM SUBMISSION LOGIC
+     ------------------------------------------------------------------ */
+
+  /**
+   * Handles the contact form submission process.
+   * Validates the form, triggers animations for invalid fields, sends a POST request 
+   * to the backend API, and updates the UI state based on the response.
+   * * @returns {Promise&lt;void&gt;} A promise that resolves when the submission process is complete
+   */
+  async onSubmit(): Promise&lt;void&gt; {
+    this.submitSuccess.set(false);
+    this.submitError.set(false);
+
+    if (this.contactForm.invalid) {
+      this.contactForm.markAllAsTouched();
+
+      const invalidFields &#x3D; new Set&lt;string&gt;();
+      Object.keys(this.contactForm.controls).forEach(key &#x3D;&gt; {
+        if (this.contactForm.get(key)?.invalid)
+          invalidFields.add(key);
+      });
+
+      this.shakeFields.set(invalidFields);
+
+      setTimeout(() &#x3D;&gt; this.shakeFields.set(new Set()), 500);
+      return;
+    }
+
+    this.isSubmitting.set(true);
+
+    const payload &#x3D; {
+      name: this.contactForm.value.name,
+      email: this.contactForm.value.email,
+      message: this.contactForm.value.query
+    };
+
+    try {
+      const response &#x3D; await fetch(
+        &#x27;https://coders813-exwiseapi.hf.space/api/contact/&#x27;,
+        {
+          method: &#x27;POST&#x27;,
+          headers: { &#x27;Content-Type&#x27;: &#x27;application/json&#x27; },
+          body: JSON.stringify(payload)
+        }
+      );
+
+      if (response.ok) {
+        this.submitSuccess.set(true);
+        this.contactForm.reset();
+      } else {
+        throw new Error(&#x27;Server error&#x27;);
+      }
+
+    } catch (error) {
+      console.error(&quot;Submission Error:&quot;, error);
+      this.submitError.set(true);
+
+    } finally {
+      this.isSubmitting.set(false);
+
+      this.cdr.markForCheck();
+
+      if (isPlatformBrowser(this.platformId)) {
+        setTimeout(() &#x3D;&gt; {
+          if (typeof lucide !&#x3D;&#x3D; &#x27;undefined&#x27;)
+            lucide.createIcons();
+        });
+      }
+    }
+  }
+}</code></pre>
     </div>
 
     <div class="tab-pane fade " id="templateData">
-        <pre class="line-numbers"><code class="language-html">&lt;p&gt;help-dashboard.component works!&lt;/p&gt;
+        <pre class="line-numbers"><code class="language-html">&lt;div class&#x3D;&quot;bg-slate-50 text-slate-800 min-h-screen flex flex-col selection:bg-indigo-100 selection:text-indigo-700&quot;&gt;
+
+    &lt;!-- Navbar --&gt;
+    &lt;nav class&#x3D;&quot;glass-nav border-b border-white/50 sticky top-0 z-50 transition-all duration-300&quot;&gt;
+        &lt;div class&#x3D;&quot;max-w-5xl mx-auto px-4 sm:px-6 lg:px-8&quot;&gt;
+            &lt;div class&#x3D;&quot;flex justify-between h-16 items-center&quot;&gt;
+                &lt;div class&#x3D;&quot;flex items-center gap-2.5&quot;&gt;
+                    &lt;img src&#x3D;&quot;https://exwise.vercel.app/icons/icon-512x512.png&quot; alt&#x3D;&quot;ExWise Logo&quot;
+                        class&#x3D;&quot;w-8 h-8 rounded-lg shadow-lg hover:rotate-12 transition-transform duration-300&quot;&gt;
+                    &lt;span class&#x3D;&quot;font-bold text-xl tracking-tight text-slate-900&quot;&gt;Expense Wise&lt;/span&gt;
+                &lt;/div&gt;
+                &lt;div class&#x3D;&quot;flex items-center gap-4&quot;&gt;
+                    &lt;a href&#x3D;&quot;https://exwisedoc.vercel.app&quot;
+                        class&#x3D;&quot;hidden sm:block text-sm font-medium text-slate-500 hover:text-indigo-600 transition-colors&quot;&gt;Documentation&lt;/a&gt;
+                    &lt;a href&#x3D;&quot;https://exwise.vercel.app&quot;
+                        class&#x3D;&quot;bg-slate-900 text-white px-5 py-2.5 rounded-xl text-sm font-semibold hover:bg-slate-800 transition-all shadow-md hover:shadow-xl active:scale-95&quot;&gt;Open
+                        App&lt;/a&gt;
+                &lt;/div&gt;
+            &lt;/div&gt;
+        &lt;/div&gt;
+    &lt;/nav&gt;
+
+    &lt;!-- Hero Section --&gt;
+    &lt;div class&#x3D;&quot;bg-gradient-to-br from-indigo-600 via-indigo-700 to-indigo-800 text-white relative overflow-hidden&quot;&gt;
+        &lt;!-- Abstract Background Shapes --&gt;
+        &lt;div class&#x3D;&quot;absolute top-0 left-0 w-full h-full overflow-hidden z-0 pointer-events-none&quot;&gt;
+            &lt;div
+                class&#x3D;&quot;absolute top-[-10%] left-[-10%] w-96 h-96 bg-indigo-400/30 rounded-full mix-blend-overlay filter blur-3xl animate-pulse-slow&quot;&gt;
+            &lt;/div&gt;
+            &lt;div class&#x3D;&quot;absolute bottom-[10%] right-[-5%] w-[30rem] h-[30rem] bg-indigo-400/20 rounded-full mix-blend-overlay filter blur-[100px]&quot;
+                style&#x3D;&quot;animation-delay: 1.5s;&quot;&gt;&lt;/div&gt;
+        &lt;/div&gt;
+
+        &lt;div class&#x3D;&quot;max-w-4xl mx-auto text-center relative z-10 pt-16 pb-32 px-4&quot;&gt;
+            &lt;div
+                class&#x3D;&quot;inline-flex items-center gap-2 py-1.5 px-4 rounded-full bg-white/10 border border-white/20 backdrop-blur-md text-sm font-medium mb-8 text-indigo-50 shadow-sm&quot;&gt;
+                &lt;span class&#x3D;&quot;relative flex h-2 w-2&quot;&gt;
+                    &lt;span
+                        class&#x3D;&quot;animate-ping absolute inline-flex h-full w-full rounded-full bg-indigo-300 opacity-75&quot;&gt;&lt;/span&gt;
+                    &lt;span class&#x3D;&quot;relative inline-flex rounded-full h-2 w-2 bg-emerald-400&quot;&gt;&lt;/span&gt;
+                &lt;/span&gt;
+                Help Center &amp; Support
+            &lt;/div&gt;
+
+            &lt;h1
+                class&#x3D;&quot;text-4xl sm:text-5xl md:text-6xl font-extrabold mb-6 tracking-tight leading-tight bg-clip-text text-transparent bg-gradient-to-b from-white to-indigo-100&quot;&gt;
+                How can we help you?
+            &lt;/h1&gt;
+            &lt;p class&#x3D;&quot;text-indigo-100 mb-10 text-lg sm:text-xl max-w-2xl mx-auto leading-relaxed font-light&quot;&gt;
+                Find answers about budgeting algorithms, heatmap customization, data security, and more.
+            &lt;/p&gt;
+
+            &lt;!-- Search Bar --&gt;
+            &lt;div class&#x3D;&quot;relative max-w-xl mx-auto group&quot;&gt;
+                &lt;div class&#x3D;&quot;absolute inset-y-0 left-0 pl-5 flex items-center pointer-events-none z-10&quot;&gt;
+                    &lt;i data-lucide&#x3D;&quot;search&quot;
+                        class&#x3D;&quot;w-5 h-5 text-slate-400 group-focus-within:text-indigo-500 transition-colors&quot;&gt;&lt;/i&gt;
+                &lt;/div&gt;
+                &lt;input type&#x3D;&quot;text&quot; [value]&#x3D;&quot;searchQuery()&quot; (input)&#x3D;&quot;onSearchInput($event)&quot;
+                    class&#x3D;&quot;block w-full pl-12 pr-12 py-5 rounded-2xl text-slate-900 placeholder-slate-400 bg-white/95 backdrop-blur-xl shadow-2xl shadow-indigo-900/30 focus:outline-none focus:ring-4 focus:ring-indigo-500/30 focus:bg-white transition-all border border-white/10 text-lg font-medium&quot;
+                    placeholder&#x3D;&quot;Search &#x27;backup&#x27;, &#x27;heatmap&#x27;, &#x27;budget&#x27;...&quot; aria-label&#x3D;&quot;Search help topics&quot;
+                    autocomplete&#x3D;&quot;off&quot;&gt;
+                @if (searchQuery().length &gt; 0) {
+                &lt;button (click)&#x3D;&quot;resetSearch()&quot; aria-label&#x3D;&quot;Clear search&quot;
+                    class&#x3D;&quot;absolute inset-y-0 right-0 pr-5 flex items-center cursor-pointer z-10 hover:scale-110 transition-transform&quot;&gt;
+                    &lt;i data-lucide&#x3D;&quot;x-circle&quot; class&#x3D;&quot;w-5 h-5 text-slate-400 hover:text-red-500 transition-colors&quot;&gt;&lt;/i&gt;
+                &lt;/button&gt;
+                }
+            &lt;/div&gt;
+        &lt;/div&gt;
+
+        &lt;!-- Curve SVG --&gt;
+        &lt;div class&#x3D;&quot;custom-shape-divider-bottom&quot;&gt;
+            &lt;svg data-name&#x3D;&quot;Layer 1&quot; xmlns&#x3D;&quot;http://www.w3.org/2000/svg&quot; viewBox&#x3D;&quot;0 0 1200 120&quot;
+                preserveAspectRatio&#x3D;&quot;none&quot;&gt;
+                &lt;path
+                    d&#x3D;&quot;M321.39,56.44c58-10.79,114.16-30.13,172-41.86,82.39-16.72,168.19-17.73,250.45-.39C823.78,31,906.67,72,985.66,92.83c70.05,18.48,146.53,26.09,214.34,3V0H0V27.35A600.21,600.21,0,0,0,321.39,56.44Z&quot;
+                    class&#x3D;&quot;shape-fill&quot;&gt;&lt;/path&gt;
+            &lt;/svg&gt;
+        &lt;/div&gt;
+    &lt;/div&gt;
+
+    &lt;!-- Main Content --&gt;
+    &lt;main class&#x3D;&quot;flex-grow max-w-5xl mx-auto w-full px-4 sm:px-6 pb-20 relative z-20 -mt-20&quot;&gt;
+
+        &lt;!-- Quick Categories (Floating) --&gt;
+        @if (!searchQuery()) {
+        &lt;div class&#x3D;&quot;grid grid-cols-2 md:grid-cols-4 gap-4 mb-16&quot;&gt;
+            &lt;button (click)&#x3D;&quot;setCategory(&#x27;Getting Started&#x27;)&quot;
+                class&#x3D;&quot;quick-filter group bg-white p-6 rounded-2xl shadow-soft hover:shadow-glow border border-white flex flex-col items-center text-center gap-4 hover:-translate-y-1.5 transition-all duration-300&quot;&gt;
+                &lt;div
+                    class&#x3D;&quot;bg-blue-50 text-blue-600 p-3.5 rounded-xl group-hover:bg-blue-600 group-hover:text-white transition-colors shadow-sm&quot;&gt;
+                    &lt;i data-lucide&#x3D;&quot;rocket&quot; class&#x3D;&quot;w-6 h-6&quot;&gt;&lt;/i&gt;
+                &lt;/div&gt;
+                &lt;span class&#x3D;&quot;text-sm font-bold text-slate-700&quot;&gt;Getting Started&lt;/span&gt;
+            &lt;/button&gt;
+            &lt;button (click)&#x3D;&quot;setCategory(&#x27;Features&#x27;)&quot;
+                class&#x3D;&quot;quick-filter group bg-white p-6 rounded-2xl shadow-soft hover:shadow-glow border border-white flex flex-col items-center text-center gap-4 hover:-translate-y-1.5 transition-all duration-300&quot;&gt;
+                &lt;div
+                    class&#x3D;&quot;bg-emerald-50 text-emerald-600 p-3.5 rounded-xl group-hover:bg-emerald-600 group-hover:text-white transition-colors shadow-sm&quot;&gt;
+                    &lt;i data-lucide&#x3D;&quot;zap&quot; class&#x3D;&quot;w-6 h-6&quot;&gt;&lt;/i&gt;
+                &lt;/div&gt;
+                &lt;span class&#x3D;&quot;text-sm font-bold text-slate-700&quot;&gt;App Features&lt;/span&gt;
+            &lt;/button&gt;
+            &lt;button (click)&#x3D;&quot;setCategory(&#x27;Budgeting&#x27;)&quot;
+                class&#x3D;&quot;quick-filter group bg-white p-6 rounded-2xl shadow-soft hover:shadow-glow border border-white flex flex-col items-center text-center gap-4 hover:-translate-y-1.5 transition-all duration-300&quot;&gt;
+                &lt;div
+                    class&#x3D;&quot;bg-amber-50 text-amber-600 p-3.5 rounded-xl group-hover:bg-amber-600 group-hover:text-white transition-colors shadow-sm&quot;&gt;
+                    &lt;i data-lucide&#x3D;&quot;pie-chart&quot; class&#x3D;&quot;w-6 h-6&quot;&gt;&lt;/i&gt;
+                &lt;/div&gt;
+                &lt;span class&#x3D;&quot;text-sm font-bold text-slate-700&quot;&gt;Budget &amp; Income&lt;/span&gt;
+            &lt;/button&gt;
+            &lt;button (click)&#x3D;&quot;setCategory(&#x27;Data &amp; Settings&#x27;)&quot;
+                class&#x3D;&quot;quick-filter group bg-white p-6 rounded-2xl shadow-soft hover:shadow-glow border border-white flex flex-col items-center text-center gap-4 hover:-translate-y-1.5 transition-all duration-300&quot;&gt;
+                &lt;div
+                    class&#x3D;&quot;bg-violet-50 text-violet-600 p-3.5 rounded-xl group-hover:bg-violet-600 group-hover:text-white transition-colors shadow-sm&quot;&gt;
+                    &lt;i data-lucide&#x3D;&quot;settings&quot; class&#x3D;&quot;w-6 h-6&quot;&gt;&lt;/i&gt;
+                &lt;/div&gt;
+                &lt;span class&#x3D;&quot;text-sm font-bold text-slate-700&quot;&gt;Data &amp; Settings&lt;/span&gt;
+            &lt;/button&gt;
+        &lt;/div&gt;
+        }
+
+        &lt;!-- Results Header --&gt;
+        @if (searchQuery()) {
+        &lt;div class&#x3D;&quot;mb-8 mt-32 flex justify-between items-center animate-fade-in-up&quot;&gt;
+            &lt;div&gt;
+                &lt;h2 class&#x3D;&quot;text-2xl font-bold text-slate-900 tracking-tight&quot;&gt;Search Results&lt;/h2&gt;
+                &lt;p class&#x3D;&quot;text-slate-500 text-sm mt-1&quot;&gt;Found answers matching your query&lt;/p&gt;
+            &lt;/div&gt;
+            &lt;button (click)&#x3D;&quot;resetSearch()&quot;
+                class&#x3D;&quot;text-sm text-indigo-600 hover:text-indigo-700 font-semibold bg-indigo-50 px-4 py-2 rounded-lg hover:bg-indigo-100 transition-colors flex items-center gap-2&quot;&gt;
+                &lt;i data-lucide&#x3D;&quot;rotate-ccw&quot; class&#x3D;&quot;w-3.5 h-3.5&quot;&gt;&lt;/i&gt; Clear Filter
+            &lt;/button&gt;
+        &lt;/div&gt;
+        }
+
+        &lt;!-- FAQ List --&gt;
+        @if (groupedFAQs().length &gt; 0) {
+        &lt;div class&#x3D;&quot;space-y-10&quot;&gt;
+            @for (group of groupedFAQs(); track group.category; let i &#x3D; $index) {
+            &lt;div class&#x3D;&quot;animate-fade-in-up&quot; [style.animationDelay]&#x3D;&quot;(i * 100) + &#x27;ms&#x27;&quot;&gt;
+                &lt;div class&#x3D;&quot;flex items-center gap-4 mb-5&quot;&gt;
+                    &lt;h3
+                        class&#x3D;&quot;text-xs font-bold text-indigo-600 uppercase tracking-widest bg-indigo-50 px-3 py-1.5 rounded-lg border border-indigo-100/50&quot;&gt;
+                        {{ group.category }}&lt;/h3&gt;
+                    &lt;div class&#x3D;&quot;h-px bg-slate-100 flex-grow&quot;&gt;&lt;/div&gt;
+                &lt;/div&gt;
+
+                &lt;div class&#x3D;&quot;grid gap-4&quot;&gt;
+                    @for (item of group.items; track item.id) {
+                    &lt;div class&#x3D;&quot;accordion-item group bg-white border border-slate-200/60 rounded-xl overflow-hidden hover:border-indigo-300 hover:shadow-soft transition-all duration-300&quot;
+                        [class.ring-2]&#x3D;&quot;isAccordionOpen(item.id)&quot; [class.ring-indigo-100]&#x3D;&quot;isAccordionOpen(item.id)&quot;
+                        [class.border-indigo-300]&#x3D;&quot;isAccordionOpen(item.id)&quot;&gt;
+                        &lt;button (click)&#x3D;&quot;toggleAccordion(item.id)&quot;
+                            class&#x3D;&quot;accordion-trigger w-full text-left px-6 py-5 flex justify-between items-center focus:outline-none select-none&quot;&gt;
+                            &lt;span
+                                class&#x3D;&quot;font-semibold text-slate-700 group-hover:text-indigo-700 transition-colors pr-4&quot;
+                                [innerHTML]&#x3D;&quot;highlightText(item.question, searchQuery())&quot;&gt;&lt;/span&gt;
+                            &lt;div
+                                class&#x3D;&quot;bg-slate-50 p-2 rounded-full group-hover:bg-indigo-50 transition-colors shrink-0&quot;&gt;
+                                &lt;i data-lucide&#x3D;&quot;chevron-down&quot;
+                                    class&#x3D;&quot;accordion-icon w-4 h-4 text-slate-400 group-hover:text-indigo-500 transform transition-transform duration-300&quot;
+                                    [class.rotate-180]&#x3D;&quot;isAccordionOpen(item.id)&quot;&gt;&lt;/i&gt;
+                            &lt;/div&gt;
+                        &lt;/button&gt;
+
+                        @if (isAccordionOpen(item.id)) {
+                        &lt;div
+                            class&#x3D;&quot;accordion-content px-6 pb-6 text-slate-600 text-sm leading-relaxed border-t border-slate-50 animate-slide-down origin-top&quot;&gt;
+                            &lt;div class&#x3D;&quot;pt-2&quot; [innerHTML]&#x3D;&quot;highlightText(item.answer, searchQuery())&quot;&gt;&lt;/div&gt;
+                        &lt;/div&gt;
+                        }
+                    &lt;/div&gt;
+                    }
+                &lt;/div&gt;
+            &lt;/div&gt;
+            }
+        &lt;/div&gt;
+        } @else {
+        &lt;!-- No Results --&gt;
+        &lt;div
+            class&#x3D;&quot;text-center py-16 animate-fade-in-up bg-white rounded-3xl border border-slate-100 shadow-sm mt-8 mx-auto max-w-2xl&quot;&gt;
+            &lt;div class&#x3D;&quot;bg-indigo-50 w-20 h-20 rounded-full flex items-center justify-center mx-auto mb-6&quot;&gt;
+                &lt;i data-lucide&#x3D;&quot;search-x&quot; class&#x3D;&quot;w-10 h-10 text-indigo-500&quot;&gt;&lt;/i&gt;
+            &lt;/div&gt;
+            &lt;h3 class&#x3D;&quot;text-xl font-bold text-slate-900 mb-2&quot;&gt;We couldn&#x27;t find an answer for that&lt;/h3&gt;
+            &lt;p class&#x3D;&quot;text-slate-500 mb-8 max-w-md mx-auto&quot;&gt;Don&#x27;t worry! You can ask us directly. Fill out the form
+                below and we&#x27;ll help you out.&lt;/p&gt;
+
+            &lt;button (click)&#x3D;&quot;scrollToForm()&quot;
+                class&#x3D;&quot;inline-flex items-center gap-2 bg-indigo-600 text-white px-6 py-3 rounded-xl font-semibold hover:bg-indigo-700 transition-colors shadow-lg shadow-indigo-500/25 active:scale-95 transform&quot;&gt;
+                &lt;span&gt;Use Contact Form&lt;/span&gt;
+                &lt;i data-lucide&#x3D;&quot;arrow-down&quot; class&#x3D;&quot;w-4 h-4&quot;&gt;&lt;/i&gt;
+            &lt;/button&gt;
+        &lt;/div&gt;
+        }
+
+        &lt;!-- Contact Form Section --&gt;
+        &lt;div id&#x3D;&quot;contactFormSection&quot; class&#x3D;&quot;mt-24 pt-16 border-t border-slate-200&quot;&gt;
+            &lt;div class&#x3D;&quot;grid md:grid-cols-2 gap-12 lg:gap-20 items-start&quot;&gt;
+                &lt;div class&#x3D;&quot;md:sticky md:top-24&quot;&gt;
+                    &lt;div class&#x3D;&quot;inline-block p-2 bg-indigo-50 rounded-lg mb-4&quot;&gt;
+                        &lt;i data-lucide&#x3D;&quot;life-buoy&quot; class&#x3D;&quot;w-6 h-6 text-indigo-600&quot;&gt;&lt;/i&gt;
+                    &lt;/div&gt;
+                    &lt;h2 class&#x3D;&quot;text-3xl font-bold text-slate-900 mb-4 tracking-tight&quot;&gt;Still need help?&lt;/h2&gt;
+                    &lt;p class&#x3D;&quot;text-slate-600 mb-8 leading-relaxed text-lg&quot;&gt;If you couldn&#x27;t find the answer in our
+                        documentation, fill out the form below. Our support team usually responds within 24 hours.&lt;/p&gt;
+                &lt;/div&gt;
+
+                &lt;div
+                    class&#x3D;&quot;bg-white p-6 sm:p-8 rounded-3xl shadow-xl shadow-slate-200/50 border border-slate-100 relative overflow-hidden&quot;&gt;
+                    &lt;div
+                        class&#x3D;&quot;absolute top-0 right-0 w-32 h-32 bg-indigo-100 rounded-bl-full -mr-16 -mt-16 opacity-50 pointer-events-none&quot;&gt;
+                    &lt;/div&gt;
+
+                    &lt;form [formGroup]&#x3D;&quot;contactForm&quot; (ngSubmit)&#x3D;&quot;onSubmit()&quot; class&#x3D;&quot;space-y-5 relative z-10&quot; novalidate&gt;
+                        &lt;div&gt;
+                            &lt;label class&#x3D;&quot;block text-sm font-semibold text-slate-700 mb-2&quot;&gt;Your Name&lt;/label&gt;
+                            &lt;input type&#x3D;&quot;text&quot; formControlName&#x3D;&quot;name&quot;
+                                class&#x3D;&quot;w-full px-5 py-3.5 rounded-xl border border-slate-200 bg-slate-50 focus:bg-white focus:border-indigo-500 focus:ring-4 focus:ring-indigo-500/10 outline-none transition-all text-sm font-medium&quot;
+                                [class.input-error]&#x3D;&quot;isInvalid(&#x27;name&#x27;)&quot; [class.animate-shake]&#x3D;&quot;shouldShake(&#x27;name&#x27;)&quot;
+                                placeholder&#x3D;&quot;John Doe&quot;&gt;
+                            @if (isInvalid(&#x27;name&#x27;)) {
+                            &lt;p
+                                class&#x3D;&quot;text-rose-500 text-xs mt-2 font-medium flex items-center gap-1.5 animate-fade-in-up&quot;&gt;
+                                &lt;span class&#x3D;&quot;inline-flex&quot;&gt;&lt;i data-lucide&#x3D;&quot;alert-circle&quot; class&#x3D;&quot;w-3.5 h-3.5&quot;&gt;&lt;/i&gt;&lt;/span&gt;
+                                &lt;span&gt;Name is required&lt;/span&gt;
+                            &lt;/p&gt;
+                            }
+                        &lt;/div&gt;
+                        &lt;div&gt;
+                            &lt;label class&#x3D;&quot;block text-sm font-semibold text-slate-700 mb-2&quot;&gt;Email Address&lt;/label&gt;
+                            &lt;input type&#x3D;&quot;email&quot; formControlName&#x3D;&quot;email&quot;
+                                class&#x3D;&quot;w-full px-5 py-3.5 rounded-xl border border-slate-200 bg-slate-50 focus:bg-white focus:border-indigo-500 focus:ring-4 focus:ring-indigo-500/10 outline-none transition-all text-sm font-medium&quot;
+                                [class.input-error]&#x3D;&quot;isInvalid(&#x27;email&#x27;)&quot; [class.animate-shake]&#x3D;&quot;shouldShake(&#x27;email&#x27;)&quot;
+                                placeholder&#x3D;&quot;john@example.com&quot;&gt;
+                            @if (isInvalid(&#x27;email&#x27;)) {
+                            &lt;p
+                                class&#x3D;&quot;text-rose-500 text-xs mt-2 font-medium flex items-center gap-1.5 animate-fade-in-up&quot;&gt;
+                                &lt;span class&#x3D;&quot;inline-flex&quot;&gt;&lt;i data-lucide&#x3D;&quot;alert-circle&quot; class&#x3D;&quot;w-3.5 h-3.5&quot;&gt;&lt;/i&gt;&lt;/span&gt;
+                                &lt;span&gt;Please enter a valid email&lt;/span&gt;
+                            &lt;/p&gt;
+                            }
+                        &lt;/div&gt;
+                        &lt;div&gt;
+                            &lt;label class&#x3D;&quot;block text-sm font-semibold text-slate-700 mb-2&quot;&gt;How can we help?&lt;/label&gt;
+                            &lt;textarea formControlName&#x3D;&quot;query&quot; rows&#x3D;&quot;4&quot;
+                                class&#x3D;&quot;w-full px-5 py-3.5 rounded-xl border border-slate-200 bg-slate-50 focus:bg-white focus:border-indigo-500 focus:ring-4 focus:ring-indigo-500/10 outline-none transition-all text-sm font-medium resize-none&quot;
+                                [class.input-error]&#x3D;&quot;isInvalid(&#x27;query&#x27;)&quot; [class.animate-shake]&#x3D;&quot;shouldShake(&#x27;query&#x27;)&quot;
+                                placeholder&#x3D;&quot;Describe your issue...&quot;&gt;&lt;/textarea&gt;
+                            @if (isInvalid(&#x27;query&#x27;)) {
+                            &lt;p
+                                class&#x3D;&quot;text-rose-500 text-xs mt-2 font-medium flex items-center gap-1.5 animate-fade-in-up&quot;&gt;
+                                &lt;span class&#x3D;&quot;inline-flex&quot;&gt;&lt;i data-lucide&#x3D;&quot;alert-circle&quot; class&#x3D;&quot;w-3.5 h-3.5&quot;&gt;&lt;/i&gt;&lt;/span&gt;
+                                &lt;span&gt;Message must be at least 10 characters&lt;/span&gt;
+                            &lt;/p&gt;
+                            }
+                        &lt;/div&gt;
+
+                        &lt;button type&#x3D;&quot;submit&quot; [disabled]&#x3D;&quot;isSubmitting()&quot;
+                            class&#x3D;&quot;w-full bg-indigo-600 text-white font-bold py-4 rounded-xl hover:bg-indigo-700 active:scale-[0.98] transition-all flex items-center justify-center gap-2 shadow-lg shadow-indigo-500/25 mt-2 disabled:opacity-70 disabled:cursor-not-allowed&quot;&gt;
+                            @if (isSubmitting()) {
+                            &lt;span class&#x3D;&quot;inline-flex&quot;&gt;&lt;i data-lucide&#x3D;&quot;loader-2&quot; class&#x3D;&quot;w-5 h-5 animate-spin&quot;&gt;&lt;/i&gt;&lt;/span&gt;
+                            &lt;span&gt;Sending...&lt;/span&gt;
+                            } @else {
+                            &lt;span&gt;Send Message&lt;/span&gt;
+                            &lt;span class&#x3D;&quot;inline-flex&quot;&gt;&lt;i data-lucide&#x3D;&quot;send&quot; class&#x3D;&quot;w-4 h-4&quot;&gt;&lt;/i&gt;&lt;/span&gt;
+                            }
+                        &lt;/button&gt;
+                    &lt;/form&gt;
+
+                    &lt;!-- Status Messages --&gt;
+                    @if (submitSuccess()) {
+                    &lt;div
+                        class&#x3D;&quot;mt-4 p-4 bg-emerald-50 border border-emerald-100 text-emerald-700 rounded-xl text-sm flex items-start gap-3 animate-fade-in-up&quot;&gt;
+                        &lt;span class&#x3D;&quot;inline-flex&quot;&gt;&lt;i data-lucide&#x3D;&quot;check-circle&quot;
+                                class&#x3D;&quot;w-5 h-5 shrink-0 mt-0.5&quot;&gt;&lt;/i&gt;&lt;/span&gt;
+                        &lt;div&gt;
+                            &lt;p class&#x3D;&quot;font-bold&quot;&gt;Message sent!&lt;/p&gt;
+                            &lt;p&gt;We&#x27;ll get back to you soon.&lt;/p&gt;
+                        &lt;/div&gt;
+                    &lt;/div&gt;
+                    }
+                    @if (submitError()) {
+                    &lt;div
+                        class&#x3D;&quot;mt-4 p-4 bg-red-50 border border-red-100 text-red-700 rounded-xl text-sm flex items-start gap-3 animate-fade-in-up&quot;&gt;
+                        &lt;span class&#x3D;&quot;inline-flex&quot;&gt;&lt;i data-lucide&#x3D;&quot;alert-circle&quot;
+                                class&#x3D;&quot;w-5 h-5 shrink-0 mt-0.5&quot;&gt;&lt;/i&gt;&lt;/span&gt;
+                        &lt;div&gt;
+                            &lt;p class&#x3D;&quot;font-bold&quot;&gt;Error sending&lt;/p&gt;
+                            &lt;p&gt;Please try again later.&lt;/p&gt;
+                        &lt;/div&gt;
+                    &lt;/div&gt;
+                    }
+                &lt;/div&gt;
+            &lt;/div&gt;
+        &lt;/div&gt;
+    &lt;/main&gt;
+
+    &lt;!-- Footer --&gt;
+    &lt;footer class&#x3D;&quot;bg-white border-t border-slate-200 py-12&quot;&gt;
+        &lt;div
+            class&#x3D;&quot;max-w-6xl mx-auto px-4 flex flex-col md:flex-row justify-between items-center gap-6 text-center md:text-left&quot;&gt;
+            &lt;div&gt;
+                &lt;div class&#x3D;&quot;flex items-center justify-center md:justify-start gap-2 mb-2&quot;&gt;
+                    &lt;img src&#x3D;&quot;https://exwise.vercel.app/icons/icon-512x512.png&quot; alt&#x3D;&quot;ExWise Logo&quot;
+                        class&#x3D;&quot;w-8 h-8 rounded-lg shadow-lg hover:rotate-12 transition-transform duration-300&quot;&gt;
+                    &lt;span class&#x3D;&quot;font-bold text-lg text-slate-900 tracking-tight&quot;&gt;Expense Wise&lt;/span&gt;
+                &lt;/div&gt;
+                &lt;p class&#x3D;&quot;text-slate-500 text-sm&quot;&gt;Empowering your financial journey since 2024.&lt;/p&gt;
+            &lt;/div&gt;
+            &lt;div class&#x3D;&quot;flex flex-wrap justify-center md:justify-end gap-6 text-sm font-semibold text-slate-600&quot;&gt;
+                &lt;a href&#x3D;&quot;https://github.com/devnamdev2003&quot;
+                    class&#x3D;&quot;hover:text-indigo-600 transition-colors flex items-center gap-1&quot;&gt;
+                    &lt;i data-lucide&#x3D;&quot;github&quot; class&#x3D;&quot;w-4 h-4&quot;&gt;&lt;/i&gt; GitHub
+                &lt;/a&gt;
+                &lt;a href&#x3D;&quot;https://devnamdev2003.github.io&quot;
+                    class&#x3D;&quot;hover:text-indigo-600 transition-colors flex items-center gap-1&quot;&gt;
+                    &lt;i data-lucide&#x3D;&quot;code&quot; class&#x3D;&quot;w-4 h-4&quot;&gt;&lt;/i&gt; Developer
+                &lt;/a&gt;
+                &lt;a href&#x3D;&quot;https://github.com/devnamdev2003/angular-expense-tracker/raw/refs/heads/main/exwise.apk&quot;
+                    class&#x3D;&quot;hover:text-indigo-600 transition-colors flex items-center gap-1 text-indigo-600 bg-indigo-50 px-3 py-1 rounded-full hover:bg-indigo-100&quot;&gt;
+                    &lt;i data-lucide&#x3D;&quot;download&quot; class&#x3D;&quot;w-4 h-4&quot;&gt;&lt;/i&gt; Download APK
+                &lt;/a&gt;
+            &lt;/div&gt;
+        &lt;/div&gt;
+    &lt;/footer&gt;
+&lt;/div&gt;
 </code></pre>
     </div>
 
@@ -245,8 +2553,8 @@ export class HelpDashboard {
 <script src="../js/libs/htmlparser.js"></script>
 <script src="../js/libs/deep-iterator.js"></script>
 <script>
-        var COMPONENT_TEMPLATE = '<div><p>help-dashboard.component works!</p></div>'
-    var COMPONENTS = [{'name': 'AddExpenseComponent', 'selector': 'app-add-expense'},{'name': 'AiComponent', 'selector': 'app-ai'},{'name': 'AppComponent', 'selector': 'app-root'},{'name': 'CalendarComponent', 'selector': 'app-calendar'},{'name': 'CategoryDropdownComponent', 'selector': 'app-category-dropdown'},{'name': 'DownloadComponentComponent', 'selector': 'app-download-component'},{'name': 'ExpenseDetailsModalComponent', 'selector': 'app-expense-details-modal'},{'name': 'ExpenseListComponent', 'selector': 'app-expense-list'},{'name': 'ExpenseWiseComponent', 'selector': 'app-expense-wise'},{'name': 'FooterComponent', 'selector': 'app-footer'},{'name': 'FormModelComponent', 'selector': 'app-form-model'},{'name': 'GlobalLoaderComponent', 'selector': 'app-global-loader'},{'name': 'GraphsComponent', 'selector': 'app-graphs'},{'name': 'HamburgerMenuComponent', 'selector': 'app-hamburger-menu'},{'name': 'HelpDashboard', 'selector': 'app-help-dashboard'},{'name': 'HomeComponent', 'selector': 'app-home'},{'name': 'InstallAppPopupComponentComponent', 'selector': 'app-install-app-popup-component'},{'name': 'ListExpensesComponent', 'selector': 'app-list-expenses'},{'name': 'MusicComponent', 'selector': 'app-music'},{'name': 'NavbarComponent', 'selector': 'app-navbar'},{'name': 'PieChartComponent', 'selector': 'app-pie-chart'},{'name': 'PlaylistMusicComponent', 'selector': 'app-playlist-music'},{'name': 'SalaryComponent', 'selector': 'app-salary'},{'name': 'SearchButtonComponent', 'selector': 'app-search-button'},{'name': 'SearchMusicComponent', 'selector': 'app-search-music'},{'name': 'SettingItemComponent', 'selector': 'app-setting-item'},{'name': 'SettingsComponent', 'selector': 'app-settings'},{'name': 'SidebarComponent', 'selector': 'app-sidebar'},{'name': 'SplashScreenComponent', 'selector': 'app-splash-screen'},{'name': 'TemplatePlaygroundComponent', 'selector': 'template-playground-root'},{'name': 'ToastComponent', 'selector': 'app-toast'}];
+        var COMPONENT_TEMPLATE = '<div><div class="bg-slate-50 text-slate-800 min-h-screen flex flex-col selection:bg-indigo-100 selection:text-indigo-700">    <!-- Navbar -->    <nav class="glass-nav border-b border-white/50 sticky top-0 z-50 transition-all duration-300">        <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">            <div class="flex justify-between h-16 items-center">                <div class="flex items-center gap-2.5">                    <img src="https://exwise.vercel.app/icons/icon-512x512.png" alt="ExWise Logo"                        class="w-8 h-8 rounded-lg shadow-lg hover:rotate-12 transition-transform duration-300">                    <span class="font-bold text-xl tracking-tight text-slate-900">Expense Wise</span>                </div>                <div class="flex items-center gap-4">                    <a href="https://exwisedoc.vercel.app"                        class="hidden sm:block text-sm font-medium text-slate-500 hover:text-indigo-600 transition-colors">Documentation</a>                    <a href="https://exwise.vercel.app"                        class="bg-slate-900 text-white px-5 py-2.5 rounded-xl text-sm font-semibold hover:bg-slate-800 transition-all shadow-md hover:shadow-xl active:scale-95">Open                        App</a>                </div>            </div>        </div>    </nav>    <!-- Hero Section -->    <div class="bg-gradient-to-br from-indigo-600 via-indigo-700 to-indigo-800 text-white relative overflow-hidden">        <!-- Abstract Background Shapes -->        <div class="absolute top-0 left-0 w-full h-full overflow-hidden z-0 pointer-events-none">            <div                class="absolute top-[-10%] left-[-10%] w-96 h-96 bg-indigo-400/30 rounded-full mix-blend-overlay filter blur-3xl animate-pulse-slow">            </div>            <div class="absolute bottom-[10%] right-[-5%] w-[30rem] h-[30rem] bg-indigo-400/20 rounded-full mix-blend-overlay filter blur-[100px]"                style="animation-delay: 1.5s;"></div>        </div>        <div class="max-w-4xl mx-auto text-center relative z-10 pt-16 pb-32 px-4">            <div                class="inline-flex items-center gap-2 py-1.5 px-4 rounded-full bg-white/10 border border-white/20 backdrop-blur-md text-sm font-medium mb-8 text-indigo-50 shadow-sm">                <span class="relative flex h-2 w-2">                    <span                        class="animate-ping absolute inline-flex h-full w-full rounded-full bg-indigo-300 opacity-75"></span>                    <span class="relative inline-flex rounded-full h-2 w-2 bg-emerald-400"></span>                </span>                Help Center & Support            </div>            <h1                class="text-4xl sm:text-5xl md:text-6xl font-extrabold mb-6 tracking-tight leading-tight bg-clip-text text-transparent bg-gradient-to-b from-white to-indigo-100">                How can we help you?            </h1>            <p class="text-indigo-100 mb-10 text-lg sm:text-xl max-w-2xl mx-auto leading-relaxed font-light">                Find answers about budgeting algorithms, heatmap customization, data security, and more.            </p>            <!-- Search Bar -->            <div class="relative max-w-xl mx-auto group">                <div class="absolute inset-y-0 left-0 pl-5 flex items-center pointer-events-none z-10">                    <i data-lucide="search"                        class="w-5 h-5 text-slate-400 group-focus-within:text-indigo-500 transition-colors"></i>                </div>                <input type="text" [value]="searchQuery()" (input)="onSearchInput($event)"                    class="block w-full pl-12 pr-12 py-5 rounded-2xl text-slate-900 placeholder-slate-400 bg-white/95 backdrop-blur-xl shadow-2xl shadow-indigo-900/30 focus:outline-none focus:ring-4 focus:ring-indigo-500/30 focus:bg-white transition-all border border-white/10 text-lg font-medium"                    placeholder="Search \'backup\', \'heatmap\', \'budget\'..." aria-label="Search help topics"                    autocomplete="off">                @if (searchQuery().length > 0) {                <button (click)="resetSearch()" aria-label="Clear search"                    class="absolute inset-y-0 right-0 pr-5 flex items-center cursor-pointer z-10 hover:scale-110 transition-transform">                    <i data-lucide="x-circle" class="w-5 h-5 text-slate-400 hover:text-red-500 transition-colors"></i>                </button>                }            </div>        </div>        <!-- Curve SVG -->        <div class="custom-shape-divider-bottom">            <svg data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 120"                preserveAspectRatio="none">                <path                    d="M321.39,56.44c58-10.79,114.16-30.13,172-41.86,82.39-16.72,168.19-17.73,250.45-.39C823.78,31,906.67,72,985.66,92.83c70.05,18.48,146.53,26.09,214.34,3V0H0V27.35A600.21,600.21,0,0,0,321.39,56.44Z"                    class="shape-fill"></path>            </svg>        </div>    </div>    <!-- Main Content -->    <main class="flex-grow max-w-5xl mx-auto w-full px-4 sm:px-6 pb-20 relative z-20 -mt-20">        <!-- Quick Categories (Floating) -->        @if (!searchQuery()) {        <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-16">            <button (click)="setCategory(\'Getting Started\')"                class="quick-filter group bg-white p-6 rounded-2xl shadow-soft hover:shadow-glow border border-white flex flex-col items-center text-center gap-4 hover:-translate-y-1.5 transition-all duration-300">                <div                    class="bg-blue-50 text-blue-600 p-3.5 rounded-xl group-hover:bg-blue-600 group-hover:text-white transition-colors shadow-sm">                    <i data-lucide="rocket" class="w-6 h-6"></i>                </div>                <span class="text-sm font-bold text-slate-700">Getting Started</span>            </button>            <button (click)="setCategory(\'Features\')"                class="quick-filter group bg-white p-6 rounded-2xl shadow-soft hover:shadow-glow border border-white flex flex-col items-center text-center gap-4 hover:-translate-y-1.5 transition-all duration-300">                <div                    class="bg-emerald-50 text-emerald-600 p-3.5 rounded-xl group-hover:bg-emerald-600 group-hover:text-white transition-colors shadow-sm">                    <i data-lucide="zap" class="w-6 h-6"></i>                </div>                <span class="text-sm font-bold text-slate-700">App Features</span>            </button>            <button (click)="setCategory(\'Budgeting\')"                class="quick-filter group bg-white p-6 rounded-2xl shadow-soft hover:shadow-glow border border-white flex flex-col items-center text-center gap-4 hover:-translate-y-1.5 transition-all duration-300">                <div                    class="bg-amber-50 text-amber-600 p-3.5 rounded-xl group-hover:bg-amber-600 group-hover:text-white transition-colors shadow-sm">                    <i data-lucide="pie-chart" class="w-6 h-6"></i>                </div>                <span class="text-sm font-bold text-slate-700">Budget & Income</span>            </button>            <button (click)="setCategory(\'Data & Settings\')"                class="quick-filter group bg-white p-6 rounded-2xl shadow-soft hover:shadow-glow border border-white flex flex-col items-center text-center gap-4 hover:-translate-y-1.5 transition-all duration-300">                <div                    class="bg-violet-50 text-violet-600 p-3.5 rounded-xl group-hover:bg-violet-600 group-hover:text-white transition-colors shadow-sm">                    <i data-lucide="settings" class="w-6 h-6"></i>                </div>                <span class="text-sm font-bold text-slate-700">Data & Settings</span>            </button>        </div>        }        <!-- Results Header -->        @if (searchQuery()) {        <div class="mb-8 mt-32 flex justify-between items-center animate-fade-in-up">            <div>                <h2 class="text-2xl font-bold text-slate-900 tracking-tight">Search Results</h2>                <p class="text-slate-500 text-sm mt-1">Found answers matching your query</p>            </div>            <button (click)="resetSearch()"                class="text-sm text-indigo-600 hover:text-indigo-700 font-semibold bg-indigo-50 px-4 py-2 rounded-lg hover:bg-indigo-100 transition-colors flex items-center gap-2">                <i data-lucide="rotate-ccw" class="w-3.5 h-3.5"></i> Clear Filter            </button>        </div>        }        <!-- FAQ List -->        @if (groupedFAQs().length > 0) {        <div class="space-y-10">            @for (group of groupedFAQs(); track group.category; let i = $index) {            <div class="animate-fade-in-up" [style.animationDelay]="(i * 100) + \'ms\'">                <div class="flex items-center gap-4 mb-5">                    <h3                        class="text-xs font-bold text-indigo-600 uppercase tracking-widest bg-indigo-50 px-3 py-1.5 rounded-lg border border-indigo-100/50">                        {{ group.category }}</h3>                    <div class="h-px bg-slate-100 flex-grow"></div>                </div>                <div class="grid gap-4">                    @for (item of group.items; track item.id) {                    <div class="accordion-item group bg-white border border-slate-200/60 rounded-xl overflow-hidden hover:border-indigo-300 hover:shadow-soft transition-all duration-300"                        [class.ring-2]="isAccordionOpen(item.id)" [class.ring-indigo-100]="isAccordionOpen(item.id)"                        [class.border-indigo-300]="isAccordionOpen(item.id)">                        <button (click)="toggleAccordion(item.id)"                            class="accordion-trigger w-full text-left px-6 py-5 flex justify-between items-center focus:outline-none select-none">                            <span                                class="font-semibold text-slate-700 group-hover:text-indigo-700 transition-colors pr-4"                                [innerHTML]="highlightText(item.question, searchQuery())"></span>                            <div                                class="bg-slate-50 p-2 rounded-full group-hover:bg-indigo-50 transition-colors shrink-0">                                <i data-lucide="chevron-down"                                    class="accordion-icon w-4 h-4 text-slate-400 group-hover:text-indigo-500 transform transition-transform duration-300"                                    [class.rotate-180]="isAccordionOpen(item.id)"></i>                            </div>                        </button>                        @if (isAccordionOpen(item.id)) {                        <div                            class="accordion-content px-6 pb-6 text-slate-600 text-sm leading-relaxed border-t border-slate-50 animate-slide-down origin-top">                            <div class="pt-2" [innerHTML]="highlightText(item.answer, searchQuery())"></div>                        </div>                        }                    </div>                    }                </div>            </div>            }        </div>        } @else {        <!-- No Results -->        <div            class="text-center py-16 animate-fade-in-up bg-white rounded-3xl border border-slate-100 shadow-sm mt-8 mx-auto max-w-2xl">            <div class="bg-indigo-50 w-20 h-20 rounded-full flex items-center justify-center mx-auto mb-6">                <i data-lucide="search-x" class="w-10 h-10 text-indigo-500"></i>            </div>            <h3 class="text-xl font-bold text-slate-900 mb-2">We couldn\'t find an answer for that</h3>            <p class="text-slate-500 mb-8 max-w-md mx-auto">Don\'t worry! You can ask us directly. Fill out the form                below and we\'ll help you out.</p>            <button (click)="scrollToForm()"                class="inline-flex items-center gap-2 bg-indigo-600 text-white px-6 py-3 rounded-xl font-semibold hover:bg-indigo-700 transition-colors shadow-lg shadow-indigo-500/25 active:scale-95 transform">                <span>Use Contact Form</span>                <i data-lucide="arrow-down" class="w-4 h-4"></i>            </button>        </div>        }        <!-- Contact Form Section -->        <div id="contactFormSection" class="mt-24 pt-16 border-t border-slate-200">            <div class="grid md:grid-cols-2 gap-12 lg:gap-20 items-start">                <div class="md:sticky md:top-24">                    <div class="inline-block p-2 bg-indigo-50 rounded-lg mb-4">                        <i data-lucide="life-buoy" class="w-6 h-6 text-indigo-600"></i>                    </div>                    <h2 class="text-3xl font-bold text-slate-900 mb-4 tracking-tight">Still need help?</h2>                    <p class="text-slate-600 mb-8 leading-relaxed text-lg">If you couldn\'t find the answer in our                        documentation, fill out the form below. Our support team usually responds within 24 hours.</p>                </div>                <div                    class="bg-white p-6 sm:p-8 rounded-3xl shadow-xl shadow-slate-200/50 border border-slate-100 relative overflow-hidden">                    <div                        class="absolute top-0 right-0 w-32 h-32 bg-indigo-100 rounded-bl-full -mr-16 -mt-16 opacity-50 pointer-events-none">                    </div>                    <form [formGroup]="contactForm" (ngSubmit)="onSubmit()" class="space-y-5 relative z-10" novalidate>                        <div>                            <label class="block text-sm font-semibold text-slate-700 mb-2">Your Name</label>                            <input type="text" formControlName="name"                                class="w-full px-5 py-3.5 rounded-xl border border-slate-200 bg-slate-50 focus:bg-white focus:border-indigo-500 focus:ring-4 focus:ring-indigo-500/10 outline-none transition-all text-sm font-medium"                                [class.input-error]="isInvalid(\'name\')" [class.animate-shake]="shouldShake(\'name\')"                                placeholder="John Doe">                            @if (isInvalid(\'name\')) {                            <p                                class="text-rose-500 text-xs mt-2 font-medium flex items-center gap-1.5 animate-fade-in-up">                                <span class="inline-flex"><i data-lucide="alert-circle" class="w-3.5 h-3.5"></i></span>                                <span>Name is required</span>                            </p>                            }                        </div>                        <div>                            <label class="block text-sm font-semibold text-slate-700 mb-2">Email Address</label>                            <input type="email" formControlName="email"                                class="w-full px-5 py-3.5 rounded-xl border border-slate-200 bg-slate-50 focus:bg-white focus:border-indigo-500 focus:ring-4 focus:ring-indigo-500/10 outline-none transition-all text-sm font-medium"                                [class.input-error]="isInvalid(\'email\')" [class.animate-shake]="shouldShake(\'email\')"                                placeholder="john@example.com">                            @if (isInvalid(\'email\')) {                            <p                                class="text-rose-500 text-xs mt-2 font-medium flex items-center gap-1.5 animate-fade-in-up">                                <span class="inline-flex"><i data-lucide="alert-circle" class="w-3.5 h-3.5"></i></span>                                <span>Please enter a valid email</span>                            </p>                            }                        </div>                        <div>                            <label class="block text-sm font-semibold text-slate-700 mb-2">How can we help?</label>                            <textarea formControlName="query" rows="4"                                class="w-full px-5 py-3.5 rounded-xl border border-slate-200 bg-slate-50 focus:bg-white focus:border-indigo-500 focus:ring-4 focus:ring-indigo-500/10 outline-none transition-all text-sm font-medium resize-none"                                [class.input-error]="isInvalid(\'query\')" [class.animate-shake]="shouldShake(\'query\')"                                placeholder="Describe your issue..."></textarea>                            @if (isInvalid(\'query\')) {                            <p                                class="text-rose-500 text-xs mt-2 font-medium flex items-center gap-1.5 animate-fade-in-up">                                <span class="inline-flex"><i data-lucide="alert-circle" class="w-3.5 h-3.5"></i></span>                                <span>Message must be at least 10 characters</span>                            </p>                            }                        </div>                        <button type="submit" [disabled]="isSubmitting()"                            class="w-full bg-indigo-600 text-white font-bold py-4 rounded-xl hover:bg-indigo-700 active:scale-[0.98] transition-all flex items-center justify-center gap-2 shadow-lg shadow-indigo-500/25 mt-2 disabled:opacity-70 disabled:cursor-not-allowed">                            @if (isSubmitting()) {                            <span class="inline-flex"><i data-lucide="loader-2" class="w-5 h-5 animate-spin"></i></span>                            <span>Sending...</span>                            } @else {                            <span>Send Message</span>                            <span class="inline-flex"><i data-lucide="send" class="w-4 h-4"></i></span>                            }                        </button>                    </form>                    <!-- Status Messages -->                    @if (submitSuccess()) {                    <div                        class="mt-4 p-4 bg-emerald-50 border border-emerald-100 text-emerald-700 rounded-xl text-sm flex items-start gap-3 animate-fade-in-up">                        <span class="inline-flex"><i data-lucide="check-circle"                                class="w-5 h-5 shrink-0 mt-0.5"></i></span>                        <div>                            <p class="font-bold">Message sent!</p>                            <p>We\'ll get back to you soon.</p>                        </div>                    </div>                    }                    @if (submitError()) {                    <div                        class="mt-4 p-4 bg-red-50 border border-red-100 text-red-700 rounded-xl text-sm flex items-start gap-3 animate-fade-in-up">                        <span class="inline-flex"><i data-lucide="alert-circle"                                class="w-5 h-5 shrink-0 mt-0.5"></i></span>                        <div>                            <p class="font-bold">Error sending</p>                            <p>Please try again later.</p>                        </div>                    </div>                    }                </div>            </div>        </div>    </main>    <!-- Footer -->    <footer class="bg-white border-t border-slate-200 py-12">        <div            class="max-w-6xl mx-auto px-4 flex flex-col md:flex-row justify-between items-center gap-6 text-center md:text-left">            <div>                <div class="flex items-center justify-center md:justify-start gap-2 mb-2">                    <img src="https://exwise.vercel.app/icons/icon-512x512.png" alt="ExWise Logo"                        class="w-8 h-8 rounded-lg shadow-lg hover:rotate-12 transition-transform duration-300">                    <span class="font-bold text-lg text-slate-900 tracking-tight">Expense Wise</span>                </div>                <p class="text-slate-500 text-sm">Empowering your financial journey since 2024.</p>            </div>            <div class="flex flex-wrap justify-center md:justify-end gap-6 text-sm font-semibold text-slate-600">                <a href="https://github.com/devnamdev2003"                    class="hover:text-indigo-600 transition-colors flex items-center gap-1">                    <i data-lucide="github" class="w-4 h-4"></i> GitHub                </a>                <a href="https://devnamdev2003.github.io"                    class="hover:text-indigo-600 transition-colors flex items-center gap-1">                    <i data-lucide="code" class="w-4 h-4"></i> Developer                </a>                <a href="https://github.com/devnamdev2003/angular-expense-tracker/raw/refs/heads/main/exwise.apk"                    class="hover:text-indigo-600 transition-colors flex items-center gap-1 text-indigo-600 bg-indigo-50 px-3 py-1 rounded-full hover:bg-indigo-100">                    <i data-lucide="download" class="w-4 h-4"></i> Download APK                </a>            </div>        </div>    </footer></div></div>'
+    var COMPONENTS = [{'name': 'AddExpenseComponent', 'selector': 'app-add-expense'},{'name': 'AiComponent', 'selector': 'app-ai'},{'name': 'AppComponent', 'selector': 'app-root'},{'name': 'CalendarComponent', 'selector': 'app-calendar'},{'name': 'CategoryDropdownComponent', 'selector': 'app-category-dropdown'},{'name': 'CloudBackupComponent', 'selector': 'app-cloud-backup'},{'name': 'DownloadComponentComponent', 'selector': 'app-download-component'},{'name': 'ExpenseDetailsModalComponent', 'selector': 'app-expense-details-modal'},{'name': 'ExpenseListComponent', 'selector': 'app-expense-list'},{'name': 'ExpenseWiseComponent', 'selector': 'app-expense-wise'},{'name': 'FooterComponent', 'selector': 'app-footer'},{'name': 'FormModelComponent', 'selector': 'app-form-model'},{'name': 'GlobalLoaderComponent', 'selector': 'app-global-loader'},{'name': 'GraphsComponent', 'selector': 'app-graphs'},{'name': 'HamburgerMenuComponent', 'selector': 'app-hamburger-menu'},{'name': 'HelpDashboard', 'selector': 'app-help-dashboard'},{'name': 'HomeComponent', 'selector': 'app-home'},{'name': 'InstallAppPopupComponentComponent', 'selector': 'app-install-app-popup-component'},{'name': 'ListExpensesComponent', 'selector': 'app-list-expenses'},{'name': 'MusicComponent', 'selector': 'app-music'},{'name': 'NavbarComponent', 'selector': 'app-navbar'},{'name': 'PieChartComponent', 'selector': 'app-pie-chart'},{'name': 'PlaylistMusicComponent', 'selector': 'app-playlist-music'},{'name': 'SalaryComponent', 'selector': 'app-salary'},{'name': 'SearchButtonComponent', 'selector': 'app-search-button'},{'name': 'SearchMusicComponent', 'selector': 'app-search-music'},{'name': 'SettingItemComponent', 'selector': 'app-setting-item'},{'name': 'SettingsComponent', 'selector': 'app-settings'},{'name': 'SidebarComponent', 'selector': 'app-sidebar'},{'name': 'SplashScreenComponent', 'selector': 'app-splash-screen'},{'name': 'TemplatePlaygroundComponent', 'selector': 'template-playground-root'},{'name': 'ToastComponent', 'selector': 'app-toast'}];
     var DIRECTIVES = [];
     var ACTUAL_COMPONENT = {'name': 'HelpDashboard'};
 </script>

@@ -41,7 +41,8 @@ export class NavbarComponent {
     salary: 'Financial Dashboard',
     calendar: 'Calender',
     list: 'List',
-    add: 'Add Expense'
+    add: 'Add Expense',
+    cloudBackup: 'Cloud Backup'
   };
 
   /**

@@ -4,7 +4,8 @@ import { FormsModule } from '@angular/forms';
 import { SalaryService, Salary } from '../../service/localStorage/salary.service';
 import { ExpenseService, Expense } from '../../service/localStorage/expense.service';
 import { UserService } from '../../service/localStorage/user.service';
-
+import { SavingComponent } from '../../component/income-components/saving/saving.component';
+import { SavingsService } from '../../service/localStorage/savings.service';
 /**
  * Component for managing and visualizing user salary, budgets, and financial metrics.
  * Provides views for tracking income and monthly budget planning.
@@ -12,14 +13,14 @@ import { UserService } from '../../service/localStorage/user.service';
 @Component({
   selector: 'app-salary',
   standalone: true,
-  imports: [CommonModule, FormsModule],
+  imports: [CommonModule, FormsModule, SavingComponent],
   templateUrl: './salary.component.html',
   styleUrls: ['./salary.component.css']
 })
 export class SalaryComponent implements OnInit {
 
   /** Current active view mode of the component */
-  viewMode: 'salary' | 'budget' = 'salary';
+  viewMode: 'salary' | 'budget' | 'saving' = 'salary';
 
   /** Reference to the amount input field in the modal for auto-focusing */
   @ViewChild('amountInput') amountInput!: ElementRef;
@@ -114,6 +115,8 @@ export class SalaryComponent implements OnInit {
   /** Count of days elapsed since the very first recorded expense */
   daysPassedFromLastExpense: number = 0;
 
+  totalSavings: number = 0;
+
   /**
    * @param salaryService Service to handle salary/budget data operations
    * @param expenseService Service to handle expense data operations
@@ -122,10 +125,12 @@ export class SalaryComponent implements OnInit {
   constructor(
     private salaryService: SalaryService,
     private expenseService: ExpenseService,
-    private userService: UserService
+    private userService: UserService,
+    private savingsService: SavingsService
   ) {
     this.userCurrancy = this.userService.getValue<string>('currency') || '';
-    this.viewMode = this.userService.getValue<'salary' | 'budget'>('salary_view_mode') || 'salary';
+    this.viewMode = this.userService.getValue<'salary' | 'budget' | 'saving'>('salary_view_mode') || 'salary';
+
   }
 
   /**
@@ -172,6 +177,7 @@ export class SalaryComponent implements OnInit {
     this.totalExpense = this.totalExpenseFunction();
     this.totalIncome = this.filteredTransactions.reduce((acc, t) => acc + (t.amount || 0), 0);
     this.totalBudget = this.filteredTransactions.reduce((acc, t) => acc + (t.budget || 0), 0);
+    this.totalSavings = this.savingsService.getTotalSavingsFromIncome() > 0 ? this.savingsService.getTotalSavingsFromIncome() : 0;
     this.salaryGrowth = this.salaryGrowthFunction(allTransactions);
     this.dateMetrics = this.dateMetricsFunction();
     this.dailyAllowed = this.dailyAllowedFunction();
@@ -222,6 +228,12 @@ export class SalaryComponent implements OnInit {
     const balance = this.totalIncome - this.totalExpense;
     return (balance / this.totalIncome) * 100;
   }
+
+  totalSavingsFunction(): number {
+    const savingsAmount = this.savingsService.getTotalSavings();
+    return savingsAmount > 0 ? savingsAmount : 0;;
+  }
+
 
   /**
    * Aggregates total expenses based on whether the user is viewing all time or the current month's budget.
@@ -570,7 +582,7 @@ export class SalaryComponent implements OnInit {
    * Switches the UI between 'salary' and 'budget' views.
    * @param mode The view mode to switch to
    */
-  toggleView(mode: 'salary' | 'budget') {
+  toggleView(mode: 'salary' | 'budget' | 'saving') {
     if (this.isFilterActive) {
       this.clearFilter();
     }

@@ -1,112 +1,64 @@
-import { Component, signal, effect, OnDestroy, Inject, PLATFORM_ID } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { Component, signal, effect, OnDestroy, Inject, PLATFORM_ID, ViewChild, ElementRef } from '@angular/core';
+import { CommonModule, isPlatformBrowser } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { SaavnService } from '../../service/saavan-api/saavan.service';
 import { ConfigService } from '../../service/config/config.service';
-import { isPlatformBrowser } from '@angular/common';
-import { FormModelComponent } from '../../component/form-model/form-model.component';
 import { UserLikedSongsService } from '../../service/localStorage/user-liked-song.service';
-import { ViewChild, ElementRef } from '@angular/core';
+import { NgZone } from '@angular/core';
 
-/**
- * Component to search, play, and suggest songs using Saavn API and AI suggestions.
- *
- * Features:
- * - Search for songs by query.
- * - Play, pause, and track song progress.
- * - Automatically suggest next song based on AI suggestion.
- * - Handles time formatting and seeking within a song.
- */
 @Component({
   selector: 'app-music',
   standalone: true,
-  imports: [CommonModule, FormsModule, FormModelComponent],
+  imports: [CommonModule, FormsModule],
   templateUrl: './music.component.html',
   styleUrls: ['./music.component.css']
 })
 export class MusicComponent implements OnDestroy {
 
-  /** Current search query for songs */
   query = '';
-
-  /** List of songs retrieved from search results */
   songs = signal<any[]>([]);
-
-  /** HTML audio element for playing songs */
   audio: HTMLAudioElement | null = null;
-
-  /** Currently playing song object */
   currentSong: any = null;
-
-  /** Progress of the current song in seconds */
   progress = signal(0);
-
-  /** Total duration of the current song in seconds */
   duration = signal(0);
-
-  /** Interval ID for updating song progress */
   interval: any = null;
-
-  /** Current application version */
   appVersion: string;
-
-  /** Flag to indicate if running in browser environment */
   isBrowser: boolean;
-
-  /** Set to store URLs of liked songs */
   isCurrentSongLiked: boolean = false;
+  showPlayerModal = false;
+  likedPlaylist: any[] = [];
+  currentLikedIndex = -1;
+  repeatCurrentSong = false;
+  year: number = new Date().getFullYear();
 
-  /** Reference to the search input element */
+
   @ViewChild('searchSongInput') searchSongInput!: ElementRef;
 
-  /**
-   * Creates an instance of MusicComponent.
-   *
-   * @param saavnService Service to interact with Saavn API.
-   * @param configService Service to retrieve application configuration.
-   * @param platformId Angular platform ID to detect browser/server environment.
-   * @param userLikedSongsService Service to manage user liked songs in localStorage.
-   */
   constructor(
     private saavnService: SaavnService,
     private configService: ConfigService,
     private userLikedSongsService: UserLikedSongsService,
+    private ngZone: NgZone,
     @Inject(PLATFORM_ID) private platformId: object
   ) {
     this.appVersion = this.configService.getVersion();
     this.isBrowser = isPlatformBrowser(this.platformId);
   }
 
-  /**
-   * Searches for songs based on the current query.
-   */
   searchSong(): void {
     this.removeFocus();
     const q = this.query.trim();
     if (q) {
-      this.saavnService.searchSongs(q).subscribe((res) => {
+      this.saavnService.searchSongs(q).subscribe((res: any) => {
         this.songs.set(res.data.results || []);
       });
     }
   }
 
-  /**
-   * Returns the highest quality 320kbps download URL of a song.
-   *
-   * @param song Song object
-   * @returns URL string or empty string if not available
-   */
   getSongUrl(song: any): string {
-    return song.downloadUrl?.find((d: any) => d.quality === '320kbps')?.url || '';
+    return song.downloadUrl?.find((d: any) => d.quality === '320kbps')?.url || song.downloadUrl?.[0]?.url || '';
   }
 
-  /**
-   * Plays or pauses a song. If a new song is selected, plays it from the beginning.
-   *
-   * @param url URL of the song to play
-   * @param song Song object
-   * @param isbuttonClick Indicates if the play/pause was triggered by a button click
-   */
   playSong(url: string, song: any, isbuttonClick: boolean = false): void {
     if (!this.isBrowser) return;
     this.removeFocus();
@@ -115,15 +67,19 @@ export class MusicComponent implements OnDestroy {
     if (this.currentSong?.url === url) {
       if (isbuttonClick) {
         this.audio.paused ? this.audio.play() : this.audio.pause();
-      }
-      else {
+      } else {
         this.audio.play();
       }
     } else {
       this.audio.src = url;
       this.audio.play();
-      const data = this.userLikedSongsService.getAll().filter(s => s.song_id === song.id);
-      this.isCurrentSongLiked = data.length > 0 ? true : false;
+      this.likedPlaylist = this.userLikedSongsService.getAll() || [];
+
+      this.currentLikedIndex = this.likedPlaylist.findIndex(
+        s => s.song_id === song.id
+      );
+
+      this.isCurrentSongLiked = this.currentLikedIndex !== -1;
       this.currentSong = { ...song, url };
       this.duration.set(song.duration);
     }
@@ -133,73 +89,79 @@ export class MusicComponent implements OnDestroy {
       if (this.audio) this.progress.set(this.audio.currentTime);
     }, 500);
 
-    this.audio.onended = () => this.onSongFinished();
-  }
-
-  /**
-   * Handles the end of a song. Suggests the next song using AI and automatically plays it.
-   */
-  async onSongFinished(): Promise<void> {
-    if (!this.isBrowser) return;
-    this.removeFocus();
-    try {
-      const transformedData = this.transformSongData(this.currentSong, this.isCurrentSongLiked);
-      const nextSong = await this.saavnService.suggestNextSong(transformedData);
-
-      if (!nextSong || typeof nextSong !== 'string' || nextSong.trim() === '') return;
-
-      let cleanedSong = nextSong.trim()
-        .replace(/^```json/, '').replace(/^```/, '')
-        .replace(/```$/, '').trim();
-
-      let songDetails: { songName: string; artistsName: string };
-      try {
-        songDetails = JSON.parse(cleanedSong);
-      } catch {
-        console.warn('Failed to parse AI response as JSON');
-        return;
-      }
-
-      const { songName, artistsName } = songDetails || {};
-      const mainArtist = artistsName ? artistsName.split(',')[0].trim() : '';
-      if (!songName || !mainArtist) return;
-
-      this.saavnService.searchSongs(`${songName} ${mainArtist}`).subscribe({
-        next: (res) => {
-          const results = res.data?.results || [];
-          if (results.length > 0) {
-            const firstSong = results[0];
-            const newUrl = this.getSongUrl(firstSong);
-            this.playSong(newUrl, firstSong);
-          }
-        },
-        error: (err) => console.error('Error during song search:', err)
+    this.audio.onended = () => {
+      this.ngZone.run(() => {
+        this.onSongFinished();
       });
-    } finally {
-      this.currentSong = null;
-      this.progress.set(0);
-      clearInterval(this.interval);
-      this.isCurrentSongLiked = false;
-    }
+    };
   }
 
-  /**
-   * Formats seconds into MM:SS string for display.
-   *
-   * @param seconds Number of seconds
-   * @returns Formatted time string
-   */
+  onSongFinished(): void {
+    if (!this.isBrowser) return;
+    if (this.repeatCurrentSong && this.currentSong?.url) {
+      this.playSong(this.currentSong.url, this.currentSong);
+      return;
+    }
+    this.likedPlaylist = this.userLikedSongsService.getAll() || [];
+
+    if (!this.likedPlaylist.length) return;
+
+    // If song wasn't from playlist, start from 0
+    if (this.currentLikedIndex === -1) {
+      this.currentLikedIndex = 0;
+    } else {
+      // Loop safely using modulo
+      this.currentLikedIndex =
+        (this.currentLikedIndex + 1) % this.likedPlaylist.length;
+    }
+
+    const nextSong = this.likedPlaylist[this.currentLikedIndex];
+
+    // 🚀 BEST: Use saved downloadUrl (no API call needed)
+    if (nextSong.downloadUrl) {
+      this.playSong(nextSong.downloadUrl, {
+        id: nextSong.song_id,
+        name: nextSong.song_name,
+        duration: nextSong.duration,
+        image: [{}, {}, { url: nextSong.image }],
+        artists: { primary: [{ name: nextSong.artistName }] }
+      });
+      return;
+    }
+
+    // Fallback to search if URL missing
+    const songName = nextSong.song_name || '';
+    const artistName = nextSong.artistName || '';
+
+    this.saavnService.searchSongs(`${songName} ${artistName}`).subscribe({
+      next: (res: any) => {
+        const results = res.data?.results || [];
+        if (!results.length) return;
+
+        const firstSong = results[0];
+        const url = this.getSongUrl(firstSong);
+
+        this.playSong(url, firstSong);
+      }
+    });
+
+    this.progress.set(0);
+    clearInterval(this.interval);
+  }
+
   formatTime(seconds: number): string {
     const min = Math.floor(seconds / 60);
     const sec = Math.floor(seconds % 60);
     return `${min}:${sec.toString().padStart(2, '0')}`;
   }
 
-  /**
-   * Seeks the audio playback to a specific time.
-   *
-   * @param event Input change event from the seek bar
-   */
+  // Calculate percentage for dynamic progress bar filling
+  get progressPercent(): number {
+    const d = this.duration();
+    if (!d) return 0;
+    return (this.progress() / d) * 100;
+  }
+
   onSeek(event: Event): void {
     if (!this.isBrowser || !this.audio) return;
     const target = event.target as HTMLInputElement;
@@ -208,12 +170,17 @@ export class MusicComponent implements OnDestroy {
     this.progress.set(seekTime);
   }
 
-  /**
-   * Transforms a song object to the expected format for AI suggestion.
-   *
-   * @param data Original song object
-   * @returns Transformed object with relevant song metadata
-   */
+  onSeekMini(event: MouseEvent): void {
+    if (!this.isBrowser || !this.audio) return;
+    const target = event.currentTarget as HTMLElement;
+    const clickX = event.offsetX;
+    const width = target.clientWidth;
+    const percentage = clickX / width;
+    const seekTime = percentage * this.duration();
+    this.audio.currentTime = seekTime;
+    this.progress.set(seekTime);
+  }
+
   transformSongData(data: any, isLiked: boolean): any {
     return {
       name: data.name,
@@ -231,7 +198,6 @@ export class MusicComponent implements OnDestroy {
     };
   }
 
-  /** Angular lifecycle hook called on component destruction */
   ngOnDestroy(): void {
     clearInterval(this.interval);
     if (this.audio) {
@@ -241,16 +207,18 @@ export class MusicComponent implements OnDestroy {
     }
   }
 
-  /** Toggles the like status of a song */
   toggleLike() {
     this.removeFocus();
     if (this.isCurrentSongLiked) {
       this.userLikedSongsService.delete(this.currentSong.id);
+      this
       this.isCurrentSongLiked = false;
     } else {
       this.userLikedSongsService.add(this.transformSongDataForAPI(this.currentSong));
       this.isCurrentSongLiked = true;
     }
+    this.updateLikedSongList();
+
   }
 
   transformSongDataForAPI(data: any): any {
@@ -263,20 +231,18 @@ export class MusicComponent implements OnDestroy {
       label: data.label,
       language: data.language,
       copyright: data.copyright,
-      albumName: data.album?.name || '',
-      artistName: data.artists.primary[0]?.name,
+      albumName: new Date().toISOString(),
+      artistName: data.artists?.primary?.[0]?.name,
       image: data.image?.[2]?.url,
       downloadUrl: this.getSongUrl(data),
       isLiked: true,
     }
   }
 
-  /** Checks if a song is liked */
   isSongLiked(): boolean {
     return this.isCurrentSongLiked;
   }
 
-  /** Downloads a song */
   async downloadSong(song: any) {
     if (!song?.url) return;
     this.removeFocus();
@@ -285,7 +251,7 @@ export class MusicComponent implements OnDestroy {
       const res = await fetch(song.url);
       if (!res.ok) throw new Error('Failed to fetch song');
 
-      const blob = await res.blob(); // Convert response to Blob
+      const blob = await res.blob();
       const link = document.createElement('a');
       link.href = URL.createObjectURL(blob);
       link.download = `${song.name || 'song'}.mp3`;
@@ -299,22 +265,16 @@ export class MusicComponent implements OnDestroy {
     }
   }
 
-  /** Flag to show/hide the player modal */
-  showPlayerModal = false;
-
-  /** Open the player modal */
   openPlayerModal() {
     this.removeFocus();
     this.showPlayerModal = true;
   }
 
-  /** Close the player modal */
   closePlayerModal() {
     this.removeFocus();
     this.showPlayerModal = false;
   }
 
-  /** Restart current song when Previous is pressed */
   restartSong() {
     this.removeFocus();
     if (this.audio) {
@@ -325,14 +285,30 @@ export class MusicComponent implements OnDestroy {
     }
   }
 
-  /** Play next song when Next is pressed */
   nextSong() {
     this.onSongFinished();
   }
 
-  /** Removes focus from the search input */
   removeFocus() {
-    this.searchSongInput.nativeElement.blur();
+    this.searchSongInput?.nativeElement?.blur();
   }
 
+  showLikedSongs() {
+    this.removeFocus();
+    this.updateLikedSongList();
+  }
+
+  updateLikedSongList() {
+    const liked = this.userLikedSongsService.getAll() || [];
+    const mappedSongs = liked.map(song => ({
+      id: song.song_id,
+      name: song.song_name,
+      duration: song.duration,
+      image: [{}, {}, { url: song.image }],
+      artists: { primary: [{ name: song.artistName }] },
+      downloadUrl: [{ quality: '320kbps', url: song.downloadUrl }]
+    }));
+
+    this.songs.set(mappedSongs);
+  }
 }
