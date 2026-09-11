@@ -178,6 +178,9 @@ customElements.define('compodoc-menu', class extends HTMLElement {
                                 <a href="components/SalaryComponent.html" data-type="entity-link" >SalaryComponent</a>
                             </li>
                             <li class="link">
+                                <a href="components/SavingComponent.html" data-type="entity-link" >SavingComponent</a>
+                            </li>
+                            <li class="link">
                                 <a href="components/SearchButtonComponent.html" data-type="entity-link" >SearchButtonComponent</a>
                             </li>
                             <li class="link">
@@ -194,6 +197,9 @@ customElements.define('compodoc-menu', class extends HTMLElement {
                             </li>
                             <li class="link">
                                 <a href="components/SplashScreenComponent.html" data-type="entity-link" >SplashScreenComponent</a>
+                            </li>
+                            <li class="link">
+                                <a href="components/TestComponent.html" data-type="entity-link" >TestComponent</a>
                             </li>
                             <li class="link">
                                 <a href="components/ToastComponent.html" data-type="entity-link" >ToastComponent</a>
@@ -227,6 +233,9 @@ customElements.define('compodoc-menu', class extends HTMLElement {
                                     <a href="injectables/GlobalLoaderService.html" data-type="entity-link" >GlobalLoaderService</a>
                                 </li>
                                 <li class="link">
+                                    <a href="injectables/GoalService.html" data-type="entity-link" >GoalService</a>
+                                </li>
+                                <li class="link">
                                     <a href="injectables/HbsRenderService.html" data-type="entity-link" >HbsRenderService</a>
                                 </li>
                                 <li class="link">
@@ -243,6 +252,9 @@ customElements.define('compodoc-menu', class extends HTMLElement {
                                 </li>
                                 <li class="link">
                                     <a href="injectables/SalaryService.html" data-type="entity-link" >SalaryService</a>
+                                </li>
+                                <li class="link">
+                                    <a href="injectables/SavingsService.html" data-type="entity-link" >SavingsService</a>
                                 </li>
                                 <li class="link">
                                     <a href="injectables/ScreenTypeService.html" data-type="entity-link" >ScreenTypeService</a>
@@ -267,6 +279,9 @@ customElements.define('compodoc-menu', class extends HTMLElement {
                                 </li>
                                 <li class="link">
                                     <a href="injectables/UserService.html" data-type="entity-link" >UserService</a>
+                                </li>
+                                <li class="link">
+                                    <a href="injectables/UtilService.html" data-type="entity-link" >UtilService</a>
                                 </li>
                                 <li class="link">
                                     <a href="injectables/ZipExportService.html" data-type="entity-link" >ZipExportService</a>
@@ -297,10 +312,16 @@ customElements.define('compodoc-menu', class extends HTMLElement {
                                 <a href="interfaces/FAQ.html" data-type="entity-link" >FAQ</a>
                             </li>
                             <li class="link">
+                                <a href="interfaces/Goal.html" data-type="entity-link" >Goal</a>
+                            </li>
+                            <li class="link">
                                 <a href="interfaces/HeatmapSummary.html" data-type="entity-link" >HeatmapSummary</a>
                             </li>
                             <li class="link">
                                 <a href="interfaces/Salary.html" data-type="entity-link" >Salary</a>
+                            </li>
+                            <li class="link">
+                                <a href="interfaces/Saving.html" data-type="entity-link" >Saving</a>
                             </li>
                             <li class="link">
                                 <a href="interfaces/Schema.html" data-type="entity-link" >Schema</a>

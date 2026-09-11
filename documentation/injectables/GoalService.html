@@ -109,7 +109,7 @@
 
 <ol class="breadcrumb">
   <li class="breadcrumb-item">Injectables</li>
-  <li class="breadcrumb-item" >SyncSchemaService</li>
+  <li class="breadcrumb-item" >GoalService</li>
 </ol>
 
 <ul class="nav nav-tabs" role="tablist">
@@ -133,7 +133,7 @@
             <h3>File</h3>
         </p>
         <p class="comment">
-            <code>src/app/service/localStorage/sync-schema.service.ts</code>
+            <code>src/app/service/localStorage/goal.service.ts</code>
         </p>
 
 
@@ -141,9 +141,14 @@
                 <h3>Description</h3>
             </p>
             <p class="comment">
-                <p>Service to synchronize local storage data with the current application schema.
-Ensures that stored data conforms to the latest schema definitions.
-This service should be invoked during application initialization.</p>
+                <p>Service for managing user goals stored in localStorage.</p>
+<p>Features:</p>
+<ul>
+<li>Add goal</li>
+<li>Update goal</li>
+<li>Delete goal</li>
+<li>Retrieve goals</li>
+</ul>
 
             </p>
 
@@ -163,19 +168,20 @@ This service should be invoked during application initialization.</p>
                     <td class="col-md-4">
                         <ul class="index-list">
                             <li>
+                                <a href="#add" >add</a>
+                            </li>
+                            <li>
+                                <a href="#delete" >delete</a>
+                            </li>
+                            <li>
+                                <a href="#getAll" >getAll</a>
+                            </li>
+                            <li>
                                     <span class="modifier">Private</span>
                                 <a href="#isBrowser" >isBrowser</a>
                             </li>
                             <li>
-                                <a href="#syncAllSchema" >syncAllSchema</a>
-                            </li>
-                            <li>
-                                    <span class="modifier">Private</span>
-                                <a href="#syncUser" >syncUser</a>
-                            </li>
-                            <li>
-                                    <span class="modifier">Private</span>
-                                <a href="#syncWithSchema" >syncWithSchema</a>
+                                <a href="#update" >update</a>
                             </li>
                         </ul>
                     </td>
@@ -195,18 +201,18 @@ This service should be invoked during application initialization.</p>
             <tbody>
                 <tr>
                     <td class="col-md-4">
-<code>constructor(storageService: <a href="../injectables/StorageService.html" target="_self">StorageService</a>, configService: <a href="../injectables/ConfigService.html" target="_self">ConfigService</a>)</code>
+<code>constructor(storageService: <a href="../injectables/StorageService.html" target="_self">StorageService</a>)</code>
                     </td>
                 </tr>
                         <tr>
                             <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="13" class="link-to-prism">src/app/service/localStorage/sync-schema.service.ts:13</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="26" class="link-to-prism">src/app/service/localStorage/goal.service.ts:26</a></div>
                             </td>
                         </tr>
 
                 <tr>
                     <td class="col-md-4">
-                            <div class="io-description"><p>Creates an instance of SyncSchemaService.</p>
+                            <div class="io-description"><p>Creates an instance of GoalService.</p>
 </div>
                             <div>
                                     <b>Parameters :</b>
@@ -232,22 +238,8 @@ This service should be invoked during application initialization.</p>
                                                     </td>
                                                     
                                                         <td>
-                                                                <p>A service for interacting with local storage keys and data.</p>
+                                                                <p>Service for interacting with localStorage.</p>
 
-                                                        </td>
-                                                </tr>
-                                                <tr>
-                                                        <td>configService</td>
-                                                  
-                                                        <td>
-                                                                        <code><a href="../injectables/ConfigService.html" target="_self" >ConfigService</a></code>
-                                                        </td>
-                                                  
-                                                    <td>
-                                                            No
-                                                    </td>
-                                                    
-                                                        <td>
                                                         </td>
                                                 </tr>
                                         </tbody>
@@ -264,6 +256,198 @@ This service should be invoked during application initialization.</p>
     <h3 id="methods">
         Methods
     </h3>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="add"></a>
+                    <span class="name">
+                        <span ><b>add</b></span>
+                        <a href="#add"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>add(data: <a href="../interfaces/Goal.html" target="_self">Omit&lt;Goal | goal_id&gt;</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="70"
+                                    class="link-to-prism">src/app/service/localStorage/goal.service.ts:70</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-description"><p>Adds a new goal.</p>
+</div>
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                                <td>Description</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>data</td>
+                                            <td>
+                                                            <code><a href="../interfaces/Goal.html" target="_self" >Omit&lt;Goal | goal_id&gt;</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                            <td>
+                                                    <p>Goal object</p>
+
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="delete"></a>
+                    <span class="name">
+                        <span ><b>delete</b></span>
+                        <a href="#delete"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>delete(goal_id: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="102"
+                                    class="link-to-prism">src/app/service/localStorage/goal.service.ts:102</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-description"><p>Deletes a goal by ID.</p>
+</div>
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                                <td>Description</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>goal_id</td>
+                                            <td>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                            <td>
+                                                    <p>Goal ID</p>
+
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="getAll"></a>
+                    <span class="name">
+                        <span ><b>getAll</b></span>
+                        <a href="#getAll"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>getAll()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="51"
+                                    class="link-to-prism">src/app/service/localStorage/goal.service.ts:51</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-description"><p>Retrieves all goals from localStorage.</p>
+<p>Sorted by start_date (latest first).</p>
+</div>
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="../interfaces/Goal.html" target="_self" >Goal[]</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                <p>Array of Goal objects.</p>
+
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
     <table class="table table-sm table-bordered">
         <tbody>
             <tr>
@@ -286,15 +470,15 @@ This service should be invoked during application initialization.</p>
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="30"
-                                    class="link-to-prism">src/app/service/localStorage/sync-schema.service.ts:30</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="40"
+                                    class="link-to-prism">src/app/service/localStorage/goal.service.ts:40</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
-                        <div class="io-description"><p>Checks if the code is running in a browser environment with <code>localStorage</code> available.</p>
+                        <div class="io-description"><p>Checks if the environment supports localStorage.</p>
 </div>
 
                         <div class="io-description">
@@ -302,7 +486,7 @@ This service should be invoked during application initialization.</p>
 
                         </div>
                             <div class="io-description">
-                                <p>True if running in the browser, false otherwise.</p>
+                                <p>True if running in browser.</p>
 
                             </div>
                 </td>
@@ -313,70 +497,31 @@ This service should be invoked during application initialization.</p>
         <tbody>
             <tr>
                 <td class="col-md-4">
-                    <a name="syncAllSchema"></a>
+                    <a name="update"></a>
                     <span class="name">
-                        <span ><b>syncAllSchema</b></span>
-                        <a href="#syncAllSchema"><span class="icon ion-ios-link"></span></a>
+                        <span ><b>update</b></span>
+                        <a href="#update"><span class="icon ion-ios-link"></span></a>
                     </span>
                 </td>
             </tr>
             <tr>
                 <td class="col-md-4">
-<code>syncAllSchema()</code>
+<code>update(goal_id: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>, newData: <a href="../interfaces/Goal.html" target="_self">Partial&lt;Goal&gt;</a>)</code>
                 </td>
             </tr>
 
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="34"
-                                    class="link-to-prism">src/app/service/localStorage/sync-schema.service.ts:34</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="86"
+                                    class="link-to-prism">src/app/service/localStorage/goal.service.ts:86</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
-
-                        <div class="io-description">
-                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
-
-                        </div>
-                </td>
-            </tr>
-        </tbody>
-    </table>
-    <table class="table table-sm table-bordered">
-        <tbody>
-            <tr>
-                <td class="col-md-4">
-                    <a name="syncUser"></a>
-                    <span class="name">
-                            <span class="modifier">Private</span>
-                        <span ><b>syncUser</b></span>
-                        <a href="#syncUser"><span class="icon ion-ios-link"></span></a>
-                    </span>
-                </td>
-            </tr>
-            <tr>
-                <td class="col-md-4">
-                        <span class="modifier-icon icon ion-ios-reset"></span>
-                    <code>syncUser(storageKey: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>, defaultSchema: <a href="../interfaces/Schema.html" target="_self">Schema</a>)</code>
-                </td>
-            </tr>
-
-
-                    <tr>
-                        <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="84"
-                                    class="link-to-prism">src/app/service/localStorage/sync-schema.service.ts:84</a></div>
-                        </td>
-                    </tr>
-
-
-            <tr>
-                <td class="col-md-4">
-                        <div class="io-description"><p>Syncs user data in localStorage with a schema and updates the app version.</p>
+                        <div class="io-description"><p>Updates an existing goal.</p>
 </div>
 
                             <div class="io-description">
@@ -388,12 +533,11 @@ This service should be invoked during application initialization.</p>
                                             <td>Name</td>
                                                 <td>Type</td>
                                             <td>Optional</td>
-                                                <td>Description</td>
                                         </tr>
                                     </thead>
                                     <tbody>
                                         <tr>
-                                                <td>storageKey</td>
+                                                <td>goal_id</td>
                                             <td>
                                                             <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
                                             </td>
@@ -403,15 +547,11 @@ This service should be invoked during application initialization.</p>
                                             </td>
 
 
-                                            <td>
-                                                    <p>The localStorage key for the user.</p>
-
-                                            </td>
                                         </tr>
                                         <tr>
-                                                <td>defaultSchema</td>
+                                                <td>newData</td>
                                             <td>
-                                                            <code><a href="../interfaces/Schema.html" target="_self" >Schema</a></code>
+                                                            <code><a href="../interfaces/Goal.html" target="_self" >Partial&lt;Goal&gt;</a></code>
                                             </td>
 
                                             <td>
@@ -419,102 +559,6 @@ This service should be invoked during application initialization.</p>
                                             </td>
 
 
-                                            <td>
-                                                    <p>The default schema to apply.</p>
-
-                                            </td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                            </div>
-                        <div class="io-description">
-                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
-
-                        </div>
-                            <div class="io-description">
-                                
-                            </div>
-                </td>
-            </tr>
-        </tbody>
-    </table>
-    <table class="table table-sm table-bordered">
-        <tbody>
-            <tr>
-                <td class="col-md-4">
-                    <a name="syncWithSchema"></a>
-                    <span class="name">
-                            <span class="modifier">Private</span>
-                        <span ><b>syncWithSchema</b></span>
-                        <a href="#syncWithSchema"><span class="icon ion-ios-link"></span></a>
-                    </span>
-                </td>
-            </tr>
-            <tr>
-                <td class="col-md-4">
-                        <span class="modifier-icon icon ion-ios-reset"></span>
-                    <code>syncWithSchema(storageKey: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>, defaultSchema: <a href="../interfaces/Schema.html" target="_self">Schema</a>)</code>
-                </td>
-            </tr>
-
-
-                    <tr>
-                        <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="52"
-                                    class="link-to-prism">src/app/service/localStorage/sync-schema.service.ts:52</a></div>
-                        </td>
-                    </tr>
-
-
-            <tr>
-                <td class="col-md-4">
-                        <div class="io-description"><p>Helper function to sync any localStorage data array with a given schema.</p>
-</div>
-
-                            <div class="io-description">
-                                <b>Parameters :</b>
-                                
-                                <table class="params">
-                                    <thead>
-                                        <tr>
-                                            <td>Name</td>
-                                                <td>Type</td>
-                                            <td>Optional</td>
-                                                <td>Description</td>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr>
-                                                <td>storageKey</td>
-                                            <td>
-                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
-                                            </td>
-
-                                            <td>
-                                                    No
-                                            </td>
-
-
-                                            <td>
-                                                    <p>The localStorage key to sync.</p>
-
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                                <td>defaultSchema</td>
-                                            <td>
-                                                            <code><a href="../interfaces/Schema.html" target="_self" >Schema</a></code>
-                                            </td>
-
-                                            <td>
-                                                    No
-                                            </td>
-
-
-                                            <td>
-                                                    <p>The default schema to apply to missing properties.</p>
-
-                                            </td>
                                         </tr>
                                     </tbody>
                                 </table>
@@ -538,107 +582,115 @@ This service should be invoked during application initialization.</p>
     <div class="tab-pane fade  tab-source-code" id="source">
         <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Injectable } from &#x27;@angular/core&#x27;;
 import { StorageService } from &#x27;./storage.service&#x27;;
-import { ConfigService } from &#x27;../config/config.service&#x27;;
-import { Categories } from &#x27;./data/categories&#x27;;
-import { Schema } from &#x27;./storage.service&#x27;;
 
 /**
- * Service to synchronize local storage data with the current application schema.
- * Ensures that stored data conforms to the latest schema definitions.
- * This service should be invoked during application initialization.
+ * Interface representing a Goal.
+ */
+export interface Goal {
+    goal_id: string;
+    goal_name: string;
+    target_amount: number;
+    start_date: string;
+    target_date: string;
+    note: string;
+}
+
+/**
+ * Service for managing user goals stored in localStorage.
+ *
+ * Features:
+ * - Add goal
+ * - Update goal
+ * - Delete goal
+ * - Retrieve goals
  */
 @Injectable({ providedIn: &#x27;root&#x27; })
-export class SyncSchemaService {
+export class GoalService {
 
     /**
-     * Creates an instance of SyncSchemaService.
-     *
-     * @param storageService A service for interacting with local storage keys and data.
+     * Creates an instance of GoalService.
+     * 
+     * @param storageService Service for interacting with localStorage.
      */
-    constructor(
-        private storageService: StorageService,
-        private configService: ConfigService
-    ) { }
+    constructor(private storageService: StorageService) { }
 
     /**
-     * Checks if the code is running in a browser environment with &#x60;localStorage&#x60; available.
+     * Checks if the environment supports localStorage.
      *
-     * @returns {boolean} True if running in the browser, false otherwise.
+     * @returns True if running in browser.
      */
     private isBrowser(): boolean {
         return typeof window !&#x3D;&#x3D; &#x27;undefined&#x27; &amp;&amp; typeof window.localStorage !&#x3D;&#x3D; &#x27;undefined&#x27;;
     }
 
-    syncAllSchema(): void {
-        if (this.isBrowser()) {
-            this.syncUser(this.storageService.getUserKey(), this.storageService.getuserSchema());
-            this.syncWithSchema(this.storageService.getCategoryKey(), this.storageService.getcategorySchema());
-            this.syncWithSchema(this.storageService.getExpenseKey(), this.storageService.getexpenseSchema());
-            this.syncWithSchema(this.storageService.getSalaryKey(), this.storageService.getsalarySchema());
-            this.syncWithSchema(this.storageService.getUserLikedSongsKey(), this.storageService.getlikedSongSchema());
-            this.syncWithSchema(this.storageService.getGoalKey(), this.storageService.getGoalSchema());
-            this.syncWithSchema(this.storageService.getSavingsKey(), this.storageService.getSavingsSchema());
-        }
+    /**
+     * Retrieves all goals from localStorage.
+     *
+     * Sorted by start_date (latest first).
+     *
+     * @returns Array of Goal objects.
+     */
+    getAll(): Goal[] {
+        if (!this.isBrowser()) return [];
+
+        return this.storageService.getAllGoals().sort((a: Goal, b: Goal) &#x3D;&gt; {
+            const dateA &#x3D; new Date(a?.start_date || 0).getTime();
+            const dateB &#x3D; new Date(b?.start_date || 0).getTime();
+
+            const safeA &#x3D; isNaN(dateA) ? 0 : dateA;
+            const safeB &#x3D; isNaN(dateB) ? 0 : dateB;
+
+            return safeB - safeA; // newest first
+        });
     }
 
     /**
-     * Helper function to sync any localStorage data array with a given schema.
+     * Adds a new goal.
      *
-     * @param storageKey The localStorage key to sync.
-     * @param defaultSchema The default schema to apply to missing properties.
+     * @param data Goal object
      */
-    private syncWithSchema(storageKey: string, defaultSchema: Schema): void {
-        if (!this.isBrowser()) {
-            console.error(&#x27;localStorage is not available in this environment.&#x27;);
-            return;
-        }
-
-        let savedData &#x3D; JSON.parse(localStorage.getItem(storageKey) || &#x27;[]&#x27;);
-
-        if (storageKey &#x3D;&#x3D;&#x3D; this.storageService.getCategoryKey()) {
-            const pastData &#x3D; JSON.parse(localStorage.getItem(this.storageService.getCategoryKey()) || &#x27;[]&#x27;);
-            const filteredPastData &#x3D; pastData.filter((item: any) &#x3D;&gt; item.user_id !&#x3D;&#x3D; &quot;0&quot;);
-            savedData &#x3D; [...filteredPastData, ...Categories];
-        }
-
-        const schemaKeys &#x3D; Object.keys(defaultSchema);
-        const updatedData &#x3D; savedData.map((item: Schema) &#x3D;&gt; {
-            const synced: Schema &#x3D; {};
-            schemaKeys.forEach((key: string) &#x3D;&gt; {
-                synced[key] &#x3D; key in item ? item[key] : defaultSchema[key];
-            });
-            return synced;
-        });
-
-        localStorage.setItem(storageKey, JSON.stringify(updatedData));
+    add(data: Omit&lt;Goal, &#x27;goal_id&#x27;&gt;): void {
+        if (!this.isBrowser()) return;
+        const all: Goal[] &#x3D; this.getAll();
+        const goal_id &#x3D; crypto.randomUUID();
+        all.push({ ...data, goal_id, target_amount: Math.round(data.target_amount * 100) / 100 });
+        localStorage.setItem(
+            this.storageService.getGoalKey(),
+            JSON.stringify(all)
+        );
     }
 
     /**
-     * Syncs user data in localStorage with a schema and updates the app version.
+     * Updates an existing goal.
      *
-     * @param storageKey The localStorage key for the user.
-     * @param defaultSchema The default schema to apply.
+     * @param updatedGoal Updated goal object
      */
-    private syncUser(storageKey: string, defaultSchema: Schema): void {
-        if (!this.isBrowser()) {
-            console.error(&#x27;localStorage is not available in this environment.&#x27;);
-            return;
-        }
-
-        const savedSettings &#x3D; JSON.parse(localStorage.getItem(storageKey) || &#x27;{}&#x27;);
-        const schemaKeys &#x3D; Object.keys(defaultSchema);
-        const syncedSettings: Schema &#x3D; {};
-
-        schemaKeys.forEach((key: string) &#x3D;&gt; {
-            syncedSettings[key] &#x3D; key in savedSettings ? savedSettings[key] : defaultSchema[key];
-        });
-        syncedSettings[&#x27;app_version&#x27;] &#x3D; this.configService.getVersion();
-
-        localStorage.setItem(this.storageService.getUserKey(), JSON.stringify(syncedSettings));
+    update(goal_id: string, newData: Partial&lt;Goal&gt;): void {
+        if (!this.isBrowser()) return;
+        let all: Goal[] &#x3D; this.getAll();
+        all &#x3D; all.map(item &#x3D;&gt; item.goal_id &#x3D;&#x3D;&#x3D; goal_id ? { ...item, ...newData } : item);
+        all &#x3D; all.map(item &#x3D;&gt; ({ ...item, target_amount: Math.round(item.target_amount * 100) / 100 }));
+        localStorage.setItem(
+            this.storageService.getGoalKey(),
+            JSON.stringify(all)
+        );
     }
 
-}
-</code></pre>
+    /**
+     * Deletes a goal by ID.
+     *
+     * @param goal_id Goal ID
+     */
+    delete(goal_id: string): void {
+        if (!this.isBrowser()) return;
+        let all: Goal[] &#x3D; this.getAll();
+        all &#x3D; all.filter(goal &#x3D;&gt; goal.goal_id !&#x3D;&#x3D; goal_id);
+        localStorage.setItem(
+            this.storageService.getGoalKey(),
+            JSON.stringify(all)
+        );
+    }
+}</code></pre>
     </div>
 
 </div>
@@ -681,7 +733,7 @@ export class SyncSchemaService {
        <script>
             var COMPODOC_CURRENT_PAGE_DEPTH = 1;
             var COMPODOC_CURRENT_PAGE_CONTEXT = 'injectable';
-            var COMPODOC_CURRENT_PAGE_URL = 'SyncSchemaService.html';
+            var COMPODOC_CURRENT_PAGE_URL = 'GoalService.html';
             var MAX_SEARCH_RESULTS = 15;
        </script>
 

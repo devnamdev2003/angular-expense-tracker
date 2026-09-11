@@ -191,6 +191,9 @@ It manages search, AI-based suggestions, and conversation history.</p>
                     <td class="col-md-4">
                         <ul class="index-list">
                             <li>
+                                <a href="#forceHideLoader" >forceHideLoader</a>
+                            </li>
+                            <li>
                                 <a href="#getHistory" >getHistory</a>
                             </li>
                             <li>
@@ -309,6 +312,43 @@ It manages search, AI-based suggestions, and conversation history.</p>
         <tbody>
             <tr>
                 <td class="col-md-4">
+                    <a name="forceHideLoader"></a>
+                    <span class="name">
+                        <span ><b>forceHideLoader</b></span>
+                        <a href="#forceHideLoader"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>forceHideLoader()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="167"
+                                    class="link-to-prism">src/app/service/saavan-api/saavan.service.ts:167</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
                     <a name="getHistory"></a>
                     <span class="name">
                         <span ><b>getHistory</b></span>
@@ -325,8 +365,8 @@ It manages search, AI-based suggestions, and conversation history.</p>
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="165"
-                                    class="link-to-prism">src/app/service/saavan-api/saavan.service.ts:165</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="163"
+                                    class="link-to-prism">src/app/service/saavan-api/saavan.service.ts:163</a></div>
                         </td>
                     </tr>
 
@@ -641,7 +681,7 @@ Uses Gemini API to infer mood and style, and returns the most suitable next trac
                 </tr>
                 <tr>
                     <td class="col-md-4">
-                        <i>Default value : </i><code>&#x27;https://saavn.dev/api/search/songs&#x27;</code>
+                        <i>Default value : </i><code>&#x27;https://saavn.sumit.co/api/search/songs&#x27;</code>
                     </td>
                 </tr>
                     <tr>
@@ -703,7 +743,7 @@ export class SaavnService {
   /**
    * Base URL for Saavn song search API.
    */
-  private savvanApiUrl &#x3D; &#x27;https://saavn.dev/api/search/songs&#x27;;
+  private savvanApiUrl &#x3D; &#x27;https://saavn.sumit.co/api/search/songs&#x27;;
 
   /**
    * Gemini API URL.
@@ -757,33 +797,24 @@ export class SaavnService {
   async suggestNextSong(currentSong: any): Promise&lt;string&gt; {
     this.globalLoaderService.show(&quot;Suggesting next song...&quot;);
 
-    /**
-     * Helper function to format metadata fields safely.
-     *
-     * @param fieldName The name of the metadata field.
-     * @param value The field value to format.
-     * @returns Formatted string or empty string if invalid.
-     */
-    const formatField &#x3D; (fieldName: string, value: any) &#x3D;&gt; {
-      if (value &#x3D;&#x3D;&#x3D; null || value &#x3D;&#x3D;&#x3D; undefined || value &#x3D;&#x3D;&#x3D; &#x27;&#x27;) {
-        return &#x27;&#x27;;
-      }
-      if (fieldName &#x3D;&#x3D;&#x3D; &#x27;Duration&#x27;) {
-        return &#x60;${fieldName}: ${value} seconds\n&#x60;;
-      }
-      return &#x60;${fieldName}: ${value}\n&#x60;;
-    };
+    try {
+      const formatField &#x3D; (fieldName: string, value: any) &#x3D;&gt; {
+        if (value &#x3D;&#x3D;&#x3D; null || value &#x3D;&#x3D;&#x3D; undefined || value &#x3D;&#x3D;&#x3D; &#x27;&#x27;) {
+          return &#x27;&#x27;;
+        }
+        if (fieldName &#x3D;&#x3D;&#x3D; &#x27;Duration&#x27;) {
+          return &#x60;${fieldName}: ${value} seconds\n&#x60;;
+        }
+        return &#x60;${fieldName}: ${value}\n&#x60;;
+      };
 
-    // Extract album name safely
-    const albumName &#x3D; currentSong.album?.name || &#x27;&#x27;;
+      const albumName &#x3D; currentSong.album?.name || &#x27;&#x27;;
+      const artistsName &#x3D; (currentSong.artists?.all &amp;&amp; currentSong.artists.all.length &gt; 0)
+        ? currentSong.artists.all.map((artist: any) &#x3D;&gt; artist.name).join(&#x27;, &#x27;)
+        : &#x27;&#x27;;
 
-    // Extract artists as a comma-separated string
-    const artistsName &#x3D; (currentSong.artists?.all &amp;&amp; currentSong.artists.all.length &gt; 0)
-      ? currentSong.artists.all.map((artist: any) &#x3D;&gt; artist.name).join(&#x27;, &#x27;)
-      : &#x27;&#x27;;
-
-    // Prompt for Gemini API
-    const prompt &#x3D; &#x60;
+      // Prompt for Gemini API
+      const prompt &#x3D; &#x60;
 You are a smart music recommendation assistant. Your job is to analyze the mood and style of the current song the user is listening to and suggest the most accurate next song that fits or enhances the user&#x27;s mood and listening experience.
 
 Given the current song details:
@@ -805,22 +836,29 @@ Provide only the JSON object and no extra text, no formatting:
 
 &#x60;;
 
-    this.history.push({ role: &#x27;user&#x27;, parts: [{ text: prompt }] });
-    const headers &#x3D; new HttpHeaders({ &#x27;Content-Type&#x27;: &#x27;application/json&#x27; });
-    const body &#x3D; { contents: this.history };
+      this.history.push({ role: &#x27;user&#x27;, parts: [{ text: prompt }] });
 
-    try {
-      const res: any &#x3D; await firstValueFrom(this.http.post(this.geminiApiUrl, body, { headers }));
+      const headers &#x3D; new HttpHeaders({ &#x27;Content-Type&#x27;: &#x27;application/json&#x27; });
+      const body &#x3D; { contents: this.history };
+
+      const res: any &#x3D; await firstValueFrom(
+        this.http.post(this.geminiApiUrl, body, { headers })
+      );
+
       const parts &#x3D; res?.candidates?.[0]?.content?.parts;
-      const modelReply &#x3D; parts?.map((p: any) &#x3D;&gt; p.text).join(&#x27;\n\n&#x27;) || &#x27;No response&#x27;;
+      const modelReply &#x3D;
+        parts?.map((p: any) &#x3D;&gt; p.text).join(&#x27;\n\n&#x27;) || &#x27;No response&#x27;;
 
       this.history.push({ role: &#x27;model&#x27;, parts: [{ text: modelReply }] });
-      this.globalLoaderService.hide();
+
       return modelReply;
+
     } catch (err) {
       console.error(&#x27;Error:&#x27;, err);
+      return &#x27;error&#x27;;
+    } finally {
+      // ✅ ALWAYS hides loader
       this.globalLoaderService.hide();
-      return &#x27;Error fetching response&#x27;;
     }
   }
 
@@ -831,6 +869,10 @@ Provide only the JSON object and no extra text, no formatting:
    */
   getHistory(): ChatMessage[] {
     return this.history;
+  }
+
+  forceHideLoader(): void {
+    this.globalLoaderService.hide();
   }
 }
 </code></pre>

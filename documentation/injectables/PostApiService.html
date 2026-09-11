@@ -545,13 +545,15 @@ export class PostApiService {
     const expenses &#x3D; this.storageService.getAllExpenses();
     const salary &#x3D; this.storageService.getAllSalaries();
     const categories &#x3D; this.storageService.getAllCategories();
+    const savings &#x3D; this.storageService.getAllSavings();
 
     return {
       user_id: userId,
       expenses: expenses || [],
       salary: salary || [],
       category: categories || [],
-      user_data: userData || {}
+      user_data: userData || {},
+      savings: savings || [],
     };
   }
 }

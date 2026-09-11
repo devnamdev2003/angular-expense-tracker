@@ -273,8 +273,8 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="45"
-                                    class="link-to-prism">src/app/service/localStorage/user-liked-song.service.ts:45</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="55"
+                                    class="link-to-prism">src/app/service/localStorage/user-liked-song.service.ts:55</a></div>
                         </td>
                     </tr>
 
@@ -347,8 +347,8 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="69"
-                                    class="link-to-prism">src/app/service/localStorage/user-liked-song.service.ts:69</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="79"
+                                    class="link-to-prism">src/app/service/localStorage/user-liked-song.service.ts:79</a></div>
                         </td>
                     </tr>
 
@@ -464,8 +464,8 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="59"
-                                    class="link-to-prism">src/app/service/localStorage/user-liked-song.service.ts:59</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="69"
+                                    class="link-to-prism">src/app/service/localStorage/user-liked-song.service.ts:69</a></div>
                         </td>
                     </tr>
 
@@ -606,7 +606,17 @@ export class UserLikedSongsService {
      */
     getAll(): Song[] {
         if (!this.isBrowser()) return [];
-        return this.storageService.getAllSongs();
+
+        return this.storageService.getAllSongs().sort((a, b) &#x3D;&gt; {
+            const dateA &#x3D; new Date(a?.albumName || 0).getTime();
+            const dateB &#x3D; new Date(b?.albumName || 0).getTime();
+
+            // If invalid date → Date returns NaN → convert to 0
+            const safeA &#x3D; isNaN(dateA) ? 0 : dateA;
+            const safeB &#x3D; isNaN(dateB) ? 0 : dateB;
+
+            return safeB - safeA; // latest first
+        });
     }
 
     /**

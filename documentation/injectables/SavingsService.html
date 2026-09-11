@@ -109,7 +109,7 @@
 
 <ol class="breadcrumb">
   <li class="breadcrumb-item">Injectables</li>
-  <li class="breadcrumb-item" >UserService</li>
+  <li class="breadcrumb-item" >SavingsService</li>
 </ol>
 
 <ul class="nav nav-tabs" role="tablist">
@@ -133,7 +133,7 @@
             <h3>File</h3>
         </p>
         <p class="comment">
-            <code>src/app/service/localStorage/user.service.ts</code>
+            <code>src/app/service/localStorage/savings.service.ts</code>
         </p>
 
 
@@ -141,8 +141,14 @@
                 <h3>Description</h3>
             </p>
             <p class="comment">
-                <p>Service for managing user data and preferences in local storage.
-Provides methods to read, update, and persist user settings.</p>
+                <p>Service for managing savings entries stored in localStorage.</p>
+<p>Features:</p>
+<ul>
+<li>Add saving</li>
+<li>Update saving</li>
+<li>Delete saving</li>
+<li>Retrieve savings</li>
+</ul>
 
             </p>
 
@@ -162,13 +168,22 @@ Provides methods to read, update, and persist user settings.</p>
                     <td class="col-md-4">
                         <ul class="index-list">
                             <li>
-                                <a href="#get" >get</a>
+                                <a href="#add" >add</a>
                             </li>
                             <li>
-                                <a href="#getUserData" >getUserData</a>
+                                <a href="#delete" >delete</a>
                             </li>
                             <li>
-                                <a href="#getValue" >getValue</a>
+                                <a href="#getAll" >getAll</a>
+                            </li>
+                            <li>
+                                <a href="#getTotalSavings" >getTotalSavings</a>
+                            </li>
+                            <li>
+                                <a href="#gettotalSavingsBetweenDates" >gettotalSavingsBetweenDates</a>
+                            </li>
+                            <li>
+                                <a href="#getTotalSavingsFromIncome" >getTotalSavingsFromIncome</a>
                             </li>
                             <li>
                                     <span class="modifier">Private</span>
@@ -178,7 +193,7 @@ Provides methods to read, update, and persist user settings.</p>
                                 <a href="#update" >update</a>
                             </li>
                             <li>
-                                <a href="#updateUserData" >updateUserData</a>
+                                <a href="#updateAllSavings" >updateAllSavings</a>
                             </li>
                         </ul>
                     </td>
@@ -203,13 +218,13 @@ Provides methods to read, update, and persist user settings.</p>
                 </tr>
                         <tr>
                             <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="68" class="link-to-prism">src/app/service/localStorage/user.service.ts:68</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="25" class="link-to-prism">src/app/service/localStorage/savings.service.ts:25</a></div>
                             </td>
                         </tr>
 
                 <tr>
                     <td class="col-md-4">
-                            <div class="io-description"><p>Creates an instance of UserService.</p>
+                            <div class="io-description"><p>Creates an instance of SavingsService.</p>
 </div>
                             <div>
                                     <b>Parameters :</b>
@@ -235,7 +250,7 @@ Provides methods to read, update, and persist user settings.</p>
                                                     </td>
                                                     
                                                         <td>
-                                                                <p>Service for handling local storage operations.</p>
+                                                                <p>Service for interacting with localStorage.</p>
 
                                                         </td>
                                                 </tr>
@@ -257,125 +272,31 @@ Provides methods to read, update, and persist user settings.</p>
         <tbody>
             <tr>
                 <td class="col-md-4">
-                    <a name="get"></a>
+                    <a name="add"></a>
                     <span class="name">
-                        <span ><b>get</b></span>
-                        <a href="#get"><span class="icon ion-ios-link"></span></a>
+                        <span ><b>add</b></span>
+                        <a href="#add"><span class="icon ion-ios-link"></span></a>
                     </span>
                 </td>
             </tr>
             <tr>
                 <td class="col-md-4">
-<code>get()</code>
+<code>add(data: <a href="../interfaces/Saving.html" target="_self">Omit&lt;Saving | saving_id&gt;</a>)</code>
                 </td>
             </tr>
 
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="92"
-                                    class="link-to-prism">src/app/service/localStorage/user.service.ts:92</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="67"
+                                    class="link-to-prism">src/app/service/localStorage/savings.service.ts:67</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
-                        <div class="io-description"><p>Retrieves the current user object from storage.</p>
-</div>
-
-                        <div class="io-description">
-                            <b>Returns : </b>    <code>Record&lt;string, any&gt;</code>
-
-                        </div>
-                            <div class="io-description">
-                                <p>User data object, or empty object if not available.</p>
-
-                            </div>
-                </td>
-            </tr>
-        </tbody>
-    </table>
-    <table class="table table-sm table-bordered">
-        <tbody>
-            <tr>
-                <td class="col-md-4">
-                    <a name="getUserData"></a>
-                    <span class="name">
-                        <span ><b>getUserData</b></span>
-                        <a href="#getUserData"><span class="icon ion-ios-link"></span></a>
-                    </span>
-                </td>
-            </tr>
-            <tr>
-                <td class="col-md-4">
-<code>getUserData()</code>
-                </td>
-            </tr>
-
-
-                    <tr>
-                        <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="127"
-                                    class="link-to-prism">src/app/service/localStorage/user.service.ts:127</a></div>
-                        </td>
-                    </tr>
-
-
-            <tr>
-                <td class="col-md-4">
-                        <div class="io-description"><p>Retrieves full user data.</p>
-</div>
-
-                        <div class="io-description">
-                            <b>Returns : </b>        <code><a href="../interfaces/User.html" target="_self" >User | null</a></code>
-
-                        </div>
-                            <div class="io-description">
-                                <p>The user object, or empty object if not available.</p>
-
-                            </div>
-                </td>
-            </tr>
-        </tbody>
-    </table>
-    <table class="table table-sm table-bordered">
-        <tbody>
-            <tr>
-                <td class="col-md-4">
-                    <a name="getValue"></a>
-                    <span class="name">
-                        <span ><b>getValue</b></span>
-                        <a href="#getValue"><span class="icon ion-ios-link"></span></a>
-                    </span>
-                </td>
-            </tr>
-            <tr>
-                <td class="col-md-4">
-<code>getValue(key: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>)</code>
-                </td>
-            </tr>
-
-
-                    <tr>
-                        <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="117"
-                                    class="link-to-prism">src/app/service/localStorage/user.service.ts:117</a></div>
-                        </td>
-                    </tr>
-
-                    <tr>
-                        <td class="col-md-4">
-                            <b>Type parameters :</b>
-                            <ul class="type-parameters">
-                                    <li>T</li>
-                            </ul>
-                        </td>
-                    </tr>
-
-            <tr>
-                <td class="col-md-4">
-                        <div class="io-description"><p>Retrieves a specific user property by key.</p>
+                        <div class="io-description"><p>Adds a new saving entry.</p>
 </div>
 
                             <div class="io-description">
@@ -392,7 +313,81 @@ Provides methods to read, update, and persist user settings.</p>
                                     </thead>
                                     <tbody>
                                         <tr>
-                                                <td>key</td>
+                                                <td>data</td>
+                                            <td>
+                                                            <code><a href="../interfaces/Saving.html" target="_self" >Omit&lt;Saving | saving_id&gt;</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                            <td>
+                                                    <p>Saving object</p>
+
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="delete"></a>
+                    <span class="name">
+                        <span ><b>delete</b></span>
+                        <a href="#delete"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>delete(saving_id: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="99"
+                                    class="link-to-prism">src/app/service/localStorage/savings.service.ts:99</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-description"><p>Deletes a saving entry by ID.</p>
+</div>
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                                <td>Description</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>saving_id</td>
                                             <td>
                                                             <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
                                             </td>
@@ -403,7 +398,7 @@ Provides methods to read, update, and persist user settings.</p>
 
 
                                             <td>
-                                                    <p>The property key to retrieve.</p>
+                                                    <p>Saving ID</p>
 
                                             </td>
                                         </tr>
@@ -411,13 +406,209 @@ Provides methods to read, update, and persist user settings.</p>
                                 </table>
                             </div>
                         <div class="io-description">
-                            <b>Returns : </b>    <code>T | null</code>
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
 
                         </div>
                             <div class="io-description">
-                                <p>The value if it exists, otherwise <code>null</code>.</p>
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="getAll"></a>
+                    <span class="name">
+                        <span ><b>getAll</b></span>
+                        <a href="#getAll"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>getAll()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="48"
+                                    class="link-to-prism">src/app/service/localStorage/savings.service.ts:48</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-description"><p>Retrieves all savings from localStorage.</p>
+<p>Sorted by date (latest first).</p>
+</div>
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="../interfaces/Saving.html" target="_self" >Saving[]</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                <p>Array of Saving objects.</p>
 
                             </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="getTotalSavings"></a>
+                    <span class="name">
+                        <span ><b>getTotalSavings</b></span>
+                        <a href="#getTotalSavings"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>getTotalSavings()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="109"
+                                    class="link-to-prism">src/app/service/localStorage/savings.service.ts:109</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="gettotalSavingsBetweenDates"></a>
+                    <span class="name">
+                        <span ><b>gettotalSavingsBetweenDates</b></span>
+                        <a href="#gettotalSavingsBetweenDates"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>gettotalSavingsBetweenDates(from: string | null, to: string | null)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="121"
+                                    class="link-to-prism">src/app/service/localStorage/savings.service.ts:121</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>from</td>
+                                            <td>
+                                                        <code>string | null</code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                        <tr>
+                                                <td>to</td>
+                                            <td>
+                                                        <code>string | null</code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="getTotalSavingsFromIncome"></a>
+                    <span class="name">
+                        <span ><b>getTotalSavingsFromIncome</b></span>
+                        <a href="#getTotalSavingsFromIncome"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>getTotalSavingsFromIncome()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="115"
+                                    class="link-to-prism">src/app/service/localStorage/savings.service.ts:115</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+
+                        </div>
                 </td>
             </tr>
         </tbody>
@@ -444,26 +635,21 @@ Provides methods to read, update, and persist user settings.</p>
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="83"
-                                    class="link-to-prism">src/app/service/localStorage/user.service.ts:83</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="37"
+                                    class="link-to-prism">src/app/service/localStorage/savings.service.ts:37</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
-                        <div class="io-description"><p>Checks if the service is running in a browser environment
-with access to <code>localStorage</code>.</p>
+                        <div class="io-description"><p>Checks if the environment supports localStorage.</p>
 </div>
 
                         <div class="io-description">
                             <b>Returns : </b>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
 
                         </div>
-                            <div class="io-description">
-                                <p>True if running in the browser, false otherwise.</p>
-
-                            </div>
                 </td>
             </tr>
         </tbody>
@@ -481,22 +667,22 @@ with access to <code>localStorage</code>.</p>
             </tr>
             <tr>
                 <td class="col-md-4">
-<code>update(key: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>, value: <a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank">any</a>)</code>
+<code>update(saving_id: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>, newData: <a href="../interfaces/Saving.html" target="_self">Partial&lt;Saving&gt;</a>)</code>
                 </td>
             </tr>
 
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="103"
-                                    class="link-to-prism">src/app/service/localStorage/user.service.ts:103</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="83"
+                                    class="link-to-prism">src/app/service/localStorage/savings.service.ts:83</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
-                        <div class="io-description"><p>Updates a single user property in local storage.</p>
+                        <div class="io-description"><p>Updates an existing saving entry.</p>
 </div>
 
                             <div class="io-description">
@@ -508,12 +694,11 @@ with access to <code>localStorage</code>.</p>
                                             <td>Name</td>
                                                 <td>Type</td>
                                             <td>Optional</td>
-                                                <td>Description</td>
                                         </tr>
                                     </thead>
                                     <tbody>
                                         <tr>
-                                                <td>key</td>
+                                                <td>saving_id</td>
                                             <td>
                                                             <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
                                             </td>
@@ -523,15 +708,11 @@ with access to <code>localStorage</code>.</p>
                                             </td>
 
 
-                                            <td>
-                                                    <p>The property key to update.</p>
-
-                                            </td>
                                         </tr>
                                         <tr>
-                                                <td>value</td>
+                                                <td>newData</td>
                                             <td>
-                                                            <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
+                                                            <code><a href="../interfaces/Saving.html" target="_self" >Partial&lt;Saving&gt;</a></code>
                                             </td>
 
                                             <td>
@@ -539,10 +720,6 @@ with access to <code>localStorage</code>.</p>
                                             </td>
 
 
-                                            <td>
-                                                    <p>The new value to assign.</p>
-
-                                            </td>
                                         </tr>
                                     </tbody>
                                 </table>
@@ -562,32 +739,30 @@ with access to <code>localStorage</code>.</p>
         <tbody>
             <tr>
                 <td class="col-md-4">
-                    <a name="updateUserData"></a>
+                    <a name="updateAllSavings"></a>
                     <span class="name">
-                        <span ><b>updateUserData</b></span>
-                        <a href="#updateUserData"><span class="icon ion-ios-link"></span></a>
+                        <span ><b>updateAllSavings</b></span>
+                        <a href="#updateAllSavings"><span class="icon ion-ios-link"></span></a>
                     </span>
                 </td>
             </tr>
             <tr>
                 <td class="col-md-4">
-<code>updateUserData(user: <a href="../interfaces/User.html" target="_self">User | literal type</a>)</code>
+<code>updateAllSavings(savings: <a href="../interfaces/Saving.html" target="_self">Saving[]</a>)</code>
                 </td>
             </tr>
 
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="142"
-                                    class="link-to-prism">src/app/service/localStorage/user.service.ts:142</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="138"
+                                    class="link-to-prism">src/app/service/localStorage/savings.service.ts:138</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
-                        <div class="io-description"><p>Updates the entire user object in local storage.</p>
-</div>
 
                             <div class="io-description">
                                 <b>Parameters :</b>
@@ -598,14 +773,13 @@ with access to <code>localStorage</code>.</p>
                                             <td>Name</td>
                                                 <td>Type</td>
                                             <td>Optional</td>
-                                                <td>Description</td>
                                         </tr>
                                     </thead>
                                     <tbody>
                                         <tr>
-                                                <td>user</td>
+                                                <td>savings</td>
                                             <td>
-                                                            <code><a href="../interfaces/User.html" target="_self" >User | literal type</a></code>
+                                                            <code><a href="../interfaces/Saving.html" target="_self" >Saving[]</a></code>
                                             </td>
 
                                             <td>
@@ -613,10 +787,6 @@ with access to <code>localStorage</code>.</p>
                                             </td>
 
 
-                                            <td>
-                                                    <p>The new user object to save.</p>
-
-                                            </td>
                                         </tr>
                                     </tbody>
                                 </table>
@@ -642,149 +812,144 @@ with access to <code>localStorage</code>.</p>
 import { StorageService } from &#x27;./storage.service&#x27;;
 
 /**
- * Interface representing a user profile and application settings.
+ * Interface representing a Saving entry.
  */
-export interface User {
-  /** Unique identifier for the user. */
-  id: string;
-
-  /** User&#x27;s display name. */
-  user_name: string;
-
-  /** Timestamp of the last performed backup. */
-  last_backup: string;
-
-  /** Preferred theme mode (e.g., light, dark). */
-  theme_mode: string;
-
-  /** Preferred currency code (e.g., USD, INR). */
-  currency: string;
-
-  /** Application version associated with the user. */
-  app_version: string;
-
-  /** Whether the user’s app has been updated to the latest version. */
-  is_app_updated: boolean;
-
-  /** Whether to show heatmap on calendar. */
-  is_show_heatmap: boolean;
-
-  /** Flag to determine if the user can access music URLs for streaming and downloading. */
-  has_music_url_access: boolean;
-
-  /** Flag to determine if the user can access ai ssection for analysis data*/
-  has_ai_access: boolean;
-
-  /** Stores the amount associated with the Rose heatmap color */
-  rose_amount: number;
-
-  /** Stores the amount associated with the Emerald heatmap color */
-  emerald_amount: number;
-
-  /** AI key */
-  ai_key: string;
-
-  /** If true, heatmap threshold values are automatically set based on the user&#x27;s salary otherwise, the user can set them manually. */
-  is_budget_radio_clicked: boolean;
-
-  /** Determines whether to show monthly or daily or yearly view. */
-  graph_view_type: &#x27;month&#x27; | &#x27;day&#x27; | &#x27;year&#x27;;
-
-  /** Graph representation mode received from the parent component. */
-  graph_type: number;
-
-  /** User&#x27;s preferred view mode for salary display. */
-  salary_view_mode: &#x27;salary&#x27; | &#x27;budget&#x27; | &#x27;saving&#x27;;
-
-  /** */
-  is_backup_enable: boolean;
+export interface Saving {
+    saving_id: string;
+    amount: number;
+    date: string;
+    note: string;
+    is_from_income?: boolean;
 }
 
 /**
- * Service for managing user data and preferences in local storage.
- * Provides methods to read, update, and persist user settings.
+ * Service for managing savings entries stored in localStorage.
+ *
+ * Features:
+ * - Add saving
+ * - Update saving
+ * - Delete saving
+ * - Retrieve savings
  */
 @Injectable({ providedIn: &#x27;root&#x27; })
-export class UserService {
+export class SavingsService {
 
-  /**
-   * Creates an instance of UserService.
-   *
-   * @param storageService Service for handling local storage operations.
-   */
-  constructor(private storageService: StorageService) { }
+    /**
+     * Creates an instance of SavingsService.
+     *
+     * @param storageService Service for interacting with localStorage.
+     */
+    constructor(private storageService: StorageService) { }
 
-  /**
-   * Checks if the service is running in a browser environment
-   * with access to &#x60;localStorage&#x60;.
-   *
-   * @returns {boolean} True if running in the browser, false otherwise.
-   */
-  private isBrowser(): boolean {
-    return typeof window !&#x3D;&#x3D; &#x27;undefined&#x27; &amp;&amp; typeof window.localStorage !&#x3D;&#x3D; &#x27;undefined&#x27;;
-  }
-
-  /**
-   * Retrieves the current user object from storage.
-   *
-   * @returns {Record&lt;string, any&gt;} User data object, or empty object if not available.
-   */
-  get(): Record&lt;string, any&gt; {
-    if (!this.isBrowser()) return {};
-    return this.storageService.getUser();
-  }
-
-  /**
-   * Updates a single user property in local storage.
-   *
-   * @param key The property key to update.
-   * @param value The new value to assign.
-   */
-  update(key: string, value: any): void {
-    if (!this.isBrowser()) return;
-    const currentSettings &#x3D; this.get();
-    currentSettings[key] &#x3D; value;
-    localStorage.setItem(this.storageService.getUserKey(), JSON.stringify(currentSettings));
-  }
-
-  /**
-   * Retrieves a specific user property by key.
-   *
-   * @typeParam T The expected return type of the value.
-   * @param key The property key to retrieve.
-   * @returns {T | null} The value if it exists, otherwise &#x60;null&#x60;.
-   */
-  getValue&lt;T &#x3D; any&gt;(key: string): T | null {
-    const currentSettings &#x3D; this.get();
-    return key in currentSettings ? currentSettings[key] : null;
-  }
-
-  /**
-   * Retrieves full user data.
-   *
-   * @returns {User | {}} The user object, or empty object if not available.
-   */
-  getUserData(): User | null {
-    if (!this.isBrowser()) return null;
-    const userData &#x3D; this.storageService.getUser();
-    if (userData) {
-      const { ai_key, ...safeUser } &#x3D; userData;
-      return safeUser;
+    /**
+     * Checks if the environment supports localStorage.
+     */
+    private isBrowser(): boolean {
+        return typeof window !&#x3D;&#x3D; &#x27;undefined&#x27; &amp;&amp; typeof window.localStorage !&#x3D;&#x3D; &#x27;undefined&#x27;;
     }
-    return null;
-  }
 
-  /**
-   * Updates the entire user object in local storage.
-   *
-   * @param user The new user object to save.
-   */
-  updateUserData(user: User | {}): void {
-    if (!this.isBrowser()) return;
-    this.storageService.updateUser(user);
-  }
-}
-</code></pre>
+    /**
+     * Retrieves all savings from localStorage.
+     *
+     * Sorted by date (latest first).
+     *
+     * @returns Array of Saving objects.
+     */
+    getAll(): Saving[] {
+        if (!this.isBrowser()) return [];
+
+        return this.storageService.getAllSavings().sort((a: Saving, b: Saving) &#x3D;&gt; {
+            const dateA &#x3D; new Date(a?.date || 0).getTime();
+            const dateB &#x3D; new Date(b?.date || 0).getTime();
+
+            const safeA &#x3D; isNaN(dateA) ? 0 : dateA;
+            const safeB &#x3D; isNaN(dateB) ? 0 : dateB;
+
+            return safeB - safeA;
+        });
+    }
+
+    /**
+     * Adds a new saving entry.
+     *
+     * @param data Saving object
+     */
+    add(data: Omit&lt;Saving, &#x27;saving_id&#x27;&gt;): void {
+        if (!this.isBrowser()) return;
+        const all: Saving[] &#x3D; this.getAll();
+        const saving_id &#x3D; crypto.randomUUID();
+        all.push({ ...data, saving_id, amount: Math.round(data.amount * 100) / 100 });
+        localStorage.setItem(
+            this.storageService.getSavingsKey(),
+            JSON.stringify(all)
+        );
+    }
+
+    /**
+     * Updates an existing saving entry.
+     *
+     * @param updatedSaving Updated saving object
+     */
+    update(saving_id: string, newData: Partial&lt;Saving&gt;): void {
+        if (!this.isBrowser()) return;
+        let all: Saving[] &#x3D; this.getAll();
+        all &#x3D; all.map(item &#x3D;&gt; item.saving_id &#x3D;&#x3D;&#x3D; saving_id ? { ...item, ...newData } : item);
+        all &#x3D; all.map(item &#x3D;&gt; ({ ...item, amount: Math.round(item.amount * 100) / 100 }));
+        localStorage.setItem(
+            this.storageService.getSavingsKey(),
+            JSON.stringify(all)
+        );
+    }
+
+    /**
+     * Deletes a saving entry by ID.
+     *
+     * @param saving_id Saving ID
+     */
+    delete(saving_id: string): void {
+        if (!this.isBrowser()) return;
+        let all: Saving[] &#x3D; this.getAll();
+        all &#x3D; all.filter(saving &#x3D;&gt; saving.saving_id !&#x3D;&#x3D; saving_id);
+        localStorage.setItem(
+            this.storageService.getSavingsKey(),
+            JSON.stringify(all)
+        );
+    }
+
+    getTotalSavings(): number {
+        if (!this.isBrowser()) return 0;
+        const all: Saving[] &#x3D; this.getAll();
+        return all.reduce((acc, item) &#x3D;&gt; acc + item.amount, 0);
+    }
+
+    getTotalSavingsFromIncome(): number {
+        if (!this.isBrowser()) return 0;
+        const all: Saving[] &#x3D; this.getAll();
+        return all.filter(item &#x3D;&gt; item.is_from_income).reduce((acc, item) &#x3D;&gt; acc + item.amount, 0);
+    }
+
+    gettotalSavingsBetweenDates(from: string | null, to: string | null): number {
+        if (!this.isBrowser()) return 0;
+        if (from &amp;&amp; to) {
+            const all: Saving[] &#x3D; this.getAll();
+            return all.filter(item &#x3D;&gt; {
+                const itemDate &#x3D; new Date(item.date);
+                itemDate.setHours(0, 0, 0, 0);
+                const fromDate &#x3D; new Date(from);
+                const toDate &#x3D; new Date(to);
+                fromDate.setHours(0, 0, 0, 0);
+                toDate.setHours(23, 59, 59, 999);
+                return itemDate &gt;&#x3D; fromDate &amp;&amp; itemDate &lt;&#x3D; toDate;
+            }).reduce((acc, item) &#x3D;&gt; acc + item.amount, 0);
+        }
+        return 0;
+    }
+
+    updateAllSavings(savings: Saving[]): void {
+        if (!this.isBrowser()) return;
+        this.storageService.updateSavings(savings);
+    }
+}</code></pre>
     </div>
 
 </div>
@@ -827,7 +992,7 @@ export class UserService {
        <script>
             var COMPODOC_CURRENT_PAGE_DEPTH = 1;
             var COMPODOC_CURRENT_PAGE_CONTEXT = 'injectable';
-            var COMPODOC_CURRENT_PAGE_URL = 'UserService.html';
+            var COMPODOC_CURRENT_PAGE_URL = 'SavingsService.html';
             var MAX_SEARCH_RESULTS = 15;
        </script>
 
