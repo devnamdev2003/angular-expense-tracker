@@ -662,7 +662,7 @@ export class GeminiApiService {
     private configService: ConfigService
   ) {
     this.geminiAPIKey &#x3D; this.configService.getGeminiApiKey() || &#x27;&#x27;;
-    this.geminiApiUrl &#x3D; &#x60;https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key&#x3D;${this.geminiAPIKey}&#x60;;
+    this.geminiApiUrl &#x3D; &#x60;https://generativelanguage.googleapis.com/v1beta/models/gemini-3.6-flash:generateContent?key&#x3D;${this.geminiAPIKey}&#x60;;
   }
 
   /**
