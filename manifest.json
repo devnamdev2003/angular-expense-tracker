@@ -6,7 +6,7 @@
     "display": "standalone",
     "orientation": "portrait",
     "background_color": "#000000",
-    "theme_color": "#8f91ea",
+    "theme_color": "#6366f1",
     "icons": [
       {
         "src": "https://exwise.netlify.app/assets/images/favicon_io/android-chrome-192x192.png",
