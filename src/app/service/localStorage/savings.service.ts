@@ -134,4 +134,9 @@ export class SavingsService {
         }
         return 0;
     }
+
+    updateAllSavings(savings: Saving[]): void {
+        if (!this.isBrowser()) return;
+        this.storageService.updateSavings(savings);
+    }
 }

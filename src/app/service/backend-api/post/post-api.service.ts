@@ -100,13 +100,15 @@ export class PostApiService {
     const expenses = this.storageService.getAllExpenses();
     const salary = this.storageService.getAllSalaries();
     const categories = this.storageService.getAllCategories();
+    const savings = this.storageService.getAllSavings();
 
     return {
       user_id: userId,
       expenses: expenses || [],
       salary: salary || [],
       category: categories || [],
-      user_data: userData || {}
+      user_data: userData || {},
+      savings: savings || [],
     };
   }
 }

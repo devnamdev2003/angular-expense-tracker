@@ -8,7 +8,7 @@ import { SalaryService } from '../../../service/localStorage/salary.service';
 import { ExpenseService } from '../../../service/localStorage/expense.service';
 import { RestoreDataService } from '../../../service/backend-api/get/restore-data.service';
 import { StorageService } from '../../../service/localStorage/storage.service';
-
+import { SavingsService } from '../../../service/localStorage/savings.service';
 @Component({
   selector: 'app-cloud-backup',
   standalone: true,
@@ -28,7 +28,8 @@ export class CloudBackupComponent {
     private salaryService: SalaryService,
     private expenseService: ExpenseService,
     private restoreDataService: RestoreDataService,
-    private storageService: StorageService
+    private storageService: StorageService,
+    private savingsService: SavingsService
   ) {
     this.autoBackupEnabled.set(this.userService.getValue<boolean>('is_backup_enable') || false);
   }
@@ -183,6 +184,8 @@ export class CloudBackupComponent {
           );
 
           this.expenseService.addBulk(validData);
+
+          this.savingsService.updateAllSavings(json.savingData)
 
           this.toastService.show(
             'Data successfully restored from cloud!',
