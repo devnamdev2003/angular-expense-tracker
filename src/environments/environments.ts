@@ -39,9 +39,9 @@ export const environment = {
   /**
    * The production (live) API base URL.
    *
-   * Example: `https://exwiseapi.vercel.app/`
+   * Example: `https://exwiseapi.vercel.app`
    */
-  liveAPIUrl: "https://exwiseapi.vercel.app/",
+  liveAPIUrl: "https://exwiseapi.vercel.app",
 
   /**
    * The local development API base URL.
